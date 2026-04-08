@@ -1,0 +1,41 @@
+{
+  "artifact": "collective-pack",
+  "profile": "swarm_mvp_v1",
+  "version": "v1.0",
+  "status": "ONCHAIN_LINKED",
+  "title": "Swarm MVP v1 Collective Pack",
+  "description": "Canonical collective pack linked to the live Sepolia anchor.",
+  "generatedAt": "2026-03-31T00:00:00Z",
+  "caseId": "swarm_mvp_v1_case_001",
+  "network": {
+    "name": "sepolia",
+    "chainId": 11155111
+  },
+  "collectiveSubject": {
+    "subjectType": "SWARM_CONFIGURATION",
+    "subjectId": "swarm_mvp_v1",
+    "role": "collective_subject"
+  },
+  "anchorLink": {
+    "contractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884",
+    "rootHash": "0x63f558cd48ca2a6b78b530eb966635dcf5641e1580f01b9fa4fa5fc3c37d9426",
+    "txHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+    "blockNumber": 10564127,
+    "blockHash": "0xab49de5f92e1ad9528f361a7f01638f39173fb2d39845a306f2621fa7b9dba14",
+    "anchorer": "0x9221456deCC27547aA76EC5d53537dfe430C69B7",
+    "nonce": "1",
+    "eventName": "ClosureAnchored",
+    "chainId": "11155111"
+  },
+  "linkedArtifacts": {
+    "anchorReceipt": "artifacts/swarm/anchor-receipt.swarm_mvp_v1.canonical.json",
+    "incidentBundle": "artifacts/swarm/security_incident_bundle_v1_0.json",
+    "executionRecord": "artifacts/swarm/last_anchor_execution.json"
+  },
+  "integrity": {
+    "onchainLinked": true,
+    "verifyOnchainEvent": "PASS",
+    "rootHashLinked": true,
+    "verificationMode": "strong"
+  }
+}

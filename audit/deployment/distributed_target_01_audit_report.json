@@ -1,0 +1,8 @@
+{
+  "schema_id": "ETHICBIT_TARGET_AUDIT_REPORT_V1",
+  "target_id": "distributed_target_01",
+  "status": "PASS_AUDIT",
+  "environment_profile_ref": "deployment/environments/distributed_target_01_profile.json",
+  "release_manifest_ref": "deployment/manifests/distributed_target_01_release_manifest.json",
+  "human_review_required": true
+}

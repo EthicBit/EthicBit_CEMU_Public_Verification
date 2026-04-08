@@ -1,0 +1,61 @@
+{
+  "check_id": "GLOBAL_DEPLOYMENT_AUDIT_OPERATIVE_CHECK",
+  "status": "FAIL_OPERATIVE_BASELINE",
+  "results": [
+    {
+      "path": "deployment/environments/environment_registry.json",
+      "exists": true
+    },
+    {
+      "path": "deployment/manifests/distributed_release_manifest.json",
+      "exists": true
+    },
+    {
+      "path": "deployment/manifests/distributed_target_matrix.json",
+      "exists": true
+    },
+    {
+      "path": "deployment/policies/distributed_production_policy.json",
+      "exists": true
+    },
+    {
+      "path": "deployment/policies/distributed_readiness_checklist.json",
+      "exists": true
+    },
+    {
+      "path": "deployment/policies/production_distributed_readiness_gate.json",
+      "exists": true
+    },
+    {
+      "path": "audit/deployment/global_deployment_audit_index.json",
+      "exists": true
+    }
+  ],
+  "target_audits": [
+    {
+      "target_id": "local_controlled",
+      "target_present": true,
+      "environment_known": true,
+      "audit_index_present": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "target_id": "github_actions_runner",
+      "target_present": true,
+      "environment_known": true,
+      "audit_index_present": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "target_id": "distributed_target_placeholder",
+      "target_present": false,
+      "environment_known": false,
+      "audit_index_present": true,
+      "human_review_required": false,
+      "status": "FAIL_OPERATIVE_BASELINE"
+    }
+  ],
+  "global_audit_report_ref": "audit/deployment/global_deployment_audit_report.json"
+}

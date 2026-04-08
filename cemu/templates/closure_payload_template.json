@@ -1,0 +1,12 @@
+{
+  "schema_id": "CEMU_CLOSURE_TEMPLATE_V1",
+  "template_id": "closure_payload_template_001",
+  "description": "Initial closure payload template for future CEMU packaging flows.",
+  "fields": [
+    "case_id",
+    "artifact_manifest_ref",
+    "closure_state_ref",
+    "certificate_ref",
+    "verification_ref"
+  ]
+}

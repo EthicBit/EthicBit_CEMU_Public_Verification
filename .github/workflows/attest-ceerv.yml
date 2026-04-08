@@ -1,0 +1,11 @@
+name: Attest CEERV Baseline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder attestation step
+        run: echo "Initial CEERV attestation scaffold"

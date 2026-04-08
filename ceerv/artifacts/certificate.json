@@ -1,0 +1,11 @@
+{
+  "schema_id": "CEERV_CERTIFICATE_V1",
+  "certificate_id": "case_003-ceerv-certificate-001",
+  "version": "1.0.0",
+  "case_ref": "case_003",
+  "claim_string": "ETHICBIT/CEERV-v1 | PROFILE-COURT | OFFLINE-VERIFY",
+  "signature_policy": {
+    "mode": "DECLARED_ONLY_INITIAL"
+  },
+  "status": "DRAFT_MATERIALIZED"
+}

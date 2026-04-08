@@ -1,0 +1,21 @@
+{
+  "schema_id": "ETHICBIT_NCD_V1",
+  "ncd_id": "NCD_001_FREEZE_RULES",
+  "title": "Freeze Rules",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "profile": "COURT_FIRST",
+  "description": "Normative closure rules for freeze, pre-sealing, and closure escalation.",
+  "rules": [
+    {
+      "rule_id": "FRZ-001",
+      "condition": "critical_risk_detected",
+      "effect": "FREEZE_REQUIRED"
+    },
+    {
+      "rule_id": "FRZ-002",
+      "condition": "verification_not_passed",
+      "effect": "NO_FORMAL_CLOSURE"
+    }
+  ]
+}

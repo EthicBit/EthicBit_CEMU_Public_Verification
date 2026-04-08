@@ -1,0 +1,31 @@
+{
+  "schema_id": "ETHICBIT_IN_TOTO_ATTESTATION_INDEX_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "attestations": [
+    {
+      "step": "intake",
+      "statement_ref": "PENDING_ATTESTATION"
+    },
+    {
+      "step": "provenance",
+      "statement_ref": "PENDING_ATTESTATION"
+    },
+    {
+      "step": "governance",
+      "statement_ref": "PENDING_ATTESTATION"
+    },
+    {
+      "step": "fixation",
+      "statement_ref": "PENDING_ATTESTATION"
+    },
+    {
+      "step": "sealing",
+      "statement_ref": "PENDING_ATTESTATION"
+    },
+    {
+      "step": "closure",
+      "statement_ref": "PENDING_ATTESTATION"
+    }
+  ]
+}

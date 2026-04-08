@@ -1,0 +1,11 @@
+{
+  "schema_id": "ETHICBIT_REGULATORY_POLICY_BASELINE_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "principles": [
+    "no_automatic_legal_equivalence",
+    "technical_verification_before_claim_strengthening",
+    "jurisdiction_specific_mapping_required",
+    "human_review_required_for_escalated_regulatory_use"
+  ]
+}

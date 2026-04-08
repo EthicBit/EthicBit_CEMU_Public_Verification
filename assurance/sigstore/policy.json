@@ -1,0 +1,22 @@
+{
+  "schema_id": "ETHICBIT_SIGSTORE_POLICY_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "signing_mode": "KEYLESS_BASELINE_PLACEHOLDER",
+  "verification_requirements": [
+    "artifact_identity_must_be_declared",
+    "provenance_reference_must_exist",
+    "human_review_required_for_escalated_release_claims"
+  ],
+  "scope": {
+    "artifacts": [
+      "ceerv/artifacts/evidence_bundle_full.json",
+      "ceerv/artifacts/certificate.json",
+      "ceerv/outputs/ACTA_MINIMA.json"
+    ]
+  },
+  "enforcement": {
+    "current_level": "BASELINE_ONLY",
+    "production_signing_required": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "artifact": "independent_external_anchor_reverification.swarm_mvp_v1",
+  "status": "PASS",
+  "verifier": "independent_clean_terminal_reverification",
+  "executedAt": "2026-04-07",
+  "scope": {
+    "receiptPath": "artifacts/swarm/anchor-receipt.swarm_mvp_v1.canonical.json",
+    "sepoliaTxHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+    "arweaveTxId": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
+    "aoProcessId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+    "aoMessageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0"
+  },
+  "checks": {
+    "sepoliaResolved": "PASS",
+    "arweaveResolved": "PASS",
+    "aoResolved": "PASS",
+    "zeroPublicationDrift": "PASS",
+    "noUnresolvedAnchorConflicts": "PASS"
+  },
+  "result": "PASS",
+  "note": "Independent external anchor reverification completed successfully from a clean terminal session."
+}

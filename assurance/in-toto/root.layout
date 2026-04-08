@@ -1,0 +1,38 @@
+{
+  "type": "in_toto_layout",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "description": "Initial in-toto layout for ETHICBIT / CEERV / CEMU.",
+  "steps": [
+    {
+      "name": "intake",
+      "expected_command": ["python3", "-m", "cemu.core.intake"],
+      "expected_products": ["ceerv/artifacts/evidence_bundle_full.json"]
+    },
+    {
+      "name": "provenance",
+      "expected_command": ["python3", "-m", "cemu.core.provenance"],
+      "expected_products": ["ceerv/manifests/SSOT_MANIFEST_V1.json"]
+    },
+    {
+      "name": "governance",
+      "expected_command": ["python3", "-m", "cemu.core.governance"],
+      "expected_products": ["cemu/outputs/case_003_output_index.json"]
+    },
+    {
+      "name": "fixation",
+      "expected_command": ["python3", "-m", "cemu.core.fixation"],
+      "expected_products": ["ceerv/artifacts/certificate.json"]
+    },
+    {
+      "name": "sealing",
+      "expected_command": ["python3", "-m", "cemu.core.sealing"],
+      "expected_products": ["ceerv/outputs/ACTA_MINIMA.json"]
+    },
+    {
+      "name": "closure",
+      "expected_command": ["python3", "-m", "cemu.core.closure"],
+      "expected_products": ["artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json"]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "artifactType": "mixed_audience_gate_report",
+  "generatedAt": "2026-04-07T23:17:15Z",
+  "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+  "declaredState": {
+    "packState": "ACTIVE_CANONICAL",
+    "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "publicationState": "ACTIVE_CANONICAL"
+  },
+  "verifiedState": {
+    "packState": "ACTIVE_CANONICAL",
+    "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
+    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "publicationState": "ACTIVE_CANONICAL"
+  },
+  "gates": {
+    "requiredComponentsPresent": "PASS",
+    "manifestActiveState": "PASS",
+    "bundleHashMatchesManifest": "PASS",
+    "certificateHashMatchesManifest": "PASS",
+    "ledgerBundleMatchesManifest": "PASS",
+    "ledgerCertificateMatchesManifest": "PASS",
+    "ledgerSubordinatedToManifest": "PASS",
+    "publicationActiveLinkPresent": "PASS",
+    "publicationActiveLinkMatchesTarget": "PASS",
+    "activeReleaseExists": "PASS",
+    "publicationStateActiveCanonical": "PASS",
+    "activeBundleMatchesSource": "PASS",
+    "activeCertificateMatchesSource": "PASS",
+    "activeManifestMatchesSource": "PASS",
+    "zeroActiveSupersededReferences": "PASS",
+    "noDualPublicationEffective": "PASS",
+    "noStalePublicPointerCache": "PASS",
+    "verifyClosureIntegrity": "PASS",
+    "runProductionReadiness": "PASS",
+    "declaredOperationalReadinessPresent": "PASS",
+    "anchorHardeningStatusArtifactPresent": "PASS",
+    "independentExternalReverificationArtifactPresent": "PASS",
+    "anchorHardeningDeclared": "PASS",
+    "externalTriplePublicAnchorReconciled": "PASS",
+    "externalNoUnresolvedAnchorConflicts": "PASS",
+    "externalZeroPublicationDrift": "PASS",
+    "externalIndependentReverification": "PASS",
+    "externalAnchorHardeningVerified": "PASS"
+  },
+  "rawOutputs": {
+    "verifyClosureIntegrity": "ACTIVE_CANONICAL",
+    "runProductionReadiness": "ACTIVE_CANONICAL\nACTIVE_CANONICAL\nREADY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"
+  }
+}

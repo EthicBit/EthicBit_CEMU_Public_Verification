@@ -1,0 +1,16 @@
+{
+  "schema_id": "CEERV_PROOF_INDEX_V1",
+  "status": "INITIAL_PLACEHOLDER",
+  "proofs": [
+    {
+      "proof_id": "case_003_anchor_reference",
+      "type": "anchor_reference",
+      "ref": "artifacts/cases/case_003/anchor_receipt.case_003.canonical.json"
+    },
+    {
+      "proof_id": "case_003_hash_manifest_reference",
+      "type": "integrity_reference",
+      "ref": "artifacts/cases/case_003/case_003_integrity_manifest.sha256"
+    }
+  ]
+}

@@ -1,0 +1,481 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "initialOwner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "error",
+    "name": "AlreadyAnchored",
+    "inputs": [
+      {
+        "name": "rootHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "ContractPaused",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "EmptyAnchorType",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "EmptyArtifactType",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "EmptyRootHash",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "EmptyVersion",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidChainHint",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidNonce",
+    "inputs": [
+      {
+        "name": "expected",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "provided",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "Unauthorized",
+    "inputs": []
+  },
+  {
+    "type": "event",
+    "name": "ClosureAnchored",
+    "anonymous": false,
+    "inputs": [
+      {
+        "name": "rootHash",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "anchorer",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "anchorType",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "artifactType",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "manifestURI",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "receiptURI",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "nonce",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "timestamp",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "chainId",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "blockHash",
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "GuardianUpdated",
+    "anonymous": false,
+    "inputs": [
+      {
+        "name": "guardian",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "allowed",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "OwnerTransferred",
+    "anonymous": false,
+    "inputs": [
+      {
+        "name": "previousOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "newOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "PauseStateChanged",
+    "anonymous": false,
+    "inputs": [
+      {
+        "name": "paused",
+        "type": "bool",
+        "indexed": false,
+        "internalType": "bool"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "anchorClosure",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "name": "rootHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "anchorType",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "artifactType",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "manifestURI",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "receiptURI",
+        "type": "string",
+        "internalType": "string"
+      },
+      {
+        "name": "expectedChainId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "nonce",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "getAnchor",
+    "stateMutability": "view",
+    "inputs": [
+      {
+        "name": "rootHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct ClosureAnchor.AnchorRecord",
+        "components": [
+          {
+            "name": "rootHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "anchorer",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "anchorType",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "artifactType",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "version",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "manifestURI",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "receiptURI",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "blockHash",
+            "type": "bytes32",
+            "internalType": "bytes32"
+          },
+          {
+            "name": "exists",
+            "type": "bool",
+            "internalType": "bool"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "guardians",
+    "stateMutability": "view",
+    "inputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "isAnchored",
+    "stateMutability": "view",
+    "inputs": [
+      {
+        "name": "rootHash",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "nextNonce",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "owner",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "paused",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "rootHashAt",
+    "stateMutability": "view",
+    "inputs": [
+      {
+        "name": "index",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "setGuardian",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "name": "guardian",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "allowed",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "setPaused",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "name": "isPaused",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "totalAnchors",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "transferOwnership",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": []
+  }
+]

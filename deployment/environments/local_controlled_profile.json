@@ -1,0 +1,14 @@
+{
+  "schema_id": "ETHICBIT_ENVIRONMENT_PROFILE_V1",
+  "environment_id": "local_controlled",
+  "environment_type": "local",
+  "owner": "controlled_local_operator",
+  "network_policy": "restricted_local_only",
+  "artifact_policy": "local_controlled_artifacts_only",
+  "runtime_constraints": [
+    "manual_review_required_for_release",
+    "local_execution_trace_required"
+  ],
+  "human_review_required": true,
+  "status": "ACTIVE_REAL_TARGET"
+}

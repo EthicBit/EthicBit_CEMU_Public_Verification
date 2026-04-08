@@ -1,0 +1,69 @@
+{
+  "check_id": "GLOBAL_REGULATORY_CERTIFICATION_OPERATIVE_CHECK",
+  "status": "PASS_OPERATIVE_BASELINE",
+  "results": [
+    {
+      "path": "regulatory/jurisdictions/jurisdiction_registry.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/mappings/ceerv_regulatory_mapping.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/mappings/jurisdiction_coverage_matrix.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/policies/regulatory_policy_baseline.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/policies/jurisdiction_escalation_policy.json",
+      "exists": true
+    },
+    {
+      "path": "audit/regulatory/global_regulatory_certification_matrix.json",
+      "exists": true
+    }
+  ],
+  "jurisdiction_reports": [
+    {
+      "jurisdiction_id": "US",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "in_certification_matrix": true,
+      "baseline_cert_status": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "jurisdiction_id": "EU",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "in_certification_matrix": true,
+      "baseline_cert_status": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "jurisdiction_id": "UK",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "in_certification_matrix": true,
+      "baseline_cert_status": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "jurisdiction_id": "CO",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "in_certification_matrix": true,
+      "baseline_cert_status": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    }
+  ],
+  "certification_report_ref": "audit/regulatory/global_regulatory_certification_report.json"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_id": "CEERV_ACTA_MINIMA_V1",
+  "acta_id": "case_003-acta-minima-001",
+  "case_ref": "case_003",
+  "claim_string": "ETHICBIT/CEERV-v1 | PROFILE-COURT | OFFLINE-VERIFY",
+  "outcome": "FORMALLY_FROZEN",
+  "verification_status": "PASS_REFERENCE_ONLY",
+  "linked_artifacts": {
+    "verification_pack": "artifacts/cases/case_003/verification_pack.case_003.canonical.json",
+    "closure_state": "artifacts/cases/case_003/closure_state.case_003.canonical.json",
+    "formal_closure_certificate": "artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json"
+  }
+}

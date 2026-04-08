@@ -1,0 +1,30 @@
+{
+  "artifactType": "mixed_audience_audit_pack",
+  "executionEntrypoint": "./scripts/run_mixed_audience_audit.sh --all",
+  "declaredState": {
+    "packState": "ACTIVE_CANONICAL",
+    "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "publicationState": "ACTIVE_CANONICAL"
+  },
+  "includedRoots": [
+    "artifacts",
+    "scripts",
+    "publication",
+    "results"
+  ],
+  "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+  "publishedAt": "20260407T204627Z",
+  "sourceReleaseTarget": "releases/release-20260407T204627Z",
+  "verificationEvidence": {
+    "gateReportPath": "results/GATE_REPORT.json",
+    "verifiedStatePath": "results/index.json",
+    "verificationCommands": [
+      "./scripts/verify_closure_integrity.sh .",
+      "./scripts/run_production_readiness.sh . ./publication",
+      "./scripts/run_mixed_audience_audit.sh --all"
+    ],
+    "packStateSnapshot": "ACTIVE_CANONICAL",
+    "operationalReadinessSnapshot": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema_id": "ETHICBIT_TARGET_RELEASE_MANIFEST_V1",
+  "target_id": "distributed_target_02",
+  "bundle_ref": "ceerv/artifacts/evidence_bundle_full.json",
+  "certificate_ref": "ceerv/artifacts/certificate.json",
+  "acta_ref": "ceerv/outputs/ACTA_MINIMA.json",
+  "digest_set_ref": "ceerv/checksums/MANIFEST_FILES.sha256",
+  "release_status": "DECLARED_REAL_TARGET"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_id": "ETHICBIT_SLSA_L4_POLICY_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "level_target": "L4_BASELINE",
+  "requirements": [
+    "source_integrity_required",
+    "subject_index_required",
+    "attestation_chain_required",
+    "human_review_required_for_escalated_release_claims"
+  ],
+  "current_scope": {
+    "artifacts": [
+      "ceerv/artifacts/evidence_bundle_full.json",
+      "ceerv/artifacts/certificate.json",
+      "ceerv/outputs/ACTA_MINIMA.json"
+    ]
+  },
+  "enforcement": {
+    "current_level": "BASELINE_ONLY",
+    "full_l4_claim_allowed": false
+  }
+}

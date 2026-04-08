@@ -1,0 +1,34 @@
+{
+  "schema_id": "ETHICBIT_MULTI_JURISDICTION_SUPPORT_REPORT_V1",
+  "status": "PASS_OPERATIVE_BASELINE",
+  "jurisdictions": [
+    {
+      "jurisdiction_id": "US",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "jurisdiction_id": "EU",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "jurisdiction_id": "UK",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "jurisdiction_id": "CO",
+      "in_registry": true,
+      "in_coverage_matrix": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    }
+  ]
+}

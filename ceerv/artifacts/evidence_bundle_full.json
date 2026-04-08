@@ -1,0 +1,14 @@
+{
+  "schema_id": "CEERV_EVIDENCE_BUNDLE_V1",
+  "bundle_id": "case_003-bundle-ceerv-001",
+  "version": "1.0.0",
+  "claim_string": "ETHICBIT/CEERV-v1 | PROFILE-COURT | OFFLINE-VERIFY",
+  "case_ref": "case_003",
+  "status": "DRAFT_MATERIALIZED",
+  "linked_artifacts": [
+    "artifacts/cases/case_003/canonical_root.case_003.json",
+    "artifacts/cases/case_003/verification_pack.case_003.canonical.json",
+    "artifacts/cases/case_003/closure_state.case_003.canonical.json",
+    "artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json"
+  ]
+}

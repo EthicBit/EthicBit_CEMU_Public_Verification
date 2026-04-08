@@ -1,0 +1,32 @@
+{
+  "artifactType": "mixed_audience_audit_results_index",
+  "generatedAt": "2026-04-07T23:17:15Z",
+  "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+  "declaredState": {
+    "packState": "ACTIVE_CANONICAL",
+    "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "publicationState": "ACTIVE_CANONICAL"
+  },
+  "verifiedState": {
+    "packState": "ACTIVE_CANONICAL",
+    "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
+    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "publicationState": "ACTIVE_CANONICAL"
+  },
+  "gateReportPath": "results/GATE_REPORT.json",
+  "activeTarget": "releases/release-20260407T204627Z",
+  "canonicalLineage": "case_003_promoted_active_chain",
+  "officialStates": [
+    "ACTIVE_CANONICAL"
+  ],
+  "generatedResults": [
+    "GATE_REPORT.json",
+    "public_summary.md",
+    "technical_verification.md",
+    "legal_claim_boundary.md",
+    "regulatory_control_report.md",
+    "finance_anchor_report.md",
+    "executive_onepager.md"
+  ]
+}

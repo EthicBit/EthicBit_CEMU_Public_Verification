@@ -1,0 +1,13 @@
+{
+  "schema_id": "ETHICBIT_FINAL_JURISDICTION_SCOPE_V1",
+  "version": "10.0.0",
+  "status": "FINAL_SCOPE_DECLARED",
+  "scope_type": "CLOSED_SCOPE",
+  "jurisdictions_in_scope": [
+    "US",
+    "EU",
+    "UK",
+    "CO"
+  ],
+  "rule": "No jurisdiction outside this declared set may be claimed as fully supported in v10.0."
+}

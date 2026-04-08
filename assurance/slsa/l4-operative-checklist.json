@@ -1,0 +1,14 @@
+{
+  "schema_id": "ETHICBIT_SLSA_L4_OPERATIVE_CHECKLIST_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_OPERATIVE_BASELINE",
+  "checks": [
+    "required_subjects_present",
+    "level4_policy_present",
+    "subject_index_present",
+    "in_toto_layout_present",
+    "sigstore_policy_present",
+    "digest_capture_present"
+  ],
+  "full_l4_achieved": false
+}

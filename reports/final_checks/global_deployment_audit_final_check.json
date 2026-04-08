@@ -1,0 +1,31 @@
+{
+  "check_id": "GLOBAL_DEPLOYMENT_AUDIT_FINAL_CHECK",
+  "status": "PASS_AUDIT_FINAL",
+  "checks": [
+    {
+      "report": "audit/deployment/local_controlled_audit_report.json",
+      "exists": true,
+      "actual_status": "PASS_AUDIT",
+      "status": "PASS_AUDIT_FINAL"
+    },
+    {
+      "report": "audit/deployment/github_actions_runner_audit_report.json",
+      "exists": true,
+      "actual_status": "PASS_AUDIT",
+      "status": "PASS_AUDIT_FINAL"
+    },
+    {
+      "report": "audit/deployment/distributed_target_01_audit_report.json",
+      "exists": true,
+      "actual_status": "PASS_AUDIT",
+      "status": "PASS_AUDIT_FINAL"
+    },
+    {
+      "report": "audit/deployment/distributed_target_02_audit_report.json",
+      "exists": true,
+      "actual_status": "PASS_AUDIT",
+      "status": "PASS_AUDIT_FINAL"
+    }
+  ],
+  "consolidated_report_ref": "audit/deployment/global_deployment_audit_report.json"
+}

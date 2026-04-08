@@ -1,0 +1,24 @@
+{
+  "schema_id": "ETHICBIT_REASON_REGISTRY_V1",
+  "registry_id": "REASON_REGISTRY_001",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "reasons": [
+    {
+      "reason_code": "FREEZE_REQUIRED",
+      "meaning": "Critical state requires freeze before further transition."
+    },
+    {
+      "reason_code": "NO_FORMAL_CLOSURE",
+      "meaning": "Formal closure cannot proceed until verification passes."
+    },
+    {
+      "reason_code": "ISOLATE_AND_FREEZE",
+      "meaning": "Swarm or collective state requires isolation and freeze."
+    },
+    {
+      "reason_code": "RESIDUAL_GAP_GOVERNANCE",
+      "meaning": "Output remains governed but not yet eligible for closure."
+    }
+  ]
+}

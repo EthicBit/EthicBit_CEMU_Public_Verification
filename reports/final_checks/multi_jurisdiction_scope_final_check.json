@@ -1,0 +1,89 @@
+{
+  "check_id": "MULTI_JURISDICTION_SCOPE_FINAL_CHECK",
+  "status": "PASS_SCOPE_FINAL",
+  "rule": "Support is complete only for the closed declared scope.",
+  "checks": [
+    {
+      "type": "required_file",
+      "path": "regulatory/jurisdictions/final_scope_v10.0.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "audit/regulatory/US_certification_report.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "audit/regulatory/EU_certification_report.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "audit/regulatory/UK_certification_report.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "audit/regulatory/CO_certification_report.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "reports/final_checks/global_regulatory_certification_final_check.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "scope_definition",
+      "scope_type": "CLOSED_SCOPE",
+      "scope_set": [
+        "CO",
+        "EU",
+        "UK",
+        "US"
+      ],
+      "expected_scope": [
+        "CO",
+        "EU",
+        "UK",
+        "US"
+      ],
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "jurisdiction_certification",
+      "jurisdiction_id": "CO",
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "jurisdiction_certification",
+      "jurisdiction_id": "EU",
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "jurisdiction_certification",
+      "jurisdiction_id": "UK",
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "jurisdiction_certification",
+      "jurisdiction_id": "US",
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "global_certification_final",
+      "actual_status": "PASS_CERTIFICATION_FINAL",
+      "status": "PASS_FINAL"
+    }
+  ]
+}
