@@ -1,9 +1,0 @@
-{
-  "artifact": "publication_drift_protocol_status",
-  "protocolDocument": "docs/technical/EthicBit_CEMU_v3_7_0_plus_Publication_Drift_Resolution_Protocol.md",
-  "currentState": "EXTERNAL_ANCHOR_EVIDENCE_READY_FOR_INDEPENDENT_REVERIFICATION",
-  "independentExternalAnchorReverification": "PASS",
-  "anchorHardeningEnabled": "PASS",
-  "rule": "canonize_first_harden_after",
-  "note": "Anchor hardening formally declared after independent external anchor reverification passed, zero publication drift, and restoration of a single active canonical chain."
-}

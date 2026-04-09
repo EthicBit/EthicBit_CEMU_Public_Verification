@@ -1,6 +1,0 @@
-{
-  "schema_id": "ETHICBIT_RUNTIMEGUARD_L4_OPERATIVE_DECISION_V1",
-  "case_id": "case_003",
-  "status": "ALLOW_OPERATIVE_BASELINE",
-  "reason": "all_required_runtimeguard_l4_refs_present"
-}

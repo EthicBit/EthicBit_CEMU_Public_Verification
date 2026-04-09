@@ -1,9 +1,0 @@
-{
-  "anchor_type": "ARWEAVE_OBJECT",
-  "candidate_id": "PENDIENTE_BITCOIN_ARWEAVE_TXID",
-  "candidate_locator": "https://arweave.net/PENDIENTE_BITCOIN_ARWEAVE_TXID",
-  "resolved": "PASS",
-  "html_detected": false,
-  "json_parse": "PASS",
-  "matches_expected_artifact": "PASS"
-}

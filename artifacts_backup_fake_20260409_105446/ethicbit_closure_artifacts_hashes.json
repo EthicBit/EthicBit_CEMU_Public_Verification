@@ -1,8 +1,0 @@
-{
-  "artifact": "ethicbit_closure_artifacts_hashes",
-  "bundleHash": "5ad0112bc01ffd6f35978564f7e2dc6a545c9469164a8c81b30c3e26220479ef",
-  "certificateHash": "b2a107807f0f9a7392dc9635388e0f677f73cd61d528115e4553b646db4d4b15",
-  "derivedFrom": {
-    "manifestPath": "artifacts/artifact_manifest.json"
-  }
-}

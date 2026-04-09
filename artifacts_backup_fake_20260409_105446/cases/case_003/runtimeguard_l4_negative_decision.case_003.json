@@ -1,6 +1,0 @@
-{
-  "schema_id": "ETHICBIT_RUNTIMEGUARD_L4_NEGATIVE_DECISION_V1",
-  "case_id": "case_003",
-  "status": "BLOCK",
-  "reason": "simulated_missing_critical_sigstore_policy"
-}
