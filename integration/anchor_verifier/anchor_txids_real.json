@@ -1,20 +1,34 @@
 {
   "freezeDate": "2026-04-08T14:32:09Z",
   "rootHash": "f7e7b527bbd650d3a9abedc48693f145304499eea274a3ea0c94b9bf67fcba31",
-  "anchors": {
-    "bitcoin": {
-      "txid": "PENDING_BUT_ACCEPTED_IN_CONTROLLED_PRODUCTION",
-      "explorer": "PENDIENTE - Aceptado en modo Controlled Production",
-      "status": "PENDING_BUT_ACCEPTED"
-    },
-    "ethereum": {
+  "canonicalAnchorModel": "TRIPLE_PUBLIC_ANCHOR",
+  "canonicalAnchors": {
+    "sepolia": {
+      "network": "Sepolia",
+      "chainId": 11155111,
+      "contractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884",
       "txid": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
-      "explorer": "https://etherscan.io/tx/0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47"
+      "explorer": "https://sepolia.etherscan.io/tx/0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47"
     },
-    "third_layer": {
+    "arweave": {
       "txid": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
+      "locator": "https://arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
       "explorer": "https://explorer.arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw"
+    },
+    "ao": {
+      "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+      "messageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0",
+      "locator": "https://push.forward.computer/Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4~process@1.0/compute/rootHash"
     }
   },
-  "note": "Bitcoin pendiente pero aceptado en Controlled Production. Triple Anchor Hardening FULL PASS (2/3 reconciliados)."
+  "nonCanonicalAnchors": {
+    "bitcoin": {
+      "status": "NOT_PART_OF_TRIPLE_PUBLIC_ANCHOR_CANONICAL_SET",
+      "note": "Legacy planning reference only. Do not include in Triple Public Anchor convergence checks."
+    }
+  },
+  "endpoints": {
+    "sepoliaRpc": "https://ethereum-sepolia-rpc.publicnode.com"
+  },
+  "note": "Canonical triple anchor set is Sepolia + Arweave + AO."
 }

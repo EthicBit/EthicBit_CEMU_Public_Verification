@@ -1,6 +1,6 @@
 # Executive One-Pager
 
-Generated At: 2026-04-08T15:04:43Z
+Generated At: 2026-04-09T23:21:31Z
 Package ID: EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z
 
 Declared states:
@@ -14,7 +14,7 @@ Verified states:
 
 - Pack: ACTIVE_CANONICAL
 - External anchor: ANCHOR_HARDENING_ENABLED
-- Operational readiness: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING
+- Operational readiness: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE
 - Publication: ACTIVE_CANONICAL
 - Active target: releases/release-20260407T204627Z
 - Canonical lineage: case_003_promoted_active_chain
