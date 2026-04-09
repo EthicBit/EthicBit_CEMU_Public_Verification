@@ -2,7 +2,7 @@
   "anchor_type": "ARWEAVE_OBJECT",
   "candidate_id": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
   "candidate_locator": "https://arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
-  "resolved": "FAIL",
+  "resolved": "PASS",
   "html_detected": false,
-  "json_parse": "FAIL"
+  "json_parse": "PASS"
 }
