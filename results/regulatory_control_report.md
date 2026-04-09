@@ -6,7 +6,7 @@ Declared Pack State: ACTIVE_CANONICAL
 Verified Pack State: ACTIVE_CANONICAL
 Declared External Anchor State: ANCHOR_HARDENING_ENABLED
 Verified External Anchor State: ANCHOR_HARDENING_ENABLED
-Verified Operational Readiness: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE
+Verified Operational Readiness: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING
 Verified Publication State: ACTIVE_CANONICAL
 Active Target: releases/release-20260407T204627Z
 Canonical Lineage: case_003_promoted_active_chain

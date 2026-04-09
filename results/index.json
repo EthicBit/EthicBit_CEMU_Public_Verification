@@ -5,13 +5,13 @@
   "declaredState": {
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
-    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING",
     "publicationState": "ACTIVE_CANONICAL"
   },
   "verifiedState": {
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
-    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING",
     "publicationState": "ACTIVE_CANONICAL"
   },
   "gateReportPath": "results/GATE_REPORT.json",

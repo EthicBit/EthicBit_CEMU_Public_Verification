@@ -14,10 +14,10 @@
   "coreFormula": [
     "ACTIVE_CANONICAL",
     "CONSTITUTIONAL_ROOT_COMPLIANCE=PASS",
-    "TRIPLE_PUBLIC_ANCHOR_RECONCILED=PASS",
+    "TRIPLE_PUBLIC_ANCHOR_RECONCILED=PENDING",
     "INDEPENDENT_EXTERNAL_ANCHOR_REVERIFICATION=PASS",
     "ANCHOR_HARDENING_ENABLED=PASS",
-    "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING",
     "PUBLICATION_STATE=ACTIVE_CANONICAL"
   ],
   "note": "Pre-freeze test suite ejecutado + auditoría de secretos limpia. Master State sincronizado y congelado. Tecnología propietaria protegida. Listo para producción controlada."

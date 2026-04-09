@@ -7,14 +7,14 @@ Declared states:
 
 - Pack: ACTIVE_CANONICAL
 - External anchor: ANCHOR_HARDENING_ENABLED
-- Operational readiness claim: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE
+- Operational readiness claim: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING
 - Publication: ACTIVE_CANONICAL
 
 Verified states:
 
 - Pack: ACTIVE_CANONICAL
 - External anchor: ANCHOR_HARDENING_ENABLED
-- Operational readiness: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE
+- Operational readiness: READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING
 - Publication: ACTIVE_CANONICAL
 - Active target: releases/release-20260407T204627Z
 - Canonical lineage: case_003_promoted_active_chain

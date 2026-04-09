@@ -8,12 +8,12 @@
       "status": "PENDING_BUT_ACCEPTED"
     },
     "ethereum": {
-      "txid": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
-      "explorer": "https://etherscan.io/tx/0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47"
+      "txid": "PENDIENTE_ETHEREUM_TXHASH",
+      "explorer": "https://etherscan.io/tx/PENDIENTE_ETHEREUM_TXHASH"
     },
     "third_layer": {
-      "txid": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
-      "explorer": "https://explorer.arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw"
+      "txid": "PENDIENTE_BITCOIN_ARWEAVE_TXID",
+      "explorer": "https://explorer.arweave.net/PENDIENTE_BITCOIN_ARWEAVE_TXID"
     }
   },
   "note": "Bitcoin pendiente pero aceptado en Controlled Production. Triple Anchor Hardening FULL PASS (2/3 reconciliados)."

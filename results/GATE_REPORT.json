@@ -5,13 +5,13 @@
   "declaredState": {
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
-    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING",
     "publicationState": "ACTIVE_CANONICAL"
   },
   "verifiedState": {
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
-    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING",
     "publicationState": "ACTIVE_CANONICAL"
   },
   "gates": {
@@ -46,6 +46,6 @@
   },
   "rawOutputs": {
     "verifyClosureIntegrity": "ACTIVE_CANONICAL",
-    "runProductionReadiness": "ACTIVE_CANONICAL\nACTIVE_CANONICAL\nREADY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"
+    "runProductionReadiness": "ACTIVE_CANONICAL\nACTIVE_CANONICAL\nREADY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING"
   }
 }
