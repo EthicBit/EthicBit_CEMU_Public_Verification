@@ -169,6 +169,10 @@ INDEPENDENT_REVERIFICATION_REL="$(json_get_or_default "$BUNDLE" "externalAnchorE
 ANCHOR_HARDENING_STATUS_PATH="$(resolve_root_relative "$ANCHOR_HARDENING_STATUS_REL")"
 INDEPENDENT_REVERIFICATION_PATH="$(resolve_root_relative "$INDEPENDENT_REVERIFICATION_REL")"
 GENERATED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+RUN_ID="${ETHICBIT_RUN_ID:-run-$(date -u +%Y%m%dT%H%M%SZ)-$$}"
+RELEASE_ID="${ETHICBIT_RELEASE_ID:-${PACKAGE_ID}}"
+VERIFICATION_EPOCH="${ETHICBIT_VERIFICATION_EPOCH:-$(date -u +%Y-%m-%dT%H:00:00Z)}"
+GATE_POLICY_VERSION="mixed-audience-gate-policy.v1.0.0"
 VERIFY_OUTPUT_JSON="$(json_quote "$VERIFY_OUTPUT")"
 READINESS_OUTPUT_JSON="$(json_quote "$READINESS_OUTPUT")"
 
@@ -319,6 +323,12 @@ write_gate_report() {
 {
   "artifactType": "mixed_audience_gate_report",
   "generatedAt": "${GENERATED_AT}",
+  "policyVersion": "${GATE_POLICY_VERSION}",
+  "runContext": {
+    "runId": "${RUN_ID}",
+    "releaseId": "${RELEASE_ID}",
+    "verificationEpoch": "${VERIFICATION_EPOCH}"
+  },
   "packageId": "${PACKAGE_ID}",
   "declaredState": {
     "packState": "${DECLARED_PACK_STATE}",
@@ -544,6 +554,12 @@ write_index() {
 {
   "artifactType": "mixed_audience_audit_results_index",
   "generatedAt": "${GENERATED_AT}",
+  "policyVersion": "${GATE_POLICY_VERSION}",
+  "runContext": {
+    "runId": "${RUN_ID}",
+    "releaseId": "${RELEASE_ID}",
+    "verificationEpoch": "${VERIFICATION_EPOCH}"
+  },
   "packageId": "${PACKAGE_ID}",
   "declaredState": {
     "packState": "${DECLARED_PACK_STATE}",

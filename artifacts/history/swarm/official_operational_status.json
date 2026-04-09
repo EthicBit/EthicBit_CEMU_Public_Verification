@@ -1,0 +1,49 @@
+{
+  "artifactType": "official_operational_status",
+  "generatedAt": "2026-04-09T23:21:33.284423Z",
+  "policyVersion": "official-operational-status-policy.v1.0.0",
+  "runContext": {
+    "runId": "run-20260409T232900Z-manual",
+    "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+    "verificationEpoch": "2026-04-09T23:00:00Z"
+  },
+  "officialStatus": "BLOCKED",
+  "reason": "LIVE_FAIL",
+  "divergence": true,
+  "gateStatusRaw": "PASS",
+  "gateStatusRawSource": "verifiedState",
+  "gateStatusEffective": "DEGRADED_BY_LIVE",
+  "liveStatus": "FAIL",
+  "liveStatusSource": "result",
+  "canonicalAssessment": {
+    "ok": true,
+    "model": "TRIPLE_PUBLIC_ANCHOR",
+    "canonicalModelOk": true,
+    "sepolia": true,
+    "arweave": true,
+    "ao": true,
+    "bitcoinPresentInCanonicalAnchors": false
+  },
+  "freezeActive": false,
+  "integrity": {
+    "inputHashes": {
+      "gateReport": "e4931a0e0d96a18539a73d4620861558bcea2dccd5c9f06188e8aa93e26e915b",
+      "liveReport": "d96765b1ff5664fb9c5090b5750ffc468d7278362ea3083d4f3a8eb4fcc2c691",
+      "canonicalConfig": "fb4425e37982ff84d2e1a06ab04647dc0494a3b49fe95102a398d17021bfed16"
+    },
+    "outputHash": "eb3ad7927f8294a477482ad1faf3fa1e169935b2cc8461ca266bdf369c2c8581"
+  },
+  "paths": {
+    "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
+    "live": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/triple_public_anchor_live_verification.json",
+    "canonical": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/integration/anchor_verifier/anchor_txids_real.json",
+    "freeze": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/runtime/publication_freeze_state.json",
+    "output": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/official_operational_status.json"
+  },
+  "signature": {
+    "status": "SIGNED",
+    "algorithm": "HMAC-SHA256",
+    "keyId": "local-dev",
+    "value": "ab58e3d5a7c693ac91b4cc2eab8c4dcc08089971b3974cbf6e355bbec513c07f"
+  }
+}

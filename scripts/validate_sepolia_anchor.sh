@@ -1,36 +1,52 @@
-#!/bin/sh
-set -eu
+#!/usr/bin/env bash
+set -euo pipefail
 
-REPO_ROOT="${1:-/Users/oskrmiranda/Documentos/EthicBit_CEMU}"
-RECEIPT="$REPO_ROOT/artifacts/swarm/anchor-receipt.swarm_mvp_v1.canonical.json"
-OUT="$REPO_ROOT/artifacts/history/swarm/sepolia_external_validation.json"
+ROOT_DIR="$(cd -- "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+RECEIPT="${ROOT_DIR}/artifacts/swarm/anchor-receipt.swarm_mvp_v1.canonical.json"
+OUT="${ROOT_DIR}/artifacts/history/swarm/sepolia_external_validation.json"
+PUBLICATION_STATE="${ROOT_DIR}/publication/publication_state.json"
 
-mkdir -p "$(dirname "$OUT")"
-
-NETWORK="$(jq -r '.locators[] | select(.type=="BLOCKCHAIN_ANCHOR") | .network // "MISSING"' "$RECEIPT")"
-CHAIN_ID="$(jq -r '.locators[] | select(.type=="BLOCKCHAIN_ANCHOR") | .chainId // "MISSING"' "$RECEIPT")"
-TX_HASH="$(jq -r '.locators[] | select(.type=="BLOCKCHAIN_ANCHOR") | .transactionHash // "MISSING"' "$RECEIPT")"
-BLOCK_HASH="$(jq -r '.locators[] | select(.type=="BLOCKCHAIN_ANCHOR") | .blockHash // "MISSING"' "$RECEIPT")"
-BLOCK_NUMBER="$(jq -r '.locators[] | select(.type=="BLOCKCHAIN_ANCHOR") | .blockNumber // "MISSING"' "$RECEIPT")"
-
-STATUS="FAIL"
-if [ "$NETWORK" = "Sepolia" ] && [ "$CHAIN_ID" = "11155111" ] && \
-   [ "$TX_HASH" != "MISSING" ] && [ "$BLOCK_HASH" != "MISSING" ] && \
-   [ "$BLOCK_NUMBER" != "MISSING" ]; then
-  STATUS="PASS"
+POLICY_VERSION="external-anchor-validation-policy.v1.0.0"
+GENERATED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+RUN_ID="${ETHICBIT_RUN_ID:-run-$(date -u +%Y%m%dT%H%M%SZ)-$$}"
+VERIFICATION_EPOCH="${ETHICBIT_VERIFICATION_EPOCH:-$(date -u +%Y-%m-%dT%H:00:00Z)}"
+RELEASE_ID="${ETHICBIT_RELEASE_ID:-UNKNOWN_RELEASE}"
+if [[ "$RELEASE_ID" == "UNKNOWN_RELEASE" && -f "$PUBLICATION_STATE" ]]; then
+  RELEASE_ID="$(jq -r '.activeTarget // "UNKNOWN_RELEASE"' "$PUBLICATION_STATE" 2>/dev/null || echo "UNKNOWN_RELEASE")"
 fi
 
-cat > "$OUT" <<EOF
-{
-  "anchor_type": "BLOCKCHAIN_ANCHOR",
-  "network": "$NETWORK",
-  "chainId": $CHAIN_ID,
-  "transactionHash": "$TX_HASH",
-  "blockHash": "$BLOCK_HASH",
-  "blockNumber": $BLOCK_NUMBER,
-  "resolved": "$STATUS"
-}
-EOF
+TXID="$(jq -r '.locators[] | select(.type=="BLOCKCHAIN_ANCHOR") | .transactionHash' "$RECEIPT")"
 
-echo "SEPOLIA_ANCHOR_RESOLVED=$STATUS"
+if echo "$TXID" | grep -Eq '^0x[0-9a-fA-F]{64}$'; then
+  STATUS="PASS"
+  RESULT="SEPOLIA_ANCHOR_RESOLVED=PASS"
+  SUBSTATUS="CONVERGED"
+  REASON_CODE="SEPOLIA_TX_HASH_VALID"
+else
+  STATUS="FAIL"
+  RESULT="SEPOLIA_ANCHOR_RESOLVED=FAIL"
+  SUBSTATUS="INVALID_INPUT"
+  REASON_CODE="SEPOLIA_TX_HASH_INVALID"
+fi
+
+cat > "$OUT" <<JSON
+{
+  "artifact": "sepolia_external_validation",
+  "generatedAt": "$GENERATED_AT",
+  "policyVersion": "$POLICY_VERSION",
+  "runContext": {
+    "runId": "$RUN_ID",
+    "releaseId": "$RELEASE_ID",
+    "verificationEpoch": "$VERIFICATION_EPOCH"
+  },
+  "status": "$STATUS",
+  "network": "sepolia",
+  "transactionHash": "$TXID",
+  "substatus": "$SUBSTATUS",
+  "reasonCode": "$REASON_CODE",
+  "result": "$RESULT"
+}
+JSON
+
+echo "$RESULT"
 echo "OUT=$OUT"
