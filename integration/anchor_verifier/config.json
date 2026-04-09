@@ -1,0 +1,7 @@
+{
+  "rootHash": "f7e7b527bbd650d3a9abedc48693f145304499eea274a3ea0c94b9bf67fcba31",
+  "freezeDate": "2026-04-08T14:32:09Z",
+  "requiredAnchors": 3,
+  "hardeningEnabled": true,
+  "reconciliationRequired": true
+}

@@ -4,3 +4,52 @@ keys/
 *.pem
 *.key
 *.secret
+
+# === NODE.JS & DEPENDENCIES ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# === LOGS Y TEMPORALES ===
+logs/
+*.log
+*.log.*
+.history/
+
+# === OS MAC ===
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# === BUILD / GENERATED ===
+dist/
+build/
+coverage/
+.nyc_output/
+*.min.js
+
+# === ENVIRONMENT ===
+.env
+.env.*
+!.env.example
+
+# === TEMP FILES ===
+*.tmp
+*.temp
+tmp/
+temp/
+
+
+# Backups y temporales
+*.backup*
+*.backup_*
+
+# Backups y temporales
+*.backup*
+*.backup_*
+
+# Backups y temporales
+*.backup*
+*.backup_*

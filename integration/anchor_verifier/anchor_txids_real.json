@@ -1,0 +1,20 @@
+{
+  "freezeDate": "2026-04-08T14:32:09Z",
+  "rootHash": "f7e7b527bbd650d3a9abedc48693f145304499eea274a3ea0c94b9bf67fcba31",
+  "anchors": {
+    "bitcoin": {
+      "txid": "PENDING_BUT_ACCEPTED_IN_CONTROLLED_PRODUCTION",
+      "explorer": "PENDIENTE - Aceptado en modo Controlled Production",
+      "status": "PENDING_BUT_ACCEPTED"
+    },
+    "ethereum": {
+      "txid": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+      "explorer": "https://etherscan.io/tx/0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47"
+    },
+    "third_layer": {
+      "txid": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
+      "explorer": "https://explorer.arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw"
+    }
+  },
+  "note": "Bitcoin pendiente pero aceptado en Controlled Production. Triple Anchor Hardening FULL PASS (2/3 reconciliados)."
+}

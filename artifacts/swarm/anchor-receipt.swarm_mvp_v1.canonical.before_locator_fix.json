@@ -15,14 +15,14 @@
     },
     {
       "type": "ARWEAVE_OBJECT",
-      "txId": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
-      "locator": "https://arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw"
+      "txId": "PEGA_AQUI_TXID_RAW_CORRECTO",
+      "locator": "https://arweave.net/PEGA_AQUI_TXID_RAW_CORRECTO"
     },
     {
       "type": "AO_PROCESS",
-      "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
-      "messageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0",
-      "locator": "https://push.forward.computer/Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4~process@1.0/compute/rootHash"
+      "processId": "PEGA_AQUI_PROCESS_ID_CORRECTO",
+      "messageId": "PEGA_AQUI_MESSAGE_ID_CORRECTO",
+      "locator": "PEGA_AQUI_LOCATOR_AO_CORRECTO"
     }
   ],
   "timestamp": "2026-03-28T18:49:32Z",
