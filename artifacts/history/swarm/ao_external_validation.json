@@ -1,0 +1,15 @@
+{
+  "artifact": "ao_external_validation",
+  "status": "FAIL",
+  "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+  "messageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0",
+  "locator": "https://push.forward.computer/Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4~process@1.0/compute/rootHash",
+  "selectedLocator": "https://cu.ao-testnet.xyz/result/aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+  "checks": {
+    "httpCode": "404",
+    "bodyBytes": 21,
+    "bodyClass": "ERROR_TEXT"
+  },
+  "result": "AO_PROCESS_RESOLVED=FAIL",
+  "note": "No AO endpoint returned a valid live payload. Last probe: http=404, bodyClass=ERROR_TEXT, locator=https://cu.ao-testnet.xyz/result/aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4."
+}
