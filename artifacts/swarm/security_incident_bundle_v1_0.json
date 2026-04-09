@@ -47,7 +47,7 @@
     "anchorReceipt": "artifacts/swarm/anchor-receipt.swarm_mvp_v1.canonical.json",
     "verificationPack": "PENDING_VERIFICATION_PACK",
     "formalClosureCertificate": "PENDING_FORMAL_CLOSURE_CERTIFICATE",
-    "anchorTxHash": "PENDIENTE_ETHEREUM_TXHASH",
+    "anchorTxHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
     "anchorContractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884"
   },
   "integrity": {

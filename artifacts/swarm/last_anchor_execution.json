@@ -1,7 +1,7 @@
 {
   "contractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884",
   "rootHash": "0x63f558cd48ca2a6b78b530eb966635dcf5641e1580f01b9fa4fa5fc3c37d9426",
-  "txHash": "PENDIENTE_ETHEREUM_TXHASH",
+  "txHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
   "blockNumber": 10564127,
   "status": 1,
   "eventName": "ClosureAnchored",

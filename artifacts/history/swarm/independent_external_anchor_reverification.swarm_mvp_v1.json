@@ -5,8 +5,8 @@
   "executedAt": "2026-04-07",
   "scope": {
     "receiptPath": "artifacts/swarm/anchor-receipt.swarm_mvp_v1.canonical.json",
-    "sepoliaTxHash": "PENDIENTE_ETHEREUM_TXHASH",
-    "arweaveTxId": "PENDIENTE_BITCOIN_ARWEAVE_TXID",
+    "sepoliaTxHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+    "arweaveTxId": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
     "aoProcessId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
     "aoMessageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0"
   },

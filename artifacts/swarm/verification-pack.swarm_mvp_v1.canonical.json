@@ -20,7 +20,7 @@
   "inputs": {
     "contractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884",
     "rootHash": "0x63f558cd48ca2a6b78b530eb966635dcf5641e1580f01b9fa4fa5fc3c37d9426",
-    "txHash": "PENDIENTE_ETHEREUM_TXHASH",
+    "txHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
     "blockNumber": 10564127,
     "blockHash": "0xab49de5f92e1ad9528f361a7f01638f39173fb2d39845a306f2621fa7b9dba14",
     "anchorer": "0x9221456deCC27547aA76EC5d53537dfe430C69B7",
