@@ -11,14 +11,14 @@
       "explorer": "https://sepolia.etherscan.io/tx/0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47"
     },
     "arweave": {
-      "txid": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
-      "locator": "https://arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
-      "explorer": "https://explorer.arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw"
+      "txid": "Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY",
+      "locator": "https://arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY",
+      "explorer": "https://explorer.arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY"
     },
     "ao": {
-      "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
-      "messageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0",
-      "locator": "https://push.forward.computer/Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4~process@1.0/compute/rootHash"
+      "processId": "PEGAR_PROCESS_REAL",
+      "messageId": "PEGAR_MESSAGE_REAL",
+      "locator": "PEGA_AQUI_EL_URL_QUE_DIO_200"
     }
   },
   "nonCanonicalAnchors": {
