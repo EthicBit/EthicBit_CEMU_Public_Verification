@@ -1,23 +1,23 @@
 {
   "artifactType": "official_operational_status",
-  "generatedAt": "2026-04-11T17:00:27.759858Z",
+  "generatedAt": "2026-04-11T17:17:44.929060Z",
   "policyVersion": "official-operational-status-policy.v2.0.0",
   "runContext": {
-    "runId": "run-20260411T170018Z-3845",
+    "runId": "run-20260411T171704Z-5788",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
     "verificationEpoch": "2026-04-11T17:00:00Z"
   },
-  "officialStatus": "BLOCKED",
-  "reason": "LIVE_FAIL",
+  "officialStatus": "READY",
+  "reason": "LIVE_CANONICAL_GATE_CONVERGED",
   "reasonCodes": [
-    "LIVE_FAIL",
+    "LIVE_CANONICAL_GATE_CONVERGED",
     "EXTERNAL_CRYPTO_INTEROP_FAIL"
   ],
-  "divergence": true,
+  "divergence": false,
   "gateStatusRaw": "PASS",
   "gateStatusRawSource": "verifiedState",
-  "gateStatusEffective": "DEGRADED_BY_LIVE",
-  "liveStatus": "FAIL",
+  "gateStatusEffective": "PASS",
+  "liveStatus": "PASS",
   "liveStatusSource": "result",
   "canonicalAssessment": {
     "ok": true,
@@ -32,10 +32,10 @@
   "integrity": {
     "inputHashes": {
       "gateReport": "071de12893daa6e2224595ec9a1ff49f7e1bff0d11348e220e83c85723a19a7a",
-      "liveReport": "1ba4f32341e82ff725191971f32e43702a1e9801c32b2fcdbd86fb5d426fb14d",
-      "canonicalConfig": "e66207a9ac1f80cb4040aa20dc97869cd2bc94cfe5316a7c7af441f8c4e41750"
+      "liveReport": "eb4dd543550d75d6a17f3ab2d9d44b621218188572ea5ec98b1d1821c955f0b5",
+      "canonicalConfig": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093"
     },
-    "outputHash": "2c9d35beaf0726b065abe5044dd0f4bc4a0a685954355f184af2fba5aa4d7cee"
+    "outputHash": "e919d538f3a3721ac7d2e0762ab74699bd5e8df6b4caa9897e3381378bdf5ef6"
   },
   "paths": {
     "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
@@ -44,17 +44,17 @@
     "freeze": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/runtime/publication_freeze_state.json",
     "output": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/official_operational_status.json"
   },
-  "officialOperationalStatus": "BLOCKED",
+  "officialOperationalStatus": "READY",
   "internalClosureStatus": "INTERNAL_CLOSED",
-  "externalProjectionStatus": "EXTERNAL_LIVE_FAIL",
+  "externalProjectionStatus": "EXTERNAL_LIVE_CONVERGED",
   "internalCryptographyStatus": "PASS",
   "externalCryptographyStatus": "FAIL",
   "stateModel": {
     "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
     "operatingMode": "SOVEREIGN_INTERNAL",
     "internalClosureStatus": "INTERNAL_CLOSED",
-    "externalProjectionStatus": "EXTERNAL_LIVE_FAIL",
-    "officialOperationalStatus": "BLOCKED"
+    "externalProjectionStatus": "EXTERNAL_LIVE_CONVERGED",
+    "officialOperationalStatus": "READY"
   },
   "cryptography": {
     "status": "PASS",
@@ -97,7 +97,7 @@
     "policyVersion": "official-operational-status-policy.v2.0.0",
     "riskMode": "HIGH",
     "runContext": {
-      "runId": "run-20260411T170018Z-3845",
+      "runId": "run-20260411T171704Z-5788",
       "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
       "verificationEpoch": "2026-04-11T17:00:00Z"
     },
@@ -105,14 +105,14 @@
       "ED25519",
       "ML-DSA"
     ],
-    "payloadHash": "36bec6b9fb2aefbb062d7e376bae3e938f18ceb43a89ca68729268a272bbfb2f",
+    "payloadHash": "201037785952702688de0ce30a107822171a9beb0486a979de5be45570b40ba6",
     "signatures": [
       {
         "algorithm": "ED25519",
         "keyId": "ED25519_UNSET",
         "status": "FAIL",
         "signature": "",
-        "signedAt": "2026-04-11T17:00:27.760552Z",
+        "signedAt": "2026-04-11T17:17:44.930149Z",
         "commandConfigured": false,
         "error": "missing signer command for ED25519"
       },
@@ -121,7 +121,7 @@
         "keyId": "MLDSA_UNSET",
         "status": "FAIL",
         "signature": "",
-        "signedAt": "2026-04-11T17:00:27.760557Z",
+        "signedAt": "2026-04-11T17:17:44.930153Z",
         "commandConfigured": false,
         "error": "missing signer command for ML-DSA"
       }

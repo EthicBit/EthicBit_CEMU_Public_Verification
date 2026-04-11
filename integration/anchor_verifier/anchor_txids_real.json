@@ -16,9 +16,9 @@
       "explorer": "https://explorer.arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY"
     },
     "ao": {
-      "processId": "PEGAR_PROCESS_REAL",
-      "messageId": "PEGAR_MESSAGE_REAL",
-      "locator": "PEGA_AQUI_EL_URL_QUE_DIO_200"
+      "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+      "messageId": "cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo",
+      "locator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4"
     }
   },
   "nonCanonicalAnchors": {
