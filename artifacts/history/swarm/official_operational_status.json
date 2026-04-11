@@ -1,11 +1,11 @@
 {
   "artifactType": "official_operational_status",
-  "generatedAt": "2026-04-11T16:15:45.765031Z",
+  "generatedAt": "2026-04-11T17:00:27.759858Z",
   "policyVersion": "official-operational-status-policy.v2.0.0",
   "runContext": {
-    "runId": "run-20260411T161534Z-98710",
+    "runId": "run-20260411T170018Z-3845",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-11T16:00:00Z"
+    "verificationEpoch": "2026-04-11T17:00:00Z"
   },
   "officialStatus": "BLOCKED",
   "reason": "LIVE_FAIL",
@@ -32,10 +32,10 @@
   "integrity": {
     "inputHashes": {
       "gateReport": "071de12893daa6e2224595ec9a1ff49f7e1bff0d11348e220e83c85723a19a7a",
-      "liveReport": "b0e38e5fe57d6f59c8d71f63f97bcc84ff122db1f9d0533218faee6dee54d605",
-      "canonicalConfig": "800ef4c0e84c69678c58f8a02ffae1fe7adf8762eb884c0e2063ab6fa2b0c644"
+      "liveReport": "1ba4f32341e82ff725191971f32e43702a1e9801c32b2fcdbd86fb5d426fb14d",
+      "canonicalConfig": "e66207a9ac1f80cb4040aa20dc97869cd2bc94cfe5316a7c7af441f8c4e41750"
     },
-    "outputHash": "edbc4ed396fe2bfdd6e41eab8f0c5a58d0a5c2708df4bab020a75a2390f7e882"
+    "outputHash": "2c9d35beaf0726b065abe5044dd0f4bc4a0a685954355f184af2fba5aa4d7cee"
   },
   "paths": {
     "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
@@ -97,22 +97,22 @@
     "policyVersion": "official-operational-status-policy.v2.0.0",
     "riskMode": "HIGH",
     "runContext": {
-      "runId": "run-20260411T161534Z-98710",
+      "runId": "run-20260411T170018Z-3845",
       "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-      "verificationEpoch": "2026-04-11T16:00:00Z"
+      "verificationEpoch": "2026-04-11T17:00:00Z"
     },
     "requiredAlgorithms": [
       "ED25519",
       "ML-DSA"
     ],
-    "payloadHash": "0be86b10d3298071b6230cd8cee988b004d4cb71cae630e9978d2d90cd5d2bdc",
+    "payloadHash": "36bec6b9fb2aefbb062d7e376bae3e938f18ceb43a89ca68729268a272bbfb2f",
     "signatures": [
       {
         "algorithm": "ED25519",
         "keyId": "ED25519_UNSET",
         "status": "FAIL",
         "signature": "",
-        "signedAt": "2026-04-11T16:15:45.765911Z",
+        "signedAt": "2026-04-11T17:00:27.760552Z",
         "commandConfigured": false,
         "error": "missing signer command for ED25519"
       },
@@ -121,7 +121,7 @@
         "keyId": "MLDSA_UNSET",
         "status": "FAIL",
         "signature": "",
-        "signedAt": "2026-04-11T16:15:45.765917Z",
+        "signedAt": "2026-04-11T17:00:27.760557Z",
         "commandConfigured": false,
         "error": "missing signer command for ML-DSA"
       }

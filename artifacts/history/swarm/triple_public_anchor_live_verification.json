@@ -1,11 +1,11 @@
 {
   "artifact": "triple_public_anchor_live_verification",
-  "generatedAt": "2026-04-11T16:15:34Z",
+  "generatedAt": "2026-04-11T17:00:18Z",
   "policyVersion": "triple-public-anchor-live-policy.v1.0.0",
   "runContext": {
-    "runId": "run-20260411T161534Z-98710",
+    "runId": "run-20260411T170018Z-3845",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-11T16:00:00Z"
+    "verificationEpoch": "2026-04-11T17:00:00Z"
   },
   "supportType": "TRIPLE_PUBLIC_ANCHOR",
   "verificationStatus": "PUBLISHED",
@@ -39,25 +39,19 @@
     },
     "ao": {
       "resolved": "FAIL",
-      "selectedLocator": "https://cu.ao-testnet.xyz/result/aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+      "selectedLocator": "https://cu.ao-testnet.xyz/result/PEGA_AQUI_UN_ID_REAL?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
       "selectedHttp": 404,
       "selectedBodyClass": "ERROR_TEXT",
       "selectedError": "HTTPError:404",
       "probedCandidates": [
         {
-          "locator": "https://push.forward.computer/Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4~process@1.0/compute/rootHash",
-          "http": 404,
-          "bodyClass": "HTML",
-          "error": "HTTPError:404"
-        },
-        {
-          "locator": "https://su-router.ao-testnet.xyz/aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+          "locator": "https://su-router.ao-testnet.xyz/PEGA_AQUI_UN_ID_REAL?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
           "http": 400,
           "bodyClass": "ERROR_TEXT",
           "error": "HTTPError:400"
         },
         {
-          "locator": "https://cu.ao-testnet.xyz/result/aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+          "locator": "https://cu.ao-testnet.xyz/result/PEGA_AQUI_UN_ID_REAL?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
           "http": 404,
           "bodyClass": "ERROR_TEXT",
           "error": "HTTPError:404"
