@@ -138,11 +138,31 @@ PUBLICATION_STATE="${ROOT_DIR}/publication/publication_state.json"
 [[ -f "$LEDGER" ]] || fail "missing ledger: $LEDGER"
 [[ -f "$PUBLICATION_STATE" ]] || fail "missing publication state: $PUBLICATION_STATE"
 
-VERIFY_OUTPUT="$("$VERIFY_SCRIPT" "$ROOT_DIR")"
-READINESS_OUTPUT="$("$READINESS_SCRIPT" "$ROOT_DIR" "${ROOT_DIR}/publication")"
+VERIFY_OUTPUT=""
+VERIFY_EXIT_CODE=0
+if VERIFY_OUTPUT="$("$VERIFY_SCRIPT" "$ROOT_DIR" 2>&1)"; then
+  VERIFY_EXIT_CODE=0
+else
+  VERIFY_EXIT_CODE=$?
+fi
+
+READINESS_OUTPUT=""
+READINESS_EXIT_CODE=0
+if READINESS_OUTPUT="$("$READINESS_SCRIPT" "$ROOT_DIR" "${ROOT_DIR}/publication" 2>&1)"; then
+  READINESS_EXIT_CODE=0
+else
+  READINESS_EXIT_CODE=$?
+fi
 
 VERIFY_STATUS="$(printf '%s\n' "$VERIFY_OUTPUT" | tail -n 1)"
 READINESS_STATUS="$(printf '%s\n' "$READINESS_OUTPUT" | tail -n 1)"
+
+if [[ "$VERIFY_EXIT_CODE" -ne 0 && "$VERIFY_STATUS" != "ACTIVE_CANONICAL" ]]; then
+  VERIFY_STATUS="NOT_VERIFIED"
+fi
+if [[ "$READINESS_EXIT_CODE" -ne 0 && "$READINESS_STATUS" != "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE" ]]; then
+  READINESS_STATUS="NOT_VERIFIED"
+fi
 DECLARED_PACK_STATE="$(json_get "$PACKAGE_MANIFEST" "declaredState.packState")"
 DECLARED_EXTERNAL_ANCHOR_STATE="$(json_get "$PACKAGE_MANIFEST" "declaredState.externalAnchorState")"
 DECLARED_OPERATIONAL_READINESS="$(json_get "$PACKAGE_MANIFEST" "declaredState.operationalReadinessClaim")"
@@ -172,7 +192,9 @@ GENERATED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 RUN_ID="${ETHICBIT_RUN_ID:-run-$(date -u +%Y%m%dT%H%M%SZ)-$$}"
 RELEASE_ID="${ETHICBIT_RELEASE_ID:-${PACKAGE_ID}}"
 VERIFICATION_EPOCH="${ETHICBIT_VERIFICATION_EPOCH:-$(date -u +%Y-%m-%dT%H:00:00Z)}"
-GATE_POLICY_VERSION="mixed-audience-gate-policy.v1.0.0"
+GATE_POLICY_VERSION="mixed-audience-gate-policy.v1.1.0"
+OFFICIAL_AUDIT_WORKFLOW="${ROOT_DIR}/.github/workflows/official-periodic-audit.yml"
+OFFICIAL_OPERATIONAL_STATUS_PATH="${ROOT_DIR}/artifacts/history/swarm/official_operational_status.json"
 VERIFY_OUTPUT_JSON="$(json_quote "$VERIFY_OUTPUT")"
 READINESS_OUTPUT_JSON="$(json_quote "$READINESS_OUTPUT")"
 
@@ -242,6 +264,7 @@ for pointer in \
 done
 GATE_NO_DUAL_PUBLICATION_EFFECTIVE="$(if [[ -z "$EXTRA_PUBLICATION_POINTER" && -z "$SHADOW_PUBLICATION_POINTER" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 GATE_NO_STALE_PUBLIC_POINTER_CACHE="$(if [[ "$GATE_ACTIVE_LINK_PRESENT" == "PASS" && "$GATE_ACTIVE_LINK_MATCHES_TARGET" == "PASS" && "$GATE_ACTIVE_MANIFEST_MATCHES_SOURCE" == "PASS" && "$GATE_ACTIVE_BUNDLE_MATCHES_SOURCE" == "PASS" && "$GATE_ACTIVE_CERTIFICATE_MATCHES_SOURCE" == "PASS" && -n "$PUBLICATION_PUBLISHED_AT" && "$PUBLICATION_STATE_VALUE" == "ACTIVE_CANONICAL" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
+GATE_PERIODIC_AUDIT_WORKFLOW_SCHEDULED="$(if [[ -f "$OFFICIAL_AUDIT_WORKFLOW" ]] && grep -Eq '^[[:space:]]*schedule:' "$OFFICIAL_AUDIT_WORKFLOW"; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 
 GATE_ANCHOR_STATUS_ARTIFACT_PRESENT="$(gate_if test -f "$ANCHOR_HARDENING_STATUS_PATH")"
 GATE_INDEPENDENT_REVERIFICATION_ARTIFACT_PRESENT="$(gate_if test -f "$INDEPENDENT_REVERIFICATION_PATH")"
@@ -298,7 +321,7 @@ else
   VERIFIED_PACK_STATE="NOT_VERIFIED"
 fi
 
-if [[ "$GATE_RUN_PRODUCTION_READINESS" == "PASS" && "$GATE_NO_DUAL_PUBLICATION_EFFECTIVE" == "PASS" && "$GATE_NO_STALE_PUBLIC_POINTER_CACHE" == "PASS" ]]; then
+if [[ "$GATE_RUN_PRODUCTION_READINESS" == "PASS" && "$GATE_NO_DUAL_PUBLICATION_EFFECTIVE" == "PASS" && "$GATE_NO_STALE_PUBLIC_POINTER_CACHE" == "PASS" && "$GATE_PERIODIC_AUDIT_WORKFLOW_SCHEDULED" == "PASS" ]]; then
   VERIFIED_OPERATIONAL_READINESS="READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"
 else
   VERIFIED_OPERATIONAL_READINESS="NOT_VERIFIED"
@@ -315,6 +338,28 @@ if [[ "$GATE_ACTIVE_PUBLICATION_STATE" == "PASS" && "$GATE_NO_DUAL_PUBLICATION_E
 else
   VERIFIED_PUBLICATION_STATE="NOT_VERIFIED"
 fi
+
+if [[ "$VERIFIED_PACK_STATE" == "ACTIVE_CANONICAL" && "$VERIFIED_OPERATIONAL_READINESS" == "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE" ]]; then
+  INTERNAL_CLOSURE_STATUS="INTERNAL_CLOSED"
+elif [[ "$VERIFIED_PACK_STATE" == "ACTIVE_CANONICAL" ]]; then
+  INTERNAL_CLOSURE_STATUS="INTERNAL_PARTIAL"
+else
+  INTERNAL_CLOSURE_STATUS="INTERNAL_BLOCKED"
+fi
+
+if [[ "$VERIFIED_EXTERNAL_ANCHOR_STATE" == "ANCHOR_HARDENING_ENABLED" ]]; then
+  EXTERNAL_PROJECTION_STATUS="EXTERNAL_READY_FOR_LIVE_CONVERGENCE"
+else
+  EXTERNAL_PROJECTION_STATUS="EXTERNAL_NOT_READY"
+fi
+
+OBSERVED_OFFICIAL_OPERATIONAL_STATUS="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "officialOperationalStatus" "NOT_COMPUTED")"
+if [[ -z "$OBSERVED_OFFICIAL_OPERATIONAL_STATUS" || "$OBSERVED_OFFICIAL_OPERATIONAL_STATUS" == "NOT_COMPUTED" || "$OBSERVED_OFFICIAL_OPERATIONAL_STATUS" == "null" ]]; then
+  OBSERVED_OFFICIAL_OPERATIONAL_STATUS="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "officialStatus" "NOT_COMPUTED")"
+fi
+OBSERVED_OFFICIAL_REASON="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "reason" "NOT_COMPUTED")"
+OBSERVED_INTERNAL_CLOSURE_STATUS="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "internalClosureStatus" "NOT_COMPUTED")"
+OBSERVED_EXTERNAL_PROJECTION_STATUS="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "externalProjectionStatus" "NOT_COMPUTED")"
 
 mkdir -p "$RESULTS_DIR"
 
@@ -340,7 +385,19 @@ write_gate_report() {
     "packState": "${VERIFIED_PACK_STATE}",
     "externalAnchorState": "${VERIFIED_EXTERNAL_ANCHOR_STATE}",
     "operationalReadiness": "${VERIFIED_OPERATIONAL_READINESS}",
-    "publicationState": "${VERIFIED_PUBLICATION_STATE}"
+    "publicationState": "${VERIFIED_PUBLICATION_STATE}",
+    "internalClosureStatus": "${INTERNAL_CLOSURE_STATUS}",
+    "externalProjectionStatus": "${EXTERNAL_PROJECTION_STATUS}"
+  },
+  "stateModel": {
+    "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
+    "internalClosureStatus": "${INTERNAL_CLOSURE_STATUS}",
+    "externalProjectionStatus": "${EXTERNAL_PROJECTION_STATUS}",
+    "officialOperationalStatusObserved": "${OBSERVED_OFFICIAL_OPERATIONAL_STATUS}",
+    "officialReasonObserved": "${OBSERVED_OFFICIAL_REASON}",
+    "officialStatePath": "artifacts/history/swarm/official_operational_status.json",
+    "officialInternalClosureStatusObserved": "${OBSERVED_INTERNAL_CLOSURE_STATUS}",
+    "officialExternalProjectionStatusObserved": "${OBSERVED_EXTERNAL_PROJECTION_STATUS}"
   },
   "gates": {
     "requiredComponentsPresent": "${GATE_REQUIRED_COMPONENTS}",
@@ -360,6 +417,7 @@ write_gate_report() {
     "zeroActiveSupersededReferences": "${GATE_ZERO_ACTIVE_SUPERSEDED_REFERENCES}",
     "noDualPublicationEffective": "${GATE_NO_DUAL_PUBLICATION_EFFECTIVE}",
     "noStalePublicPointerCache": "${GATE_NO_STALE_PUBLIC_POINTER_CACHE}",
+    "periodicAuditWorkflowScheduled": "${GATE_PERIODIC_AUDIT_WORKFLOW_SCHEDULED}",
     "verifyClosureIntegrity": "${GATE_VERIFY_CLOSURE_INTEGRITY}",
     "runProductionReadiness": "${GATE_RUN_PRODUCTION_READINESS}",
     "declaredOperationalReadinessPresent": "${DECLARED_OPERATIONAL_READINESS_PRESENT}",
@@ -375,6 +433,10 @@ write_gate_report() {
   "rawOutputs": {
     "verifyClosureIntegrity": ${VERIFY_OUTPUT_JSON},
     "runProductionReadiness": ${READINESS_OUTPUT_JSON}
+  },
+  "rawExitCodes": {
+    "verifyClosureIntegrity": ${VERIFY_EXIT_CODE},
+    "runProductionReadiness": ${READINESS_EXIT_CODE}
   }
 }
 EOF
@@ -391,6 +453,7 @@ Verified Pack State: ${VERIFIED_PACK_STATE}
 Declared External Anchor State: ${DECLARED_EXTERNAL_ANCHOR_STATE}
 Verified External Anchor State: ${VERIFIED_EXTERNAL_ANCHOR_STATE}
 Verified Operational Readiness: ${VERIFIED_OPERATIONAL_READINESS}
+Periodic Audit Workflow Scheduled: ${GATE_PERIODIC_AUDIT_WORKFLOW_SCHEDULED}
 Verified Publication State: ${VERIFIED_PUBLICATION_STATE}
 Active Target: ${ACTIVE_TARGET}
 Canonical Lineage: ${CANONICAL_LINEAGE}
@@ -419,6 +482,13 @@ Declared External Anchor State: ${DECLARED_EXTERNAL_ANCHOR_STATE}
 Verified External Anchor State: ${VERIFIED_EXTERNAL_ANCHOR_STATE}
 Verified Operational Readiness: ${VERIFIED_OPERATIONAL_READINESS}
 Verified Publication State: ${VERIFIED_PUBLICATION_STATE}
+Internal Closure Status (Gate-Derived): ${INTERNAL_CLOSURE_STATUS}
+External Projection Status (Gate-Derived): ${EXTERNAL_PROJECTION_STATUS}
+Official Operational Status (Observed): ${OBSERVED_OFFICIAL_OPERATIONAL_STATUS}
+Official Reason (Observed): ${OBSERVED_OFFICIAL_REASON}
+Official Internal Closure Status (Observed): ${OBSERVED_INTERNAL_CLOSURE_STATUS}
+Official External Projection Status (Observed): ${OBSERVED_EXTERNAL_PROJECTION_STATUS}
+Official Status Path: artifacts/history/swarm/official_operational_status.json
 Active Target: ${ACTIVE_TARGET}
 Canonical Lineage: ${CANONICAL_LINEAGE}
 Bundle Hash: ${MANIFEST_BUNDLE_HASH}
@@ -571,7 +641,17 @@ write_index() {
     "packState": "${VERIFIED_PACK_STATE}",
     "externalAnchorState": "${VERIFIED_EXTERNAL_ANCHOR_STATE}",
     "operationalReadiness": "${VERIFIED_OPERATIONAL_READINESS}",
-    "publicationState": "${VERIFIED_PUBLICATION_STATE}"
+    "publicationState": "${VERIFIED_PUBLICATION_STATE}",
+    "internalClosureStatus": "${INTERNAL_CLOSURE_STATUS}",
+    "externalProjectionStatus": "${EXTERNAL_PROJECTION_STATUS}"
+  },
+  "stateModel": {
+    "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
+    "internalClosureStatus": "${INTERNAL_CLOSURE_STATUS}",
+    "externalProjectionStatus": "${EXTERNAL_PROJECTION_STATUS}",
+    "officialOperationalStatusObserved": "${OBSERVED_OFFICIAL_OPERATIONAL_STATUS}",
+    "officialReasonObserved": "${OBSERVED_OFFICIAL_REASON}",
+    "officialStatePath": "artifacts/history/swarm/official_operational_status.json"
   },
   "gateReportPath": "results/GATE_REPORT.json",
   "activeTarget": "${ACTIVE_TARGET}",

@@ -16,13 +16,13 @@
     {
       "type": "ARWEAVE_OBJECT",
       "txId": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
-      "locator": "https://arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw"
+      "locator": "https://arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY"
     },
     {
       "type": "AO_PROCESS",
       "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
-      "messageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0",
-      "locator": "https://push.forward.computer/Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4~process@1.0/compute/rootHash"
+      "messageId": "cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo",
+      "locator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4"
     }
   ],
   "timestamp": "2026-03-28T18:49:32Z",

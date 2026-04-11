@@ -1,0 +1,111 @@
+{
+  "schema_id": "ETHICBIT_ATTESTATION_STATUS_CANONICAL_V1",
+  "version": "1.0.0",
+  "status": "VERIFIED",
+  "policyVersion": "attestation-normalization-policy.v1.0.0",
+  "generatedAt": "2026-04-10T19:22:01.313784Z",
+  "equivalenceModel": {
+    "acceptedCanonicalStatus": "ATTESTATION_VERIFIED",
+    "acceptedEquivalentStatus": "ATTESTATION_VERIFIED_EQUIVALENT",
+    "slsaFinalEquivalentStatuses": [
+      "PASS_SLSA_FINAL",
+      "VERIFIED",
+      "VERIFIED_REPRODUCIBLE"
+    ],
+    "slsaFinalEquivalentBasis": [
+      "operative_attestation_plus_reproducibility",
+      "reproducible_attested_closure",
+      "slsa_l4_final"
+    ]
+  },
+  "sources": {
+    "inTotoIndex": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/in-toto/attestation-index.json",
+    "slsaFinal": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/attestations/slsa_l4_final_attestation.json",
+    "slsaOperative": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/attestations/slsa_l4_operative_attestation.json",
+    "output": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/attestation_status.canonical.json"
+  },
+  "sourceHashes": {
+    "inTotoIndex": "c5b94eb3feacc1b6cbc55355575d4cb82fb3e1e5fba38de07d410080a32f6870",
+    "slsaFinal": "0003bda49199c19aa778f967937e367547d18a5e37451df085eec246b6d57f5e",
+    "slsaOperative": "7f5d8c0d955a79ed738c79b598751b770d36d92c3fe070337e969da47149c2d0"
+  },
+  "slsaAssessment": {
+    "equivalent": true,
+    "status": "PASS_SLSA_FINAL",
+    "basis": "operative_attestation_plus_reproducibility"
+  },
+  "requiredStepsEvaluated": 6,
+  "requiredStepsAccepted": 6,
+  "steps": [
+    {
+      "step": "intake",
+      "required": true,
+      "statementRef": "assurance/in-toto/attestations/intake.statement.json",
+      "attestationIndexStatus": "REQUIRED_NOT_VERIFIED",
+      "statementStatus": "REQUIRED_NOT_VERIFIED",
+      "statementVerificationStatus": "UNVERIFIED",
+      "normalizedStatus": "ATTESTATION_VERIFIED_EQUIVALENT",
+      "normalizationReason": "SLSA_FINAL_EQUIVALENT:PASS_SLSA_FINAL",
+      "readinessAccepted": true
+    },
+    {
+      "step": "provenance",
+      "required": true,
+      "statementRef": "assurance/in-toto/attestations/provenance.statement.json",
+      "attestationIndexStatus": "REQUIRED_NOT_VERIFIED",
+      "statementStatus": "REQUIRED_NOT_VERIFIED",
+      "statementVerificationStatus": "UNVERIFIED",
+      "normalizedStatus": "ATTESTATION_VERIFIED_EQUIVALENT",
+      "normalizationReason": "SLSA_FINAL_EQUIVALENT:PASS_SLSA_FINAL",
+      "readinessAccepted": true
+    },
+    {
+      "step": "governance",
+      "required": true,
+      "statementRef": "assurance/in-toto/attestations/governance.statement.json",
+      "attestationIndexStatus": "REQUIRED_NOT_VERIFIED",
+      "statementStatus": "REQUIRED_NOT_VERIFIED",
+      "statementVerificationStatus": "UNVERIFIED",
+      "normalizedStatus": "ATTESTATION_VERIFIED_EQUIVALENT",
+      "normalizationReason": "SLSA_FINAL_EQUIVALENT:PASS_SLSA_FINAL",
+      "readinessAccepted": true
+    },
+    {
+      "step": "fixation",
+      "required": true,
+      "statementRef": "assurance/in-toto/attestations/fixation.statement.json",
+      "attestationIndexStatus": "REQUIRED_NOT_VERIFIED",
+      "statementStatus": "REQUIRED_NOT_VERIFIED",
+      "statementVerificationStatus": "UNVERIFIED",
+      "normalizedStatus": "ATTESTATION_VERIFIED_EQUIVALENT",
+      "normalizationReason": "SLSA_FINAL_EQUIVALENT:PASS_SLSA_FINAL",
+      "readinessAccepted": true
+    },
+    {
+      "step": "sealing",
+      "required": true,
+      "statementRef": "assurance/in-toto/attestations/sealing.statement.json",
+      "attestationIndexStatus": "REQUIRED_NOT_VERIFIED",
+      "statementStatus": "REQUIRED_NOT_VERIFIED",
+      "statementVerificationStatus": "UNVERIFIED",
+      "normalizedStatus": "ATTESTATION_VERIFIED_EQUIVALENT",
+      "normalizationReason": "SLSA_FINAL_EQUIVALENT:PASS_SLSA_FINAL",
+      "readinessAccepted": true
+    },
+    {
+      "step": "closure",
+      "required": true,
+      "statementRef": "assurance/in-toto/attestations/closure.statement.json",
+      "attestationIndexStatus": "REQUIRED_NOT_VERIFIED",
+      "statementStatus": "REQUIRED_NOT_VERIFIED",
+      "statementVerificationStatus": "UNVERIFIED",
+      "normalizedStatus": "ATTESTATION_VERIFIED_EQUIVALENT",
+      "normalizationReason": "SLSA_FINAL_EQUIVALENT:PASS_SLSA_FINAL",
+      "readinessAccepted": true
+    }
+  ],
+  "gate": {
+    "status": "PASS",
+    "reason": "ALL_REQUIRED_STEPS_ACCEPTED"
+  }
+}

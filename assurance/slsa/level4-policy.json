@@ -1,23 +1,42 @@
 {
   "schema_id": "ETHICBIT_SLSA_L4_POLICY_V1",
-  "version": "1.0.0",
-  "status": "INITIAL_MATERIALIZATION",
-  "level_target": "L4_BASELINE",
+  "version": "1.1.0",
+  "status": "ENFORCED",
+  "level_target": "L4_ENFORCED",
   "requirements": [
     "source_integrity_required",
     "subject_index_required",
     "attestation_chain_required",
+    "hybrid_signature_set_required",
+    "in_toto_attestations_required",
     "human_review_required_for_escalated_release_claims"
   ],
   "current_scope": {
     "artifacts": [
       "ceerv/artifacts/evidence_bundle_full.json",
       "ceerv/artifacts/certificate.json",
-      "ceerv/outputs/ACTA_MINIMA.json"
+      "ceerv/outputs/ACTA_MINIMA.json",
+      "artifacts/history/swarm/official_operational_status.json"
     ]
   },
+  "risk_modes": {
+    "STANDARD": {
+      "ed25519_required": true,
+      "mldsa_required": false
+    },
+    "HIGH": {
+      "ed25519_required": true,
+      "mldsa_required": true
+    },
+    "GOV": {
+      "ed25519_required": true,
+      "mldsa_required": true,
+      "witness_or_tsa_required": true
+    }
+  },
   "enforcement": {
-    "current_level": "BASELINE_ONLY",
-    "full_l4_claim_allowed": false
+    "current_level": "ENFORCED",
+    "full_l4_claim_allowed": true,
+    "attestations_mandatory": true
   }
 }

@@ -1,22 +1,53 @@
 {
   "schema_id": "ETHICBIT_SIGSTORE_POLICY_V1",
-  "version": "1.0.0",
-  "status": "INITIAL_MATERIALIZATION",
-  "signing_mode": "KEYLESS_BASELINE_PLACEHOLDER",
+  "version": "1.2.0",
+  "status": "ENFORCED",
+  "signing_mode": "MODE_DRIVEN",
+  "operational_modes": {
+    "default_mode": "SOVEREIGN_INTERNAL",
+    "supported_modes": [
+      "SOVEREIGN_INTERNAL",
+      "MARKET_INTEROP"
+    ],
+    "SOVEREIGN_INTERNAL": {
+      "description": "Internal sovereign closure is the hard requirement. External hybrid signatures are optional for projection.",
+      "internal_crypto_required": true,
+      "external_hybrid_signature_required": false,
+      "block_official_status_on_external_crypto_failure": false
+    },
+    "MARKET_INTEROP": {
+      "description": "Both sovereign closure and market-interoperable hybrid signatures are required.",
+      "internal_crypto_required": true,
+      "external_hybrid_signature_required": true,
+      "block_official_status_on_external_crypto_failure": true
+    }
+  },
   "verification_requirements": [
     "artifact_identity_must_be_declared",
     "provenance_reference_must_exist",
+    "internal_sovereign_cryptography_required",
+    "hybrid_signature_set_required_when_mode_requires_external_interop",
+    "ed25519_signature_must_verify_when_external_interop_is_required",
+    "mldsa_signature_must_verify_when_external_interop_is_required",
     "human_review_required_for_escalated_release_claims"
   ],
   "scope": {
     "artifacts": [
       "ceerv/artifacts/evidence_bundle_full.json",
       "ceerv/artifacts/certificate.json",
-      "ceerv/outputs/ACTA_MINIMA.json"
+      "ceerv/outputs/ACTA_MINIMA.json",
+      "artifacts/history/swarm/official_operational_status.json"
     ]
   },
+  "key_management": {
+    "private_keys_in_repo_forbidden": true,
+    "rotation_required": true,
+    "hsm_or_kms_required_for_production": true
+  },
   "enforcement": {
-    "current_level": "BASELINE_ONLY",
-    "production_signing_required": false
+    "current_level": "ENFORCED",
+    "production_signing_required": true,
+    "hybrid_signature_required": "MODE_DRIVEN",
+    "allow_unsigned_artifacts": false
   }
 }

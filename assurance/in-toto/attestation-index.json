@@ -1,31 +1,43 @@
 {
   "schema_id": "ETHICBIT_IN_TOTO_ATTESTATION_INDEX_V1",
-  "version": "1.0.0",
-  "status": "INITIAL_MATERIALIZATION",
+  "version": "1.1.0",
+  "status": "ENFORCED",
+  "verification": {
+    "mode": "FAIL_CLOSED",
+    "allStepsMustBeAttested": true,
+    "noPendingAllowed": true,
+    "requiredStatementStatus": "VERIFIED"
+  },
   "attestations": [
     {
       "step": "intake",
-      "statement_ref": "PENDING_ATTESTATION"
+      "statement_ref": "assurance/in-toto/attestations/intake.statement.json",
+      "status": "REQUIRED_NOT_VERIFIED"
     },
     {
       "step": "provenance",
-      "statement_ref": "PENDING_ATTESTATION"
+      "statement_ref": "assurance/in-toto/attestations/provenance.statement.json",
+      "status": "REQUIRED_NOT_VERIFIED"
     },
     {
       "step": "governance",
-      "statement_ref": "PENDING_ATTESTATION"
+      "statement_ref": "assurance/in-toto/attestations/governance.statement.json",
+      "status": "REQUIRED_NOT_VERIFIED"
     },
     {
       "step": "fixation",
-      "statement_ref": "PENDING_ATTESTATION"
+      "statement_ref": "assurance/in-toto/attestations/fixation.statement.json",
+      "status": "REQUIRED_NOT_VERIFIED"
     },
     {
       "step": "sealing",
-      "statement_ref": "PENDING_ATTESTATION"
+      "statement_ref": "assurance/in-toto/attestations/sealing.statement.json",
+      "status": "REQUIRED_NOT_VERIFIED"
     },
     {
       "step": "closure",
-      "statement_ref": "PENDING_ATTESTATION"
+      "statement_ref": "assurance/in-toto/attestations/closure.statement.json",
+      "status": "REQUIRED_NOT_VERIFIED"
     }
   ]
 }

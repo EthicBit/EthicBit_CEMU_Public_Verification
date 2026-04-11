@@ -1,11 +1,11 @@
 {
   "artifactType": "mixed_audience_gate_report",
-  "generatedAt": "2026-04-09T23:21:31Z",
-  "policyVersion": "mixed-audience-gate-policy.v1.0.0",
+  "generatedAt": "2026-04-10T19:22:17Z",
+  "policyVersion": "mixed-audience-gate-policy.v1.1.0",
   "runContext": {
-    "runId": "run-20260409T232900Z-manual",
+    "runId": "run-20260410T192217Z-82277",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-09T23:00:00Z"
+    "verificationEpoch": "2026-04-10T19:00:00Z"
   },
   "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
   "declaredState": {
@@ -18,7 +18,19 @@
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
     "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
-    "publicationState": "ACTIVE_CANONICAL"
+    "publicationState": "ACTIVE_CANONICAL",
+    "internalClosureStatus": "INTERNAL_CLOSED",
+    "externalProjectionStatus": "EXTERNAL_READY_FOR_LIVE_CONVERGENCE"
+  },
+  "stateModel": {
+    "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
+    "internalClosureStatus": "INTERNAL_CLOSED",
+    "externalProjectionStatus": "EXTERNAL_READY_FOR_LIVE_CONVERGENCE",
+    "officialOperationalStatusObserved": "BLOCKED",
+    "officialReasonObserved": "LIVE_FAIL",
+    "officialStatePath": "artifacts/history/swarm/official_operational_status.json",
+    "officialInternalClosureStatusObserved": "INTERNAL_CLOSED",
+    "officialExternalProjectionStatusObserved": "EXTERNAL_LIVE_FAIL"
   },
   "gates": {
     "requiredComponentsPresent": "PASS",
@@ -38,6 +50,7 @@
     "zeroActiveSupersededReferences": "PASS",
     "noDualPublicationEffective": "PASS",
     "noStalePublicPointerCache": "PASS",
+    "periodicAuditWorkflowScheduled": "PASS",
     "verifyClosureIntegrity": "PASS",
     "runProductionReadiness": "PASS",
     "declaredOperationalReadinessPresent": "PASS",
@@ -53,5 +66,9 @@
   "rawOutputs": {
     "verifyClosureIntegrity": "ACTIVE_CANONICAL",
     "runProductionReadiness": "ACTIVE_CANONICAL\nACTIVE_CANONICAL\nREADY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"
+  },
+  "rawExitCodes": {
+    "verifyClosureIntegrity": 0,
+    "runProductionReadiness": 0
   }
 }

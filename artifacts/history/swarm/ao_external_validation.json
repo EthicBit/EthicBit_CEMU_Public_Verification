@@ -1,24 +1,24 @@
 {
   "artifact": "ao_external_validation",
-  "generatedAt": "2026-04-11T17:00:08Z",
+  "generatedAt": "2026-04-11T17:17:03Z",
   "policyVersion": "external-anchor-validation-policy.v1.0.0",
   "runContext": {
-    "runId": "run-20260411T170008Z-3816",
+    "runId": "run-20260411T171703Z-5766",
     "releaseId": "releases/release-20260407T204627Z",
     "verificationEpoch": "2026-04-11T17:00:00Z"
   },
-  "status": "FAIL",
+  "status": "PASS",
   "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
-  "messageId": "PEGA_AQUI_UN_ID_REAL",
-  "locator": "",
-  "selectedLocator": "https://cu.ao-testnet.xyz/result/PEGA_AQUI_UN_ID_REAL?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
-  "substatus": "RESOLUTION_FAILED",
-  "reasonCode": "AO_HTTP_404",
+  "messageId": "cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo",
+  "locator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+  "selectedLocator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+  "substatus": "CONVERGED",
+  "reasonCode": "AO_PAYLOAD_RESOLVED",
   "checks": {
-    "httpCode": "404",
-    "bodyBytes": 21,
+    "httpCode": "200",
+    "bodyBytes": 28,
     "bodyClass": "TEXT"
   },
-  "result": "AO_PROCESS_RESOLVED=FAIL",
-  "note": "No AO endpoint returned a valid live payload. Last probe: http=404, bodyClass=TEXT, locator=https://cu.ao-testnet.xyz/result/PEGA_AQUI_UN_ID_REAL?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4."
+  "result": "AO_PROCESS_RESOLVED=PASS",
+  "note": "AO endpoint resolved successfully with non-HTML payload."
 }

@@ -3,7 +3,7 @@
 CEMU Ethical Oracle Builder
 
 Fail-closed rule:
-- Only allows on-chain update when officialStatus == READY
+- Only allows on-chain update when officialStatus == READY and cryptography.status == PASS
 
 Usage:
   ./scripts/builders/cemu_ethical_oracle_builder.py
@@ -71,13 +71,20 @@ def root_hash_from_receipt(receipt_path: Path) -> str:
     raise ValueError("bundleRootHash missing or invalid in receipt")
 
 
-def load_status(status_path: Path) -> tuple[str, str]:
+def load_status(status_path: Path) -> tuple[str, str, str, str]:
     payload = read_json(status_path)
     if not isinstance(payload, dict):
         raise ValueError("official status file must be a JSON object")
     status = str(payload.get("officialStatus") or "UNKNOWN").strip().upper()
     reason = str(payload.get("reason") or "UNKNOWN").strip()
-    return status, reason
+
+    cryptography = payload.get("cryptography") if isinstance(payload.get("cryptography"), dict) else {}
+    crypto_status = str(cryptography.get("status") or "UNKNOWN").strip().upper()
+
+    signature = payload.get("signature") if isinstance(payload.get("signature"), dict) else {}
+    signature_status = str(signature.get("status") or "UNKNOWN").strip().upper()
+
+    return status, reason, crypto_status, signature_status
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -108,17 +115,19 @@ def main() -> int:
     runner_path = (root / args.runner).resolve() if not Path(args.runner).is_absolute() else Path(args.runner)
 
     try:
-        official_status, reason = load_status(status_path)
+        official_status, reason, crypto_status, signature_status = load_status(status_path)
     except Exception as exc:
         return fail(f"cannot read official status: {exc}")
 
     print(f"OFFICIAL_STATUS={official_status}")
     print(f"OFFICIAL_REASON={reason}")
+    print(f"OFFICIAL_CRYPTO_STATUS={crypto_status}")
+    print(f"OFFICIAL_SIGNATURE_STATUS={signature_status}")
     print(f"OFFICIAL_STATUS_PATH={status_path}")
 
-    if official_status != "READY":
+    if official_status != "READY" or crypto_status != "PASS":
         print("ORACLE_UPDATE=BLOCKED_BY_OFFICIAL_STATUS")
-        print("DETAIL=Only READY can update CEMUEthicalOracle")
+        print("DETAIL=Only READY + cryptography PASS can update CEMUEthicalOracle")
         return 2
 
     contract_address = args.contract_address.strip()

@@ -1,0 +1,50 @@
+name: Official Periodic Audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  official-periodic-audit:
+    runs-on: ubuntu-latest
+    env:
+      ETHICBIT_RISK_MODE: HIGH
+      ETH_RPC_URL: http://127.0.0.1:8545
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ensure scripts are executable
+        run: |
+          chmod +x scripts/run_mixed_audience_audit.sh
+          chmod +x scripts/status/official_operational_status_calculator.py
+          chmod +x scripts/status/write_periodic_audit_receipt.py
+
+      - name: Run mixed audience gates
+        run: ./scripts/run_mixed_audience_audit.sh --all
+
+      - name: Compute official status
+        run: ./scripts/status/official_operational_status_calculator.py --root .
+
+      - name: Write periodic audit receipt
+        if: always()
+        run: ./scripts/status/write_periodic_audit_receipt.py --root .
+
+      - name: Upload periodic audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-periodic-audit-${{ github.run_id }}
+          path: |
+            results/GATE_REPORT.json
+            results/index.json
+            artifacts/history/swarm/official_operational_status.json
+            artifacts/history/swarm/periodic_audit_receipt.json

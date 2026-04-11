@@ -1,0 +1,14 @@
+{
+  "artifactType": "periodic_audit_receipt",
+  "generatedAt": "2026-04-10T16:34:33.034436Z",
+  "scheduler": "github_actions_schedule",
+  "gitHead": "c4ed6ee812e3f9a07eda2b09f8800c5a3f0383a1",
+  "gateStatus": "NOT_VERIFIED",
+  "officialStatus": "BLOCKED",
+  "officialReason": "LIVE_FAIL",
+  "paths": {
+    "gateReport": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
+    "officialStatus": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/official_operational_status.json",
+    "output": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/periodic_audit_receipt.json"
+  }
+}

@@ -1,38 +1,66 @@
 {
   "type": "in_toto_layout",
-  "version": "1.0.0",
-  "status": "INITIAL_MATERIALIZATION",
-  "description": "Initial in-toto layout for ETHICBIT / CEERV / CEMU.",
+  "version": "1.1.0",
+  "status": "ENFORCED",
+  "description": "Fail-closed in-toto layout for ETHICBIT / CEERV / CEMU.",
+  "verification": {
+    "mode": "FAIL_CLOSED",
+    "requiredAttestationThreshold": 1,
+    "allStepsMustBeAttested": true,
+    "requireHybridSignatures": true,
+    "allowedRiskModes": [
+      "STANDARD",
+      "HIGH",
+      "GOV"
+    ],
+    "forbiddenMarkers": [
+      "PENDING_ATTESTATION",
+      "PLACEHOLDER",
+      "TODO"
+    ]
+  },
   "steps": [
     {
       "name": "intake",
       "expected_command": ["python3", "-m", "cemu.core.intake"],
-      "expected_products": ["ceerv/artifacts/evidence_bundle_full.json"]
+      "expected_products": ["ceerv/artifacts/evidence_bundle_full.json"],
+      "required_attestation_ref": "assurance/in-toto/attestations/intake.statement.json",
+      "threshold": 1
     },
     {
       "name": "provenance",
       "expected_command": ["python3", "-m", "cemu.core.provenance"],
-      "expected_products": ["ceerv/manifests/SSOT_MANIFEST_V1.json"]
+      "expected_products": ["ceerv/manifests/SSOT_MANIFEST_V1.json"],
+      "required_attestation_ref": "assurance/in-toto/attestations/provenance.statement.json",
+      "threshold": 1
     },
     {
       "name": "governance",
       "expected_command": ["python3", "-m", "cemu.core.governance"],
-      "expected_products": ["cemu/outputs/case_003_output_index.json"]
+      "expected_products": ["cemu/outputs/case_003_output_index.json"],
+      "required_attestation_ref": "assurance/in-toto/attestations/governance.statement.json",
+      "threshold": 1
     },
     {
       "name": "fixation",
       "expected_command": ["python3", "-m", "cemu.core.fixation"],
-      "expected_products": ["ceerv/artifacts/certificate.json"]
+      "expected_products": ["ceerv/artifacts/certificate.json"],
+      "required_attestation_ref": "assurance/in-toto/attestations/fixation.statement.json",
+      "threshold": 1
     },
     {
       "name": "sealing",
       "expected_command": ["python3", "-m", "cemu.core.sealing"],
-      "expected_products": ["ceerv/outputs/ACTA_MINIMA.json"]
+      "expected_products": ["ceerv/outputs/ACTA_MINIMA.json"],
+      "required_attestation_ref": "assurance/in-toto/attestations/sealing.statement.json",
+      "threshold": 1
     },
     {
       "name": "closure",
       "expected_command": ["python3", "-m", "cemu.core.closure"],
-      "expected_products": ["artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json"]
+      "expected_products": ["artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json"],
+      "required_attestation_ref": "assurance/in-toto/attestations/closure.statement.json",
+      "threshold": 1
     }
   ]
 }
