@@ -1,0 +1,194 @@
+name: slsa-hybrid-attest
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    tags:
+      - "v*"
+      - "audit-freeze-*"
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  build-sign-attest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Show tool versions
+        run: |
+          python3 --version
+          openssl version
+          node --version || true
+          npm --version || true
+
+      - name: Prepare directories
+        run: |
+          mkdir -p provenance
+          mkdir -p artifacts/ci
+          mkdir -p attestation
+
+      - name: Generate canonical provenance payload
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from scripts.crypto.jcs_rfc8785 import canonicalize_bytes
+
+          payload = {
+            "artifactType": "ethicbit_ci_attestation_payload",
+            "repository": "${{ github.repository }}",
+            "ref": "${{ github.ref }}",
+            "sha": "${{ github.sha }}",
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "workflow": "${{ github.workflow }}",
+            "actor": "${{ github.actor }}",
+            "event_name": "${{ github.event_name }}",
+            "server_url": "${{ github.server_url }}",
+            "retention_days": "${{ github.retention_days }}"
+          }
+
+          Path("provenance/payload.json").write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8"
+          )
+          Path("provenance/payload.jcs.json").write_bytes(canonicalize_bytes(payload))
+          print("WROTE provenance/payload.json")
+          print("WROTE provenance/payload.jcs.json")
+          PY
+
+      - name: Capture OIDC-linked metadata
+        run: |
+          cat > provenance/oidc_context.json <<EOF
+          {
+            "repository": "${{ github.repository }}",
+            "repository_owner": "${{ github.repository_owner }}",
+            "ref": "${{ github.ref }}",
+            "sha": "${{ github.sha }}",
+            "run_id": "${{ github.run_id }}",
+            "run_attempt": "${{ github.run_attempt }}",
+            "workflow": "${{ github.workflow }}",
+            "job": "${{ github.job }}",
+            "actor": "${{ github.actor }}",
+            "event_name": "${{ github.event_name }}"
+          }
+          EOF
+
+      - name: Load signing keys
+        shell: bash
+        run: |
+          mkdir -p assurance/keys
+          printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
+          printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
+          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
+          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
+          chmod 600 assurance/keys/*.pem
+
+      - name: Export signing environment
+        shell: bash
+        run: |
+          {
+            echo "ETHICBIT_ED25519_SIGN_CMD=${{ github.workspace }}/assurance/signers/ed25519_sign.sh {payload}"
+            echo "ETHICBIT_MLDSA_SIGN_CMD=${{ github.workspace }}/assurance/signers/mldsa_sign.sh {payload}"
+            echo "ETHICBIT_ED25519_VERIFY_CMD=${{ github.workspace }}/assurance/signers/ed25519_verify.sh {payload} {signature}"
+            echo "ETHICBIT_MLDSA_VERIFY_CMD=${{ github.workspace }}/assurance/signers/mldsa_verify.sh {payload} {signature}"
+            echo "ETHICBIT_ED25519_KEY_ID=ETHICBIT_ED25519_CI_V1"
+            echo "ETHICBIT_MLDSA_KEY_ID=ETHICBIT_MLDSA65_CI_V1"
+            echo "ETHICBIT_ED25519_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/ed25519_private.pem"
+            echo "ETHICBIT_ED25519_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/ed25519_public.pem"
+            echo "ETHICBIT_MLDSA_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/mldsa_private.pem"
+            echo "ETHICBIT_MLDSA_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/mldsa_public.pem"
+          } >> "$GITHUB_ENV"
+
+      - name: Hybrid-sign provenance payload
+        run: |
+          python3 scripts/crypto/hybrid_sign.py \
+            provenance/payload.json \
+            --output attestation/hybrid_signature_set.json \
+            --risk-mode HIGH \
+            --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
+            --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
+            --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
+            --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID"
+
+      - name: Verify hybrid signatures
+        run: |
+          python3 scripts/crypto/hybrid_verify.py \
+            --payload provenance/payload.jcs.json \
+            --signature-set attestation/hybrid_signature_set.json \
+            --risk-mode HIGH \
+            --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
+            --mldsa-verify-cmd "$ETHICBIT_MLDSA_VERIFY_CMD"
+
+      - name: Build attestation bundle
+        run: |
+          python3 - <<'PY'
+          import json, hashlib
+          from pathlib import Path
+
+          def sha256_file(path):
+              return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+          bundle = {
+            "artifactType": "ethicbit_ci_attestation_bundle",
+            "repository": "${{ github.repository }}",
+            "ref": "${{ github.ref }}",
+            "sha": "${{ github.sha }}",
+            "run_id": "${{ github.run_id }}",
+            "workflow": "${{ github.workflow }}",
+            "payload_sha256": sha256_file("provenance/payload.jcs.json"),
+            "signature_set_sha256": sha256_file("attestation/hybrid_signature_set.json"),
+            "oidc_context_sha256": sha256_file("provenance/oidc_context.json")
+          }
+
+          Path("artifacts/ci/attestation_bundle.json").write_text(
+            json.dumps(bundle, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8"
+          )
+          print("WROTE artifacts/ci/attestation_bundle.json")
+          PY
+
+      - name: Generate checksums
+        run: |
+          shasum -a 256 \
+            provenance/payload.json \
+            provenance/payload.jcs.json \
+            provenance/oidc_context.json \
+            attestation/hybrid_signature_set.json \
+            artifacts/ci/attestation_bundle.json \
+            > artifacts/ci/attestation_bundle.sha256
+
+      - name: Upload GitHub attestation subjects
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            provenance/payload.jcs.json
+            attestation/hybrid_signature_set.json
+            artifacts/ci/attestation_bundle.json
+
+      - name: Upload CI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ethicbit-slsa-hybrid-attestation-${{ github.run_id }}
+          path: |
+            provenance/payload.json
+            provenance/payload.jcs.json
+            provenance/oidc_context.json
+            attestation/hybrid_signature_set.json
+            artifacts/ci/attestation_bundle.json
+            artifacts/ci/attestation_bundle.sha256
