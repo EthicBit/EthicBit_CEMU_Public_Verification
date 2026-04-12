@@ -13,9 +13,12 @@ contract CEMUEthicalOracle {
 
     mapping(bytes32 => mapping(address => bool)) private _hasRole;
 
-    bytes32 public currentCemuRootHash;
-    uint64 public lastUpdateTimestamp;
-    uint64 public updateCount;
+    struct CemuState {
+        bytes32 rootHash;
+        uint64 lastUpdateTimestamp;
+        uint64 updateCount;
+    }
+    CemuState public cemuState;   // ← todo en un solo slot (ahorro de gas y storage)
 
     error MissingRole(bytes32 role, address account);
     error InvalidAddress();
@@ -53,16 +56,18 @@ contract CEMUEthicalOracle {
         _hasRole[DEFAULT_ADMIN_ROLE][msg.sender] = true;
         _hasRole[CEMU_ORACLE_ROLE][msg.sender] = true;
 
-        currentCemuRootHash = initialRootHash;
-        lastUpdateTimestamp = uint64(block.timestamp);
-        updateCount = 1;
+        cemuState = CemuState({
+            rootHash: initialRootHash,
+            lastUpdateTimestamp: uint64(block.timestamp),
+            updateCount: 1
+        });
 
         emit RoleGranted(DEFAULT_ADMIN_ROLE, msg.sender, msg.sender);
         emit RoleGranted(CEMU_ORACLE_ROLE, msg.sender, msg.sender);
         emit CemuRootHashUpdated(
             initialRootHash,
-            lastUpdateTimestamp,
-            updateCount,
+            cemuState.lastUpdateTimestamp,
+            cemuState.updateCount,
             initialVersionTag,
             msg.sender
         );
@@ -96,18 +101,18 @@ contract CEMUEthicalOracle {
     {
         if (newRootHash == bytes32(0)) revert InvalidHash();
         if (versionTag == bytes32(0)) revert InvalidVersionTag();
-        if (newRootHash == currentCemuRootHash) revert HashUnchanged();
+        if (newRootHash == cemuState.rootHash) revert HashUnchanged();
 
-        currentCemuRootHash = newRootHash;
-        lastUpdateTimestamp = uint64(block.timestamp);
+        cemuState.rootHash = newRootHash;
+        cemuState.lastUpdateTimestamp = uint64(block.timestamp);
         unchecked {
-            updateCount += 1;
+            cemuState.updateCount += 1;
         }
 
         emit CemuRootHashUpdated(
             newRootHash,
-            lastUpdateTimestamp,
-            updateCount,
+            cemuState.lastUpdateTimestamp,
+            cemuState.updateCount,
             versionTag,
             msg.sender
         );
@@ -115,12 +120,12 @@ contract CEMUEthicalOracle {
 
     function isEthicallyCompliant() public view returns (bool) {
         return
-            currentCemuRootHash != bytes32(0) &&
-            block.timestamp - uint256(lastUpdateTimestamp) < 30 days;
+            cemuState.rootHash != bytes32(0) &&
+            block.timestamp - uint256(cemuState.lastUpdateTimestamp) < 30 days;
     }
 
     function verifyCurrentClosure(bytes32 providedRootHash) external view returns (bool) {
-        return providedRootHash == currentCemuRootHash;
+        return providedRootHash == cemuState.rootHash;
     }
 
     function checkAndEmitEthicalCompliance() external returns (bool) {

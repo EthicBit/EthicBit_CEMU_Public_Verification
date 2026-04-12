@@ -1,0 +1,35 @@
+# VCS and local metadata
+.git
+.gitignore
+.DS_Store
+
+# Local env and potential secrets
+.env
+.env.*
+!.env.template
+assurance/keys/
+**/*.pem
+**/*private*.key
+**/*private*.pem
+
+# Local runtime state
+node_modules/
+.venv*/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Build outputs and large mutable dirs
+artifacts/
+artifacts_backup_fake_20260409_105446/
+cache/
+history/
+logs/
+results/
+reports/
+publication/
+.hardhat/
+*.log

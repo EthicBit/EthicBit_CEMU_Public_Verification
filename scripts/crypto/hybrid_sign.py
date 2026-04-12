@@ -104,13 +104,14 @@ def _sign_one(
             result["error"] = (proc.stderr or proc.stdout or "signer command failed").strip()
             return result
 
-        if not signature_path.exists():
-            result["error"] = "signer command did not write signature file"
-            return result
+        signature_value = ""
+        if signature_path.exists():
+            signature_value = signature_path.read_text(encoding="utf-8").strip()
+        elif proc.stdout:
+            signature_value = proc.stdout.strip()
 
-        signature_value = signature_path.read_text(encoding="utf-8").strip()
         if not signature_value:
-            result["error"] = "signature file is empty"
+            result["error"] = "signer command did not produce signature output"
             return result
 
         result["signature"] = signature_value

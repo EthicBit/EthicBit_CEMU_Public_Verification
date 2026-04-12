@@ -1,21 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
+
 echo "========================================"
-echo "🚀 AUDITORÍA COMPLETA EthicBit_CEMU + SLSA L4"
+echo "AUDITORIA COMPLETA EthicBit_CEMU + SLSA L4"
 echo "========================================"
 
-echo "\n1. Hardhat compile"
-npx hardhat compile --force || echo "→ Compilación terminada"
+echo
+echo "1. Hardhat compile"
+npx hardhat compile --force
 
-echo "\n2. Slither"
-slither . --solc-remaps "@nomicfoundation= node_modules/@nomicfoundation" 2>/dev/null || echo "→ Slither finalizado"
+echo
+echo "2. Slither"
+slither . --solc-remaps "@nomicfoundation= node_modules/@nomicfoundation"
 
-echo "\n3. Hermetic Build (SLSA L4)"
+echo
+echo "3. Hermetic Build (SLSA L4)"
 npm run build:hermetic
 
-echo "\n4. in-toto + SLSA L4 verification"
-in-toto-verify -l assurance/in-toto/root.layout 2>/dev/null || echo "→ in-toto verification (pendiente de firmas)"
+echo
+echo "4. in-toto + SLSA L4 verification"
+in-toto-verify -l assurance/in-toto/root.layout
 
-echo "\n5. RuntimeGuard L4 check"
-python3 -m cemu.builders.runtime_guard || echo "→ RuntimeGuard L4 ejecutado"
+echo
+echo "5. RuntimeGuard L4 check"
+python3 -m cemu.builders.runtime_guard
 
-echo "\n✅ AUDITORÍA SLSA L4 TERMINADA."
+echo
+echo "AUDITORIA SLSA L4 TERMINADA (PASS)."

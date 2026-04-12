@@ -43,6 +43,9 @@ async function main() {
   const hasClosureAnchored = abi.some(
     (item) => item.type === "event" && item.name === "ClosureAnchored"
   );
+  const closureAnchoredEvent = abi.find(
+    (item) => item.type === "event" && item.name === "ClosureAnchored"
+  );
   const hasIsAnchored = abi.some(
     (item) => item.type === "function" && item.name === "isAnchored"
   );
@@ -53,6 +56,19 @@ async function main() {
   if (!hasClosureAnchored) fail("El ABI no contiene ClosureAnchored");
   if (!hasIsAnchored) fail("El ABI no contiene isAnchored");
   if (!hasGetAnchor) fail("El ABI no contiene getAnchor");
+  const expectedClosureAnchorFields = [
+    "anchorTypeHash",
+    "artifactTypeHash",
+    "versionHash",
+    "manifestURIHash",
+    "receiptURIHash"
+  ];
+  const closureAnchoredFieldNames = new Set((closureAnchoredEvent?.inputs || []).map((x) => x.name));
+  for (const fieldName of expectedClosureAnchorFields) {
+    if (!closureAnchoredFieldNames.has(fieldName)) {
+      fail(`El ABI no contiene ClosureAnchored.${fieldName} (modo hash bytes32)`);
+    }
+  }
 
   ok("ABI alineado con ClosureAnchored / isAnchored / getAnchor");
 

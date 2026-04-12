@@ -11,6 +11,7 @@ contract ClosureAnchor {
     error EmptyArtifactType();
     error EmptyVersion();
     error InvalidNonce(uint256 expected, uint256 provided);
+    error MaxAnchorsReached();   // ← nueva protección contra storage growth
 
     event OwnerTransferred(address indexed previousOwner, address indexed newOwner);
     event GuardianUpdated(address indexed guardian, bool allowed);
@@ -18,11 +19,11 @@ contract ClosureAnchor {
     event ClosureAnchored(
         bytes32 indexed rootHash,
         address indexed anchorer,
-        string anchorType,
-        string artifactType,
-        string version,
-        string manifestURI,
-        string receiptURI,
+        bytes32 anchorTypeHash,
+        bytes32 artifactTypeHash,
+        bytes32 versionHash,
+        bytes32 manifestURIHash,
+        bytes32 receiptURIHash,
         uint256 nonce,
         uint256 timestamp,
         uint256 chainId,
@@ -32,11 +33,11 @@ contract ClosureAnchor {
     struct AnchorRecord {
         bytes32 rootHash;
         address anchorer;
-        string anchorType;
-        string artifactType;
-        string version;
-        string manifestURI;
-        string receiptURI;
+        bytes32 anchorTypeHash;     // keccak256(anchorType)
+        bytes32 artifactTypeHash;
+        bytes32 versionHash;
+        bytes32 manifestURIHash;    // ideal para Arweave/AO CID
+        bytes32 receiptURIHash;
         uint256 nonce;
         uint256 timestamp;
         uint256 chainId;
@@ -47,10 +48,11 @@ contract ClosureAnchor {
     address public owner;
     bool public paused;
     uint256 public nextNonce = 1;
+    uint256 public constant MAX_ANCHORS = 10_000;   // ← límite de gas/storage
 
     mapping(address => bool) public guardians;
     mapping(bytes32 => AnchorRecord) private _records;
-    bytes32[] private _rootHashes;
+    bytes32[] private _rootHashes;   // puedes eliminarlo si no lo necesitas
 
     modifier onlyAuthorized() {
         if (msg.sender != owner && !guardians[msg.sender]) revert Unauthorized();
@@ -89,54 +91,86 @@ contract ClosureAnchor {
 
     function anchorClosure(
         bytes32 rootHash,
-        string calldata anchorType,
-        string calldata artifactType,
-        string calldata version,
-        string calldata manifestURI,
-        string calldata receiptURI,
+        bytes32 anchorTypeHash,
+        bytes32 artifactTypeHash,
+        bytes32 versionHash,
+        bytes32 manifestURIHash,
+        bytes32 receiptURIHash,
         uint256 expectedChainId,
         uint256 nonce
     ) external onlyAuthorized whenNotPaused {
         if (rootHash == bytes32(0)) revert EmptyRootHash();
         if (_records[rootHash].exists) revert AlreadyAnchored(rootHash);
         if (expectedChainId != 0 && expectedChainId != block.chainid) revert InvalidChainHint();
-        if (bytes(anchorType).length == 0) revert EmptyAnchorType();
-        if (bytes(artifactType).length == 0) revert EmptyArtifactType();
-        if (bytes(version).length == 0) revert EmptyVersion();
+        if (anchorTypeHash == bytes32(0)) revert EmptyAnchorType();
+        if (artifactTypeHash == bytes32(0)) revert EmptyArtifactType();
+        if (versionHash == bytes32(0)) revert EmptyVersion();
         if (nonce != nextNonce) revert InvalidNonce(nextNonce, nonce);
+        if (_rootHashes.length >= MAX_ANCHORS) revert MaxAnchorsReached();
 
         bytes32 prevBlockHash = blockhash(block.number - 1);
+        _writeAnchorRecord(
+            rootHash,
+            msg.sender,
+            anchorTypeHash,
+            artifactTypeHash,
+            versionHash,
+            manifestURIHash,
+            receiptURIHash,
+            nonce,
+            prevBlockHash
+        );
 
-        AnchorRecord memory record = AnchorRecord({
-            rootHash: rootHash,
-            anchorer: msg.sender,
-            anchorType: anchorType,
-            artifactType: artifactType,
-            version: version,
-            manifestURI: manifestURI,
-            receiptURI: receiptURI,
-            nonce: nonce,
-            timestamp: block.timestamp,
-            chainId: block.chainid,
-            blockHash: prevBlockHash,
-            exists: true
-        });
-
-        _records[rootHash] = record;
         _rootHashes.push(rootHash);
         nextNonce += 1;
 
+        _emitClosureAnchored(rootHash, msg.sender, nonce, prevBlockHash);
+    }
+
+    function _writeAnchorRecord(
+        bytes32 rootHash,
+        address anchorer,
+        bytes32 anchorTypeHash,
+        bytes32 artifactTypeHash,
+        bytes32 versionHash,
+        bytes32 manifestURIHash,
+        bytes32 receiptURIHash,
+        uint256 nonce,
+        bytes32 prevBlockHash
+    ) private {
+        AnchorRecord storage record = _records[rootHash];
+        record.rootHash = rootHash;
+        record.anchorer = anchorer;
+        record.anchorTypeHash = anchorTypeHash;
+        record.artifactTypeHash = artifactTypeHash;
+        record.versionHash = versionHash;
+        record.manifestURIHash = manifestURIHash;
+        record.receiptURIHash = receiptURIHash;
+        record.nonce = nonce;
+        record.timestamp = block.timestamp;
+        record.chainId = block.chainid;
+        record.blockHash = prevBlockHash;
+        record.exists = true;
+    }
+
+    function _emitClosureAnchored(
+        bytes32 rootHash,
+        address anchorer,
+        uint256 nonce,
+        bytes32 prevBlockHash
+    ) private {
+        AnchorRecord storage record = _records[rootHash];
         emit ClosureAnchored(
             rootHash,
-            msg.sender,
-            anchorType,
-            artifactType,
-            version,
-            manifestURI,
-            receiptURI,
+            anchorer,
+            record.anchorTypeHash,
+            record.artifactTypeHash,
+            record.versionHash,
+            record.manifestURIHash,
+            record.receiptURIHash,
             nonce,
-            block.timestamp,
-            block.chainid,
+            record.timestamp,
+            record.chainId,
             prevBlockHash
         );
     }

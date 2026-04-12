@@ -1,11 +1,11 @@
 {
   "artifact": "triple_public_anchor_live_verification",
-  "generatedAt": "2026-04-11T17:17:04Z",
+  "generatedAt": "2026-04-11T21:55:40Z",
   "policyVersion": "triple-public-anchor-live-policy.v1.0.0",
   "runContext": {
-    "runId": "run-20260411T171704Z-5788",
+    "runId": "run-20260411T215540Z-33389",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-11T17:00:00Z"
+    "verificationEpoch": "2026-04-11T21:00:00Z"
   },
   "supportType": "TRIPLE_PUBLIC_ANCHOR",
   "verificationStatus": "PUBLISHED",
