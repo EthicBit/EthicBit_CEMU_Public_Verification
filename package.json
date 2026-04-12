@@ -8,5 +8,8 @@
     "@nomicfoundation/hardhat-ethers": "^4.0.7",
     "hardhat": "^3.2.0"
   },
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "build:hermetic": "hardhat compile --force && python3 -m cemu.builders.runtime_guard"
+  }
 }
