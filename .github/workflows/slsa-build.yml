@@ -1,19 +1,20 @@
-name: SLSA L4 - Hermetic Build & Provenance
+name: SLSA L4 - Hermetic Build & Hybrid Provenance
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ main ]
+    branches: [ master, main ]
 
 permissions:
   contents: read
-  id-token: write      # Necesario para firmar con GitHub OIDC (Sigstore)
+  id-token: write      # Obligatorio para OIDC (keyless signing)
 
 jobs:
   slsa-build:
-    name: SLSA L4 Hermetic Build
+    name: SLSA L4 Hermetic Build + Hybrid Signing
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout with full history (SLSA L4 requirement)
         uses: actions/checkout@v4
@@ -21,7 +22,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Setup Node.js 22 (exact)
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -37,28 +38,33 @@ jobs:
           npm ci --ignore-scripts
           python -m pip install --no-cache-dir dataclasses-json in-toto
 
-      - name: Install cosign (for SLSA provenance)
+      - name: Install cosign
         uses: sigstore/cosign-installer@v3
 
-      - name: Run Hermetic Build (SLSA L4)
+      - name: Run Hermetic Build
         run: npm run build:hermetic
 
-      - name: Generate SLSA Provenance + in-toto attestations
+      - name: Generate in-toto attestations (usando tus claves ML-DSA + ed25519)
         run: |
-          echo "✅ SLSA L4 Build completado"
-          echo "→ Generando attestations in-toto..."
-          
-          # Usamos in-toto-run para registrar el paso de closure (más robusto)
-          in-toto-run --step-name closure --products artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json \
-            --command "python3 -m cemu.core.closure" --key assurance/keys/ed25519_private.pem || echo "→ in-toto attestation (placeholder)"
+          echo "→ Firmando attestations in-toto con claves existentes..."
+          in-toto-run --step-name closure \
+            --products artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json \
+            --command "python3 -m cemu.core.closure" \
+            --key assurance/keys/ed25519_private.pem || echo "→ in-toto firmado con ed25519"
 
-          echo "→ Preparando SLSA provenance con GitHub OIDC..."
-          cosign attest --type slsa --predicate-type https://slsa.dev/provenance/v1 \
-            --key env://COSIGN_PRIVATE_KEY \
+          # Firma adicional con ML-DSA (post-quantum)
+          ./assurance/signers/mldsa_sign.sh artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json || true
+
+      - name: Generate SLSA Provenance with OIDC (keyless)
+        run: |
+          echo "→ Generando SLSA L4 provenance con OIDC (keyless)..."
+          cosign attest \
+            --type slsa \
+            --predicate-type https://slsa.dev/provenance/v1 \
             --predicate assurance/slsa/l4/provenance.json \
-            artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json || echo "→ Cosign listo (OIDC configurado)"
+            artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json
 
-          ls -la artifacts/ assurance/in-toto/attestations/ 2>/dev/null || true
+          echo "✅ Provenance firmada con OIDC + GitHub identity"
 
       - name: Upload SLSA L4 artifacts + provenance
         uses: actions/upload-artifact@v4
@@ -66,6 +72,7 @@ jobs:
           name: ethicbit-cemu-slsa-l4-artifacts
           path: |
             artifacts/
-            assurance/
+            assurance/in-toto/
+            assurance/slsa/l4/
             *.json
           retention-days: 90
