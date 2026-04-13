@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-finanzas-2026.04",
+  "sector": "FINANZAS",
+  "description": "Financial Mechanical Ethics registry for EthicBit / CEMU.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-FIN-001-v3.0",
+      "description": "All financial transactions must be fully traceable to source.",
+      "category": "TRANSPARENCY",
+      "version": "3.0",
+      "severity": "CRITICAL",
+      "reference": "Anti-money laundering principle",
+      "justification": "La falta de trazabilidad habilita lavado de dinero y fraudes financieros.",
+      "evidence_sources": [
+        "transaction_ledger",
+        "source_funds_proof",
+        "audit_trail"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-FIN-003-v3.0",
+      "description": "No hidden fees or undisclosed costs may be applied.",
+      "category": "FAIRNESS",
+      "version": "3.0",
+      "severity": "CRITICAL",
+      "reference": "Consumer protection",
+      "justification": "Los costos ocultos violan la transparencia y generan desconfianza en el sistema financiero.",
+      "evidence_sources": [
+        "fee_schedule",
+        "cost_disclosure_log",
+        "contract_review"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-FIN-004-v1.0",
+      "description": "Risk calculations must be reproducible with same inputs.",
+      "category": "REPRODUCIBILITY",
+      "version": "1.0",
+      "severity": "HIGH",
+      "reference": "Model governance",
+      "justification": "Los cálculos de riesgo no reproducibles impiden auditoría y generan riesgo sistémico.",
+      "evidence_sources": [
+        "model_version",
+        "input_snapshot",
+        "reproduction_script"
+      ]
+    }
+  ]
+}

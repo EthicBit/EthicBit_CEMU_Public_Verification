@@ -681,3 +681,24 @@ write_index
 
 printf 'RESULTS_DIR=%s\n' "$RESULTS_DIR"
 find "$RESULTS_DIR" -maxdepth 1 -type f | sort
+
+echo "=== EJECUTANDO AUDITORÍA DE ÉTICA MECÁNICA ==="
+
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+ETHIC_AUDIT_SCRIPT="$ROOT_DIR/scripts/audit/audit_ethic_mechanics.sh"
+
+if [ ! -f "$ETHIC_AUDIT_SCRIPT" ]; then
+    echo "ERROR: No se encontró $ETHIC_AUDIT_SCRIPT"
+    exit 2
+fi
+
+bash "$ETHIC_AUDIT_SCRIPT" || {
+    echo "AUDITORÍA DE ÉTICA MECÁNICA FALLIDA"
+    echo "Se detectó incumplimiento de regla CRITICAL (FAIL_CLOSED)"
+    echo "El proceso se detiene por violación ética grave"
+    exit 1
+}
+
+echo "AUDITORÍA DE ÉTICA MECÁNICA: PASS"
+echo "==============================================================================="
+
