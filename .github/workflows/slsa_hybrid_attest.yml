@@ -3,7 +3,7 @@ name: slsa-hybrid-attest
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
     tags:
       - "v*"
       - "audit-freeze-*"
