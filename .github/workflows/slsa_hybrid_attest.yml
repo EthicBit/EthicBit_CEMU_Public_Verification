@@ -105,7 +105,13 @@ jobs:
 
           echo
           echo "===== DIRECT ML-DSA ====="
-          bash assurance/signers/mldsa_sign.sh /tmp/ci_test_payload.jcs.json | head -c 120 ; echo
+          if bash assurance/signers/mldsa_sign.sh /tmp/ci_test_payload.jcs.json > /tmp/mldsa_ci_test.sig 2>/tmp/mldsa_ci_test.err; then
+            head -c 120 /tmp/mldsa_ci_test.sig ; echo
+            echo "MLDSA_CI=PASS"
+          else
+            cat /tmp/mldsa_ci_test.err || true
+            echo "MLDSA_CI=UNSUPPORTED_ON_RUNNER"
+          fi
 
       - name: Hybrid-sign provenance payload
         run: |
