@@ -129,10 +129,11 @@ echo "TAMPER_TEST=PASS_EXPECTED_FAIL"
 
 echo
 echo "===== 6. OFFICIAL STATUS RECALC ====="
-python3 scripts/status/official_operational_status_calculator.py \
-  --risk-mode "$AUDIT_RISK_MODE" \
-  --require-hybrid \
-  --require-signature \
+if [ "$AUDIT_REQUIRE_HYBRID" = "1" ]; then
+  python3 scripts/status/official_operational_status_calculator.py \
+    --risk-mode "$AUDIT_RISK_MODE" \
+    --require-hybrid \
+    --require-signature \
     --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
     --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
     --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
@@ -140,6 +141,7 @@ python3 scripts/status/official_operational_status_calculator.py \
     --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
     --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID"
 else
+  ETHICBIT_OPERATIONAL_MODE=SOVEREIGN_INTERNAL \
   python3 scripts/status/official_operational_status_calculator.py \
     --risk-mode "$AUDIT_RISK_MODE" \
     --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
@@ -149,7 +151,6 @@ else
     --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
     --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID"
 fi
-
 echo
 echo "===== 7. OFFICIAL STATUS SUMMARY ====="
 python3 - <<'PY'
