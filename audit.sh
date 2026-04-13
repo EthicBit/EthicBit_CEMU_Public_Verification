@@ -4,6 +4,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
+AUDIT_RISK_MODE="${ETHICBIT_AUDIT_RISK_MODE:-HIGH}"
+AUDIT_REQUIRE_HYBRID="${ETHICBIT_AUDIT_REQUIRE_HYBRID:-1}"
+
 echo "===== ETHICBIT_CEMU FULL AUDIT ====="
 echo "ROOT=$ROOT"
 date -u
@@ -64,7 +67,7 @@ PY
 python3 scripts/crypto/hybrid_sign.py \
   /tmp/ethicbit_hybrid_payload.json \
   --output /tmp/ethicbit_signature_set.json \
-  --risk-mode HIGH \
+  --risk-mode "$AUDIT_RISK_MODE" \
   --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
   --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
   --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
@@ -73,7 +76,7 @@ python3 scripts/crypto/hybrid_sign.py \
 python3 scripts/crypto/hybrid_verify.py \
   --payload /tmp/ethicbit_hybrid_payload.verify.jcs.json \
   --signature-set /tmp/ethicbit_signature_set.json \
-  --risk-mode HIGH \
+  --risk-mode "$AUDIT_RISK_MODE" \
   --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
   --mldsa-verify-cmd "$ETHICBIT_MLDSA_VERIFY_CMD"
 
@@ -112,7 +115,7 @@ set +e
 python3 scripts/crypto/hybrid_verify.py \
   --payload /tmp/ethicbit_hybrid_payload.tampered.json \
   --signature-set /tmp/ethicbit_signature_set.json \
-  --risk-mode HIGH \
+  --risk-mode "$AUDIT_RISK_MODE" \
   --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
   --mldsa-verify-cmd "$ETHICBIT_MLDSA_VERIFY_CMD"
 RC=$?
@@ -127,15 +130,26 @@ echo "TAMPER_TEST=PASS_EXPECTED_FAIL"
 echo
 echo "===== 6. OFFICIAL STATUS RECALC ====="
 python3 scripts/status/official_operational_status_calculator.py \
-  --risk-mode HIGH \
+  --risk-mode "$AUDIT_RISK_MODE" \
   --require-hybrid \
   --require-signature \
-  --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
-  --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
-  --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
-  --mldsa-verify-cmd "$ETHICBIT_MLDSA_VERIFY_CMD" \
-  --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
-  --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID"
+    --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
+    --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
+    --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
+    --mldsa-verify-cmd "$ETHICBIT_MLDSA_VERIFY_CMD" \
+    --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
+    --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID"
+else
+  python3 scripts/status/official_operational_status_calculator.py \
+    --risk-mode "$AUDIT_RISK_MODE" \
+    --require-signature \
+    --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
+    --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
+    --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
+    --mldsa-verify-cmd "$ETHICBIT_MLDSA_VERIFY_CMD" \
+    --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
+    --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID"
+fi
 
 echo
 echo "===== 7. OFFICIAL STATUS SUMMARY ====="
