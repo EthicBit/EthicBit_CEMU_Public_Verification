@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="/Users/oskrmiranda/Documentos/EthicBit_CEMU"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
 echo "===== ETHICBIT_CEMU FULL AUDIT ====="
