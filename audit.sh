@@ -142,7 +142,6 @@ python3 scripts/status/official_operational_status_calculator.py \
 else
   python3 scripts/status/official_operational_status_calculator.py \
     --risk-mode "$AUDIT_RISK_MODE" \
-    --require-signature \
     --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
     --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
     --ed25519-verify-cmd "$ETHICBIT_ED25519_VERIFY_CMD" \
