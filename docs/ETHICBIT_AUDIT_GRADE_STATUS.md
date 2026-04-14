@@ -3,21 +3,22 @@
 **Document status:** Active  
 **Repository:** `EthicBit_CEMU`  
 **Current branch:** `master`  
-**Purpose:** Declare the current audit-grade operational posture of EthicBit / CEMU after sovereign reconciliation, live convergence, and repository alignment.
+**Purpose:** Declare the current audit-grade operational posture of EthicBit / CEMU after sovereign reconciliation, live convergence, repository alignment, and full Mechanical Ethics remediation across all currently defined sectors.
 
 ---
 
 ## 1. Executive statement
 
-EthicBit / CEMU is now operating under an **audit-grade truth model** with:
+EthicBit / CEMU now operates under an audit-grade truth model with:
 
 - a canonical sovereign truth artifact,
 - a canonical reconciliation entrypoint,
 - derived technical verification artifacts,
 - a final status snapshot,
-- and documented workflow precedence.
+- documented workflow precedence,
+- and a canonically integrated Mechanical Ethics engine validated across all currently defined sectors.
 
-The repository is no longer only technically functional; it is now also **institutionally legible** for audit, verification, and controlled external review.
+The repository is not only technically functional, but institutionally legible for audit, verification, and controlled external review.
 
 ---
 
@@ -29,48 +30,43 @@ The canonical operational truth of the repository is:
 
 - `artifacts/history/swarm/official_operational_status.json`
 
-This artifact prevails over all derived technical reports.
+This artifact prevails over derived technical reports within the system’s internal truth model.
 
 ### 2.2 Derived corroborative artifacts
 
-These artifacts are treated as technical corroboration layers:
+These artifacts are treated as corroborative technical layers:
 
 - `results/GATE_REPORT.json`
 - `results/technical_verification.md`
 - `results/index.json`
 
-They are meaningful, but they do not override sovereign truth.
-
 ### 2.3 Short-form audit snapshot
 
-The short-form current state is exported to:
+A compact current-state export is provided at:
 
 - `results/active/final_status_snapshot.json`
-
-This file exists to provide a compact and audit-friendly operational summary.
 
 ---
 
 ## 3. Canonical reconciliation path
 
-The repository now exposes a canonical reconciliation entrypoint:
+The repository exposes a canonical reconciliation entrypoint:
 
 - `scripts/entrypoints/reconcile_and_show_status.sh`
 
-Its purpose is to:
+This entrypoint recalculates official status, regenerates derived artifacts, exports the active snapshot, and prints the reconciled state.
 
-1. recalculate the official operational status,
-2. regenerate derived technical artifacts,
-3. export a final short-form status snapshot,
-4. and print the reconciled state in a human-readable format.
+In addition, the canonical mixed-audience audit flow is:
 
-This entrypoint should be treated as the primary audit command for operational status review.
+- `scripts/run_mixed_audience_audit.sh`
+
+This flow now includes Mechanical Ethics enforcement checks as part of the canonical audit execution.
 
 ---
 
 ## 4. Current reconciled operational state
 
-After reconciliation, the current active state is:
+The active reconciled state remains:
 
 - `internalClosureStatus = INTERNAL_CLOSED`
 - `liveStatus = PASS`
@@ -78,75 +74,76 @@ After reconciliation, the current active state is:
 - `officialOperationalStatus = READY`
 - `reason = LIVE_CANONICAL_GATE_CONVERGED`
 
-### 4.1 Interpretation
+This means the repository remains:
 
-This means:
-
-- the sovereign internal closure of EthicBit has achieved closure,
-- the live external projection layer has converged,
-- and the official operational state has advanced to `READY`.
-
-This is materially different from prior states such as:
-
-- `BLOCKED`
-- `LIVE_FAIL`
-- `EXTERNAL_LIVE_FAIL`
-
-Those conditions no longer define the active official operational posture.
+- internally closed,
+- externally live-converged,
+- officially ready,
+- and now accompanied by canonically integrated Mechanical Ethics enforcement.
 
 ---
 
-## 5. Meaning of the current state
+## 5. Mechanical Ethics status
 
-### 5.1 Internal closure
+A materially functioning Mechanical Ethics engine is now present in the repository.
 
-`INTERNAL_CLOSED` means the internal sovereign state of EthicBit has achieved closure under its own policy and reconciliation logic.
+It includes:
 
-### 5.2 Live convergence
+- sector-aware registries,
+- executable rule evaluation,
+- `FAIL_CLOSED` behavior for critical violations,
+- `REJECT` handling for unknown rules,
+- fallback behavior to `CORE`,
+- and integration into the canonical audit pipeline.
 
-`PASS` + `EXTERNAL_LIVE_CONVERGED` means the external live projection layer is no longer merely prepared for convergence; it is now observed as converged.
+### 5.1 Currently validated sectors
 
-### 5.3 Official operational readiness
+The Mechanical Ethics layer has now been validated across all currently defined sectors:
 
-`READY` means the system is not merely internally coherent; it is institutionally elevated to an operationally ready condition under the current official status model.
+- `CORE`
+- `JUSTICIA`
+- `FINANZAS`
+- `SECURITY`
+- `TECHNICAL`
+- `LEGAL`
+- `REGULATORY`
 
-### 5.4 Reason normalization
+### 5.2 Canonical enforcement path
 
-`LIVE_CANONICAL_GATE_CONVERGED` is the canonical reason that explains the current official readiness transition.
+Mechanical Ethics enforcement is exercised through:
 
-This reason should be preferred over previous failure reasons when describing current state.
+- `scripts/core/RegistryManager.py`
+- `scripts/core/ethic_mechanics_check.sh`
+- `scripts/audit/audit_ethic_mechanics.sh`
+- `scripts/run_mixed_audience_audit.sh`
+
+### 5.3 Audit significance
+
+The original critical gap concerning the practical implementation of the Mechanical Ethics layer can no longer be stated in the same form.
+
+It is no longer accurate to describe the Mechanical Ethics layer as merely conceptual or materially incomplete within the currently defined scope.
 
 ---
 
 ## 6. Audit-grade repository organization
 
-The repository has been aligned to support higher-grade audit interpretation through the introduction of the following documents and entrypoints:
+The repository includes the following audit-facing structure:
 
 - `AUDIT_START_HERE.md`
 - `docs/REPO_AUDIT_TRUTH_MODEL.md`
 - `docs/CANONICAL_WORKFLOWS.md`
+- `docs/ETHICBIT_AUDIT_GRADE_STATUS.md`
+- `docs/ETHICBIT_REGULATORY_BRIEF.md`
 - `scripts/entrypoints/reconcile_and_show_status.sh`
 - `results/active/final_status_snapshot.json`
+- `audit_package/`
 
-### 6.1 Effect of this alignment
+This structure establishes:
 
-This alignment establishes:
-
-- a declared truth hierarchy,
-- a stable audit starting point,
-- workflow precedence guidance,
-- and a consistent short-form operational state export.
-
-### 6.2 Institutional benefit
-
-The repository is now easier to audit because an external reviewer no longer needs to infer final truth from multiple potentially stale artifacts.
-
-The expected reading order is now explicit:
-
-1. `official_operational_status.json`
-2. `GATE_REPORT.json`
-3. `technical_verification.md`
-4. assurance and policy artifacts if needed
+- a truth hierarchy,
+- a stable review starting point,
+- a curated audit package,
+- and a current-state layer synchronized with the canonical audit flow.
 
 ---
 
@@ -160,26 +157,13 @@ The repository contains a materially implemented assurance layer including:
 - `assurance/sigstore/policy.json`
 - `verifier/verify_all.sh`
 
-This means EthicBit already possesses a real assurance architecture and not merely an aspirational documentation layer.
-
-### 7.1 Important precision
-
-The presence of these artifacts supports a strong assurance claim.
-
-However, this document distinguishes between:
-
-- **implemented assurance architecture**
-- and
-- **maximum external proof closure**
-
-The first is established.  
-The second remains dependent on the strict proof level required for each claim.
+This means EthicBit possesses a real assurance architecture and not merely an aspirational documentation layer.
 
 ---
 
 ## 8. What is now firmly established
 
-The following can now be stated with high confidence:
+The following statements can now be made with high confidence within the repository’s demonstrated scope:
 
 ### 8.1 Technology existence
 EthicBit / CEMU is a real implemented system, not merely a conceptual framework.
@@ -194,29 +178,18 @@ The live external layer has converged.
 The official operational state is `READY`.
 
 ### 8.5 Audit-grade organization
-The repository has been organized to expose its state under a clear audit truth model.
+The repository has been organized under a clear audit truth model.
+
+### 8.6 Mechanical Ethics implementation
+The Mechanical Ethics layer is materially implemented and canonically enforced across all currently defined sectors.
 
 ---
 
-## 9. What remains outside the scope of this document
+## 9. Scope limits
 
-This document does **not** claim, by itself, that all of the following are fully and finally proven:
+This document does not, by itself, assert universal finality for every possible assurance, regulatory, or third-party certification question.
 
-- universal bit-a-bit reproducibility under all environments,
-- total hermetic build closure,
-- final end-to-end supply-chain closure at maximum proof threshold,
-- or independent third-party proof closure for every highest-level claim.
-
-Those questions belong to stronger proof tracks and should be handled separately.
-
-This document is narrower and more precise:
-
-It records that EthicBit / CEMU is now:
-
-- internally closed,
-- externally live-converged,
-- officially ready,
-- and audit-grade organized.
+It records the current repository posture and the evidence currently demonstrated in the canonical audit flow.
 
 ---
 
@@ -224,32 +197,20 @@ It records that EthicBit / CEMU is now:
 
 The current canonical repository claim is:
 
-EthicBit / CEMU is internally closed, externally live-converged, officially READY, and organized under an audit-grade truth model with a canonical reconciliation entrypoint and final status snapshot.
+**EthicBit / CEMU is internally closed, externally live-converged, officially READY, organized under an audit-grade truth model, and equipped with a canonically integrated Mechanical Ethics engine validated across all currently defined sectors.**
 
 ---
 
 ## 11. Recommended audit procedure
 
-For any future review, the recommended sequence is:
+For review, the recommended sequence is:
 
-1. Run:
-   - `bash ./scripts/entrypoints/reconcile_and_show_status.sh`
-
-2. Read sovereign truth:
-   - `artifacts/history/swarm/official_operational_status.json`
-
-3. Confirm short-form state:
-   - `results/active/final_status_snapshot.json`
-
-4. Corroborate technical derived artifacts:
-   - `results/GATE_REPORT.json`
-   - `results/technical_verification.md`
-
-5. Review assurance artifacts if a higher-trust review is required:
-   - `attestations/slsa_l4_final_attestation.json`
-   - `assurance/in-toto/root.layout`
-   - `assurance/slsa/provenance.json`
-   - `assurance/sigstore/policy.json`
+1. `bash ./scripts/entrypoints/reconcile_and_show_status.sh`
+2. Read `artifacts/history/swarm/official_operational_status.json`
+3. Confirm `results/active/final_status_snapshot.json`
+4. Corroborate `results/GATE_REPORT.json` and `results/technical_verification.md`
+5. Review `audit_package/`
+6. Where needed, run `./scripts/run_mixed_audience_audit.sh`
 
 ---
 
@@ -257,14 +218,13 @@ For any future review, the recommended sequence is:
 
 EthicBit / CEMU has crossed an important threshold.
 
-It is no longer only a technically rich repository with multiple assurance and evidence layers.  
-It is now also a repository whose truth model has been made explicit, whose operational state is reconciled, and whose final active posture is:
+It is now:
 
 - sovereignly closed,
 - externally converged,
 - officially ready,
-- and audit-grade organized.
+- audit-grade organized,
+- and materially equipped with a Mechanical Ethics enforcement layer integrated into the canonical audit flow across all currently defined sectors.
 
-That condition should define the current institutional reading of the system.
+That combined state should define the current institutional reading of the system.
 
----
