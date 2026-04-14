@@ -80,6 +80,7 @@ At the time of this addendum, the remediation has been demonstrably validated fo
 - `CORE`
 - `JUSTICIA`
 - `FINANZAS`
+- `SECURITY`
 
 For these sectors, the system now demonstrates:
 
@@ -87,6 +88,7 @@ For these sectors, the system now demonstrates:
 - schema-aligned rule definition,
 - positive evaluation path,
 - critical fail-closed path,
+- reject handling,
 - and successful invocation through the canonical audit pipeline.
 
 ---
@@ -108,6 +110,7 @@ The remediation is evidenced by the following repository components:
 - `ceerv/policy/reason_registry_CORE.json`
 - `ceerv/policy/reason_registry_JUSTICIA.json`
 - `ceerv/policy/reason_registry_FINANZAS.json`
+- `ceerv/policy/reason_registry_SECURITY.json`
 
 ### 5.4 Refreshed audit package state
 - `audit_package/current_state/final_status_snapshot.json`
@@ -128,6 +131,7 @@ The current repository now demonstrates a materially functioning Mechanical Ethi
 - structured registries,
 - executable rule evaluation,
 - fail-closed enforcement for critical violations,
+- reject handling for unknown rules,
 - and canonical pipeline integration,
 
 for the currently validated sectors:
@@ -135,6 +139,7 @@ for the currently validated sectors:
 - `CORE`
 - `JUSTICIA`
 - `FINANZAS`
+- `SECURITY`
 
 ---
 
@@ -159,7 +164,7 @@ Accordingly, this addendum records a material remediation, not a claim of univer
 
 Following remediation, the most accurate interpretation is now:
 
-EthicBit / CEMU materially remediated the critical gap concerning the practical implementation of the Mechanical Ethics layer by introducing executable rule enforcement, fail-closed behavior, and canonical pipeline integration for the currently validated sectors CORE, JUSTICIA, and FINANZAS.
+EthicBit / CEMU materially remediated the critical gap concerning the practical implementation of the Mechanical Ethics layer by introducing executable rule enforcement, fail-closed behavior, reject handling, and canonical pipeline integration for the currently validated sectors CORE, JUSTICIA, FINANZAS, and SECURITY.
 
 This is a stronger and more technically grounded posture than the one reflected in the earlier finding.
 
@@ -185,4 +190,3 @@ The repository has moved from having a critically incomplete Mechanical Ethics l
 
 That improvement should be taken into account in any updated external audit interpretation.
 
----
