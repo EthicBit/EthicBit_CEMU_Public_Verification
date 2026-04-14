@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-technical-2026.04",
+  "sector": "TECHNICAL",
+  "description": "Technical Mechanical Ethics registry for EthicBit / CEMU.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-TEC-001-v1.0",
+      "description": "All technical builds affecting critical outputs must be reproducible from preserved source, configuration, and dependency state.",
+      "category": "REPRODUCIBILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Build reproducibility principle",
+      "justification": "Sin reproducibilidad técnica no existe verificación independiente fiable ni cierre de auditoría defendible.",
+      "evidence_sources": [
+        "source_snapshot",
+        "build_config",
+        "dependency_lock"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-002-v1.0",
+      "description": "All critical technical transformations must be fully traceable across inputs, intermediate states, and outputs.",
+      "category": "TRACEABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Technical traceability principle",
+      "justification": "Sin trazabilidad técnica completa no es posible reconstruir causalidad, aislar fallos ni defender resultados ante auditoría.",
+      "evidence_sources": [
+        "transformation_log",
+        "intermediate_state_record",
+        "output_manifest"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-003-v1.0",
+      "description": "All technical verification procedures must preserve explainable failure reasons and actionable remediation paths.",
+      "category": "EXPLAINABILITY",
+      "version": "1.0",
+      "severity": "HIGH",
+      "reference": "Technical verification explainability",
+      "justification": "Las fallas técnicas opacas impiden remediación disciplinada y degradan la capacidad de auditoría posterior.",
+      "evidence_sources": [
+        "verification_report",
+        "failure_reason_log",
+        "remediation_record"
+      ]
+    }
+  ]
+}
