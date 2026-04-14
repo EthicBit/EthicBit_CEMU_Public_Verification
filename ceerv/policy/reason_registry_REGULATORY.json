@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-regulatory-2026.04",
+  "sector": "REGULATORY",
+  "description": "Regulatory Mechanical Ethics registry for EthicBit / CEMU.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-REG-001-v2.1",
+      "description": "All regulatory relevant outputs must preserve complete traceability to underlying inputs, rules, and control decisions.",
+      "category": "TRACEABILITY",
+      "version": "2.1",
+      "severity": "CRITICAL",
+      "reference": "Regulatory accountability principle",
+      "justification": "Sin trazabilidad regulatoria completa no es posible demostrar cumplimiento, responder a requerimientos ni sostener supervisión externa.",
+      "evidence_sources": [
+        "control_decision_log",
+        "input_snapshot",
+        "regulatory_trace_record"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-REG-002-v1.0",
+      "description": "All regulatory compliance determinations must be reproducible from preserved evidence, policy state, and execution context.",
+      "category": "REPRODUCIBILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Regulatory reproducibility principle",
+      "justification": "Sin reproducibilidad de las determinaciones regulatorias no puede existir validación independiente robusta ni supervisión técnica confiable.",
+      "evidence_sources": [
+        "policy_snapshot",
+        "execution_context_record",
+        "compliance_replay_script"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-REG-003-v1.0",
+      "description": "All regulatory findings must expose clear justification and reviewable explanation for supervisory interpretation.",
+      "category": "EXPLAINABILITY",
+      "version": "1.0",
+      "severity": "HIGH",
+      "reference": "Supervisory explainability principle",
+      "justification": "Hallazgos regulatorios opacos dificultan revisión, contradicción técnica y gobernanza institucional.",
+      "evidence_sources": [
+        "finding_explanation_record",
+        "supervisory_summary",
+        "reasoning_log"
+      ]
+    }
+  ]
+}

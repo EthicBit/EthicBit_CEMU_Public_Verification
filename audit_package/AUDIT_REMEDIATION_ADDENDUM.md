@@ -81,6 +81,9 @@ At the time of this addendum, the remediation has been demonstrably validated fo
 - `JUSTICIA`
 - `FINANZAS`
 - `SECURITY`
+- `TECHNICAL`
+- `LEGAL`
+- `REGULATORY`
 
 For these sectors, the system now demonstrates:
 
@@ -89,6 +92,7 @@ For these sectors, the system now demonstrates:
 - positive evaluation path,
 - critical fail-closed path,
 - reject handling,
+- fallback behavior to `CORE`,
 - and successful invocation through the canonical audit pipeline.
 
 ---
@@ -111,6 +115,9 @@ The remediation is evidenced by the following repository components:
 - `ceerv/policy/reason_registry_JUSTICIA.json`
 - `ceerv/policy/reason_registry_FINANZAS.json`
 - `ceerv/policy/reason_registry_SECURITY.json`
+- `ceerv/policy/reason_registry_TECHNICAL.json`
+- `ceerv/policy/reason_registry_LEGAL.json`
+- `ceerv/policy/reason_registry_REGULATORY.json`
 
 ### 5.4 Refreshed audit package state
 - `audit_package/current_state/final_status_snapshot.json`
@@ -132,6 +139,7 @@ The current repository now demonstrates a materially functioning Mechanical Ethi
 - executable rule evaluation,
 - fail-closed enforcement for critical violations,
 - reject handling for unknown rules,
+- fallback behavior to `CORE`,
 - and canonical pipeline integration,
 
 for the currently validated sectors:
@@ -140,6 +148,9 @@ for the currently validated sectors:
 - `JUSTICIA`
 - `FINANZAS`
 - `SECURITY`
+- `TECHNICAL`
+- `LEGAL`
+- `REGULATORY`
 
 ---
 
@@ -151,8 +162,7 @@ It does not claim that all possible future sectors, regulatory domains, or assur
 
 In particular, the following may still remain outside the presently demonstrated scope:
 
-- additional sector registries not yet materialized,
-- broader expansion to further policy domains,
+- future sector expansion beyond the currently defined set,
 - deeper policy-to-artifact reporting integration,
 - and any stronger external conclusion beyond the evidence currently demonstrated.
 
@@ -164,7 +174,7 @@ Accordingly, this addendum records a material remediation, not a claim of univer
 
 Following remediation, the most accurate interpretation is now:
 
-EthicBit / CEMU materially remediated the critical gap concerning the practical implementation of the Mechanical Ethics layer by introducing executable rule enforcement, fail-closed behavior, reject handling, and canonical pipeline integration for the currently validated sectors CORE, JUSTICIA, FINANZAS, and SECURITY.
+EthicBit / CEMU materially remediated the critical gap concerning the practical implementation of the Mechanical Ethics layer by introducing executable rule enforcement, fail-closed behavior, reject handling, fallback behavior, and canonical pipeline integration for the currently validated sectors CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, and REGULATORY.
 
 This is a stronger and more technically grounded posture than the one reflected in the earlier finding.
 
@@ -176,9 +186,8 @@ The next recommended steps are:
 
 1. preserve the current remediated state in version control,
 2. maintain current-state artifacts in sync with the canonical audit flow,
-3. extend the same rigor to additional sectors,
-4. optionally expose Mechanical Ethics outcomes more explicitly in top-level audit artifacts,
-5. and submit the updated package for follow-up external review.
+3. optionally expose Mechanical Ethics outcomes more explicitly in top-level audit artifacts,
+4. and submit the updated package for follow-up external review.
 
 ---
 
@@ -186,7 +195,6 @@ The next recommended steps are:
 
 This addendum records a meaningful improvement in the maturity of EthicBit / CEMU.
 
-The repository has moved from having a critically incomplete Mechanical Ethics layer to having a materially implemented, executable, and canonically integrated enforcement mechanism within the scope already demonstrated.
+The repository has moved from having a critically incomplete Mechanical Ethics layer to having a materially implemented, executable, and canonically integrated enforcement mechanism across all currently defined sectors.
 
 That improvement should be taken into account in any updated external audit interpretation.
-
