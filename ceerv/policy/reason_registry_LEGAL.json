@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-legal-2026.04",
+  "sector": "LEGAL",
+  "description": "Legal Mechanical Ethics registry for EthicBit / CEMU.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-LEG-001-v2.0",
+      "description": "All legally relevant determinations must preserve a complete and reviewable evidentiary chain.",
+      "category": "TRACEABILITY",
+      "version": "2.0",
+      "severity": "CRITICAL",
+      "reference": "Legal evidentiary integrity principle",
+      "justification": "Sin cadena de evidencia completa no es posible sostener revisión legal independiente ni defender la validez del resultado.",
+      "evidence_sources": [
+        "evidence_chain_log",
+        "source_reference_record",
+        "timestamped_snapshot"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-LEG-002-v1.0",
+      "description": "All legal conclusions must be explainable through a clear and reconstructable reasoning path.",
+      "category": "EXPLAINABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Legal explainability and accountability",
+      "justification": "Las conclusiones legales opacas impiden contradicción efectiva y degradan la defendibilidad institucional del sistema.",
+      "evidence_sources": [
+        "reasoning_log",
+        "causal_chain_record",
+        "decision_explanation"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-LEG-003-v1.0",
+      "description": "All legal compliance checks must be reproducible from preserved inputs and governing policy state.",
+      "category": "REPRODUCIBILITY",
+      "version": "1.0",
+      "severity": "HIGH",
+      "reference": "Legal compliance reproducibility",
+      "justification": "Sin reproducibilidad de chequeos legales no existe validación independiente suficiente ni auditoría robusta.",
+      "evidence_sources": [
+        "input_snapshot",
+        "policy_snapshot",
+        "compliance_replay_script"
+      ]
+    }
+  ]
+}
