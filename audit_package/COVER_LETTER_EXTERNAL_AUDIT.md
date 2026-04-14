@@ -2,17 +2,27 @@
 
 **Project:** EthicBit / CEMU  
 **Repository:** `EthicBit_CEMU`  
-**Package:** `audit_package/`  
-**Purpose:** External high-impact technical audit intake  
-**Status at package creation:** `READY`
+**Audit package:** `audit_package/`  
+**Purpose:** Formal intake for external technical review  
+**Package status at issuance:** `SUBMITTED_FOR_EXTERNAL_REVIEW`  
+**Current repository posture:** `READY`
+
+## Package identity
+**Package version:** [to be completed]  
+**Repository tag:** [to be completed]  
+**Commit SHA:** `bea59f8a6935cd15c983af5634afc847b64f905c`  
+**Generation timestamp (UTC):** [to be completed]  
+**Package SHA256:** [to be completed]  
+**Generation tool/version:** [to be completed]  
+**Issuing authority:** [to be completed]
 
 ---
 
-## 1. Introduction
+## 1. Purpose of this submission
 
-This package is provided as the curated external-audit entrypoint for EthicBit / CEMU.
+This package is provided as the curated entrypoint for external review of EthicBit / CEMU.
 
-Its purpose is to reduce ambiguity for an external reviewer by isolating:
+Its purpose is to reduce ambiguity for the independent reviewer by presenting a structured audit surface that explicitly defines:
 
 - scope,
 - system overview,
@@ -20,33 +30,34 @@ Its purpose is to reduce ambiguity for an external reviewer by isolating:
 - threat model,
 - operational runbook,
 - current reconciled state,
+- remediation status,
 - and canonical repository references.
 
-The intent is not to require the reviewer to infer operational truth from the repository at large, but to provide a structured and institutionally legible audit surface.
+This package is not intended to replace full source-code inspection, independent validation of signed artifacts, or execution of verification procedures by the auditor. Its role is to support a rigorous, traceable, and efficient external review.
 
 ---
 
-## 2. What EthicBit / CEMU is
+## 2. Current state of the system
 
-EthicBit / CEMU is a sovereign evidence and assurance system organized around:
+At the time of this package state, the repository presents:
 
-- a canonical sovereign operational truth artifact,
-- derived technical verification artifacts,
-- an assurance layer including provenance and attestation structures,
+- a sovereign operational truth model,
 - a canonical reconciliation path,
-- and a current active operational state.
+- refreshed current-state artifacts,
+- and a materially remediated Mechanical Ethics layer integrated into the canonical audit pipeline.
 
-The repository is designed to distinguish between:
+The repository explicitly distinguishes between:
 
 - sovereign internal closure,
 - external live projection,
-- and official operational status.
+- official operational status,
+- and sector-aware Mechanical Ethics enforcement.
 
 ---
 
-## 3. Current active operational posture
+## 3. Current declared operational posture
 
-At the time this package was assembled, the current active reconciled state is:
+At the time this package was assembled, the system’s internally reconciled declared posture was:
 
 - `internalClosureStatus = INTERNAL_CLOSED`
 - `liveStatus = PASS`
@@ -54,19 +65,51 @@ At the time this package was assembled, the current active reconciled state is:
 - `officialOperationalStatus = READY`
 - `reason = LIVE_CANONICAL_GATE_CONVERGED`
 
-The short-form representation of this state is included at:
+The compact representation of this state is included in:
 
 - `current_state/final_status_snapshot.json`
 
-The canonical sovereign truth artifact is:
+The canonical internal reconciled operational-state artifact is included in:
 
 - `current_state/official_operational_status.json`
 
+These values should be interpreted as internal system declarations subject to independent validation during external review.
+
 ---
 
-## 4. Canonical reading order
+## 4. Mechanical Ethics remediation status
 
-For external review, the recommended reading order is:
+The original critical gap concerning the practical implementation of the Mechanical Ethics layer has now been materially remediated within the repository’s demonstrated scope.
+
+EthicBit / CEMU now demonstrates:
+
+- structured sector-aware registries,
+- executable rule evaluation,
+- fail-closed enforcement for critical violations,
+- reject handling for unknown rules,
+- fallback behavior to `CORE`,
+- and canonical integration into the main audit flow.
+
+This remediation has been validated across all currently defined sectors:
+
+- `CORE`
+- `JUSTICIA`
+- `FINANZAS`
+- `SECURITY`
+- `TECHNICAL`
+- `LEGAL`
+- `REGULATORY`
+
+The remediation record is documented in:
+
+- `AUDIT_REMEDIATION_ADDENDUM.md`
+- `FINAL_AUDIT_CONCLUSION.md`
+
+---
+
+## 5. Recommended canonical reading order
+
+For efficient external review, the following reading order is recommended:
 
 1. `README.md`
 2. `SCOPE.md`
@@ -74,77 +117,90 @@ For external review, the recommended reading order is:
 4. `THREAT_MODEL.md`
 5. `ASSUMPTIONS_AND_TRUST_BOUNDARIES.md`
 6. `RUNBOOK.md`
-7. `current_state/final_status_snapshot.json`
-8. `current_state/official_operational_status.json`
-9. `current_state/GATE_REPORT.json`
-10. `current_state/technical_verification.md`
-11. `references/REPO_AUDIT_TRUTH_MODEL.md`
-12. `references/CANONICAL_WORKFLOWS.md`
-13. `references/ETHICBIT_AUDIT_GRADE_STATUS.md`
+7. `AUDIT_REMEDIATION_ADDENDUM.md`
+8. `FINAL_AUDIT_CONCLUSION.md`
+9. `current_state/final_status_snapshot.json`
+10. `current_state/official_operational_status.json`
+11. `current_state/GATE_REPORT.json`
+12. `current_state/technical_verification.md`
+13. `references/REPO_AUDIT_TRUTH_MODEL.md`
+14. `references/CANONICAL_WORKFLOWS.md`
+15. `references/ETHICBIT_AUDIT_GRADE_STATUS.md`
 
 ---
 
-## 5. Canonical rule
+## 6. Documentary precedence rule
 
-If any conflict exists between artifacts, the canonical sovereign truth artifact prevails:
+Within the system’s internal model, the artifact:
 
 - `current_state/official_operational_status.json`
 
-This package is intentionally organized so that derived reports remain available, but do not override sovereign truth.
+should be treated as the canonical internal summary of the reconciled operational state.
+
+For purposes of external audit, however, no declarative artifact should automatically prevail over independently verifiable evidence. In the event of discrepancy, the auditor’s conclusion should rest on:
+
+- source-code inspection,
+- reproducible verification,
+- signed artifacts and attestations,
+- provenance validation,
+- and any other primary technical evidence deemed applicable.
 
 ---
 
-## 6. Audit intent
+## 7. Audit intent
 
-The goal of this package is to support a high-quality third-party review of:
+This package is designed to support a high-quality external review of:
 
 - the repository’s active operational truth model,
 - the reconciliation path,
-- the relation between sovereign internal closure and external projection,
-- the structure of derived verification artifacts,
-- and the current readiness posture of the system.
+- the relation between sovereign closure and external projection,
+- the structure of derived technical artifacts,
+- the current readiness posture,
+- and the now-remediated Mechanical Ethics enforcement layer.
 
-This package is not intended to collapse all possible assurance claims into one statement.  
-Rather, it provides a disciplined basis for external review.
-
----
-
-## 7. Assurance posture
-
-The broader repository contains assurance-related artifacts and structures including:
-
-- in-toto layout material,
-- SLSA-oriented provenance,
-- Sigstore policy,
-- verifier entrypoints,
-- and attestation artifacts.
-
-Selected references are included in this package under `references/`.
-
-Where deeper repository review is required, the package should be used as the entrypoint, not as a substitute for full source inspection.
+The package is intended to provide a disciplined and institutionally legible basis for review, not to substitute for the auditor’s own validation.
 
 ---
 
 ## 8. Practical review guidance
 
-The fastest way to verify the active repository state is:
+The fastest way to assess the current repository posture is to:
 
-- follow the reading order in this package, and
-- if needed, execute the canonical reconciliation command documented in `RUNBOOK.md`.
+- follow the reading order defined in this package, and
+- when appropriate, execute the canonical reconciliation command documented in `RUNBOOK.md`.
 
-This package is designed to minimize time lost to navigation ambiguity and stale-report interpretation.
+At minimum, the external review should confirm:
+
+- that short-form state matches underlying artifacts,
+- that derived reports are consistent with sovereign truth,
+- that Mechanical Ethics enforcement is present in the canonical pipeline,
+- and that the current result can be reproduced within documented technical limits.
+
+---
+
+## 9. Limits and exclusions
+
+This package:
+
+- does not replace full source-code review;
+- does not, by itself, constitute a certification of security, compliance, or production suitability;
+- does not replace independent validation of artifacts, signatures, attestations, or provenance;
+- does not convert an internal `READY` declaration into an external conclusion;
+- and does not extend beyond the scope actually represented in this package.
+
+Any external conclusion should remain limited to the evidence independently reviewed.
 
 ---
 
-## 9. Closing note
+## 10. Closing note
 
-EthicBit / CEMU is being presented here not merely as a codebase, but as a system with:
+EthicBit / CEMU is presented here not only as a codebase, but as a system with:
 
-- explicit truth hierarchy,
-- reconciled operational state,
-- documented trust boundaries,
-- and a curated audit surface.
+- an explicit operational truth hierarchy,
+- a documented reconciled state,
+- defined trust boundaries,
+- a curated external audit surface,
+- and a materially implemented Mechanical Ethics enforcement layer integrated into the canonical audit flow.
 
-That is the intended basis for external technical review.
+On that basis, an independent technical review is respectfully requested.
 
----
