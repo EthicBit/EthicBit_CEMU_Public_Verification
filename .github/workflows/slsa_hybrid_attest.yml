@@ -113,6 +113,12 @@ jobs:
             echo "MLDSA_CI=UNSUPPORTED_ON_RUNNER"
           fi
 
+      - name: Run constitutional fail-closed release gate
+        shell: bash
+        run: |
+          chmod +x scripts/audit/verify_constitutional_controls.sh
+          ./scripts/audit/verify_constitutional_controls.sh
+
       - name: Hybrid-sign provenance payload
         run: |
           python3 - <<'PY'
@@ -176,4 +182,5 @@ jobs:
             attestation/hybrid_signature_set.json
             artifacts/history/swarm/official_operational_status.json
             results/GATE_REPORT.json
+            results/constitutional_controls_report.json
             artifacts/history/swarm/triple_public_anchor_live_verification.json

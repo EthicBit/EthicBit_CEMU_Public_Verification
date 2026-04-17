@@ -62,3 +62,6 @@ artifacts_backup_*
 
 # Hardhat isolated build output
 .hardhat/
+
+# Constitutional controls runtime report (generated)
+results/constitutional_controls_report.json
