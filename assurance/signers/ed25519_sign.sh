@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "${SCRIPT_DIR}/../.." && pwd)"
+
 PAYLOAD_FILE="${1:-}"
-KEY_PATH="${ETHICBIT_ED25519_PRIVATE_KEY:-/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/keys/ed25519_private.pem}"
+KEY_PATH="${ETHICBIT_ED25519_PRIVATE_KEY:-${REPO_ROOT}/assurance/keys/ed25519_private.pem}"
 [ -f "$PAYLOAD_FILE" ] || { echo "payload file not found: $PAYLOAD_FILE" >&2; exit 3; }
 [ -f "$KEY_PATH" ] || { echo "ed25519 private key not found: $KEY_PATH" >&2; exit 4; }
 TMP_SIG="$(mktemp)"

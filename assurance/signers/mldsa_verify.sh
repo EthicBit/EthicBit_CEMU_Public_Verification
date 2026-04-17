@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "${SCRIPT_DIR}/../.." && pwd)"
+
 LEVEL="${ETHICBIT_MLDSA_LEVEL:-65}"
-PUBKEY_PATH="${ETHICBIT_MLDSA_PUBLIC_KEY:-/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/keys/mldsa_public.pem}"
+PUBKEY_PATH="${ETHICBIT_MLDSA_PUBLIC_KEY:-${REPO_ROOT}/assurance/keys/mldsa_public.pem}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in

@@ -15,6 +15,7 @@ import argparse
 import hashlib
 import json
 import os
+import shlex
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -28,7 +29,9 @@ PASS_TOKENS = {
     "SUCCESS",
     "READY",
     "ACTIVE_CANONICAL",
-    "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "READY_FOR_CONTROLLED_PRODUCTION",
+    "READY_FOR_CONTROLLED_PRODUCTION",
+    "CONTROLLED_PRODUCTION_ACTIVE",
     "ANCHOR_HARDENING_ENABLED",
     "TRUE",
 }
@@ -51,6 +54,10 @@ PLACEHOLDER_TOKENS = ("PENDING", "PON_AQUI", "PLACEHOLDER", "TODO", "TBD", "EMPT
 DEFAULT_POLICY_VERSION = "official-operational-status-policy.v2.0.0"
 DEFAULT_RISK_MODE = "HIGH"
 DEFAULT_OPERATING_MODE = "SOVEREIGN_INTERNAL"
+DEFAULT_ED25519_SIGNER = "assurance/signers/ed25519_sign.sh"
+DEFAULT_MLDSA_SIGNER = "assurance/signers/mldsa_sign.sh"
+DEFAULT_ED25519_VERIFIER = "assurance/signers/ed25519_verify.sh"
+DEFAULT_MLDSA_VERIFIER = "assurance/signers/mldsa_verify.sh"
 
 
 def fail(message: str) -> None:
@@ -386,6 +393,20 @@ def required_algorithms_for_risk_mode(risk_mode: str, force_hybrid: bool) -> lis
     return ["ED25519", "ML-DSA"]
 
 
+def _default_signing_command(root: Path, script_relpath: str, *, include_signature: bool) -> str:
+    script_path = (root / script_relpath).resolve()
+    quoted = shlex.quote(str(script_path))
+    if include_signature:
+        return f"{quoted} {{payload}} {{signature}}"
+    return f"{quoted} {{payload}}"
+
+
+def resolve_signing_command(value: str, *, root: Path, script_relpath: str, include_signature: bool) -> str:
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    return _default_signing_command(root, script_relpath, include_signature=include_signature)
+
+
 def derive_base_status(
     *,
     live_pass: bool,
@@ -468,6 +489,31 @@ def main() -> int:
     risk_mode = args.risk_mode.upper().strip() or DEFAULT_RISK_MODE
 
     root = Path(args.root).resolve()
+    ed25519_sign_cmd = resolve_signing_command(
+        args.ed25519_sign_cmd,
+        root=root,
+        script_relpath=DEFAULT_ED25519_SIGNER,
+        include_signature=False,
+    )
+    mldsa_sign_cmd = resolve_signing_command(
+        args.mldsa_sign_cmd,
+        root=root,
+        script_relpath=DEFAULT_MLDSA_SIGNER,
+        include_signature=False,
+    )
+    ed25519_verify_cmd = resolve_signing_command(
+        args.ed25519_verify_cmd,
+        root=root,
+        script_relpath=DEFAULT_ED25519_VERIFIER,
+        include_signature=True,
+    )
+    mldsa_verify_cmd = resolve_signing_command(
+        args.mldsa_verify_cmd,
+        root=root,
+        script_relpath=DEFAULT_MLDSA_VERIFIER,
+        include_signature=True,
+    )
+
     sigstore_policy, sigstore_policy_path = load_sigstore_policy(root, args.sigstore_policy)
     operating_mode = resolve_operating_mode(sigstore_policy, args.operating_mode)
     operating_mode_policy = resolve_operating_mode_policy(sigstore_policy, operating_mode)
@@ -563,8 +609,8 @@ def main() -> int:
         policy_version=args.policy_version,
         run_context=run_context,
         risk_mode=risk_mode,
-        ed25519_sign_cmd=args.ed25519_sign_cmd,
-        mldsa_sign_cmd=args.mldsa_sign_cmd,
+        ed25519_sign_cmd=ed25519_sign_cmd,
+        mldsa_sign_cmd=mldsa_sign_cmd,
         ed25519_key_id=args.ed25519_key_id,
         mldsa_key_id=args.mldsa_key_id,
         required_algorithms=required_algorithms,
@@ -574,8 +620,8 @@ def main() -> int:
         unsigned_payload,
         signature_set,
         risk_mode=risk_mode,
-        ed25519_verify_cmd=args.ed25519_verify_cmd,
-        mldsa_verify_cmd=args.mldsa_verify_cmd,
+        ed25519_verify_cmd=ed25519_verify_cmd,
+        mldsa_verify_cmd=mldsa_verify_cmd,
         required_algorithms=required_algorithms,
     )
 

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REGISTRY_MANAGER="scripts/core/RegistryManager.py"
-WRAPPER="scripts/core/ethic_mechanics_check.sh"
+WRAPPER="scripts/core/ethic_mechanics_check_v22.sh"
 
 echo "=== ETHIC MECHANICS AUDIT (7 REAL SECTORS) ==="
 echo "Sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY"
@@ -14,7 +14,7 @@ if [ ! -f "$REGISTRY_MANAGER" ] || [ ! -f "$WRAPPER" ]; then
 fi
 
 echo "=== 1. LOAD CHECK ==="
-python3 "$REGISTRY_MANAGER" --rule-id "RULE-ETHIC-CORE-001-v1.0" --sector "CORE" --evidence-ok true >/dev/null
+"$WRAPPER" "RULE-ETHIC-CORE-001-v1.0" "CORE" "true" >/dev/null
 echo "OK: registries load"
 echo
 
