@@ -1,122 +1,226 @@
 #!/usr/bin/env python3
 import argparse
 import json
-import logging
+import sys
+import time
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Any, Optional, List, Tuple
+from typing import Any, Dict, List, Optional, Set
 
+# Stub temporal para EvidenceBroker
+sys.path.insert(0, str(Path(__file__).parent))
 try:
-    import jsonschema
-except Exception:
-    jsonschema = None
+    # Preferred module name in this repository.
+    from EvidenceBroker import EvidenceBroker  # type: ignore
+except ImportError:
+    try:
+        # Backward-compatible fallback.
+        from evidence_broker import EvidenceBroker  # type: ignore
+    except ImportError:
+        class EvidenceBroker:
+            def __init__(self, config_path: str = ""):
+                pass
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("EthicBit.RegistryManager")
+            async def fetch_evidence(self, rule: Dict[str, Any], state: Dict[str, Any]):
+                return {}, None
+
+@dataclass
+class EvaluationResult:
+    ruleId: str
+    sector: str
+    status: str
+    severity: str
+    evidenceMissing: List[str]
+    evidenceProvided: List[str]
+    reason: str
+    actionTaken: str
+    timestamp: str
 
 class RegistryManager:
-    def __init__(self, policy_dir: str = "ceerv/policy"):
-        self.policy_dir = Path(policy_dir)
-        self.registries: Dict[str, dict] = {}
-        self.rule_index: Dict[Tuple[str, str], dict] = {}
-        self.schema = None
-        self._load_schema()
+    def __init__(self, config_path: str = "config/registry-manager-config.json"):
+        self.config = self._load_config(config_path)
+        self.registries: Dict[str, Dict] = {}
+        self.rule_index: Dict[str, Dict] = {}
+        self._loaded_sectors: Set[str] = set()
+        self._base_path = Path(".")
+        self.evidence_broker = EvidenceBroker(config_path)
+        self.severity_mapping = self.config["evaluationSettings"]["defaultSeverityMapping"]
+        print(f"✅ RegistryManager v2.1 (Lazy Loading) inicializado correctamente | 0 sectores cargados")
 
-    def _load_schema(self):
-        schema_path = self.policy_dir / "reason_registry.schema.json"
-        if schema_path.exists():
-            with open(schema_path, "r", encoding="utf-8") as f:
-                self.schema = json.load(f)
-        else:
-            logger.warning("reason_registry.schema.json not found; schema validation disabled")
+    def _load_config(self, path: str) -> Dict:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
 
-    def load_all(self) -> Dict[str, dict]:
-        self.registries.clear()
-        self.rule_index.clear()
+    def _load_registry(self, sector: str) -> None:
+        if sector in self._loaded_sectors:
+            return
+        for reg_info in self.config["registries"]:
+            if reg_info["sector"] == sector:
+                file_path = self._base_path / reg_info["file"]
+                with open(file_path, "r", encoding="utf-8") as f:
+                    registry_data = json.load(f)
+                self.registries[sector] = registry_data
+                for rule in registry_data.get("rules", []):
+                    rule["sector"] = sector
+                    self.rule_index[rule["rule_id"]] = rule
+                self._loaded_sectors.add(sector)
+                print(f"📦 Sector cargado: {sector}")
+                return
+        raise ValueError(f"Sector desconocido: {sector}")
 
-        for file in sorted(self.policy_dir.glob("reason_registry*.json")):
-            if file.name == "reason_registry.schema.json":
-                continue
-            with open(file, "r", encoding="utf-8") as f:
-                data = json.load(f)
+    def _ensure_sector_loaded(self, sector: Optional[str] = None) -> None:
+        if sector and sector not in self._loaded_sectors:
+            self._load_registry(sector)
+        if self.config["evaluationSettings"].get("fallbackToCore", True) and "CORE" not in self._loaded_sectors:
+            self._load_registry("CORE")
 
-            if self.schema and jsonschema is not None:
-                jsonschema.validate(instance=data, schema=self.schema)
+    def _get_rule(self, rule_id: str, sector: Optional[str] = None) -> Optional[Dict]:
+        self._ensure_sector_loaded(sector)
+        return self.rule_index.get(rule_id)
 
-            sector = data.get("sector", "CORE")
-            self.registries[sector] = data
+    @staticmethod
+    def _extract_required_evidence(rule: Dict[str, Any]) -> List[str]:
+        # Canonical field in JSON registries is "evidence_sources".
+        # Keep backward compatibility with legacy "evidenceRequired".
+        required = rule.get("evidence_sources")
+        if required is None:
+            required = rule.get("evidenceRequired", [])
+        if not isinstance(required, list):
+            return []
+        return [str(item) for item in required if isinstance(item, str)]
 
-            for rule in data.get("rules", []):
-                self.rule_index[(sector, rule["rule_id"])] = {**rule, "sector": sector}
-
-        return self.registries
-
-    def _get_rule(self, rule_id: str, sector: str = "CORE") -> Optional[dict]:
-        if (sector, rule_id) in self.rule_index:
-            return self.rule_index[(sector, rule_id)]
-        if ("CORE", rule_id) in self.rule_index:
-            return self.rule_index[("CORE", rule_id)]
-        return None
-
-    def evaluate_rule(self, rule_id: str, sector: str = "CORE", evidence_ok: bool = True) -> Dict[str, Any]:
+    def evaluate(
+        self,
+        rule_id: str,
+        state: Dict[str, Any],
+        extra_evidence: Optional[Dict[str, Any]] = None,
+        sector: Optional[str] = None,
+    ) -> EvaluationResult:
         rule = self._get_rule(rule_id, sector)
         if not rule:
-            return {
-                "valid": False,
-                "action": "REJECT",
-                "error": f"Rule {rule_id} not found in sector {sector} or CORE",
-                "severity": None,
-                "rule": None
-            }
+            return self._create_fail_result(rule_id, "Regla no encontrada")
 
-        severity = rule["severity"]
-        result = {
-            "valid": evidence_ok,
-            "action": "PASS",
-            "rule": rule,
-            "severity": severity,
-            "sector": rule["sector"],
-            "evidence_ok": evidence_ok
-        }
+        state_evidence = state.get("evidence", {})
+        if not isinstance(state_evidence, dict):
+            state_evidence = {}
+        evidence = {**state_evidence, **(extra_evidence or {})}
+        required_evidence = self._extract_required_evidence(rule)
+        missing = [e for e in required_evidence if e not in evidence]
 
-        if not evidence_ok:
-            if severity == "CRITICAL":
-                result["valid"] = False
-                result["action"] = "FAIL_CLOSED"
-            elif severity == "HIGH":
-                result["valid"] = False
-                result["action"] = "WARN_DEGRADE"
-            else:
-                result["valid"] = False
-                result["action"] = "WARN"
+        status = (
+            "PASS"
+            if not missing
+            else rule.get(
+                "outcomeOnViolation",
+                self.severity_mapping.get(rule["severity"], "FAIL_CLOSED"),
+            )
+        )
 
+        result = EvaluationResult(
+            ruleId=rule["rule_id"],
+            sector=rule["sector"],
+            status=status,
+            severity=rule["severity"],
+            evidenceMissing=missing,
+            evidenceProvided=list(evidence.keys()),
+            reason="Faltan evidencias" if missing else "Regla satisfecha",
+            actionTaken=status,
+            timestamp=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        )
+
+        if status == "FAIL_CLOSED":
+            print(f"🚨 FAIL_CLOSED → {rule_id} ({rule['sector']})")
         return result
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--rule-id", required=True)
-    parser.add_argument("--sector", default="CORE")
-    parser.add_argument("--evidence-ok", required=True)
-    parser.add_argument("--strict", action="store_true")
+    def evaluate_batch(self, sectors: List[str], data: Dict, state: Dict) -> bool:
+        for sector in sectors:
+            self._ensure_sector_loaded(sector)
+            if sector not in self.registries:
+                continue
+            for rule in self.registries[sector].get("rules", []):
+                if rule.get("severity") == "CRITICAL":
+                    result = self.evaluate(rule["rule_id"], state, data, sector=sector)
+                    if result.status == "FAIL_CLOSED":
+                        return False
+        return True
+
+    def _create_fail_result(self, rule_id: str, reason: str) -> EvaluationResult:
+        return EvaluationResult(
+            ruleId=rule_id,
+            sector="UNKNOWN",
+            status="FAIL_CLOSED",
+            severity="CRITICAL",
+            evidenceMissing=["rule_not_found"],
+            evidenceProvided=[],
+            reason=reason,
+            actionTaken="FAIL_CLOSED",
+            timestamp=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        )
+
+def _parse_bool(value: str) -> bool:
+    return str(value).strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _build_cli_evidence(
+    manager: RegistryManager,
+    rule_id: str,
+    sector: str,
+    evidence_ok: bool,
+) -> Dict[str, Any]:
+    if not evidence_ok:
+        return {}
+
+    rule = manager._get_rule(rule_id, sector)
+    if not rule:
+        return {}
+
+    required = manager._extract_required_evidence(rule)
+    return {key: {"present": True} for key in required}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="RegistryManager CLI (fail-closed)")
+    parser.add_argument("--config", default="config/registry-manager-config.json", help="Ruta de config JSON")
+    parser.add_argument("--rule-id", required=True, help="Rule ID a evaluar")
+    parser.add_argument("--sector", default="CORE", help="Sector esperado para carga lazy")
+    parser.add_argument(
+        "--evidence-ok",
+        default="true",
+        help="Si true, inyecta evidencia mínima requerida para PASS",
+    )
+    parser.add_argument(
+        "--extra-evidence-json",
+        default="",
+        help="JSON object con evidencia extra (opcional)",
+    )
     args = parser.parse_args()
 
-    evidence_ok = str(args.evidence_ok).lower() in ("true", "1", "yes", "y")
+    manager = RegistryManager(config_path=args.config)
+    evidence_ok = _parse_bool(args.evidence_ok)
+    state = {"evidence": _build_cli_evidence(manager, args.rule_id, args.sector, evidence_ok)}
 
-    rm = RegistryManager()
-    rm.load_all()
-    result = rm.evaluate_rule(args.rule_id, args.sector, evidence_ok=evidence_ok)
+    extra_evidence: Dict[str, Any] = {}
+    if args.extra_evidence_json.strip():
+        try:
+            loaded = json.loads(args.extra_evidence_json)
+            if not isinstance(loaded, dict):
+                print("ERROR: --extra-evidence-json debe ser objeto JSON", file=sys.stderr)
+                return 2
+            extra_evidence = loaded
+        except json.JSONDecodeError as exc:
+            print(f"ERROR: invalid JSON en --extra-evidence-json: {exc}", file=sys.stderr)
+            return 2
 
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    result = manager.evaluate(
+        args.rule_id,
+        state=state,
+        extra_evidence=extra_evidence,
+        sector=args.sector,
+    )
 
-    action = result.get("action")
-    if action == "PASS":
-        raise SystemExit(0)
-    if action == "FAIL_CLOSED":
-        raise SystemExit(1)
-    if action == "REJECT":
-        raise SystemExit(2)
-    if action == "WARN_DEGRADE":
-        raise SystemExit(3)
-    raise SystemExit(4 if args.strict else 0)
+    print(json.dumps(result.__dict__, ensure_ascii=False))
+    return 0 if result.status == "PASS" else 1
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

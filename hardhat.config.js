@@ -2,6 +2,13 @@ import "dotenv/config";
 import hardhatEthers from "@nomicfoundation/hardhat-ethers";
 
 const sepoliaUrl = process.env.ETH_RPC_URL || "http://127.0.0.1:8545";
+const soliditySettings = {
+  optimizer: {
+    enabled: true,
+    runs: 200
+  },
+  viaIR: true
+};
 
 export default {
   plugins: [hardhatEthers],
@@ -12,14 +19,10 @@ export default {
     artifacts: "./.hardhat/artifacts"
   },
   solidity: {
-    version: "0.8.24",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200
-      },
-      viaIR: true
-    }
+    compilers: [
+      { version: "0.8.24", settings: soliditySettings },
+      { version: "0.8.28", settings: soliditySettings }
+    ]
   },
   networks: {
     sepolia: {

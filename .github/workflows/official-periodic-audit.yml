@@ -14,6 +14,12 @@ jobs:
     env:
       ETHICBIT_RISK_MODE: HIGH
       ETH_RPC_URL: http://127.0.0.1:8545
+      ETHICBIT_ED25519_SIGN_CMD: assurance/signers/ed25519_sign.sh {payload}
+      ETHICBIT_MLDSA_SIGN_CMD: assurance/signers/mldsa_sign.sh {payload}
+      ETHICBIT_ED25519_VERIFY_CMD: assurance/signers/ed25519_verify.sh {payload} {signature}
+      ETHICBIT_MLDSA_VERIFY_CMD: assurance/signers/mldsa_verify.sh {payload} {signature}
+      ETHICBIT_ED25519_KEY_ID: ED25519_LOCAL_CI
+      ETHICBIT_MLDSA_KEY_ID: MLDSA_LOCAL_CI
     steps:
       - uses: actions/checkout@v4
 
@@ -27,12 +33,16 @@ jobs:
           chmod +x scripts/run_mixed_audience_audit.sh
           chmod +x scripts/status/official_operational_status_calculator.py
           chmod +x scripts/status/write_periodic_audit_receipt.py
+          chmod +x assurance/signers/ed25519_sign.sh
+          chmod +x assurance/signers/ed25519_verify.sh
+          chmod +x assurance/signers/mldsa_sign.sh
+          chmod +x assurance/signers/mldsa_verify.sh
 
       - name: Run mixed audience gates
         run: ./scripts/run_mixed_audience_audit.sh --all
 
       - name: Compute official status
-        run: ./scripts/status/official_operational_status_calculator.py --root .
+        run: ./scripts/status/official_operational_status_calculator.py --root . --strict --require-signature
 
       - name: Write periodic audit receipt
         if: always()
