@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-core-2026.04",
+  "sector": "CORE",
+  "description": "Core Mechanical Ethics registry for EthicBit / CEMU.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-CORE-001-v1.0",
+      "description": "Every critical system must preserve complete auditable traceability for each critical decision.",
+      "category": "TRACEABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Sovereign closure principle",
+      "justification": "Sin trazabilidad completa no es posible demostrar cumplimiento ético ante auditorías externas o regulatorias.",
+      "evidence_sources": [
+        "audit_log",
+        "decision_chain",
+        "timestamped_snapshot"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-CORE-002-v1.0",
+      "description": "All evidence of compliance must be immutable and tamper-proof.",
+      "category": "INTEGRITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Immutable evidence principle",
+      "justification": "La evidencia mutable permite manipulación posterior y destruye la confianza en el sistema ético.",
+      "evidence_sources": [
+        "immutable_storage",
+        "blockchain_anchor",
+        "cryptographic_hash"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-CORE-003-v1.0",
+      "description": "Every decision must be explainable with clear causal chain.",
+      "category": "EXPLAINABILITY",
+      "version": "1.0",
+      "severity": "HIGH",
+      "reference": "Explainable AI principle",
+      "justification": "Las decisiones opacas violan el principio de accountability y generan riesgo legal.",
+      "evidence_sources": [
+        "explanation_log",
+        "causal_graph",
+        "model_trace"
+      ]
+    }
+  ]
+}

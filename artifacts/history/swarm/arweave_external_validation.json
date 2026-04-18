@@ -1,0 +1,18 @@
+{
+  "artifact": "arweave_external_validation",
+  "status": "FAIL",
+  "txId": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
+  "locator": "https://arweave.net/uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
+  "checks": {
+    "metaTxMatch": "PASS",
+    "metaDataSizeNonZero": "PASS",
+    "bodyNonEmpty": "PASS",
+    "bodyIsJson": "FAIL",
+    "bodyIsNotHtml": "PASS",
+    "bodyNoPlaceholders": "FAIL",
+    "placeholderCount": 2,
+    "bodyBytes": 1221
+  },
+  "result": "ARWEAVE_OBJECT_RESOLVED=FAIL",
+  "note": "Remote truth check failed: META_TX_MATCH=PASS, META_DATA_SIZE_NONZERO=PASS, BODY_NONEMPTY=PASS, BODY_IS_JSON=FAIL, BODY_IS_NOT_HTML=PASS, BODY_NO_PLACEHOLDERS=FAIL."
+}

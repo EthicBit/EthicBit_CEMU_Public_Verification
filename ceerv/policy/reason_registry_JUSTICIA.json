@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-justicia-2026.04",
+  "sector": "JUSTICIA",
+  "description": "Judicial Mechanical Ethics registry for EthicBit / CEMU.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-JUS-001-v3.1",
+      "description": "All judicial decisions must preserve full traceability of reasoning and evidence chain.",
+      "category": "TRACEABILITY",
+      "version": "3.1",
+      "severity": "CRITICAL",
+      "reference": "Due process and judicial accountability",
+      "justification": "Sin trazabilidad completa del razonamiento judicial no es posible verificar legalidad, accountability ni contradicción.",
+      "evidence_sources": [
+        "judicial_reasoning_log",
+        "evidence_chain",
+        "timestamped_snapshot"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-JUS-003-v3.1",
+      "description": "All judicial risk or recommendation claims must be reproducible offline from the same inputs.",
+      "category": "REPRODUCIBILITY",
+      "version": "3.1",
+      "severity": "CRITICAL",
+      "reference": "Right to contradiction and reproducibility",
+      "justification": "Sin reproducibilidad verificable no puede existir revisión judicial independiente ni contradicción efectiva.",
+      "evidence_sources": [
+        "input_snapshot",
+        "replay_proof",
+        "reproduction_script"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-JUS-005-v2.0",
+      "description": "All appeal mechanisms must provide a clear and enforceable response window.",
+      "category": "DUE_PROCESS",
+      "version": "2.0",
+      "severity": "HIGH",
+      "reference": "Right to appeal",
+      "justification": "Sin plazo definido para apelaciones se viola el derecho fundamental a una respuesta oportuna.",
+      "evidence_sources": [
+        "appeal_deadline_log",
+        "notification_record"
+      ]
+    }
+  ]
+}

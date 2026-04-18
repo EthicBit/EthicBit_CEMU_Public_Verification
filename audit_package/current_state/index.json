@@ -1,0 +1,53 @@
+{
+  "artifactType": "mixed_audience_audit_results_index",
+  "generatedAt": "2026-04-18T13:41:54Z",
+  "policyVersion": "mixed-audience-gate-policy.v1.1.0",
+  "stateTaxonomyVersion": "ethicbit-state-taxonomy.v2.0.0",
+  "runContext": {
+    "runId": "run-20260418T134154Z-82458",
+    "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+    "verificationEpoch": "2026-04-18T13:00:00Z"
+  },
+  "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+  "declaredState": {
+    "packState": "ACTIVE_CANONICAL",
+    "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION",
+    "publicationState": "ACTIVE_CANONICAL"
+  },
+  "verifiedState": {
+    "packState": "ACTIVE_CANONICAL",
+    "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
+    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION",
+    "publicationState": "ACTIVE_CANONICAL",
+    "internalClosureStatus": "INTERNAL_CLOSED",
+    "externalProjectionStatus": "EXTERNAL_READY_FOR_LIVE_CONVERGENCE"
+  },
+  "stateModel": {
+    "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
+    "internalClosureStatus": "INTERNAL_CLOSED",
+    "externalProjectionStatus": "EXTERNAL_READY_FOR_LIVE_CONVERGENCE",
+    "operationalTruthStatus": "READY",
+    "canonicalIntegrityStatus": "ACTIVE_CANONICAL",
+    "externalAssuranceStatus": "ANCHOR_HARDENING_ENABLED",
+    "deploymentAuthorizationStatus": "READY_FOR_CONTROLLED_PRODUCTION",
+    "officialOperationalStatusObserved": "READY",
+    "officialReasonObserved": "LIVE_CANONICAL_GATE_CONVERGED",
+    "officialStatePath": "artifacts/history/swarm/official_operational_status.json"
+  },
+  "gateReportPath": "results/GATE_REPORT.json",
+  "activeTarget": "releases/release-20260407T204627Z",
+  "canonicalLineage": "case_003_promoted_active_chain",
+  "officialStates": [
+    "ACTIVE_CANONICAL"
+  ],
+  "generatedResults": [
+    "GATE_REPORT.json",
+    "public_summary.md",
+    "technical_verification.md",
+    "legal_claim_boundary.md",
+    "regulatory_control_report.md",
+    "finance_anchor_report.md",
+    "executive_onepager.md"
+  ]
+}

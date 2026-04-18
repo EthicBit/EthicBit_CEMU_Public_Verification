@@ -1,0 +1,8 @@
+{
+  "schema_id": "ETHICBIT_TARGET_AUDIT_REPORT_V1",
+  "target_id": "github_actions_runner",
+  "status": "PASS_AUDIT",
+  "environment_profile_ref": "deployment/environments/github_actions_runner_profile.json",
+  "release_manifest_ref": "deployment/manifests/github_actions_runner_release_manifest.json",
+  "human_review_required": true
+}

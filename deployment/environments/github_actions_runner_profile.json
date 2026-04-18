@@ -1,0 +1,14 @@
+{
+  "schema_id": "ETHICBIT_ENVIRONMENT_PROFILE_V1",
+  "environment_id": "github_actions_runner",
+  "environment_type": "ci",
+  "owner": "github_actions",
+  "network_policy": "ci_restricted_policy",
+  "artifact_policy": "ci_generated_artifacts_only",
+  "runtime_constraints": [
+    "workflow_trace_required",
+    "artifact_integrity_check_required"
+  ],
+  "human_review_required": true,
+  "status": "ACTIVE_REAL_TARGET"
+}

@@ -1,0 +1,55 @@
+{
+  "schema_id": "ETHICBIT_DISTRIBUTED_TARGET_MATRIX_V1",
+  "version": "2.0.0",
+  "status": "REAL_TARGETS_MATERIALIZED",
+  "targets": [
+    {
+      "target_id": "local_controlled",
+      "environment_profile_ref": "deployment/environments/local_controlled_profile.json",
+      "deployment_mode": "baseline_local_real",
+      "artifact_scope": [
+        "ceerv/artifacts/evidence_bundle_full.json",
+        "ceerv/artifacts/certificate.json",
+        "ceerv/outputs/ACTA_MINIMA.json"
+      ],
+      "human_review_required": true,
+      "audit_required": true
+    },
+    {
+      "target_id": "github_actions_runner",
+      "environment_profile_ref": "deployment/environments/github_actions_runner_profile.json",
+      "deployment_mode": "baseline_ci_real",
+      "artifact_scope": [
+        "ceerv/artifacts/evidence_bundle_full.json",
+        "ceerv/artifacts/certificate.json",
+        "ceerv/outputs/ACTA_MINIMA.json"
+      ],
+      "human_review_required": true,
+      "audit_required": true
+    },
+    {
+      "target_id": "distributed_target_01",
+      "environment_profile_ref": "deployment/environments/distributed_target_01_profile.json",
+      "deployment_mode": "distributed_real",
+      "artifact_scope": [
+        "ceerv/artifacts/evidence_bundle_full.json",
+        "ceerv/artifacts/certificate.json",
+        "ceerv/outputs/ACTA_MINIMA.json"
+      ],
+      "human_review_required": true,
+      "audit_required": true
+    },
+    {
+      "target_id": "distributed_target_02",
+      "environment_profile_ref": "deployment/environments/distributed_target_02_profile.json",
+      "deployment_mode": "distributed_real",
+      "artifact_scope": [
+        "ceerv/artifacts/evidence_bundle_full.json",
+        "ceerv/artifacts/certificate.json",
+        "ceerv/outputs/ACTA_MINIMA.json"
+      ],
+      "human_review_required": true,
+      "audit_required": true
+    }
+  ]
+}

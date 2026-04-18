@@ -1,0 +1,64 @@
+{
+  "registries": [
+    {
+      "sector": "CORE",
+      "file": "ceerv/policy/reason_registry_CORE.json"
+    },
+    {
+      "sector": "JUSTICIA",
+      "file": "ceerv/policy/reason_registry_JUSTICIA.json"
+    },
+    {
+      "sector": "FINANZAS",
+      "file": "ceerv/policy/reason_registry_FINANZAS.json"
+    },
+    {
+      "sector": "SECURITY",
+      "file": "ceerv/policy/reason_registry_SECURITY.json"
+    },
+    {
+      "sector": "TECHNICAL",
+      "file": "ceerv/policy/reason_registry_TECHNICAL.json"
+    },
+    {
+      "sector": "LEGAL",
+      "file": "ceerv/policy/reason_registry_LEGAL.json"
+    },
+    {
+      "sector": "REGULATORY",
+      "file": "ceerv/policy/reason_registry_REGULATORY.json"
+    }
+  ],
+  "evaluationSettings": {
+    "fallbackToCore": true,
+    "failClosedOnBrokerError": true,
+    "failClosedOnConflict": true,
+    "requireHumanApprovalVerification": true,
+    "defaultSeverityMapping": {
+      "LOW": "WARN",
+      "MEDIUM": "WARN_DEGRADE",
+      "HIGH": "REJECT",
+      "CRITICAL": "FAIL_CLOSED"
+    }
+  },
+  "evidenceBroker": {
+    "mode": "MOCK",
+    "providers": [
+      "self-attested",
+      "chainlink",
+      "jumio"
+    ],
+    "quorum": 2,
+    "timeout_seconds": 5,
+    "max_providers": 3,
+    "consensus_threshold_critical": 0.9,
+    "consensus_threshold_default": 0.75,
+    "allow_mock_in_canonical_audit": false,
+    "mock_mode_status": "NON_PRODUCTION",
+    "providerTrust": {
+      "self-attested": 0.4,
+      "chainlink": 0.9,
+      "jumio": 0.85
+    }
+  }
+}

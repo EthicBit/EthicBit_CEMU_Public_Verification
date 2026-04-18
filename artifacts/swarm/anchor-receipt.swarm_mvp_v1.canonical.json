@@ -1,0 +1,30 @@
+{
+  "anchorReceipt": "anchor-receipt.swarm_mvp_v1.canonical",
+  "bundleRootHash": "sha256:9f3a7c1d8e2b4f6a9c0e1d2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+  "collectivePackHash": "sha256:4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c",
+  "supportType": "TRIPLE_PUBLIC_ANCHOR",
+  "locators": [
+    {
+      "type": "BLOCKCHAIN_ANCHOR",
+      "network": "Sepolia",
+      "chainId": 11155111,
+      "contractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884",
+      "transactionHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+      "blockNumber": 10564127,
+      "blockHash": "0xc76a1df3c5983ec2488cf62d3e4e4a1ecbb656096bc3eb6c201f70821fe223eb"
+    },
+    {
+      "type": "ARWEAVE_OBJECT",
+      "txId": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
+      "locator": "https://arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY"
+    },
+    {
+      "type": "AO_PROCESS",
+      "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+      "messageId": "cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo",
+      "locator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4"
+    }
+  ],
+  "timestamp": "2026-03-28T18:49:32Z",
+  "verificationStatus": "PUBLISHED"
+}

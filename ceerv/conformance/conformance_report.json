@@ -1,0 +1,8 @@
+{
+  "schema_id": "CEERV_CONFORMANCE_REPORT_V1",
+  "report_id": "case_003-conformance-report-001",
+  "case_ref": "case_003",
+  "profile": "INITIAL_BOOTSTRAP",
+  "status": "DRAFT_MATERIALIZED",
+  "note": "Placeholder conformance report for v6.0 incremental materialization."
+}

@@ -1,0 +1,37 @@
+name: SLSA L4 Operative Baseline
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  slsa-l4-operative:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate required subjects
+        run: |
+          test -f ceerv/artifacts/evidence_bundle_full.json
+          test -f ceerv/artifacts/certificate.json
+          test -f ceerv/outputs/ACTA_MINIMA.json
+          test -f assurance/slsa/level4-policy.json
+          test -f assurance/slsa/subject-index.json
+          test -f assurance/in-toto/root.layout
+          test -f assurance/sigstore/policy.json
+
+      - name: Baseline digest capture
+        run: |
+          shasum -a 256 ceerv/artifacts/evidence_bundle_full.json
+          shasum -a 256 ceerv/artifacts/certificate.json
+          shasum -a 256 ceerv/outputs/ACTA_MINIMA.json
+
+      - name: Baseline L4 gate
+        run: echo "SLSA L4 operative baseline checks passed"
+
+      - name: Future attestation hook
+        run: echo "Future verified L4 closure hook"

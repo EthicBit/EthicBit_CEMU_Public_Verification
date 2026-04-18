@@ -1,0 +1,33 @@
+{
+  "check_id": "RUNTIMEGUARD_L4_NEGATIVE_CASE_CHECK",
+  "status": "PASS_NEGATIVE_TEST",
+  "simulated_missing": "assurance/sigstore/policy.json",
+  "results": [
+    {
+      "path": "assurance/in-toto/root.layout",
+      "exists_on_disk": true,
+      "effective_exists_for_test": true,
+      "status": "PASS_NEGATIVE_CHECK"
+    },
+    {
+      "path": "assurance/slsa/level4-policy.json",
+      "exists_on_disk": true,
+      "effective_exists_for_test": true,
+      "status": "PASS_NEGATIVE_CHECK"
+    },
+    {
+      "path": "assurance/sigstore/policy.json",
+      "exists_on_disk": true,
+      "effective_exists_for_test": false,
+      "status": "FAIL_NEGATIVE_CHECK"
+    },
+    {
+      "path": "regulatory/policies/regulatory_policy_baseline.json",
+      "exists_on_disk": true,
+      "effective_exists_for_test": true,
+      "status": "PASS_NEGATIVE_CHECK"
+    }
+  ],
+  "decision_ref": "artifacts/cases/case_003/runtimeguard_l4_negative_decision.case_003.json",
+  "block_record_ref": "artifacts/cases/case_003/runtimeguard_l4_negative_block_record.case_003.json"
+}

@@ -1,0 +1,28 @@
+{
+  "schema_id": "ETHICBIT_GLOBAL_DEPLOYMENT_AUDIT_INDEX_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_OPERATIVE_BASELINE",
+  "audited_layers": [
+    {
+      "layer": "deployment/environments/environment_registry.json",
+      "audit_status": "REFERENCED_BASELINE"
+    },
+    {
+      "layer": "deployment/manifests/distributed_release_manifest.json",
+      "audit_status": "REFERENCED_BASELINE"
+    },
+    {
+      "layer": "deployment/manifests/distributed_target_matrix.json",
+      "audit_status": "REFERENCED_BASELINE"
+    },
+    {
+      "layer": "deployment/policies/distributed_production_policy.json",
+      "audit_status": "REFERENCED_BASELINE"
+    },
+    {
+      "layer": "deployment/policies/distributed_readiness_checklist.json",
+      "audit_status": "REFERENCED_BASELINE"
+    }
+  ],
+  "global_deployment_audited": false
+}

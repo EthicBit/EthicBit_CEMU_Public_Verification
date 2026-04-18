@@ -1,0 +1,9 @@
+{
+  "anchor_type": "AO_PROCESS",
+  "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+  "messageId": "aFmdo_K-XOU3neMIpNTxyRiIg1t7glNvgYf3UiGfxs0",
+  "candidate_locator": "https://push.forward.computer/Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4~process@1.0/compute/rootHash",
+  "resolved": "PASS",
+  "body_nonempty": true,
+  "matches_expected_process": "PASS"
+}

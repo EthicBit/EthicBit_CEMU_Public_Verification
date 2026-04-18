@@ -1,0 +1,87 @@
+name: Official Periodic Audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  official-periodic-audit:
+    runs-on: ubuntu-latest
+    env:
+      ETHICBIT_RISK_MODE: HIGH
+      ETH_RPC_URL: http://127.0.0.1:8545
+      ETHICBIT_ED25519_SIGN_CMD: assurance/signers/ed25519_sign.sh {payload}
+      ETHICBIT_MLDSA_SIGN_CMD: assurance/signers/mldsa_sign.sh {payload}
+      ETHICBIT_ED25519_VERIFY_CMD: assurance/signers/ed25519_verify.sh {payload} {signature}
+      ETHICBIT_MLDSA_VERIFY_CMD: assurance/signers/mldsa_verify.sh {payload} {signature}
+      ETHICBIT_ED25519_KEY_ID: ED25519_LOCAL_CI
+      ETHICBIT_MLDSA_KEY_ID: MLDSA_LOCAL_CI
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Prepare hybrid signing keys
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assurance/keys
+          printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
+          printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
+          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
+          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
+          for key_file in assurance/keys/ed25519_private.pem assurance/keys/ed25519_public.pem assurance/keys/mldsa_private.pem assurance/keys/mldsa_public.pem; do
+            if [ ! -s "$key_file" ]; then
+              echo "Missing required signing secret material: $key_file" >&2
+              exit 1
+            fi
+          done
+          chmod 600 assurance/keys/*.pem
+
+      - name: Export key paths
+        shell: bash
+        run: |
+          {
+            echo "ETHICBIT_ED25519_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/ed25519_private.pem"
+            echo "ETHICBIT_ED25519_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/ed25519_public.pem"
+            echo "ETHICBIT_MLDSA_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/mldsa_private.pem"
+            echo "ETHICBIT_MLDSA_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/mldsa_public.pem"
+          } >> "$GITHUB_ENV"
+
+      - name: Ensure scripts are executable
+        run: |
+          chmod +x scripts/run_mixed_audience_audit.sh
+          chmod +x scripts/status/official_operational_status_calculator.py
+          chmod +x scripts/status/write_periodic_audit_receipt.py
+          chmod +x assurance/signers/ed25519_sign.sh
+          chmod +x assurance/signers/ed25519_verify.sh
+          chmod +x assurance/signers/mldsa_sign.sh
+          chmod +x assurance/signers/mldsa_verify.sh
+
+      - name: Run mixed audience gates
+        run: ./scripts/run_mixed_audience_audit.sh --all
+
+      - name: Compute official status
+        run: ./scripts/status/official_operational_status_calculator.py --root . --strict --require-signature
+
+      - name: Write periodic audit receipt
+        if: always()
+        run: ./scripts/status/write_periodic_audit_receipt.py --root .
+
+      - name: Upload periodic audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-periodic-audit-${{ github.run_id }}
+          path: |
+            results/GATE_REPORT.json
+            results/index.json
+            artifacts/history/swarm/official_operational_status.json
+            artifacts/history/swarm/periodic_audit_receipt.json

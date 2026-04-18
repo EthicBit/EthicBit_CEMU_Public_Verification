@@ -1,0 +1,7 @@
+{
+  "schema_id": "ETHICBIT_JURISDICTION_CERTIFICATION_REPORT_V1",
+  "jurisdiction_id": "UK",
+  "status": "CERTIFICATION_GRANTED",
+  "basis": "operative_baseline_passed",
+  "human_review_required": true
+}

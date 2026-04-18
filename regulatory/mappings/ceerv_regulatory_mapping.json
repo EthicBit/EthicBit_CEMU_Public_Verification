@@ -1,0 +1,23 @@
+{
+  "schema_id": "ETHICBIT_CEERV_REGULATORY_MAPPING_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "mappings": [
+    {
+      "artifact": "ceerv/artifacts/evidence_bundle_full.json",
+      "regulatory_role": "evidence_bundle_reference"
+    },
+    {
+      "artifact": "ceerv/artifacts/certificate.json",
+      "regulatory_role": "certificate_reference"
+    },
+    {
+      "artifact": "ceerv/outputs/ACTA_MINIMA.json",
+      "regulatory_role": "minimum_executive_record"
+    },
+    {
+      "artifact": "ceerv/verification/verification.json",
+      "regulatory_role": "verification_record"
+    }
+  ]
+}

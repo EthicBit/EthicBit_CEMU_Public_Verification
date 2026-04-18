@@ -1,0 +1,30 @@
+name: SLSA L4 Final
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  slsa-l4-final:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run final SLSA check
+        run: python3 tools/checks/check_slsa_l4_reproducibility_final.py
+
+      - name: Require generated final SLSA artifacts
+        run: |
+          test -f reports/final_checks/slsa_l4_final_check.json
+          test -f reports/final_checks/slsa_l4_reproducibility_report.json
+          test -f attestations/slsa_l4_final_attestation.json
+          test -f logs/slsa_l4_final.log

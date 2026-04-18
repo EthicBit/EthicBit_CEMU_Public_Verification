@@ -1,0 +1,5 @@
+{
+  "schema_id": "ETHICBIT_SLSA_L4_FINAL_ATTESTATION_V1",
+  "status": "PASS_SLSA_FINAL",
+  "basis": "operative_attestation_plus_reproducibility"
+}

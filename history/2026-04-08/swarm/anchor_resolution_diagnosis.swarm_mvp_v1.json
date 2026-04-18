@@ -1,0 +1,23 @@
+{
+  "schema_id": "ETHICBIT_ANCHOR_RESOLUTION_DIAGNOSIS_V1",
+  "artifact": "anchor-receipt.swarm_mvp_v1.canonical.json",
+  "checked_at": "2026-04-08T18:38:18Z",
+  "pack_state": "ACTIVE_CANONICAL",
+  "external_anchor_state": "EXTERNAL_ANCHOR_EVIDENCE_READY_FOR_INDEPENDENT_REVERIFICATION",
+  "no_unresolved_anchor_conflicts": "FAIL_VISIBLE",
+  "anchor_hardening_enabled": "NOT_YET_DECLARED",
+  "findings": {
+    "sepolia": "RESOLVED",
+    "arweave": "RESOLVED_BUT_PUBLISHED_PAYLOAD_OLD",
+    "ao": "LOCATOR_404"
+  },
+  "blocking_conditions": [
+    "Arweave body still contains placeholder values in ARWEAVE_OBJECT",
+    "AO locator returns HTTP 404 and HTML error body"
+  ],
+  "required_actions": [
+    "Republish the current local canonical receipt to Arweave",
+    "Replace AO locator with a live endpoint that resolves successfully",
+    "Rerun safe verifier after both corrections"
+  ]
+}

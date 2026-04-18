@@ -1,0 +1,164 @@
+{
+  "artifactType": "official_operational_status",
+  "generatedAt": "2026-04-13T17:12:04.966139Z",
+  "policyVersion": "official-operational-status-policy.v2.0.0",
+  "runContext": {
+    "runId": "run-20260412T231529Z-65684",
+    "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+    "verificationEpoch": "2026-04-12T23:00:00Z"
+  },
+  "officialStatus": "READY",
+  "reason": "LIVE_CANONICAL_GATE_CONVERGED",
+  "reasonCodes": [
+    "LIVE_CANONICAL_GATE_CONVERGED",
+    "EXTERNAL_CRYPTO_INTEROP_FAIL"
+  ],
+  "divergence": false,
+  "gateStatusRaw": "PASS",
+  "gateStatusRawSource": "verifiedState",
+  "gateStatusEffective": "PASS",
+  "liveStatus": "PASS",
+  "liveStatusSource": "result",
+  "canonicalAssessment": {
+    "ok": true,
+    "model": "TRIPLE_PUBLIC_ANCHOR",
+    "canonicalModelOk": true,
+    "sepolia": true,
+    "arweave": true,
+    "ao": true,
+    "bitcoinPresentInCanonicalAnchors": false
+  },
+  "freezeActive": false,
+  "integrity": {
+    "inputHashes": {
+      "gateReport": "c195d7a61392d7c2e75aff4a0862c914e6943c2d61f2f47efd686c48ff0e1569",
+      "liveReport": "abb4672c7fc8127b0977f473affc4ec5749444406fe238e10e256d69f20e5f43",
+      "canonicalConfig": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093"
+    },
+    "outputHash": "18fe6f50ba28843a94c8d311f87340722725db427255a8144e28da5897b77b75"
+  },
+  "paths": {
+    "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
+    "live": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/triple_public_anchor_live_verification.json",
+    "canonical": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/integration/anchor_verifier/anchor_txids_real.json",
+    "freeze": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/runtime/publication_freeze_state.json",
+    "output": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/official_operational_status.json"
+  },
+  "officialOperationalStatus": "READY",
+  "internalClosureStatus": "INTERNAL_CLOSED",
+  "externalProjectionStatus": "EXTERNAL_LIVE_CONVERGED",
+  "internalCryptographyStatus": "PASS",
+  "externalCryptographyStatus": "FAIL",
+  "stateModel": {
+    "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
+    "operatingMode": "SOVEREIGN_INTERNAL",
+    "internalClosureStatus": "INTERNAL_CLOSED",
+    "externalProjectionStatus": "EXTERNAL_LIVE_CONVERGED",
+    "officialOperationalStatus": "READY"
+  },
+  "cryptography": {
+    "status": "PASS",
+    "operatingMode": "SOVEREIGN_INTERNAL",
+    "riskMode": "HIGH",
+    "requiredAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ],
+    "internal": {
+      "status": "PASS",
+      "required": true,
+      "mechanism": "CANONICAL_PAYLOAD_HASH_BINDING"
+    },
+    "external": {
+      "status": "FAIL",
+      "required": false,
+      "blocking": false,
+      "algorithm": "HYBRID_ED25519_MLDSA"
+    },
+    "policyPath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/sigstore/policy.json"
+  },
+  "policyBinding": {
+    "sigstorePolicyPath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/sigstore/policy.json",
+    "operatingMode": "SOVEREIGN_INTERNAL",
+    "internalCryptoRequired": true,
+    "externalHybridSignatureRequired": false,
+    "blockOfficialStatusOnExternalCryptoFailure": false
+  },
+  "signature": {
+    "status": "INVALID_OR_MISSING",
+    "algorithm": "HYBRID_ED25519_MLDSA",
+    "keyIds": [
+      "ED25519_UNSET",
+      "MLDSA_UNSET"
+    ]
+  },
+  "signatureSet": {
+    "status": "FAIL",
+    "policyVersion": "official-operational-status-policy.v2.0.0",
+    "riskMode": "HIGH",
+    "runContext": {
+      "runId": "run-20260412T231529Z-65684",
+      "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+      "verificationEpoch": "2026-04-12T23:00:00Z"
+    },
+    "requiredAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ],
+    "payloadHash": "6b2769ddbae4cea02dd5d2db5f450e210734e2da551b2686ebd85e55e45b2278",
+    "signatures": [
+      {
+        "algorithm": "ED25519",
+        "keyId": "ED25519_UNSET",
+        "status": "FAIL",
+        "signature": "",
+        "signedAt": "2026-04-13T17:12:04.967376Z",
+        "commandConfigured": false,
+        "timeoutSeconds": 25.0,
+        "error": "missing signer command for ED25519"
+      },
+      {
+        "algorithm": "ML-DSA",
+        "keyId": "MLDSA_UNSET",
+        "status": "FAIL",
+        "signature": "",
+        "signedAt": "2026-04-13T17:12:04.967382Z",
+        "commandConfigured": false,
+        "timeoutSeconds": 25.0,
+        "error": "missing signer command for ML-DSA"
+      }
+    ],
+    "missingOrInvalidAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ]
+  },
+  "signatureVerification": {
+    "status": "FAIL",
+    "riskMode": "HIGH",
+    "requiredAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ],
+    "checks": [
+      {
+        "algorithm": "ED25519",
+        "status": "FAIL",
+        "commandConfigured": false,
+        "timeoutSeconds": 25.0,
+        "error": "missing verify command for ED25519"
+      },
+      {
+        "algorithm": "ML-DSA",
+        "status": "FAIL",
+        "commandConfigured": false,
+        "timeoutSeconds": 25.0,
+        "error": "missing verify command for ML-DSA"
+      }
+    ],
+    "missingOrInvalidAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ]
+  }
+}

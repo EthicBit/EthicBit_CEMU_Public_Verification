@@ -1,0 +1,32 @@
+{
+  "schema_id": "ETHICBIT_SLSA_PROVENANCE_V1",
+  "version": "1.0.0",
+  "buildType": "https://slsa.dev/provenance/v1",
+  "builder": {
+    "id": "https://github.com/oskrmiranda/EthicBit_CEMU/.github/workflows/slsa-build.yml",
+    "version": "v1.0"
+  },
+  "buildConfig": {
+    "command": "npm run build:hermetic",
+    "env": {
+      "NODE_ENV": "production",
+      "PYTHONUNBUFFERED": "1"
+    }
+  },
+  "materials": [
+    {
+      "uri": "git+https://github.com/oskrmiranda/EthicBit_CEMU.git",
+      "digest": {
+        "gitCommit": "${{ github.sha }}"
+      }
+    }
+  ],
+  "invocation": {
+    "configSource": {
+      "uri": "https://github.com/oskrmiranda/EthicBit_CEMU/blob/main/.github/workflows/slsa-build.yml",
+      "digest": {
+        "sha1": "${{ github.sha }}"
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "case_003",
+  "collective_pack_id": "case_003-COLLECTIVE-PACK-001",
+  "swarm_ids": [
+    "SWARM_ALPHA"
+  ],
+  "primary_entity_id": "O1",
+  "containment_state": "HIGH_CRITICALITY_ESCALATED",
+  "containment_scope": "HIGH_CRITICALITY_ESCALATION_SCOPE",
+  "collective_escalation_probability": 0.937,
+  "isolation_bundle_id": "CASE003-ISB-20260402181627",
+  "collective_outputs": [
+    {
+      "output_id": "case_003-OUT-003",
+      "output_type": "SWARM_CONTAINMENT_EVENT",
+      "source_entity": "O1",
+      "related_action_id": "ACT-0001",
+      "traceability_level": "HIGH",
+      "eligibility_state": "COLLECTIVE_REVIEW_REQUIRED",
+      "relevance_score": 0.937,
+      "linked_artifacts": [
+        "swarm_containment_state.case_003.canonical.json"
+      ],
+      "decision_mode": "AUTONOMOUS_BLOCK_ONLY",
+      "review_required": true,
+      "notes": "Swarm containment event classified as collective governance output."
+    },
+    {
+      "output_id": "case_003-OUT-004",
+      "output_type": "ISOLATION_BUNDLE",
+      "source_entity": "O1",
+      "related_action_id": "ACT-0001",
+      "traceability_level": "HIGH",
+      "eligibility_state": "COLLECTIVE_REVIEW_REQUIRED",
+      "relevance_score": 0.937,
+      "linked_artifacts": [
+        "post_event_isolation_bundle.case_003.canonical.json"
+      ],
+      "decision_mode": "AUTONOMOUS_WITH_AUDIT",
+      "review_required": true,
+      "notes": "Post-event isolation bundle classified for next-stage governance."
+    }
+  ],
+  "audit_edge_count": 0,
+  "residual_state": "COLLECTIVE_OUTPUT_NOT_ELEVABLE",
+  "residual_review_path": "HUMAN_ESCALATION_REQUIRED",
+  "authority": "Collective Output Consolidation Authority",
+  "decision_mode": "HUMAN_SUPERVISED",
+  "human_required": true,
+  "generated_at": "2026-04-02T18:16:28.005741+00:00",
+  "canonical_hash": "fffc6581eb8ff4155bd8bef06c16d0d08b3fafd76cc493eb83ca7f4219fe3d51"
+}

@@ -1,0 +1,7 @@
+{
+  "schema_id": "ETHICBIT_TARGET_CERTIFICATION_REPORT_V1",
+  "target_id": "github_actions_runner",
+  "status": "CERTIFIED_TARGET",
+  "basis": "real_target_profile_plus_pass_audit_final",
+  "human_review_required": true
+}

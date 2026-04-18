@@ -1,0 +1,10 @@
+{
+  "case_id": "case_003",
+  "environment_id": "case_003-VERIFICATION-ENV-001",
+  "container_hash": "23a16bdc30c62166a-placeholder",
+  "runtime_version": "python-3.12",
+  "dependency_lock": "LOCKFILE_PRESENT",
+  "seed": "case_003-REPLAY-SEED-001",
+  "generated_at": "2026-04-03T04:09:01.787048+00:00",
+  "canonical_hash": "ea850a7c36e4ac4019658179ca81f8eb56a99ac6f056180336b56a6c3cd4f591"
+}

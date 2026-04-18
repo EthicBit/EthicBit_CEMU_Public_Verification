@@ -1,0 +1,6 @@
+# SLSA L4 - Two-person review
+/contracts/          @oskrmiranda @otro-reviewer
+/cemu/               @oskrmiranda @otro-reviewer
+/ceerv/              @oskrmiranda @otro-reviewer
+/assurance/          @oskrmiranda @otro-reviewer
+/scripts/            @oskrmiranda @otro-reviewer

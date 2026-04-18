@@ -1,0 +1,11 @@
+name: Build SLSA Baseline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder build step
+        run: echo "Initial SLSA baseline scaffold for ETHICBIT / CEERV / CEMU v6.0"

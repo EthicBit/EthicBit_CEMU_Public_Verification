@@ -1,0 +1,5 @@
+GLOBAL_DEPLOYMENT_AUDIT_FINAL_CHECK=PASS_AUDIT_FINAL
+audit/deployment/local_controlled_audit_report.json=PASS_AUDIT_FINAL
+audit/deployment/github_actions_runner_audit_report.json=PASS_AUDIT_FINAL
+audit/deployment/distributed_target_01_audit_report.json=PASS_AUDIT_FINAL
+audit/deployment/distributed_target_02_audit_report.json=PASS_AUDIT_FINAL

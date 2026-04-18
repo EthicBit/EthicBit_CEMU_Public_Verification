@@ -1,0 +1,19 @@
+{
+  "schema_id": "ETHICBIT_SLSA_SUBJECT_INDEX_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "subjects": [
+    {
+      "name": "ceerv/artifacts/evidence_bundle_full.json",
+      "digest_status": "TO_BE_BOUND"
+    },
+    {
+      "name": "ceerv/artifacts/certificate.json",
+      "digest_status": "TO_BE_BOUND"
+    },
+    {
+      "name": "ceerv/outputs/ACTA_MINIMA.json",
+      "digest_status": "TO_BE_BOUND"
+    }
+  ]
+}

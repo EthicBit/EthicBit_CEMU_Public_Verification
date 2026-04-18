@@ -1,0 +1,18 @@
+{
+  "schema_id": "ETHICBIT_SLSA_L4_OPERATIVE_ATTESTATION_V1",
+  "status": "OPERATIVE_BASELINE_ATTESTED",
+  "subjects": [
+    {
+      "name": "ceerv/artifacts/evidence_bundle_full.json",
+      "sha256": "69c3d8d156b8079772222e5c76a0823ba7a1cda52f7b878d36b8b9a04a03096e"
+    },
+    {
+      "name": "ceerv/artifacts/certificate.json",
+      "sha256": "def17b7d92865f3fbdee2cee53d61c81395910b47f3f98da8fff604accaec087"
+    },
+    {
+      "name": "ceerv/outputs/ACTA_MINIMA.json",
+      "sha256": "35849d003b2897e731e3c172a9fef69c4ceb255875d6f87d880aac07d9483cee"
+    }
+  ]
+}

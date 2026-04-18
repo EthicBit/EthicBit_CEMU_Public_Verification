@@ -1,0 +1,28 @@
+name: RuntimeGuard L4 Negative Real
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runtimeguard-l4-negative-real:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run negative RuntimeGuard test
+        run: python3 tools/checks/check_runtimeguard_l4_negative_case.py
+
+      - name: Require generated negative-case artifacts
+        run: |
+          test -f reports/final_checks/runtimeguard_l4_negative_check.json
+          test -f artifacts/cases/case_003/runtimeguard_l4_negative_decision.case_003.json
+          test -f artifacts/cases/case_003/runtimeguard_l4_negative_block_record.case_003.json
+          test -f logs/runtimeguard_l4_negative.log

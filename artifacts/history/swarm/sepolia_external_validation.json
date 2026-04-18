@@ -1,0 +1,7 @@
+{
+  "artifact": "sepolia_external_validation",
+  "status": "PASS",
+  "network": "sepolia",
+  "transactionHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+  "result": "SEPOLIA_ANCHOR_RESOLVED=PASS"
+}
