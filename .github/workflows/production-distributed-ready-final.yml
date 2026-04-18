@@ -12,6 +12,11 @@ permissions:
 jobs:
   production-distributed-ready-final:
     runs-on: ubuntu-latest
+    env:
+      ETHICBIT_ED25519_SIGN_CMD: assurance/signers/ed25519_sign.sh {payload}
+      ETHICBIT_MLDSA_SIGN_CMD: assurance/signers/mldsa_sign.sh {payload}
+      ETHICBIT_ED25519_VERIFY_CMD: assurance/signers/ed25519_verify.sh {payload} {signature}
+      ETHICBIT_MLDSA_VERIFY_CMD: assurance/signers/mldsa_verify.sh {payload} {signature}
     steps:
       - uses: actions/checkout@v4
 
@@ -19,6 +24,41 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Prepare hybrid signing keys
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assurance/keys
+          printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
+          printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
+          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
+          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
+          for key_file in assurance/keys/ed25519_private.pem assurance/keys/ed25519_public.pem assurance/keys/mldsa_private.pem assurance/keys/mldsa_public.pem; do
+            if [ ! -s "$key_file" ]; then
+              echo "Missing required signing secret material: $key_file" >&2
+              exit 1
+            fi
+          done
+          chmod 600 assurance/keys/*.pem
+
+      - name: Export key paths
+        shell: bash
+        run: |
+          {
+            echo "ETHICBIT_ED25519_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/ed25519_private.pem"
+            echo "ETHICBIT_ED25519_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/ed25519_public.pem"
+            echo "ETHICBIT_MLDSA_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/mldsa_private.pem"
+            echo "ETHICBIT_MLDSA_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/mldsa_public.pem"
+          } >> "$GITHUB_ENV"
 
       - name: Run constitutional fail-closed gate
         run: |
