@@ -33,18 +33,18 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
 
-      - name: Prepare hybrid signing keys
+      - name: Prepare CI hybrid signing keys
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p assurance/keys
-          printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
-          printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
-          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
-          printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
+          openssl genpkey -algorithm Ed25519 -out assurance/keys/ed25519_private.pem
+          openssl pkey -in assurance/keys/ed25519_private.pem -pubout -out assurance/keys/ed25519_public.pem
+          openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
+          openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
           for key_file in assurance/keys/ed25519_private.pem assurance/keys/ed25519_public.pem assurance/keys/mldsa_private.pem assurance/keys/mldsa_public.pem; do
             if [ ! -s "$key_file" ]; then
-              echo "Missing required signing secret material: $key_file" >&2
+              echo "Missing generated signing key material: $key_file" >&2
               exit 1
             fi
           done
