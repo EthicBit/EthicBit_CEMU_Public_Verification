@@ -1,0 +1,34 @@
+{
+  "check_id": "SLSA_L4_BASELINE_CHECK",
+  "status": "PASS_BASELINE",
+  "results": [
+    {
+      "path": "ceerv/artifacts/evidence_bundle_full.json",
+      "exists": true
+    },
+    {
+      "path": "ceerv/artifacts/certificate.json",
+      "exists": true
+    },
+    {
+      "path": "ceerv/outputs/ACTA_MINIMA.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/level4-policy.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/subject-index.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/in-toto/root.layout",
+      "exists": true
+    },
+    {
+      "path": "assurance/sigstore/policy.json",
+      "exists": true
+    }
+  ]
+}

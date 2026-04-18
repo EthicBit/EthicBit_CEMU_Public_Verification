@@ -1,0 +1,8 @@
+{
+  "schema_id": "CEERV_VERIFICATION_V1",
+  "verification_id": "case_003-verification-001",
+  "case_ref": "case_003",
+  "mode": "REFERENCE_BINDING",
+  "status": "DRAFT_MATERIALIZED",
+  "note": "Initial CEERV layer references existing case_003 verified artifacts."
+}

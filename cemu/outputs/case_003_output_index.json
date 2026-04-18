@@ -1,0 +1,17 @@
+{
+  "schema_id": "CEMU_OUTPUT_INDEX_V1",
+  "case_id": "case_003",
+  "status": "INITIAL_MATERIALIZATION",
+  "outputs": [
+    {
+      "output_id": "case_003_closure_reference",
+      "type": "closure_reference",
+      "ref": "artifacts/cases/case_003/formal_closure_certificate.case_003.canonical.json"
+    },
+    {
+      "output_id": "case_003_verification_reference",
+      "type": "verification_reference",
+      "ref": "artifacts/cases/case_003/verification_pack.case_003.canonical.json"
+    }
+  ]
+}

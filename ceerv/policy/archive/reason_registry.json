@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-core-2026.04",
+  "sector": "CORE",
+  "description": "Master fallback registry for Mechanical Ethics core rules.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-CORE-001-v1.0",
+      "description": "Every critical system must preserve complete auditable traceability for each critical decision.",
+      "category": "TRACEABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Sovereign closure principle",
+      "justification": "Without complete traceability, ethical compliance cannot be independently verified.",
+      "evidence_sources": [
+        "audit_log",
+        "decision_chain",
+        "timestamped_snapshot"
+      ]
+    }
+  ]
+}

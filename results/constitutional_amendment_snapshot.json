@@ -1,0 +1,76 @@
+{
+  "artifactType": "constitutional_amendment_snapshot",
+  "amendment_id": "AMENDMENT-TECHNICAL-SCOPE-DETECTABLE-ENTITIES-v1.0",
+  "constitutional_scope": "TECHNICAL_EXPANDED",
+  "rule_count": 4,
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-001-v1.0",
+      "description": "All detectable non-visible technical entities influencing critical outputs must preserve traceable technical evidence.",
+      "severity": "CRITICAL",
+      "evidence_sources": [
+        "runtime_signal_trace",
+        "event_correlation_record",
+        "technical_detection_snapshot"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "TRACE_SIGNAL_OUTPUT_CORRELATION",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": false,
+      "externalEvidenceRequired": false,
+      "outcomeOnViolation": "FAIL_CLOSED"
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-002-v1.0",
+      "description": "All agentic systems or multi-agent environments with material influence over critical outputs must remain auditable by interaction, orchestration, or reproducibility evidence.",
+      "severity": "CRITICAL",
+      "evidence_sources": [
+        "agent_interaction_log",
+        "orchestration_trace",
+        "reproducibility_control_record"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "INTERACTION_ORCHESTRATION_REPRODUCIBILITY",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": false,
+      "externalEvidenceRequired": false,
+      "outcomeOnViolation": "FAIL_CLOSED"
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-003-v1.0",
+      "description": "Any detectable non-visible technical entity affecting a critical path must trigger fail-closed behavior when detectability evidence is insufficient.",
+      "severity": "CRITICAL",
+      "evidence_sources": [
+        "detectability_assessment",
+        "impact_trace_record",
+        "control_decision_log"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "DETECTABILITY_AND_IMPACT_VALIDATION",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": false,
+      "externalEvidenceRequired": false,
+      "outcomeOnViolation": "FAIL_CLOSED"
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-004-v1.0",
+      "description": "Any detectable technical entity with legal, financial, security, or regulatory impact must trigger mandatory cross-sector review.",
+      "severity": "CRITICAL",
+      "evidence_sources": [
+        "impact_scope_matrix",
+        "cross_sector_trigger_record",
+        "supervisory_trace_record"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "IMPACT_CORRELATION_AND_SCOPE_ANALYSIS",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": true,
+      "externalEvidenceRequired": false,
+      "outcomeOnViolation": "FAIL_CLOSED"
+    }
+  ]
+}

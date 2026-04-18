@@ -1,0 +1,5 @@
+{
+  "schema_id": "ETHICBIT_MULTI_JURISDICTION_COMPLETE_DECISION_V1",
+  "status": "MULTI_JURISDICTIONAL_SUPPORT_COMPLETE",
+  "scope_ref": "regulatory/jurisdictions/final_scope_v10.0.json"
+}

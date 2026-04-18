@@ -1,0 +1,34 @@
+{
+  "freezeDate": "2026-04-08T14:32:09Z",
+  "rootHash": "f7e7b527bbd650d3a9abedc48693f145304499eea274a3ea0c94b9bf67fcba31",
+  "canonicalAnchorModel": "TRIPLE_PUBLIC_ANCHOR",
+  "canonicalAnchors": {
+    "sepolia": {
+      "network": "Sepolia",
+      "chainId": 11155111,
+      "contractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884",
+      "txid": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+      "explorer": "https://sepolia.etherscan.io/tx/0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47"
+    },
+    "arweave": {
+      "txid": "Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY",
+      "locator": "https://arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY",
+      "explorer": "https://explorer.arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY"
+    },
+    "ao": {
+      "processId": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+      "messageId": "cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo",
+      "locator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4"
+    }
+  },
+  "nonCanonicalAnchors": {
+    "bitcoin": {
+      "status": "NOT_PART_OF_TRIPLE_PUBLIC_ANCHOR_CANONICAL_SET",
+      "note": "Legacy planning reference only. Do not include in Triple Public Anchor convergence checks."
+    }
+  },
+  "endpoints": {
+    "sepoliaRpc": "https://ethereum-sepolia-rpc.publicnode.com"
+  },
+  "note": "Canonical triple anchor set is Sepolia + Arweave + AO."
+}

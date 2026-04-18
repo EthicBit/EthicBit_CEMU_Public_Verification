@@ -1,0 +1,42 @@
+{
+  "check_id": "RUNTIMEGUARD_L4_BASELINE_CHECK",
+  "status": "ALLOW_BASELINE",
+  "results": [
+    {
+      "path": "cemu/builders/runtime_guard.py",
+      "exists": true
+    },
+    {
+      "path": "cemu/builders/runtime_guard_l4_policy.json",
+      "exists": true
+    },
+    {
+      "path": "cemu/builders/runtime_guard_l4_checklist.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/in-toto/root.layout",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/provenance.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/level4-policy.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/subject-index.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/sigstore/policy.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/policies/regulatory_policy_baseline.json",
+      "exists": true
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "check_id": "SLSA_L4_FINAL_CHECK",
+  "status": "PASS_SLSA_FINAL",
+  "checks": [
+    {
+      "type": "required_file",
+      "path": "attestations/slsa_l4_operative_attestation.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "reports/operative_checks/slsa_l4_operative_check.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "logs/slsa_l4_operative.log",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "assurance/slsa/level4-policy.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "assurance/slsa/subject-index.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "assurance/in-toto/root.layout",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_file",
+      "path": "assurance/sigstore/policy.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    }
+  ],
+  "reproducibility_ref": "reports/final_checks/slsa_l4_reproducibility_report.json"
+}

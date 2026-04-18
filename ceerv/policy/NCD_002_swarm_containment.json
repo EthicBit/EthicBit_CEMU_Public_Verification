@@ -1,0 +1,21 @@
+{
+  "schema_id": "ETHICBIT_NCD_V1",
+  "ncd_id": "NCD_002_SWARM_CONTAINMENT",
+  "title": "Swarm Containment Rules",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "profile": "COURT_FIRST",
+  "description": "Normative containment rules for multi-agent or swarm scenarios.",
+  "rules": [
+    {
+      "rule_id": "SWM-001",
+      "condition": "collective_escalation_probability_high",
+      "effect": "ISOLATE_AND_FREEZE"
+    },
+    {
+      "rule_id": "SWM-002",
+      "condition": "collective_output_not_traceable",
+      "effect": "RESIDUAL_GAP_GOVERNANCE"
+    }
+  ]
+}

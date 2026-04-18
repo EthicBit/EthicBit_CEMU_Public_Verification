@@ -1,0 +1,12 @@
+{
+  "schema_id": "ETHICBIT_DISTRIBUTED_PRODUCTION_POLICY_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "principles": [
+    "environment_identity_must_be_declared",
+    "artifact_manifest_must_exist",
+    "assurance_baseline_must_be_present",
+    "human_review_required_for_escalated_production_claims"
+  ],
+  "full_certified_production_claim_allowed": false
+}

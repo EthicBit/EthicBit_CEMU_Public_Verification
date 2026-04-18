@@ -1,0 +1,67 @@
+{
+  "case_id": "case_003",
+  "derived_outputs": [
+    {
+      "output_id": "case_003-OUT-001",
+      "output_type": "RUNTIME_ASSESSMENT",
+      "source_entity": "O1",
+      "related_action_id": "ACT-0001",
+      "traceability_level": "HIGH",
+      "eligibility_state": "ELIGIBLE_FOR_FIXATION",
+      "relevance_score": 0.5813,
+      "linked_artifacts": [
+        "runtime_constitutional_assessment.case_003.canonical.json"
+      ],
+      "decision_mode": "AUTONOMOUS_WITH_AUDIT",
+      "review_required": false,
+      "notes": "Constitutional assessment classified as derived output."
+    },
+    {
+      "output_id": "case_003-OUT-002",
+      "output_type": "FREEZE_EVENT",
+      "source_entity": "O1",
+      "related_action_id": "ACT-0001",
+      "traceability_level": "HIGH",
+      "eligibility_state": "ELIGIBLE_FOR_FIXATION",
+      "relevance_score": 0.9,
+      "linked_artifacts": [
+        "freeze_decision.case_003.canonical.json"
+      ],
+      "decision_mode": "AUTONOMOUS_BLOCK_ONLY",
+      "review_required": true,
+      "notes": "Freeze event classified for governance and possible fixation."
+    },
+    {
+      "output_id": "case_003-OUT-003",
+      "output_type": "SWARM_CONTAINMENT_EVENT",
+      "source_entity": "O1",
+      "related_action_id": "ACT-0001",
+      "traceability_level": "HIGH",
+      "eligibility_state": "COLLECTIVE_REVIEW_REQUIRED",
+      "relevance_score": 0.937,
+      "linked_artifacts": [
+        "swarm_containment_state.case_003.canonical.json"
+      ],
+      "decision_mode": "AUTONOMOUS_BLOCK_ONLY",
+      "review_required": true,
+      "notes": "Swarm containment event classified as collective governance output."
+    },
+    {
+      "output_id": "case_003-OUT-004",
+      "output_type": "ISOLATION_BUNDLE",
+      "source_entity": "O1",
+      "related_action_id": "ACT-0001",
+      "traceability_level": "HIGH",
+      "eligibility_state": "COLLECTIVE_REVIEW_REQUIRED",
+      "relevance_score": 0.937,
+      "linked_artifacts": [
+        "post_event_isolation_bundle.case_003.canonical.json"
+      ],
+      "decision_mode": "AUTONOMOUS_WITH_AUDIT",
+      "review_required": true,
+      "notes": "Post-event isolation bundle classified for next-stage governance."
+    }
+  ],
+  "generated_at": "2026-04-02T18:16:27.899695+00:00",
+  "canonical_hash": "117c2f6b35da5ff00cd83deb0ffc20ebd1a938d2685927678b82ee6153b7b119"
+}

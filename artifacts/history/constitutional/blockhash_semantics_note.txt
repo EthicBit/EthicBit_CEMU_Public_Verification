@@ -1,0 +1,1 @@
+blockHash in this receipt refers to the previous block hash captured onchain via blockhash(block.number - 1).

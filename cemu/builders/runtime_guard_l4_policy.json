@@ -1,0 +1,19 @@
+{
+  "schema_id": "ETHICBIT_RUNTIMEGUARD_L4_POLICY_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "mode": "L4_BASELINE",
+  "checks": [
+    "slsa_l4_policy_must_exist",
+    "slsa_subject_index_must_exist",
+    "in_toto_layout_must_exist",
+    "sigstore_policy_must_exist",
+    "regulatory_policy_must_exist"
+  ],
+  "actions_on_failure": [
+    "freeze_required",
+    "human_review_required",
+    "closure_escalation_blocked"
+  ],
+  "full_l4_claim_allowed": false
+}

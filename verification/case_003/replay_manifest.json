@@ -1,0 +1,16 @@
+{
+  "case_id": "case_003",
+  "root_id": "case_003-ROOT-001",
+  "manifest_id": "case_003-MANIFEST-001",
+  "case_bundle_id": "case_003-BUNDLE-001",
+  "replay_seed": "case_003-REPLAY-SEED-001",
+  "execution_order": [
+    "cemu_case_003_runtime_guard.py",
+    "cemu_case_003_swarm_containment.py",
+    "cemu_case_003_residual_governance.py",
+    "cemu_case_003_manifest_builder.py",
+    "cemu_case_003_root_builder.py",
+    "cemu_case_003_anchor_prepare.py"
+  ],
+  "generated_at": "2026-04-02T20:07:33.157534+00:00"
+}

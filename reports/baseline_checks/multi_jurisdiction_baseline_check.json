@@ -1,0 +1,26 @@
+{
+  "check_id": "MULTI_JURISDICTION_BASELINE_CHECK",
+  "status": "PASS_BASELINE",
+  "results": [
+    {
+      "path": "regulatory/jurisdictions/jurisdiction_registry.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/mappings/ceerv_regulatory_mapping.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/mappings/jurisdiction_coverage_matrix.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/policies/regulatory_policy_baseline.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/policies/jurisdiction_escalation_policy.json",
+      "exists": true
+    }
+  ]
+}

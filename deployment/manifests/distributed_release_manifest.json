@@ -1,0 +1,20 @@
+{
+  "schema_id": "ETHICBIT_DISTRIBUTED_RELEASE_MANIFEST_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "targets": [
+    {
+      "target_id": "artifact_bundle",
+      "ref": "ceerv/artifacts/evidence_bundle_full.json"
+    },
+    {
+      "target_id": "certificate",
+      "ref": "ceerv/artifacts/certificate.json"
+    },
+    {
+      "target_id": "acta_minima",
+      "ref": "ceerv/outputs/ACTA_MINIMA.json"
+    }
+  ],
+  "release_mode": "DISTRIBUTED_BASELINE_PLACEHOLDER"
+}

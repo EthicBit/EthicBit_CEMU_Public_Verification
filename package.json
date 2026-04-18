@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@ardrive/turbo-sdk": "^1.41.0",
+    "dotenv": "^17.3.1",
+    "ethers": "^6.16.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.7",
+    "hardhat": "^3.2.0"
+  },
+  "type": "module",
+  "scripts": {
+    "build:hermetic": "hardhat compile --force && python3 -m cemu.builders.runtime_guard"
+  }
+}

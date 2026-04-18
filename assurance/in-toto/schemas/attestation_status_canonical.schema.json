@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ethicbit:in-toto:attestation_status_canonical:v1",
+  "title": "ETHICBIT Attestation Status Canonical",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "status",
+    "policyVersion",
+    "generatedAt",
+    "requiredStepsEvaluated",
+    "requiredStepsAccepted",
+    "steps",
+    "gate"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ETHICBIT_ATTESTATION_STATUS_CANONICAL_V1"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "NOT_VERIFIED"
+      ]
+    },
+    "policyVersion": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "type": "string"
+    },
+    "requiredStepsEvaluated": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "requiredStepsAccepted": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "step",
+          "required",
+          "normalizedStatus",
+          "readinessAccepted"
+        ],
+        "properties": {
+          "step": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "normalizedStatus": {
+            "type": "string",
+            "enum": [
+              "ATTESTATION_VERIFIED",
+              "ATTESTATION_VERIFIED_EQUIVALENT",
+              "ATTESTATION_NOT_VERIFIED"
+            ]
+          },
+          "readinessAccepted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "gate": {
+      "type": "object",
+      "required": [
+        "status",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

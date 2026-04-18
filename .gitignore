@@ -1,0 +1,69 @@
+.env
+.env.*
+keys/
+*.pem
+*.key
+*.secret
+
+# === NODE.JS & DEPENDENCIES ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# === LOGS Y TEMPORALES ===
+logs/
+*.log
+*.log.*
+.history/
+
+# === OS MAC ===
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# === BUILD / GENERATED ===
+dist/
+build/
+coverage/
+.nyc_output/
+*.min.js
+__pycache__/
+*.py[cod]
+
+# === ENVIRONMENT ===
+.env
+.env.*
+!.env.example
+
+# === TEMP FILES ===
+*.tmp
+*.temp
+tmp/
+temp/
+
+
+# Backups y temporales
+*.backup*
+*.backup_*
+
+# Backups y temporales
+*.backup*
+*.backup_*
+
+# Backups y temporales
+*.backup*
+*.backup_*
+
+# Backups automáticos (nunca commitear)
+artifacts_backup_*
+*_backup_*
+*.backup
+*.bak
+
+# Hardhat isolated build output
+.hardhat/
+
+# Constitutional controls runtime report (generated)
+results/constitutional_controls_report.json

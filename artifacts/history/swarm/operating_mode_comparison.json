@@ -1,0 +1,72 @@
+{
+  "artifactType": "operating_mode_comparison",
+  "generatedAt": "2026-04-10T19:29:26.134963Z",
+  "leftMode": "SOVEREIGN_INTERNAL",
+  "rightMode": "MARKET_INTEROP",
+  "sourceFiles": {
+    "left": "/tmp/official_sov_mode.json",
+    "right": "/tmp/official_market_mode.json"
+  },
+  "rows": [
+    {
+      "field": "operatingMode",
+      "SOVEREIGN_INTERNAL": "SOVEREIGN_INTERNAL",
+      "MARKET_INTEROP": "MARKET_INTEROP"
+    },
+    {
+      "field": "officialOperationalStatus",
+      "SOVEREIGN_INTERNAL": "BLOCKED",
+      "MARKET_INTEROP": "BLOCKED"
+    },
+    {
+      "field": "reason",
+      "SOVEREIGN_INTERNAL": "LIVE_FAIL",
+      "MARKET_INTEROP": "LIVE_FAIL"
+    },
+    {
+      "field": "internalClosureStatus",
+      "SOVEREIGN_INTERNAL": "INTERNAL_CLOSED",
+      "MARKET_INTEROP": "INTERNAL_CLOSED"
+    },
+    {
+      "field": "externalProjectionStatus",
+      "SOVEREIGN_INTERNAL": "EXTERNAL_LIVE_FAIL",
+      "MARKET_INTEROP": "EXTERNAL_CRYPTO_INTEROP_FAIL"
+    },
+    {
+      "field": "internalCryptographyStatus",
+      "SOVEREIGN_INTERNAL": "PASS",
+      "MARKET_INTEROP": "PASS"
+    },
+    {
+      "field": "externalCryptographyStatus",
+      "SOVEREIGN_INTERNAL": "FAIL",
+      "MARKET_INTEROP": "FAIL"
+    },
+    {
+      "field": "cryptography.status",
+      "SOVEREIGN_INTERNAL": "PASS",
+      "MARKET_INTEROP": "FAIL"
+    },
+    {
+      "field": "cryptography.internal.status",
+      "SOVEREIGN_INTERNAL": "PASS",
+      "MARKET_INTEROP": "PASS"
+    },
+    {
+      "field": "cryptography.external.status",
+      "SOVEREIGN_INTERNAL": "FAIL",
+      "MARKET_INTEROP": "FAIL"
+    },
+    {
+      "field": "liveStatus",
+      "SOVEREIGN_INTERNAL": "FAIL",
+      "MARKET_INTEROP": "FAIL"
+    },
+    {
+      "field": "gateStatusEffective",
+      "SOVEREIGN_INTERNAL": "DEGRADED_BY_LIVE",
+      "MARKET_INTEROP": "DEGRADED_BY_LIVE"
+    }
+  ]
+}

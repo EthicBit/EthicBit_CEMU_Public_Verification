@@ -1,0 +1,38 @@
+{
+  "schema_id": "ETHICBIT_SLSA_PROVENANCE_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_MATERIALIZATION",
+  "build_definition": {
+    "build_type": "ethicbit-cemu-initial-baseline",
+    "source_repository": "ETHICBIT / CEERV / CEMU",
+    "source_ref": "local-repo-state"
+  },
+  "subjects": [
+    {
+      "name": "ceerv/artifacts/evidence_bundle_full.json",
+      "digest": {
+        "sha256": "TO_BE_BOUND"
+      }
+    },
+    {
+      "name": "ceerv/artifacts/certificate.json",
+      "digest": {
+        "sha256": "TO_BE_BOUND"
+      }
+    },
+    {
+      "name": "ceerv/outputs/ACTA_MINIMA.json",
+      "digest": {
+        "sha256": "TO_BE_BOUND"
+      }
+    }
+  ],
+  "builder": {
+    "id": "github-actions-initial-baseline"
+  },
+  "metadata": {
+    "completeness": "INITIAL",
+    "hermeticity": "NOT_CLAIMED",
+    "reproducibility": "PARTIAL_BASELINE_ONLY"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_id": "CEERV_SSOT_MANIFEST_V1",
+  "manifest_id": "case_003-ssot-manifest-001",
+  "case_ref": "case_003",
+  "version": "1.0.0",
+  "artifacts": [
+    "ceerv/policy/NCD_001_freeze_rules.json",
+    "ceerv/policy/NCD_002_swarm_containment.json",
+    "ceerv/policy/reason_registry.json",
+    "ceerv/artifacts/evidence_bundle_full.json",
+    "ceerv/artifacts/certificate.json",
+    "ceerv/outputs/ACTA_MINIMA.json",
+    "ceerv/verification/verification.json"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_id": "ETHICBIT_GLOBAL_REGULATORY_CERTIFICATION_MATRIX_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_OPERATIVE_BASELINE",
+  "jurisdictions": [
+    {
+      "jurisdiction_id": "US",
+      "certification_status": "BASELINE_REFERENCE_ONLY"
+    },
+    {
+      "jurisdiction_id": "EU",
+      "certification_status": "BASELINE_REFERENCE_ONLY"
+    },
+    {
+      "jurisdiction_id": "UK",
+      "certification_status": "BASELINE_REFERENCE_ONLY"
+    },
+    {
+      "jurisdiction_id": "CO",
+      "certification_status": "BASELINE_REFERENCE_ONLY"
+    }
+  ],
+  "full_regulatory_certification_global": false
+}

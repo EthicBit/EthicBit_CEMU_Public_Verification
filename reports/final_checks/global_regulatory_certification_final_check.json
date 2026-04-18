@@ -1,0 +1,35 @@
+{
+  "check_id": "GLOBAL_REGULATORY_CERTIFICATION_FINAL_CHECK",
+  "status": "PASS_CERTIFICATION_FINAL",
+  "checks": [
+    {
+      "jurisdiction_id": "US",
+      "report": "audit/regulatory/US_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_CERTIFICATION_FINAL"
+    },
+    {
+      "jurisdiction_id": "EU",
+      "report": "audit/regulatory/EU_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_CERTIFICATION_FINAL"
+    },
+    {
+      "jurisdiction_id": "UK",
+      "report": "audit/regulatory/UK_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_CERTIFICATION_FINAL"
+    },
+    {
+      "jurisdiction_id": "CO",
+      "report": "audit/regulatory/CO_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFICATION_GRANTED",
+      "status": "PASS_CERTIFICATION_FINAL"
+    }
+  ],
+  "consolidated_report_ref": "audit/regulatory/global_regulatory_certification_report.json"
+}

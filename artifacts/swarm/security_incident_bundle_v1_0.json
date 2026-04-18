@@ -1,0 +1,59 @@
+{
+  "artifact": "security_incident_bundle_v1_0",
+  "version": "v1.0",
+  "profile": "swarm_mvp_v1",
+  "status": "CANONICAL_CONTENT_READY",
+  "title": "Swarm MVP v1 Security Incident Bundle",
+  "description": "Canonical incident bundle for EthicBit / CEMU swarm profile linked to live onchain anchor.",
+  "generatedAt": "2026-03-31T00:00:00Z",
+  "caseId": "swarm_mvp_v1_case_001",
+  "environment": {
+    "network": "sepolia",
+    "chainId": 11155111,
+    "system": "EthicBit / CEMU",
+    "version": "3.7.0+"
+  },
+  "incident": {
+    "type": "SWARM_COORDINATION_RISK",
+    "severity": "HIGH",
+    "summary": "Coordinated multi-agent activity evaluated under sovereign containment and closure governance.",
+    "detectedAt": "2026-03-30T00:00:00Z",
+    "source": "swarm_mvp_v1",
+    "status": "CAPTURED_AND_FIXED"
+  },
+  "subjects": [
+    {
+      "subjectType": "SWARM_CONFIGURATION",
+      "subjectId": "swarm_mvp_v1",
+      "role": "collective_subject"
+    }
+  ],
+  "evidence": [
+    {
+      "evidenceId": "ev_001",
+      "kind": "collective_trace",
+      "description": "Primary collective trace captured for canonical incident bundle.",
+      "hash": "0x63f558cd48ca2a6b78b530eb966635dcf5641e1580f01b9fa4fa5fc3c37d9426"
+    }
+  ],
+  "governance": {
+    "applicableRegime": "SOVEREIGN_CONTAINMENT_LAYER",
+    "authorityMode": "HYBRID_GOVERNED",
+    "closureEligibility": "UNDER_REVIEW",
+    "residualGapStatus": "NONE_DECLARED"
+  },
+  "references": {
+    "artifactManifest": "PENDING_ARTIFACT_MANIFEST",
+    "anchorReceipt": "artifacts/swarm/anchor-receipt.swarm_mvp_v1.canonical.json",
+    "verificationPack": "PENDING_VERIFICATION_PACK",
+    "formalClosureCertificate": "PENDING_FORMAL_CLOSURE_CERTIFICATE",
+    "anchorTxHash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+    "anchorContractAddress": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884"
+  },
+  "integrity": {
+    "canonicalization": "json",
+    "hashAlgorithm": "sha256",
+    "onchainLinked": true,
+    "verifyOnchainEvent": "PASS"
+  }
+}

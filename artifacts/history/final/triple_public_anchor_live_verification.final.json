@@ -1,0 +1,78 @@
+{
+  "artifact": "triple_public_anchor_live_verification",
+  "generatedAt": "2026-04-11T17:17:04Z",
+  "policyVersion": "triple-public-anchor-live-policy.v1.0.0",
+  "runContext": {
+    "runId": "run-20260411T171704Z-5788",
+    "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+    "verificationEpoch": "2026-04-11T17:00:00Z"
+  },
+  "supportType": "TRIPLE_PUBLIC_ANCHOR",
+  "verificationStatus": "PUBLISHED",
+  "canonicalAnchorModel": "TRIPLE_PUBLIC_ANCHOR",
+  "checks": {
+    "supportTypeCanonical": "PASS",
+    "canonicalModelDeclared": "PASS",
+    "sepolia": {
+      "txHashFormat": "PASS",
+      "liveResolved": "PASS",
+      "selectedRpc": "https://ethereum-sepolia-rpc.publicnode.com",
+      "note": "Sepolia transaction resolved and matched locator fields.",
+      "substatus": "CONVERGED",
+      "reasonCode": "SEPOLIA_TX_RESOLVED"
+    },
+    "arweave": {
+      "metaTxMatch": "PASS",
+      "metaDataSizeNonZero": "PASS",
+      "bodyNonEmpty": "PASS",
+      "bodyIsJson": "PASS",
+      "bodyIsNotHtml": "PASS",
+      "bodyNoPlaceholders": "PASS",
+      "resolved": "PASS",
+      "note": "Arweave content must be JSON and placeholder-free to pass live verification.",
+      "selectedLocator": "https://arweave.net/Khwkqhy7JaoBPApd9kvIO8FFwS-cZ6HfF2xVm0fQiDY",
+      "metaHttp": 200,
+      "bodyHttp": 200,
+      "metaDataSize": "1221",
+      "substatus": "CONVERGED",
+      "reasonCode": "ARWEAVE_OBJECT_CONVERGED"
+    },
+    "ao": {
+      "resolved": "PASS",
+      "selectedLocator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+      "selectedHttp": 200,
+      "selectedBodyClass": "TEXT",
+      "selectedError": "",
+      "probedCandidates": [
+        {
+          "locator": "https://push.forward.computer/cyEIMEmz77ng3kdkZqm5PJdv8Tuga4IkOKdjXIV1jKo?process-id=Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+          "http": 200,
+          "bodyClass": "TEXT",
+          "error": ""
+        }
+      ],
+      "note": "AO endpoint resolved with non-HTML payload.",
+      "substatus": "CONVERGED",
+      "reasonCode": "AO_PAYLOAD_RESOLVED"
+    },
+    "noUnresolvedAnchorConflicts": "PASS"
+  },
+  "anchors": {
+    "sepolia": {
+      "status": "PASS",
+      "substatus": "CONVERGED",
+      "reasonCode": "SEPOLIA_TX_RESOLVED"
+    },
+    "arweave": {
+      "status": "PASS",
+      "substatus": "CONVERGED",
+      "reasonCode": "ARWEAVE_OBJECT_CONVERGED"
+    },
+    "ao": {
+      "status": "PASS",
+      "substatus": "CONVERGED",
+      "reasonCode": "AO_PAYLOAD_RESOLVED"
+    }
+  },
+  "result": "PASS"
+}

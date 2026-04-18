@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_version": "5.3-security-2026.04",
+  "sector": "SECURITY",
+  "description": "Security Mechanical Ethics registry for EthicBit / CEMU.",
+  "rules": [
+    {
+      "rule_id": "RULE-ETHIC-SEC-001-v2.0",
+      "description": "All security-critical events must be immutably logged and independently auditable.",
+      "category": "INTEGRITY",
+      "version": "2.0",
+      "severity": "CRITICAL",
+      "reference": "Security auditability principle",
+      "justification": "Sin registro inmutable de eventos críticos no es posible reconstruir incidentes ni demostrar integridad operativa.",
+      "evidence_sources": [
+        "security_event_log",
+        "immutable_storage",
+        "cryptographic_hash"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-SEC-002-v1.0",
+      "description": "All privileged actions must be attributable to a verified identity and traceable to execution context.",
+      "category": "TRACEABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Privileged action accountability",
+      "justification": "Las acciones privilegiadas no atribuibles destruyen accountability y aumentan el riesgo de abuso interno o externo.",
+      "evidence_sources": [
+        "identity_binding_log",
+        "privileged_action_trace",
+        "execution_context_record"
+      ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-SEC-003-v1.0",
+      "description": "Security verification outcomes must be reproducible from preserved inputs and configuration state.",
+      "category": "REPRODUCIBILITY",
+      "version": "1.0",
+      "severity": "HIGH",
+      "reference": "Security verification reproducibility",
+      "justification": "Sin reproducibilidad de verificaciones de seguridad, la auditoría posterior pierde capacidad de confirmación técnica.",
+      "evidence_sources": [
+        "verification_input_snapshot",
+        "config_snapshot",
+        "reproduction_script"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "constitutionVersion": "v1.0.0",
+  "matrixVersion": "v1.0.0",
+  "generatedAt": "2026-04-17T00:00:00Z",
+  "controls": [
+    {
+      "articleId": "ART-01",
+      "title": "Sovereign Operational Truth Is Canonical",
+      "normative": "MUST",
+      "controlId": "CTL-SOV-001",
+      "owner": "core-status",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 180,
+        "command": "ETHICBIT_ED25519_PRIVATE_KEY='assurance/keys/ed25519_private.pem' ETHICBIT_ED25519_PUBLIC_KEY='assurance/keys/ed25519_public.pem' ETHICBIT_MLDSA_PRIVATE_KEY='assurance/keys/mldsa_private.pem' ETHICBIT_MLDSA_PUBLIC_KEY='assurance/keys/mldsa_public.pem' ETHICBIT_ED25519_SIGN_CMD='assurance/signers/ed25519_sign.sh {payload}' ETHICBIT_MLDSA_SIGN_CMD='assurance/signers/mldsa_sign.sh {payload}' ETHICBIT_ED25519_VERIFY_CMD='assurance/signers/ed25519_verify.sh {payload} {signature}' ETHICBIT_MLDSA_VERIFY_CMD='assurance/signers/mldsa_verify.sh {payload} {signature}' ./scripts/status/official_operational_status_calculator.py --root . --strict --require-signature"
+      },
+      "evidence": {
+        "paths": [
+          "artifacts/history/swarm/official_operational_status.json",
+          "results/GATE_REPORT.json"
+        ]
+      },
+      "audiences": [
+        "big-tech",
+        "model-labs",
+        "regulatory",
+        "government",
+        "cross-economy"
+      ]
+    },
+    {
+      "articleId": "ART-02",
+      "title": "Mechanical Ethics Must Be Executable And Sector-Aware",
+      "normative": "MUST",
+      "controlId": "CTL-ETH-001",
+      "owner": "core-ethics",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 240,
+        "command": "bash scripts/audit/audit_ethic_mechanics.sh"
+      },
+      "evidence": {
+        "paths": [
+          "scripts/audit/audit_ethic_mechanics.sh",
+          "ceerv/policy/reason_registry_CORE.json",
+          "ceerv/policy/reason_registry_JUSTICIA.json",
+          "ceerv/policy/reason_registry_FINANZAS.json",
+          "ceerv/policy/reason_registry_SECURITY.json",
+          "ceerv/policy/reason_registry_TECHNICAL.json",
+          "ceerv/policy/reason_registry_LEGAL.json",
+          "ceerv/policy/reason_registry_REGULATORY.json"
+        ]
+      },
+      "audiences": [
+        "ai-agentic",
+        "big-legal",
+        "regulatory",
+        "government"
+      ]
+    },
+    {
+      "articleId": "ART-03",
+      "title": "Mixed-Audience Audit Must Be Canonical",
+      "normative": "MUST",
+      "controlId": "CTL-MIX-001",
+      "owner": "audit-platform",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 300,
+        "command": "./scripts/run_mixed_audience_audit.sh --all"
+      },
+      "evidence": {
+        "paths": [
+          "results/index.json",
+          "results/public_summary.md",
+          "results/technical_verification.md",
+          "results/legal_claim_boundary.md",
+          "results/regulatory_control_report.md",
+          "results/finance_anchor_report.md",
+          "results/executive_onepager.md"
+        ]
+      },
+      "audiences": [
+        "big-tech",
+        "ai-agentic",
+        "model-labs",
+        "big-legal",
+        "crypto",
+        "cybersecurity",
+        "financial",
+        "regulatory",
+        "government",
+        "cross-economy"
+      ]
+    },
+    {
+      "articleId": "ART-04",
+      "title": "Periodic Official Audit Must Run In Strict Mode",
+      "normative": "MUST",
+      "controlId": "CTL-CI-001",
+      "owner": "platform-assurance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 30,
+        "command": "grep -Eq -- '--strict --require-signature' .github/workflows/official-periodic-audit.yml && grep -Eq -- 'ETHICBIT_MLDSA_VERIFY_CMD' .github/workflows/official-periodic-audit.yml"
+      },
+      "evidence": {
+        "paths": [
+          ".github/workflows/official-periodic-audit.yml"
+        ]
+      },
+      "audiences": [
+        "big-tech",
+        "cybersecurity",
+        "regulatory",
+        "government"
+      ]
+    },
+    {
+      "articleId": "ART-05",
+      "title": "Operational Secret Handling Must Avoid Unsafe Defaults",
+      "normative": "MUST",
+      "controlId": "CTL-SEC-001",
+      "owner": "ops-security",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 30,
+        "command": "! grep -Eq '^[[:space:]]*source[[:space:]]+\\.env' scripts/entrypoints/reconcile_and_show_status.sh && grep -q 'ALLOW_INSECURE_PRIVATE_KEY_CLI' scripts/entrypoints/reconcile_and_show_status.sh"
+      },
+      "evidence": {
+        "paths": [
+          "scripts/entrypoints/reconcile_and_show_status.sh"
+        ]
+      },
+      "audiences": [
+        "cybersecurity",
+        "financial",
+        "regulatory",
+        "government"
+      ]
+    },
+    {
+      "articleId": "ART-06",
+      "title": "Build Reproducibility Must Be Maintained",
+      "normative": "SHOULD",
+      "controlId": "CTL-BUILD-001",
+      "owner": "protocol-engineering",
+      "failureBehavior": "WARN",
+      "execution": {
+        "timeoutSeconds": 420,
+        "command": "./scripts/compile_hardhat_isolated.sh"
+      },
+      "evidence": {
+        "paths": [
+          "hardhat.config.js",
+          "contracts/EthicBitAnchor.sol",
+          "contracts/ClosureAnchor.sol",
+          "contracts/CEMUEthicalOracle.sol"
+        ]
+      },
+      "audiences": [
+        "big-tech",
+        "model-labs",
+        "crypto",
+        "cybersecurity"
+      ]
+    }
+  ]
+}

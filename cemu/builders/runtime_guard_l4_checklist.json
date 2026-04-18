@@ -1,0 +1,18 @@
+{
+  "schema_id": "ETHICBIT_RUNTIMEGUARD_L4_CHECKLIST_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_OPERATIVE_BASELINE",
+  "checks": [
+    "runtime_assessment_ref_present",
+    "freeze_decision_ref_present",
+    "in_toto_layout_ref_present",
+    "slsa_provenance_ref_present",
+    "slsa_l4_policy_ref_present",
+    "slsa_subject_index_ref_present",
+    "sigstore_policy_ref_present",
+    "regulatory_policy_ref_present",
+    "runtimeguard_l4_policy_ref_present"
+  ],
+  "automatic_cryptographic_blocking": false,
+  "full_l4_runtime_operable": false
+}

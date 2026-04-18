@@ -1,0 +1,5 @@
+{
+  "schema_id": "ETHICBIT_PRODUCTION_DISTRIBUTED_READINESS_NEGATIVE_CERTIFICATE_V1",
+  "status": "NOT_READY_FINAL",
+  "basis": "negative_runtimeguard_path_enforced"
+}

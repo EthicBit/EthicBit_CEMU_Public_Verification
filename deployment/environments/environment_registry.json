@@ -1,0 +1,31 @@
+{
+  "schema_id": "ETHICBIT_ENVIRONMENT_REGISTRY_V1",
+  "version": "2.0.0",
+  "status": "REAL_TARGETS_MATERIALIZED",
+  "environments": [
+    {
+      "environment_id": "local_controlled",
+      "type": "local",
+      "status": "ACTIVE_REAL_TARGET",
+      "profile_ref": "deployment/environments/local_controlled_profile.json"
+    },
+    {
+      "environment_id": "github_actions_runner",
+      "type": "ci",
+      "status": "ACTIVE_REAL_TARGET",
+      "profile_ref": "deployment/environments/github_actions_runner_profile.json"
+    },
+    {
+      "environment_id": "distributed_target_01",
+      "type": "distributed",
+      "status": "ACTIVE_REAL_TARGET",
+      "profile_ref": "deployment/environments/distributed_target_01_profile.json"
+    },
+    {
+      "environment_id": "distributed_target_02",
+      "type": "distributed",
+      "status": "ACTIVE_REAL_TARGET",
+      "profile_ref": "deployment/environments/distributed_target_02_profile.json"
+    }
+  ]
+}

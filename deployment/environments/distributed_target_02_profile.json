@@ -1,0 +1,14 @@
+{
+  "schema_id": "ETHICBIT_ENVIRONMENT_PROFILE_V1",
+  "environment_id": "distributed_target_02",
+  "environment_type": "distributed",
+  "owner": "distributed_release_node_02",
+  "network_policy": "restricted_distributed_policy",
+  "artifact_policy": "signed_bundle_required",
+  "runtime_constraints": [
+    "deployment_trace_required",
+    "audit_report_required"
+  ],
+  "human_review_required": true,
+  "status": "ACTIVE_REAL_TARGET"
+}

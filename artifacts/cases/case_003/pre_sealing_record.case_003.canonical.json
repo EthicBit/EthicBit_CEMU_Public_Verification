@@ -1,0 +1,20 @@
+{
+  "case_id": "case_003",
+  "pre_sealing_id": "case_003-PRE-SEAL-001",
+  "critical_state": "HIGH_CRITICALITY_PRE_SEALABLE",
+  "pre_seal_status": "PRE_SEALED_PENDING_FORMAL_CLOSURE",
+  "pre_seal_scope": "HIGH_CRITICALITY_ESCALATION_SCOPE",
+  "escalation_protocol": "ESCALATION_TO_FORMAL_CLOSURE",
+  "verification_pack_id": "case_003-VERIFICATION-PACK-001",
+  "root_id": "case_003-ROOT-001",
+  "root_hash": "18c066d8303a072aaaad2a693f791bd2151253245ba0a5ffd4014d57360422b5",
+  "source_action_id": "ACT-0001",
+  "source_entity_id": "O1",
+  "containment_state": "HIGH_CRITICALITY_ESCALATED",
+  "collective_escalation_probability": 0.937,
+  "human_required": true,
+  "decision_mode": "HUMAN_REQUIRED",
+  "authority": "Frontier Pre-Sealing Governance Framework",
+  "generated_at": "2026-04-02T20:07:33.279617+00:00",
+  "canonical_hash": "16a81ae720c3b24eab95e7cc9d3d22b516ca394d13e5129732b7a474abe223eb"
+}

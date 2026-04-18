@@ -1,0 +1,35 @@
+{
+  "check_id": "DISTRIBUTED_PRODUCTION_CERTIFICATION_FINAL_CHECK",
+  "status": "PASS_CERTIFICATION_FINAL",
+  "checks": [
+    {
+      "target_id": "local_controlled",
+      "report": "audit/deployment/local_controlled_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFIED_TARGET",
+      "status": "PASS_CERTIFICATION_FINAL"
+    },
+    {
+      "target_id": "github_actions_runner",
+      "report": "audit/deployment/github_actions_runner_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFIED_TARGET",
+      "status": "PASS_CERTIFICATION_FINAL"
+    },
+    {
+      "target_id": "distributed_target_01",
+      "report": "audit/deployment/distributed_target_01_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFIED_TARGET",
+      "status": "PASS_CERTIFICATION_FINAL"
+    },
+    {
+      "target_id": "distributed_target_02",
+      "report": "audit/deployment/distributed_target_02_certification_report.json",
+      "exists": true,
+      "actual_status": "CERTIFIED_TARGET",
+      "status": "PASS_CERTIFICATION_FINAL"
+    }
+  ],
+  "consolidated_report_ref": "audit/deployment/distributed_production_certification_report_final.json"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_id": "ETHICBIT_ARWEAVE_TURBO_ATTEMPT_V1",
+  "txid": "fEtMydg-eA-pBui-l3OppEJ20hytg-4hSUHxUMWIArA",
+  "status": "FAILED_PUBLIC_RAW_RESOLUTION",
+  "checks": {
+    "arweave.net": "HTML_404",
+    "gateway.arweave.net": "HTML_404"
+  },
+  "conclusion": "Turbo upload completed, but the returned id did not resolve as raw JSON payload on public gateways."
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_003",
+  "expected_hashes": {
+    "canonical_root.case_003.json": "13916763ec67ceabc5c317ef904e90c5149279592457e7dbee90cbada0b3f4c4",
+    "artifact_manifest.case_003.canonical.json": "4f9569a6c681fe7dd394fb75a7f42fe85a73a29b79483826b34e3108d944a6a3",
+    "case_bundle.case_003.canonical.json": "b4f07a422080f801de9db1db3984bbd38828fa9646149279cc6fa5ebf775943b"
+  },
+  "generated_at": "2026-04-02T20:07:33.157797+00:00"
+}

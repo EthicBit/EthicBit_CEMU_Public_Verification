@@ -1,0 +1,62 @@
+{
+  "check_id": "PRODUCTION_DISTRIBUTED_READY_NEGATIVE_CHECK",
+  "status": "NOT_READY_FINAL",
+  "checks": [
+    {
+      "type": "required_file",
+      "path": "artifacts/production_final_approval_record.json",
+      "exists": true,
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_report",
+      "path": "reports/operative_checks/slsa_l4_operative_check.json",
+      "exists": true,
+      "expected_status": "PASS_OPERATIVE_BASELINE",
+      "actual_status": "PASS_OPERATIVE_BASELINE",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_report",
+      "path": "reports/operative_checks/multi_jurisdiction_operative_check.json",
+      "exists": true,
+      "expected_status": "PASS_OPERATIVE_BASELINE",
+      "actual_status": "PASS_OPERATIVE_BASELINE",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_report",
+      "path": "reports/operative_checks/distributed_production_operative_check.json",
+      "exists": true,
+      "expected_status": "PASS_OPERATIVE_BASELINE",
+      "actual_status": "FAIL_OPERATIVE_BASELINE",
+      "status": "FAIL_FINAL"
+    },
+    {
+      "type": "required_report",
+      "path": "reports/final_checks/global_deployment_audit_final_check.json",
+      "exists": true,
+      "expected_status": "PASS_AUDIT_FINAL",
+      "actual_status": "PASS_AUDIT_FINAL",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "required_report",
+      "path": "reports/final_checks/global_regulatory_certification_final_check.json",
+      "exists": true,
+      "expected_status": "PASS_CERTIFICATION_FINAL",
+      "actual_status": "PASS_CERTIFICATION_FINAL",
+      "status": "PASS_FINAL"
+    },
+    {
+      "type": "runtimeguard_negative_enforcement",
+      "path": "reports/final_checks/runtimeguard_l4_negative_check.json",
+      "exists": true,
+      "negative_report_status": "PASS_NEGATIVE_TEST",
+      "negative_decision_status": "BLOCK",
+      "negative_block_status": "FREEZE_REQUIRED",
+      "status": "FAIL_FINAL"
+    }
+  ],
+  "reason": "runtimeguard_negative_path_blocks_final_readiness"
+}

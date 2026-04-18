@@ -1,0 +1,77 @@
+{
+  "artifactType": "ethicbit_audit_freeze_manifest",
+  "freezeId": "audit-freeze-2026-04-12-hardened",
+  "generatedAt": "2026-04-12T23:20:09Z",
+  "items": [
+    {
+      "path": "GATE_REPORT.json",
+      "sha256": "071de12893daa6e2224595ec9a1ff49f7e1bff0d11348e220e83c85723a19a7a",
+      "size": 3136
+    },
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": "befecdb5f77a536ab68e3281be457d181b139727a2fe96672e951576f8396bbc",
+      "size": 1116
+    },
+    {
+      "path": "SECURITY_TRIAGE.audit-freeze.json",
+      "sha256": "ee355b31c861be76fdff5c1f899a8d9b3abc5a5e48d680a281362db897b64205",
+      "size": 427
+    },
+    {
+      "path": "anchor_txids_real.json",
+      "sha256": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093",
+      "size": 1499
+    },
+    {
+      "path": "audit.sh",
+      "sha256": "3135babd7297f44479a4512cd90b2d7abb63b2b83f774dfee69ac9d6f741b2ef",
+      "size": 5943
+    },
+    {
+      "path": "docker_audit_grype.postfix.json",
+      "sha256": "79dab5003e1b43e77f57f1c9baa9acf0d6dd9ed765440fe6b600a59ff86acade",
+      "size": 13626
+    },
+    {
+      "path": "docker_audit_sbom.postfix.json",
+      "sha256": "08f4257627f67edcea7b7e7a42767a175a8948ea4c1c3210e1b47c20656cfbaf",
+      "size": 3557037
+    },
+    {
+      "path": "docker_audit_trivy_config.postfix.json",
+      "sha256": "ae312a11c099506562e9d9929117133474ef98c875b23b0a00a03857545908f0",
+      "size": 4251
+    },
+    {
+      "path": "hybrid_sign.py",
+      "sha256": "bc078292d7103dfffeefbb262d4bec7ae4f0181dd104e6c0e950bab54b41cc5a",
+      "size": 5331
+    },
+    {
+      "path": "hybrid_verify.py",
+      "sha256": "a0534a874db599b0cb3b86005cde26d585b47b9305dd11ea1c7af56b4f735304",
+      "size": 4535
+    },
+    {
+      "path": "official_operational_status.json",
+      "sha256": "85300b23fcfd5e38c7f443330e1c2ce350535d7ffeb4ea513c4cd17afbf2ffa4",
+      "size": 9390
+    },
+    {
+      "path": "official_operational_status_calculator.py",
+      "sha256": "bbfe33e9b7f13e3206c40fab7a9ac376241f75cf18826d552336dd1ec49e0bbe",
+      "size": 25134
+    },
+    {
+      "path": "publication_state.json",
+      "sha256": "0d587af50858f6bf1bf8054c9db4a2c72c4610be5561a162df721ab4d2a59074",
+      "size": 130
+    },
+    {
+      "path": "triple_public_anchor_live_verification.json",
+      "sha256": "abb4672c7fc8127b0977f473affc4ec5749444406fe238e10e256d69f20e5f43",
+      "size": 2609
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_id": "ETHICBIT_JURISDICTION_ESCALATION_POLICY_V1",
+  "version": "1.0.0",
+  "status": "INITIAL_OPERATIVE_BASELINE",
+  "principles": [
+    "jurisdiction_must_be_declared",
+    "coverage_matrix_must_exist",
+    "human_review_required_for_escalated_external_claims",
+    "no_automatic_regulatory_equivalence"
+  ],
+  "escalation_modes": [
+    {
+      "mode": "BASELINE_RECOGNITION_ONLY",
+      "external_certification_claim_allowed": false
+    },
+    {
+      "mode": "HUMAN_REVIEW_REQUIRED",
+      "external_certification_claim_allowed": false
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "check_id": "RUNTIMEGUARD_L4_OPERATIVE_CHECK",
+  "status": "ALLOW_OPERATIVE_BASELINE",
+  "results": [
+    {
+      "path": "artifacts/cases/case_003/runtime_constitutional_assessment.case_003.canonical.json",
+      "exists": true
+    },
+    {
+      "path": "artifacts/cases/case_003/freeze_decision.case_003.canonical.json",
+      "exists": true
+    },
+    {
+      "path": "cemu/builders/runtime_guard.py",
+      "exists": true
+    },
+    {
+      "path": "cemu/builders/runtime_guard_l4_policy.json",
+      "exists": true
+    },
+    {
+      "path": "cemu/builders/runtime_guard_l4_checklist.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/in-toto/root.layout",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/provenance.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/level4-policy.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/slsa/subject-index.json",
+      "exists": true
+    },
+    {
+      "path": "assurance/sigstore/policy.json",
+      "exists": true
+    },
+    {
+      "path": "regulatory/policies/regulatory_policy_baseline.json",
+      "exists": true
+    }
+  ],
+  "decision_ref": "artifacts/cases/case_003/runtimeguard_l4_decision.case_003.json",
+  "block_record_ref": "artifacts/cases/case_003/runtimeguard_l4_block_record.case_003.json"
+}
