@@ -4,7 +4,7 @@
   "declaredState": {
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
-    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION",
     "publicationState": "ACTIVE_CANONICAL"
   },
   "includedRoots": [
@@ -25,6 +25,6 @@
       "./scripts/run_mixed_audience_audit.sh --all"
     ],
     "packStateSnapshot": "ACTIVE_CANONICAL",
-    "operationalReadinessSnapshot": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING"
+    "operationalReadinessSnapshot": "READY_FOR_CONTROLLED_PRODUCTION"
   }
 }

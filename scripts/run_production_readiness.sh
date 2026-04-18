@@ -136,10 +136,11 @@ ensure_assurance_enforced() {
 }
 
 main() {
-  local timestamp log_file source_manifest_hash source_bundle_hash source_certificate_hash
+  local timestamp log_file source_manifest_hash source_bundle_hash source_certificate_hash readiness_state
   timestamp="$(date -u +%Y%m%dT%H%M%SZ)"
   mkdir -p "$LOG_DIR"
   log_file="${LOG_DIR}/production_readiness_${timestamp}.log"
+  readiness_state="READY_FOR_CONTROLLED_PRODUCTION"
 
   [[ -x "$VERIFY_SCRIPT" ]] || fail "NOT_READY (FAIL-CLOSED)" "verify_closure_integrity.sh must be executable"
   [[ -x "${ROOT_DIR}/scripts/resolve_publication_drift.sh" ]] || fail "NOT_READY (FAIL-CLOSED)" "resolve_publication_drift.sh must be executable"
@@ -168,11 +169,13 @@ main() {
     [[ "$source_manifest_hash" == "$active_manifest_hash" ]] || fail "PUBLICATION_DRIFT_DETECTED" "active publication manifest differs from the repository SSOT"
     [[ "$source_bundle_hash" == "$active_bundle_hash" ]] || fail "PUBLICATION_DRIFT_DETECTED" "active publication bundle differs from the repository root material"
     [[ "$source_certificate_hash" == "$active_certificate_hash" ]] || fail "PUBLICATION_DRIFT_DETECTED" "active publication certificate differs from the repository formal act"
+    readiness_state="READY_FOR_CONTROLLED_PRODUCTION"
+    log_line 'INFO: active publication integrity reconciled; readiness promoted to controlled production.'
   else
     log_line 'INFO: no active publication symlink detected; readiness remains a controlled candidate only.'
   fi
 
-  log_line 'READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE'
+  log_line "$readiness_state"
 }
 
 main "$@"

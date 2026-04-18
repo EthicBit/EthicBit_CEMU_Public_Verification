@@ -6,6 +6,10 @@ ROOT_DIR="${ROOT_DIR:-$(cd -- "${SCRIPT_DIR}/.." && pwd)}"
 RESULTS_DIR="${ROOT_DIR}/results"
 PROFILE="all"
 JSON_QUERY_SCRIPT="${ROOT_DIR}/scripts/json_query.py"
+READINESS_CANDIDATE="READY_FOR_CONTROLLED_PRODUCTION"
+READINESS_READY="READY_FOR_CONTROLLED_PRODUCTION"
+READINESS_ACTIVE="CONTROLLED_PRODUCTION_ACTIVE"
+STATE_TAXONOMY_VERSION="ethicbit-state-taxonomy.v2.0.0"
 
 usage() {
   cat <<'EOF'
@@ -86,6 +90,11 @@ contains_line() {
   printf '%s\n' "$haystack" | grep -Fxq "$needle"
 }
 
+is_verified_readiness_status() {
+  local value="$1"
+  [[ "$value" == "$READINESS_CANDIDATE" || "$value" == "$READINESS_READY" || "$value" == "$READINESS_ACTIVE" ]]
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --all)
@@ -160,7 +169,7 @@ READINESS_STATUS="$(printf '%s\n' "$READINESS_OUTPUT" | tail -n 1)"
 if [[ "$VERIFY_EXIT_CODE" -ne 0 && "$VERIFY_STATUS" != "ACTIVE_CANONICAL" ]]; then
   VERIFY_STATUS="NOT_VERIFIED"
 fi
-if [[ "$READINESS_EXIT_CODE" -ne 0 && "$READINESS_STATUS" != "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE" ]]; then
+if [[ "$READINESS_EXIT_CODE" -ne 0 ]] && ! is_verified_readiness_status "$READINESS_STATUS"; then
   READINESS_STATUS="NOT_VERIFIED"
 fi
 DECLARED_PACK_STATE="$(json_get "$PACKAGE_MANIFEST" "declaredState.packState")"
@@ -183,7 +192,7 @@ MANIFEST_ACTIVE_STATE="$(json_get "$ARTIFACT_MANIFEST" "activePublication.state"
 ALLOWED_CLAIMS="$(json_get_or_default "$BUNDLE" "governance.allowedClaims" "NOT_DECLARED")"
 FORBIDDEN_CLAIMS="$(json_get_or_default "$BUNDLE" "governance.forbiddenClaims" "NOT_DECLARED")"
 OFFICIAL_STATES="$(json_get_or_default "$BUNDLE" "officialStates" "ACTIVE_CANONICAL")"
-DECLARED_CERTIFICATE_STATES="$(json_get_or_default "$CERTIFICATE" "declaredStates" "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE")"
+DECLARED_CERTIFICATE_STATES="$(json_get_or_default "$CERTIFICATE" "declaredStates" "READY_FOR_CONTROLLED_PRODUCTION")"
 ANCHOR_HARDENING_STATUS_REL="$(json_get_or_default "$BUNDLE" "externalAnchorEvidence.swarmMvpV1.anchorHardeningStatusPath" "artifacts/history/swarm/anchor_hardening_status.swarm_mvp_v1.json")"
 INDEPENDENT_REVERIFICATION_REL="$(json_get_or_default "$BUNDLE" "externalAnchorEvidence.swarmMvpV1.independentExternalReverificationArtifactPath" "artifacts/history/swarm/independent_external_anchor_reverification.swarm_mvp_v1.json")"
 ANCHOR_HARDENING_STATUS_PATH="$(resolve_root_relative "$ANCHOR_HARDENING_STATUS_REL")"
@@ -222,7 +231,7 @@ GATE_ACTIVE_BUNDLE_MATCHES_SOURCE="$(if [[ -f "$ACTIVE_RELEASE_BUNDLE" && "$(sha
 GATE_ACTIVE_CERTIFICATE_MATCHES_SOURCE="$(if [[ -f "$ACTIVE_RELEASE_CERTIFICATE" && "$(sha256_file "$ACTIVE_RELEASE_CERTIFICATE")" == "$ACTUAL_CERTIFICATE_HASH" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 GATE_ACTIVE_MANIFEST_MATCHES_SOURCE="$(if [[ -f "$ACTIVE_RELEASE_MANIFEST" && "$(sha256_file "$ACTIVE_RELEASE_MANIFEST")" == "$(sha256_file "$ARTIFACT_MANIFEST")" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 GATE_VERIFY_CLOSURE_INTEGRITY="$(if [[ "$VERIFY_STATUS" == "ACTIVE_CANONICAL" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
-GATE_RUN_PRODUCTION_READINESS="$(if [[ "$READINESS_STATUS" == "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
+GATE_RUN_PRODUCTION_READINESS="$(if is_verified_readiness_status "$READINESS_STATUS"; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 
 ZERO_ACTIVE_SUPERSEDED_FAIL=0
 if printf '%s\n%s\n%s\n%s\n' \
@@ -296,7 +305,7 @@ fi
 GATE_ANCHOR_HARDENING_DECLARED="$(if [[ "$ANCHOR_HARDENING_ENABLED_VALUE" == "PASS" && "$ANCHOR_HARDENING_INDEPENDENT_REVERIFICATION" == "PASS" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 GATE_EXTERNAL_ANCHOR_HARDENING_VERIFIED="$(if [[ "$GATE_ANCHOR_HARDENING_DECLARED" == "PASS" && "$INDEPENDENT_REVERIFICATION_STATUS" == "PASS" && "$GATE_EXTERNAL_TRIPLE_ANCHOR_RECONCILED" == "PASS" && "$GATE_EXTERNAL_NO_UNRESOLVED_CONFLICTS" == "PASS" && "$GATE_EXTERNAL_ZERO_PUBLICATION_DRIFT" == "PASS" && "$GATE_EXTERNAL_INDEPENDENT_REVERIFICATION" == "PASS" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 
-DECLARED_OPERATIONAL_READINESS_PRESENT="$(if contains_line "$DECLARED_CERTIFICATE_STATES" "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
+DECLARED_OPERATIONAL_READINESS_PRESENT="$(if contains_line "$DECLARED_CERTIFICATE_STATES" "$READINESS_CANDIDATE" || contains_line "$DECLARED_CERTIFICATE_STATES" "$READINESS_READY" || contains_line "$DECLARED_CERTIFICATE_STATES" "$READINESS_ACTIVE"; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 
 if [[ \
   "$GATE_REQUIRED_COMPONENTS" == "PASS" && \
@@ -322,7 +331,7 @@ else
 fi
 
 if [[ "$GATE_RUN_PRODUCTION_READINESS" == "PASS" && "$GATE_NO_DUAL_PUBLICATION_EFFECTIVE" == "PASS" && "$GATE_NO_STALE_PUBLIC_POINTER_CACHE" == "PASS" && "$GATE_PERIODIC_AUDIT_WORKFLOW_SCHEDULED" == "PASS" ]]; then
-  VERIFIED_OPERATIONAL_READINESS="READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"
+  VERIFIED_OPERATIONAL_READINESS="$READINESS_STATUS"
 else
   VERIFIED_OPERATIONAL_READINESS="NOT_VERIFIED"
 fi
@@ -339,7 +348,7 @@ else
   VERIFIED_PUBLICATION_STATE="NOT_VERIFIED"
 fi
 
-if [[ "$VERIFIED_PACK_STATE" == "ACTIVE_CANONICAL" && "$VERIFIED_OPERATIONAL_READINESS" == "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE" ]]; then
+if [[ "$VERIFIED_PACK_STATE" == "ACTIVE_CANONICAL" && "$VERIFIED_OPERATIONAL_READINESS" != "NOT_VERIFIED" ]]; then
   INTERNAL_CLOSURE_STATUS="INTERNAL_CLOSED"
 elif [[ "$VERIFIED_PACK_STATE" == "ACTIVE_CANONICAL" ]]; then
   INTERNAL_CLOSURE_STATUS="INTERNAL_PARTIAL"
@@ -369,6 +378,7 @@ write_gate_report() {
   "artifactType": "mixed_audience_gate_report",
   "generatedAt": "${GENERATED_AT}",
   "policyVersion": "${GATE_POLICY_VERSION}",
+  "stateTaxonomyVersion": "${STATE_TAXONOMY_VERSION}",
   "runContext": {
     "runId": "${RUN_ID}",
     "releaseId": "${RELEASE_ID}",
@@ -393,6 +403,10 @@ write_gate_report() {
     "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
     "internalClosureStatus": "${INTERNAL_CLOSURE_STATUS}",
     "externalProjectionStatus": "${EXTERNAL_PROJECTION_STATUS}",
+    "operationalTruthStatus": "${OBSERVED_OFFICIAL_OPERATIONAL_STATUS}",
+    "canonicalIntegrityStatus": "${VERIFIED_PACK_STATE}",
+    "externalAssuranceStatus": "${VERIFIED_EXTERNAL_ANCHOR_STATE}",
+    "deploymentAuthorizationStatus": "${VERIFIED_OPERATIONAL_READINESS}",
     "officialOperationalStatusObserved": "${OBSERVED_OFFICIAL_OPERATIONAL_STATUS}",
     "officialReasonObserved": "${OBSERVED_OFFICIAL_REASON}",
     "officialStatePath": "artifacts/history/swarm/official_operational_status.json",
@@ -625,6 +639,7 @@ write_index() {
   "artifactType": "mixed_audience_audit_results_index",
   "generatedAt": "${GENERATED_AT}",
   "policyVersion": "${GATE_POLICY_VERSION}",
+  "stateTaxonomyVersion": "${STATE_TAXONOMY_VERSION}",
   "runContext": {
     "runId": "${RUN_ID}",
     "releaseId": "${RELEASE_ID}",
@@ -649,6 +664,10 @@ write_index() {
     "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
     "internalClosureStatus": "${INTERNAL_CLOSURE_STATUS}",
     "externalProjectionStatus": "${EXTERNAL_PROJECTION_STATUS}",
+    "operationalTruthStatus": "${OBSERVED_OFFICIAL_OPERATIONAL_STATUS}",
+    "canonicalIntegrityStatus": "${VERIFIED_PACK_STATE}",
+    "externalAssuranceStatus": "${VERIFIED_EXTERNAL_ANCHOR_STATE}",
+    "deploymentAuthorizationStatus": "${VERIFIED_OPERATIONAL_READINESS}",
     "officialOperationalStatusObserved": "${OBSERVED_OFFICIAL_OPERATIONAL_STATUS}",
     "officialReasonObserved": "${OBSERVED_OFFICIAL_REASON}",
     "officialStatePath": "artifacts/history/swarm/official_operational_status.json"
@@ -701,4 +720,3 @@ bash "$ETHIC_AUDIT_SCRIPT" || {
 
 echo "AUDITORÍA DE ÉTICA MECÁNICA: PASS"
 echo "==============================================================================="
-
