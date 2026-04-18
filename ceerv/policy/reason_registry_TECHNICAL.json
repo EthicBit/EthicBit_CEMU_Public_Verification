@@ -45,6 +45,86 @@
         "failure_reason_log",
         "remediation_record"
       ]
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-001-v1.0",
+      "description": "All detectable non-visible technical entities influencing critical outputs must preserve traceable technical evidence.",
+      "category": "DETECTABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Constitutional amendment on expanded technical scope",
+      "justification": "Without detectable traceability, technically influential non-visible entities cannot be audited or governed.",
+      "evidence_sources": [
+        "runtime_signal_trace",
+        "event_correlation_record",
+        "technical_detection_snapshot"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "TRACE_SIGNAL_OUTPUT_CORRELATION",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": false,
+      "outcomeOnViolation": "FAIL_CLOSED"
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-002-v1.0",
+      "description": "All agentic systems or multi-agent environments with material influence over critical outputs must remain auditable by interaction, orchestration, or reproducibility evidence.",
+      "category": "AGENTIC_AUDITABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Constitutional amendment on expanded technical scope",
+      "justification": "Agentic influence without auditable technical evidence undermines reproducibility, accountability, and technical trust.",
+      "evidence_sources": [
+        "agent_interaction_log",
+        "orchestration_trace",
+        "reproducibility_control_record"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "INTERACTION_ORCHESTRATION_REPRODUCIBILITY",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": false,
+      "outcomeOnViolation": "FAIL_CLOSED"
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-003-v1.0",
+      "description": "Any detectable non-visible technical entity affecting a critical path must trigger fail-closed behavior when detectability evidence is insufficient.",
+      "category": "FAIL_CLOSED_DETECTABILITY",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Constitutional amendment on expanded technical scope",
+      "justification": "Critical technical influence without sufficient detectability evidence is institutionally unsafe.",
+      "evidence_sources": [
+        "detectability_assessment",
+        "impact_trace_record",
+        "control_decision_log"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "DETECTABILITY_AND_IMPACT_VALIDATION",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": false,
+      "outcomeOnViolation": "FAIL_CLOSED"
+    },
+    {
+      "rule_id": "RULE-ETHIC-TEC-DET-004-v1.0",
+      "description": "Any detectable technical entity with legal, financial, security, or regulatory impact must trigger mandatory cross-sector review.",
+      "category": "CROSS_SECTOR_ESCALATION",
+      "version": "1.0",
+      "severity": "CRITICAL",
+      "reference": "Constitutional amendment on expanded technical scope",
+      "justification": "Cross-domain impact cannot remain confined to a purely technical interpretation.",
+      "evidence_sources": [
+        "impact_scope_matrix",
+        "cross_sector_trigger_record",
+        "supervisory_trace_record"
+      ],
+      "entity_visibility": "NON_VISIBLE",
+      "entity_detectability": "AUDITABLY_INFERABLE",
+      "detection_mode": "IMPACT_CORRELATION_AND_SCOPE_ANALYSIS",
+      "constitutional_scope": "TECHNICAL_EXPANDED",
+      "cross_sector_activation": true,
+      "outcomeOnViolation": "FAIL_CLOSED"
     }
   ]
 }

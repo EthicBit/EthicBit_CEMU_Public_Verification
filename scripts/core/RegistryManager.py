@@ -170,6 +170,17 @@ class RegistryManager:
 
         return bool(required & external_keys)
 
+
+    def _extract_constitutional_rule_metadata(self, rule: Dict[str, Any]) -> Dict[str, Any]:
+        return {
+            "entity_visibility": rule.get("entity_visibility"),
+            "entity_detectability": rule.get("entity_detectability"),
+            "detection_mode": rule.get("detection_mode"),
+            "constitutional_scope": rule.get("constitutional_scope"),
+            "cross_sector_activation": bool(rule.get("cross_sector_activation", False)),
+            "external_evidence_required": bool(rule.get("externalEvidenceRequired", False)),
+        }
+
     def _is_critical_rule(self, rule: Dict[str, Any]) -> bool:
         tags = set(rule.get("tags", []))
         decision_mode = rule.get("decisionMode", "")
@@ -277,6 +288,8 @@ class RegistryManager:
             "sector_requested": sector,
             "sector_resolved": rule.get("sector"),
         }
+        metadata.update(self._extract_constitutional_rule_metadata(rule))
+        metadata["cross_sector_review_required"] = bool(rule.get("cross_sector_activation", False))
 
         internal_evidence = {**state.get("evidence", {}), **(extra_evidence or {})}
         evidence_required = self._normalize_required_evidence(rule)
