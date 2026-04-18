@@ -1,23 +1,24 @@
 {
   "artifactType": "mixed_audience_gate_report",
-  "generatedAt": "2026-04-14T00:24:53Z",
+  "generatedAt": "2026-04-18T13:41:54Z",
   "policyVersion": "mixed-audience-gate-policy.v1.1.0",
+  "stateTaxonomyVersion": "ethicbit-state-taxonomy.v2.0.0",
   "runContext": {
-    "runId": "run-20260414T002453Z-94301",
+    "runId": "run-20260418T134154Z-82458",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-14T00:00:00Z"
+    "verificationEpoch": "2026-04-18T13:00:00Z"
   },
   "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
   "declaredState": {
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
-    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE_BUT_ANCHORS_PENDING",
+    "operationalReadinessClaim": "READY_FOR_CONTROLLED_PRODUCTION",
     "publicationState": "ACTIVE_CANONICAL"
   },
   "verifiedState": {
     "packState": "ACTIVE_CANONICAL",
     "externalAnchorState": "ANCHOR_HARDENING_ENABLED",
-    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION_CANDIDATE",
+    "operationalReadiness": "READY_FOR_CONTROLLED_PRODUCTION",
     "publicationState": "ACTIVE_CANONICAL",
     "internalClosureStatus": "INTERNAL_CLOSED",
     "externalProjectionStatus": "EXTERNAL_READY_FOR_LIVE_CONVERGENCE"
@@ -26,6 +27,10 @@
     "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
     "internalClosureStatus": "INTERNAL_CLOSED",
     "externalProjectionStatus": "EXTERNAL_READY_FOR_LIVE_CONVERGENCE",
+    "operationalTruthStatus": "READY",
+    "canonicalIntegrityStatus": "ACTIVE_CANONICAL",
+    "externalAssuranceStatus": "ANCHOR_HARDENING_ENABLED",
+    "deploymentAuthorizationStatus": "READY_FOR_CONTROLLED_PRODUCTION",
     "officialOperationalStatusObserved": "READY",
     "officialReasonObserved": "LIVE_CANONICAL_GATE_CONVERGED",
     "officialStatePath": "artifacts/history/swarm/official_operational_status.json",
@@ -65,7 +70,7 @@
   },
   "rawOutputs": {
     "verifyClosureIntegrity": "ACTIVE_CANONICAL",
-    "runProductionReadiness": "ACTIVE_CANONICAL\nACTIVE_CANONICAL\nREADY_FOR_CONTROLLED_PRODUCTION_CANDIDATE"
+    "runProductionReadiness": "ACTIVE_CANONICAL\nACTIVE_CANONICAL\nINFO: active publication integrity reconciled; readiness promoted to controlled production.\nREADY_FOR_CONTROLLED_PRODUCTION"
   },
   "rawExitCodes": {
     "verifyClosureIntegrity": 0,
