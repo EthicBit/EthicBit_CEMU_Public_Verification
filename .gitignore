@@ -29,6 +29,8 @@ build/
 coverage/
 .nyc_output/
 *.min.js
+__pycache__/
+*.py[cod]
 
 # === ENVIRONMENT ===
 .env
