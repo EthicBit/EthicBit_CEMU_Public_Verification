@@ -495,10 +495,18 @@ jobs:
       - name: Hybrid-sign provenance payload
         run: |
           python3 - <<'PY'
+          import hashlib
           import json
           import os
           from pathlib import Path
           from scripts.crypto.jcs_rfc8785 import canonicalize_bytes
+
+          truth_path = Path("artifacts/ci/hybrid_crypto_truth.json")
+          if not truth_path.exists():
+            raise SystemExit(f"missing truth artifact: {truth_path}")
+          truth_bytes = truth_path.read_bytes()
+          hybrid_crypto_truth = json.loads(truth_bytes.decode("utf-8"))
+          hybrid_crypto_truth_sha256 = hashlib.sha256(truth_bytes).hexdigest()
 
           payload = {
             "artifactType": "ethicbit_ci_attestation_payload",
@@ -520,7 +528,9 @@ jobs:
             "require_native_hybrid": os.environ.get("ETHICBIT_REQUIRE_NATIVE_HYBRID", "0").lower() in {"1", "true", "yes"},
             "ephemeral_keys_used": os.environ.get("ETHICBIT_EPHEMERAL_KEYS_USED", "true").lower() == "true",
             "runner_supports_mldsa": os.environ.get("ETHICBIT_RUNNER_SUPPORTS_MLDSA", "false").lower() == "true",
-            "eligible_for_sovereign_release": os.environ.get("ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE", "false").lower() == "true"
+            "eligible_for_sovereign_release": os.environ.get("ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE", "false").lower() == "true",
+            "hybrid_crypto_truth_sha256": hybrid_crypto_truth_sha256,
+            "hybrid_crypto_truth": hybrid_crypto_truth
           }
           Path("provenance/payload.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
