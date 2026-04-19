@@ -382,6 +382,22 @@ def build_run_context(root: Path, live_report: dict[str, Any], generated_at: str
     }
 
 
+def resolve_crypto_mode_metadata() -> dict[str, Any]:
+    metadata: dict[str, Any] = {
+        "effectiveMode": os.environ.get("ETHICBIT_CRYPTO_MODE_EFFECTIVE", "unknown"),
+        "mldsaMode": os.environ.get("ETHICBIT_MLDSA_MODE", "unknown"),
+        "keyProvenanceMode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
+        "claimTier": os.environ.get("ETHICBIT_CRYPTO_CLAIM_TIER", "unspecified"),
+    }
+    audit_require_hybrid = os.environ.get("ETHICBIT_AUDIT_REQUIRE_HYBRID", "").strip()
+    if audit_require_hybrid:
+        metadata["auditRequireHybrid"] = audit_require_hybrid
+    release_class = os.environ.get("ETHICBIT_RELEASE_CLASS", "").strip()
+    if release_class:
+        metadata["releaseClass"] = release_class
+    return metadata
+
+
 def required_algorithms_for_risk_mode(risk_mode: str, force_hybrid: bool) -> list[str]:
     normalized = risk_mode.upper().strip() or DEFAULT_RISK_MODE
     if force_hybrid:
@@ -562,6 +578,7 @@ def main() -> int:
 
     generated_at = now_utc_iso()
     run_context = build_run_context(root, live_report, generated_at)
+    crypto_mode_metadata = resolve_crypto_mode_metadata()
 
     input_hashes: dict[str, str] = {
         "gateReport": sha256_file(gate_path),
@@ -576,6 +593,7 @@ def main() -> int:
         "generatedAt": generated_at,
         "policyVersion": args.policy_version,
         "runContext": run_context,
+        "cryptoMode": crypto_mode_metadata,
         "officialStatus": base_status,
         "reason": base_reason,
         "reasonCodes": [base_reason],
@@ -614,6 +632,7 @@ def main() -> int:
         ed25519_key_id=args.ed25519_key_id,
         mldsa_key_id=args.mldsa_key_id,
         required_algorithms=required_algorithms,
+        crypto_mode=crypto_mode_metadata,
     )
 
     signature_verification = verify_hybrid_signature_set(
@@ -683,6 +702,7 @@ def main() -> int:
         "status": "PASS" if crypto_pass else "FAIL",
         "operatingMode": operating_mode,
         "riskMode": risk_mode,
+        "executionMode": crypto_mode_metadata,
         "requiredAlgorithms": required_algorithms,
         "internal": {
             "status": "PASS" if internal_crypto_pass else "FAIL",
