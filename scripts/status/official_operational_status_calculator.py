@@ -386,6 +386,13 @@ def resolve_crypto_mode_metadata() -> dict[str, Any]:
     metadata: dict[str, Any] = {
         "effectiveMode": os.environ.get("ETHICBIT_CRYPTO_MODE_EFFECTIVE", "unknown"),
         "mldsaMode": os.environ.get("ETHICBIT_MLDSA_MODE", "unknown"),
+        "mldsaEffectiveMode": os.environ.get(
+            "ETHICBIT_MLDSA_EFFECTIVE_MODE",
+            os.environ.get("ETHICBIT_MLDSA_MODE", "unknown"),
+        ),
+        "ed25519KeySource": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
+        "mldsaKeySource": os.environ.get("ETHICBIT_MLDSA_KEY_SOURCE", "unknown"),
+        "hybridClaimMode": os.environ.get("ETHICBIT_HYBRID_CLAIM_MODE", "unknown"),
         "keyProvenanceMode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
         "claimTier": os.environ.get("ETHICBIT_CRYPTO_CLAIM_TIER", "unspecified"),
     }
@@ -395,6 +402,12 @@ def resolve_crypto_mode_metadata() -> dict[str, Any]:
     release_class = os.environ.get("ETHICBIT_RELEASE_CLASS", "").strip()
     if release_class:
         metadata["releaseClass"] = release_class
+    ed_key_id = os.environ.get("ETHICBIT_ED25519_KEY_ID", "").strip()
+    if ed_key_id:
+        metadata["ed25519KeyId"] = ed_key_id
+    mldsa_key_id = os.environ.get("ETHICBIT_MLDSA_KEY_ID", "").strip()
+    if mldsa_key_id:
+        metadata["mldsaKeyId"] = mldsa_key_id
     return metadata
 
 

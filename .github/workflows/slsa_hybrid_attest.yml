@@ -47,14 +47,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          key_provenance_mode="trusted_secrets_keys"
-          mldsa_mode="native_hybrid"
+          ed25519_key_source="trusted_secrets"
+          mldsa_key_source="trusted_secrets"
+          mldsa_effective_mode="native_mldsa"
+          runner_supports_mldsa="true"
 
           if [[ -n "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" && -n "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" ]]; then
             printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
             printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
           else
-            key_provenance_mode="ephemeral_runner_keys"
+            ed25519_key_source="ephemeral_runner"
             openssl genpkey -algorithm Ed25519 -out assurance/keys/ed25519_private.pem
             openssl pkey -in assurance/keys/ed25519_private.pem -pubout -out assurance/keys/ed25519_public.pem
           fi
@@ -63,7 +65,9 @@ jobs:
             printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
             printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
           else
-            key_provenance_mode="ephemeral_runner_keys"
+            mldsa_key_source="ephemeral_runner"
+            mldsa_effective_mode="compatibility_fallback"
+            runner_supports_mldsa="false"
             openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
             openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
           fi
@@ -82,17 +86,56 @@ jobs:
           # Fallback to a CI-compatible keypair so fail-closed controls remain executable.
           if ! openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig >/tmp/ci_key_probe.mldsa.err 2>&1; then
             echo "ML-DSA key unsupported on runner; enabling CI compatibility fallback."
-            mldsa_mode="compatibility_fallback"
-            key_provenance_mode="ephemeral_runner_keys"
+            mldsa_effective_mode="compatibility_fallback"
+            mldsa_key_source="ephemeral_runner"
+            runner_supports_mldsa="false"
             openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
             openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
             openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig
           fi
 
-          if [[ "${key_provenance_mode}" == "trusted_secrets_keys" && "${mldsa_mode}" == "native_hybrid" ]]; then
-            crypto_claim_tier="strict_trusted_hybrid"
+          if [[ "${mldsa_effective_mode}" == "native_mldsa" ]]; then
+            crypto_mode_effective="native_hybrid"
           else
+            crypto_mode_effective="compatibility_fallback"
+          fi
+
+          if [[ "${ed25519_key_source}" == "trusted_secrets" && "${mldsa_key_source}" == "trusted_secrets" && "${mldsa_effective_mode}" == "native_mldsa" ]]; then
+            hybrid_claim_mode="native_hybrid"
+            crypto_claim_tier="strict_trusted_hybrid"
+            key_provenance_mode="trusted_secrets"
+          else
+            hybrid_claim_mode="compatibility_hybrid"
             crypto_claim_tier="compatibility_hybrid"
+            key_provenance_mode="ephemeral_runner"
+          fi
+
+          if [[ "${ed25519_key_source}" == "trusted_secrets" ]]; then
+            ed25519_key_id="ETHICBIT_ED25519_CI_SECRET_V1"
+          else
+            ed25519_key_id="ETHICBIT_ED25519_CI_EPHEMERAL_V1"
+          fi
+
+          if [[ "${mldsa_effective_mode}" == "native_mldsa" ]]; then
+            if [[ "${mldsa_key_source}" == "trusted_secrets" ]]; then
+              mldsa_key_id="ETHICBIT_MLDSA65_CI_SECRET_V1"
+            else
+              mldsa_key_id="ETHICBIT_MLDSA65_CI_EPHEMERAL_V1"
+            fi
+          else
+            mldsa_key_id="ETHICBIT_MLDSA_COMPAT_ED25519_CI_V1"
+          fi
+
+          if [[ "${ed25519_key_source}" == "ephemeral_runner" || "${mldsa_key_source}" == "ephemeral_runner" ]]; then
+            ephemeral_keys_used="true"
+          else
+            ephemeral_keys_used="false"
+          fi
+
+          if [[ "${hybrid_claim_mode}" == "native_hybrid" && "${ephemeral_keys_used}" == "false" && "${runner_supports_mldsa}" == "true" ]]; then
+            eligible_for_sovereign_release="true"
+          else
+            eligible_for_sovereign_release="false"
           fi
 
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
@@ -108,12 +151,33 @@ jobs:
             release_class="release_tag"
           fi
 
+          claim_level="ci_grade"
+          require_native_hybrid="0"
+          if [[ "${release_class}" == "audit_freeze_tag" ]]; then
+            claim_level="freeze_grade"
+            require_native_hybrid="1"
+          elif [[ "${release_class}" == "release_tag" ]]; then
+            claim_level="sovereign_release"
+            require_native_hybrid="1"
+          fi
+
           {
             echo "ETHICBIT_KEY_PROVENANCE_MODE=${key_provenance_mode}"
-            echo "ETHICBIT_MLDSA_MODE=${mldsa_mode}"
-            echo "ETHICBIT_CRYPTO_MODE_EFFECTIVE=${mldsa_mode}"
+            echo "ETHICBIT_ED25519_KEY_SOURCE=${ed25519_key_source}"
+            echo "ETHICBIT_MLDSA_KEY_SOURCE=${mldsa_key_source}"
+            echo "ETHICBIT_MLDSA_MODE=${mldsa_effective_mode}"
+            echo "ETHICBIT_MLDSA_EFFECTIVE_MODE=${mldsa_effective_mode}"
+            echo "ETHICBIT_CRYPTO_MODE_EFFECTIVE=${crypto_mode_effective}"
+            echo "ETHICBIT_HYBRID_CLAIM_MODE=${hybrid_claim_mode}"
             echo "ETHICBIT_CRYPTO_CLAIM_TIER=${crypto_claim_tier}"
+            echo "ETHICBIT_ED25519_KEY_ID=${ed25519_key_id}"
+            echo "ETHICBIT_MLDSA_KEY_ID=${mldsa_key_id}"
+            echo "ETHICBIT_RUNNER_SUPPORTS_MLDSA=${runner_supports_mldsa}"
+            echo "ETHICBIT_EPHEMERAL_KEYS_USED=${ephemeral_keys_used}"
+            echo "ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE=${eligible_for_sovereign_release}"
             echo "ETHICBIT_AUDIT_REQUIRE_HYBRID=${audit_require_hybrid}"
+            echo "ETHICBIT_CLAIM_LEVEL=${claim_level}"
+            echo "ETHICBIT_REQUIRE_NATIVE_HYBRID=${require_native_hybrid}"
             echo "ETHICBIT_RELEASE_CLASS=${release_class}"
           } >> "$GITHUB_ENV"
 
@@ -127,13 +191,75 @@ jobs:
             echo "ETHICBIT_MLDSA_SIGN_CMD=${{ github.workspace }}/assurance/signers/mldsa_sign.sh {payload}"
             echo "ETHICBIT_ED25519_VERIFY_CMD=${{ github.workspace }}/assurance/signers/ed25519_verify.sh {payload} {signature}"
             echo "ETHICBIT_MLDSA_VERIFY_CMD=${{ github.workspace }}/assurance/signers/mldsa_verify.sh {payload} {signature}"
-            echo "ETHICBIT_ED25519_KEY_ID=ETHICBIT_ED25519_CI_V1"
-            echo "ETHICBIT_MLDSA_KEY_ID=ETHICBIT_MLDSA65_CI_V1"
             echo "ETHICBIT_ED25519_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/ed25519_private.pem"
             echo "ETHICBIT_ED25519_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/ed25519_public.pem"
             echo "ETHICBIT_MLDSA_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/mldsa_private.pem"
             echo "ETHICBIT_MLDSA_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/mldsa_public.pem"
           } >> "$GITHUB_ENV"
+
+      - name: Write signing mode artifacts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report = {
+            "artifactType": "signing_environment_report",
+            "repository": os.environ.get("GITHUB_REPOSITORY", ""),
+            "ref": os.environ.get("GITHUB_REF", ""),
+            "sha": os.environ.get("GITHUB_SHA", ""),
+            "run_id": os.environ.get("GITHUB_RUN_ID", ""),
+            "ed25519_key_source": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
+            "mldsa_key_source": os.environ.get("ETHICBIT_MLDSA_KEY_SOURCE", "unknown"),
+            "mldsa_effective_mode": os.environ.get("ETHICBIT_MLDSA_EFFECTIVE_MODE", "unknown"),
+            "hybrid_claim_mode": os.environ.get("ETHICBIT_HYBRID_CLAIM_MODE", "unknown"),
+            "ed25519_key_id": os.environ.get("ETHICBIT_ED25519_KEY_ID", "unknown"),
+            "mldsa_key_id": os.environ.get("ETHICBIT_MLDSA_KEY_ID", "unknown"),
+            "audit_require_hybrid": os.environ.get("ETHICBIT_AUDIT_REQUIRE_HYBRID", "0"),
+            "claim_level": os.environ.get("ETHICBIT_CLAIM_LEVEL", "ci_grade"),
+            "require_native_hybrid": os.environ.get("ETHICBIT_REQUIRE_NATIVE_HYBRID", "0"),
+            "release_class": os.environ.get("ETHICBIT_RELEASE_CLASS", "branch_ci"),
+          }
+
+          effective = {
+            "artifactType": "hybrid_mode_effective",
+            "crypto_mode_effective": os.environ.get("ETHICBIT_CRYPTO_MODE_EFFECTIVE", "unknown"),
+            "ed25519_key_source": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
+            "mldsa_key_source": os.environ.get("ETHICBIT_MLDSA_KEY_SOURCE", "unknown"),
+            "mldsa_effective_mode": os.environ.get("ETHICBIT_MLDSA_EFFECTIVE_MODE", "unknown"),
+            "hybrid_claim_mode": os.environ.get("ETHICBIT_HYBRID_CLAIM_MODE", "unknown"),
+            "key_provenance_mode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
+            "claim_tier": os.environ.get("ETHICBIT_CRYPTO_CLAIM_TIER", "unspecified"),
+          }
+
+          truth = {
+            "artifactType": "hybrid_crypto_truth",
+            "ed25519_key_source": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
+            "mldsa_key_source": os.environ.get("ETHICBIT_MLDSA_KEY_SOURCE", "unknown"),
+            "mldsa_effective_mode": os.environ.get("ETHICBIT_MLDSA_EFFECTIVE_MODE", "unknown"),
+            "hybrid_claim_mode": os.environ.get("ETHICBIT_HYBRID_CLAIM_MODE", "unknown"),
+            "ephemeral_keys_used": os.environ.get("ETHICBIT_EPHEMERAL_KEYS_USED", "true").lower() == "true",
+            "runner_supports_mldsa": os.environ.get("ETHICBIT_RUNNER_SUPPORTS_MLDSA", "false").lower() == "true",
+            "claim_level": os.environ.get("ETHICBIT_CLAIM_LEVEL", "ci_grade"),
+            "require_native_hybrid": os.environ.get("ETHICBIT_REQUIRE_NATIVE_HYBRID", "0").lower() in {"1", "true", "yes"},
+            "eligible_for_sovereign_release": os.environ.get("ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE", "false").lower() == "true",
+          }
+
+          Path("artifacts/ci/signing_environment_report.json").write_text(
+              json.dumps(report, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+          Path("artifacts/ci/hybrid_mode_effective.json").write_text(
+              json.dumps(effective, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+          Path("artifacts/ci/hybrid_crypto_truth.json").write_text(
+              json.dumps(truth, indent=2, ensure_ascii=False) + "\n",
+              encoding="utf-8",
+          )
+          PY
 
       - name: Diagnose signing environment
         shell: bash
@@ -199,6 +325,10 @@ jobs:
             "ref": "${{ github.ref }}",
             "sha": "${{ github.sha }}",
             "run_id": "${{ github.run_id }}",
+            "ed25519_key_source": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
+            "mldsa_key_source": os.environ.get("ETHICBIT_MLDSA_KEY_SOURCE", "unknown"),
+            "mldsa_effective_mode": os.environ.get("ETHICBIT_MLDSA_EFFECTIVE_MODE", "unknown"),
+            "hybrid_claim_mode": os.environ.get("ETHICBIT_HYBRID_CLAIM_MODE", "unknown"),
             "crypto_mode_effective": os.environ.get("ETHICBIT_CRYPTO_MODE_EFFECTIVE", "unknown"),
             "mldsa_mode": os.environ.get("ETHICBIT_MLDSA_MODE", "unknown"),
             "key_provenance_mode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
@@ -213,6 +343,11 @@ jobs:
           Path("provenance/payload.jcs.json").write_bytes(canonicalize_bytes(payload))
           PY
 
+          extra_sign_args=()
+          if [[ "${ETHICBIT_REQUIRE_NATIVE_HYBRID}" == "1" ]]; then
+            extra_sign_args+=(--require-native-hybrid)
+          fi
+
           python3 scripts/crypto/hybrid_sign.py \
             provenance/payload.json \
             --output attestation/hybrid_signature_set.json \
@@ -220,7 +355,10 @@ jobs:
             --ed25519-sign-cmd "$ETHICBIT_ED25519_SIGN_CMD" \
             --mldsa-sign-cmd "$ETHICBIT_MLDSA_SIGN_CMD" \
             --ed25519-key-id "$ETHICBIT_ED25519_KEY_ID" \
-            --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID"
+            --mldsa-key-id "$ETHICBIT_MLDSA_KEY_ID" \
+            --crypto-truth-json artifacts/ci/hybrid_crypto_truth.json \
+            --claim-level "$ETHICBIT_CLAIM_LEVEL" \
+            "${extra_sign_args[@]}"
 
       - name: Verify hybrid signatures
         run: |
@@ -262,3 +400,6 @@ jobs:
             results/GATE_REPORT.json
             results/constitutional_controls_report.json
             artifacts/history/swarm/triple_public_anchor_live_verification.json
+            artifacts/ci/signing_environment_report.json
+            artifacts/ci/hybrid_mode_effective.json
+            artifacts/ci/hybrid_crypto_truth.json
