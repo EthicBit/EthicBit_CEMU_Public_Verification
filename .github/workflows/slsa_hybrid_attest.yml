@@ -15,7 +15,6 @@ permissions:
 
 env:
   PYTHON_VERSION: "3.11"
-  HARDENED_FREEZE_TARBALL: "freezes/audit-freeze-2026-04-12-hardened.tar.gz"
 
 jobs:
   build-sign-attest:
@@ -48,11 +47,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          key_provenance_mode="trusted_secrets_keys"
+          mldsa_mode="native_hybrid"
 
           if [[ -n "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" && -n "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" ]]; then
             printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
             printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
           else
+            key_provenance_mode="ephemeral_runner_keys"
             openssl genpkey -algorithm Ed25519 -out assurance/keys/ed25519_private.pem
             openssl pkey -in assurance/keys/ed25519_private.pem -pubout -out assurance/keys/ed25519_public.pem
           fi
@@ -61,6 +63,7 @@ jobs:
             printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
             printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
           else
+            key_provenance_mode="ephemeral_runner_keys"
             openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
             openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
           fi
@@ -79,10 +82,40 @@ jobs:
           # Fallback to a CI-compatible keypair so fail-closed controls remain executable.
           if ! openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig >/tmp/ci_key_probe.mldsa.err 2>&1; then
             echo "ML-DSA key unsupported on runner; enabling CI compatibility fallback."
+            mldsa_mode="compatibility_fallback"
+            key_provenance_mode="ephemeral_runner_keys"
             openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
             openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
             openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig
           fi
+
+          if [[ "${key_provenance_mode}" == "trusted_secrets_keys" && "${mldsa_mode}" == "native_hybrid" ]]; then
+            crypto_claim_tier="strict_trusted_hybrid"
+          else
+            crypto_claim_tier="compatibility_hybrid"
+          fi
+
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            audit_require_hybrid="1"
+          else
+            audit_require_hybrid="0"
+          fi
+
+          release_class="branch_ci"
+          if [[ "${GITHUB_REF_TYPE}" == "tag" && "${GITHUB_REF_NAME}" == audit-freeze-* ]]; then
+            release_class="audit_freeze_tag"
+          elif [[ "${GITHUB_REF_TYPE}" == "tag" && "${GITHUB_REF_NAME}" == v* ]]; then
+            release_class="release_tag"
+          fi
+
+          {
+            echo "ETHICBIT_KEY_PROVENANCE_MODE=${key_provenance_mode}"
+            echo "ETHICBIT_MLDSA_MODE=${mldsa_mode}"
+            echo "ETHICBIT_CRYPTO_MODE_EFFECTIVE=${mldsa_mode}"
+            echo "ETHICBIT_CRYPTO_CLAIM_TIER=${crypto_claim_tier}"
+            echo "ETHICBIT_AUDIT_REQUIRE_HYBRID=${audit_require_hybrid}"
+            echo "ETHICBIT_RELEASE_CLASS=${release_class}"
+          } >> "$GITHUB_ENV"
 
           chmod 600 assurance/keys/*.pem
 
@@ -156,6 +189,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json
+          import os
           from pathlib import Path
           from scripts.crypto.jcs_rfc8785 import canonicalize_bytes
 
@@ -164,7 +198,13 @@ jobs:
             "repository": "${{ github.repository }}",
             "ref": "${{ github.ref }}",
             "sha": "${{ github.sha }}",
-            "run_id": "${{ github.run_id }}"
+            "run_id": "${{ github.run_id }}",
+            "crypto_mode_effective": os.environ.get("ETHICBIT_CRYPTO_MODE_EFFECTIVE", "unknown"),
+            "mldsa_mode": os.environ.get("ETHICBIT_MLDSA_MODE", "unknown"),
+            "key_provenance_mode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
+            "crypto_claim_tier": os.environ.get("ETHICBIT_CRYPTO_CLAIM_TIER", "unspecified"),
+            "audit_require_hybrid": os.environ.get("ETHICBIT_AUDIT_REQUIRE_HYBRID", "0"),
+            "release_class": os.environ.get("ETHICBIT_RELEASE_CLASS", "branch_ci")
           }
           Path("provenance/payload.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
@@ -194,8 +234,13 @@ jobs:
       - name: Run full audit
         run: |
           chmod +x ./audit.sh
+          echo "ETHICBIT_AUDIT_REQUIRE_HYBRID=${ETHICBIT_AUDIT_REQUIRE_HYBRID}"
+          echo "ETHICBIT_CRYPTO_MODE_EFFECTIVE=${ETHICBIT_CRYPTO_MODE_EFFECTIVE}"
+          echo "ETHICBIT_KEY_PROVENANCE_MODE=${ETHICBIT_KEY_PROVENANCE_MODE}"
+          echo "ETHICBIT_MLDSA_MODE=${ETHICBIT_MLDSA_MODE}"
+          echo "ETHICBIT_CRYPTO_CLAIM_TIER=${ETHICBIT_CRYPTO_CLAIM_TIER}"
           ETHICBIT_AUDIT_RISK_MODE=STANDARD \
-          ETHICBIT_AUDIT_REQUIRE_HYBRID=0 \
+          ETHICBIT_AUDIT_REQUIRE_HYBRID="${ETHICBIT_AUDIT_REQUIRE_HYBRID}" \
           ./audit.sh
 
       - name: Upload GitHub provenance attestation

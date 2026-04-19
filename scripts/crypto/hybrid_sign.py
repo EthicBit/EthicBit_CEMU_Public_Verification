@@ -85,6 +85,7 @@ def build_hybrid_signature_set(
     ed25519_key_id: str,
     mldsa_key_id: str,
     required_algorithms: list[str],
+    crypto_mode: dict | None = None,
 ):
     payload_bytes = canonicalize_bytes(payload)
 
@@ -122,6 +123,8 @@ def build_hybrid_signature_set(
         "payloadHash": sha256_hex(payload_bytes),
         "signatures": signatures,
     }
+    if isinstance(crypto_mode, dict) and crypto_mode:
+        summary["cryptoMode"] = crypto_mode
     if missing:
         summary["missingOrInvalidAlgorithms"] = missing
 
@@ -142,6 +145,18 @@ def main():
 
     payload = json.loads(Path(args.payload).read_text(encoding="utf-8"))
     required = ["ED25519"] if args.risk_mode == "STANDARD" else ["ED25519", "ML-DSA"]
+    crypto_mode = {
+        "effectiveMode": os.environ.get("ETHICBIT_CRYPTO_MODE_EFFECTIVE", "unknown"),
+        "mldsaMode": os.environ.get("ETHICBIT_MLDSA_MODE", "unknown"),
+        "keyProvenanceMode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
+        "claimTier": os.environ.get("ETHICBIT_CRYPTO_CLAIM_TIER", "unspecified"),
+    }
+    audit_require_hybrid = os.environ.get("ETHICBIT_AUDIT_REQUIRE_HYBRID", "").strip()
+    if audit_require_hybrid:
+        crypto_mode["auditRequireHybrid"] = audit_require_hybrid
+    release_class = os.environ.get("ETHICBIT_RELEASE_CLASS", "").strip()
+    if release_class:
+        crypto_mode["releaseClass"] = release_class
 
     signature_set, _ = build_hybrid_signature_set(
         payload,
@@ -153,6 +168,7 @@ def main():
         ed25519_key_id=args.ed25519_key_id,
         mldsa_key_id=args.mldsa_key_id,
         required_algorithms=required,
+        crypto_mode=crypto_mode,
     )
 
     Path(args.output).write_text(json.dumps(signature_set, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
