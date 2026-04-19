@@ -103,11 +103,25 @@ jobs:
           if [[ "${ed25519_key_source}" == "trusted_secrets" && "${mldsa_key_source}" == "trusted_secrets" && "${mldsa_effective_mode}" == "native_mldsa" ]]; then
             hybrid_claim_mode="native_hybrid"
             crypto_claim_tier="strict_trusted_hybrid"
-            key_provenance_mode="trusted_secrets"
+            key_provenance_mode="fully_trusted_native"
           else
             hybrid_claim_mode="compatibility_hybrid"
-            crypto_claim_tier="compatibility_hybrid"
-            key_provenance_mode="ephemeral_runner"
+            if [[ "${ed25519_key_source}" == "trusted_secrets" && "${mldsa_key_source}" == "ephemeral_runner" && "${mldsa_effective_mode}" == "compatibility_fallback" ]]; then
+              key_provenance_mode="trusted_plus_compatibility_fallback"
+              crypto_claim_tier="compatibility_hybrid_trusted_anchor"
+            elif [[ "${ed25519_key_source}" == "trusted_secrets" && "${mldsa_key_source}" == "ephemeral_runner" ]]; then
+              key_provenance_mode="trusted_plus_ephemeral_mldsa"
+              crypto_claim_tier="compatibility_hybrid_mixed"
+            elif [[ "${ed25519_key_source}" == "ephemeral_runner" && "${mldsa_key_source}" == "trusted_secrets" ]]; then
+              key_provenance_mode="ephemeral_ed25519_plus_trusted_mldsa"
+              crypto_claim_tier="compatibility_hybrid_mixed"
+            elif [[ "${ed25519_key_source}" == "ephemeral_runner" && "${mldsa_key_source}" == "ephemeral_runner" ]]; then
+              key_provenance_mode="fully_ephemeral"
+              crypto_claim_tier="compatibility_hybrid_ephemeral"
+            else
+              key_provenance_mode="mixed_provenance"
+              crypto_claim_tier="compatibility_hybrid_mixed"
+            fi
           fi
 
           if [[ "${ed25519_key_source}" == "trusted_secrets" ]]; then
@@ -311,6 +325,72 @@ jobs:
           chmod +x scripts/audit/verify_constitutional_controls.sh
           ./scripts/audit/verify_constitutional_controls.sh
 
+      - name: Enforce crypto claim policy
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          claim_level="${ETHICBIT_CLAIM_LEVEL:-ci_grade}"
+          require_native_hybrid="${ETHICBIT_REQUIRE_NATIVE_HYBRID:-0}"
+          hybrid_claim_mode="${ETHICBIT_HYBRID_CLAIM_MODE:-unknown}"
+          mldsa_effective_mode="${ETHICBIT_MLDSA_EFFECTIVE_MODE:-unknown}"
+          ed25519_key_source="${ETHICBIT_ED25519_KEY_SOURCE:-unknown}"
+          mldsa_key_source="${ETHICBIT_MLDSA_KEY_SOURCE:-unknown}"
+          ephemeral_keys_used="${ETHICBIT_EPHEMERAL_KEYS_USED:-true}"
+          runner_supports_mldsa="${ETHICBIT_RUNNER_SUPPORTS_MLDSA:-false}"
+          eligible_for_sovereign_release="${ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE:-false}"
+
+          echo "POLICY_CONTEXT: claim_level=${claim_level} require_native_hybrid=${require_native_hybrid} hybrid_claim_mode=${hybrid_claim_mode} mldsa_effective_mode=${mldsa_effective_mode}"
+          echo "POLICY_CONTEXT: ed25519_key_source=${ed25519_key_source} mldsa_key_source=${mldsa_key_source} ephemeral_keys_used=${ephemeral_keys_used} runner_supports_mldsa=${runner_supports_mldsa} eligible_for_sovereign_release=${eligible_for_sovereign_release}"
+
+          # Base consistency checks for effective crypto truth
+          if [[ "${ephemeral_keys_used}" == "true" && "${ed25519_key_source}" == "trusted_secrets" && "${mldsa_key_source}" == "trusted_secrets" ]]; then
+            echo "Policy violation: ephemeral_keys_used=true but both key sources are trusted_secrets." >&2
+            exit 1
+          fi
+          if [[ "${ephemeral_keys_used}" == "false" && ( "${ed25519_key_source}" == "ephemeral_runner" || "${mldsa_key_source}" == "ephemeral_runner" ) ]]; then
+            echo "Policy violation: ephemeral_keys_used=false but an ephemeral key source is declared." >&2
+            exit 1
+          fi
+
+          # Native-hybrid requirement enforcement
+          if [[ "${require_native_hybrid}" == "1" ]]; then
+            if [[ "${hybrid_claim_mode}" != "native_hybrid" ]]; then
+              echo "Policy violation: require_native_hybrid=1 but hybrid_claim_mode=${hybrid_claim_mode}." >&2
+              exit 1
+            fi
+            if [[ "${mldsa_effective_mode}" != "native_mldsa" ]]; then
+              echo "Policy violation: require_native_hybrid=1 but mldsa_effective_mode=${mldsa_effective_mode}." >&2
+              exit 1
+            fi
+          fi
+
+          # Freeze/release-grade enforcement
+          if [[ "${claim_level}" == "freeze_grade" || "${claim_level}" == "sovereign_release" ]]; then
+            if [[ "${ed25519_key_source}" != "trusted_secrets" || "${mldsa_key_source}" != "trusted_secrets" ]]; then
+              echo "Policy violation: ${claim_level} requires trusted_secrets on both channels." >&2
+              exit 1
+            fi
+            if [[ "${ephemeral_keys_used}" != "false" ]]; then
+              echo "Policy violation: ${claim_level} does not allow ephemeral keys." >&2
+              exit 1
+            fi
+            if [[ "${hybrid_claim_mode}" != "native_hybrid" || "${mldsa_effective_mode}" != "native_mldsa" ]]; then
+              echo "Policy violation: ${claim_level} requires native hybrid mode." >&2
+              exit 1
+            fi
+            if [[ "${runner_supports_mldsa}" != "true" ]]; then
+              echo "Policy violation: ${claim_level} requires ML-DSA support on runner." >&2
+              exit 1
+            fi
+            if [[ "${eligible_for_sovereign_release}" != "true" ]]; then
+              echo "Policy violation: ${claim_level} requires eligible_for_sovereign_release=true." >&2
+              exit 1
+            fi
+          fi
+
+          echo "Crypto claim policy enforcement PASS"
+
       - name: Hybrid-sign provenance payload
         run: |
           python3 - <<'PY'
@@ -334,7 +414,12 @@ jobs:
             "key_provenance_mode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
             "crypto_claim_tier": os.environ.get("ETHICBIT_CRYPTO_CLAIM_TIER", "unspecified"),
             "audit_require_hybrid": os.environ.get("ETHICBIT_AUDIT_REQUIRE_HYBRID", "0"),
-            "release_class": os.environ.get("ETHICBIT_RELEASE_CLASS", "branch_ci")
+            "release_class": os.environ.get("ETHICBIT_RELEASE_CLASS", "branch_ci"),
+            "claim_level": os.environ.get("ETHICBIT_CLAIM_LEVEL", "ci_grade"),
+            "require_native_hybrid": os.environ.get("ETHICBIT_REQUIRE_NATIVE_HYBRID", "0").lower() in {"1", "true", "yes"},
+            "ephemeral_keys_used": os.environ.get("ETHICBIT_EPHEMERAL_KEYS_USED", "true").lower() == "true",
+            "runner_supports_mldsa": os.environ.get("ETHICBIT_RUNNER_SUPPORTS_MLDSA", "false").lower() == "true",
+            "eligible_for_sovereign_release": os.environ.get("ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE", "false").lower() == "true"
           }
           Path("provenance/payload.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
