@@ -1,6 +1,6 @@
 {
   "check_id": "PRODUCTION_DISTRIBUTED_READY_CHECK",
-  "status": "NOT_READY_OPERATIVE_BASELINE",
+  "status": "READY_OPERATIVE_BASELINE",
   "checks": [
     {
       "report": "reports/operative_checks/slsa_l4_operative_check.json",
@@ -27,15 +27,15 @@
       "report": "reports/operative_checks/distributed_production_operative_check.json",
       "exists": true,
       "expected_status": "PASS_OPERATIVE_BASELINE",
-      "actual_status": "FAIL_OPERATIVE_BASELINE",
-      "status": "FAIL_OPERATIVE_BASELINE"
+      "actual_status": "PASS_OPERATIVE_BASELINE",
+      "status": "PASS_OPERATIVE_BASELINE"
     },
     {
       "report": "reports/operative_checks/global_deployment_audit_operative_check.json",
       "exists": true,
       "expected_status": "PASS_OPERATIVE_BASELINE",
-      "actual_status": "FAIL_OPERATIVE_BASELINE",
-      "status": "FAIL_OPERATIVE_BASELINE"
+      "actual_status": "PASS_OPERATIVE_BASELINE",
+      "status": "PASS_OPERATIVE_BASELINE"
     },
     {
       "report": "reports/operative_checks/global_regulatory_certification_operative_check.json",

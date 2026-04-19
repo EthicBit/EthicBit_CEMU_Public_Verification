@@ -16,6 +16,9 @@
 - The constitutional gate check must pass before merge:
   - Check name: `production-distributed-ready-final`
   - Workflow file: `.github/workflows/production-distributed-ready-final.yml`
+- The release discipline gate check must pass before merge:
+  - Check name: `release-grade-discipline-gate`
+  - Workflow file: `.github/workflows/release-grade-discipline-gate.yml`
 
 ## Minimal PR expectations
 

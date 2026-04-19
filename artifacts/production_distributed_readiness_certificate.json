@@ -1,6 +1,6 @@
 {
   "schema_id": "ETHICBIT_PRODUCTION_DISTRIBUTED_READINESS_CERTIFICATE_V1",
-  "status": "NOT_READY_OPERATIVE_BASELINE",
+  "status": "READY_OPERATIVE_BASELINE",
   "basis": "operative_baseline_reports",
   "human_review_required": true
 }

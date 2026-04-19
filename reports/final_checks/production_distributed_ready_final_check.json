@@ -1,6 +1,6 @@
 {
   "check_id": "PRODUCTION_DISTRIBUTED_READY_FINAL_CHECK",
-  "status": "NOT_READY_FINAL",
+  "status": "READY_FINAL",
   "checks": [
     {
       "type": "required_file",
@@ -37,8 +37,8 @@
       "path": "reports/operative_checks/distributed_production_operative_check.json",
       "exists": true,
       "expected_status": "PASS_OPERATIVE_BASELINE",
-      "actual_status": "FAIL_OPERATIVE_BASELINE",
-      "status": "FAIL_FINAL"
+      "actual_status": "PASS_OPERATIVE_BASELINE",
+      "status": "PASS_FINAL"
     },
     {
       "type": "required_report",

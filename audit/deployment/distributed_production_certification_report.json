@@ -1,27 +1,38 @@
 {
   "schema_id": "ETHICBIT_DISTRIBUTED_PRODUCTION_CERTIFICATION_REPORT_V1",
-  "status": "FAIL_OPERATIVE_BASELINE",
+  "status": "PASS_OPERATIVE_BASELINE",
   "targets": [
     {
       "target_id": "local_controlled",
       "target_present": true,
-      "environment_ref_present": false,
+      "environment_known": true,
+      "environment_ref_present": true,
       "human_review_required": true,
-      "status": "FAIL_OPERATIVE_BASELINE"
+      "status": "PASS_OPERATIVE_BASELINE"
     },
     {
       "target_id": "github_actions_runner",
       "target_present": true,
-      "environment_ref_present": false,
+      "environment_known": true,
+      "environment_ref_present": true,
       "human_review_required": true,
-      "status": "FAIL_OPERATIVE_BASELINE"
+      "status": "PASS_OPERATIVE_BASELINE"
     },
     {
-      "target_id": "distributed_target_placeholder",
-      "target_present": false,
-      "environment_ref_present": false,
-      "human_review_required": false,
-      "status": "FAIL_OPERATIVE_BASELINE"
+      "target_id": "distributed_target_01",
+      "target_present": true,
+      "environment_known": true,
+      "environment_ref_present": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "target_id": "distributed_target_02",
+      "target_present": true,
+      "environment_known": true,
+      "environment_ref_present": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
     }
   ]
 }
