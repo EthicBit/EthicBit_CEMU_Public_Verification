@@ -15,14 +15,34 @@ REQUIRED_FILES = [
     "audit/regulatory/global_regulatory_certification_matrix.json",
 ]
 
-TARGETS = [
-    "local_controlled",
-    "github_actions_runner",
-    "distributed_target_placeholder",
-]
-
 def load_json(rel_path: str):
     return json.loads((ROOT / rel_path).read_text(encoding="utf-8"))
+
+
+def resolve_target_ids(target_matrix: dict) -> list[str]:
+    targets = target_matrix.get("targets", [])
+    if not isinstance(targets, list):
+        return []
+    ids: list[str] = []
+    for item in targets:
+        if not isinstance(item, dict):
+            continue
+        tid = item.get("target_id")
+        if isinstance(tid, str) and tid.strip():
+            ids.append(tid.strip())
+    return ids
+
+
+def environment_binding_present(target: dict) -> bool:
+    env_ref = target.get("environment_ref")
+    if env_ref == "deployment/environments/environment_registry.json":
+        return True
+    profile_ref = target.get("environment_profile_ref")
+    if not isinstance(profile_ref, str):
+        return False
+    if not profile_ref.startswith("deployment/environments/"):
+        return False
+    return (ROOT / profile_ref).exists()
 
 def main():
     results = []
@@ -39,26 +59,38 @@ def main():
         env_registry = load_json("deployment/environments/environment_registry.json")
         target_matrix = load_json("deployment/manifests/distributed_target_matrix.json")
 
-        envs = {item["environment_id"]: item for item in env_registry.get("environments", [])}
-        targets = {item["target_id"]: item for item in target_matrix.get("targets", [])}
+        envs = {
+            item["environment_id"]: item
+            for item in env_registry.get("environments", [])
+            if isinstance(item, dict) and "environment_id" in item
+        }
+        targets = {
+            item["target_id"]: item
+            for item in target_matrix.get("targets", [])
+            if isinstance(item, dict) and "target_id" in item
+        }
+        target_ids = resolve_target_ids(target_matrix)
+        if not target_ids:
+            all_ok = False
 
-        for tid in TARGETS:
+        for tid in target_ids:
             target_present = tid in targets
+            environment_known = tid in envs
             env_ref_present = False
             human_review_required = False
 
             if target_present:
-                env_ref = targets[tid].get("environment_ref")
-                env_ref_present = env_ref == "deployment/environments/environment_registry.json"
+                env_ref_present = environment_binding_present(targets[tid])
                 human_review_required = bool(targets[tid].get("human_review_required", False))
 
-            ok = target_present and env_ref_present and human_review_required
+            ok = target_present and environment_known and env_ref_present and human_review_required
             if not ok:
                 all_ok = False
 
             target_results.append({
                 "target_id": tid,
                 "target_present": target_present,
+                "environment_known": environment_known,
                 "environment_ref_present": env_ref_present,
                 "human_review_required": human_review_required,
                 "status": "PASS_OPERATIVE_BASELINE" if ok else "FAIL_OPERATIVE_BASELINE"

@@ -1,0 +1,171 @@
+{
+  "policyVersion": "release-grade-discipline.v1.0.0",
+  "matrixVersion": "v1.0.0",
+  "generatedAt": "2026-04-19T00:00:00Z",
+  "controls": [
+    {
+      "controlId": "CTL-RDP-001",
+      "title": "Sovereign branch policy is explicit and consistent",
+      "normative": "MUST",
+      "owner": "governance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "grep -Eq '^- Canonical operational and audit branch: `main`' README.md && grep -Eq '^- `master` is frozen' README.md && grep -Eq '^- `main` is the only canonical branch' CONTRIBUTING.md"
+      },
+      "evidence": {
+        "paths": [
+          "README.md",
+          "CONTRIBUTING.md"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-002",
+      "title": "PR governance checklist enforces target branch and checks",
+      "normative": "MUST",
+      "owner": "governance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "grep -q 'Base branch is `main`' .github/PULL_REQUEST_TEMPLATE.md && grep -q 'Constitutional check `production-distributed-ready-final` passed' .github/PULL_REQUEST_TEMPLATE.md && grep -q 'Release discipline check `release-grade-discipline-gate` passed' .github/PULL_REQUEST_TEMPLATE.md"
+      },
+      "evidence": {
+        "paths": [
+          ".github/PULL_REQUEST_TEMPLATE.md"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-003",
+      "title": "Constitutional gate workflow runs on PRs targeting main",
+      "normative": "MUST",
+      "owner": "platform-assurance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "grep -q '^name: Production Distributed Ready Final' .github/workflows/production-distributed-ready-final.yml && grep -Eq '^\\s+pull_request:' .github/workflows/production-distributed-ready-final.yml && grep -Eq '^\\s+- main$' .github/workflows/production-distributed-ready-final.yml && grep -Eq '^\\s+workflow_dispatch:' .github/workflows/production-distributed-ready-final.yml"
+      },
+      "evidence": {
+        "paths": [
+          ".github/workflows/production-distributed-ready-final.yml"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-004",
+      "title": "Periodic official audit keeps strict signature enforcement",
+      "normative": "MUST",
+      "owner": "platform-assurance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "grep -Eq -- '--strict --require-signature' .github/workflows/official-periodic-audit.yml && grep -Eq -- 'ETHICBIT_MLDSA_VERIFY_CMD' .github/workflows/official-periodic-audit.yml"
+      },
+      "evidence": {
+        "paths": [
+          ".github/workflows/official-periodic-audit.yml"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-005",
+      "title": "ML-DSA verifier is fail-closed",
+      "normative": "MUST",
+      "owner": "crypto-assurance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "grep -q 'echo \"PASS\"' assurance/signers/mldsa_verify.sh && grep -q 'echo \"FAIL\"' assurance/signers/mldsa_verify.sh && grep -q '^exit 1$' assurance/signers/mldsa_verify.sh"
+      },
+      "evidence": {
+        "paths": [
+          "assurance/signers/mldsa_verify.sh"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-006",
+      "title": "Strict freeze mode can enforce clean working tree",
+      "normative": "MUST",
+      "owner": "release-engineering",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "grep -q -- '--require-clean-tree' scripts/audit/final_closure_audit.sh && grep -q 'git status --porcelain' scripts/audit/final_closure_audit.sh"
+      },
+      "evidence": {
+        "paths": [
+          "scripts/audit/final_closure_audit.sh"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-007",
+      "title": "Constitutional MUST controls remain fail-closed by policy",
+      "normative": "MUST",
+      "owner": "constitutional-governance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 30,
+        "command": "python3 -c \"import json; d=json.load(open('config/constitutional_controls.v1.json', encoding='utf-8')); assert all(c.get('failureBehavior')=='FAIL_CLOSED' for c in d.get('controls', []) if str(c.get('normative','')).upper()=='MUST')\""
+      },
+      "evidence": {
+        "paths": [
+          "config/constitutional_controls.v1.json"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-008",
+      "title": "Release discipline policy and final checklist are versioned",
+      "normative": "MUST",
+      "owner": "governance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "test -f docs/policies/RELEASE_GRADE_DISCIPLINE_POLICY.md && test -f docs/checks/FINAL_RELEASE_APPROVAL_CHECKLIST.md"
+      },
+      "evidence": {
+        "paths": [
+          "docs/policies/RELEASE_GRADE_DISCIPLINE_POLICY.md",
+          "docs/checks/FINAL_RELEASE_APPROVAL_CHECKLIST.md"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-009",
+      "title": "Release discipline gate workflow is present and wired to verifier",
+      "normative": "MUST",
+      "owner": "platform-assurance",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 20,
+        "command": "grep -q '^name: Release Grade Discipline Gate' .github/workflows/release-grade-discipline-gate.yml && grep -Eq '^\\s+pull_request:' .github/workflows/release-grade-discipline-gate.yml && grep -Eq '^\\s+- main$' .github/workflows/release-grade-discipline-gate.yml && grep -q 'verify_release_discipline.sh' .github/workflows/release-grade-discipline-gate.yml"
+      },
+      "evidence": {
+        "paths": [
+          ".github/workflows/release-grade-discipline-gate.yml",
+          "scripts/audit/verify_release_discipline.sh"
+        ]
+      }
+    },
+    {
+      "controlId": "CTL-RDP-010",
+      "title": "Release readiness check artifact is generated",
+      "normative": "SHOULD",
+      "owner": "release-engineering",
+      "failureBehavior": "WARN",
+      "execution": {
+        "timeoutSeconds": 30,
+        "command": "python3 tools/checks/check_production_distributed_ready_final.py >/dev/null"
+      },
+      "evidence": {
+        "paths": [
+          "reports/final_checks/production_distributed_ready_final_check.json",
+          "artifacts/production_distributed_readiness_certificate_final.json"
+        ]
+      }
+    }
+  ]
+}

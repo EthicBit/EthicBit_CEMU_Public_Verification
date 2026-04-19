@@ -1,6 +1,6 @@
 {
   "check_id": "GLOBAL_DEPLOYMENT_AUDIT_OPERATIVE_CHECK",
-  "status": "FAIL_OPERATIVE_BASELINE",
+  "status": "PASS_OPERATIVE_BASELINE",
   "results": [
     {
       "path": "deployment/environments/environment_registry.json",
@@ -49,12 +49,20 @@
       "status": "PASS_OPERATIVE_BASELINE"
     },
     {
-      "target_id": "distributed_target_placeholder",
-      "target_present": false,
-      "environment_known": false,
+      "target_id": "distributed_target_01",
+      "target_present": true,
+      "environment_known": true,
       "audit_index_present": true,
-      "human_review_required": false,
-      "status": "FAIL_OPERATIVE_BASELINE"
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
+    },
+    {
+      "target_id": "distributed_target_02",
+      "target_present": true,
+      "environment_known": true,
+      "audit_index_present": true,
+      "human_review_required": true,
+      "status": "PASS_OPERATIVE_BASELINE"
     }
   ],
   "global_audit_report_ref": "audit/deployment/global_deployment_audit_report.json"

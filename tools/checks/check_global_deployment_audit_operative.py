@@ -14,14 +14,22 @@ REQUIRED_FILES = [
     "audit/deployment/global_deployment_audit_index.json",
 ]
 
-TARGETS = [
-    "local_controlled",
-    "github_actions_runner",
-    "distributed_target_placeholder",
-]
-
 def load_json(rel_path: str):
     return json.loads((ROOT / rel_path).read_text(encoding="utf-8"))
+
+
+def resolve_target_ids(target_matrix: dict) -> list[str]:
+    targets = target_matrix.get("targets", [])
+    if not isinstance(targets, list):
+        return []
+    ids: list[str] = []
+    for item in targets:
+        if not isinstance(item, dict):
+            continue
+        tid = item.get("target_id")
+        if isinstance(tid, str) and tid.strip():
+            ids.append(tid.strip())
+    return ids
 
 def main():
     results = []
@@ -39,13 +47,24 @@ def main():
         target_matrix = load_json("deployment/manifests/distributed_target_matrix.json")
         audit_index = load_json("audit/deployment/global_deployment_audit_index.json")
 
-        envs = {item["environment_id"]: item for item in env_registry.get("environments", [])}
-        targets = {item["target_id"]: item for item in target_matrix.get("targets", [])}
+        envs = {
+            item["environment_id"]: item
+            for item in env_registry.get("environments", [])
+            if isinstance(item, dict) and "environment_id" in item
+        }
+        targets = {
+            item["target_id"]: item
+            for item in target_matrix.get("targets", [])
+            if isinstance(item, dict) and "target_id" in item
+        }
+        target_ids = resolve_target_ids(target_matrix)
+        if not target_ids:
+            all_ok = False
         audited_layers = audit_index.get("audited_layers", [])
 
         audit_index_present = len(audited_layers) > 0
 
-        for tid in TARGETS:
+        for tid in target_ids:
             target_present = tid in targets
             environment_known = tid in envs
             human_review_required = bool(targets.get(tid, {}).get("human_review_required", False))

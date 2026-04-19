@@ -1,0 +1,36 @@
+name: Release Grade Discipline Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-grade-discipline-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run release discipline gate
+        run: |
+          chmod +x scripts/audit/verify_release_discipline.sh
+          ./scripts/audit/verify_release_discipline.sh --mode baseline
+
+      - name: Require release discipline report
+        run: test -f results/release_discipline_report.json
+
+      - name: Upload release discipline report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-discipline-report-${{ github.run_id }}
+          path: results/release_discipline_report.json

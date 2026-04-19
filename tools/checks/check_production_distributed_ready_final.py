@@ -95,6 +95,8 @@ def main():
 
     print(json.dumps(report, indent=2))
     print(json.dumps(readiness_certificate, indent=2))
+    if not ready:
+        raise SystemExit(1)
 
 if __name__ == "__main__":
     main()
