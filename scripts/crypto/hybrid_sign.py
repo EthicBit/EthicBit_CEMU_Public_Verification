@@ -143,6 +143,21 @@ def _normalize_truth(
         "eligible_for_sovereign_release": eligible_for_sovereign_release,
     }
 
+    key_provenance_mode = raw.get("key_provenance_mode") or raw.get("keyProvenanceMode")
+    if key_provenance_mode is not None:
+        normalized["key_provenance_mode"] = key_provenance_mode
+        normalized["keyProvenanceMode"] = key_provenance_mode
+
+    crypto_claim_tier = raw.get("crypto_claim_tier") or raw.get("claim_tier") or raw.get("claimTier")
+    if crypto_claim_tier is not None:
+        normalized["crypto_claim_tier"] = crypto_claim_tier
+        normalized["claimTier"] = crypto_claim_tier
+
+    release_class = raw.get("release_class") or raw.get("releaseClass")
+    if release_class is not None:
+        normalized["release_class"] = release_class
+        normalized["releaseClass"] = release_class
+
     # Preserve useful legacy metadata when present.
     for legacy_key in (
         "keyProvenanceMode",
@@ -418,6 +433,9 @@ def _resolve_cli_truth(args: argparse.Namespace) -> dict[str, Any]:
             os.environ.get("ETHICBIT_MLDSA_MODE", "unknown"),
         ),
         "hybrid_claim_mode": os.environ.get("ETHICBIT_HYBRID_CLAIM_MODE", "unknown"),
+        "key_provenance_mode": os.environ.get("ETHICBIT_KEY_PROVENANCE_MODE", "unknown"),
+        "crypto_claim_tier": os.environ.get("ETHICBIT_CRYPTO_CLAIM_TIER", "unspecified"),
+        "release_class": os.environ.get("ETHICBIT_RELEASE_CLASS", "branch_ci"),
         "ephemeral_keys_used": _as_bool(os.environ.get("ETHICBIT_EPHEMERAL_KEYS_USED"), default=False),
         "runner_supports_mldsa": _as_bool(os.environ.get("ETHICBIT_RUNNER_SUPPORTS_MLDSA"), default=False),
         "eligible_for_sovereign_release": _as_bool(
