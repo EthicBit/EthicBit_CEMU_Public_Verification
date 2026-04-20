@@ -35,7 +35,12 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-PAYLOAD_FILE="${1:-}"
+if [[ $# -ne 1 ]]; then
+  echo "usage: $(basename "$0") [--level <n>] <payload-file>" >&2
+  exit 2
+fi
+
+PAYLOAD_FILE="$1"
 KEY_PATH="${ETHICBIT_MLDSA_PRIVATE_KEY:-${REPO_ROOT}/assurance/keys/mldsa_private.pem}"
 [ -f "$PAYLOAD_FILE" ] || { echo "payload file not found: $PAYLOAD_FILE" >&2; exit 3; }
 [ -f "$KEY_PATH" ] || { echo "mldsa private key not found: $KEY_PATH" >&2; exit 4; }

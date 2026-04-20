@@ -4,7 +4,12 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "${SCRIPT_DIR}/../.." && pwd)"
 
-PAYLOAD_FILE="${1:-}"
+if [[ $# -ne 1 ]]; then
+  echo "usage: $(basename "$0") <payload-file>" >&2
+  exit 2
+fi
+
+PAYLOAD_FILE="$1"
 KEY_PATH="${ETHICBIT_ED25519_PRIVATE_KEY:-${REPO_ROOT}/assurance/keys/ed25519_private.pem}"
 [ -f "$PAYLOAD_FILE" ] || { echo "payload file not found: $PAYLOAD_FILE" >&2; exit 3; }
 [ -f "$KEY_PATH" ] || { echo "ed25519 private key not found: $KEY_PATH" >&2; exit 4; }
