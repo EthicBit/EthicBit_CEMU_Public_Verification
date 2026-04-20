@@ -166,10 +166,55 @@ fi
 VERIFY_STATUS="$(printf '%s\n' "$VERIFY_OUTPUT" | tail -n 1)"
 READINESS_STATUS="$(printf '%s\n' "$READINESS_OUTPUT" | tail -n 1)"
 
+CASE003_MATERIAL_STATUS="$("${ROOT_DIR}/scripts/verify_case003_material_integrity.sh" 2>/tmp/case003_material_check.err || true)"
+if [[ "$CASE003_MATERIAL_STATUS" != "CASE003_MATERIAL_OK" ]]; then
+  READINESS_STATUS="NOT_VERIFIED"
+  READINESS_EXIT_CODE=1
+fi
+
+material_case003_root_hash_verified() {
+  python3 - <<'PY2'
+import json
+from pathlib import Path
+import sys
+
+root = Path("artifacts/cases/case_003/canonical_root.case_003.json")
+anchor = Path("artifacts/cases/case_003/anchor_verification.case_003.canonical.json")
+
+def norm(v: str) -> str:
+    v = (v or "").strip().lower()
+    if v.startswith("0x"):
+        v = v[2:]
+    return v
+
+if not root.exists() or not anchor.exists():
+    raise SystemExit(1)
+
+root_data = json.loads(root.read_text(encoding="utf-8"))
+anchor_data = json.loads(anchor.read_text(encoding="utf-8"))
+
+root_hash = norm(root_data.get("root_hash", ""))
+expected_root_hash = norm(anchor_data.get("expected_root_hash", ""))
+
+if not root_hash or not expected_root_hash:
+    raise SystemExit(1)
+
+if root_hash != expected_root_hash:
+    raise SystemExit(1)
+
+print("case003_root_hash_match")
+PY2
+}
+
+if ! material_case003_root_hash_verified >/tmp/case003_material_check.out 2>/tmp/case003_material_check.err; then
+  READINESS_STATUS="NOT_VERIFIED"
+  READINESS_EXIT_CODE=1
+fi
+
 if [[ "$VERIFY_EXIT_CODE" -ne 0 && "$VERIFY_STATUS" != "ACTIVE_CANONICAL" ]]; then
   VERIFY_STATUS="NOT_VERIFIED"
 fi
-if [[ "$READINESS_EXIT_CODE" -ne 0 ]] && ! is_verified_readiness_status "$READINESS_STATUS"; then
+if [[ "$READINESS_EXIT_CODE" -ne 0 ]] || ! is_verified_readiness_status "$READINESS_STATUS"; then
   READINESS_STATUS="NOT_VERIFIED"
 fi
 DECLARED_PACK_STATE="$(json_get "$PACKAGE_MANIFEST" "declaredState.packState")"
@@ -231,6 +276,7 @@ GATE_ACTIVE_BUNDLE_MATCHES_SOURCE="$(if [[ -f "$ACTIVE_RELEASE_BUNDLE" && "$(sha
 GATE_ACTIVE_CERTIFICATE_MATCHES_SOURCE="$(if [[ -f "$ACTIVE_RELEASE_CERTIFICATE" && "$(sha256_file "$ACTIVE_RELEASE_CERTIFICATE")" == "$ACTUAL_CERTIFICATE_HASH" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 GATE_ACTIVE_MANIFEST_MATCHES_SOURCE="$(if [[ -f "$ACTIVE_RELEASE_MANIFEST" && "$(sha256_file "$ACTIVE_RELEASE_MANIFEST")" == "$(sha256_file "$ARTIFACT_MANIFEST")" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 GATE_VERIFY_CLOSURE_INTEGRITY="$(if [[ "$VERIFY_STATUS" == "ACTIVE_CANONICAL" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
+GATE_CASE003_MATERIAL_INTEGRITY="$(if [[ "$CASE003_MATERIAL_STATUS" == "CASE003_MATERIAL_OK" ]]; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 GATE_RUN_PRODUCTION_READINESS="$(if is_verified_readiness_status "$READINESS_STATUS"; then printf 'PASS\n'; else printf 'FAIL\n'; fi)"
 
 ZERO_ACTIVE_SUPERSEDED_FAIL=0
