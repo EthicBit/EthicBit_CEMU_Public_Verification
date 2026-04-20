@@ -1,0 +1,15 @@
+{
+  "artifact_type": "formal_closure_certificate_multicapa",
+  "status": "HUMAN_REQUIRED_PENDING_REISSUANCE",
+  "notes": [
+    "historical certificate remains in artifacts/history/case_003/",
+    "new certificate must not issue without explicit human approval evidence"
+  ],
+  "required_human_approval_fields": [
+    "human_approver_id",
+    "approval_timestamp",
+    "approval_reason",
+    "approval_scope",
+    "approval_signature_or_attestation_hash"
+  ]
+}

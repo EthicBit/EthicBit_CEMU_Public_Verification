@@ -1,0 +1,13 @@
+{
+  "artifact_type": "active_publication_ssot",
+  "package_version": "v1.1_remediated",
+  "status": "ACTIVE_CANONICAL_CANDIDATE",
+  "active_authority_source": "scripts/verify_case003_material_integrity.sh + canonical_root.case_003.json",
+  "verification_pack_authority": "historical_support_only",
+  "history_path": "artifacts/history/case_003/",
+  "notes": [
+    "verification_pack.case_003.canonical.json is preserved as supporting proof only",
+    "active publication authority is reissued at repo root",
+    "this package is intended to replace the previous cleaned export as the remediated export candidate"
+  ]
+}

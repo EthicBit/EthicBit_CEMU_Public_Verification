@@ -1,0 +1,11 @@
+{
+  "artifact_type": "security_incident_bundle",
+  "status": "TO_BE_REISSUED_FROM_CASE_003",
+  "source_material": [
+    "artifacts/cases/case_003/canonical_root.case_003.json",
+    "artifacts/cases/case_003/case_bundle.case_003.canonical.json"
+  ],
+  "notes": [
+    "reissued from case_003 source artifacts per v1.2 remediation matrix"
+  ]
+}
