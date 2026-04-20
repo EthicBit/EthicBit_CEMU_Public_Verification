@@ -333,6 +333,24 @@ jobs:
             echo "MLDSA_CI=UNSUPPORTED_ON_RUNNER"
           fi
 
+      - name: Preflight sovereign crypto requirements
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${ETHICBIT_CLAIM_LEVEL}" == "freeze_grade" || "${ETHICBIT_CLAIM_LEVEL}" == "sovereign_release" ]]; then
+            echo "Running strict preflight for claim level: ${ETHICBIT_CLAIM_LEVEL}"
+            [[ "${ETHICBIT_REQUIRE_NATIVE_HYBRID}" == "1" ]] || { echo "Policy violation: strict claims require ETHICBIT_REQUIRE_NATIVE_HYBRID=1" >&2; exit 1; }
+            [[ "${ETHICBIT_REQUIRE_TRUSTED_KEYS}" == "1" ]] || { echo "Policy violation: strict claims require ETHICBIT_REQUIRE_TRUSTED_KEYS=1" >&2; exit 1; }
+            [[ "${ETHICBIT_HYBRID_CLAIM_MODE}" == "native_hybrid" ]] || { echo "Policy violation: strict claims require native_hybrid claim mode (found ${ETHICBIT_HYBRID_CLAIM_MODE})" >&2; exit 1; }
+            [[ "${ETHICBIT_MLDSA_EFFECTIVE_MODE}" == "native_mldsa" || "${ETHICBIT_MLDSA_EFFECTIVE_MODE}" == "native" ]] || { echo "Policy violation: strict claims require native ML-DSA mode (found ${ETHICBIT_MLDSA_EFFECTIVE_MODE})" >&2; exit 1; }
+            [[ "${ETHICBIT_ED25519_KEY_SOURCE}" == "trusted_secrets" ]] || { echo "Policy violation: strict claims require trusted ED25519 key source (found ${ETHICBIT_ED25519_KEY_SOURCE})" >&2; exit 1; }
+            [[ "${ETHICBIT_MLDSA_KEY_SOURCE}" == "trusted_secrets" ]] || { echo "Policy violation: strict claims require trusted ML-DSA key source (found ${ETHICBIT_MLDSA_KEY_SOURCE})" >&2; exit 1; }
+            [[ "${ETHICBIT_RUNNER_SUPPORTS_MLDSA}" == "true" ]] || { echo "Policy violation: strict claims require a runner with ML-DSA support" >&2; exit 1; }
+            [[ "${ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE}" == "true" ]] || { echo "Policy violation: strict claims require eligible_for_sovereign_release=true" >&2; exit 1; }
+          else
+            echo "Preflight skipped for claim level ${ETHICBIT_CLAIM_LEVEL}."
+          fi
+
       - name: Run constitutional fail-closed release gate
         shell: bash
         run: |
