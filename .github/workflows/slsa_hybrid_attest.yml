@@ -175,6 +175,14 @@ jobs:
             require_native_hybrid="1"
           fi
 
+          require_trusted_keys="0"
+          if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "master" ]]; then
+            require_trusted_keys="1"
+          fi
+          if [[ "${claim_level}" == "freeze_grade" || "${claim_level}" == "sovereign_release" ]]; then
+            require_trusted_keys="1"
+          fi
+
           {
             echo "ETHICBIT_KEY_PROVENANCE_MODE=${key_provenance_mode}"
             echo "ETHICBIT_ED25519_KEY_SOURCE=${ed25519_key_source}"
@@ -192,6 +200,7 @@ jobs:
             echo "ETHICBIT_AUDIT_REQUIRE_HYBRID=${audit_require_hybrid}"
             echo "ETHICBIT_CLAIM_LEVEL=${claim_level}"
             echo "ETHICBIT_REQUIRE_NATIVE_HYBRID=${require_native_hybrid}"
+            echo "ETHICBIT_REQUIRE_TRUSTED_KEYS=${require_trusted_keys}"
             echo "ETHICBIT_RELEASE_CLASS=${release_class}"
           } >> "$GITHUB_ENV"
 
@@ -234,6 +243,7 @@ jobs:
             "audit_require_hybrid": os.environ.get("ETHICBIT_AUDIT_REQUIRE_HYBRID", "0"),
             "claim_level": os.environ.get("ETHICBIT_CLAIM_LEVEL", "ci_grade"),
             "require_native_hybrid": os.environ.get("ETHICBIT_REQUIRE_NATIVE_HYBRID", "0"),
+            "require_trusted_keys": os.environ.get("ETHICBIT_REQUIRE_TRUSTED_KEYS", "0"),
             "release_class": os.environ.get("ETHICBIT_RELEASE_CLASS", "branch_ci"),
           }
 
@@ -261,6 +271,7 @@ jobs:
             "runner_supports_mldsa": os.environ.get("ETHICBIT_RUNNER_SUPPORTS_MLDSA", "false").lower() == "true",
             "claim_level": os.environ.get("ETHICBIT_CLAIM_LEVEL", "ci_grade"),
             "require_native_hybrid": os.environ.get("ETHICBIT_REQUIRE_NATIVE_HYBRID", "0").lower() in {"1", "true", "yes"},
+            "require_trusted_keys": os.environ.get("ETHICBIT_REQUIRE_TRUSTED_KEYS", "0").lower() in {"1", "true", "yes"},
             "eligible_for_sovereign_release": os.environ.get("ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE", "false").lower() == "true",
           }
 
@@ -354,6 +365,7 @@ jobs:
           env_view = {
               "claim_level": os.environ.get("ETHICBIT_CLAIM_LEVEL", "ci_grade"),
               "require_native_hybrid": as_bool_from_env("ETHICBIT_REQUIRE_NATIVE_HYBRID", False),
+              "require_trusted_keys": as_bool_from_env("ETHICBIT_REQUIRE_TRUSTED_KEYS", False),
               "hybrid_claim_mode": os.environ.get("ETHICBIT_HYBRID_CLAIM_MODE", "unknown"),
               "mldsa_effective_mode": os.environ.get("ETHICBIT_MLDSA_EFFECTIVE_MODE", "unknown"),
               "ed25519_key_source": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
@@ -369,6 +381,7 @@ jobs:
           compare_keys = [
               "claim_level",
               "require_native_hybrid",
+              "require_trusted_keys",
               "hybrid_claim_mode",
               "mldsa_effective_mode",
               "ed25519_key_source",
@@ -397,6 +410,7 @@ jobs:
 
           claim_level = str(truth.get("claim_level", "ci_grade"))
           require_native_hybrid = bool(truth.get("require_native_hybrid", False))
+          require_trusted_keys = bool(truth.get("require_trusted_keys", False))
           hybrid_claim_mode = str(truth.get("hybrid_claim_mode", "unknown"))
           mldsa_effective_mode = str(truth.get("mldsa_effective_mode", "unknown"))
           ed25519_key_source = str(truth.get("ed25519_key_source", "unknown"))
@@ -410,6 +424,7 @@ jobs:
               {
                   "claim_level": claim_level,
                   "require_native_hybrid": require_native_hybrid,
+                  "require_trusted_keys": require_trusted_keys,
                   "hybrid_claim_mode": hybrid_claim_mode,
                   "mldsa_effective_mode": mldsa_effective_mode,
                   "ed25519_key_source": ed25519_key_source,
@@ -440,6 +455,21 @@ jobs:
                   file=sys.stderr,
               )
               raise SystemExit(1)
+
+          # Trusted-key requirement enforcement (enabled on master and sovereign-grade claims)
+          if require_trusted_keys:
+              if ed25519_key_source != "trusted_secrets" or mldsa_key_source != "trusted_secrets":
+                  print(
+                      "Policy violation: require_trusted_keys=true requires trusted_secrets on both channels.",
+                      file=sys.stderr,
+                  )
+                  raise SystemExit(1)
+              if ephemeral_keys_used:
+                  print(
+                      "Policy violation: require_trusted_keys=true does not allow ephemeral keys.",
+                      file=sys.stderr,
+                  )
+                  raise SystemExit(1)
 
           # Native-hybrid requirement enforcement
           if require_native_hybrid:
@@ -526,6 +556,7 @@ jobs:
             "release_class": os.environ.get("ETHICBIT_RELEASE_CLASS", "branch_ci"),
             "claim_level": os.environ.get("ETHICBIT_CLAIM_LEVEL", "ci_grade"),
             "require_native_hybrid": os.environ.get("ETHICBIT_REQUIRE_NATIVE_HYBRID", "0").lower() in {"1", "true", "yes"},
+            "require_trusted_keys": os.environ.get("ETHICBIT_REQUIRE_TRUSTED_KEYS", "0").lower() in {"1", "true", "yes"},
             "ephemeral_keys_used": os.environ.get("ETHICBIT_EPHEMERAL_KEYS_USED", "true").lower() == "true",
             "runner_supports_mldsa": os.environ.get("ETHICBIT_RUNNER_SUPPORTS_MLDSA", "false").lower() == "true",
             "eligible_for_sovereign_release": os.environ.get("ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE", "false").lower() == "true",
