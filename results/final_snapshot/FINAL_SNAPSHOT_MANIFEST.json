@@ -1,8 +1,8 @@
 {
   "artifactType": "ethicbit_final_closure_snapshot_manifest",
-  "generatedAt": "2026-04-20T03:20:41.089485Z",
+  "generatedAt": "2026-04-20T12:22:49.832393Z",
   "repository": "EthicBit/EthicBit_CEMU",
-  "headCommit": "2c0f086ed706c9998f8d66456fcb9b384a55ad29",
+  "headCommit": "5c09a7a71089d24bf438a371f4b7405bd97fb0a1",
   "officialTagReferences": [
     {
       "tag": "v2.2b-sovereign-preclose-20260419",
@@ -95,5 +95,12 @@
       "release-grade-discipline-gate"
     ],
     "enforcedOn": "main (~DEFAULT_BRANCH)"
+  },
+  "postClosureUpdates": {
+    "periodicAuditHybridFix": {
+      "mergeCommit": "5c09a7a71089d24bf438a371f4b7405bd97fb0a1",
+      "sourcePR": "https://github.com/EthicBit/EthicBit_CEMU/pull/10",
+      "summary": "Periodic audit workflow now probes ML-DSA support and applies compatible fallback on unsupported runners while preserving require-signature enforcement."
+    }
   }
 }

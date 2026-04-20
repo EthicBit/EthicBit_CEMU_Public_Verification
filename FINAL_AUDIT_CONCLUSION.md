@@ -5,7 +5,7 @@
 **Document purpose:** Final closure conclusion after sovereign crypto-claim hardening and merge to canonical `main`
 **Status:** Active
 **Date:** 2026-04-20
-**Commit SHA (main):** `2c0f086ed706c9998f8d66456fcb9b384a55ad29`
+**Commit SHA (main):** `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
 
 ---
 
@@ -49,7 +49,7 @@ Therefore, both statements are simultaneously true and non-contradictory:
 - Preclose tag: `v2.2b-sovereign-preclose-20260419`
 - Hybrid claim enforcement tag: `v2.2b-hybrid-claim-enforcement`
 - Freeze tag: `audit-freeze-20260419-hybrid-claim-enforcement`
-- Canonical merge commit on `main`: `2c0f086ed706c9998f8d66456fcb9b384a55ad29`
+- Canonical merge commit on `main`: `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
 
 ---
 
@@ -68,3 +68,14 @@ Therefore, both statements are simultaneously true and non-contradictory:
 ## Scope boundary
 
 This conclusion certifies repository-level closure evidence and governance controls as captured in the artifacts above. It does not claim universal jurisdictional approval or substitute independent third-party certification.
+
+
+---
+
+## Post-closure hardening update
+
+After documentary closure, `main` incorporated an additional CI hardening merge for scheduled periodic audits:
+
+- `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
+
+This preserves the declared closure posture while improving periodic hybrid-signature resilience on hosted runners.
