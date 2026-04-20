@@ -5,7 +5,7 @@
 **Document purpose:** Final closure conclusion after sovereign crypto-claim hardening and merge to canonical `main`
 **Status:** Active
 **Date:** 2026-04-20
-**Commit SHA (main):** `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
+**Commit SHA (main):** `3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
 
 ---
 
@@ -49,7 +49,7 @@ Therefore, both statements are simultaneously true and non-contradictory:
 - Preclose tag: `v2.2b-sovereign-preclose-20260419`
 - Hybrid claim enforcement tag: `v2.2b-hybrid-claim-enforcement`
 - Freeze tag: `audit-freeze-20260419-hybrid-claim-enforcement`
-- Canonical merge commit on `main`: `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
+- Canonical merge commit on `main`: `3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
 
 ---
 
@@ -62,6 +62,11 @@ Therefore, both statements are simultaneously true and non-contradictory:
 - `results/final_snapshot/GATE_REPORT.json`
 - `results/final_snapshot/hybrid_signature_set.json`
 - `results/final_snapshot/hybrid_signature_verification.json`
+
+Snapshot refresh note:
+
+- final snapshot regenerated on 2026-04-20 from canonical runtime artifacts at `main@3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
+- hybrid evidence now includes schema v2 semantic binding (`hybridCryptoTruth` + `verificationPolicy`)
 
 ---
 
