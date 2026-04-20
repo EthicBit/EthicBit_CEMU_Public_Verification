@@ -1,0 +1,151 @@
+{
+  "artifactType": "official_operational_status",
+  "generatedAt": "2026-04-18T13:51:01.172637Z",
+  "policyVersion": "official-operational-status-policy.v2.0.0",
+  "runContext": {
+    "runId": "run-20260411T215540Z-33389",
+    "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+    "verificationEpoch": "2026-04-11T21:00:00Z"
+  },
+  "officialStatus": "READY",
+  "reason": "LIVE_CANONICAL_GATE_CONVERGED",
+  "reasonCodes": [
+    "LIVE_CANONICAL_GATE_CONVERGED"
+  ],
+  "divergence": false,
+  "gateStatusRaw": "PASS",
+  "gateStatusRawSource": "verifiedState",
+  "gateStatusEffective": "PASS",
+  "liveStatus": "PASS",
+  "liveStatusSource": "result",
+  "canonicalAssessment": {
+    "ok": true,
+    "model": "TRIPLE_PUBLIC_ANCHOR",
+    "canonicalModelOk": true,
+    "sepolia": true,
+    "arweave": true,
+    "ao": true,
+    "bitcoinPresentInCanonicalAnchors": false
+  },
+  "freezeActive": false,
+  "integrity": {
+    "inputHashes": {
+      "gateReport": "10b934c05763de4fe36b676f6309a8b26007ab48a0d4452797cbef3d7cdb4c52",
+      "liveReport": "ffed75a162e96349f76431ced523b630b6cb986fb4c97df02988cd2b92dc6024",
+      "canonicalConfig": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093"
+    },
+    "outputHash": "0b102585dce8cc49b1c7c60242174d1188d8e4c3b4f158601818929d223221ef"
+  },
+  "paths": {
+    "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
+    "live": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/triple_public_anchor_live_verification.json",
+    "canonical": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/integration/anchor_verifier/anchor_txids_real.json",
+    "freeze": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/runtime/publication_freeze_state.json",
+    "output": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/official_operational_status.json"
+  },
+  "officialOperationalStatus": "READY",
+  "internalClosureStatus": "INTERNAL_CLOSED",
+  "externalProjectionStatus": "EXTERNAL_LIVE_CONVERGED",
+  "internalCryptographyStatus": "PASS",
+  "externalCryptographyStatus": "PASS",
+  "stateModel": {
+    "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
+    "operatingMode": "SOVEREIGN_INTERNAL",
+    "internalClosureStatus": "INTERNAL_CLOSED",
+    "externalProjectionStatus": "EXTERNAL_LIVE_CONVERGED",
+    "officialOperationalStatus": "READY"
+  },
+  "cryptography": {
+    "status": "PASS",
+    "operatingMode": "SOVEREIGN_INTERNAL",
+    "riskMode": "HIGH",
+    "requiredAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ],
+    "internal": {
+      "status": "PASS",
+      "required": true,
+      "mechanism": "CANONICAL_PAYLOAD_HASH_BINDING"
+    },
+    "external": {
+      "status": "PASS",
+      "required": false,
+      "blocking": false,
+      "algorithm": "HYBRID_ED25519_MLDSA"
+    },
+    "policyPath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/sigstore/policy.json"
+  },
+  "policyBinding": {
+    "sigstorePolicyPath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/sigstore/policy.json",
+    "operatingMode": "SOVEREIGN_INTERNAL",
+    "internalCryptoRequired": true,
+    "externalHybridSignatureRequired": false,
+    "blockOfficialStatusOnExternalCryptoFailure": false
+  },
+  "signature": {
+    "status": "SIGNED_HYBRID",
+    "algorithm": "HYBRID_ED25519_MLDSA",
+    "keyIds": [
+      "ED25519_UNSET",
+      "MLDSA_UNSET"
+    ]
+  },
+  "signatureSet": {
+    "status": "PASS",
+    "policyVersion": "official-operational-status-policy.v2.0.0",
+    "riskMode": "HIGH",
+    "runContext": {
+      "runId": "run-20260411T215540Z-33389",
+      "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
+      "verificationEpoch": "2026-04-11T21:00:00Z"
+    },
+    "requiredAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ],
+    "payloadHash": "1f26c1315c7284776678cceabc4eac8fca665e1f2b332e83c784a788b6c6b1c1",
+    "signatures": [
+      {
+        "algorithm": "ED25519",
+        "keyId": "ED25519_UNSET",
+        "status": "PASS",
+        "signature": "0TSyTNfZLheOxrEIPRiAB8HNrHJa+pblxxBDms2JixBrWeVkFTg/9A0nzZUZdWfPShPTu/DrTMevnIUBWIHwAg==",
+        "signedAt": "2026-04-18T13:51:01.173467Z",
+        "commandConfigured": true,
+        "timeoutSeconds": 25.0
+      },
+      {
+        "algorithm": "ML-DSA",
+        "keyId": "MLDSA_UNSET",
+        "status": "PASS",
+        "signature": "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",
+        "signedAt": "2026-04-18T13:51:01.200685Z",
+        "commandConfigured": true,
+        "timeoutSeconds": 25.0
+      }
+    ]
+  },
+  "signatureVerification": {
+    "status": "PASS",
+    "riskMode": "HIGH",
+    "requiredAlgorithms": [
+      "ED25519",
+      "ML-DSA"
+    ],
+    "checks": [
+      {
+        "algorithm": "ED25519",
+        "status": "PASS",
+        "commandConfigured": true,
+        "timeoutSeconds": 25.0
+      },
+      {
+        "algorithm": "ML-DSA",
+        "status": "PASS",
+        "commandConfigured": true,
+        "timeoutSeconds": 25.0
+      }
+    ]
+  }
+}

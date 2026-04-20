@@ -2,40 +2,69 @@
 
 **Project:** EthicBit / CEMU
 **Repository:** `EthicBit_CEMU`
-**Package:** `audit_package/`
-**Document purpose:** Final short-form conclusion after remediation and Anchor Hardening
+**Document purpose:** Final closure conclusion after sovereign crypto-claim hardening and merge to canonical `main`
 **Status:** Active
-**Date:** 2026-04-16
-**Commit SHA:** (actualizar después del commit)
+**Date:** 2026-04-20
+**Commit SHA (main):** `2c0f086ed706c9998f8d66456fcb9b384a55ad29`
 
 ---
 
 ## Final conclusion
 
-Following the remediation work and the successful deployment of the on-chain Anchor Hardening layer, the previously identified critical gap has been fully closed.
+EthicBit / CEMU remains in `READY` official status with canonical closure controls in `PASS`, constitutional controls in `6/6 PASS`, and hybrid signature evidence validated.
 
-EthicBit / CEMU now demonstrates:
-- a functioning Mechanical Ethics engine across all 7 sectors
-- canonical integration into the audit pipeline
-- sovereign operational truth with **Anchor Hardening completed** on Base Sepolia
+Consolidated closure signals observed in repository artifacts:
 
-**On-chain Anchor:**
-- Contract Address: `0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884`
-- Network: Base Sepolia
-- First anchor transaction successfully executed
+- `officialOperationalStatus = READY`
+- `internalClosureStatus = INTERNAL_CLOSED`
+- `externalProjectionStatus = EXTERNAL_LIVE_CONVERGED`
+- `signature.status = SIGNED_HYBRID`
+- `constitutional controls = PASS (mustFailClosedTriggered=false)`
 
-The current state therefore supports the following conclusion:
-
-**EthicBit / CEMU is internally closed, externally live-converged, officially READY, and now equipped with a canonically integrated Mechanical Ethics engine and on-chain Anchor Hardening.**
-
-This conclusion should be read together with:
-- `audit_package/AUDIT_REMEDIATION_ADDENDUM.md`
-- `audit_package/current_state/official_operational_status.json`
-- `audit_package/current_state/GATE_REPORT.json`
+This state supports controlled sovereign operation under fail-closed policy and release-discipline gating.
 
 ---
 
-## Scope note
+## Explicit freeze interpretation (required)
 
-Anchor Hardening is now active on Base Sepolia. The system is no longer in "candidate" status for production.
+A specific operational-state artifact in this closure set shows:
 
+- `freezeActive = false`
+
+This value reflects the runtime publication state at the exact artifact generation time.
+
+It does **not** negate formal freeze governance because a formal freeze tag has already been emitted:
+
+- `audit-freeze-20260419-hybrid-claim-enforcement`
+
+Therefore, both statements are simultaneously true and non-contradictory:
+
+1. the observed runtime artifact recorded `freezeActive=false`, and
+2. a formal freeze tag exists as immutable governance/audit reference.
+
+---
+
+## Official reference set for this closure wave
+
+- Preclose tag: `v2.2b-sovereign-preclose-20260419`
+- Hybrid claim enforcement tag: `v2.2b-hybrid-claim-enforcement`
+- Freeze tag: `audit-freeze-20260419-hybrid-claim-enforcement`
+- Canonical merge commit on `main`: `2c0f086ed706c9998f8d66456fcb9b384a55ad29`
+
+---
+
+## Evidence package used for documentary closure
+
+- `results/final_snapshot/FINAL_SNAPSHOT_MANIFEST.json`
+- `results/final_snapshot/artifact_hashes.sha256`
+- `results/final_snapshot/official_operational_status.json`
+- `results/final_snapshot/constitutional_controls_report.json`
+- `results/final_snapshot/GATE_REPORT.json`
+- `results/final_snapshot/hybrid_signature_set.json`
+- `results/final_snapshot/hybrid_signature_verification.json`
+
+---
+
+## Scope boundary
+
+This conclusion certifies repository-level closure evidence and governance controls as captured in the artifacts above. It does not claim universal jurisdictional approval or substitute independent third-party certification.
