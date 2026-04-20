@@ -20,7 +20,7 @@ Scope: Post-merge closure update for sovereign crypto-claim enforcement
 
 Canonical merge commit that integrated the latest hardening set into `main`:
 
-- `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
+- `3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
 
 ## Required clarification on freeze state
 
@@ -46,6 +46,7 @@ Interpretation rule for mixed audiences:
 - `results/final_snapshot/constitutional_controls_report.json`
 - `results/final_snapshot/hybrid_signature_set.json`
 - `results/final_snapshot/hybrid_signature_verification.json`
+- `results/final_snapshot` refreshed against canonical runtime artifacts at `main@3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
 
 ## Governance controls
 

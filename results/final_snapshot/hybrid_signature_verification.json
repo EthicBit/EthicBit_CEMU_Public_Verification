@@ -5,6 +5,7 @@
     "ED25519",
     "ML-DSA"
   ],
+  "semanticStatus": "PASS",
   "checks": [
     {
       "algorithm": "ED25519",

@@ -5,7 +5,7 @@ Repository: `EthicBit/EthicBit_CEMU`
 
 ## 1. Final commit and integration point
 
-- Final canonical merge commit (`main`): `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
+- Final canonical merge commit (`main`): `3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
 - Integrated hardening commit: `2681041d51e127f125955e3c5ad8a0f9b2384611`
 - Periodic audit hardening merge: `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
 
@@ -45,7 +45,9 @@ Observed status in closure snapshot:
 
 - `signatureSet.status = PASS`
 - `signatureVerification.status = PASS`
+- `signatureVerification.semanticStatus = PASS`
 - required algorithms include `ED25519` and `ML-DSA`
+- signature-set schema includes v2 semantic truth fields (`hybridCryptoTruth`, `verificationPolicy`)
 
 ## 5. Official status and constitutional controls
 
