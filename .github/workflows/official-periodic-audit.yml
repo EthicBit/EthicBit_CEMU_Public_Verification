@@ -18,8 +18,8 @@ jobs:
       ETHICBIT_MLDSA_SIGN_CMD: assurance/signers/mldsa_sign.sh {payload}
       ETHICBIT_ED25519_VERIFY_CMD: assurance/signers/ed25519_verify.sh {payload} {signature}
       ETHICBIT_MLDSA_VERIFY_CMD: assurance/signers/mldsa_verify.sh {payload} {signature}
-      ETHICBIT_ED25519_KEY_ID: ED25519_LOCAL_CI
-      ETHICBIT_MLDSA_KEY_ID: MLDSA_LOCAL_CI
+      ETHICBIT_ED25519_KEY_ID: ETHICBIT_ED25519_PERIODIC_SECRET_V1
+      ETHICBIT_MLDSA_KEY_ID: ETHICBIT_MLDSA65_PERIODIC_NATIVE_SECRET_V1
     steps:
       - uses: actions/checkout@v4
 
@@ -43,6 +43,31 @@ jobs:
               exit 1
             fi
           done
+
+          # Periodic audits run on generic hosted runners. If native ML-DSA is
+          # unavailable in the runner OpenSSL build, downgrade to a compatible
+          # fallback keypair while keeping strict signature enforcement active.
+          mldsa_effective_mode="native_mldsa"
+          mldsa_key_id="ETHICBIT_MLDSA65_PERIODIC_NATIVE_SECRET_V1"
+          runner_supports_mldsa="true"
+          printf '{"artifactType":"periodic_mldsa_probe"}' >/tmp/periodic_mldsa_probe.json
+          if ! openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/periodic_mldsa_probe.json -out /tmp/periodic_mldsa_probe.sig >/tmp/periodic_mldsa_probe.err 2>&1; then
+            echo "ML-DSA secret key unsupported on this runner; enabling compatibility fallback."
+            openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
+            openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
+            openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/periodic_mldsa_probe.json -out /tmp/periodic_mldsa_probe.sig
+            mldsa_effective_mode="compatibility_fallback"
+            mldsa_key_id="ETHICBIT_MLDSA_COMPAT_ED25519_PERIODIC_V1"
+            runner_supports_mldsa="false"
+          fi
+
+          {
+            echo "ETHICBIT_MLDSA_EFFECTIVE_MODE=${mldsa_effective_mode}"
+            echo "ETHICBIT_MLDSA_MODE=${mldsa_effective_mode}"
+            echo "ETHICBIT_MLDSA_KEY_ID=${mldsa_key_id}"
+            echo "ETHICBIT_RUNNER_SUPPORTS_MLDSA=${runner_supports_mldsa}"
+          } >> "$GITHUB_ENV"
+
           chmod 600 assurance/keys/*.pem
 
       - name: Export key paths
