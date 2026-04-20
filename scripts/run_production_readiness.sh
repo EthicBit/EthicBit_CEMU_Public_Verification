@@ -1,3 +1,10 @@
+
+CASE003_MATERIAL_STATUS="$("${ROOT_DIR}/scripts/verify_case003_material_integrity.sh" 2>/tmp/case003_material_check.err || true)"
+if [[ "$CASE003_MATERIAL_STATUS" != "CASE003_MATERIAL_OK" ]]; then
+  echo "FAIL_CLOSED: case_003 material integrity gate failed"
+  exit 1
+fi
+
 #!/usr/bin/env bash
 set -euo pipefail
 

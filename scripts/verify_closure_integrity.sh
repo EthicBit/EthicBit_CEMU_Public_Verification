@@ -1,3 +1,8 @@
+if ! scripts/verify_case003_material_integrity.sh; then
+  echo "FAIL_CLOSED: case_003 material integrity gate failed"
+  exit 1
+fi
+
 #!/usr/bin/env bash
 set -euo pipefail
 
