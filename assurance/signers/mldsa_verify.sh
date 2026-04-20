@@ -36,8 +36,13 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-PAYLOAD_FILE="${1:-}"
-SIGNATURE_B64="${2:-}"
+if [[ $# -ne 2 ]]; then
+  echo "usage: $(basename "$0") [--level <n>] <payload-file> <signature-b64>" >&2
+  exit 2
+fi
+
+PAYLOAD_FILE="$1"
+SIGNATURE_B64="$2"
 
 [ -f "$PAYLOAD_FILE" ] || { echo "ERROR: payload file not found" >&2; exit 3; }
 [ -n "$SIGNATURE_B64" ] || { echo "ERROR: no signature provided" >&2; exit 5; }
