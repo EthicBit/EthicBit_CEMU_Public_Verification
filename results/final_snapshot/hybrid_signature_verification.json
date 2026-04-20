@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "riskMode": "HIGH",
+  "requiredAlgorithms": [
+    "ED25519",
+    "ML-DSA"
+  ],
+  "checks": [
+    {
+      "algorithm": "ED25519",
+      "status": "PASS",
+      "commandConfigured": true,
+      "timeoutSeconds": 25.0
+    },
+    {
+      "algorithm": "ML-DSA",
+      "status": "PASS",
+      "commandConfigured": true,
+      "timeoutSeconds": 25.0
+    }
+  ]
+}
