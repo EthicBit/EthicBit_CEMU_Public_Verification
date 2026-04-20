@@ -20,7 +20,7 @@ Scope: Post-merge closure update for sovereign crypto-claim enforcement
 
 Canonical merge commit that integrated the latest hardening set into `main`:
 
-- `2c0f086ed706c9998f8d66456fcb9b384a55ad29`
+- `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
 
 ## Required clarification on freeze state
 
@@ -53,3 +53,8 @@ Interpretation rule for mixed audiences:
 - Required status checks enforced by ruleset:
   - `production-distributed-ready-final`
   - `release-grade-discipline-gate`
+
+
+Post-closure update:
+
+- Scheduled periodic audit workflow hardened for ML-DSA runner compatibility and strict hybrid signature continuity (merged in `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`).

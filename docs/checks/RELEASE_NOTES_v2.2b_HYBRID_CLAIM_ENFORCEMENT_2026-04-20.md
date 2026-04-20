@@ -5,8 +5,9 @@ Repository: `EthicBit/EthicBit_CEMU`
 
 ## 1. Final commit and integration point
 
-- Final canonical merge commit (`main`): `2c0f086ed706c9998f8d66456fcb9b384a55ad29`
+- Final canonical merge commit (`main`): `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
 - Integrated hardening commit: `2681041d51e127f125955e3c5ad8a0f9b2384611`
+- Periodic audit hardening merge: `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
 
 ## 2. Emitted tags in closure scope
 
