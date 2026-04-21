@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 import json
 import os
 import time
@@ -195,8 +196,14 @@ class EvidenceBroker:
         required: List[str],
         state: Dict[str, Any]
     ) -> EvidenceResult:
-        if self.mode == "REAL":
+        if self.mode in {"REAL", "REAL_LOCAL"}:
+            return await self._call_real_local_provider(provider, required, state)
+
+        if self.mode == "REAL_EXTERNAL":
             return await self._call_real_provider(provider, required, state)
+
+        if self.mode == "SIMULATED_SIGNED":
+            return await self._call_simulated_signed_provider(provider, required, state)
 
         if self.mode == "STUB":
             return EvidenceResult(
@@ -209,6 +216,96 @@ class EvidenceBroker:
             )
 
         return await self._call_mock_provider(provider, required, state)
+
+    async def _call_real_local_provider(
+        self,
+        provider: str,
+        required: List[str],
+        state: Dict[str, Any]
+    ) -> EvidenceResult:
+        await asyncio.sleep(0)
+        real_local_evidence = state.get("real_local_evidence", {})
+        if not isinstance(real_local_evidence, dict):
+            return EvidenceResult(
+                provider=provider,
+                status="ERROR",
+                evidence={},
+                timestamp=self._now(),
+                confidence=0.0,
+                error="real_local_evidence must be a dict"
+            )
+
+        missing = [key for key in required if key not in real_local_evidence]
+        if missing:
+            return EvidenceResult(
+                provider=provider,
+                status="FAILED",
+                evidence={},
+                timestamp=self._now(),
+                confidence=0.0,
+                error=f"missing REAL_LOCAL evidence keys: {','.join(missing)}"
+            )
+
+        evidence = {key: real_local_evidence[key] for key in required}
+        confidence = self._provider_confidence(provider)
+        signature = self._generate_deterministic_signature(
+            provider=provider,
+            evidence=evidence,
+            evidence_mode="REAL_LOCAL",
+        )
+        return EvidenceResult(
+            provider=provider,
+            status="SUCCESS",
+            evidence=evidence,
+            timestamp=self._now(),
+            confidence=confidence,
+            signature=signature,
+        )
+
+    async def _call_simulated_signed_provider(
+        self,
+        provider: str,
+        required: List[str],
+        state: Dict[str, Any]
+    ) -> EvidenceResult:
+        await asyncio.sleep(0)
+        simulated = state.get("simulated_signed_evidence", {})
+        if not isinstance(simulated, dict):
+            return EvidenceResult(
+                provider=provider,
+                status="ERROR",
+                evidence={},
+                timestamp=self._now(),
+                confidence=0.0,
+                error="simulated_signed_evidence must be a dict"
+            )
+
+        missing = [key for key in required if key not in simulated]
+        if missing:
+            return EvidenceResult(
+                provider=provider,
+                status="FAILED",
+                evidence={},
+                timestamp=self._now(),
+                confidence=0.0,
+                error=f"missing SIMULATED_SIGNED evidence keys: {','.join(missing)}"
+            )
+
+        evidence = {key: simulated[key] for key in required}
+        confidence = self._provider_confidence(provider)
+        signature = self._generate_deterministic_signature(
+            provider=provider,
+            evidence=evidence,
+            evidence_mode="SIMULATED_SIGNED",
+        )
+        return EvidenceResult(
+            provider=provider,
+            status="SUCCESS",
+            evidence=evidence,
+            timestamp=self._now(),
+            confidence=confidence,
+            signature=signature,
+        )
 
     async def _call_mock_provider(
         self,
@@ -451,6 +548,16 @@ class EvidenceBroker:
     def _generate_signature(self, provider: str, evidence: Dict[str, Any]) -> str:
         payload = f"{provider}|{self._stable_serialize(evidence)}|{uuid.uuid4().hex}"
         return "attest::" + str(uuid.uuid5(uuid.NAMESPACE_DNS, payload))
+
+    def _generate_deterministic_signature(
+        self,
+        provider: str,
+        evidence: Dict[str, Any],
+        evidence_mode: str
+    ) -> str:
+        payload = f"{provider}|{evidence_mode}|{self._stable_serialize(evidence)}"
+        digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+        return f"attest::sha256::{digest}"
 
     def verify_signature(self, signature: str) -> bool:
         return isinstance(signature, str) and signature.startswith("attest::")

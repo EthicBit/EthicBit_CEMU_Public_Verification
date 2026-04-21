@@ -59,6 +59,21 @@ fi
 
 echo "=== 2. ETHIC MECHANICS AUDIT ==="
 ./scripts/audit/audit_ethic_mechanics.sh
+test -f results/mechanical_ethics_gate.json || fail "missing results/mechanical_ethics_gate.json"
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+gate = json.loads(Path("results/mechanical_ethics_gate.json").read_text(encoding="utf-8"))
+status = gate.get("status")
+mode = gate.get("mode")
+required = gate.get("required_sectors", [])
+print("mechanical_ethics_gate.status =", status)
+print("mechanical_ethics_gate.mode =", mode)
+print("mechanical_ethics_gate.required_sectors =", required)
+if status != "PASS":
+    raise SystemExit("mechanical_ethics_gate.status != PASS")
+PY
 echo
 
 echo "=== 3. OFFICIAL OPERATIONAL STATUS ==="

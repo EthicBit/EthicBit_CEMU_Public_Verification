@@ -3,12 +3,14 @@ set -euo pipefail
 
 REGISTRY_MANAGER="scripts/core/RegistryManager.py"
 WRAPPER="scripts/core/ethic_mechanics_check_v22.sh"
+GATE_SCRIPT="scripts/core/mechanical_ethics_gate.py"
+GATE_OUTPUT="results/mechanical_ethics_gate.json"
 
 echo "=== ETHIC MECHANICS AUDIT (7 REAL SECTORS) ==="
 echo "Sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY"
 echo
 
-if [ ! -f "$REGISTRY_MANAGER" ] || [ ! -f "$WRAPPER" ]; then
+if [ ! -f "$REGISTRY_MANAGER" ] || [ ! -f "$WRAPPER" ] || [ ! -f "$GATE_SCRIPT" ]; then
     echo "ERROR: Required files not found"
     exit 2
 fi
@@ -64,6 +66,26 @@ if "$WRAPPER" "RULE-ETHIC-XYZ-999-v9.9" "JUSTICIA" "false"; then
 else
   echo "OK: REJECT triggered"
 fi
+echo
+
+echo "=== 5. CANONICAL MECHANICAL ETHICS GATE ==="
+python3 "$GATE_SCRIPT" --output "$GATE_OUTPUT" --required-sectors "CORE,TECHNICAL"
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+path = Path("results/mechanical_ethics_gate.json")
+if not path.exists():
+    raise SystemExit("mechanical_ethics_gate.json missing")
+
+data = json.loads(path.read_text(encoding="utf-8"))
+status = data.get("status")
+mode = data.get("mode")
+print(f"gate.status={status}")
+print(f"gate.mode={mode}")
+if status != "PASS":
+    raise SystemExit("mechanical ethics gate status != PASS")
+PY
 echo
 
 echo "=============================================="

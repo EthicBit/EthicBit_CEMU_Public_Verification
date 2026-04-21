@@ -42,7 +42,7 @@
     }
   },
   "evidenceBroker": {
-    "mode": "MOCK",
+    "mode": "REAL_LOCAL",
     "providers": [
       "self-attested",
       "chainlink",
