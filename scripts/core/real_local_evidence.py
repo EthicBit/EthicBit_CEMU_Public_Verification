@@ -164,6 +164,8 @@ EVIDENCE_PATH_MAP: Dict[str, List[str]] = {
         "results/constitutional_amendment_snapshot.json",
     ],
     "cross_sector_trigger_record": [
+        "results/constitutional_amendment_snapshot.json",
+        "artifacts/cases/case_003/runtime_constitutional_assessment.case_003.canonical.json",
         "results/constitutional_controls_report.json",
     ],
     "supervisory_trace_record": [
