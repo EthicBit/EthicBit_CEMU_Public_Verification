@@ -5,6 +5,7 @@ REGISTRY_MANAGER="scripts/core/RegistryManager.py"
 WRAPPER="scripts/core/ethic_mechanics_check_v22.sh"
 GATE_SCRIPT="scripts/core/mechanical_ethics_gate.py"
 GATE_OUTPUT="results/mechanical_ethics_gate.json"
+GATE_REQUIRED_SECTORS="${ETHICBIT_ME_GATE_REQUIRED_SECTORS:-CORE,TECHNICAL,SECURITY,LEGAL}"
 
 echo "=== ETHIC MECHANICS AUDIT (7 REAL SECTORS) ==="
 echo "Sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY"
@@ -69,7 +70,7 @@ fi
 echo
 
 echo "=== 5. CANONICAL MECHANICAL ETHICS GATE ==="
-python3 "$GATE_SCRIPT" --output "$GATE_OUTPUT" --required-sectors "CORE,TECHNICAL"
+python3 "$GATE_SCRIPT" --output "$GATE_OUTPUT" --required-sectors "$GATE_REQUIRED_SECTORS"
 python3 - <<'PY'
 import json
 from pathlib import Path

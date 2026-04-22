@@ -30,6 +30,12 @@ DEFAULT_SECTORS = [
     "LEGAL",
     "REGULATORY",
 ]
+L4_FOUNDATIONAL_SECTORS = [
+    "CORE",
+    "TECHNICAL",
+    "SECURITY",
+    "LEGAL",
+]
 
 
 def utc_now() -> str:
@@ -150,6 +156,27 @@ def main() -> int:
         blocking_reasons.append("REQUIRED_SECTORS_NOT_VALIDATED")
 
     status = "PASS" if not blocking_reasons else "FAIL_CLOSED"
+    l4_blockers: List[str] = []
+    l4_missing_evidence_by_sector: Dict[str, List[str]] = {}
+    for sector in L4_FOUNDATIONAL_SECTORS:
+        sector_data = per_sector.get(sector, {})
+        missing = list(sector_data.get("missing_evidence_keys", []))
+        if missing:
+            l4_missing_evidence_by_sector[sector] = missing
+
+        if sector_data.get("status") != "PASS":
+            l4_blockers.append(f"L4_SECTOR_NOT_VALIDATED:{sector}")
+
+    if evidence_mode != "REAL_LOCAL":
+        l4_blockers.append("L4_REQUIRES_REAL_LOCAL_MODE")
+    if l4_missing_evidence_by_sector:
+        l4_blockers.append("L4_MISSING_FOUNDATIONAL_EVIDENCE")
+
+    claim_level_ceiling = "L4" if status == "PASS" and not l4_blockers else "L3"
+    foundational_validated = not l4_missing_evidence_by_sector and all(
+        per_sector.get(sector, {}).get("status") == "PASS"
+        for sector in L4_FOUNDATIONAL_SECTORS
+    )
 
     payload = {
         "artifactType": "mechanical_ethics_gate",
@@ -159,7 +186,11 @@ def main() -> int:
         "blocking": status != "PASS",
         "mode": evidence_mode,
         "evidence_mode": "REAL_LOCAL",
-        "claim_level_ceiling": "L4" if status == "PASS" else "L3",
+        "claim_level_ceiling": claim_level_ceiling,
+        "l4_foundational_sectors": L4_FOUNDATIONAL_SECTORS,
+        "l4_foundational_validated": foundational_validated,
+        "l4_blockers": sorted(set(l4_blockers)),
+        "l4_missing_evidence_by_sector": l4_missing_evidence_by_sector,
         "required_sectors": required_sectors,
         "validated_sectors": validated_sectors,
         "failed_sectors": failed_sectors,
@@ -191,4 +222,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
