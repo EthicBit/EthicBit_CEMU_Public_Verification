@@ -17,6 +17,7 @@ jobs:
       ETHICBIT_MLDSA_SIGN_CMD: assurance/signers/mldsa_sign.sh {payload}
       ETHICBIT_ED25519_VERIFY_CMD: assurance/signers/ed25519_verify.sh {payload} {signature}
       ETHICBIT_MLDSA_VERIFY_CMD: assurance/signers/mldsa_verify.sh {payload} {signature}
+      ETHICBIT_ME_GATE_REQUIRED_SECTORS: CORE,JUSTICIA,FINANZAS,SECURITY,TECHNICAL,LEGAL,REGULATORY
     steps:
       - uses: actions/checkout@v4
 
@@ -64,6 +65,50 @@ jobs:
         run: |
           chmod +x scripts/audit/verify_constitutional_controls.sh
           ./scripts/audit/verify_constitutional_controls.sh
+
+      - name: Require canonical mechanical ethics gate
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          required = [
+              "CORE",
+              "JUSTICIA",
+              "FINANZAS",
+              "SECURITY",
+              "TECHNICAL",
+              "LEGAL",
+              "REGULATORY",
+          ]
+
+          gate_path = Path("results/mechanical_ethics_gate.json")
+          if not gate_path.exists():
+              raise SystemExit("Missing results/mechanical_ethics_gate.json")
+
+          gate = json.loads(gate_path.read_text(encoding="utf-8"))
+          status = gate.get("status")
+          if status != "PASS":
+              raise SystemExit(f"Mechanical ethics gate status is not PASS: {status}")
+
+          validated = set(gate.get("validated_sectors", []))
+          missing_required = [sector for sector in required if sector not in validated]
+          if missing_required:
+              raise SystemExit(
+                  "Mechanical ethics gate missing required sectors: "
+                  + ",".join(missing_required)
+              )
+
+          if gate.get("claim_level_ceiling") != "L4":
+              raise SystemExit(
+                  "Mechanical ethics gate claim_level_ceiling must be L4 for production check"
+              )
+
+          if gate.get("l4_foundational_validated") is not True:
+              raise SystemExit("Mechanical ethics gate L4 foundational validation is not true")
+
+          print("mechanical_ethics_gate: PASS (all required sectors + L4 validated)")
+          PY
 
       - name: Run final readiness gate
         run: python3 tools/checks/check_production_distributed_ready_final.py
