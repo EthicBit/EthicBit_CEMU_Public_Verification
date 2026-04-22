@@ -62,6 +62,11 @@ Therefore, both statements are simultaneously true and non-contradictory:
 - `results/final_snapshot/GATE_REPORT.json`
 - `results/final_snapshot/hybrid_signature_set.json`
 - `results/final_snapshot/hybrid_signature_verification.json`
+- `audit_package/current_state/index.json`
+- `audit_package/current_state/GATE_REPORT.json`
+- `audit_package/current_state/official_operational_status.json`
+- `results/active/final_status_snapshot.json`
+- `artifacts/history/swarm/periodic_audit_receipt.json`
 
 Snapshot refresh note:
 
@@ -73,6 +78,29 @@ Snapshot refresh note:
 Periodic evidence alignment note:
 
 - `artifacts/history/swarm/periodic_audit_receipt.json` was refreshed on 2026-04-22 to match current gate and official status outputs.
+
+## 16. Official Closure Snapshot (updated 2026-04-22)
+
+The official closure snapshot was updated to include regenerated runtime-aligned artifacts and synchronized current-state package artifacts.
+
+Regenerated and synchronized set:
+
+- `results/final_snapshot/official_operational_status.json`
+- `results/final_snapshot/GATE_REPORT.json`
+- `results/final_snapshot/constitutional_controls_report.json`
+- `results/final_snapshot/hybrid_signature_set.json`
+- `results/final_snapshot/hybrid_signature_verification.json`
+- `results/final_snapshot/FINAL_SNAPSHOT_MANIFEST.json`
+- `results/final_snapshot/artifact_hashes.sha256`
+- `audit_package/current_state/index.json`
+- `audit_package/current_state/GATE_REPORT.json`
+- `audit_package/current_state/official_operational_status.json`
+- `audit_package/current_state/final_status_snapshot.json`
+- `results/active/final_status_snapshot.json`
+
+Integrity check:
+
+- `shasum -a 256 -c results/final_snapshot/artifact_hashes.sha256` => all entries `OK` on 2026-04-22.
 
 ---
 

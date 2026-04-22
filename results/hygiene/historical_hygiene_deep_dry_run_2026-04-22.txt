@@ -1,0 +1,54 @@
+=== HISTORICAL HYGIENE DEEP DRY RUN ===
+repo: /Users/oskrmiranda/Documentos/EthicBit_CEMU
+
+[1] Current object store footprint
+count: 914
+size: 4.93 MiB
+in-pack: 35985
+packs: 4
+size-pack: 1.34 GiB
+prune-packable: 0
+garbage: 1
+size-garbage: 296.63 MiB
+
+[2] Tracked file counts for high-risk hygiene classes
+.venv-mythril tracked: 0
+
+*.pyc tracked: 0
+
+__pycache__ tracked paths: 0
+
+node_modules tracked: 0
+
+
+[3] Largest historical blobs (top 30)
+38387208 f4999ec24d93a1d74b6ba43ac7d2946a500aaafe node_modules/@nomicfoundation/edr-linux-x64-musl/edr.linux-x64-musl.node
+38368856 0f15d4015e8aa0050a4a7a06f0b36d32f7f06a7e node_modules/@nomicfoundation/edr-linux-x64-gnu/edr.linux-x64-gnu.node
+35743568 4557dd771242d2ffae8b6fd22e526443d5ff6e92 .venv-mythril/.solc-select/artifacts/solc-0.8.34/solc-0.8.34
+34724328 f5b7ee235fd09acb37d907b4106ae608b32c43b5 node_modules/@nomicfoundation/edr-linux-arm64-musl/edr.linux-arm64-musl.node
+34704416 2b627e8970d6aec67da53094238e709ea531a093 node_modules/@nomicfoundation/edr-linux-arm64-gnu/edr.linux-arm64-gnu.node
+25652908 d50f9724acd636874db5bc04bba50229a6222c9c node_modules/@nomicfoundation/edr-darwin-x64/edr.darwin-x64.node
+25110528 c04f9c074b24ad9cc98fd3b70e0be920fd58e5d4 node_modules/@nomicfoundation/edr-win32-x64-msvc/edr.win32-x64-msvc.node
+23365455 3f8a83a913deeb9f37e9e96a95e6de253ac68a91 .venv-mythril/bin/z3
+23142104 cc376090c1002ffda4169fec448eb86414d24f00 .venv-mythril/lib/python3.11/site-packages/z3/lib/libz3.4.12.dylib
+21389488 cdf8d37bb292518e16d8a606975c8d5df906583a node_modules/@nomicfoundation/edr-darwin-arm64/edr.darwin-arm64.node
+12406784 9cc9e31831dc8e5f4d8e6660470505c74ee3c27e .venv-mythril/lib/python3.11/site-packages/mythril/support/assets/signatures.db
+10385218 073f4e8e8d07270dec127cdac20d53124821f51d node_modules/@esbuild/darwin-arm64/bin/esbuild
+5215624 e141af941c8af6fb42be3f71aaa6999c4da7b39c .venv-mythril/lib/python3.11/site-packages/scipy/optimize/_highspy/_core.cpython-311-darwin.so
+3678200 241653ba23a4e054f0ea6aa6cf4e2690a3445c91 .venv-mythril/lib/python3.11/site-packages/numpy/_core/_multiarray_umath.cpython-311-darwin.so
+3614784 e5bce33b16043f3006340f20509db74e6a2704a6 .venv-mythril/lib/python3.11/site-packages/scipy/sparse/_sparsetools.cpython-311-darwin.so
+3557037 c9a5c097ae34a6838909434e6bb822fc67976683 freezes/audit-freeze-2026-04-12-hardened/docker_audit_sbom.postfix.json
+3016336 24cfb56e3ce0a4563841c47761b3189cceca61c6 .venv-mythril/lib/python3.11/site-packages/PIL/.dylibs/libavif.16.4.1.dylib
+2331543 3fc4687e226b5fd1b715e52af094e4e1db03a592 .venv-mythril/lib/python3.11/site-packages/cytoolz/itertoolz.c
+2150672 27bf3710df70564f82b3b0ebda9fa74e863feb94 .venv-mythril/lib/python3.11/site-packages/scipy/io/_fast_matrix_market/_fmm_core.cpython-311-darwin.so
+1994752 af9751d4d6f2fb242e1a37f06d8a3fe4efa1b617 node_modules/@nomicfoundation/solidity-analyzer-linux-arm64-gnu/solidity-analyzer.linux-arm64-gnu.node
+1980624 b0ad458cbbe34b0bdd359ebad7d57de0eccacadb node_modules/ethers/dist/ethers.umd.js.map
+1980407 e323080e6c9144dde3abd09579c7004eab5df5a2 node_modules/ethers/dist/ethers.js.map
+1967432 c8f145034a3b7da7cefe40489aed2e0a831ae87b node_modules/@nomicfoundation/solidity-analyzer-linux-arm64-musl/solidity-analyzer.linux-arm64-musl.node
+1943664 1d73da524e34604cf497776e4e72e449e74b7e87 node_modules/@nomicfoundation/solidity-analyzer-linux-x64-gnu/solidity-analyzer.linux-x64-gnu.node
+1931104 6e692a95b4c441550576c3017d3d33e71f39a05f node_modules/@nomicfoundation/solidity-analyzer-linux-x64-musl/solidity-analyzer.linux-x64-musl.node
+1901520 5cbaa5267f0002d98577ac2b9896c42fd97f1b68 .venv-mythril/lib/python3.11/site-packages/scipy/.dylibs/libgfortran.5.dylib
+1871104 1cc9f38940171d1096ab1f3593c024d9a068269f .venv-mythril/lib/python3.11/site-packages/scipy/linalg/_flapack.cpython-311-darwin.so
+1841526 8d3b0043ea53790b1ad142d8ce9a6b3a7fd19e66 .venv-mythril/lib/python3.11/site-packages/virtualenv/seed/wheels/embed/pip-25.0.1-py3-none-any.whl
+1837643 9b4b9e7005409f5a92f3d9d5bc6333d7db714f81 .venv-mythril/lib/python3.11/site-packages/fontTools/misc/bezierTools.c
+1790224 70818d84604314118aa8f98153e73b33f699e444 .venv-mythril/lib/python3.11/site-packages/PIL/.dylibs/libharfbuzz.0.dylib

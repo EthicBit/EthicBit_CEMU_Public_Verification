@@ -12,6 +12,9 @@ This report documents the synchronization performed between:
 
 ## Alignment actions executed
 
+0. Historical hygiene deep dry-run executed first:
+   - `./scripts/hygiene/historical_hygiene_deep_dry_run.sh`
+   - evidence output: `results/hygiene/historical_hygiene_deep_dry_run_2026-04-22.txt`
 1. Canonical regeneration:
    - `./scripts/run_mixed_audience_audit_with_constitutional_amendment.sh`
    - `./scripts/status/official_operational_status_calculator.py --root . --strict --require-signature`
