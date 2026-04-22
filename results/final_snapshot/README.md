@@ -1,9 +1,9 @@
-# Final Snapshot (2026-04-20)
+# Final Snapshot (2026-04-22)
 
-This directory captures the closing evidence set used for release-grade documentation.
+This directory captures the current closure evidence set synchronized from canonical runtime artifacts.
 
 - It includes official status, constitutional controls, gate report, and hybrid signature evidence.
-- It explicitly records that `freezeActive=false` in this snapshot does not negate the formal freeze tag issuance.
+- `freezeActive` in runtime artifacts is interpreted together with formal freeze-tag governance references.
 
 Primary manifest: `FINAL_SNAPSHOT_MANIFEST.json`
 Hashes: `artifact_hashes.sha256`

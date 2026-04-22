@@ -4,8 +4,8 @@
 **Repository:** `EthicBit_CEMU`
 **Document purpose:** Final closure conclusion after sovereign crypto-claim hardening and merge to canonical `main`
 **Status:** Active
-**Date:** 2026-04-20
-**Commit SHA (main):** `3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
+**Date:** 2026-04-22
+**Commit SHA (main):** `f2f441e1994e90b133a2bb04154d08ce96f1d1a4`
 
 ---
 
@@ -49,7 +49,7 @@ Therefore, both statements are simultaneously true and non-contradictory:
 - Preclose tag: `v2.2b-sovereign-preclose-20260419`
 - Hybrid claim enforcement tag: `v2.2b-hybrid-claim-enforcement`
 - Freeze tag: `audit-freeze-20260419-hybrid-claim-enforcement`
-- Canonical merge commit on `main`: `3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
+- Canonical merge commit on `main`: `f2f441e1994e90b133a2bb04154d08ce96f1d1a4`
 
 ---
 
@@ -65,8 +65,14 @@ Therefore, both statements are simultaneously true and non-contradictory:
 
 Snapshot refresh note:
 
-- final snapshot regenerated on 2026-04-20 from canonical runtime artifacts at `main@3e9b1785342c4e33eca88e8cb3085dadabf6d50d`
-- hybrid evidence now includes schema v2 semantic binding (`hybridCryptoTruth` + `verificationPolicy`)
+- final snapshot synchronized on 2026-04-22 from current canonical runtime artifacts
+- snapshot head captured in manifest: `8771abf3c9f840472ec01e8b860ea6d8f46b39b5`
+- observed upstream `main` at synchronization time: `f2f441e1994e90b133a2bb04154d08ce96f1d1a4`
+- hybrid evidence remains aligned with schema v2 semantic binding (`hybridCryptoTruth` + `verificationPolicy`)
+
+Periodic evidence alignment note:
+
+- `artifacts/history/swarm/periodic_audit_receipt.json` was refreshed on 2026-04-22 to match current gate and official status outputs.
 
 ---
 

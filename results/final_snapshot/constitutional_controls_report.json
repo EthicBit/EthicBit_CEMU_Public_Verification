@@ -1,6 +1,6 @@
 {
   "artifactType": "constitutional_controls_report",
-  "generatedAt": "2026-04-18T18:32:49.887296Z",
+  "generatedAt": "2026-04-22T01:56:16.697523Z",
   "constitutionVersion": "v1.0.0",
   "matrixVersion": "v1.0.0",
   "matrixPath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/config/constitutional_controls.v1.json",
@@ -42,7 +42,7 @@
         "government",
         "cross-economy"
       ],
-      "checkedAt": "2026-04-18T18:32:38.485569Z"
+      "checkedAt": "2026-04-22T01:56:06.674329Z"
     },
     {
       "controlId": "CTL-ETH-001",
@@ -55,7 +55,7 @@
       "status": "PASS",
       "execution": {
         "returnCode": 0,
-        "stdoutTail": "ce\": null, \"fallback_reason\": null, \"sector_requested\": \"REGULATORY\", \"sector_resolved\": \"CORE\", \"entity_visibility\": null, \"entity_detectability\": null, \"detection_mode\": null, \"constitutional_scope\": null, \"cross_sector_activation\": false, \"external_evidence_required\": false, \"cross_sector_review_required\": false}}\n-> REJECT expected\n✅ EvidenceBroker v2.2b inicializado | modo=MOCK | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: CORE\nbrokerReport.final_gate=N/A\nfail_closed_reason=N/A\n{\"ruleId\": \"RULE-ETHIC-XYZ-999-v9.9\", \"sector\": \"UNKNOWN\", \"status\": \"FAIL_CLOSED\", \"severity\": \"CRITICAL\", \"evidenceMissing\": [\"rule_not_found\"], \"evidenceProvided\": [], \"reason\": \"Regla no encontrada\", \"actionTaken\": \"FAIL_CLOSED\", \"timestamp\": \"2026-04-18T18:32:41Z\", \"brokerReport\": {}, \"metadata\": {\"final_gate\": \"FAIL_CLOSED\"}}\nOK: REJECT triggered\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\n",
+        "stdoutTail": "ver.missing=[]\n{\"ruleId\": \"RULE-ETHIC-XYZ-999-v9.9\", \"sector\": \"UNKNOWN\", \"status\": \"FAIL_CLOSED\", \"severity\": \"CRITICAL\", \"evidenceMissing\": [\"rule_not_found\"], \"evidenceProvided\": [], \"reason\": \"Regla no encontrada\", \"actionTaken\": \"FAIL_CLOSED\", \"timestamp\": \"2026-04-22T01:56:08Z\", \"brokerReport\": {}, \"metadata\": {\"final_gate\": \"FAIL_CLOSED\"}}\nOK: REJECT triggered\n\n=== 5. CANONICAL MECHANICAL ETHICS GATE ===\n✅ EvidenceBroker v2.2b inicializado | modo=REAL_LOCAL | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: CORE\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: FINANZAS\n📦 Sector cargado: SECURITY\n📦 Sector cargado: TECHNICAL\n📦 Sector cargado: LEGAL\n📦 Sector cargado: REGULATORY\nmechanical_ethics_gate=/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/mechanical_ethics_gate.json\nstatus=PASS\nmode=REAL_LOCAL\nrequired_failed=[]\ngate.status=PASS\ngate.mode=REAL_LOCAL\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\n",
         "stderrTail": ""
       },
       "evidence": {
@@ -77,7 +77,7 @@
         "regulatory",
         "government"
       ],
-      "checkedAt": "2026-04-18T18:32:39.981207Z"
+      "checkedAt": "2026-04-22T01:56:06.837167Z"
     },
     {
       "controlId": "CTL-MIX-001",
@@ -90,7 +90,7 @@
       "status": "PASS",
       "execution": {
         "returnCode": 0,
-        "stdoutTail": "y\": null, \"entity_detectability\": null, \"detection_mode\": null, \"constitutional_scope\": null, \"cross_sector_activation\": false, \"external_evidence_required\": false, \"cross_sector_review_required\": false}}\n-> REJECT expected\n✅ EvidenceBroker v2.2b inicializado | modo=MOCK | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: CORE\nbrokerReport.final_gate=N/A\nfail_closed_reason=N/A\n{\"ruleId\": \"RULE-ETHIC-XYZ-999-v9.9\", \"sector\": \"UNKNOWN\", \"status\": \"FAIL_CLOSED\", \"severity\": \"CRITICAL\", \"evidenceMissing\": [\"rule_not_found\"], \"evidenceProvided\": [], \"reason\": \"Regla no encontrada\", \"actionTaken\": \"FAIL_CLOSED\", \"timestamp\": \"2026-04-18T18:32:47Z\", \"brokerReport\": {}, \"metadata\": {\"final_gate\": \"FAIL_CLOSED\"}}\nOK: REJECT triggered\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\nAUDITORÍA DE ÉTICA MECÁNICA: PASS\n===============================================================================\n",
+        "stdoutTail": "ITICAL\", \"evidenceMissing\": [\"rule_not_found\"], \"evidenceProvided\": [], \"reason\": \"Regla no encontrada\", \"actionTaken\": \"FAIL_CLOSED\", \"timestamp\": \"2026-04-22T01:56:14Z\", \"brokerReport\": {}, \"metadata\": {\"final_gate\": \"FAIL_CLOSED\"}}\nOK: REJECT triggered\n\n=== 5. CANONICAL MECHANICAL ETHICS GATE ===\n✅ EvidenceBroker v2.2b inicializado | modo=REAL_LOCAL | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: CORE\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: FINANZAS\n📦 Sector cargado: SECURITY\n📦 Sector cargado: TECHNICAL\n📦 Sector cargado: LEGAL\n📦 Sector cargado: REGULATORY\nmechanical_ethics_gate=/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/mechanical_ethics_gate.json\nstatus=PASS\nmode=REAL_LOCAL\nrequired_failed=[]\ngate.status=PASS\ngate.mode=REAL_LOCAL\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\nAUDITORÍA DE ÉTICA MECÁNICA: PASS\n===============================================================================\n",
         "stderrTail": ""
       },
       "evidence": {
@@ -117,7 +117,7 @@
         "government",
         "cross-economy"
       ],
-      "checkedAt": "2026-04-18T18:32:41.228008Z"
+      "checkedAt": "2026-04-22T01:56:08.418384Z"
     },
     {
       "controlId": "CTL-CI-001",
@@ -145,7 +145,7 @@
         "regulatory",
         "government"
       ],
-      "checkedAt": "2026-04-18T18:32:47.351933Z"
+      "checkedAt": "2026-04-22T01:56:14.488785Z"
     },
     {
       "controlId": "CTL-SEC-001",
@@ -173,7 +173,7 @@
         "regulatory",
         "government"
       ],
-      "checkedAt": "2026-04-18T18:32:47.360373Z"
+      "checkedAt": "2026-04-22T01:56:14.497699Z"
     },
     {
       "controlId": "CTL-BUILD-001",
@@ -204,7 +204,7 @@
         "crypto",
         "cybersecurity"
       ],
-      "checkedAt": "2026-04-18T18:32:47.368298Z"
+      "checkedAt": "2026-04-22T01:56:14.506255Z"
     }
   ],
   "constitutionalAmendment": {

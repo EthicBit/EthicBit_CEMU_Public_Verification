@@ -1,15 +1,29 @@
 {
   "artifactType": "mechanical_ethics_gate",
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-04-21T12:02:44Z",
+  "generatedAt": "2026-04-22T16:29:53Z",
   "status": "PASS",
   "blocking": false,
   "mode": "REAL_LOCAL",
   "evidence_mode": "REAL_LOCAL",
   "claim_level_ceiling": "L4",
+  "l4_foundational_sectors": [
+    "CORE",
+    "TECHNICAL",
+    "SECURITY",
+    "LEGAL"
+  ],
+  "l4_foundational_validated": true,
+  "l4_blockers": [],
+  "l4_missing_evidence_by_sector": {},
   "required_sectors": [
     "CORE",
-    "TECHNICAL"
+    "JUSTICIA",
+    "FINANZAS",
+    "SECURITY",
+    "TECHNICAL",
+    "LEGAL",
+    "REGULATORY"
   ],
   "validated_sectors": [
     "CORE",
@@ -88,7 +102,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -132,7 +146,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -176,7 +190,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -220,7 +234,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -264,7 +278,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -308,7 +322,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -352,7 +366,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -396,7 +410,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -440,7 +454,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -484,7 +498,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -528,7 +542,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -572,7 +586,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -616,7 +630,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -660,7 +674,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -683,7 +697,7 @@
           "mode": "REAL_LOCAL",
           "resolved": {
             "impact_scope_matrix": "results/constitutional_amendment_snapshot.json",
-            "cross_sector_trigger_record": "results/constitutional_controls_report.json",
+            "cross_sector_trigger_record": "results/constitutional_amendment_snapshot.json",
             "supervisory_trace_record": "results/regulatory_control_report.md"
           },
           "missing": []
@@ -704,7 +718,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -748,7 +762,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -792,7 +806,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,
@@ -836,7 +850,7 @@
       ],
       "reason": "Regla satisfecha",
       "actionTaken": "PASS",
-      "timestamp": "2026-04-21T12:02:44Z",
+      "timestamp": "2026-04-22T16:29:53Z",
       "brokerReport": {},
       "metadata": {
         "fallback_used": false,

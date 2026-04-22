@@ -1,12 +1,12 @@
 {
   "artifactType": "mixed_audience_audit_results_index",
-  "generatedAt": "2026-04-21T12:02:41Z",
+  "generatedAt": "2026-04-22T16:29:49Z",
   "policyVersion": "mixed-audience-gate-policy.v1.1.0",
   "stateTaxonomyVersion": "ethicbit-state-taxonomy.v2.0.0",
   "runContext": {
-    "runId": "run-20260421T120241Z-50927",
+    "runId": "run-20260422T162949Z-16707",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-21T12:00:00Z"
+    "verificationEpoch": "2026-04-22T16:00:00Z"
   },
   "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
   "declaredState": {
