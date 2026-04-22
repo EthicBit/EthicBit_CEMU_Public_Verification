@@ -20,7 +20,7 @@ env:
 
 jobs:
   build-sign-attest:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.ref_type == 'tag' && (startsWith(github.ref_name, 'v') || startsWith(github.ref_name, 'audit-freeze-'))) && fromJSON('["self-hosted","linux","x64","mldsa-native"]') || fromJSON('["ubuntu-latest"]') }}
 
     steps:
       - name: Checkout
