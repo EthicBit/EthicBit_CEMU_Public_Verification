@@ -31,7 +31,7 @@ git rev-list --objects --all \
   | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
   | awk '$1=="blob"{print $3, $2, substr($0, index($0,$4))}' \
   | sort -nr \
-  | head -30
+  | awk 'NR<=30 { print }'
 echo
 
 echo "[4] Non-destructive rewrite plan preview"

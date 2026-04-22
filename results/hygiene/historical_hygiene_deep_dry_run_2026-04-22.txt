@@ -2,8 +2,8 @@
 repo: /Users/oskrmiranda/Documentos/EthicBit_CEMU
 
 [1] Current object store footprint
-count: 914
-size: 4.93 MiB
+count: 952
+size: 5.08 MiB
 in-pack: 35985
 packs: 4
 size-pack: 1.34 GiB
@@ -52,3 +52,17 @@ node_modules tracked: 0
 1841526 8d3b0043ea53790b1ad142d8ce9a6b3a7fd19e66 .venv-mythril/lib/python3.11/site-packages/virtualenv/seed/wheels/embed/pip-25.0.1-py3-none-any.whl
 1837643 9b4b9e7005409f5a92f3d9d5bc6333d7db714f81 .venv-mythril/lib/python3.11/site-packages/fontTools/misc/bezierTools.c
 1790224 70818d84604314118aa8f98153e73b33f699e444 .venv-mythril/lib/python3.11/site-packages/PIL/.dylibs/libharfbuzz.0.dylib
+
+[4] Non-destructive rewrite plan preview
+- Freeze window and comms plan.
+- Full backup mirror before rewrite:
+  git clone --mirror <repo-url> ../EthicBit_CEMU.mirror.backup.git
+- Analyze candidates:
+  git filter-repo --analyze
+- Rewrite candidates (execute only in approved maintenance window):
+  git filter-repo --path .venv-mythril --invert-paths
+  git filter-repo --path-glob '*.pyc' --invert-paths
+  git filter-repo --path-glob '**/__pycache__/*' --invert-paths
+- Re-tag/re-validate closure artifacts and publish migration notice.
+
+dry-run complete

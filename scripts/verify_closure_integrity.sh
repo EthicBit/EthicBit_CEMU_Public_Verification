@@ -1,8 +1,3 @@
-if ! scripts/verify_case003_material_integrity.sh; then
-  echo "FAIL_CLOSED: case_003 material integrity gate failed"
-  exit 1
-fi
-
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -16,6 +11,13 @@ BUNDLE="${ARTIFACTS_DIR}/security_incident_bundle_v1_0.json"
 CERTIFICATE="${ARTIFACTS_DIR}/formal_closure_certificate_multicapa_v1_0.json"
 MANIFEST="${ARTIFACTS_DIR}/artifact_manifest.json"
 LEDGER="${ARTIFACTS_DIR}/ethicbit_closure_artifacts_hashes.json"
+CASE003_MATERIAL_SCRIPT="${SCRIPTS_DIR}/verify_case003_material_integrity.sh"
+IN_TOTO_LAYOUT="${ROOT_DIR}/assurance/in-toto/root.layout"
+IN_TOTO_INDEX="${ROOT_DIR}/assurance/in-toto/attestation-index.json"
+SLSA_L4_POLICY="${ROOT_DIR}/assurance/slsa/level4-policy.json"
+SIGSTORE_POLICY="${ROOT_DIR}/assurance/sigstore/policy.json"
+ATTESTATION_STATUS_CANONICAL="${ROOT_DIR}/artifacts/history/swarm/attestation_status.canonical.json"
+NORMALIZE_ATTESTATION_STATUS_SCRIPT="${ROOT_DIR}/scripts/status/normalize_attestation_status_canonical.py"
 
 fail() {
   local code="$1"
@@ -50,10 +52,78 @@ ensure_required_components() {
   require_file "$CERTIFICATE"
   require_file "$MANIFEST"
   require_file "$LEDGER"
+  require_file "$CASE003_MATERIAL_SCRIPT"
   require_file "${SCRIPTS_DIR}/verify_closure_integrity.sh"
   require_file "${SCRIPTS_DIR}/resolve_publication_drift.sh"
   require_file "${SCRIPTS_DIR}/publish-closure-atomic.sh"
   require_file "${SCRIPTS_DIR}/run_production_readiness.sh"
+}
+
+ensure_case003_material_integrity() {
+  if ! "$CASE003_MATERIAL_SCRIPT" >/tmp/case003_material_integrity.out 2>/tmp/case003_material_integrity.err; then
+    fail "NOT_READY (FAIL-CLOSED)" "case_003 material integrity gate failed"
+  fi
+}
+
+ensure_assurance_layer_enforced() {
+  require_file "$IN_TOTO_LAYOUT"
+  require_file "$IN_TOTO_INDEX"
+  require_file "$SLSA_L4_POLICY"
+  require_file "$SIGSTORE_POLICY"
+  require_file "$NORMALIZE_ATTESTATION_STATUS_SCRIPT"
+
+  local layout_status index_status slsa_status sigstore_status
+  local in_toto_all_steps in_toto_no_pending in_toto_required_status
+  local sigstore_production_signing sigstore_allow_unsigned sigstore_hybrid_mode
+  local slsa_attestation_required
+  layout_status="$(json_get "$IN_TOTO_LAYOUT" "status")"
+  index_status="$(json_get "$IN_TOTO_INDEX" "status")"
+  slsa_status="$(json_get "$SLSA_L4_POLICY" "status")"
+  sigstore_status="$(json_get "$SIGSTORE_POLICY" "status")"
+  in_toto_all_steps="$(json_get "$IN_TOTO_INDEX" "verification.allStepsMustBeAttested")"
+  in_toto_no_pending="$(json_get "$IN_TOTO_INDEX" "verification.noPendingAllowed")"
+  in_toto_required_status="$(json_get "$IN_TOTO_INDEX" "verification.requiredStatementStatus")"
+  sigstore_production_signing="$(json_get "$SIGSTORE_POLICY" "enforcement.production_signing_required")"
+  sigstore_allow_unsigned="$(json_get "$SIGSTORE_POLICY" "enforcement.allow_unsigned_artifacts")"
+  sigstore_hybrid_mode="$(json_get "$SIGSTORE_POLICY" "enforcement.hybrid_signature_required")"
+  slsa_attestation_required="$(json_get "$SLSA_L4_POLICY" "enforcement.attestations_mandatory")"
+
+  [[ "$layout_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto layout status must be ENFORCED"
+  [[ "$index_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto attestation index status must be ENFORCED"
+  [[ "$slsa_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "SLSA L4 policy status must be ENFORCED"
+  [[ "$sigstore_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore policy status must be ENFORCED"
+  [[ "$in_toto_all_steps" == "true" || "$in_toto_all_steps" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto allStepsMustBeAttested must be true"
+  [[ "$in_toto_no_pending" == "true" || "$in_toto_no_pending" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto noPendingAllowed must be true"
+  [[ "$in_toto_required_status" == "VERIFIED" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto requiredStatementStatus must be VERIFIED"
+  [[ "$sigstore_production_signing" == "true" || "$sigstore_production_signing" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore production_signing_required must be true"
+  [[ "$sigstore_allow_unsigned" == "false" || "$sigstore_allow_unsigned" == "False" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore allow_unsigned_artifacts must be false"
+  [[ "$sigstore_hybrid_mode" == "MODE_DRIVEN" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore hybrid_signature_required must be MODE_DRIVEN"
+  [[ "$slsa_attestation_required" == "true" || "$slsa_attestation_required" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "slsa attestations_mandatory must be true"
+
+  if grep -Eq 'PENDING_ATTESTATION|PLACEHOLDER|TODO' "$IN_TOTO_INDEX"; then
+    fail "CRYPTO_POLICY_FAIL" "in-toto attestation index contains forbidden pending markers"
+  fi
+
+  if ! /usr/bin/python3 "$NORMALIZE_ATTESTATION_STATUS_SCRIPT" --root "$ROOT_DIR" --strict >/tmp/attestation_normalize.out 2>/tmp/attestation_normalize.err; then
+    fail "CRYPTO_POLICY_FAIL" "canonical attestation normalization failed in strict mode"
+  fi
+
+  require_file "$ATTESTATION_STATUS_CANONICAL"
+
+  local canonical_schema canonical_status canonical_gate_status canonical_slsa_status
+  canonical_schema="$(json_get "$ATTESTATION_STATUS_CANONICAL" "schema_id")"
+  canonical_status="$(json_get "$ATTESTATION_STATUS_CANONICAL" "status")"
+  canonical_gate_status="$(json_get "$ATTESTATION_STATUS_CANONICAL" "gate.status")"
+  canonical_slsa_status="$(json_get "$ATTESTATION_STATUS_CANONICAL" "slsaAssessment.status")"
+
+  [[ "$canonical_schema" == "ETHICBIT_ATTESTATION_STATUS_CANONICAL_V1" ]] || fail "CRYPTO_POLICY_FAIL" "invalid canonical attestation schema_id"
+  [[ "$canonical_status" == "VERIFIED" ]] || fail "CRYPTO_POLICY_FAIL" "canonical attestation status must be VERIFIED"
+  [[ "$canonical_gate_status" == "PASS" ]] || fail "CRYPTO_POLICY_FAIL" "canonical attestation gate must be PASS"
+
+  case "$canonical_slsa_status" in
+    PASS_SLSA_FINAL|VERIFIED_REPRODUCIBLE|VERIFIED) ;;
+    *) fail "CRYPTO_POLICY_FAIL" "canonical slsaAssessment.status is not an accepted final-equivalent status" ;;
+  esac
 }
 
 ensure_no_known_competing_files() {
@@ -180,6 +250,8 @@ ensure_publication_pointer_if_present() {
 
 main() {
   ensure_required_components
+  ensure_case003_material_integrity
+  ensure_assurance_layer_enforced
   ensure_no_known_competing_files
   ensure_manifest_shape
   ensure_hash_alignment
