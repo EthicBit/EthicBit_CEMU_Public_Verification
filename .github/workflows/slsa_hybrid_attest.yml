@@ -16,6 +16,7 @@ permissions:
 env:
   PYTHON_VERSION: "3.11"
   ETHICBIT_ME_GATE_REQUIRED_SECTORS: CORE,JUSTICIA,FINANZAS,SECURITY,TECHNICAL,LEGAL,REGULATORY
+  ETHICBIT_HERMETIC_BASE_IMAGE_REF: ${{ vars.ETHICBIT_HERMETIC_BASE_IMAGE_REF }}
 
 jobs:
   build-sign-attest:
@@ -29,6 +30,69 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Materialize hermetic build posture report
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p results
+
+          strict_required="0"
+          if [[ "${GITHUB_REF_TYPE}" == "tag" && ( "${GITHUB_REF_NAME}" == v* || "${GITHUB_REF_NAME}" == audit-freeze-* ) ]]; then
+            strict_required="1"
+          fi
+
+          mode="equivalence_non_hermetic"
+          network_mode="runner-default"
+          build_system="github_actions_runner"
+          build_target="none"
+          declared_gap="Strict hermetic build is not enforced for non-tag CI context."
+          base_image_ref="${ETHICBIT_HERMETIC_BASE_IMAGE_REF:-node:22-bookworm-slim}"
+
+          if [[ "${strict_required}" == "1" ]]; then
+            [[ "$base_image_ref" =~ @sha256:[a-f0-9]{64}$ ]] || {
+              echo "ETHICBIT_HERMETIC_BASE_IMAGE_REF must be pinned with @sha256 for strict hermetic mode." >&2
+              exit 1
+            }
+
+            docker build \
+              --file Dockerfile.build \
+              --target hermetic-check \
+              --build-arg ETHICBIT_BASE_IMAGE_REF="$base_image_ref" \
+              --network=none \
+              --tag "ethicbit-hermetic-probe:${GITHUB_RUN_ID}" \
+              .
+
+            mode="strict_hermetic"
+            network_mode="none"
+            build_system="docker"
+            build_target="hermetic-check"
+            declared_gap=""
+          fi
+
+          extra_args=()
+          if [[ "${strict_required}" == "1" ]]; then
+            extra_args+=(--strict-required)
+          fi
+          if [[ -n "$declared_gap" ]]; then
+            extra_args+=(--declared-gap "$declared_gap")
+          fi
+
+          python3 scripts/assurance/write_hermetic_build_report.py \
+            --output results/hermetic_build_report.json \
+            --mode "$mode" \
+            --base-image-ref "$base_image_ref" \
+            --network-mode "$network_mode" \
+            --claim-level "ci_grade" \
+            --build-system "$build_system" \
+            --build-target "$build_target" \
+            --lockfile package-lock.json \
+            "${extra_args[@]}"
+
+          {
+            echo "ETHICBIT_HERMETIC_REQUIRE_STRICT=${strict_required}"
+            echo "ETHICBIT_HERMETIC_REPORT_PATH=results/hermetic_build_report.json"
+          } >> "$GITHUB_ENV"
 
       - name: Show tool versions
         run: |
@@ -401,6 +465,12 @@ jobs:
           print("mechanical_ethics_gate: PASS (canonical + multisector)")
           PY
 
+      - name: Validate closure integrity (hermetic-aware)
+        shell: bash
+        run: |
+          ETHICBIT_HERMETIC_REQUIRE_STRICT="${ETHICBIT_HERMETIC_REQUIRE_STRICT:-0}" \
+          ./scripts/verify_closure_integrity.sh
+
       - name: Enforce crypto claim policy
         shell: bash
         run: |
@@ -607,10 +677,22 @@ jobs:
           mechanical_ethics_gate = json.loads(gate_bytes.decode("utf-8"))
           mechanical_ethics_gate_sha256 = hashlib.sha256(gate_bytes).hexdigest()
 
+          hermetic_path = Path("results/hermetic_build_report.json")
+          if not hermetic_path.exists():
+            raise SystemExit(f"missing hermetic build report artifact: {hermetic_path}")
+          hermetic_bytes = hermetic_path.read_bytes()
+          hermetic_report = json.loads(hermetic_bytes.decode("utf-8"))
+          hermetic_report_sha256 = hashlib.sha256(hermetic_bytes).hexdigest()
+
           if mechanical_ethics_gate.get("status") != "PASS":
             raise SystemExit(
               f"mechanical ethics gate must be PASS before signing, got {mechanical_ethics_gate.get('status')}"
             )
+          if os.environ.get("ETHICBIT_HERMETIC_REQUIRE_STRICT", "0").lower() in {"1", "true", "yes"}:
+            if hermetic_report.get("status") != "PASS_STRICT_HERMETIC":
+              raise SystemExit(
+                "strict hermetic mode requires PASS_STRICT_HERMETIC report status before signing"
+              )
 
           payload = {
             "artifactType": "ethicbit_ci_attestation_payload",
@@ -645,6 +727,13 @@ jobs:
             "mechanical_ethics_gate_required_sectors": mechanical_ethics_gate.get("required_sectors", []),
             "mechanical_ethics_gate_validated_sectors": mechanical_ethics_gate.get("validated_sectors", []),
             "mechanical_ethics_gate_l4_blockers": mechanical_ethics_gate.get("l4_blockers", []),
+            "hermetic_build_report_path": str(hermetic_path),
+            "hermetic_build_report_sha256": hermetic_report_sha256,
+            "hermetic_build_status": hermetic_report.get("status", "UNKNOWN"),
+            "hermetic_build_mode": hermetic_report.get("hermetic_mode", "unknown"),
+            "hermetic_build_network_mode": hermetic_report.get("network_mode", "unknown"),
+            "hermetic_build_base_image_ref": hermetic_report.get("base_image_ref", "unknown"),
+            "hermetic_build_pinned_base_image_verified": hermetic_report.get("controls", {}).get("pinned_base_image_verified", False),
           }
           Path("provenance/payload.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
@@ -710,6 +799,7 @@ jobs:
             results/GATE_REPORT.json
             results/constitutional_controls_report.json
             results/mechanical_ethics_gate.json
+            results/hermetic_build_report.json
             artifacts/history/swarm/triple_public_anchor_live_verification.json
             artifacts/ci/signing_environment_report.json
             artifacts/ci/hybrid_mode_effective.json

@@ -56,6 +56,20 @@ Define the execution path from the current canonical equivalence model to strong
 - Promote to `v*` release tags after two consecutive green cycles.
 - Update public claims only after canonical evidence and addendum update.
 
+## Stream D: Native hermetic toolchains (Nix/Bazel)
+
+### D1. Feasibility track
+
+- Evaluate Nix and Bazel against current build graph (`node`, `python`, `solidity`).
+- Publish a compatibility matrix with adoption risk and operational cost.
+- Select one pilot path for deterministic lock + no-network execution.
+
+### D2. Controlled pilot
+
+- Run pilot in parallel CI lane (non-blocking) for two cycles.
+- Compare artifact hashes and runtime against current canonical lane.
+- Promote to blocking only after parity and governance review.
+
 ## Governance rules for all streams
 
 - Do not weaken fail-closed checks already active in closure scripts.

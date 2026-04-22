@@ -18,6 +18,7 @@ SLSA_L4_POLICY="${ROOT_DIR}/assurance/slsa/level4-policy.json"
 SIGSTORE_POLICY="${ROOT_DIR}/assurance/sigstore/policy.json"
 ATTESTATION_STATUS_CANONICAL="${ROOT_DIR}/artifacts/history/swarm/attestation_status.canonical.json"
 NORMALIZE_ATTESTATION_STATUS_SCRIPT="${ROOT_DIR}/scripts/status/normalize_attestation_status_canonical.py"
+HERMETIC_BUILD_REPORT="${ROOT_DIR}/results/hermetic_build_report.json"
 
 fail() {
   local code="$1"
@@ -47,12 +48,18 @@ require_file() {
   [[ -f "$path" ]] || fail "NOT_READY (FAIL-CLOSED)" "missing required component: ${path#${ROOT_DIR}/}"
 }
 
+is_true_value() {
+  local value="$1"
+  [[ "$value" == "true" || "$value" == "True" ]]
+}
+
 ensure_required_components() {
   require_file "$BUNDLE"
   require_file "$CERTIFICATE"
   require_file "$MANIFEST"
   require_file "$LEDGER"
   require_file "$CASE003_MATERIAL_SCRIPT"
+  require_file "$HERMETIC_BUILD_REPORT"
   require_file "${SCRIPTS_DIR}/verify_closure_integrity.sh"
   require_file "${SCRIPTS_DIR}/resolve_publication_drift.sh"
   require_file "${SCRIPTS_DIR}/publish-closure-atomic.sh"
@@ -124,6 +131,56 @@ ensure_assurance_layer_enforced() {
     PASS_SLSA_FINAL|VERIFIED_REPRODUCIBLE|VERIFIED) ;;
     *) fail "CRYPTO_POLICY_FAIL" "canonical slsaAssessment.status is not an accepted final-equivalent status" ;;
   esac
+}
+
+ensure_hermetic_build_posture() {
+  local schema_id status hermetic_mode claim_level strict_required
+  local network_mode base_image_ref base_image_pinned lockfiles_verified
+  local declared_gap
+
+  schema_id="$(json_get "$HERMETIC_BUILD_REPORT" "schema_id")"
+  status="$(json_get "$HERMETIC_BUILD_REPORT" "status")"
+  hermetic_mode="$(json_get "$HERMETIC_BUILD_REPORT" "hermetic_mode")"
+  claim_level="$(json_get "$HERMETIC_BUILD_REPORT" "claim_level")"
+  strict_required="$(json_get "$HERMETIC_BUILD_REPORT" "strict_required")"
+  network_mode="$(json_get "$HERMETIC_BUILD_REPORT" "network_mode")"
+  base_image_ref="$(json_get "$HERMETIC_BUILD_REPORT" "base_image_ref")"
+  base_image_pinned="$(json_get "$HERMETIC_BUILD_REPORT" "controls.pinned_base_image_verified")"
+  lockfiles_verified="$(json_get "$HERMETIC_BUILD_REPORT" "controls.lockfiles_verified")"
+  declared_gap="$(json_get "$HERMETIC_BUILD_REPORT" "declared_gap")"
+
+  [[ "$schema_id" == "ETHICBIT_HERMETIC_BUILD_REPORT_V1" ]] || fail "HERMETIC_POLICY_FAIL" "invalid hermetic build report schema"
+  [[ -n "$claim_level" ]] || fail "HERMETIC_POLICY_FAIL" "hermetic build report claim_level cannot be empty"
+  [[ "$hermetic_mode" == "strict_hermetic" || "$hermetic_mode" == "equivalence_non_hermetic" ]] \
+    || fail "HERMETIC_POLICY_FAIL" "hermetic_mode must be strict_hermetic or equivalence_non_hermetic"
+
+  local enforce_strict="${ETHICBIT_HERMETIC_REQUIRE_STRICT:-0}"
+  if [[ "$strict_required" == "1" || "$strict_required" == "true" || "$strict_required" == "True" ]]; then
+    enforce_strict="1"
+  fi
+
+  if [[ "$enforce_strict" == "1" ]]; then
+    [[ "$hermetic_mode" == "strict_hermetic" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode required but report is not strict_hermetic"
+  fi
+
+  if [[ "$hermetic_mode" == "strict_hermetic" ]]; then
+    [[ "$status" == "PASS_STRICT_HERMETIC" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires status PASS_STRICT_HERMETIC"
+    [[ "$network_mode" == "none" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires network_mode=none"
+    [[ "$base_image_ref" =~ @sha256:[0-9a-f]{64}$ ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires a pinned base image reference"
+    is_true_value "$base_image_pinned" \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires pinned_base_image_verified=true"
+    is_true_value "$lockfiles_verified" \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires lockfiles_verified=true"
+  else
+    [[ "$status" == "PASS_EQUIVALENCE_NON_HERMETIC" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "equivalence_non_hermetic mode requires status PASS_EQUIVALENCE_NON_HERMETIC"
+    [[ -n "$declared_gap" && "$declared_gap" != "null" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "equivalence_non_hermetic mode requires a declared_gap"
+  fi
 }
 
 ensure_no_known_competing_files() {
@@ -252,6 +309,7 @@ main() {
   ensure_required_components
   ensure_case003_material_integrity
   ensure_assurance_layer_enforced
+  ensure_hermetic_build_posture
   ensure_no_known_competing_files
   ensure_manifest_shape
   ensure_hash_alignment

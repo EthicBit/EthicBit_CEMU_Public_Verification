@@ -1,7 +1,18 @@
 # ================================================
 # Dockerfile.build - SLSA L4 Hermetic Build Image
 # ================================================
-FROM node:22-bookworm-slim AS builder
+ARG ETHICBIT_BASE_IMAGE_REF=node:22-bookworm-slim
+
+FROM ${ETHICBIT_BASE_IMAGE_REF} AS hermetic-check
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+WORKDIR /workspace
+COPY package.json package-lock.json ./
+COPY scripts/verify_closure_integrity.sh ./scripts/verify_closure_integrity.sh
+RUN test -s package-lock.json
+RUN test -s scripts/verify_closure_integrity.sh
+RUN echo "hermetic-check target materialized without network access"
+
+FROM ${ETHICBIT_BASE_IMAGE_REF} AS builder
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # === 1. Configuración hermética ===

@@ -214,6 +214,7 @@ The equivalence model is grounded in:
 - `assurance/in-toto/attestation-index.json`,
 - `assurance/slsa/level4-policy.json`,
 - `assurance/sigstore/policy.json`,
+- `results/hermetic_build_report.json`,
 - and fail-closed execution in `scripts/verify_closure_integrity.sh`.
 
 ### 10.3 Scope boundary
