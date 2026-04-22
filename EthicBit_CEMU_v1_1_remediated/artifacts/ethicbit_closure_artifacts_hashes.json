@@ -1,0 +1,8 @@
+{
+  "artifact_type": "derived_hash_ledger",
+  "status": "TO_BE_REGENERATED_FROM_ACTIVE_SSOT",
+  "source_of_truth": "artifacts/artifact_manifest.json",
+  "notes": [
+    "regenerate fresh hashes from the reissued active chain before external distribution"
+  ]
+}

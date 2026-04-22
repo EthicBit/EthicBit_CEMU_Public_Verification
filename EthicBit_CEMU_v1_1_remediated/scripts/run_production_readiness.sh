@@ -1,3 +1,10 @@
+
+CASE003_MATERIAL_STATUS="$("${ROOT_DIR}/scripts/verify_case003_material_integrity.sh" 2>/tmp/case003_material_check.err || true)"
+if [[ "$CASE003_MATERIAL_STATUS" != "CASE003_MATERIAL_OK" ]]; then
+  echo "FAIL_CLOSED: case_003 material integrity gate failed"
+  exit 1
+fi
+
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -145,9 +152,6 @@ main() {
   [[ -x "$VERIFY_SCRIPT" ]] || fail "NOT_READY (FAIL-CLOSED)" "verify_closure_integrity.sh must be executable"
   [[ -x "${ROOT_DIR}/scripts/resolve_publication_drift.sh" ]] || fail "NOT_READY (FAIL-CLOSED)" "resolve_publication_drift.sh must be executable"
   [[ -x "${ROOT_DIR}/scripts/publish-closure-atomic.sh" ]] || fail "NOT_READY (FAIL-CLOSED)" "publish-closure-atomic.sh must be executable"
-
-  CASE003_MATERIAL_STATUS="$("${ROOT_DIR}/scripts/verify_case003_material_integrity.sh" 2>/tmp/case003_material_check.err || true)"
-  [[ "$CASE003_MATERIAL_STATUS" == "CASE003_MATERIAL_OK" ]] || fail "NOT_READY (FAIL-CLOSED)" "case_003 material integrity gate failed"
 
   run_and_log "$VERIFY_SCRIPT" "$ROOT_DIR"
 

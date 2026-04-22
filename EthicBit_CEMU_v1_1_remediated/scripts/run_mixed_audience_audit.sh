@@ -249,10 +249,6 @@ VERIFICATION_EPOCH="${ETHICBIT_VERIFICATION_EPOCH:-$(date -u +%Y-%m-%dT%H:00:00Z
 GATE_POLICY_VERSION="mixed-audience-gate-policy.v1.1.0"
 OFFICIAL_AUDIT_WORKFLOW="${ROOT_DIR}/.github/workflows/official-periodic-audit.yml"
 OFFICIAL_OPERATIONAL_STATUS_PATH="${ROOT_DIR}/artifacts/history/swarm/official_operational_status.json"
-LEGACY_RELEASE_PATH="publication/releases/release-20260407T204627Z"
-LEGACY_RELEASE_CERTIFICATE="${ROOT_DIR}/${LEGACY_RELEASE_PATH}/artifacts/formal_closure_certificate_multicapa_v1_0.json"
-LEGACY_HUMAN_APPROVAL_ARTIFACT_PATH="${ROOT_DIR}/${LEGACY_RELEASE_PATH}/artifacts/cases/case_003/human_approval.case_003.canonical.json"
-ACTIVE_HUMAN_APPROVAL_ARTIFACT_PATH="${ROOT_DIR}/artifacts/cases/case_003/human_approval.case_003.canonical.json"
 VERIFY_OUTPUT_JSON="$(json_quote "$VERIFY_OUTPUT")"
 READINESS_OUTPUT_JSON="$(json_quote "$READINESS_OUTPUT")"
 
@@ -419,10 +415,6 @@ fi
 OBSERVED_OFFICIAL_REASON="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "reason" "NOT_COMPUTED")"
 OBSERVED_INTERNAL_CLOSURE_STATUS="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "internalClosureStatus" "NOT_COMPUTED")"
 OBSERVED_EXTERNAL_PROJECTION_STATUS="$(json_get_or_default "$OFFICIAL_OPERATIONAL_STATUS_PATH" "externalProjectionStatus" "NOT_COMPUTED")"
-LEGACY_CERTIFICATE_STATUS="$(json_get_or_default "$LEGACY_RELEASE_CERTIFICATE" "certificate_status" "NOT_PRESENT")"
-LEGACY_DECISION_MODE="$(json_get_or_default "$LEGACY_RELEASE_CERTIFICATE" "decision_mode" "NOT_PRESENT")"
-LEGACY_HUMAN_APPROVAL_EVIDENCE_PRESENT="$(gate_if test -f "$LEGACY_HUMAN_APPROVAL_ARTIFACT_PATH")"
-ACTIVE_HUMAN_APPROVAL_EVIDENCE_PRESENT="$(gate_if test -f "$ACTIVE_HUMAN_APPROVAL_ARTIFACT_PATH")"
 
 mkdir -p "$RESULTS_DIR"
 
@@ -535,14 +527,6 @@ What it proves visibly:
 - the frozen publication target matches the active release pointer
 - the promoted lineage is ${CANONICAL_LINEAGE}
 - the external anchor layer is only treated as verified when the hardening gates pass
-
-Boundary statement (historical package and claims):
-
-- ${LEGACY_RELEASE_PATH}/ is preserved as historical release evidence, not as a standalone final authority
-- observed legacy certificate fields are certificate_status=${LEGACY_CERTIFICATE_STATUS} and decision_mode=${LEGACY_DECISION_MODE}
-- a legacy certificate field alone is not sufficient to sustain "remediated release final" or "explicit human approval evidence" claims
-- explicit human approval evidence is only treated as supportable when the active artifact is present and gates pass
-- legacy human approval artifact present: ${LEGACY_HUMAN_APPROVAL_EVIDENCE_PRESENT}; active human approval artifact present: ${ACTIVE_HUMAN_APPROVAL_EVIDENCE_PRESENT}
 EOF
 }
 
@@ -614,14 +598,6 @@ Legal interpretation:
 - the package distinguishes declared states from verified states
 - no higher claim should rely on declaration alone when the corresponding verified state is not established
 - the gate report is the operative support layer for material and external-anchor assertions
-
-Historical-package legal boundary:
-
-- historical release snapshot path: ${LEGACY_RELEASE_PATH}/
-- standalone claim "remediated release final" from that historical snapshot is forbidden without current gate convergence
-- standalone claim "explicit human approval evidence" from legacy certificate fields is forbidden when the legacy human approval artifact is missing
-- operative support for human-required closure remains tied to the active artifact and current gate report
-- legacy human approval artifact present: ${LEGACY_HUMAN_APPROVAL_EVIDENCE_PRESENT}; active human approval artifact present: ${ACTIVE_HUMAN_APPROVAL_EVIDENCE_PRESENT}
 EOF
 }
 

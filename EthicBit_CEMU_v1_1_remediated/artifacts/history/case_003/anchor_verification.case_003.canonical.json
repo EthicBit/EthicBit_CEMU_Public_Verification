@@ -1,0 +1,19 @@
+{
+  "case_id": "case_003",
+  "verification_id": "case_003-ANCHOR-VERIFY-001",
+  "verification_status": "VERIFIED",
+  "root_id": "case_003-ROOT-001",
+  "expected_root_hash": "0x18c066d8303a072aaaad2a693f791bd2151253245ba0a5ffd4014d57360422b5",
+  "expected_root_payload_hash": "edd31ce6d4ecafa7dfa15b65f352a4466edf0818dcafea706013f6b752da4208",
+  "anchor_prepare_id": "case_003-ANCHOR-PREP-001",
+  "verify_script": "verify_closure_anchor_event.js",
+  "verified": true,
+  "event_match": true,
+  "contract_match": true,
+  "root_match": true,
+  "tx_hash": "0xec66a11063f8249a066a0dbbae7076aef2350a5b80e294a49cbc0303714d0b14",
+  "decision_mode": "AUTONOMOUS_WITH_AUDIT",
+  "authority": "External Anchor Verification Logic",
+  "generated_at": "2026-04-02T20:07:22.946448+00:00",
+  "canonical_hash": "704d92e91a57dda6c3bae890611bb6ea323aa03a180e1c52ff8f132a39b1f154"
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "case_003",
+  "verification_pack_id": "case_003-VERIFICATION-PACK-001",
+  "verification_status": "VERIFIED_REPRODUCIBLE",
+  "verification_scope": {
+    "root_id": "case_003-ROOT-001",
+    "manifest_id": "case_003-MANIFEST-001",
+    "case_bundle_id": "case_003-BUNDLE-001",
+    "anchor_prepare_id": "case_003-ANCHOR-PREP-001",
+    "anchor_receipt_id": "case_003-ANCHOR-RECEIPT-001",
+    "anchor_verification_id": "case_003-ANCHOR-VERIFY-001"
+  },
+  "reproducibility": {
+    "environment_id": "case_003-VERIFICATION-ENV-001",
+    "container_hash": "23a16bdc30c62166a-placeholder",
+    "runtime_version": "python-3.12",
+    "dependency_lock": "LOCKFILE_PRESENT",
+    "seed": "case_003-REPLAY-SEED-001"
+  },
+  "expected_hashes": {
+    "canonical_root_hash": "13916763ec67ceabc5c317ef904e90c5149279592457e7dbee90cbada0b3f4c4",
+    "anchor_prepare_hash": "b21ba7b4b674990dd9e96a30303bf573b3d4c9fc0cc8755d2c2abfdaa3ae265f",
+    "anchor_receipt_hash": "b0c13a387f3a27176409b4d5a0704a82535a7693bb731374b38ab0b4a578ac0a",
+    "anchor_verification_hash": "704d92e91a57dda6c3bae890611bb6ea323aa03a180e1c52ff8f132a39b1f154",
+    "artifact_manifest_hash": "4f9569a6c681fe7dd394fb75a7f42fe85a73a29b79483826b34e3108d944a6a3",
+    "case_bundle_hash": "b4f07a422080f801de9db1db3984bbd38828fa9646149279cc6fa5ebf775943b"
+  },
+  "verification_assertions": {
+    "root_status": "ANCHOR_READY",
+    "receipt_status": "RECEIPT_ATTACHED",
+    "anchor_verification_status": "VERIFIED",
+    "expected_root_hash_match": true,
+    "verified": true,
+    "event_match": true,
+    "contract_match": true,
+    "root_match": true,
+    "bundle_status": "CLOSURE_READY_PENDING_ROOT"
+  },
+  "fail_closed_reason": "None",
+  "decision_mode": "HUMAN_SUPERVISED",
+  "authority": "Verification Pack Builder",
+  "escalation_required": true,
+  "generated_at": "2026-04-20T17:05:05.989350+00:00",
+  "canonical_hash": "c258a300e25fbf8dc8a34b9c381b8d008e33b33777939f91cdabda959c0644f9"
+}
