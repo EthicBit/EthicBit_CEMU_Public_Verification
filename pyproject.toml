@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ethicbit-cemu"
+version = "0.1.0"
+description = "EthicBit / CEMU canonical audit, assurance, and mechanical ethics runtime."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "EthicBit" }
+]
+dependencies = []
+
+[project.optional-dependencies]
+agentic = [
+  "numpy>=1.26.0",
+  "PyYAML>=6.0.2",
+  "requests>=2.31.0",
+]
+dev = [
+  "mypy>=1.10.0",
+  "pytest>=8.0.0",
+  "ruff>=0.5.0",
+]
+
