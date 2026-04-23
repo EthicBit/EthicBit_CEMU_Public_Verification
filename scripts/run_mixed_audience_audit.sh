@@ -249,6 +249,7 @@ VERIFICATION_EPOCH="${ETHICBIT_VERIFICATION_EPOCH:-$(date -u +%Y-%m-%dT%H:00:00Z
 GATE_POLICY_VERSION="mixed-audience-gate-policy.v1.1.0"
 OFFICIAL_AUDIT_WORKFLOW="${ROOT_DIR}/.github/workflows/official-periodic-audit.yml"
 OFFICIAL_OPERATIONAL_STATUS_PATH="${ROOT_DIR}/artifacts/history/swarm/official_operational_status.json"
+PQ_RUNTIME_SECRET_PROTECTION_PATH="${ROOT_DIR}/results/pq_runtime_secret_protection.json"
 LEGACY_RELEASE_PATH="publication/releases/release-20260407T204627Z"
 LEGACY_RELEASE_CERTIFICATE="${ROOT_DIR}/${LEGACY_RELEASE_PATH}/artifacts/formal_closure_certificate_multicapa_v1_0.json"
 LEGACY_HUMAN_APPROVAL_ARTIFACT_PATH="${ROOT_DIR}/${LEGACY_RELEASE_PATH}/artifacts/cases/case_003/human_approval.case_003.canonical.json"
@@ -423,6 +424,17 @@ LEGACY_CERTIFICATE_STATUS="$(json_get_or_default "$LEGACY_RELEASE_CERTIFICATE" "
 LEGACY_DECISION_MODE="$(json_get_or_default "$LEGACY_RELEASE_CERTIFICATE" "decision_mode" "NOT_PRESENT")"
 LEGACY_HUMAN_APPROVAL_EVIDENCE_PRESENT="$(gate_if test -f "$LEGACY_HUMAN_APPROVAL_ARTIFACT_PATH")"
 ACTIVE_HUMAN_APPROVAL_EVIDENCE_PRESENT="$(gate_if test -f "$ACTIVE_HUMAN_APPROVAL_ARTIFACT_PATH")"
+GATE_PQ_RUNTIME_SECRET_PROTECTION_PRESENT="$(gate_if test -f "$PQ_RUNTIME_SECRET_PROTECTION_PATH")"
+
+if [[ "$GATE_PQ_RUNTIME_SECRET_PROTECTION_PRESENT" == "PASS" ]]; then
+  PQ_RUNTIME_SECRET_PROTECTION_STATUS="$(json_get_or_default "$PQ_RUNTIME_SECRET_PROTECTION_PATH" "status" "UNKNOWN")"
+  PQ_RUNTIME_SECRET_PROTECTION_PROTECTOR="$(json_get_or_default "$PQ_RUNTIME_SECRET_PROTECTION_PATH" "protector" "UNKNOWN")"
+  PQ_RUNTIME_SECRET_PROTECTION_EVIDENCE_REF="$(json_get_or_default "$PQ_RUNTIME_SECRET_PROTECTION_PATH" "evidence_ref" "UNKNOWN")"
+else
+  PQ_RUNTIME_SECRET_PROTECTION_STATUS="UNAVAILABLE_IN_CURRENT_RUNTIME"
+  PQ_RUNTIME_SECRET_PROTECTION_PROTECTOR="UNKNOWN"
+  PQ_RUNTIME_SECRET_PROTECTION_EVIDENCE_REF="UNKNOWN"
+fi
 
 mkdir -p "$RESULTS_DIR"
 
@@ -466,6 +478,13 @@ write_gate_report() {
     "officialStatePath": "artifacts/history/swarm/official_operational_status.json",
     "officialInternalClosureStatusObserved": "${OBSERVED_INTERNAL_CLOSURE_STATUS}",
     "officialExternalProjectionStatusObserved": "${OBSERVED_EXTERNAL_PROJECTION_STATUS}"
+  },
+  "runtimeSecretProtection": {
+    "path": "results/pq_runtime_secret_protection.json",
+    "present": "${GATE_PQ_RUNTIME_SECRET_PROTECTION_PRESENT}",
+    "status": "${PQ_RUNTIME_SECRET_PROTECTION_STATUS}",
+    "protector": "${PQ_RUNTIME_SECRET_PROTECTION_PROTECTOR}",
+    "evidenceRef": "${PQ_RUNTIME_SECRET_PROTECTION_EVIDENCE_REF}"
   },
   "gates": {
     "requiredComponentsPresent": "${GATE_REQUIRED_COMPONENTS}",
