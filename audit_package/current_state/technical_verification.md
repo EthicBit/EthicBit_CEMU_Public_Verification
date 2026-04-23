@@ -1,6 +1,6 @@
 # Technical Verification
 
-Generated At: 2026-04-18T13:41:54Z
+Generated At: 2026-04-22T16:29:49Z
 Package ID: EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z
 Declared Pack State: ACTIVE_CANONICAL
 Verified Pack State: ACTIVE_CANONICAL
@@ -25,7 +25,9 @@ Gate Report: results/GATE_REPORT.json
 Observed command outputs:
 
 ```text
+CASE003_MATERIAL_OK
 ACTIVE_CANONICAL
+CASE003_MATERIAL_OK
 ACTIVE_CANONICAL
 ACTIVE_CANONICAL
 INFO: active publication integrity reconciled; readiness promoted to controlled production.

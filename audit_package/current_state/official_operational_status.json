@@ -1,17 +1,26 @@
 {
   "artifactType": "official_operational_status",
-  "generatedAt": "2026-04-13T17:12:04.966139Z",
+  "generatedAt": "2026-04-22T16:30:02.379199Z",
   "policyVersion": "official-operational-status-policy.v2.0.0",
   "runContext": {
-    "runId": "run-20260412T231529Z-65684",
+    "runId": "run-20260411T215540Z-33389",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-12T23:00:00Z"
+    "verificationEpoch": "2026-04-11T21:00:00Z"
+  },
+  "cryptoMode": {
+    "effectiveMode": "unknown",
+    "mldsaMode": "unknown",
+    "mldsaEffectiveMode": "unknown",
+    "ed25519KeySource": "unknown",
+    "mldsaKeySource": "unknown",
+    "hybridClaimMode": "unknown",
+    "keyProvenanceMode": "unknown",
+    "claimTier": "unspecified"
   },
   "officialStatus": "READY",
   "reason": "LIVE_CANONICAL_GATE_CONVERGED",
   "reasonCodes": [
-    "LIVE_CANONICAL_GATE_CONVERGED",
-    "EXTERNAL_CRYPTO_INTEROP_FAIL"
+    "LIVE_CANONICAL_GATE_CONVERGED"
   ],
   "divergence": false,
   "gateStatusRaw": "PASS",
@@ -31,11 +40,11 @@
   "freezeActive": false,
   "integrity": {
     "inputHashes": {
-      "gateReport": "c195d7a61392d7c2e75aff4a0862c914e6943c2d61f2f47efd686c48ff0e1569",
-      "liveReport": "abb4672c7fc8127b0977f473affc4ec5749444406fe238e10e256d69f20e5f43",
+      "gateReport": "e1ade1d08f26a9f03ac3552e6b8871b4b0a9128cbfcea68814aeeef0d8c2bd6a",
+      "liveReport": "ffed75a162e96349f76431ced523b630b6cb986fb4c97df02988cd2b92dc6024",
       "canonicalConfig": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093"
     },
-    "outputHash": "18fe6f50ba28843a94c8d311f87340722725db427255a8144e28da5897b77b75"
+    "outputHash": "12339c2ca79f6cdfcefdb849811b9446e88845d8be983caf8382dc47ea2d09ab"
   },
   "paths": {
     "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
@@ -48,7 +57,7 @@
   "internalClosureStatus": "INTERNAL_CLOSED",
   "externalProjectionStatus": "EXTERNAL_LIVE_CONVERGED",
   "internalCryptographyStatus": "PASS",
-  "externalCryptographyStatus": "FAIL",
+  "externalCryptographyStatus": "PASS",
   "stateModel": {
     "model": "SOVEREIGN_INTERNAL_CLOSURE_PLUS_EXTERNAL_PROJECTION_V1",
     "operatingMode": "SOVEREIGN_INTERNAL",
@@ -60,6 +69,16 @@
     "status": "PASS",
     "operatingMode": "SOVEREIGN_INTERNAL",
     "riskMode": "HIGH",
+    "executionMode": {
+      "effectiveMode": "unknown",
+      "mldsaMode": "unknown",
+      "mldsaEffectiveMode": "unknown",
+      "ed25519KeySource": "unknown",
+      "mldsaKeySource": "unknown",
+      "hybridClaimMode": "unknown",
+      "keyProvenanceMode": "unknown",
+      "claimTier": "unspecified"
+    },
     "requiredAlgorithms": [
       "ED25519",
       "ML-DSA"
@@ -70,7 +89,7 @@
       "mechanism": "CANONICAL_PAYLOAD_HASH_BINDING"
     },
     "external": {
-      "status": "FAIL",
+      "status": "PASS",
       "required": false,
       "blocking": false,
       "algorithm": "HYBRID_ED25519_MLDSA"
@@ -85,7 +104,7 @@
     "blockOfficialStatusOnExternalCryptoFailure": false
   },
   "signature": {
-    "status": "INVALID_OR_MISSING",
+    "status": "SIGNED_HYBRID",
     "algorithm": "HYBRID_ED25519_MLDSA",
     "keyIds": [
       "ED25519_UNSET",
@@ -93,72 +112,98 @@
     ]
   },
   "signatureSet": {
-    "status": "FAIL",
+    "artifactType": "hybrid_signature_set",
+    "schemaVersion": "2.0.0",
+    "status": "PASS",
     "policyVersion": "official-operational-status-policy.v2.0.0",
     "riskMode": "HIGH",
     "runContext": {
-      "runId": "run-20260412T231529Z-65684",
+      "runId": "run-20260411T215540Z-33389",
       "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-      "verificationEpoch": "2026-04-12T23:00:00Z"
+      "verificationEpoch": "2026-04-11T21:00:00Z"
     },
     "requiredAlgorithms": [
       "ED25519",
       "ML-DSA"
     ],
-    "payloadHash": "6b2769ddbae4cea02dd5d2db5f450e210734e2da551b2686ebd85e55e45b2278",
+    "payloadHash": "306f1ab7148db0611770959bd8def2ae2eebd6fca2242dfc92eadef242b86200",
+    "payload": {
+      "path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/ethicbit_hybrid_sign_925yyy1p/payload.jcs.json",
+      "sha256": "306f1ab7148db0611770959bd8def2ae2eebd6fca2242dfc92eadef242b86200",
+      "sourcePath": ""
+    },
+    "hybridCryptoTruth": {
+      "ed25519_key_source": "unknown",
+      "mldsa_key_source": "unknown",
+      "mldsa_effective_mode": "unknown",
+      "hybrid_claim_mode": "unknown",
+      "ephemeral_keys_used": false,
+      "runner_supports_mldsa": false,
+      "claim_level": "ci_grade",
+      "require_native_hybrid": false,
+      "eligible_for_sovereign_release": false,
+      "key_provenance_mode": "unknown",
+      "keyProvenanceMode": "unknown",
+      "crypto_claim_tier": "unspecified",
+      "claimTier": "unspecified"
+    },
+    "verificationPolicy": {
+      "claimLevel": "ci_grade",
+      "requireNativeHybrid": false
+    },
     "signatures": [
       {
         "algorithm": "ED25519",
         "keyId": "ED25519_UNSET",
-        "status": "FAIL",
-        "signature": "",
-        "signedAt": "2026-04-13T17:12:04.967376Z",
-        "commandConfigured": false,
-        "timeoutSeconds": 25.0,
-        "error": "missing signer command for ED25519"
+        "status": "PASS",
+        "signature": "EJIrZ1fT/ksOfDm7APWXlhcXqSHjSYUdK8nuqemqpyfj/rsBDZvEUd7xeoztJG3RiYOeWKsaRmdy9rznx85kAQ==",
+        "signedAt": "2026-04-22T16:30:02.380697Z",
+        "commandConfigured": true,
+        "timeoutSeconds": 25.0
       },
       {
         "algorithm": "ML-DSA",
         "keyId": "MLDSA_UNSET",
-        "status": "FAIL",
-        "signature": "",
-        "signedAt": "2026-04-13T17:12:04.967382Z",
-        "commandConfigured": false,
+        "status": "PASS",
+        "signature": "vYiG6ZK8qlcyo9j735V6iANdfYQQBYIl1x90/FFsvXrOQnJ2yJg0sWCmN2kWkcbQiGhkSNQOt+UQAdm6GPYXCw==",
+        "signedAt": "2026-04-22T16:30:02.429148Z",
+        "commandConfigured": true,
         "timeoutSeconds": 25.0,
-        "error": "missing signer command for ML-DSA"
+        "effectiveMode": "unknown"
       }
     ],
-    "missingOrInvalidAlgorithms": [
-      "ED25519",
-      "ML-DSA"
-    ]
+    "cryptoMode": {
+      "effectiveMode": "compatibility_fallback",
+      "mldsaMode": "unknown",
+      "mldsaEffectiveMode": "unknown",
+      "ed25519KeySource": "unknown",
+      "mldsaKeySource": "unknown",
+      "hybridClaimMode": "unknown",
+      "keyProvenanceMode": "unknown",
+      "claimTier": "unspecified"
+    }
   },
   "signatureVerification": {
-    "status": "FAIL",
+    "status": "PASS",
     "riskMode": "HIGH",
     "requiredAlgorithms": [
       "ED25519",
       "ML-DSA"
     ],
+    "semanticStatus": "PASS",
     "checks": [
       {
         "algorithm": "ED25519",
-        "status": "FAIL",
-        "commandConfigured": false,
-        "timeoutSeconds": 25.0,
-        "error": "missing verify command for ED25519"
+        "status": "PASS",
+        "commandConfigured": true,
+        "timeoutSeconds": 25.0
       },
       {
         "algorithm": "ML-DSA",
-        "status": "FAIL",
-        "commandConfigured": false,
-        "timeoutSeconds": 25.0,
-        "error": "missing verify command for ML-DSA"
+        "status": "PASS",
+        "commandConfigured": true,
+        "timeoutSeconds": 25.0
       }
-    ],
-    "missingOrInvalidAlgorithms": [
-      "ED25519",
-      "ML-DSA"
     ]
   }
 }

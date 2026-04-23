@@ -31,6 +31,11 @@ coverage/
 *.min.js
 __pycache__/
 *.py[cod]
+.venv/
+.venv*/
+venv/
+venv*/
+env/
 
 # === ENVIRONMENT ===
 .env

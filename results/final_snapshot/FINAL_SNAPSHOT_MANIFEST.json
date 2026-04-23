@@ -1,8 +1,8 @@
 {
   "artifactType": "ethicbit_final_closure_snapshot_manifest",
-  "generatedAt": "2026-04-20T16:27:20.665826Z",
+  "generatedAt": "2026-04-22T16:31:14.077597Z",
   "repository": "EthicBit/EthicBit_CEMU",
-  "headCommit": "3e9b1785342c4e33eca88e8cb3085dadabf6d50d",
+  "headCommit": "8771abf3c9f840472ec01e8b860ea6d8f46b39b5",
   "officialTagReferences": [
     {
       "tag": "v2.2b-sovereign-preclose-20260419",
@@ -102,10 +102,11 @@
     }
   },
   "artifactHashesSha256": {
-    "official_operational_status.json": "76af555fc1fe6ef8d98748fb02f6dfe4a0d7aabd69a3e67bbd6ba409131bd63c",
-    "GATE_REPORT.json": "fab5a2c18884fe2a072399b3ad5fc5d1894d90ade7eaba64c9caafca489d0430",
-    "constitutional_controls_report.json": "17b6d1ec3415fb6d0c1f8457dd6d76b95e27049f0343efddb3213f8f9f551ad7",
-    "hybrid_signature_set.json": "b76749a271f4d9a8f2e9bd64a29310a2593ba659c51e65b1c3fe64263d7d0c11",
+    "official_operational_status.json": "e37a5e6a2171cce0770496f9cdc9b0a1edc337211ff5aa57b8cf01ae5c27396c",
+    "GATE_REPORT.json": "e1ade1d08f26a9f03ac3552e6b8871b4b0a9128cbfcea68814aeeef0d8c2bd6a",
+    "constitutional_controls_report.json": "4df9315be77db8cfcf507b1e55f2ac55131e635f7bd6230718b76f5e77affc09",
+    "hybrid_signature_set.json": "32d552107562abd7edddf7581227629ddd2f9eaef3532c9e128914ee36b2eaac",
     "hybrid_signature_verification.json": "00ab87ceac4c8c27a872636474a0abbc1a69f9a268bb09735b48624ac4fbd2cb"
-  }
+  },
+  "sourceMainCommitObserved": "f2f441e1994e90b133a2bb04154d08ce96f1d1a4"
 }

@@ -1,6 +1,6 @@
 # Finance And Anchor Report
 
-Generated At: 2026-04-21T12:02:41Z
+Generated At: 2026-04-23T02:28:01Z
 Package ID: EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z
 Canonical Lineage: case_003_promoted_active_chain
 Declared External Anchor State: ANCHOR_HARDENING_ENABLED

@@ -1,8 +1,3 @@
-if ! scripts/verify_case003_material_integrity.sh; then
-  echo "FAIL_CLOSED: case_003 material integrity gate failed"
-  exit 1
-fi
-
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -16,6 +11,14 @@ BUNDLE="${ARTIFACTS_DIR}/security_incident_bundle_v1_0.json"
 CERTIFICATE="${ARTIFACTS_DIR}/formal_closure_certificate_multicapa_v1_0.json"
 MANIFEST="${ARTIFACTS_DIR}/artifact_manifest.json"
 LEDGER="${ARTIFACTS_DIR}/ethicbit_closure_artifacts_hashes.json"
+CASE003_MATERIAL_SCRIPT="${SCRIPTS_DIR}/verify_case003_material_integrity.sh"
+IN_TOTO_LAYOUT="${ROOT_DIR}/assurance/in-toto/root.layout"
+IN_TOTO_INDEX="${ROOT_DIR}/assurance/in-toto/attestation-index.json"
+SLSA_L4_POLICY="${ROOT_DIR}/assurance/slsa/level4-policy.json"
+SIGSTORE_POLICY="${ROOT_DIR}/assurance/sigstore/policy.json"
+ATTESTATION_STATUS_CANONICAL="${ROOT_DIR}/artifacts/history/swarm/attestation_status.canonical.json"
+NORMALIZE_ATTESTATION_STATUS_SCRIPT="${ROOT_DIR}/scripts/status/normalize_attestation_status_canonical.py"
+HERMETIC_BUILD_REPORT="${ROOT_DIR}/results/hermetic_build_report.json"
 
 fail() {
   local code="$1"
@@ -45,15 +48,157 @@ require_file() {
   [[ -f "$path" ]] || fail "NOT_READY (FAIL-CLOSED)" "missing required component: ${path#${ROOT_DIR}/}"
 }
 
+is_true_value() {
+  local value="$1"
+  [[ "$value" == "true" || "$value" == "True" ]]
+}
+
 ensure_required_components() {
   require_file "$BUNDLE"
   require_file "$CERTIFICATE"
   require_file "$MANIFEST"
   require_file "$LEDGER"
+  require_file "$CASE003_MATERIAL_SCRIPT"
+  require_file "$HERMETIC_BUILD_REPORT"
   require_file "${SCRIPTS_DIR}/verify_closure_integrity.sh"
   require_file "${SCRIPTS_DIR}/resolve_publication_drift.sh"
   require_file "${SCRIPTS_DIR}/publish-closure-atomic.sh"
   require_file "${SCRIPTS_DIR}/run_production_readiness.sh"
+}
+
+ensure_case003_material_integrity() {
+  if ! "$CASE003_MATERIAL_SCRIPT" >/tmp/case003_material_integrity.out 2>/tmp/case003_material_integrity.err; then
+    fail "NOT_READY (FAIL-CLOSED)" "case_003 material integrity gate failed"
+  fi
+}
+
+ensure_assurance_layer_enforced() {
+  require_file "$IN_TOTO_LAYOUT"
+  require_file "$IN_TOTO_INDEX"
+  require_file "$SLSA_L4_POLICY"
+  require_file "$SIGSTORE_POLICY"
+  require_file "$NORMALIZE_ATTESTATION_STATUS_SCRIPT"
+
+  local layout_status index_status slsa_status sigstore_status
+  local in_toto_all_steps in_toto_no_pending in_toto_required_status
+  local sigstore_production_signing sigstore_allow_unsigned sigstore_hybrid_mode
+  local slsa_attestation_required
+  layout_status="$(json_get "$IN_TOTO_LAYOUT" "status")"
+  index_status="$(json_get "$IN_TOTO_INDEX" "status")"
+  slsa_status="$(json_get "$SLSA_L4_POLICY" "status")"
+  sigstore_status="$(json_get "$SIGSTORE_POLICY" "status")"
+  in_toto_all_steps="$(json_get "$IN_TOTO_INDEX" "verification.allStepsMustBeAttested")"
+  in_toto_no_pending="$(json_get "$IN_TOTO_INDEX" "verification.noPendingAllowed")"
+  in_toto_required_status="$(json_get "$IN_TOTO_INDEX" "verification.requiredStatementStatus")"
+  sigstore_production_signing="$(json_get "$SIGSTORE_POLICY" "enforcement.production_signing_required")"
+  sigstore_allow_unsigned="$(json_get "$SIGSTORE_POLICY" "enforcement.allow_unsigned_artifacts")"
+  sigstore_hybrid_mode="$(json_get "$SIGSTORE_POLICY" "enforcement.hybrid_signature_required")"
+  slsa_attestation_required="$(json_get "$SLSA_L4_POLICY" "enforcement.attestations_mandatory")"
+
+  [[ "$layout_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto layout status must be ENFORCED"
+  [[ "$index_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto attestation index status must be ENFORCED"
+  [[ "$slsa_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "SLSA L4 policy status must be ENFORCED"
+  [[ "$sigstore_status" == "ENFORCED" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore policy status must be ENFORCED"
+  [[ "$in_toto_all_steps" == "true" || "$in_toto_all_steps" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto allStepsMustBeAttested must be true"
+  [[ "$in_toto_no_pending" == "true" || "$in_toto_no_pending" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto noPendingAllowed must be true"
+  [[ "$in_toto_required_status" == "VERIFIED" ]] || fail "CRYPTO_POLICY_FAIL" "in-toto requiredStatementStatus must be VERIFIED"
+  [[ "$sigstore_production_signing" == "true" || "$sigstore_production_signing" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore production_signing_required must be true"
+  [[ "$sigstore_allow_unsigned" == "false" || "$sigstore_allow_unsigned" == "False" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore allow_unsigned_artifacts must be false"
+  [[ "$sigstore_hybrid_mode" == "MODE_DRIVEN" ]] || fail "CRYPTO_POLICY_FAIL" "sigstore hybrid_signature_required must be MODE_DRIVEN"
+  [[ "$slsa_attestation_required" == "true" || "$slsa_attestation_required" == "True" ]] || fail "CRYPTO_POLICY_FAIL" "slsa attestations_mandatory must be true"
+
+  if grep -Eq 'PENDING_ATTESTATION|PLACEHOLDER|TODO' "$IN_TOTO_INDEX"; then
+    fail "CRYPTO_POLICY_FAIL" "in-toto attestation index contains forbidden pending markers"
+  fi
+
+  if ! /usr/bin/python3 "$NORMALIZE_ATTESTATION_STATUS_SCRIPT" --root "$ROOT_DIR" --strict >/tmp/attestation_normalize.out 2>/tmp/attestation_normalize.err; then
+    fail "CRYPTO_POLICY_FAIL" "canonical attestation normalization failed in strict mode"
+  fi
+
+  require_file "$ATTESTATION_STATUS_CANONICAL"
+
+  local canonical_schema canonical_status canonical_gate_status canonical_slsa_status
+  canonical_schema="$(json_get "$ATTESTATION_STATUS_CANONICAL" "schema_id")"
+  canonical_status="$(json_get "$ATTESTATION_STATUS_CANONICAL" "status")"
+  canonical_gate_status="$(json_get "$ATTESTATION_STATUS_CANONICAL" "gate.status")"
+  canonical_slsa_status="$(json_get "$ATTESTATION_STATUS_CANONICAL" "slsaAssessment.status")"
+
+  [[ "$canonical_schema" == "ETHICBIT_ATTESTATION_STATUS_CANONICAL_V1" ]] || fail "CRYPTO_POLICY_FAIL" "invalid canonical attestation schema_id"
+  [[ "$canonical_status" == "VERIFIED" ]] || fail "CRYPTO_POLICY_FAIL" "canonical attestation status must be VERIFIED"
+  [[ "$canonical_gate_status" == "PASS" ]] || fail "CRYPTO_POLICY_FAIL" "canonical attestation gate must be PASS"
+
+  case "$canonical_slsa_status" in
+    PASS_SLSA_FINAL|VERIFIED_REPRODUCIBLE|VERIFIED) ;;
+    *) fail "CRYPTO_POLICY_FAIL" "canonical slsaAssessment.status is not an accepted final-equivalent status" ;;
+  esac
+}
+
+ensure_hermetic_build_posture() {
+  local schema_id status hermetic_mode claim_level strict_required
+  local network_mode base_image_ref base_image_pinned lockfiles_verified
+  local declared_gap
+
+  schema_id="$(json_get "$HERMETIC_BUILD_REPORT" "schema_id")"
+  status="$(json_get "$HERMETIC_BUILD_REPORT" "status")"
+  hermetic_mode="$(json_get "$HERMETIC_BUILD_REPORT" "hermetic_mode")"
+  claim_level="$(json_get "$HERMETIC_BUILD_REPORT" "claim_level")"
+  strict_required="$(json_get "$HERMETIC_BUILD_REPORT" "strict_required")"
+  network_mode="$(json_get "$HERMETIC_BUILD_REPORT" "network_mode")"
+  base_image_ref="$(json_get "$HERMETIC_BUILD_REPORT" "base_image_ref")"
+  base_image_pinned="$(json_get "$HERMETIC_BUILD_REPORT" "controls.pinned_base_image_verified")"
+  lockfiles_verified="$(json_get "$HERMETIC_BUILD_REPORT" "controls.lockfiles_verified")"
+  declared_gap="$(json_get "$HERMETIC_BUILD_REPORT" "declared_gap")"
+
+  [[ "$schema_id" == "ETHICBIT_HERMETIC_BUILD_REPORT_V1" ]] || fail "HERMETIC_POLICY_FAIL" "invalid hermetic build report schema"
+  [[ -n "$claim_level" ]] || fail "HERMETIC_POLICY_FAIL" "hermetic build report claim_level cannot be empty"
+  [[ "$hermetic_mode" == "strict_hermetic" || "$hermetic_mode" == "equivalence_non_hermetic" ]] \
+    || fail "HERMETIC_POLICY_FAIL" "hermetic_mode must be strict_hermetic or equivalence_non_hermetic"
+
+  local enforce_strict="${ETHICBIT_HERMETIC_REQUIRE_STRICT:-0}"
+  if [[ "$strict_required" == "1" || "$strict_required" == "true" || "$strict_required" == "True" ]]; then
+    enforce_strict="1"
+  fi
+
+  if [[ "$enforce_strict" == "1" ]]; then
+    [[ "$hermetic_mode" == "strict_hermetic" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode required but report is not strict_hermetic"
+  fi
+
+  if [[ "$hermetic_mode" == "strict_hermetic" ]]; then
+    [[ "$status" == "PASS_STRICT_HERMETIC" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires status PASS_STRICT_HERMETIC"
+    [[ "$network_mode" == "none" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires network_mode=none"
+    [[ "$base_image_ref" =~ @sha256:[0-9a-f]{64}$ ]] \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires a pinned base image reference"
+    is_true_value "$base_image_pinned" \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires pinned_base_image_verified=true"
+    is_true_value "$lockfiles_verified" \
+      || fail "HERMETIC_POLICY_FAIL" "strict hermetic mode requires lockfiles_verified=true"
+  else
+    [[ "$status" == "PASS_EQUIVALENCE_NON_HERMETIC" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "equivalence_non_hermetic mode requires status PASS_EQUIVALENCE_NON_HERMETIC"
+    [[ -n "$declared_gap" && "$declared_gap" != "null" ]] \
+      || fail "HERMETIC_POLICY_FAIL" "equivalence_non_hermetic mode requires a declared_gap"
+  fi
+}
+
+ensure_mechanical_ethics_go_gate() {
+  local require_go_gate="${ETHICBIT_REQUIRE_GO_GATE:-0}"
+  if [[ "$require_go_gate" != "1" ]]; then
+    return 0
+  fi
+
+  command -v go >/dev/null 2>&1 \
+    || fail "MECHANICAL_ETHICS_GO_GATE_FAIL" "go toolchain is required when ETHICBIT_REQUIRE_GO_GATE=1"
+  require_file "${ROOT_DIR}/go.mod"
+  require_file "${ROOT_DIR}/assurance/crypto/pq_kem.go"
+  require_file "${ROOT_DIR}/mechanical_ethics/gate.go"
+
+  if ! (cd "$ROOT_DIR" && GO111MODULE=on go test ./assurance/crypto ./mechanical_ethics >/tmp/me_go_gate.out 2>/tmp/me_go_gate.err); then
+    cat /tmp/me_go_gate.err >&2 || true
+    fail "MECHANICAL_ETHICS_GO_GATE_FAIL" "go mechanical ethics gate compile check failed"
+  fi
 }
 
 ensure_no_known_competing_files() {
@@ -180,6 +325,10 @@ ensure_publication_pointer_if_present() {
 
 main() {
   ensure_required_components
+  ensure_case003_material_integrity
+  ensure_assurance_layer_enforced
+  ensure_hermetic_build_posture
+  ensure_mechanical_ethics_go_gate
   ensure_no_known_competing_files
   ensure_manifest_shape
   ensure_hash_alignment

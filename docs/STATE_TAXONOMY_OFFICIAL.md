@@ -56,7 +56,7 @@ Official documentary references for the current closure wave:
 - `v2.2b-sovereign-preclose-20260419`
 - `v2.2b-hybrid-claim-enforcement`
 - `audit-freeze-20260419-hybrid-claim-enforcement`
-- canonical merge commit on `main`: `2c0f086ed706c9998f8d66456fcb9b384a55ad29`
+- canonical merge commit on `main` (observed 2026-04-22): `f2f441e1994e90b133a2bb04154d08ce96f1d1a4`
 
 Freeze interpretation rule:
 

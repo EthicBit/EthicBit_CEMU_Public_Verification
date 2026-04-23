@@ -187,11 +187,56 @@ The next recommended steps are:
 1. preserve the current remediated state in version control,
 2. maintain current-state artifacts in sync with the canonical audit flow,
 3. optionally expose Mechanical Ethics outcomes more explicitly in top-level audit artifacts,
-4. and submit the updated package for follow-up external review.
+4. execute hermetic-build hardening, corroborated provenance, and SLSA Build L4 migration track defined in `docs/checks/HERMETIC_BUILD_AND_SLSA_L4_ROADMAP_2026-04-22.md`,
+5. and submit the updated package for follow-up external review.
 
 ---
 
-## 10. Closing statement
+## 10. Canonical Equivalence Model (formal section)
+
+This repository uses a canonical equivalence model to prevent overstatement while keeping the fail-closed pipeline executable across declared scope.
+
+### 10.1 Normative definition
+
+Canonical assurance is accepted when:
+
+- canonical attestation status is `VERIFIED`,
+- canonical attestation gate is `PASS`,
+- SLSA assessment is in an accepted final-equivalent set (`PASS_SLSA_FINAL`, `VERIFIED_REPRODUCIBLE`, `VERIFIED`),
+- and required policy layers remain enforced (`in-toto`, `SLSA`, `sigstore`).
+
+### 10.2 Canonical source artifacts
+
+The equivalence model is grounded in:
+
+- `artifacts/history/swarm/attestation_status.canonical.json`,
+- `assurance/in-toto/root.layout`,
+- `assurance/in-toto/attestation-index.json`,
+- `assurance/slsa/level4-policy.json`,
+- `assurance/sigstore/policy.json`,
+- `results/hermetic_build_report.json`,
+- and fail-closed execution in `scripts/verify_closure_integrity.sh`.
+
+### 10.3 Scope boundary
+
+This model supports strong factual closure claims only within declared repository scope, declared jurisdictions, and declared real targets. It is not equivalent to universal independent step-by-step external verification in every possible environment.
+
+### 10.4 Claim discipline
+
+Allowed claim style under this model:
+
+- "verified under the canonical equivalence model,"
+- "strong factual closure within declared scope,"
+- "fail-closed canonical assurance posture."
+
+Disallowed claim style unless new evidence is produced:
+
+- "unrestricted universal closure,"
+- "fully independent provider-grade verification in all contexts."
+
+---
+
+## 11. Closing statement
 
 This addendum records a meaningful improvement in the maturity of EthicBit / CEMU.
 
