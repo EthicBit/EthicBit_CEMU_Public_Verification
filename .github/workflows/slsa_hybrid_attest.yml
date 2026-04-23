@@ -766,6 +766,13 @@ jobs:
           hermetic_report = json.loads(hermetic_bytes.decode("utf-8"))
           hermetic_report_sha256 = hashlib.sha256(hermetic_bytes).hexdigest()
 
+          pq_runtime_path = Path("results/pq_runtime_secret_protection.json")
+          if not pq_runtime_path.exists():
+            raise SystemExit(f"missing pq runtime secret protection artifact: {pq_runtime_path}")
+          pq_runtime_bytes = pq_runtime_path.read_bytes()
+          pq_runtime_report = json.loads(pq_runtime_bytes.decode("utf-8"))
+          pq_runtime_sha256 = hashlib.sha256(pq_runtime_bytes).hexdigest()
+
           if mechanical_ethics_gate.get("status") != "PASS":
             raise SystemExit(
               f"mechanical ethics gate must be PASS before signing, got {mechanical_ethics_gate.get('status')}"
@@ -816,6 +823,12 @@ jobs:
             "hermetic_build_network_mode": hermetic_report.get("network_mode", "unknown"),
             "hermetic_build_base_image_ref": hermetic_report.get("base_image_ref", "unknown"),
             "hermetic_build_pinned_base_image_verified": hermetic_report.get("controls", {}).get("pinned_base_image_verified", False),
+            "pq_runtime_secret_protection_path": str(pq_runtime_path),
+            "pq_runtime_secret_protection_status": pq_runtime_report.get("status", "UNKNOWN"),
+            "pq_runtime_secret_protection_sha256": pq_runtime_sha256,
+            "pq_runtime_secret_protector": pq_runtime_report.get("protector", "UNKNOWN"),
+            "pq_runtime_secret_reference": pq_runtime_report.get("secret_reference", "UNKNOWN"),
+            "pq_runtime_evidence_ref": pq_runtime_report.get("evidence_ref", "UNKNOWN"),
           }
           Path("provenance/payload.json").write_text(
             json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
