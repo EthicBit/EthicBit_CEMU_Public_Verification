@@ -20,27 +20,59 @@ type RuntimeStopper interface {
 	Stop(reason string) error
 }
 
+// RuntimeSecretProtector abstracts runtime secret protection primitives.
+// Implementations must return only the encrypted material required by the gate.
+type RuntimeSecretProtector interface {
+	Protect() (*cemucrypto.EncryptedSecret, error)
+	Name() string
+}
+
 // ProtectedSecretMeta stores only metadata. Never store HybridSecret.
 type ProtectedSecretMeta struct {
 	Algorithm     string `json:"algorithm"`
 	KeyID         string `json:"key_id"`
 	CiphertextLen int    `json:"ciphertext_len"`
 	PublicKeyLen  int    `json:"public_key_len"`
+	Protector     string `json:"protector,omitempty"`
 }
 
 type Gate struct {
 	logger    CanonicalLogger
 	stopper   RuntimeStopper
-	protectFn func() (*cemucrypto.EncryptedSecret, error)
+	protector RuntimeSecretProtector
 }
 
-// NewGate initializes the gate and enforces protection of runtime secrets.
-// It returns an error (fail-closed) instead of panic.
+type mlkem768Protector struct{}
+
+func (p mlkem768Protector) Protect() (*cemucrypto.EncryptedSecret, error) {
+	return cemucrypto.HybridMLKEM768KeyEncapsulation()
+}
+
+func (p mlkem768Protector) Name() string {
+	return "MLKEM768Protector"
+}
+
+var newDefaultRuntimeSecretProtector = func() RuntimeSecretProtector {
+	return mlkem768Protector{}
+}
+
+// NewGate initializes the gate with the default runtime secret protector and
+// enforces protection of runtime secrets. It returns an error (fail-closed)
+// instead of panic.
 func NewGate(logger CanonicalLogger, stopper RuntimeStopper) (*Gate, error) {
+	return NewGateWithProtector(newDefaultRuntimeSecretProtector(), logger, stopper)
+}
+
+// NewGateWithProtector initializes the gate with an explicit protector.
+func NewGateWithProtector(protector RuntimeSecretProtector, logger CanonicalLogger, stopper RuntimeStopper) (*Gate, error) {
 	g := &Gate{
 		logger:    logger,
 		stopper:   stopper,
-		protectFn: cemucrypto.HybridMLKEM768KeyEncapsulation,
+		protector: protector,
+	}
+
+	if g.protector == nil {
+		return nil, g.FailClosed("runtime secret protector not configured")
 	}
 
 	if err := g.ProtectRuntimeSecrets(); err != nil {
@@ -53,7 +85,7 @@ func NewGate(logger CanonicalLogger, stopper RuntimeStopper) (*Gate, error) {
 // ProtectRuntimeSecrets initializes the hybrid protection primitive and records
 // only non-sensitive metadata in canonical artifacts.
 func (g *Gate) ProtectRuntimeSecrets() error {
-	secret, err := g.protectFn()
+	secret, err := g.protector.Protect()
 	if err != nil {
 		return g.FailClosed("ml-kem768 hybrid encapsulation failed")
 	}
@@ -81,11 +113,17 @@ func (g *Gate) RegisterProtectedSecret(secret *cemucrypto.EncryptedSecret) error
 		return g.FailClosed("invalid protected secret metadata")
 	}
 
+	protectorName := "unknown"
+	if g.protector != nil {
+		protectorName = g.protector.Name()
+	}
+
 	meta := ProtectedSecretMeta{
 		Algorithm:     secret.Algorithm,
 		KeyID:         secret.KeyID,
 		CiphertextLen: len(secret.Ciphertext),
 		PublicKeyLen:  len(secret.PublicKey),
+		Protector:     protectorName,
 	}
 
 	if g.logger != nil {
