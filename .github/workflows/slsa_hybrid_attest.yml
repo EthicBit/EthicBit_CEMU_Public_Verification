@@ -101,6 +101,14 @@ jobs:
             --lockfile requirements.txt \
             "${extra_args[@]}"
 
+          if [[ "${RUNNER_ENVIRONMENT:-}" == "self-hosted" ]]; then
+            echo "Reclaiming Docker space after hermetic build."
+            "${docker_bin}" image rm -f "ethicbit-hermetic-probe:${GITHUB_RUN_ID}" || true
+            "${docker_bin}" system prune -af --volumes || true
+            "${docker_bin}" builder prune -af || true
+            "${docker_bin}" system df || true
+          fi
+
           {
             echo "ETHICBIT_HERMETIC_REQUIRE_STRICT=${strict_required}"
             echo "ETHICBIT_HERMETIC_REPORT_PATH=results/hermetic_build_report.json"
@@ -454,7 +462,12 @@ jobs:
         run: |
           set -euo pipefail
           go version
-          GO111MODULE=on go test ./assurance/crypto ./mechanical_ethics
+          go_tmp="${RUNNER_TEMP:-/tmp}/ethicbit-go-tmp"
+          go_cache="${RUNNER_TEMP:-/tmp}/ethicbit-go-cache"
+          rm -rf "${go_tmp}" "${go_cache}" || true
+          mkdir -p "${go_tmp}" "${go_cache}"
+          GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go test ./assurance/crypto ./mechanical_ethics
+          rm -rf "${go_tmp}" "${go_cache}" || true
 
       - name: Preflight sovereign crypto requirements
         shell: bash
