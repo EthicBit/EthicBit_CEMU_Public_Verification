@@ -10,6 +10,14 @@ Define the execution path from the current canonical equivalence model to strong
 - `in-toto`, `SLSA`, and `sigstore` policy artifacts are required and validated in fail-closed mode.
 - Canonical attestation normalization runs in strict mode before closure acceptance.
 
+## Phase 1 kickoff update (2026-04-23)
+
+- Strict tag lane (`v*`) now enforces hermetic posture materialization before signing and attestation.
+- `ETHICBIT_HERMETIC_BASE_IMAGE_REF` is pinned with `@sha256` and validated in strict mode.
+- Docker binary discovery hardening was added to avoid silent runner-path drift.
+- JavaScript actions are forced to run on Node 24 (`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true`).
+- Validation evidence: successful strict runs `24810631736` and `24813129514`.
+
 ## Stream A: Real hermetic builds
 
 ### A1. Runner hardening

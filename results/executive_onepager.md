@@ -1,6 +1,6 @@
 # Executive One-Pager
 
-Generated At: 2026-04-22T16:29:49Z
+Generated At: 2026-04-23T02:28:01Z
 Package ID: EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z
 
 Declared states:

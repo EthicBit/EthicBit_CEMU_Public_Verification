@@ -44,3 +44,6 @@ This report documents the synchronization performed between:
 
 - observed `origin/main` at alignment time: `f2f441e1994e90b133a2bb04154d08ce96f1d1a4`
 - synchronization head recorded in final snapshot manifest.
+2026-04-22T18:52:35Z - ✅ Verificación in-toto + snapshot hashes: OK
+2026-04-22T18:56:31Z - ✅ attestation_status.canonical.json verificado con nueva estructura ETHICBIT_ATTESTATION_STATUS_CANONICAL_V1 - Status: VERIFIED + SLSA PASS_SLSA_FINAL
+2026-04-22T18:57:52Z - ✅ VERIFICACIÓN FINAL in-toto + snapshot + Mechanical Ethics Gate: COMPLETADA CON ÉXITO (Status=VERIFIED, SLSA=PASS_SLSA_FINAL, Gate=PASS, Readiness=READY)

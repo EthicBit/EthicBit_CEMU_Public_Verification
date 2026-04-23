@@ -4,7 +4,7 @@
 **Repository:** `EthicBit_CEMU`
 **Document purpose:** Final closure conclusion after sovereign crypto-claim hardening and merge to canonical `main`
 **Status:** Active
-**Date:** 2026-04-22
+**Date:** 2026-04-23
 **Commit SHA (main):** `f2f441e1994e90b133a2bb04154d08ce96f1d1a4`
 
 ---
@@ -118,3 +118,30 @@ After documentary closure, `main` incorporated an additional CI hardening merge 
 - `5c09a7a71089d24bf438a371f4b7405bd97fb0a1`
 
 This preserves the declared closure posture while improving periodic hybrid-signature resilience on hosted runners.
+
+---
+
+## Post-closure validation update (2026-04-23)
+
+Additional strict-tag validation runs were executed after runner hardening and workflow updates:
+
+- `24810631736` (`v2.2b-hermetic-probe-20260423-3`) -> `success`
+- `24813129514` (`v2.2b-hermetic-probe-20260423-4-node24`) -> `success`
+
+Observed in those runs:
+
+- hermetic posture materialization passed in strict mode (`PASS_STRICT_HERMETIC`)
+- sovereign preflight requirements passed under strict claim semantics
+- canonical Mechanical Ethics gate validation passed
+- closure-integrity verification passed
+- hybrid-sign + hybrid-verify + full audit path passed end-to-end
+
+Node runtime hardening note:
+
+- workflow now sets `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true`
+- Node 20 deprecation remains as informational annotation, but relevant actions are forced to execute on Node 24.
+
+Post-quantum KEM note:
+
+- active attestations in this repository cut remain focused on hybrid signature evidence (`ED25519` + `ML-DSA`) and strict verification gates.
+- no `pq_kem.go` wrapper is currently present in this repository tree, so ML-KEM768 attestation materialization is tracked as next hardening step and is not over-claimed in this conclusion.
