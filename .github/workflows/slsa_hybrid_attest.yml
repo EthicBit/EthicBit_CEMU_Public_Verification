@@ -32,6 +32,11 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.x"
+
       - name: Materialize hermetic build posture report
         shell: bash
         run: |
@@ -263,6 +268,14 @@ jobs:
             require_trusted_keys="1"
           fi
 
+          require_go_gate="0"
+          if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "master" ]]; then
+            require_go_gate="1"
+          fi
+          if [[ "${claim_level}" == "freeze_grade" || "${claim_level}" == "sovereign_release" ]]; then
+            require_go_gate="1"
+          fi
+
           {
             echo "ETHICBIT_KEY_PROVENANCE_MODE=${key_provenance_mode}"
             echo "ETHICBIT_ED25519_KEY_SOURCE=${ed25519_key_source}"
@@ -281,6 +294,7 @@ jobs:
             echo "ETHICBIT_CLAIM_LEVEL=${claim_level}"
             echo "ETHICBIT_REQUIRE_NATIVE_HYBRID=${require_native_hybrid}"
             echo "ETHICBIT_REQUIRE_TRUSTED_KEYS=${require_trusted_keys}"
+            echo "ETHICBIT_REQUIRE_GO_GATE=${require_go_gate}"
             echo "ETHICBIT_RELEASE_CLASS=${release_class}"
           } >> "$GITHUB_ENV"
 
@@ -413,6 +427,13 @@ jobs:
             echo "MLDSA_CI=UNSUPPORTED_ON_RUNNER"
           fi
 
+      - name: Compile Mechanical Ethics Go gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          go version
+          GO111MODULE=on go test ./assurance/crypto ./mechanical_ethics
+
       - name: Preflight sovereign crypto requirements
         shell: bash
         run: |
@@ -484,6 +505,7 @@ jobs:
         shell: bash
         run: |
           ETHICBIT_HERMETIC_REQUIRE_STRICT="${ETHICBIT_HERMETIC_REQUIRE_STRICT:-0}" \
+          ETHICBIT_REQUIRE_GO_GATE="${ETHICBIT_REQUIRE_GO_GATE:-0}" \
           ./scripts/verify_closure_integrity.sh
 
       - name: Enforce crypto claim policy

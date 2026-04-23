@@ -3,13 +3,11 @@ package crypto
 import (
 	"bytes"
 	"crypto/ecdh"
+	"crypto/hkdf"
 	"crypto/mlkem"
 	"crypto/rand"
 	"crypto/sha256"
 	"errors"
-	"io"
-
-	"golang.org/x/crypto/hkdf"
 )
 
 // EncryptedSecret stores only non-sensitive fields for persistence.
@@ -91,12 +89,5 @@ func hybridKDF(secretPQ, secretClassic []byte) ([]byte, error) {
 	ikm = append(ikm, secretClassic...)
 
 	salt := sha256.Sum256([]byte("ETHICBIT_HYBRID_MLKEM768_X25519_V1"))
-	info := []byte("mechanical-ethics-runtime-secret")
-	kdf := hkdf.New(sha256.New, ikm, salt[:], info)
-
-	out := make([]byte, 32)
-	if _, err := io.ReadFull(kdf, out); err != nil {
-		return nil, err
-	}
-	return out, nil
+	return hkdf.Key(sha256.New, ikm, salt[:], "mechanical-ethics-runtime-secret", 32)
 }

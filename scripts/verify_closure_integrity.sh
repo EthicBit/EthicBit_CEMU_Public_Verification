@@ -183,6 +183,24 @@ ensure_hermetic_build_posture() {
   fi
 }
 
+ensure_mechanical_ethics_go_gate() {
+  local require_go_gate="${ETHICBIT_REQUIRE_GO_GATE:-0}"
+  if [[ "$require_go_gate" != "1" ]]; then
+    return 0
+  fi
+
+  command -v go >/dev/null 2>&1 \
+    || fail "MECHANICAL_ETHICS_GO_GATE_FAIL" "go toolchain is required when ETHICBIT_REQUIRE_GO_GATE=1"
+  require_file "${ROOT_DIR}/go.mod"
+  require_file "${ROOT_DIR}/assurance/crypto/pq_kem.go"
+  require_file "${ROOT_DIR}/mechanical_ethics/gate.go"
+
+  if ! (cd "$ROOT_DIR" && GO111MODULE=on go test ./assurance/crypto ./mechanical_ethics >/tmp/me_go_gate.out 2>/tmp/me_go_gate.err); then
+    cat /tmp/me_go_gate.err >&2 || true
+    fail "MECHANICAL_ETHICS_GO_GATE_FAIL" "go mechanical ethics gate compile check failed"
+  fi
+}
+
 ensure_no_known_competing_files() {
   local path
   for path in \
@@ -310,6 +328,7 @@ main() {
   ensure_case003_material_integrity
   ensure_assurance_layer_enforced
   ensure_hermetic_build_posture
+  ensure_mechanical_ethics_go_gate
   ensure_no_known_competing_files
   ensure_manifest_shape
   ensure_hash_alignment
