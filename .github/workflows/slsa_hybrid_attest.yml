@@ -32,11 +32,19 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.25.x"
-          cache: false
+      - name: Reclaim Docker space (self-hosted)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${RUNNER_ENVIRONMENT:-}" == "self-hosted" ]]; then
+            echo "Self-hosted runner detected: pruning Docker caches before hermetic build."
+            docker system df || true
+            docker system prune -af --volumes || true
+            docker builder prune -af || true
+            docker system df || true
+          else
+            echo "GitHub-hosted runner: skipping Docker prune."
+          fi
 
       - name: Materialize hermetic build posture report
         shell: bash
@@ -434,6 +442,12 @@ jobs:
             cat /tmp/mldsa_ci_test.err || true
             echo "MLDSA_CI=UNSUPPORTED_ON_RUNNER"
           fi
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.x"
+          cache: false
 
       - name: Compile Mechanical Ethics Go gate
         shell: bash
