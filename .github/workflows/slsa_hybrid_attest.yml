@@ -3,7 +3,7 @@ name: slsa-hybrid-attest
 on:
   workflow_dispatch:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
     tags:
       - "v*"
       - "audit-freeze-*"
@@ -245,7 +245,7 @@ jobs:
           fi
 
           require_trusted_keys="0"
-          if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "master" ]]; then
+          if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "main" ]]; then
             require_trusted_keys="1"
           fi
           if [[ "${claim_level}" == "freeze_grade" || "${claim_level}" == "sovereign_release" ]]; then
@@ -253,7 +253,7 @@ jobs:
           fi
 
           require_go_gate="0"
-          if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "master" ]]; then
+          if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "main" ]]; then
             require_go_gate="1"
           fi
           if [[ "${claim_level}" == "freeze_grade" || "${claim_level}" == "sovereign_release" ]]; then
@@ -609,7 +609,7 @@ jobs:
               )
               raise SystemExit(1)
 
-          # Trusted-key requirement enforcement (enabled on master and sovereign-grade claims)
+          # Trusted-key requirement enforcement (enabled on main and sovereign-grade claims)
           if require_trusted_keys:
               if ed25519_key_source != "trusted_secrets" or mldsa_key_source != "trusted_secrets":
                   print(
