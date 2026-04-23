@@ -21,7 +21,7 @@ env:
 
 jobs:
   build-sign-attest:
-    runs-on: ${{ (github.ref_type == 'tag' && (startsWith(github.ref_name, 'v') || startsWith(github.ref_name, 'audit-freeze-'))) && fromJSON('["self-hosted","linux","x64","mldsa-native"]') || fromJSON('["ubuntu-latest"]') }}
+    runs-on: ${{ ((github.ref_type == 'branch' && github.ref_name == 'main') || (github.ref_type == 'tag' && (startsWith(github.ref_name, 'v') || startsWith(github.ref_name, 'audit-freeze-')))) && fromJSON('["self-hosted","linux","x64","mldsa-native"]') || fromJSON('["ubuntu-latest"]') }}
 
     steps:
       - name: Checkout
@@ -116,6 +116,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          is_sovereign_ref="0"
+          if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "main" ]]; then
+            is_sovereign_ref="1"
+          fi
+          if [[ "${GITHUB_REF_TYPE}" == "tag" && ( "${GITHUB_REF_NAME}" == v* || "${GITHUB_REF_NAME}" == audit-freeze-* ) ]]; then
+            is_sovereign_ref="1"
+          fi
+
           ed25519_key_source="trusted_secrets"
           mldsa_key_source="trusted_secrets"
           mldsa_effective_mode="native_mldsa"
@@ -125,6 +133,10 @@ jobs:
             printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
             printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
           else
+            if [[ "${is_sovereign_ref}" == "1" ]]; then
+              echo "Policy violation: sovereign ref requires trusted ED25519 secrets." >&2
+              exit 1
+            fi
             ed25519_key_source="ephemeral_runner"
             openssl genpkey -algorithm Ed25519 -out assurance/keys/ed25519_private.pem
             openssl pkey -in assurance/keys/ed25519_private.pem -pubout -out assurance/keys/ed25519_public.pem
@@ -134,6 +146,10 @@ jobs:
             printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
             printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
           else
+            if [[ "${is_sovereign_ref}" == "1" ]]; then
+              echo "Policy violation: sovereign ref requires trusted ML-DSA secrets." >&2
+              exit 1
+            fi
             mldsa_key_source="ephemeral_runner"
             mldsa_effective_mode="compatibility_fallback"
             runner_supports_mldsa="false"
@@ -154,6 +170,11 @@ jobs:
           # Some GitHub runners do not support ML-DSA keys in OpenSSL.
           # Fallback to a CI-compatible keypair so fail-closed controls remain executable.
           if ! openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig >/tmp/ci_key_probe.mldsa.err 2>&1; then
+            if [[ "${is_sovereign_ref}" == "1" ]]; then
+              echo "Policy violation: sovereign ref requires native ML-DSA support on runner (compatibility fallback disabled)." >&2
+              cat /tmp/ci_key_probe.mldsa.err >&2 || true
+              exit 1
+            fi
             echo "ML-DSA key unsupported on runner; enabling CI compatibility fallback."
             mldsa_effective_mode="compatibility_fallback"
             mldsa_key_source="ephemeral_runner"
@@ -223,6 +244,8 @@ jobs:
 
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             audit_require_hybrid="1"
+          elif [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "main" ]]; then
+            audit_require_hybrid="1"
           else
             audit_require_hybrid="0"
           fi
@@ -247,6 +270,7 @@ jobs:
           require_trusted_keys="0"
           if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "main" ]]; then
             require_trusted_keys="1"
+            require_native_hybrid="1"
           fi
           if [[ "${claim_level}" == "freeze_grade" || "${claim_level}" == "sovereign_release" ]]; then
             require_trusted_keys="1"
@@ -422,7 +446,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [[ "${ETHICBIT_CLAIM_LEVEL}" == "freeze_grade" || "${ETHICBIT_CLAIM_LEVEL}" == "sovereign_release" ]]; then
+          if [[ "${ETHICBIT_REQUIRE_NATIVE_HYBRID}" == "1" || "${ETHICBIT_REQUIRE_TRUSTED_KEYS}" == "1" || "${ETHICBIT_CLAIM_LEVEL}" == "freeze_grade" || "${ETHICBIT_CLAIM_LEVEL}" == "sovereign_release" ]]; then
             echo "Running strict preflight for claim level: ${ETHICBIT_CLAIM_LEVEL}"
             [[ "${ETHICBIT_REQUIRE_NATIVE_HYBRID}" == "1" ]] || { echo "Policy violation: strict claims require ETHICBIT_REQUIRE_NATIVE_HYBRID=1" >&2; exit 1; }
             [[ "${ETHICBIT_REQUIRE_TRUSTED_KEYS}" == "1" ]] || { echo "Policy violation: strict claims require ETHICBIT_REQUIRE_TRUSTED_KEYS=1" >&2; exit 1; }
