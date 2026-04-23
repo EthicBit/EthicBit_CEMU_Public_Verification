@@ -1,19 +1,19 @@
 {
   "schema_id": "ETHICBIT_HERMETIC_BUILD_REPORT_V1",
   "version": "1.0.0",
-  "generated_at": "2026-04-22T19:39:18.098777Z",
-  "status": "PASS_EQUIVALENCE_NON_HERMETIC",
-  "hermetic_mode": "equivalence_non_hermetic",
+  "generated_at": "2026-04-23T16:14:24.134674Z",
+  "status": "PASS_STRICT_HERMETIC",
+  "hermetic_mode": "strict_hermetic",
   "claim_level": "ci_grade",
-  "strict_required": false,
-  "build_system": "github_actions_runner",
-  "build_target": "none",
-  "network_mode": "runner-default",
-  "base_image_ref": "node:22-bookworm-slim",
-  "base_image_pinned_digest": false,
+  "strict_required": true,
+  "build_system": "docker",
+  "build_target": "hermetic-check",
+  "network_mode": "none",
+  "base_image_ref": "node:22-bookworm-slim@sha256:d415caac2f1f77b98caaf9415c5f807e14bc8d7bdea62561ea2fef4fbd08a73c",
+  "base_image_pinned_digest": true,
   "controls": {
-    "network_none_verified": false,
-    "pinned_base_image_verified": false,
+    "network_none_verified": true,
+    "pinned_base_image_verified": true,
     "lockfiles_verified": true
   },
   "lockfiles": [
@@ -21,7 +21,12 @@
       "path": "package-lock.json",
       "exists": true,
       "sha256": "55ab31c15ae509d17606f23fc36b9369a8313bbea570a52cee5ae191082070ea"
+    },
+    {
+      "path": "requirements.txt",
+      "exists": true,
+      "sha256": "ac51f4d245e0e0c7da3ac66659796cd41ae355e1e054955729118249fb8fa3a5"
     }
   ],
-  "declared_gap": "Strict hermetic build is not yet enforced in all paths; canonical closure operates under equivalence model."
+  "declared_gap": ""
 }
