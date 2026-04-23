@@ -19,6 +19,7 @@ SIGSTORE_POLICY="${ROOT_DIR}/assurance/sigstore/policy.json"
 ATTESTATION_STATUS_CANONICAL="${ROOT_DIR}/artifacts/history/swarm/attestation_status.canonical.json"
 NORMALIZE_ATTESTATION_STATUS_SCRIPT="${ROOT_DIR}/scripts/status/normalize_attestation_status_canonical.py"
 HERMETIC_BUILD_REPORT="${ROOT_DIR}/results/hermetic_build_report.json"
+PQ_RUNTIME_SECRET_PROTECTION_REPORT="${ROOT_DIR}/results/pq_runtime_secret_protection.json"
 
 fail() {
   local code="$1"
@@ -201,6 +202,67 @@ ensure_mechanical_ethics_go_gate() {
   fi
 }
 
+ensure_pq_runtime_secret_protection_posture() {
+  local claim_level="${ETHICBIT_CLAIM_LEVEL:-ci_grade}"
+  local strict_claim="0"
+
+  case "$claim_level" in
+    freeze_grade|sovereign_release)
+      strict_claim="1"
+      ;;
+  esac
+
+  if [[ ! -f "$PQ_RUNTIME_SECRET_PROTECTION_REPORT" ]]; then
+    if [[ "$strict_claim" == "1" ]]; then
+      fail "PQ_RUNTIME_PROTECTION_FAIL" \
+        "missing results/pq_runtime_secret_protection.json for claim level ${claim_level}"
+    fi
+    echo "INFO: pq runtime secret protection artifact missing (allowed for claim level ${claim_level})"
+    return 0
+  fi
+
+  if [[ "$strict_claim" == "1" ]]; then
+    local artifact_type artifact_status
+
+    artifact_type="$(json_get "$PQ_RUNTIME_SECRET_PROTECTION_REPORT" "artifactType")" \
+      || fail "PQ_RUNTIME_PROTECTION_FAIL" "invalid pq runtime artifact structure (missing artifactType)"
+    artifact_status="$(json_get "$PQ_RUNTIME_SECRET_PROTECTION_REPORT" "status")" \
+      || fail "PQ_RUNTIME_PROTECTION_FAIL" "invalid pq runtime artifact structure (missing status)"
+
+    [[ "$artifact_type" == "pq_runtime_secret_protection" ]] \
+      || fail "PQ_RUNTIME_PROTECTION_FAIL" "unexpected pq runtime artifact type: ${artifact_type}"
+    [[ "$artifact_status" == "PROTECTED" ]] \
+      || fail "PQ_RUNTIME_PROTECTION_FAIL" \
+        "strict claim ${claim_level} requires pq runtime status PROTECTED (observed: ${artifact_status})"
+
+    echo "PQ_RUNTIME_SECRET_PROTECTION=PASS (claim level ${claim_level})"
+    return 0
+  fi
+
+  # Non-strict claims remain informational to avoid premature blocking.
+  python3 - "$PQ_RUNTIME_SECRET_PROTECTION_REPORT" "$claim_level" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+claim_level = sys.argv[2]
+
+status = "UNKNOWN"
+protector = "UNKNOWN"
+try:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    status = str(payload.get("status") or "UNKNOWN")
+    protector = str(payload.get("protector") or "UNKNOWN")
+except Exception:
+    status = "UNREADABLE"
+
+print(
+    f"INFO: pq runtime secret protection observed (claim level={claim_level}, status={status}, protector={protector})"
+)
+PY
+}
+
 ensure_no_known_competing_files() {
   local path
   for path in \
@@ -329,6 +391,7 @@ main() {
   ensure_assurance_layer_enforced
   ensure_hermetic_build_posture
   ensure_mechanical_ethics_go_gate
+  ensure_pq_runtime_secret_protection_posture
   ensure_no_known_competing_files
   ensure_manifest_shape
   ensure_hash_alignment
