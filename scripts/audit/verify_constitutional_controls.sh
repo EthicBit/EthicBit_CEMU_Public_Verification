@@ -189,6 +189,99 @@ report = {
     "controls": results,
 }
 
+# Dynamic constitutional control: PQ runtime secret protection by claim level.
+claim_level = str(os.getenv("ETHICBIT_CLAIM_LEVEL", "ci_grade") or "ci_grade").strip()
+strict_claim_levels = {"freeze_grade", "sovereign_release"}
+strict_required = claim_level in strict_claim_levels
+pq_path_rel = "results/pq_runtime_secret_protection.json"
+pq_path = (root / pq_path_rel).resolve()
+
+summary["total"] += 1
+pq_record = {
+    "controlId": "CTL-PQ-001",
+    "articleId": "ART-02",
+    "title": "PQ Runtime Secret Protection Claim-Level Enforcement",
+    "normative": "MUST",
+    "failureBehavior": "FAIL_CLOSED",
+    "command": "dynamic:claim-level-pq-runtime-protection",
+    "timeoutSeconds": 0,
+    "status": "FAIL",
+    "execution": {},
+    "evidence": {"paths": [pq_path_rel], "missing": []},
+    "audiences": ["ai-agentic", "cybersecurity", "regulatory", "government"],
+    "checkedAt": now_utc_iso(),
+    "metadata": {
+        "claimLevel": claim_level,
+        "strictRequired": strict_required,
+        "strictClaimLevels": sorted(strict_claim_levels),
+    },
+}
+
+if not pq_path.exists():
+    pq_record["evidence"]["missing"] = [pq_path_rel]
+    if strict_required:
+        pq_record["status"] = "FAIL"
+        pq_record["execution"] = {
+            "returnCode": 1,
+            "note": f"missing {pq_path_rel} for strict claim level {claim_level}",
+        }
+    else:
+        pq_record["status"] = "PASS"
+        pq_record["execution"] = {
+            "returnCode": 0,
+            "note": f"{pq_path_rel} missing but allowed for non-strict claim level {claim_level}",
+        }
+else:
+    try:
+        pq_payload = json.loads(pq_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        pq_payload = None
+        pq_record["execution"] = {
+            "returnCode": 1,
+            "error": f"invalid JSON in {pq_path_rel}: {exc}",
+        }
+        pq_record["status"] = "FAIL" if strict_required else "PASS"
+
+    if pq_payload is not None:
+        artifact_type = str(pq_payload.get("artifactType") or "")
+        pq_status = str(pq_payload.get("status") or "UNKNOWN")
+        protector = str(pq_payload.get("protector") or "UNKNOWN")
+        evidence_ref = str(pq_payload.get("evidence_ref") or "UNKNOWN")
+        pq_record["execution"] = {
+            "returnCode": 0,
+            "artifactType": artifact_type,
+            "pqStatus": pq_status,
+            "protector": protector,
+            "evidenceRef": evidence_ref,
+        }
+
+        if strict_required:
+            strict_ok = artifact_type == "pq_runtime_secret_protection" and pq_status == "PROTECTED"
+            pq_record["status"] = "PASS" if strict_ok else "FAIL"
+            if not strict_ok:
+                pq_record["execution"]["returnCode"] = 1
+                pq_record["execution"]["error"] = (
+                    "strict claim requires artifactType=pq_runtime_secret_protection and status=PROTECTED"
+                )
+        else:
+            pq_record["status"] = "PASS"
+
+if pq_record["status"] == "PASS":
+    summary["passed"] += 1
+    print(f"[PASS] {pq_record['controlId']} (MUST) - {pq_record['title']}")
+else:
+    summary["failed"] += 1
+    summary["mustFailed"] += 1
+    must_failed = True
+    print(f"[FAIL] {pq_record['controlId']} (MUST) - {pq_record['title']}")
+    if pq_record["execution"].get("returnCode", 0) != 0:
+        print(f"       command rc={pq_record['execution'].get('returnCode')}")
+    missing = pq_record["evidence"].get("missing", [])
+    if missing:
+        print(f"       missing evidence: {', '.join(missing)}")
+
+results.append(pq_record)
+
 output_path.parent.mkdir(parents=True, exist_ok=True)
 with open(output_path, "w", encoding="utf-8") as handle:
     json.dump(report, handle, indent=2, ensure_ascii=False)
