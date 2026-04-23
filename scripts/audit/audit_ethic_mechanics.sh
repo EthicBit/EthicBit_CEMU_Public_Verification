@@ -6,12 +6,14 @@ WRAPPER="scripts/core/ethic_mechanics_check_v22.sh"
 GATE_SCRIPT="scripts/core/mechanical_ethics_gate.py"
 GATE_OUTPUT="results/mechanical_ethics_gate.json"
 GATE_REQUIRED_SECTORS="${ETHICBIT_ME_GATE_REQUIRED_SECTORS:-CORE,JUSTICIA,FINANZAS,SECURITY,TECHNICAL,LEGAL,REGULATORY}"
+PQ_RUNTIME_WRITER="scripts/status/write_pq_runtime_secret_protection.py"
+PQ_RUNTIME_OUTPUT="results/pq_runtime_secret_protection.json"
 
 echo "=== ETHIC MECHANICS AUDIT (7 REAL SECTORS) ==="
 echo "Sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY"
 echo
 
-if [ ! -f "$REGISTRY_MANAGER" ] || [ ! -f "$WRAPPER" ] || [ ! -f "$GATE_SCRIPT" ]; then
+if [ ! -f "$REGISTRY_MANAGER" ] || [ ! -f "$WRAPPER" ] || [ ! -f "$GATE_SCRIPT" ] || [ ! -f "$PQ_RUNTIME_WRITER" ]; then
     echo "ERROR: Required files not found"
     exit 2
 fi
@@ -86,6 +88,31 @@ print(f"gate.status={status}")
 print(f"gate.mode={mode}")
 if status != "PASS":
     raise SystemExit("mechanical ethics gate status != PASS")
+PY
+echo
+
+echo "=== 6. PQ RUNTIME SECRET PROTECTION ARTIFACT ==="
+python3 "$PQ_RUNTIME_WRITER" \
+  --output "$PQ_RUNTIME_OUTPUT" \
+  --claim-level "${ETHICBIT_CLAIM_LEVEL:-ci_grade}" \
+  --required-sectors "$GATE_REQUIRED_SECTORS" \
+  --runtime-scope "canonical_audit_runtime" \
+  --protector "${ETHICBIT_RUNTIME_SECRET_PROTECTOR:-MLKEM768Protector}" \
+  --policy-version "CONSTITUTIONAL_CLOSURE_ADDENDUM_V2"
+
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+path = Path("results/pq_runtime_secret_protection.json")
+if not path.exists():
+    raise SystemExit("pq_runtime_secret_protection.json missing")
+
+data = json.loads(path.read_text(encoding="utf-8"))
+status = data.get("status")
+protector = data.get("protector")
+print(f"pq_runtime_secret_protection.status={status}")
+print(f"pq_runtime_secret_protection.protector={protector}")
 PY
 echo
 
