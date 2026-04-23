@@ -536,6 +536,16 @@ jobs:
           print("mechanical_ethics_gate: PASS (canonical + multisector)")
           PY
 
+      - name: Materialize PQ runtime secret protection artifact
+        shell: bash
+        run: |
+          python3 scripts/status/write_pq_runtime_secret_protection.py \
+            --claim-level "${ETHICBIT_CLAIM_LEVEL}" \
+            --required-sectors "${ETHICBIT_ME_GATE_REQUIRED_SECTORS}" \
+            --runtime-scope "canonical_ci_runtime" \
+            --protector "${ETHICBIT_RUNTIME_SECRET_PROTECTOR:-MLKEM768Protector}" \
+            --policy-version "CONSTITUTIONAL_CLOSURE_ADDENDUM_V2"
+
       - name: Validate closure integrity (hermetic-aware)
         shell: bash
         run: |
@@ -871,6 +881,7 @@ jobs:
             results/GATE_REPORT.json
             results/constitutional_controls_report.json
             results/mechanical_ethics_gate.json
+            results/pq_runtime_secret_protection.json
             results/hermetic_build_report.json
             artifacts/history/swarm/triple_public_anchor_live_verification.json
             artifacts/ci/signing_environment_report.json
