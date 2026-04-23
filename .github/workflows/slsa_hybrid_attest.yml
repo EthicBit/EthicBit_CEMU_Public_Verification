@@ -36,6 +36,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: "1.25.x"
+          cache: false
 
       - name: Materialize hermetic build posture report
         shell: bash
