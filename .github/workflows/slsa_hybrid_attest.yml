@@ -35,6 +35,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:${PATH:-}"
           mkdir -p results
 
           strict_required="0"
@@ -48,14 +49,27 @@ jobs:
           build_target="none"
           declared_gap="Strict hermetic build is not enforced for non-tag CI context."
           base_image_ref="${ETHICBIT_HERMETIC_BASE_IMAGE_REF:-node:22-bookworm-slim}"
+          docker_bin="$(command -v docker || true)"
+          if [[ -z "${docker_bin}" && -x /usr/bin/docker ]]; then
+            docker_bin="/usr/bin/docker"
+          fi
+          if [[ -z "${docker_bin}" && -x /snap/bin/docker ]]; then
+            docker_bin="/snap/bin/docker"
+          fi
 
           if [[ "${strict_required}" == "1" ]]; then
             [[ "$base_image_ref" =~ @sha256:[a-f0-9]{64}$ ]] || {
               echo "ETHICBIT_HERMETIC_BASE_IMAGE_REF must be pinned with @sha256 for strict hermetic mode." >&2
               exit 1
             }
+            if [[ -z "${docker_bin}" ]]; then
+              echo "Docker binary not found for strict hermetic mode." >&2
+              echo "PATH=$PATH" >&2
+              ls -l /usr/bin/docker /snap/bin/docker >&2 2>/dev/null || true
+              exit 127
+            fi
 
-            docker build \
+            "${docker_bin}" build \
               --file Dockerfile.build \
               --target hermetic-check \
               --build-arg ETHICBIT_BASE_IMAGE_REF="$base_image_ref" \
