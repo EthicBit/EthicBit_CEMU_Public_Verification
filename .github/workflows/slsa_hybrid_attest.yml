@@ -563,6 +563,39 @@ jobs:
           go-version: "1.25.x"
           cache: false
 
+      - name: Bootstrap Go toolchain (self-hosted if missing)
+        if: ${{ runner.environment == 'self-hosted' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v go >/dev/null 2>&1; then
+            echo "Using preinstalled Go toolchain on self-hosted runner."
+            go version
+            exit 0
+          fi
+
+          go_version="1.25.1"
+          arch="$(uname -m)"
+          case "${arch}" in
+            x86_64|amd64) go_arch="amd64" ;;
+            aarch64|arm64) go_arch="arm64" ;;
+            *)
+              echo "Unsupported self-hosted architecture for Go bootstrap: ${arch}" >&2
+              exit 1
+              ;;
+          esac
+
+          go_tgz="go${go_version}.linux-${go_arch}.tar.gz"
+          go_url="https://go.dev/dl/${go_tgz}"
+          go_root="${RUNNER_TEMP:-/tmp}/ethicbit-go-toolchain"
+          rm -rf "${go_root}"
+          mkdir -p "${go_root}"
+
+          curl --fail --location --retry 3 --connect-timeout 20 --max-time 300 "${go_url}" -o "${go_root}/${go_tgz}"
+          tar -C "${go_root}" -xzf "${go_root}/${go_tgz}"
+          echo "${go_root}/go/bin" >> "${GITHUB_PATH}"
+          "${go_root}/go/bin/go" version
+
       - name: Validate Go toolchain (self-hosted)
         if: ${{ runner.environment == 'self-hosted' }}
         shell: bash
