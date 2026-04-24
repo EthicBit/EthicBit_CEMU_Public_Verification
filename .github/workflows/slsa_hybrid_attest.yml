@@ -571,7 +571,12 @@ jobs:
           go_cache="${RUNNER_TEMP:-/tmp}/ethicbit-go-cache"
           rm -rf "${go_tmp}" "${go_cache}" || true
           mkdir -p "${go_tmp}" "${go_cache}"
-          GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go test ./assurance/crypto ./mechanical_ethics
+          # Keep compile validation deterministic on low-memory self-hosted runners.
+          export GOMAXPROCS=1
+          export GOGC=20
+          export GOMEMLIMIT=320MiB
+          export GOFLAGS="-p=1"
+          GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go build ./assurance/crypto ./mechanical_ethics
           rm -rf "${go_tmp}" "${go_cache}" || true
 
       - name: Preflight sovereign crypto requirements
