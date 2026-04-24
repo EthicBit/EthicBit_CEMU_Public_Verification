@@ -18,6 +18,13 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
   ETHICBIT_ME_GATE_REQUIRED_SECTORS: CORE,JUSTICIA,FINANZAS,SECURITY,TECHNICAL,LEGAL,REGULATORY
   ETHICBIT_HERMETIC_BASE_IMAGE_REF: ${{ vars.ETHICBIT_HERMETIC_BASE_IMAGE_REF }}
+  ETHICBIT_SIGNING_BACKEND: ${{ vars.ETHICBIT_SIGNING_BACKEND }}
+  ETHICBIT_SIGNING_ENDPOINT: ${{ vars.ETHICBIT_SIGNING_ENDPOINT }}
+  ETHICBIT_SIGNING_DISABLE_PROXY: ${{ vars.ETHICBIT_SIGNING_DISABLE_PROXY }}
+  ETHICBIT_REMOTE_ED25519_KEY_ID: ${{ vars.ETHICBIT_ED25519_KEY_ID }}
+  ETHICBIT_REMOTE_MLDSA_KEY_ID: ${{ vars.ETHICBIT_MLDSA_KEY_ID }}
+  ETHICBIT_REMOTE_PROVIDER_SUPPORTS_MLDSA: ${{ vars.ETHICBIT_REMOTE_PROVIDER_SUPPORTS_MLDSA }}
+  ETHICBIT_REMOTE_MLDSA_EFFECTIVE_MODE: ${{ vars.ETHICBIT_REMOTE_MLDSA_EFFECTIVE_MODE }}
 
 jobs:
   build-sign-attest:
@@ -127,11 +134,21 @@ jobs:
           mkdir -p artifacts/ci
           mkdir -p attestation
           mkdir -p assurance/keys
+          chmod +x assurance/signers/sign_dispatch.sh scripts/security/verify_key_posture.sh scripts/security/rotate_keys_transitional.sh || true
 
       - name: Prepare hybrid signing keys (secrets + compatibility fallback)
         shell: bash
         run: |
           set -euo pipefail
+          signing_backend="${ETHICBIT_SIGNING_BACKEND:-github_secrets_pem}"
+          if [[ -z "${signing_backend}" ]]; then
+            signing_backend="github_secrets_pem"
+          fi
+          if [[ "${signing_backend}" != "github_secrets_pem" && "${signing_backend}" != "remote_signing_provider" ]]; then
+            echo "Unsupported ETHICBIT_SIGNING_BACKEND=${signing_backend}" >&2
+            exit 1
+          fi
+
           is_sovereign_ref="0"
           if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "main" ]]; then
             is_sovereign_ref="1"
@@ -140,64 +157,110 @@ jobs:
             is_sovereign_ref="1"
           fi
 
-          ed25519_key_source="trusted_secrets"
-          mldsa_key_source="trusted_secrets"
+          ed25519_key_source="unknown"
+          mldsa_key_source="unknown"
           mldsa_effective_mode="native_mldsa"
           runner_supports_mldsa="true"
+          ed25519_key_id=""
+          mldsa_key_id=""
 
-          if [[ -n "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" && -n "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" ]]; then
-            printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
+          if [[ "${signing_backend}" == "remote_signing_provider" ]]; then
+            ed25519_key_source="trusted_remote_provider"
+            mldsa_key_source="trusted_remote_provider"
+            mldsa_effective_mode="${ETHICBIT_REMOTE_MLDSA_EFFECTIVE_MODE:-native_mldsa}"
+            if [[ -z "${mldsa_effective_mode}" ]]; then
+              mldsa_effective_mode="native_mldsa"
+            fi
+            runner_supports_mldsa="${ETHICBIT_REMOTE_PROVIDER_SUPPORTS_MLDSA:-true}"
+            if [[ -z "${runner_supports_mldsa}" ]]; then
+              runner_supports_mldsa="true"
+            fi
+
+            ed25519_key_id="${ETHICBIT_REMOTE_ED25519_KEY_ID:-}"
+            mldsa_key_id="${ETHICBIT_REMOTE_MLDSA_KEY_ID:-}"
+
+            if [[ -z "${ed25519_key_id}" || -z "${mldsa_key_id}" ]]; then
+              echo "Policy violation: remote_signing_provider requires remote key ids for both channels." >&2
+              exit 1
+            fi
+            if [[ -z "${ETHICBIT_SIGNING_ENDPOINT:-}" ]]; then
+              echo "Policy violation: remote_signing_provider requires ETHICBIT_SIGNING_ENDPOINT." >&2
+              exit 1
+            fi
+            if [[ -z "${{ secrets.ETHICBIT_SIGNING_TOKEN }}" ]]; then
+              echo "Policy violation: remote_signing_provider requires ETHICBIT_SIGNING_TOKEN secret." >&2
+              exit 1
+            fi
+
+            # Remote signing keeps private keys non-exportable; verification still needs public keys.
+            [[ -n "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" ]] || { echo "Missing ETHICBIT_ED25519_PUBLIC_KEY_PEM for remote verification." >&2; exit 1; }
+            [[ -n "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" ]] || { echo "Missing ETHICBIT_MLDSA_PUBLIC_KEY_PEM for remote verification." >&2; exit 1; }
             printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
-          else
-            if [[ "${is_sovereign_ref}" == "1" ]]; then
-              echo "Policy violation: sovereign ref requires trusted ED25519 secrets." >&2
-              exit 1
-            fi
-            ed25519_key_source="ephemeral_runner"
-            openssl genpkey -algorithm Ed25519 -out assurance/keys/ed25519_private.pem
-            openssl pkey -in assurance/keys/ed25519_private.pem -pubout -out assurance/keys/ed25519_public.pem
-          fi
-
-          if [[ -n "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" && -n "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" ]]; then
-            printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
             printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
+            rm -f assurance/keys/ed25519_private.pem assurance/keys/mldsa_private.pem
           else
-            if [[ "${is_sovereign_ref}" == "1" ]]; then
-              echo "Policy violation: sovereign ref requires trusted ML-DSA secrets." >&2
-              exit 1
+            ed25519_key_source="trusted_secrets"
+            mldsa_key_source="trusted_secrets"
+
+            if [[ -n "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" && -n "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" ]]; then
+              printf '%s' "${{ secrets.ETHICBIT_ED25519_PRIVATE_KEY_PEM }}" > assurance/keys/ed25519_private.pem
+              printf '%s' "${{ secrets.ETHICBIT_ED25519_PUBLIC_KEY_PEM }}" > assurance/keys/ed25519_public.pem
+            else
+              if [[ "${is_sovereign_ref}" == "1" ]]; then
+                echo "Policy violation: sovereign ref requires trusted ED25519 secrets." >&2
+                exit 1
+              fi
+              ed25519_key_source="ephemeral_runner"
+              openssl genpkey -algorithm Ed25519 -out assurance/keys/ed25519_private.pem
+              openssl pkey -in assurance/keys/ed25519_private.pem -pubout -out assurance/keys/ed25519_public.pem
             fi
-            mldsa_key_source="ephemeral_runner"
-            mldsa_effective_mode="compatibility_fallback"
-            runner_supports_mldsa="false"
-            openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
-            openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
+
+            if [[ -n "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" && -n "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" ]]; then
+              printf '%s' "${{ secrets.ETHICBIT_MLDSA_PRIVATE_KEY_PEM }}" > assurance/keys/mldsa_private.pem
+              printf '%s' "${{ secrets.ETHICBIT_MLDSA_PUBLIC_KEY_PEM }}" > assurance/keys/mldsa_public.pem
+            else
+              if [[ "${is_sovereign_ref}" == "1" ]]; then
+                echo "Policy violation: sovereign ref requires trusted ML-DSA secrets." >&2
+                exit 1
+              fi
+              mldsa_key_source="ephemeral_runner"
+              mldsa_effective_mode="compatibility_fallback"
+              runner_supports_mldsa="false"
+              openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
+              openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
+            fi
+
+            for key_file in assurance/keys/ed25519_private.pem assurance/keys/ed25519_public.pem assurance/keys/mldsa_private.pem assurance/keys/mldsa_public.pem; do
+              if [[ ! -s "${key_file}" ]]; then
+                echo "Missing signing key material: ${key_file}" >&2
+                exit 1
+              fi
+            done
+
+            printf '{"artifactType":"ci_key_probe"}' >/tmp/ci_key_probe.json
+            openssl pkeyutl -sign -inkey assurance/keys/ed25519_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.ed.sig
+
+            # Some GitHub runners do not support ML-DSA keys in OpenSSL.
+            # Fallback to a CI-compatible keypair so fail-closed controls remain executable.
+            if ! openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig >/tmp/ci_key_probe.mldsa.err 2>&1; then
+              if [[ "${is_sovereign_ref}" == "1" ]]; then
+                echo "Policy violation: sovereign ref requires native ML-DSA support on runner (compatibility fallback disabled)." >&2
+                cat /tmp/ci_key_probe.mldsa.err >&2 || true
+                exit 1
+              fi
+              echo "ML-DSA key unsupported on runner; enabling CI compatibility fallback."
+              mldsa_effective_mode="compatibility_fallback"
+              mldsa_key_source="ephemeral_runner"
+              runner_supports_mldsa="false"
+              openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
+              openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
+              openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig
+            fi
           fi
 
-          for key_file in assurance/keys/ed25519_private.pem assurance/keys/ed25519_public.pem assurance/keys/mldsa_private.pem assurance/keys/mldsa_public.pem; do
-            if [[ ! -s "${key_file}" ]]; then
-              echo "Missing signing key material: ${key_file}" >&2
-              exit 1
-            fi
-          done
-
-          printf '{"artifactType":"ci_key_probe"}' >/tmp/ci_key_probe.json
-          openssl pkeyutl -sign -inkey assurance/keys/ed25519_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.ed.sig
-
-          # Some GitHub runners do not support ML-DSA keys in OpenSSL.
-          # Fallback to a CI-compatible keypair so fail-closed controls remain executable.
-          if ! openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig >/tmp/ci_key_probe.mldsa.err 2>&1; then
-            if [[ "${is_sovereign_ref}" == "1" ]]; then
-              echo "Policy violation: sovereign ref requires native ML-DSA support on runner (compatibility fallback disabled)." >&2
-              cat /tmp/ci_key_probe.mldsa.err >&2 || true
-              exit 1
-            fi
-            echo "ML-DSA key unsupported on runner; enabling CI compatibility fallback."
-            mldsa_effective_mode="compatibility_fallback"
-            mldsa_key_source="ephemeral_runner"
-            runner_supports_mldsa="false"
-            openssl genpkey -algorithm Ed25519 -out assurance/keys/mldsa_private.pem
-            openssl pkey -in assurance/keys/mldsa_private.pem -pubout -out assurance/keys/mldsa_public.pem
-            openssl pkeyutl -sign -inkey assurance/keys/mldsa_private.pem -rawin -in /tmp/ci_key_probe.json -out /tmp/ci_key_probe.mldsa.sig
+          if [[ ! -s assurance/keys/ed25519_public.pem || ! -s assurance/keys/mldsa_public.pem ]]; then
+            echo "Missing signing public key material for verification." >&2
+            exit 1
           fi
 
           if [[ "${mldsa_effective_mode}" == "native_mldsa" ]]; then
@@ -206,10 +269,14 @@ jobs:
             crypto_mode_effective="compatibility_fallback"
           fi
 
-          if [[ "${ed25519_key_source}" == "trusted_secrets" && "${mldsa_key_source}" == "trusted_secrets" && "${mldsa_effective_mode}" == "native_mldsa" ]]; then
+          if [[ "${mldsa_effective_mode}" == "native_mldsa" && "${ed25519_key_source}" != "ephemeral_runner" && "${mldsa_key_source}" != "ephemeral_runner" ]]; then
             hybrid_claim_mode="native_hybrid"
             crypto_claim_tier="strict_trusted_hybrid"
-            key_provenance_mode="fully_trusted_native"
+            if [[ "${ed25519_key_source}" == "trusted_remote_provider" && "${mldsa_key_source}" == "trusted_remote_provider" ]]; then
+              key_provenance_mode="fully_trusted_remote_non_exportable"
+            else
+              key_provenance_mode="fully_trusted_native"
+            fi
           else
             hybrid_claim_mode="compatibility_hybrid"
             if [[ "${ed25519_key_source}" == "trusted_secrets" && "${mldsa_key_source}" == "ephemeral_runner" && "${mldsa_effective_mode}" == "compatibility_fallback" ]]; then
@@ -224,26 +291,33 @@ jobs:
             elif [[ "${ed25519_key_source}" == "ephemeral_runner" && "${mldsa_key_source}" == "ephemeral_runner" ]]; then
               key_provenance_mode="fully_ephemeral"
               crypto_claim_tier="compatibility_hybrid_ephemeral"
+            elif [[ "${ed25519_key_source}" == "trusted_remote_provider" && "${mldsa_key_source}" == "trusted_remote_provider" ]]; then
+              key_provenance_mode="trusted_remote_non_exportable_compatibility"
+              crypto_claim_tier="compatibility_hybrid_remote"
             else
               key_provenance_mode="mixed_provenance"
               crypto_claim_tier="compatibility_hybrid_mixed"
             fi
           fi
 
-          if [[ "${ed25519_key_source}" == "trusted_secrets" ]]; then
-            ed25519_key_id="ETHICBIT_ED25519_CI_SECRET_V1"
-          else
-            ed25519_key_id="ETHICBIT_ED25519_CI_EPHEMERAL_V1"
+          if [[ -z "${ed25519_key_id}" ]]; then
+            if [[ "${ed25519_key_source}" == "trusted_secrets" ]]; then
+              ed25519_key_id="ETHICBIT_ED25519_CI_SECRET_V1"
+            else
+              ed25519_key_id="ETHICBIT_ED25519_CI_EPHEMERAL_V1"
+            fi
           fi
 
-          if [[ "${mldsa_effective_mode}" == "native_mldsa" ]]; then
-            if [[ "${mldsa_key_source}" == "trusted_secrets" ]]; then
-              mldsa_key_id="ETHICBIT_MLDSA65_CI_SECRET_V1"
+          if [[ -z "${mldsa_key_id}" ]]; then
+            if [[ "${mldsa_effective_mode}" == "native_mldsa" ]]; then
+              if [[ "${mldsa_key_source}" == "trusted_secrets" ]]; then
+                mldsa_key_id="ETHICBIT_MLDSA65_CI_SECRET_V1"
+              else
+                mldsa_key_id="ETHICBIT_MLDSA65_CI_EPHEMERAL_V1"
+              fi
             else
-              mldsa_key_id="ETHICBIT_MLDSA65_CI_EPHEMERAL_V1"
+              mldsa_key_id="ETHICBIT_MLDSA_COMPAT_ED25519_CI_V1"
             fi
-          else
-            mldsa_key_id="ETHICBIT_MLDSA_COMPAT_ED25519_CI_V1"
           fi
 
           if [[ "${ed25519_key_source}" == "ephemeral_runner" || "${mldsa_key_source}" == "ephemeral_runner" ]]; then
@@ -292,6 +366,10 @@ jobs:
             require_trusted_keys="1"
           fi
 
+          if [[ "${signing_backend}" == "remote_signing_provider" ]]; then
+            require_trusted_keys="1"
+          fi
+
           require_go_gate="0"
           if [[ "${GITHUB_REF_TYPE}" == "branch" && "${GITHUB_REF_NAME}" == "main" ]]; then
             require_go_gate="1"
@@ -320,23 +398,35 @@ jobs:
             echo "ETHICBIT_REQUIRE_TRUSTED_KEYS=${require_trusted_keys}"
             echo "ETHICBIT_REQUIRE_GO_GATE=${require_go_gate}"
             echo "ETHICBIT_RELEASE_CLASS=${release_class}"
+            echo "ETHICBIT_SIGNING_BACKEND=${signing_backend}"
           } >> "$GITHUB_ENV"
 
-          chmod 600 assurance/keys/*.pem
+          chmod 644 assurance/keys/*_public.pem || true
+          if [[ "${signing_backend}" == "github_secrets_pem" ]]; then
+            chmod 600 assurance/keys/*_private.pem || true
+          fi
 
       - name: Export signing environment
         shell: bash
         run: |
           {
-            echo "ETHICBIT_ED25519_SIGN_CMD=${{ github.workspace }}/assurance/signers/ed25519_sign.sh {payload}"
-            echo "ETHICBIT_MLDSA_SIGN_CMD=${{ github.workspace }}/assurance/signers/mldsa_sign.sh {payload}"
+            echo "ETHICBIT_ED25519_SIGN_CMD=${{ github.workspace }}/assurance/signers/sign_dispatch.sh ED25519 {payload}"
+            echo "ETHICBIT_MLDSA_SIGN_CMD=${{ github.workspace }}/assurance/signers/sign_dispatch.sh ML-DSA {payload}"
             echo "ETHICBIT_ED25519_VERIFY_CMD=${{ github.workspace }}/assurance/signers/ed25519_verify.sh {payload} {signature}"
             echo "ETHICBIT_MLDSA_VERIFY_CMD=${{ github.workspace }}/assurance/signers/mldsa_verify.sh {payload} {signature}"
             echo "ETHICBIT_ED25519_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/ed25519_private.pem"
             echo "ETHICBIT_ED25519_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/ed25519_public.pem"
             echo "ETHICBIT_MLDSA_PRIVATE_KEY=${{ github.workspace }}/assurance/keys/mldsa_private.pem"
             echo "ETHICBIT_MLDSA_PUBLIC_KEY=${{ github.workspace }}/assurance/keys/mldsa_public.pem"
+            echo "ETHICBIT_SIGNING_BACKEND=${ETHICBIT_SIGNING_BACKEND:-github_secrets_pem}"
+            echo "ETHICBIT_SIGNING_ENDPOINT=${ETHICBIT_SIGNING_ENDPOINT:-}"
+            echo "ETHICBIT_SIGNING_DISABLE_PROXY=${ETHICBIT_SIGNING_DISABLE_PROXY:-1}"
+            echo "ETHICBIT_SIGNING_INCLUDE_PAYLOAD_PATH=${ETHICBIT_SIGNING_INCLUDE_PAYLOAD_PATH:-0}"
           } >> "$GITHUB_ENV"
+
+          if [[ -n "${{ secrets.ETHICBIT_SIGNING_TOKEN }}" ]]; then
+            echo "ETHICBIT_SIGNING_TOKEN=${{ secrets.ETHICBIT_SIGNING_TOKEN }}" >> "$GITHUB_ENV"
+          fi
 
       - name: Write signing mode artifacts
         shell: bash
@@ -352,6 +442,8 @@ jobs:
             "ref": os.environ.get("GITHUB_REF", ""),
             "sha": os.environ.get("GITHUB_SHA", ""),
             "run_id": os.environ.get("GITHUB_RUN_ID", ""),
+            "signing_backend": os.environ.get("ETHICBIT_SIGNING_BACKEND", "github_secrets_pem"),
+            "signing_endpoint_configured": bool(os.environ.get("ETHICBIT_SIGNING_ENDPOINT", "").strip()),
             "ed25519_key_source": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
             "mldsa_key_source": os.environ.get("ETHICBIT_MLDSA_KEY_SOURCE", "unknown"),
             "mldsa_effective_mode": os.environ.get("ETHICBIT_MLDSA_EFFECTIVE_MODE", "unknown"),
@@ -378,6 +470,7 @@ jobs:
 
           truth = {
             "artifactType": "hybrid_crypto_truth",
+            "signing_backend": os.environ.get("ETHICBIT_SIGNING_BACKEND", "github_secrets_pem"),
             "ed25519_key_source": os.environ.get("ETHICBIT_ED25519_KEY_SOURCE", "unknown"),
             "mldsa_key_source": os.environ.get("ETHICBIT_MLDSA_KEY_SOURCE", "unknown"),
             "mldsa_effective_mode": os.environ.get("ETHICBIT_MLDSA_EFFECTIVE_MODE", "unknown"),
@@ -406,6 +499,15 @@ jobs:
               encoding="utf-8",
           )
           PY
+
+      - name: Verify key posture
+        shell: bash
+        run: |
+          set -euo pipefail
+          scripts/security/verify_key_posture.sh \
+            --output results/key_posture_report.json \
+            --repo "${{ github.repository }}" \
+            --probe-signing
 
       - name: Diagnose signing environment
         shell: bash
@@ -438,17 +540,20 @@ jobs:
           PY
 
           echo
-          echo "===== DIRECT ED25519 ====="
-          bash assurance/signers/ed25519_sign.sh /tmp/ci_test_payload.jcs.json | head -c 120 ; echo
-
-          echo
-          echo "===== DIRECT ML-DSA ====="
-          if bash assurance/signers/mldsa_sign.sh /tmp/ci_test_payload.jcs.json > /tmp/mldsa_ci_test.sig 2>/tmp/mldsa_ci_test.err; then
+          echo "===== SIGNER DISPATCH PROBE ====="
+          if [[ "${ETHICBIT_SIGNING_BACKEND:-github_secrets_pem}" == "remote_signing_provider" ]]; then
+            echo "Backend=remote_signing_provider"
+          else
+            echo "Backend=github_secrets_pem"
+          fi
+          bash assurance/signers/sign_dispatch.sh ED25519 /tmp/ci_test_payload.jcs.json | head -c 120 ; echo
+          if bash assurance/signers/sign_dispatch.sh ML-DSA /tmp/ci_test_payload.jcs.json > /tmp/mldsa_ci_test.sig 2>/tmp/mldsa_ci_test.err; then
             head -c 120 /tmp/mldsa_ci_test.sig ; echo
             echo "MLDSA_CI=PASS"
           else
             cat /tmp/mldsa_ci_test.err || true
-            echo "MLDSA_CI=UNSUPPORTED_ON_RUNNER"
+            echo "MLDSA_CI=FAIL"
+            exit 1
           fi
 
       - name: Setup Go
@@ -473,14 +578,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          trusted_key_sources_regex='^(trusted_secrets|trusted_remote_provider|remote_non_exportable|trusted_hsm_kms|hsm_kms)$'
           if [[ "${ETHICBIT_REQUIRE_NATIVE_HYBRID}" == "1" || "${ETHICBIT_REQUIRE_TRUSTED_KEYS}" == "1" || "${ETHICBIT_CLAIM_LEVEL}" == "freeze_grade" || "${ETHICBIT_CLAIM_LEVEL}" == "sovereign_release" ]]; then
             echo "Running strict preflight for claim level: ${ETHICBIT_CLAIM_LEVEL}"
             [[ "${ETHICBIT_REQUIRE_NATIVE_HYBRID}" == "1" ]] || { echo "Policy violation: strict claims require ETHICBIT_REQUIRE_NATIVE_HYBRID=1" >&2; exit 1; }
             [[ "${ETHICBIT_REQUIRE_TRUSTED_KEYS}" == "1" ]] || { echo "Policy violation: strict claims require ETHICBIT_REQUIRE_TRUSTED_KEYS=1" >&2; exit 1; }
             [[ "${ETHICBIT_HYBRID_CLAIM_MODE}" == "native_hybrid" ]] || { echo "Policy violation: strict claims require native_hybrid claim mode (found ${ETHICBIT_HYBRID_CLAIM_MODE})" >&2; exit 1; }
             [[ "${ETHICBIT_MLDSA_EFFECTIVE_MODE}" == "native_mldsa" || "${ETHICBIT_MLDSA_EFFECTIVE_MODE}" == "native" ]] || { echo "Policy violation: strict claims require native ML-DSA mode (found ${ETHICBIT_MLDSA_EFFECTIVE_MODE})" >&2; exit 1; }
-            [[ "${ETHICBIT_ED25519_KEY_SOURCE}" == "trusted_secrets" ]] || { echo "Policy violation: strict claims require trusted ED25519 key source (found ${ETHICBIT_ED25519_KEY_SOURCE})" >&2; exit 1; }
-            [[ "${ETHICBIT_MLDSA_KEY_SOURCE}" == "trusted_secrets" ]] || { echo "Policy violation: strict claims require trusted ML-DSA key source (found ${ETHICBIT_MLDSA_KEY_SOURCE})" >&2; exit 1; }
+            [[ "${ETHICBIT_ED25519_KEY_SOURCE}" =~ ${trusted_key_sources_regex} ]] || { echo "Policy violation: strict claims require trusted ED25519 key source (found ${ETHICBIT_ED25519_KEY_SOURCE})" >&2; exit 1; }
+            [[ "${ETHICBIT_MLDSA_KEY_SOURCE}" =~ ${trusted_key_sources_regex} ]] || { echo "Policy violation: strict claims require trusted ML-DSA key source (found ${ETHICBIT_MLDSA_KEY_SOURCE})" >&2; exit 1; }
             [[ "${ETHICBIT_RUNNER_SUPPORTS_MLDSA}" == "true" ]] || { echo "Policy violation: strict claims require a runner with ML-DSA support" >&2; exit 1; }
             [[ "${ETHICBIT_ELIGIBLE_FOR_SOVEREIGN_RELEASE}" == "true" ]] || { echo "Policy violation: strict claims require eligible_for_sovereign_release=true" >&2; exit 1; }
           else
@@ -632,6 +738,16 @@ jobs:
           ephemeral_keys_used = bool(truth.get("ephemeral_keys_used", True))
           runner_supports_mldsa = bool(truth.get("runner_supports_mldsa", False))
           eligible_for_sovereign_release = bool(truth.get("eligible_for_sovereign_release", False))
+          trusted_sources = {
+              "trusted_secrets",
+              "trusted_remote_provider",
+              "remote_non_exportable",
+              "trusted_hsm_kms",
+              "hsm_kms",
+          }
+
+          def is_trusted_source(value: str) -> bool:
+              return value in trusted_sources
 
           print(
               "POLICY_CONTEXT:",
@@ -652,11 +768,11 @@ jobs:
           # Base consistency checks for effective crypto truth
           if (
               ephemeral_keys_used
-              and ed25519_key_source == "trusted_secrets"
-              and mldsa_key_source == "trusted_secrets"
+              and is_trusted_source(ed25519_key_source)
+              and is_trusted_source(mldsa_key_source)
           ):
               print(
-                  "Policy violation: ephemeral_keys_used=true but both key sources are trusted_secrets.",
+                  "Policy violation: ephemeral_keys_used=true but both key sources are trusted.",
                   file=sys.stderr,
               )
               raise SystemExit(1)
@@ -672,9 +788,9 @@ jobs:
 
           # Trusted-key requirement enforcement (enabled on main and sovereign-grade claims)
           if require_trusted_keys:
-              if ed25519_key_source != "trusted_secrets" or mldsa_key_source != "trusted_secrets":
+              if not is_trusted_source(ed25519_key_source) or not is_trusted_source(mldsa_key_source):
                   print(
-                      "Policy violation: require_trusted_keys=true requires trusted_secrets on both channels.",
+                      "Policy violation: require_trusted_keys=true requires trusted key sources on both channels.",
                       file=sys.stderr,
                   )
                   raise SystemExit(1)
@@ -702,9 +818,9 @@ jobs:
 
           # Freeze/release-grade enforcement
           if claim_level in {"freeze_grade", "sovereign_release"}:
-              if ed25519_key_source != "trusted_secrets" or mldsa_key_source != "trusted_secrets":
+              if not is_trusted_source(ed25519_key_source) or not is_trusted_source(mldsa_key_source):
                   print(
-                      f"Policy violation: {claim_level} requires trusted_secrets on both channels.",
+                      f"Policy violation: {claim_level} requires trusted key sources on both channels.",
                       file=sys.stderr,
                   )
                   raise SystemExit(1)
@@ -896,6 +1012,7 @@ jobs:
             results/mechanical_ethics_gate.json
             results/pq_runtime_secret_protection.json
             results/hermetic_build_report.json
+            results/key_posture_report.json
             artifacts/history/swarm/triple_public_anchor_live_verification.json
             artifacts/ci/signing_environment_report.json
             artifacts/ci/hybrid_mode_effective.json

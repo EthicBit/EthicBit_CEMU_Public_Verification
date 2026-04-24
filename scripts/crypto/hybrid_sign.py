@@ -15,7 +15,13 @@ from jcs_rfc8785 import canonicalize_bytes
 
 FREEZE_GRADE_LEVELS = {"freeze_grade", "sovereign_release"}
 NATIVE_MLDSA_MODES = {"native", "native_mldsa"}
-TRUSTED_KEY_SOURCES = {"trusted_secrets"}
+TRUSTED_KEY_SOURCES = {
+    "trusted_secrets",
+    "trusted_remote_provider",
+    "remote_non_exportable",
+    "trusted_hsm_kms",
+    "hsm_kms",
+}
 
 
 def now_utc() -> str:
@@ -61,6 +67,19 @@ def _normalize_key_source(value: Any) -> str:
         return "unknown"
     if source in {"trusted", "trusted_secret", "trusted_secrets", "secrets"}:
         return "trusted_secrets"
+    if source in {
+        "trusted_remote_provider",
+        "remote_signing_provider",
+        "remote_non_exportable",
+        "remote_hsm",
+        "hsm",
+        "hsm_kms",
+        "kms",
+        "trusted_hsm_kms",
+    }:
+        if source in {"hsm", "kms"}:
+            return "hsm_kms"
+        return source
     if source in {"ephemeral", "ephemeral_runner", "runner_ephemeral"}:
         return "ephemeral_runner"
     return source
