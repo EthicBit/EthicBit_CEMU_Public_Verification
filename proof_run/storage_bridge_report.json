@@ -1,0 +1,28 @@
+{
+  "artifactType": "storage_bridge_report",
+  "status": "success",
+  "timestamp": "2026-04-24T23:09:42Z",
+  "bundle_path": "/private/tmp/test_bundle.json",
+  "local_hash": "3c830e5eb6e458121cd8aa066fe3752eab3e2bdb4cdc1e95e5716d8fe6c3bd9d",
+  "storage_backend": "pinata",
+  "storage_cid": "QmPWwnhGAgwtVChdeUE5Lgr9EE7zYswCjYhuY42eaB5GxZ",
+  "nft_storage_cid": null,
+  "pinata_cid": "QmPWwnhGAgwtVChdeUE5Lgr9EE7zYswCjYhuY42eaB5GxZ",
+  "ipfs_verified": true,
+  "arweave_verification": {
+    "source": "arweave_verifier",
+    "timestamp": "2026-04-24T23:09:41Z",
+    "bundle_path": "/private/tmp/test_bundle.json",
+    "arweave_tx_id": "cll4DKHxGY17guRWzMqFP5_Vkj89oiLW16Nad4DyC5k",
+    "arweave_verified": true,
+    "gateways_tried": 1,
+    "verification_status": "VERIFIED",
+    "local_hash": "3c830e5eb6e458121cd8aa066fe3752eab3e2bdb4cdc1e95e5716d8fe6c3bd9d",
+    "used_gateway": "https://permagate.io",
+    "remote_hash": "3c830e5eb6e458121cd8aa066fe3752eab3e2bdb4cdc1e95e5716d8fe6c3bd9d",
+    "error": null
+  },
+  "verification_status": "VERIFIED",
+  "duration_seconds": 1.19,
+  "storage_fallback_from": "nft_storage"
+}
