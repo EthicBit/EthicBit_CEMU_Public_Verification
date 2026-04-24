@@ -556,11 +556,23 @@ jobs:
             exit 1
           fi
 
-      - name: Setup Go
+      - name: Setup Go (GitHub-hosted)
+        if: ${{ runner.environment != 'self-hosted' }}
         uses: actions/setup-go@v5
         with:
           go-version: "1.25.x"
           cache: false
+
+      - name: Validate Go toolchain (self-hosted)
+        if: ${{ runner.environment == 'self-hosted' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v go >/dev/null 2>&1; then
+            echo "Go is not installed on self-hosted runner. Install Go 1.25.x or higher." >&2
+            exit 1
+          fi
+          go version
 
       - name: Compile Mechanical Ethics Go gate
         shell: bash
