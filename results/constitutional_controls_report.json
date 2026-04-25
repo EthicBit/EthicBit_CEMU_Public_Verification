@@ -1,0 +1,281 @@
+{
+  "artifactType": "constitutional_controls_report",
+  "generatedAt": "2026-04-25T03:24:16.362959Z",
+  "constitutionVersion": "v1.0.0",
+  "matrixVersion": "v1.1.0",
+  "matrixPath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/config/constitutional_controls.v1.json",
+  "root": "/Users/oskrmiranda/Documentos/EthicBit_CEMU",
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "mustFailed": 0,
+    "shouldFailed": 0
+  },
+  "mustFailClosedTriggered": false,
+  "controls": [
+    {
+      "controlId": "CTL-SOV-001",
+      "articleId": "ART-01",
+      "title": "Sovereign Operational Truth Is Canonical",
+      "normative": "MUST",
+      "failureBehavior": "FAIL_CLOSED",
+      "command": "ETHICBIT_ED25519_PRIVATE_KEY='assurance/keys/ed25519_private.pem' ETHICBIT_ED25519_PUBLIC_KEY='assurance/keys/ed25519_public.pem' ETHICBIT_MLDSA_PRIVATE_KEY='assurance/keys/mldsa_private.pem' ETHICBIT_MLDSA_PUBLIC_KEY='assurance/keys/mldsa_public.pem' ETHICBIT_ED25519_SIGN_CMD='assurance/signers/ed25519_sign.sh {payload}' ETHICBIT_MLDSA_SIGN_CMD='assurance/signers/mldsa_sign.sh {payload}' ETHICBIT_ED25519_VERIFY_CMD='assurance/signers/ed25519_verify.sh {payload} {signature}' ETHICBIT_MLDSA_VERIFY_CMD='assurance/signers/mldsa_verify.sh {payload} {signature}' ./scripts/status/official_operational_status_calculator.py --root . --strict --require-signature",
+      "timeoutSeconds": 180,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "READY\nDETAIL: reason=LIVE_CANONICAL_GATE_CONVERGED; live=PASS; gate_raw=PASS; gate_effective=PASS; canonical_ok=True; freeze_active=False; divergence=False; crypto_internal=PASS; crypto_external=PASS; crypto_effective=PASS; mode=SOVEREIGN_INTERNAL; internal=INTERNAL_CLOSED; external=EXTERNAL_LIVE_CONVERGED; output=/Users/oskrmiranda/Documentos/EthicBit_CEMU/artifacts/history/swarm/official_operational_status.json\n",
+        "stderrTail": ""
+      },
+      "evidence": {
+        "paths": [
+          "artifacts/history/swarm/official_operational_status.json",
+          "results/GATE_REPORT.json"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "big-tech",
+        "model-labs",
+        "regulatory",
+        "government",
+        "cross-economy"
+      ],
+      "checkedAt": "2026-04-25T03:24:02.705613Z"
+    },
+    {
+      "controlId": "CTL-ETH-001",
+      "articleId": "ART-02",
+      "title": "Mechanical Ethics Must Be Executable And Sector-Aware",
+      "normative": "MUST",
+      "failureBehavior": "FAIL_CLOSED",
+      "command": "bash scripts/audit/audit_ethic_mechanics.sh",
+      "timeoutSeconds": 240,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "amp\": \"2026-04-25T03:24:04Z\", \"brokerReport\": {}, \"metadata\": {\"final_gate\": \"FAIL_CLOSED\"}}\nOK: REJECT triggered\n\n=== 5. CANONICAL MECHANICAL ETHICS GATE ===\n✅ EvidenceBroker v2.2b inicializado | modo=REAL_LOCAL | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: CORE\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: FINANZAS\n📦 Sector cargado: SECURITY\n📦 Sector cargado: TECHNICAL\n📦 Sector cargado: LEGAL\n📦 Sector cargado: REGULATORY\nmechanical_ethics_gate=/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/mechanical_ethics_gate.json\nstatus=PASS\nmode=REAL_LOCAL\nrequired_failed=[]\ngate.status=PASS\ngate.mode=REAL_LOCAL\n\n=== 6. PQ RUNTIME SECRET PROTECTION ARTIFACT ===\n/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/pq_runtime_secret_protection.json\nstatus=PROTECTED\npq_runtime_secret_protection.status=PROTECTED\npq_runtime_secret_protection.protector=MLKEM768Protector\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\n",
+        "stderrTail": ""
+      },
+      "evidence": {
+        "paths": [
+          "scripts/audit/audit_ethic_mechanics.sh",
+          "ceerv/policy/reason_registry_CORE.json",
+          "ceerv/policy/reason_registry_JUSTICIA.json",
+          "ceerv/policy/reason_registry_FINANZAS.json",
+          "ceerv/policy/reason_registry_SECURITY.json",
+          "ceerv/policy/reason_registry_TECHNICAL.json",
+          "ceerv/policy/reason_registry_LEGAL.json",
+          "ceerv/policy/reason_registry_REGULATORY.json",
+          "results/runtime_evidence_strength_report.json",
+          "results/constitutional_evidence_ceiling.json"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "ai-agentic",
+        "big-legal",
+        "regulatory",
+        "government"
+      ],
+      "checkedAt": "2026-04-25T03:24:02.895193Z"
+    },
+    {
+      "controlId": "CTL-MIX-001",
+      "articleId": "ART-03",
+      "title": "Mixed-Audience Audit Must Be Canonical",
+      "normative": "MUST",
+      "failureBehavior": "FAIL_CLOSED",
+      "command": "./scripts/run_mixed_audience_audit.sh --all",
+      "timeoutSeconds": 300,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "\n=== 5. CANONICAL MECHANICAL ETHICS GATE ===\n✅ EvidenceBroker v2.2b inicializado | modo=REAL_LOCAL | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: CORE\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: FINANZAS\n📦 Sector cargado: SECURITY\n📦 Sector cargado: TECHNICAL\n📦 Sector cargado: LEGAL\n📦 Sector cargado: REGULATORY\nmechanical_ethics_gate=/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/mechanical_ethics_gate.json\nstatus=PASS\nmode=REAL_LOCAL\nrequired_failed=[]\ngate.status=PASS\ngate.mode=REAL_LOCAL\n\n=== 6. PQ RUNTIME SECRET PROTECTION ARTIFACT ===\n/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/pq_runtime_secret_protection.json\nstatus=PROTECTED\npq_runtime_secret_protection.status=PROTECTED\npq_runtime_secret_protection.protector=MLKEM768Protector\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\nAUDITORÍA DE ÉTICA MECÁNICA: PASS\n===============================================================================\n",
+        "stderrTail": ""
+      },
+      "evidence": {
+        "paths": [
+          "results/index.json",
+          "results/public_summary.md",
+          "results/technical_verification.md",
+          "results/legal_claim_boundary.md",
+          "results/regulatory_control_report.md",
+          "results/finance_anchor_report.md",
+          "results/executive_onepager.md"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "big-tech",
+        "ai-agentic",
+        "model-labs",
+        "big-legal",
+        "crypto",
+        "cybersecurity",
+        "financial",
+        "regulatory",
+        "government",
+        "cross-economy"
+      ],
+      "checkedAt": "2026-04-25T03:24:04.191811Z"
+    },
+    {
+      "controlId": "CTL-CI-001",
+      "articleId": "ART-04",
+      "title": "Periodic Official Audit Must Run In Strict Mode",
+      "normative": "MUST",
+      "failureBehavior": "FAIL_CLOSED",
+      "command": "grep -Eq -- '--strict --require-signature' .github/workflows/official-periodic-audit.yml && grep -Eq -- 'ETHICBIT_MLDSA_VERIFY_CMD' .github/workflows/official-periodic-audit.yml",
+      "timeoutSeconds": 30,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "",
+        "stderrTail": ""
+      },
+      "evidence": {
+        "paths": [
+          ".github/workflows/official-periodic-audit.yml"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "big-tech",
+        "cybersecurity",
+        "regulatory",
+        "government"
+      ],
+      "checkedAt": "2026-04-25T03:24:13.232457Z"
+    },
+    {
+      "controlId": "CTL-SEC-001",
+      "articleId": "ART-05",
+      "title": "Operational Secret Handling Must Avoid Unsafe Defaults",
+      "normative": "MUST",
+      "failureBehavior": "FAIL_CLOSED",
+      "command": "! grep -Eq '^[[:space:]]*source[[:space:]]+\\.env' scripts/entrypoints/reconcile_and_show_status.sh && grep -q 'ALLOW_INSECURE_PRIVATE_KEY_CLI' scripts/entrypoints/reconcile_and_show_status.sh",
+      "timeoutSeconds": 30,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "",
+        "stderrTail": ""
+      },
+      "evidence": {
+        "paths": [
+          "scripts/entrypoints/reconcile_and_show_status.sh"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "cybersecurity",
+        "financial",
+        "regulatory",
+        "government"
+      ],
+      "checkedAt": "2026-04-25T03:24:13.241388Z"
+    },
+    {
+      "controlId": "CTL-BUILD-001",
+      "articleId": "ART-06",
+      "title": "Build Reproducibility Must Be Maintained",
+      "normative": "SHOULD",
+      "failureBehavior": "WARN",
+      "command": "./scripts/compile_hardhat_isolated.sh",
+      "timeoutSeconds": 420,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "\nCompiled 3 Solidity files with solc 0.8.28 (evm target: cancun)\n\nCompiled 3 Solidity test files with solc 0.8.28 (evm target: cancun)\n",
+        "stderrTail": ""
+      },
+      "evidence": {
+        "paths": [
+          "hardhat.config.js",
+          "contracts/EthicBitAnchor.sol",
+          "contracts/ClosureAnchor.sol",
+          "contracts/CEMUEthicalOracle.sol"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "big-tech",
+        "model-labs",
+        "crypto",
+        "cybersecurity"
+      ],
+      "checkedAt": "2026-04-25T03:24:13.249729Z"
+    },
+    {
+      "controlId": "CTL-EV-001",
+      "articleId": "ART-07",
+      "title": "Evidence Claim Level Must Reach L4",
+      "normative": "MUST",
+      "failureBehavior": "FAIL_CLOSED",
+      "command": "python3 -c \"import json,sys; d=json.load(open('results/constitutional_evidence_ceiling.json')); level=d.get('claim_level_ceiling','NONE'); conf=float(d.get('confidence',0)); srcs=d.get('sources',[]); ok=level in ('L4','L5') and conf>=0.90 and len(srcs)>=4; print('claim_level='+level+' confidence='+str(round(conf,3))+' sources='+str(len(srcs))); sys.exit(0 if ok else 1)\"",
+      "timeoutSeconds": 15,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "claim_level=L5 confidence=0.928 sources=4\n",
+        "stderrTail": ""
+      },
+      "evidence": {
+        "paths": [
+          "results/constitutional_evidence_ceiling.json",
+          "results/runtime_evidence_strength_report.json"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "ai-agentic",
+        "big-legal",
+        "crypto",
+        "regulatory",
+        "government",
+        "cross-economy"
+      ],
+      "checkedAt": "2026-04-25T03:24:16.339983Z"
+    },
+    {
+      "controlId": "CTL-PQ-001",
+      "articleId": "ART-02",
+      "title": "PQ Runtime Secret Protection Claim-Level Enforcement",
+      "normative": "MUST",
+      "failureBehavior": "FAIL_CLOSED",
+      "command": "dynamic:claim-level-pq-runtime-protection",
+      "timeoutSeconds": 0,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "artifactType": "pq_runtime_secret_protection",
+        "pqStatus": "PROTECTED",
+        "protector": "MLKEM768Protector",
+        "evidenceRef": "results/mechanical_ethics_gate.json"
+      },
+      "evidence": {
+        "paths": [
+          "results/pq_runtime_secret_protection.json"
+        ],
+        "missing": []
+      },
+      "audiences": [
+        "ai-agentic",
+        "cybersecurity",
+        "regulatory",
+        "government"
+      ],
+      "checkedAt": "2026-04-25T03:24:16.363052Z",
+      "metadata": {
+        "claimLevel": "ci_grade",
+        "strictRequired": false,
+        "strictClaimLevels": [
+          "freeze_grade",
+          "sovereign_release"
+        ]
+      }
+    }
+  ]
+}

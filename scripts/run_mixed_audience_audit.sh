@@ -444,8 +444,10 @@ if [[ "$GATE_EVIDENCE_CEILING_PRESENT" == "PASS" ]]; then
   EVIDENCE_CONFIDENCE="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "confidence" "0.0")"
   EVIDENCE_MODE="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "evidence_mode" "UNKNOWN")"
   EVIDENCE_MECHANICAL_ETHICS_STATUS="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "mechanical_ethics_status" "UNKNOWN")"
-  EVIDENCE_ELIGIBLE_L4="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "eligible_for_l4" "false")"
-  EVIDENCE_ELIGIBLE_L5="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "eligible_for_l5" "false")"
+  _raw_l4="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "eligible_for_l4" "false")"
+  _raw_l5="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "eligible_for_l5" "false")"
+  EVIDENCE_ELIGIBLE_L4="$(echo "$_raw_l4" | tr '[:upper:]' '[:lower:]')"
+  EVIDENCE_ELIGIBLE_L5="$(echo "$_raw_l5" | tr '[:upper:]' '[:lower:]')"
 else
   EVIDENCE_CLAIM_LEVEL="NOT_COMPUTED"
   EVIDENCE_CONFIDENCE="0.0"
