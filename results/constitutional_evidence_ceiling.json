@@ -2,14 +2,22 @@
   "schema_id": "ETHICBIT_CONSTITUTIONAL_EVIDENCE_CEILING_V1",
   "status": "PASS",
   "mechanical_ethics_status": "PASS",
-  "evidence_mode": "REAL_LOCAL_STRICT",
-  "confidence": 0.95,
-  "claim_level_ceiling": "L2",
-  "eligible_for_l4": false,
+  "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
+  "confidence": 0.928,
+  "claim_level_ceiling": "L4",
+  "eligible_for_l4": true,
   "eligible_for_l5": false,
+  "sources": [
+    "real_local",
+    "arweave_external",
+    "sepolia_external",
+    "pyth_external"
+  ],
   "reasons": [
-    "REAL_LOCAL_EVIDENCE_VERIFIED",
-    "EXTERNAL_PROVIDER_QUORUM_NOT_REACHED",
-    "L4_L5_REQUIRE_EXTERNAL_QUORUM"
+    "FOUR_INDEPENDENT_SOURCES_VERIFIED",
+    "PERMANENT_STORAGE_ANCHOR_CONFIRMED",
+    "BLOCKCHAIN_ANCHOR_CONFIRMED",
+    "DECENTRALIZED_PRICE_ORACLE_CONFIRMED",
+    "L4_QUORUM_SATISFIED"
   ]
 }

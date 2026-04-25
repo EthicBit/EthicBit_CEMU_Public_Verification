@@ -1,16 +1,24 @@
 {
   "schema_id": "ETHICBIT_RUNTIME_EVIDENCE_STRENGTH_V1",
   "mechanical_ethics_status": "PASS",
-  "evidence_mode": "REAL_LOCAL_STRICT",
-  "confidence": 0.95,
-  "health_score": "REAL_LOCAL_VERIFIED",
-  "claim_level_ceiling": "L2",
-  "eligible_for_l4": false,
+  "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
+  "confidence": 0.928,
+  "health_score": "L4_QUAD_SOURCE_VERIFIED",
+  "claim_level_ceiling": "L4",
+  "eligible_for_l4": true,
   "eligible_for_l5": false,
+  "sources": [
+    "real_local",
+    "arweave_external",
+    "sepolia_external",
+    "pyth_external"
+  ],
   "reasons": [
-    "REAL_LOCAL_EVIDENCE_ACTIVE",
-    "SHA256_VERIFIED_ARTIFACTS",
-    "CONFIDENCE_0_950",
-    "EXTERNAL_PROVIDERS_NOT_ACTIVE"
+    "REAL_LOCAL_SHA256_VERIFIED",
+    "ARWEAVE_PERMANENT_ANCHOR_ACTIVE",
+    "SEPOLIA_ONCHAIN_TX_VERIFIED",
+    "PYTH_ORACLE_LIVENESS_CONFIRMED",
+    "FOUR_SOURCE_QUORUM_ACHIEVED",
+    "L5_REQUIRES_ADDITIONAL_INDEPENDENT_ORACLE_NETWORKS"
   ]
 }

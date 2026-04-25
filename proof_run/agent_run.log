@@ -1,0 +1,322 @@
+
+=== Agente Real v1.0.10 Modo Daemon (intervalo 60s) iniciado a 2026-04-24 20:12:09.817817 ===
+
+[2026-04-24 20:12:09.817831] 🚀 Ejecutando fail-closed-root-hash
+[2026-04-24 20:12:31.328182] 🔍 Evaluando Mechanical Ethics (fail-closed-root-hash)...
+[2026-04-24 20:12:31.329197] 🔍 Collecting evidence for RULE-ETHIC-CORE-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:33.528362] Weighted consensus → Final price: N/A | Confidence: 0.945 | Status: PASS
+   ✅ RULE-ETHIC-CORE-001-v1.0 → PASS
+[2026-04-24 20:12:33.529127] 🔍 Collecting evidence for RULE-ETHIC-JUS-001-v3.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:34.487868] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-JUS-001-v3.1 → PASS
+[2026-04-24 20:12:34.488326] 🔍 Collecting evidence for RULE-ETHIC-FIN-001-v3.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:35.090034] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-FIN-001-v3.0 → PASS
+[2026-04-24 20:12:35.090459] 🔍 Collecting evidence for RULE-ETHIC-SEC-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:35.639753] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-SEC-001-v2.0 → PASS
+[2026-04-24 20:12:35.640173] 🔍 Collecting evidence for RULE-ETHIC-TEC-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:36.211605] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-TEC-001-v1.0 → PASS
+[2026-04-24 20:12:36.212007] 🔍 Collecting evidence for RULE-ETHIC-LEG-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:36.779642] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-LEG-001-v2.0 → PASS
+[2026-04-24 20:12:36.779948] 🔍 Collecting evidence for RULE-ETHIC-REG-001-v2.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:44.855400] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-REG-001-v2.1 → PASS
+[2026-04-24 20:12:44.855463] Mechanical Ethics: PASS
+[2026-04-24 20:12:44.855474] 🚀 Ejecutando human-approval-gate
+[2026-04-24 20:12:58.243101] 🔍 Evaluando Mechanical Ethics (human-approval-gate)...
+[2026-04-24 20:12:58.243895] 🔍 Collecting evidence for RULE-ETHIC-CORE-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:12:59.388549] Weighted consensus → Final price: N/A | Confidence: 0.945 | Status: PASS
+   ✅ RULE-ETHIC-CORE-001-v1.0 → PASS
+[2026-04-24 20:12:59.388928] 🔍 Collecting evidence for RULE-ETHIC-JUS-001-v3.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:00.576075] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-JUS-001-v3.1 → PASS
+[2026-04-24 20:13:00.576483] 🔍 Collecting evidence for RULE-ETHIC-FIN-001-v3.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:01.120923] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-FIN-001-v3.0 → PASS
+[2026-04-24 20:13:01.121281] 🔍 Collecting evidence for RULE-ETHIC-SEC-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:02.223079] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-SEC-001-v2.0 → PASS
+[2026-04-24 20:13:02.223271] 🔍 Collecting evidence for RULE-ETHIC-TEC-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:02.748290] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-TEC-001-v1.0 → PASS
+[2026-04-24 20:13:02.748623] 🔍 Collecting evidence for RULE-ETHIC-LEG-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:03.253186] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-LEG-001-v2.0 → PASS
+[2026-04-24 20:13:03.253384] 🔍 Collecting evidence for RULE-ETHIC-REG-001-v2.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:03.799331] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-REG-001-v2.1 → PASS
+[2026-04-24 20:13:03.799384] Mechanical Ethics: PASS
+[2026-04-24 20:13:03.799401] 🚀 Ejecutando offline-hermeticity
+[2026-04-24 20:13:30.631226] 🔍 Evaluando Mechanical Ethics (offline-hermeticity)...
+[2026-04-24 20:13:30.634649] 🔍 Collecting evidence for RULE-ETHIC-CORE-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:32.101814] Weighted consensus → Final price: N/A | Confidence: 0.945 | Status: PASS
+   ✅ RULE-ETHIC-CORE-001-v1.0 → PASS
+[2026-04-24 20:13:32.102547] 🔍 Collecting evidence for RULE-ETHIC-JUS-001-v3.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:33.090814] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-JUS-001-v3.1 → PASS
+[2026-04-24 20:13:33.091536] 🔍 Collecting evidence for RULE-ETHIC-FIN-001-v3.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:33.717575] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-FIN-001-v3.0 → PASS
+[2026-04-24 20:13:33.717978] 🔍 Collecting evidence for RULE-ETHIC-SEC-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:34.341918] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-SEC-001-v2.0 → PASS
+[2026-04-24 20:13:34.342639] 🔍 Collecting evidence for RULE-ETHIC-TEC-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:34.981748] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-TEC-001-v1.0 → PASS
+[2026-04-24 20:13:34.982344] 🔍 Collecting evidence for RULE-ETHIC-LEG-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:35.593892] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-LEG-001-v2.0 → PASS
+[2026-04-24 20:13:35.594376] 🔍 Collecting evidence for RULE-ETHIC-REG-001-v2.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:36.535401] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-REG-001-v2.1 → PASS
+[2026-04-24 20:13:36.535440] Mechanical Ethics: PASS
+[2026-04-24 20:13:36.535448] 🚀 Ejecutando anchor-semantics
+[2026-04-24 20:13:56.669634] 🔍 Evaluando Mechanical Ethics (anchor-semantics)...
+[2026-04-24 20:13:56.670249] 🔍 Collecting evidence for RULE-ETHIC-CORE-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:57.961165] Weighted consensus → Final price: N/A | Confidence: 0.945 | Status: PASS
+   ✅ RULE-ETHIC-CORE-001-v1.0 → PASS
+[2026-04-24 20:13:57.961578] 🔍 Collecting evidence for RULE-ETHIC-JUS-001-v3.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:58.433058] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-JUS-001-v3.1 → PASS
+[2026-04-24 20:13:58.433429] 🔍 Collecting evidence for RULE-ETHIC-FIN-001-v3.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:58.921238] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-FIN-001-v3.0 → PASS
+[2026-04-24 20:13:58.921567] 🔍 Collecting evidence for RULE-ETHIC-SEC-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:13:59.767417] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-SEC-001-v2.0 → PASS
+[2026-04-24 20:13:59.767692] 🔍 Collecting evidence for RULE-ETHIC-TEC-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:00.262815] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-TEC-001-v1.0 → PASS
+[2026-04-24 20:14:00.263274] 🔍 Collecting evidence for RULE-ETHIC-LEG-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:01.409278] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-LEG-001-v2.0 → PASS
+[2026-04-24 20:14:01.409626] 🔍 Collecting evidence for RULE-ETHIC-REG-001-v2.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:02.122246] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-REG-001-v2.1 → PASS
+[2026-04-24 20:14:02.122284] Mechanical Ethics: PASS
+[2026-04-24 20:14:02.122292] 🚀 Ejecutando tamper-readiness-escalation
+[2026-04-24 20:14:14.453257] 🔍 Evaluando Mechanical Ethics (tamper-readiness-escalation)...
+[2026-04-24 20:14:14.453988] 🔍 Collecting evidence for RULE-ETHIC-CORE-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:15.841721] Weighted consensus → Final price: N/A | Confidence: 0.945 | Status: PASS
+   ✅ RULE-ETHIC-CORE-001-v1.0 → PASS
+[2026-04-24 20:14:15.842192] 🔍 Collecting evidence for RULE-ETHIC-JUS-001-v3.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:16.646796] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-JUS-001-v3.1 → PASS
+[2026-04-24 20:14:16.647161] 🔍 Collecting evidence for RULE-ETHIC-FIN-001-v3.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:17.474725] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-FIN-001-v3.0 → PASS
+[2026-04-24 20:14:17.475150] 🔍 Collecting evidence for RULE-ETHIC-SEC-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:18.308623] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-SEC-001-v2.0 → PASS
+[2026-04-24 20:14:18.309031] 🔍 Collecting evidence for RULE-ETHIC-TEC-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:19.117854] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-TEC-001-v1.0 → PASS
+[2026-04-24 20:14:19.118258] 🔍 Collecting evidence for RULE-ETHIC-LEG-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:19.913549] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-LEG-001-v2.0 → PASS
+[2026-04-24 20:14:19.913966] 🔍 Collecting evidence for RULE-ETHIC-REG-001-v2.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:20.719623] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-REG-001-v2.1 → PASS
+[2026-04-24 20:14:20.719644] Mechanical Ethics: PASS
+[2026-04-24 20:14:20.719649] 🔍 Evaluando Mechanical Ethics (cycle_end)...
+[2026-04-24 20:14:20.719894] 🔍 Collecting evidence for RULE-ETHIC-CORE-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:21.306218] Weighted consensus → Final price: N/A | Confidence: 0.945 | Status: PASS
+   ✅ RULE-ETHIC-CORE-001-v1.0 → PASS
+[2026-04-24 20:14:21.306596] 🔍 Collecting evidence for RULE-ETHIC-JUS-001-v3.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:22.128091] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-JUS-001-v3.1 → PASS
+[2026-04-24 20:14:22.128458] 🔍 Collecting evidence for RULE-ETHIC-FIN-001-v3.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:22.938357] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-FIN-001-v3.0 → PASS
+[2026-04-24 20:14:22.938761] 🔍 Collecting evidence for RULE-ETHIC-SEC-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:23.723367] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-SEC-001-v2.0 → PASS
+[2026-04-24 20:14:23.723545] 🔍 Collecting evidence for RULE-ETHIC-TEC-001-v1.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:24.553737] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-TEC-001-v1.0 → PASS
+[2026-04-24 20:14:24.553905] 🔍 Collecting evidence for RULE-ETHIC-LEG-001-v2.0...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:25.351680] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-LEG-001-v2.0 → PASS
+[2026-04-24 20:14:25.352122] 🔍 Collecting evidence for RULE-ETHIC-REG-001-v2.1...
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ✅ real_local   → Price:      N/A | Conf: 0.95
+   ⚠️  arweave_external → all gateways failed
+   ✅ sepolia_external → Conf: 0.93 | 0x2a4ff6fb5f338a4835c950
+[2026-04-24 20:14:26.189145] Weighted consensus → Final price: N/A | Confidence: 0.943 | Status: PASS
+   ✅ RULE-ETHIC-REG-001-v2.1 → PASS
+[2026-04-24 20:14:26.189170] Mechanical Ethics: PASS
+
+🎉 Agente Real v1.0.10: Sistema completamente limpio y Mechanical Ethics PASS
