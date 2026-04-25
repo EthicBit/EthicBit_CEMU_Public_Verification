@@ -1,6 +1,6 @@
 {
   "artifactType": "official_operational_status",
-  "generatedAt": "2026-04-24T23:58:44.151174Z",
+  "generatedAt": "2026-04-25T03:24:02.778405Z",
   "policyVersion": "official-operational-status-policy.v2.0.0",
   "runContext": {
     "runId": "run-20260411T215540Z-33389",
@@ -9,15 +9,13 @@
   },
   "cryptoMode": {
     "effectiveMode": "unknown",
-    "mldsaMode": "compatibility_fallback",
-    "mldsaEffectiveMode": "compatibility_fallback",
-    "ed25519KeySource": "ephemeral_runner",
-    "mldsaKeySource": "ephemeral_runner",
-    "hybridClaimMode": "compatibility_hybrid",
-    "keyProvenanceMode": "fully_ephemeral",
-    "claimTier": "compatibility_hybrid_ephemeral",
-    "ed25519KeyId": "ETHICBIT_ED25519_LOCAL_EPHEMERAL_V1",
-    "mldsaKeyId": "ETHICBIT_MLDSA_COMPAT_ED25519_LOCAL_V1"
+    "mldsaMode": "unknown",
+    "mldsaEffectiveMode": "unknown",
+    "ed25519KeySource": "unknown",
+    "mldsaKeySource": "unknown",
+    "hybridClaimMode": "unknown",
+    "keyProvenanceMode": "unknown",
+    "claimTier": "unspecified"
   },
   "officialStatus": "READY",
   "reason": "LIVE_CANONICAL_GATE_CONVERGED",
@@ -42,11 +40,11 @@
   "freezeActive": false,
   "integrity": {
     "inputHashes": {
-      "gateReport": "7cb4ebb203cdc25e34a5af6dbe080f19eabdc50738948afdca11e72a56fe550c",
+      "gateReport": "6029a8322e2a8960c81e61ee4e06cc750f7f2de236617623993ef6805fb900aa",
       "liveReport": "ffed75a162e96349f76431ced523b630b6cb986fb4c97df02988cd2b92dc6024",
       "canonicalConfig": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093"
     },
-    "outputHash": "782180ee087e1b7a672c821ac9ee25078593b3094cf569bdcf9f8a68b56d2d33"
+    "outputHash": "ecfe6a1afe0e32eab02cd05effb73b24434bfa09669e630dd008e57e574a1b36"
   },
   "paths": {
     "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
@@ -73,15 +71,13 @@
     "riskMode": "HIGH",
     "executionMode": {
       "effectiveMode": "unknown",
-      "mldsaMode": "compatibility_fallback",
-      "mldsaEffectiveMode": "compatibility_fallback",
-      "ed25519KeySource": "ephemeral_runner",
-      "mldsaKeySource": "ephemeral_runner",
-      "hybridClaimMode": "compatibility_hybrid",
-      "keyProvenanceMode": "fully_ephemeral",
-      "claimTier": "compatibility_hybrid_ephemeral",
-      "ed25519KeyId": "ETHICBIT_ED25519_LOCAL_EPHEMERAL_V1",
-      "mldsaKeyId": "ETHICBIT_MLDSA_COMPAT_ED25519_LOCAL_V1"
+      "mldsaMode": "unknown",
+      "mldsaEffectiveMode": "unknown",
+      "ed25519KeySource": "unknown",
+      "mldsaKeySource": "unknown",
+      "hybridClaimMode": "unknown",
+      "keyProvenanceMode": "unknown",
+      "claimTier": "unspecified"
     },
     "requiredAlgorithms": [
       "ED25519",
@@ -111,8 +107,8 @@
     "status": "SIGNED_HYBRID",
     "algorithm": "HYBRID_ED25519_MLDSA",
     "keyIds": [
-      "ETHICBIT_ED25519_LOCAL_EPHEMERAL_V1",
-      "ETHICBIT_MLDSA_COMPAT_ED25519_LOCAL_V1"
+      "ED25519_UNSET",
+      "MLDSA_UNSET"
     ]
   },
   "signatureSet": {
@@ -130,28 +126,26 @@
       "ED25519",
       "ML-DSA"
     ],
-    "payloadHash": "d5aac2658c21a359e6a4abbd2f50c7513d4eeae6c64767d34f5f717f2b5e5ccb",
+    "payloadHash": "4cd808acae02f3d3d8ab0ed80f38aeb7b7e0b861e2af2a17a9175defb09ba788",
     "payload": {
-      "path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/ethicbit_hybrid_sign_8i27mvxu/payload.jcs.json",
-      "sha256": "d5aac2658c21a359e6a4abbd2f50c7513d4eeae6c64767d34f5f717f2b5e5ccb",
+      "path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/ethicbit_hybrid_sign_itajamfj/payload.jcs.json",
+      "sha256": "4cd808acae02f3d3d8ab0ed80f38aeb7b7e0b861e2af2a17a9175defb09ba788",
       "sourcePath": ""
     },
     "hybridCryptoTruth": {
-      "ed25519_key_source": "ephemeral_runner",
-      "mldsa_key_source": "ephemeral_runner",
-      "mldsa_effective_mode": "compatibility_fallback",
-      "hybrid_claim_mode": "compatibility_hybrid",
-      "ephemeral_keys_used": true,
+      "ed25519_key_source": "unknown",
+      "mldsa_key_source": "unknown",
+      "mldsa_effective_mode": "unknown",
+      "hybrid_claim_mode": "unknown",
+      "ephemeral_keys_used": false,
       "runner_supports_mldsa": false,
       "claim_level": "ci_grade",
       "require_native_hybrid": false,
       "eligible_for_sovereign_release": false,
-      "key_provenance_mode": "fully_ephemeral",
-      "keyProvenanceMode": "fully_ephemeral",
-      "crypto_claim_tier": "compatibility_hybrid_ephemeral",
-      "claimTier": "compatibility_hybrid_ephemeral",
-      "ed25519KeyId": "ETHICBIT_ED25519_LOCAL_EPHEMERAL_V1",
-      "mldsaKeyId": "ETHICBIT_MLDSA_COMPAT_ED25519_LOCAL_V1"
+      "key_provenance_mode": "unknown",
+      "keyProvenanceMode": "unknown",
+      "crypto_claim_tier": "unspecified",
+      "claimTier": "unspecified"
     },
     "verificationPolicy": {
       "claimLevel": "ci_grade",
@@ -160,33 +154,33 @@
     "signatures": [
       {
         "algorithm": "ED25519",
-        "keyId": "ETHICBIT_ED25519_LOCAL_EPHEMERAL_V1",
+        "keyId": "ED25519_UNSET",
         "status": "PASS",
-        "signature": "yeK2c+pZ0vr0wH4jN9fPosDkXbhTHPduGCJHrU7CjO0k2FV9V7g7aukj5+UTbX6EkfgcpMTUneO92jmWbqxxAg==",
-        "signedAt": "2026-04-24T23:58:44.154389Z",
+        "signature": "s4E067TfUBuDx4A/FLOHgThSbcv+h0LHy3gV+ryAsjwuk/mllGUkQCnkkRKbxZD9miQ5HfZGmkTSwgeEaiCxDg==",
+        "signedAt": "2026-04-25T03:24:02.780505Z",
         "commandConfigured": true,
         "timeoutSeconds": 25.0
       },
       {
         "algorithm": "ML-DSA",
-        "keyId": "ETHICBIT_MLDSA_COMPAT_ED25519_LOCAL_V1",
+        "keyId": "MLDSA_UNSET",
         "status": "PASS",
-        "signature": "GI8veMvEGwa7NT4wr2xc7aXjpnwhL/lsn6iftcnTrX1q1SP3B36/8hgTgA5y+6pGQei7dtEJIEIQkU0TfdgJCw==",
-        "signedAt": "2026-04-24T23:58:44.213210Z",
+        "signature": "Sr1D4gSmH4+Hw8bY1MxE7W6NP4aaTVeqbKqjm3/eoXOvFwZeR/IHAZs1ozxBeOVUuLZfSQZPtdsjq7/Eq9ZLDg==",
+        "signedAt": "2026-04-25T03:24:02.812730Z",
         "commandConfigured": true,
         "timeoutSeconds": 25.0,
-        "effectiveMode": "compatibility_fallback"
+        "effectiveMode": "unknown"
       }
     ],
     "cryptoMode": {
       "effectiveMode": "compatibility_fallback",
-      "mldsaMode": "compatibility_fallback",
-      "mldsaEffectiveMode": "compatibility_fallback",
-      "ed25519KeySource": "ephemeral_runner",
-      "mldsaKeySource": "ephemeral_runner",
-      "hybridClaimMode": "compatibility_hybrid",
-      "keyProvenanceMode": "fully_ephemeral",
-      "claimTier": "compatibility_hybrid_ephemeral"
+      "mldsaMode": "unknown",
+      "mldsaEffectiveMode": "unknown",
+      "ed25519KeySource": "unknown",
+      "mldsaKeySource": "unknown",
+      "hybridClaimMode": "unknown",
+      "keyProvenanceMode": "unknown",
+      "claimTier": "unspecified"
     }
   },
   "signatureVerification": {
