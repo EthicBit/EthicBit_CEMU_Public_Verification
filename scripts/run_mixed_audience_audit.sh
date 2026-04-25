@@ -436,6 +436,25 @@ else
   PQ_RUNTIME_SECRET_PROTECTION_EVIDENCE_REF="UNKNOWN"
 fi
 
+CONSTITUTIONAL_EVIDENCE_CEILING_PATH="${RESULTS_DIR}/constitutional_evidence_ceiling.json"
+GATE_EVIDENCE_CEILING_PRESENT="$(gate_if test -f "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH")"
+
+if [[ "$GATE_EVIDENCE_CEILING_PRESENT" == "PASS" ]]; then
+  EVIDENCE_CLAIM_LEVEL="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "claim_level_ceiling" "UNKNOWN")"
+  EVIDENCE_CONFIDENCE="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "confidence" "0.0")"
+  EVIDENCE_MODE="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "evidence_mode" "UNKNOWN")"
+  EVIDENCE_MECHANICAL_ETHICS_STATUS="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "mechanical_ethics_status" "UNKNOWN")"
+  EVIDENCE_ELIGIBLE_L4="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "eligible_for_l4" "false")"
+  EVIDENCE_ELIGIBLE_L5="$(json_get_or_default "$CONSTITUTIONAL_EVIDENCE_CEILING_PATH" "eligible_for_l5" "false")"
+else
+  EVIDENCE_CLAIM_LEVEL="NOT_COMPUTED"
+  EVIDENCE_CONFIDENCE="0.0"
+  EVIDENCE_MODE="UNKNOWN"
+  EVIDENCE_MECHANICAL_ETHICS_STATUS="UNKNOWN"
+  EVIDENCE_ELIGIBLE_L4="false"
+  EVIDENCE_ELIGIBLE_L5="false"
+fi
+
 mkdir -p "$RESULTS_DIR"
 
 write_gate_report() {
@@ -485,6 +504,16 @@ write_gate_report() {
     "status": "${PQ_RUNTIME_SECRET_PROTECTION_STATUS}",
     "protector": "${PQ_RUNTIME_SECRET_PROTECTION_PROTECTOR}",
     "evidenceRef": "${PQ_RUNTIME_SECRET_PROTECTION_EVIDENCE_REF}"
+  },
+  "evidenceLevel": {
+    "path": "results/constitutional_evidence_ceiling.json",
+    "present": "${GATE_EVIDENCE_CEILING_PRESENT}",
+    "claimLevelCeiling": "${EVIDENCE_CLAIM_LEVEL}",
+    "confidence": ${EVIDENCE_CONFIDENCE},
+    "evidenceMode": "${EVIDENCE_MODE}",
+    "mechanicalEthicsStatus": "${EVIDENCE_MECHANICAL_ETHICS_STATUS}",
+    "eligibleForL4": ${EVIDENCE_ELIGIBLE_L4},
+    "eligibleForL5": ${EVIDENCE_ELIGIBLE_L5}
   },
   "gates": {
     "requiredComponentsPresent": "${GATE_REQUIRED_COMPONENTS}",
