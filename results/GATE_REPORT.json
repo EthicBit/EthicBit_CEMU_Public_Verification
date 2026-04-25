@@ -44,6 +44,29 @@
     "protector": "MLKEM768Protector",
     "evidenceRef": "results/mechanical_ethics_gate.json"
   },
+  "evidenceLevel": {
+    "path": "results/constitutional_evidence_ceiling.json",
+    "present": "PASS",
+    "claimLevelCeiling": "L4",
+    "confidence": 0.928,
+    "evidenceMode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
+    "mechanicalEthicsStatus": "PASS",
+    "eligibleForL4": true,
+    "eligibleForL5": false,
+    "sources": [
+      "real_local",
+      "arweave_external",
+      "sepolia_external",
+      "pyth_external"
+    ],
+    "reasons": [
+      "FOUR_INDEPENDENT_SOURCES_VERIFIED",
+      "PERMANENT_STORAGE_ANCHOR_CONFIRMED",
+      "BLOCKCHAIN_ANCHOR_CONFIRMED",
+      "DECENTRALIZED_PRICE_ORACLE_CONFIRMED",
+      "L4_QUORUM_SATISFIED"
+    ]
+  },
   "gates": {
     "requiredComponentsPresent": "PASS",
     "manifestActiveState": "PASS",
