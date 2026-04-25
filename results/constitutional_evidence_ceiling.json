@@ -4,9 +4,9 @@
   "mechanical_ethics_status": "PASS",
   "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
   "confidence": 0.928,
-  "claim_level_ceiling": "L5",
+  "claim_level_ceiling": "L4",
   "eligible_for_l4": true,
-  "eligible_for_l5": true,
+  "eligible_for_l5": false,
   "sources": [
     "real_local",
     "arweave_external",
@@ -19,21 +19,6 @@
     "BLOCKCHAIN_ANCHOR_CONFIRMED",
     "DECENTRALIZED_PRICE_ORACLE_CONFIRMED",
     "L4_QUORUM_SATISFIED",
-    "L5_ONCHAIN_ANCHOR_VERIFIED",
-    "CONSTITUTIONAL_CLAIM_ROOT_ANCHORED",
-    "TRIPLE_ANCHOR_COMPLETE"
-  ],
-  "health_score": "L5_TRIPLE_ANCHOR_VERIFIED",
-  "l5_onchain_anchor": {
-    "status": "PASS",
-    "verification_status": "ONCHAIN_ANCHOR_VERIFIED",
-    "chain": "sepolia",
-    "chain_id": 11155111,
-    "contract_address": "0xCd515c1Da28F154A6F9B1260cbCA9FEFD1Bfe884",
-    "tx_hash": "0x4ab524ff92811c51b2e338d552d6bb8ea1a821bdc4b2fdff32f60f7b76d39a4a",
-    "block_number": 10726943,
-    "merkle_root": "0xe70ecdfa4868d83dc5cc5b7f45358a7a9bdaf461aea1432c8b6400c0c97fa5e2",
-    "claim_hash": "0xc31aeb1ec4cdabe47bcd5de6afdc013c0cd629c743094a79dc3fec5072b90f0e",
-    "artifact": "results/l5_onchain_anchor_report.json"
-  }
+    "L5_REQUIRES_KZG_BLOB_TX"
+  ]
 }
