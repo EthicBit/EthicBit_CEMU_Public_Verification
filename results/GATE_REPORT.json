@@ -1,12 +1,12 @@
 {
   "artifactType": "mixed_audience_gate_report",
-  "generatedAt": "2026-04-24T23:57:01Z",
+  "generatedAt": "2026-04-25T03:24:10Z",
   "policyVersion": "mixed-audience-gate-policy.v1.1.0",
   "stateTaxonomyVersion": "ethicbit-state-taxonomy.v2.0.0",
   "runContext": {
-    "runId": "run-20260424T235701Z-13314",
+    "runId": "run-20260425T032410Z-36666",
     "releaseId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
-    "verificationEpoch": "2026-04-24T23:00:00Z"
+    "verificationEpoch": "2026-04-25T03:00:00Z"
   },
   "packageId": "EthicBit_Mixed_Audience_Audit_Pack_20260407T204627Z",
   "declaredState": {
@@ -47,25 +47,12 @@
   "evidenceLevel": {
     "path": "results/constitutional_evidence_ceiling.json",
     "present": "PASS",
-    "claimLevelCeiling": "L4",
+    "claimLevelCeiling": "L5",
     "confidence": 0.928,
     "evidenceMode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
     "mechanicalEthicsStatus": "PASS",
     "eligibleForL4": true,
-    "eligibleForL5": false,
-    "sources": [
-      "real_local",
-      "arweave_external",
-      "sepolia_external",
-      "pyth_external"
-    ],
-    "reasons": [
-      "FOUR_INDEPENDENT_SOURCES_VERIFIED",
-      "PERMANENT_STORAGE_ANCHOR_CONFIRMED",
-      "BLOCKCHAIN_ANCHOR_CONFIRMED",
-      "DECENTRALIZED_PRICE_ORACLE_CONFIRMED",
-      "L4_QUORUM_SATISFIED"
-    ]
+    "eligibleForL5": true
   },
   "gates": {
     "requiredComponentsPresent": "PASS",

@@ -1,7 +1,7 @@
 {
   "constitutionVersion": "v1.0.0",
-  "matrixVersion": "v1.0.0",
-  "generatedAt": "2026-04-17T00:00:00Z",
+  "matrixVersion": "v1.1.0",
+  "generatedAt": "2026-04-25T00:00:00Z",
   "controls": [
     {
       "articleId": "ART-01",
@@ -48,7 +48,9 @@
           "ceerv/policy/reason_registry_SECURITY.json",
           "ceerv/policy/reason_registry_TECHNICAL.json",
           "ceerv/policy/reason_registry_LEGAL.json",
-          "ceerv/policy/reason_registry_REGULATORY.json"
+          "ceerv/policy/reason_registry_REGULATORY.json",
+          "results/runtime_evidence_strength_report.json",
+          "results/constitutional_evidence_ceiling.json"
         ]
       },
       "audiences": [
@@ -163,6 +165,32 @@
         "model-labs",
         "crypto",
         "cybersecurity"
+      ]
+    },
+    {
+      "articleId": "ART-07",
+      "title": "Evidence Claim Level Must Reach L4",
+      "normative": "MUST",
+      "controlId": "CTL-EV-001",
+      "owner": "evidence-broker",
+      "failureBehavior": "FAIL_CLOSED",
+      "execution": {
+        "timeoutSeconds": 15,
+        "command": "python3 -c \"import json,sys; d=json.load(open('results/constitutional_evidence_ceiling.json')); level=d.get('claim_level_ceiling','NONE'); conf=float(d.get('confidence',0)); srcs=d.get('sources',[]); ok=level in ('L4','L5') and conf>=0.90 and len(srcs)>=4; print('claim_level='+level+' confidence='+str(round(conf,3))+' sources='+str(len(srcs))); sys.exit(0 if ok else 1)\""
+      },
+      "evidence": {
+        "paths": [
+          "results/constitutional_evidence_ceiling.json",
+          "results/runtime_evidence_strength_report.json"
+        ]
+      },
+      "audiences": [
+        "ai-agentic",
+        "big-legal",
+        "crypto",
+        "regulatory",
+        "government",
+        "cross-economy"
       ]
     }
   ]
