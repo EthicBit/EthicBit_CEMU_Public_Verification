@@ -1,8 +1,8 @@
 {
   "artifactType": "ethicbit_final_closure_snapshot_manifest",
-  "generatedAt": "2026-04-22T16:31:14.077597Z",
+  "generatedAt": "2026-04-24T23:59:44.225799Z",
   "repository": "EthicBit/EthicBit_CEMU",
-  "headCommit": "8771abf3c9f840472ec01e8b860ea6d8f46b39b5",
+  "headCommit": "4fbaa557c3b11b5b0ecd01d4e94e5e0337e65c90",
   "officialTagReferences": [
     {
       "tag": "v2.2b-sovereign-preclose-20260419",
@@ -97,16 +97,16 @@
       "summary": "Periodic audit workflow now probes ML-DSA support and applies compatible fallback on unsupported runners while preserving require-signature enforcement."
     },
     "snapshotRefresh": {
-      "mergeCommit": "3e9b1785342c4e33eca88e8cb3085dadabf6d50d",
-      "summary": "Final snapshot regenerated from current canonical runtime artifacts with hybrid signature schema v2 semantics."
+      "mergeCommit": "4fbaa557c3b11b5b0ecd01d4e94e5e0337e65c90",
+      "summary": "Final snapshot regenerated from current canonical runtime artifacts after latest main merge."
     }
   },
   "artifactHashesSha256": {
-    "official_operational_status.json": "e37a5e6a2171cce0770496f9cdc9b0a1edc337211ff5aa57b8cf01ae5c27396c",
-    "GATE_REPORT.json": "e1ade1d08f26a9f03ac3552e6b8871b4b0a9128cbfcea68814aeeef0d8c2bd6a",
+    "official_operational_status.json": "ca9a9a81be89f0ceeaefd1ffe440593f2b9354cbacbfc9801b8dc657b2a89787",
+    "GATE_REPORT.json": "7cb4ebb203cdc25e34a5af6dbe080f19eabdc50738948afdca11e72a56fe550c",
     "constitutional_controls_report.json": "4df9315be77db8cfcf507b1e55f2ac55131e635f7bd6230718b76f5e77affc09",
-    "hybrid_signature_set.json": "32d552107562abd7edddf7581227629ddd2f9eaef3532c9e128914ee36b2eaac",
+    "hybrid_signature_set.json": "320a20e995af9d16f15e455b548a1143c6218fe14f7d1e8521d7653aa7175d3e",
     "hybrid_signature_verification.json": "00ab87ceac4c8c27a872636474a0abbc1a69f9a268bb09735b48624ac4fbd2cb"
   },
-  "sourceMainCommitObserved": "f2f441e1994e90b133a2bb04154d08ce96f1d1a4"
+  "sourceMainCommitObserved": "4fbaa557c3b11b5b0ecd01d4e94e5e0337e65c90"
 }

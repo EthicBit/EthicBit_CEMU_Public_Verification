@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "status": "VERIFIED",
   "policyVersion": "attestation-normalization-policy.v1.0.0",
-  "generatedAt": "2026-04-23T23:08:32.846728Z",
+  "generatedAt": "2026-04-25T00:00:01.413945Z",
   "equivalenceModel": {
     "acceptedCanonicalStatus": "ATTESTATION_VERIFIED",
     "acceptedEquivalentStatus": "ATTESTATION_VERIFIED_EQUIVALENT",

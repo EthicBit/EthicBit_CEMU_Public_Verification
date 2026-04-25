@@ -1,0 +1,16 @@
+{
+  "schema_id": "ETHICBIT_RUNTIME_EVIDENCE_STRENGTH_V1",
+  "mechanical_ethics_status": "PASS",
+  "evidence_mode": "REAL_LOCAL_STRICT",
+  "confidence": 0.95,
+  "health_score": "REAL_LOCAL_VERIFIED",
+  "claim_level_ceiling": "L2",
+  "eligible_for_l4": false,
+  "eligible_for_l5": false,
+  "reasons": [
+    "REAL_LOCAL_EVIDENCE_ACTIVE",
+    "SHA256_VERIFIED_ARTIFACTS",
+    "CONFIDENCE_0_950",
+    "EXTERNAL_PROVIDERS_NOT_ACTIVE"
+  ]
+}

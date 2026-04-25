@@ -1,0 +1,15 @@
+{
+  "schema_id": "ETHICBIT_CONSTITUTIONAL_EVIDENCE_CEILING_V1",
+  "status": "PASS",
+  "mechanical_ethics_status": "PASS",
+  "evidence_mode": "REAL_LOCAL_STRICT",
+  "confidence": 0.95,
+  "claim_level_ceiling": "L2",
+  "eligible_for_l4": false,
+  "eligible_for_l5": false,
+  "reasons": [
+    "REAL_LOCAL_EVIDENCE_VERIFIED",
+    "EXTERNAL_PROVIDER_QUORUM_NOT_REACHED",
+    "L4_L5_REQUIRE_EXTERNAL_QUORUM"
+  ]
+}
