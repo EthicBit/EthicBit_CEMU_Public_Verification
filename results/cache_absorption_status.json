@@ -1,0 +1,47 @@
+{
+  "addendum_17a_cache_absorption": "PASS",
+  "cache_enabled": true,
+  "fast_loop_policy": {
+    "fast_loop_tier": "TIER0_LOCAL_FAST",
+    "heavy_external_calls_in_fast_loop": false,
+    "heavy_external_sources_allowed_in_fast_loop": false
+  },
+  "fingerprint_policy": {
+    "algorithm": "sha256",
+    "enabled": true,
+    "fields": [
+      "rule_id",
+      "tier",
+      "status",
+      "confidence",
+      "sources_used",
+      "state_hash"
+    ]
+  },
+  "generated_at": 1777245810.794643,
+  "invalidation_policy": {
+    "by_rule_version": true,
+    "by_source_version": true,
+    "by_state_hash": true,
+    "by_ttl_expiry": true
+  },
+  "metrics": {
+    "entries": 1,
+    "hit_rate": 0.0,
+    "hits": 0,
+    "invalidations": 0,
+    "misses": 1,
+    "uptime_seconds": 7.176399230957031e-05
+  },
+  "rit_detected": false,
+  "rit_reasons": [],
+  "schema_id": "ETHICBIT_CANONICAL_CACHE_ABSORPTION_V1",
+  "status": "PASS",
+  "tiered_cache": true,
+  "ttl_policy": {
+    "TIER0_LOCAL_FAST_ms": 500,
+    "TIER1_LIGHT_ORACLE_ms": 2000,
+    "TIER2_HEAVY_ANCHOR_ms": 60000,
+    "TIER4_CANONICAL_SNAPSHOT_ms": 86400000
+  }
+}
