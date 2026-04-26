@@ -1,6 +1,6 @@
 {
   "schema_id": "ETHICBIT_CHAINLINK_EVIDENCE_V1",
-  "generated_at": "2026-04-26T23:26:21.041846+00:00",
+  "generated_at": "2026-04-26T23:29:05.180784+00:00",
   "oracle": "chainlink",
   "feed": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
   "network": "sepolia",
