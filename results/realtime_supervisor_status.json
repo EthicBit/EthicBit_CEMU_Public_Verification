@@ -2,12 +2,12 @@
   "mode": "REALTIME_100MS",
   "canonical_state": "ACTIVE_CANONICAL",
   "pre_execution_guard": "BLOCKED",
-  "local_updated_at": 1777246145.292063,
-  "external_updated_at": 1777246141.066487,
-  "mechanics_updated_at": 1777246142.012639,
+  "local_updated_at": 1777246409.9935691,
+  "external_updated_at": 1777246409.0023308,
+  "mechanics_updated_at": 1777246405.278686,
   "mechanics": {
     "mechanical_ethics_status": "PASS",
-    "updated_at": 1777246142.012639
+    "updated_at": 1777246405.278686
   },
   "external": {
     "arweave": {

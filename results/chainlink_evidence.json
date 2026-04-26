@@ -1,9 +1,20 @@
 {
   "schema_id": "ETHICBIT_CHAINLINK_EVIDENCE_V1",
-  "generated_at": "2026-04-26T23:29:05.180784+00:00",
+  "generated_at": "2026-04-26T23:33:31.799816+00:00",
   "oracle": "chainlink",
   "feed": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
   "network": "sepolia",
-  "liveness_confirmed": false,
-  "error": "SEPOLIA_RPC_URL not set"
+  "chain_id": 11155111,
+  "description": "ETH / USD",
+  "round_id": 18446744073709584057,
+  "answered_in_round": 18446744073709584057,
+  "answer_raw": 236122000000,
+  "decimals": 8,
+  "price": 2361.22,
+  "started_at_unix": 1777243488,
+  "updated_at_unix": 1777243488,
+  "age_seconds": 2923,
+  "max_age_seconds": 3600,
+  "liveness_confirmed": true,
+  "independent_of_pyth": true
 }
