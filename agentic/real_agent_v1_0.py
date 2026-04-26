@@ -18,6 +18,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from agentic.support.real_local_evidence import resolve_real_local_evidence
 from datetime import datetime
+from dataclasses import dataclass, field
+from threading import Lock
+import hashlib
 
 # Load .env from project root if present
 _env_path = Path(__file__).resolve().parents[1] / ".env"
@@ -592,6 +595,174 @@ def _emit_constitutional_evidence_reports():
 
 
 
+
+@dataclass
+class RealtimeState:
+    last_local_refresh: float = 0.0
+    last_external_refresh: float = 0.0
+    last_mechanics_refresh: float = 0.0
+    last_publish: float = 0.0
+
+    local_ttl: float = 0.10
+    external_ttl: float = 5.0
+    mechanics_ttl: float = 5.0
+    publish_ttl: float = 0.25
+
+    current_mode: str = "REALTIME_100MS"
+    canonical_state: str = "UNKNOWN"
+    pre_execution_guard: str = "UNKNOWN"
+
+    local_bundle: dict = field(default_factory=dict)
+    external_bundle: dict = field(default_factory=dict)
+    mechanics_bundle: dict = field(default_factory=dict)
+
+    last_snapshot_hash: str = ""
+    lock: Lock = field(default_factory=Lock)
+
+
+def _hash_obj(obj: dict) -> str:
+    payload = json.dumps(obj, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _refresh_local_state(rt: RealtimeState, broker, rule_ids: list[str]):
+    now_ts = time.time()
+    if now_ts - rt.last_local_refresh < rt.local_ttl:
+        return
+
+    bundle = {}
+    for rule_id in rule_ids:
+        try:
+            bundle[rule_id] = broker._resolve_real_local_bundle(rule_id)
+        except Exception as exc:
+            bundle[rule_id] = {"error": str(exc)}
+
+    with rt.lock:
+        rt.local_bundle = bundle
+        rt.last_local_refresh = now_ts
+
+
+def _refresh_external_state(rt: RealtimeState, broker):
+    now_ts = time.time()
+    if now_ts - rt.last_external_refresh < rt.external_ttl:
+        return
+
+    ext = {
+        "arweave": broker._arweave_external(),
+        "sepolia": broker._sepolia_external(),
+        "pyth": broker._pyth_external(),
+        "chainlink": broker._chainlink_external(),
+    }
+
+    with rt.lock:
+        rt.external_bundle = ext
+        rt.last_external_refresh = now_ts
+
+
+def _refresh_mechanics_state(rt: RealtimeState, agent):
+    now_ts = time.time()
+    if now_ts - rt.last_mechanics_refresh < rt.mechanics_ttl:
+        return
+
+    ok = agent.evaluate_mechanical_ethics("realtime-supervisor")
+
+    with rt.lock:
+        rt.mechanics_bundle = {
+            "mechanical_ethics_status": "PASS" if ok else "FAIL_CLOSED",
+            "updated_at": now_ts,
+        }
+        rt.last_mechanics_refresh = now_ts
+
+
+def _evaluate_pre_execution_guard(rt: RealtimeState):
+    with rt.lock:
+        ext = dict(rt.external_bundle)
+        mech = dict(rt.mechanics_bundle)
+
+    mech_ok = mech.get("mechanical_ethics_status") == "PASS"
+    ext_ok = all(
+        ext.get(k, {}).get("valid", False)
+        for k in ["arweave", "sepolia", "pyth", "chainlink"]
+        if k in ext
+    )
+
+    guard = "OK" if mech_ok and ext_ok else "BLOCKED"
+    canonical = "ACTIVE_CANONICAL" if mech_ok else "NON_CANONICAL"
+
+    with rt.lock:
+        rt.pre_execution_guard = guard
+        rt.canonical_state = canonical
+
+
+def _publish_realtime_snapshot(rt: RealtimeState):
+    now_ts = time.time()
+    if now_ts - rt.last_publish < rt.publish_ttl:
+        return
+
+    with rt.lock:
+        snapshot = {
+            "mode": rt.current_mode,
+            "canonical_state": rt.canonical_state,
+            "pre_execution_guard": rt.pre_execution_guard,
+            "local_updated_at": rt.last_local_refresh,
+            "external_updated_at": rt.last_external_refresh,
+            "mechanics_updated_at": rt.last_mechanics_refresh,
+            "mechanics": rt.mechanics_bundle,
+            "external": rt.external_bundle,
+        }
+
+    h = _hash_obj(snapshot)
+    if h == rt.last_snapshot_hash:
+        return
+
+    out = Path("results/realtime_supervisor_status.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    with rt.lock:
+        rt.last_snapshot_hash = h
+        rt.last_publish = now_ts
+
+
+def run_realtime_supervisor(agent, interval_ms: int = 100):
+    broker = EvidenceBroker()
+    rt = RealtimeState()
+    rt.current_mode = f"REALTIME_{interval_ms}MS"
+    rule_ids = [
+        "RULE-ETHIC-CORE-001-v1.0",
+        "RULE-ETHIC-JUS-001-v3.1",
+        "RULE-ETHIC-FIN-001-v3.0",
+        "RULE-ETHIC-SEC-001-v2.0",
+        "RULE-ETHIC-TEC-001-v1.0",
+        "RULE-ETHIC-LEG-001-v2.0",
+        "RULE-ETHIC-REG-001-v2.1",
+    ]
+
+    print(f"=== AGENTE REAL v1.0.10 – Modo Realtime {interval_ms}ms ===")
+    tick = interval_ms / 1000.0
+    cycle = 0
+
+    try:
+        while True:
+            cycle += 1
+            _refresh_local_state(rt, broker, rule_ids)
+            _refresh_external_state(rt, broker)
+            _refresh_mechanics_state(rt, agent)
+            _evaluate_pre_execution_guard(rt)
+            _publish_realtime_snapshot(rt)
+
+            if cycle % 10 == 0:
+                with rt.lock:
+                    print(
+                        f"[RT] cycle={cycle} guard={rt.pre_execution_guard} "
+                        f"canonical={rt.canonical_state} mode={rt.current_mode}"
+                    )
+
+            time.sleep(tick)
+    except KeyboardInterrupt:
+        print("\n[RT] supervisor detenido por usuario")
+
+
 def _resolve_real_local_for_rule(rule_id: str):
     return resolve_real_local_evidence(rule_id)
 
@@ -603,8 +774,12 @@ if __name__ == "__main__":
         parser = argparse.ArgumentParser(description="Agente Real v1.0.10 - Modo Daemon")
         parser.add_argument("-i", "--interval", type=int, default=60, help="Intervalo de ejecución en segundos (default: 60)")
         parser.add_argument("--once", action="store_true", help="Ejecutar solo una vez (no daemon)")
+        parser.add_argument("--realtime-ms", type=int, default=0, help="Supervisor realtime en milisegundos")
         args = parser.parse_args()
 
         agent = RealAgent()
-        continuous = not args.once
-        agent.run_cycle(continuous=continuous, sleep_seconds=args.interval)
+        if args.realtime_ms and args.realtime_ms > 0:
+            run_realtime_supervisor(agent, interval_ms=args.realtime_ms)
+        else:
+            continuous = not args.once
+            agent.run_cycle(continuous=continuous, sleep_seconds=args.interval)

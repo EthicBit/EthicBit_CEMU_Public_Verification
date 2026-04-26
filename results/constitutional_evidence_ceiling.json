@@ -1,26 +1,47 @@
 {
-  "schema_id": "ETHICBIT_CONSTITUTIONAL_EVIDENCE_CEILING_V1",
+  "schema_id": "ETHICBIT_CONSTITUTIONAL_EVIDENCE_CEILING_V2_1",
+  "generated_at": "2026-04-26T12:39:46.313954+00:00",
   "status": "PASS",
   "mechanical_ethics_status": "PASS",
-  "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
-  "confidence": 0.928,
   "current_ceiling": "L5",
   "claim_level_ceiling": "L5",
+  "target_ceiling": "L5",
   "eligible_for_l4": true,
   "eligible_for_l5": true,
-  "sources": [
+  "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
+  "confidence": 0.928,
+  "health_score": "L5_KZG_PENTA_SOURCE_VERIFIED",
+  "positive_evidence_count": 6,
+  "real_sources_used": [
     "real_local",
     "arweave_external",
     "sepolia_external",
     "pyth_external",
     "chainlink_external"
   ],
-  "reasons": [
-    "FIVE_INDEPENDENT_SOURCES_VERIFIED",
-    "PERMANENT_STORAGE_ANCHOR_CONFIRMED",
-    "BLOCKCHAIN_ANCHOR_CONFIRMED",
-    "DECENTRALIZED_PRICE_ORACLE_CONFIRMED",
-    "CHAINLINK_NETWORK_CONFIRMED",
-    "L5_QUORUM_SATISFIED"
-  ]
+  "sources": [
+    "arweave_external",
+    "chainlink_external",
+    "pyth_external",
+    "real_local",
+    "sepolia_external"
+  ],
+  "missing_l5_sources": [],
+  "reasons": [],
+  "l5_reasons": [],
+  "kzg_anchor": {
+    "report_present": true,
+    "status": "PASS",
+    "tx_hash": "0xbf603bf0695dbeea01199fc33084b9ccd97438968fb6b375e569873e53562e70",
+    "block_number": 10732589,
+    "blob_versioned_hash": "0x01c1059d10245734012a7ca85de317008189a22241099e959d833e0b153cc2df",
+    "blob_versioned_hashes": null
+  },
+  "chainlink_evidence": {
+    "report_present": true,
+    "liveness_confirmed": true,
+    "feed": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
+    "price": 2336.02280692,
+    "age_seconds": 3597
+  }
 }
