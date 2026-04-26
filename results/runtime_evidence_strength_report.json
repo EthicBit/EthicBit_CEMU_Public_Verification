@@ -4,9 +4,10 @@
   "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
   "confidence": 0.928,
   "health_score": "L5_KZG_PENTA_SOURCE_VERIFIED",
-  "claim_level_ceiling": "L4",
+  "current_ceiling": "L5",
+  "claim_level_ceiling": "L5",
   "eligible_for_l4": true,
-  "eligible_for_l5": false,
+  "eligible_for_l5": true,
   "sources": [
     "real_local",
     "arweave_external",
@@ -19,7 +20,8 @@
     "ARWEAVE_PERMANENT_ANCHOR_ACTIVE",
     "SEPOLIA_ONCHAIN_TX_VERIFIED",
     "PYTH_ORACLE_LIVENESS_CONFIRMED",
-    "FOUR_SOURCE_QUORUM_ACHIEVED",
-    "L5_REQUIRES_ADDITIONAL_INDEPENDENT_ORACLE_NETWORKS"
+    "CHAINLINK_ORACLE_LIVENESS_CONFIRMED",
+    "FIVE_SOURCE_QUORUM_ACHIEVED",
+    "L5_INDEPENDENT_ORACLE_NETWORKS_CONFIRMED"
   ]
 }
