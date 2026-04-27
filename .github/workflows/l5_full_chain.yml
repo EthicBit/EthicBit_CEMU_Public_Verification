@@ -1,0 +1,55 @@
+name: L5 Full Chain Verification
+
+on:
+  push:
+    branches: [main, master, develop, 'final/**']
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-l5:
+    name: Verify L5 constitutional state + cryptographic chain of custody
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install eth_account
+        run: pip install --quiet eth_account
+
+      - name: Check critical evidence files
+        run: |
+          set -e
+          MISSING=""
+          for f in results/constitutional_evidence_ceiling.json \
+                   results/constitutional_evidence_ceiling.sig \
+                   results/kzg_blob_anchor_report.json \
+                   scripts/core/verify_l5_canonical_state.py \
+                   scripts/core/verify_ceiling_signature.py \
+                   scripts/core/verify_l5_full_chain.py; do
+            if [ ! -f "$f" ]; then MISSING="$MISSING $f"; fi
+          done
+          if [ -n "$MISSING" ]; then
+            echo "::error::Missing required evidence files:$MISSING"
+            exit 1
+          fi
+          echo "All critical evidence files present."
+
+      - name: STAGE 1+2 — verify_l5_full_chain
+        run: python3 scripts/core/verify_l5_full_chain.py
+
+      - name: Final summary
+        if: success()
+        run: |
+          echo "::notice::L5_FULL_CHAIN=PASS verified by GitHub Actions runner"
+          echo "blob_anchor=verified | ceiling_v2.1=valid | crypto_chain_of_custody=verified"
