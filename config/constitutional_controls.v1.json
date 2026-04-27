@@ -192,6 +192,24 @@
         "government",
         "cross-economy"
       ]
+    },
+    {
+      "id": "realtime_snapshot_guard_constitutional_equivalence",
+      "controlId": "CTL-RT-001",
+      "title": "Realtime Snapshot Guard Must Preserve Constitutional Equivalence",
+      "severity": "MUST",
+      "description": "The millisecond realtime loop must not recalculate the full probative apparatus. It must inherit constitutional validity from a fresh canonical L5 snapshot and fail closed.",
+      "check": {
+        "type": "command",
+        "command": "python3 scripts/realtime/realtime_snapshot_guard.py && python3 scripts/realtime/verify_realtime_snapshot_guard.py"
+      },
+      "evidence": {
+        "artifacts": [
+          "results/mechanical_ethics_snapshot.json",
+          "results/realtime_millisecond_guard.json",
+          "results/constitutional_evidence_ceiling.json"
+        ]
+      }
     }
   ]
 }

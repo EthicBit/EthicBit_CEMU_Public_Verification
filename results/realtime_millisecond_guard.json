@@ -1,0 +1,23 @@
+{
+  "schema_id": "ethicbit.realtime_millisecond_guard.v1",
+  "mode": "REALTIME_10MS_COMPATIBLE",
+  "guard": "OK",
+  "constitutional_equivalence": true,
+  "snapshot_status": "PASS",
+  "mechanical_ethics": "PASS",
+  "l5_canonical_state": "PASS",
+  "snapshot_age_ms": 0.184,
+  "fingerprint_valid": true,
+  "canonical_state": "ACTIVE_CANONICAL",
+  "claim_level_ceiling": "L5",
+  "max_age_ms": 7000,
+  "fast_loop_policy": {
+    "full_probative_apparatus_out_of_loop": true,
+    "o1_guard_only": true,
+    "no_oracle_calls_in_fast_loop": true,
+    "no_onchain_anchor_in_fast_loop": true,
+    "no_heavy_kzg_in_fast_loop": true,
+    "no_full_mechanical_ethics_recalc_per_tick": true
+  },
+  "updated_at": 1777295556.509604
+}
