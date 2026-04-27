@@ -1,0 +1,26 @@
+{
+  "cache_enabled": true,
+  "canonical_state": "ACTIVE_CANONICAL",
+  "fingerprint_enabled": true,
+  "generated_at": 1777256926.831437,
+  "heavy_external_calls_in_fast_loop": false,
+  "hit_rate": 0.9999000099990001,
+  "invalidation_policy_verifiable": true,
+  "iterations": 10000,
+  "latency_ms": {
+    "avg": 0.0038159870891831815,
+    "max": 0.019916973542422056,
+    "p50": 0.003667024429887533,
+    "p95": 0.004792003892362118,
+    "p99": 0.005458015948534012
+  },
+  "mechanical_ethics_status": "PASS",
+  "rit_detected": false,
+  "schema_id": "ETHICBIT_CACHE_LATENCY_BENCHMARK_V1",
+  "status": "PASS",
+  "target_hit_rate": 0.98,
+  "target_p95_latency_ms": 1.0,
+  "tier": "TIER0_LOCAL_FAST",
+  "tiered_cache": true,
+  "ttl_policy_present": true
+}
