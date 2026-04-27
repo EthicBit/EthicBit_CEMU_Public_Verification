@@ -210,6 +210,70 @@
           "results/constitutional_evidence_ceiling.json"
         ]
       }
+    },
+    {
+      "id": "snapshot_freshness_policy",
+      "controlId": "CTL-RT-002",
+      "title": "Snapshot Freshness Policy Must Be Defined",
+      "severity": "SHOULD",
+      "description": "Realtime canonical snapshot operation must have a formal freshness, alert, and fail-closed policy.",
+      "check": {
+        "type": "command",
+        "command": "python3 -c \"import json,sys; d=json.load(open('results/realtime_snapshot_freshness_policy.json')); ok=d.get('status')=='ACTIVE' and d.get('max_snapshot_age_ms')==7000 and d.get('fail_closed_on_stale_snapshot') is True and d.get('fail_closed_on_fingerprint_mismatch') is True; print('snapshot_freshness_policy='+str(ok)); sys.exit(0 if ok else 1)\""
+      },
+      "evidence": {
+        "artifacts": [
+          "results/realtime_snapshot_freshness_policy.json"
+        ]
+      }
+    },
+    {
+      "id": "external_source_degradation_policy",
+      "controlId": "CTL-EXT-001",
+      "title": "External Source Degradation Policy Must Be Defined",
+      "severity": "SHOULD",
+      "description": "External oracle, chain, and evidence source degradation must be handled without permitting execution outside a valid canonical snapshot.",
+      "check": {
+        "type": "command",
+        "command": "python3 -c \"import json,sys; d=json.load(open('results/external_source_degradation_policy.json')); ok=d.get('status')=='ACTIVE' and d.get('minimum_sources_for_l4',0)>=4 and d.get('degradation_policy',{}).get('below_l4_threshold')=='FAIL_CLOSED'; print('external_source_degradation_policy='+str(ok)); sys.exit(0 if ok else 1)\""
+      },
+      "evidence": {
+        "artifacts": [
+          "results/external_source_degradation_policy.json"
+        ]
+      }
+    },
+    {
+      "id": "third_party_representation_boundary",
+      "controlId": "CTL-REP-001",
+      "title": "Third-Party Representation Must Be Delimited",
+      "severity": "SHOULD",
+      "description": "External representation must preserve scope delimitation and avoid claims of automatic third-party binding effect.",
+      "check": {
+        "type": "command",
+        "command": "test -s docs/third_party_representation_boundary.md && grep -qi 'does not automatically impose' docs/third_party_representation_boundary.md && grep -qi 'does not automatically bind third parties' docs/third_party_representation_boundary.md"
+      },
+      "evidence": {
+        "artifacts": [
+          "docs/third_party_representation_boundary.md"
+        ]
+      }
+    },
+    {
+      "id": "verification_reproducible_guide",
+      "controlId": "CTL-VRF-001",
+      "title": "Verification Reproducible Guide Must Exist",
+      "severity": "SHOULD",
+      "description": "A reproducible guide must allow internal or third-party reviewers to validate the constitutional and realtime snapshot checks.",
+      "check": {
+        "type": "command",
+        "command": "test -s docs/verification_reproducible_guide.md && grep -q 'verify_constitutional_controls.sh' docs/verification_reproducible_guide.md && grep -q 'verify_realtime_snapshot_guard.py' docs/verification_reproducible_guide.md"
+      },
+      "evidence": {
+        "artifacts": [
+          "docs/verification_reproducible_guide.md"
+        ]
+      }
     }
   ]
 }

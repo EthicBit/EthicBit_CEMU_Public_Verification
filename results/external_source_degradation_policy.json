@@ -1,0 +1,28 @@
+{
+  "schema_id": "ethicbit.external_source_degradation_policy.v1",
+  "policy": "MULTI_SOURCE_L5_DEGRADATION_HANDLING",
+  "status": "ACTIVE",
+  "minimum_sources_for_l4": 4,
+  "current_sources_count": 5,
+  "recognized_sources": [
+    "arweave_external",
+    "chainlink_external",
+    "pyth_external",
+    "real_local",
+    "sepolia_external"
+  ],
+  "degradation_policy": {
+    "single_source_degraded": "CONTINUE_IF_EVIDENCE_CEILING_REMAINS_L4_OR_HIGHER",
+    "multiple_sources_degraded": "RECOMPUTE_EVIDENCE_CEILING",
+    "below_l4_threshold": "FAIL_CLOSED",
+    "oracle_divergence_detected": "FAIL_CLOSED_OR_REQUIRE_MANUAL_REVIEW",
+    "chain_fork_or_anchor_inconsistency": "FAIL_CLOSED"
+  },
+  "fallback_policy": {
+    "local_cache_allowed": true,
+    "local_cache_may_not_raise_claim_level": true,
+    "local_cache_may_only_preserve_last_valid_state_until_snapshot_expiry": true,
+    "stale_cache_behavior": "BLOCKED"
+  },
+  "representation_boundary": "External source degradation may affect renewal of future snapshots but must not permit execution outside a fresh canonical L5 snapshot."
+}

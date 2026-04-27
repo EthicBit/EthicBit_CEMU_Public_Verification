@@ -1,9 +1,9 @@
 {
   "schema_id": "ethicbit.mechanical_ethics_snapshot.v1",
   "mode": "CANONICAL_L5_SNAPSHOT",
-  "generated_at": 1777297246.7108748,
-  "issued_at": 1777297246.7108748,
-  "valid_until": 1777297253.7108748,
+  "generated_at": 1777299141.3440268,
+  "issued_at": 1777299141.3440268,
+  "valid_until": 1777299148.3440268,
   "status": "PASS",
   "mechanical_ethics": "PASS",
   "l5_canonical_state": "PASS",
@@ -28,5 +28,5 @@
     "no_heavy_kzg_in_fast_loop": true,
     "no_full_mechanical_ethics_recalc_per_tick": true
   },
-  "fingerprint": "sha256:3a6f377da7d6cf09adfa7bb3fdd7e52643b9b75f452b875e315b4422ce7d26c0"
+  "fingerprint": "sha256:23971664770e77304d8913d779b21ee33fc46d836cf0344b1210a45ee4d4df29"
 }
