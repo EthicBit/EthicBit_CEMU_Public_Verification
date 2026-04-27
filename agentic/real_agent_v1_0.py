@@ -187,20 +187,20 @@ class EvidenceBroker:
         }
 
     def _arweave_external(self) -> dict:
-        tx_id = os.getenv("ETHICBIT_ARWEAVE_TX_ID", "")
-        if not tx_id:
-            return {"valid": False, "source": "arweave_external", "confidence": 0.0, "error": "ETHICBIT_ARWEAVE_TX_ID not set"}
-        gateways = os.getenv("ETHICBIT_ARWEAVE_GATEWAYS", "https://arweave.net").split(",")
-        for gw in gateways:
-            try:
-                url = f"{gw.strip().rstrip('/')}/{tx_id}"
-                r = requests.get(url, timeout=10)
-                if r.status_code == 200 and len(r.content) > 0:
-                    return {"valid": True, "source": "arweave_external", "confidence": 0.92,
-                            "tx_id": tx_id, "gateway": gw.strip(), "bytes": len(r.content)}
-            except Exception:
-                continue
-        return {"valid": False, "source": "arweave_external", "confidence": 0.0, "error": "all gateways failed"}
+            tx_id = os.getenv("ETHICBIT_ARWEAVE_TX_ID", "")
+            if not tx_id:
+                return {"valid": False, "source": "arweave_external", "confidence": 0.0, "error": "ETHICBIT_ARWEAVE_TX_ID not set"}
+            gateways = os.getenv("ETHICBIT_ARWEAVE_GATEWAYS", "https://arweave.net").split(",")
+            for gw in gateways:
+                try:
+                    url = f"{gw.strip().rstrip('/')}/{tx_id}"
+                    r = requests.get(url, timeout=10)
+                    if r.status_code == 200 and len(r.content) > 0:
+                        return {"valid": True, "source": "arweave_external", "confidence": 0.92,
+                                "tx_id": tx_id, "gateway": gw.strip(), "bytes": len(r.content)}
+                except Exception:
+                    continue
+            return {"valid": False, "source": "arweave_external", "confidence": 0.0, "error": "all gateways failed"}
 
     def _sepolia_external(self) -> dict:
         tx_hash = "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47"
@@ -480,7 +480,7 @@ def _emit_constitutional_evidence_reports():
     results_dir = Path("results")
     results_dir.mkdir(parents=True, exist_ok=True)
 
-    kzg_path = results_dir / "l5_onchain_anchor_report.json"
+    kzg_path = results_dir / "kzg_blob_anchor_report.json"
     kzg = None
     if kzg_path.exists():
         try:
@@ -490,9 +490,8 @@ def _emit_constitutional_evidence_reports():
 
     l5_ok = bool(
         kzg
-        and kzg.get("status") == "PASS"
-        and kzg.get("verification_status") == "ONCHAIN_KZG_BLOB_VERIFIED"
-        and kzg.get("blob_versioned_hash")
+        and kzg.get("status") == "ONCHAIN_BLOB_ANCHOR_VERIFIED"
+        and kzg.get("blob_versioned_hashes")
     )
 
     if l5_ok:
@@ -584,13 +583,14 @@ def _emit_constitutional_evidence_reports():
         json.dumps(runtime_report, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8"
     )
-    (results_dir / "constitutional_evidence_ceiling.json").write_text(
-        json.dumps(ceiling_report, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8"
-    )
-
     print("[REPORT] wrote results/runtime_evidence_strength_report.json")
-    print("[REPORT] wrote results/constitutional_evidence_ceiling.json")
+    import subprocess as _subprocess, sys as _sys
+    _gate = Path(__file__).resolve().parents[1] / "scripts" / "core" / "constitutional_evidence_ceiling_gate.py"
+    if _gate.exists():
+        _rc = _subprocess.run([_sys.executable, str(_gate)], check=False).returncode
+        print("[REPORT] gate exit=" + str(_rc))
+    else:
+        print("[REPORT] WARN: gate not found at " + str(_gate))
 
 
 

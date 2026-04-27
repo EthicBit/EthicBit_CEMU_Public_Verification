@@ -1,10 +1,9 @@
 {
   "schema_id": "ETHICBIT_CONSTITUTIONAL_EVIDENCE_CEILING_V2_1",
-  "generated_at": "2026-04-26T12:39:46.313954+00:00",
+  "generated_at": "2026-04-27T10:18:56.724203+00:00",
   "status": "PASS",
   "mechanical_ethics_status": "PASS",
   "current_ceiling": "L5",
-  "claim_level_ceiling": "L5",
   "target_ceiling": "L5",
   "eligible_for_l4": true,
   "eligible_for_l5": true,
@@ -31,17 +30,18 @@
   "l5_reasons": [],
   "kzg_anchor": {
     "report_present": true,
-    "status": "PASS",
+    "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
     "tx_hash": "0xbf603bf0695dbeea01199fc33084b9ccd97438968fb6b375e569873e53562e70",
     "block_number": 10732589,
-    "blob_versioned_hash": "0x01c1059d10245734012a7ca85de317008189a22241099e959d833e0b153cc2df",
-    "blob_versioned_hashes": null
+    "blob_versioned_hashes": [
+      "0x01c1059d10245734012a7ca85de317008189a22241099e959d833e0b153cc2df"
+    ]
   },
   "chainlink_evidence": {
     "report_present": true,
     "liveness_confirmed": true,
     "feed": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
-    "price": 2336.02280692,
-    "age_seconds": 3597
+    "price": 2391.74986877,
+    "age_seconds": 420
   }
 }

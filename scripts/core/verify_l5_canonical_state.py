@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 runtime_path = ROOT / "results" / "runtime_evidence_strength_report.json"
 ceiling_path = ROOT / "results" / "constitutional_evidence_ceiling.json"
-anchor_path = ROOT / "results" / "l5_onchain_anchor_report.json"
+anchor_path = ROOT / "results" / "kzg_blob_anchor_report.json"
 
 def load_json(path: Path):
     if not path.exists():
@@ -47,7 +47,7 @@ expect(ceiling, "eligible_for_l5", True, "ceiling")
 
 # anclaje L5: acepta varios esquemas razonables
 anchor_status = str(anchor.get("status") or anchor.get("verification_status") or "").upper()
-if anchor_status not in {"PASS", "ONCHAIN_ANCHOR_VERIFIED", "VERIFIED", "L5_ONCHAIN_ANCHOR_VERIFIED"}:
+if anchor_status not in {"ONCHAIN_BLOB_ANCHOR_VERIFIED"}:
     errors.append(f"anchor.status={anchor_status!r} not accepted")
 
 tx_hash = (

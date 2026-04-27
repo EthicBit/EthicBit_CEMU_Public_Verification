@@ -1,0 +1,23 @@
+{
+  "schema_id": "ETHICBIT_KZG_BLOB_ANCHOR_V1",
+  "generated_at": "2026-04-27T03:14:30.199122+00:00",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+  "verification_method": "rpc_eth_getTransactionByHash_and_eth_getTransactionReceipt",
+  "rpc_endpoint": "https://ethereum-sepolia-rpc.publicnode.com",
+  "chain_id": 11155111,
+  "tx_hash": "0xbf603bf0695dbeea01199fc33084b9ccd97438968fb6b375e569873e53562e70",
+  "tx_type": "0x3",
+  "block_number": 10732589,
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "to_address": "0xcd515c1da28f154a6f9b1260cbca9fefd1bfe884",
+  "blob_versioned_hashes": [
+    "0x01c1059d10245734012a7ca85de317008189a22241099e959d833e0b153cc2df"
+  ],
+  "blob_count": 1,
+  "blob_gas_used_hex": "0x20000",
+  "blob_gas_used_int": 131072,
+  "blob_gas_price_hex": "0x2e7553",
+  "max_fee_per_blob_gas_hex": "0x3b9aca00",
+  "receipt_status": "0x1",
+  "evidence_strength": "VERIFIED_BY_INDEPENDENT_PUBLIC_RPC"
+}

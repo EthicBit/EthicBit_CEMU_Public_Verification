@@ -1,13 +1,13 @@
 {
   "mode": "REALTIME_100MS",
   "canonical_state": "ACTIVE_CANONICAL",
-  "pre_execution_guard": "BLOCKED",
-  "local_updated_at": 1777246584.076195,
-  "external_updated_at": 1777246584.076235,
-  "mechanics_updated_at": 1777246580.0172842,
+  "pre_execution_guard": "OK",
+  "local_updated_at": 1777259332.4606788,
+  "external_updated_at": 1777259332.460711,
+  "mechanics_updated_at": 1777259334.6811059,
   "mechanics": {
     "mechanical_ethics_status": "PASS",
-    "updated_at": 1777246580.0172842
+    "updated_at": 1777259334.6811059
   },
   "external": {
     "arweave": {
@@ -34,10 +34,12 @@
       "feeds_count": 18
     },
     "chainlink": {
-      "valid": false,
+      "valid": true,
       "source": "chainlink_external",
-      "confidence": 0.0,
-      "error": "SEPOLIA_RPC_URL not set"
+      "confidence": 0.93,
+      "feed": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
+      "price": 2391.74986877,
+      "round_id": 18446744073709584062
     }
   }
 }

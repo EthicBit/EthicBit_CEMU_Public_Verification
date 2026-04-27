@@ -1,6 +1,6 @@
 {
   "schema_id": "ETHICBIT_L5_KZG_BLOB_ANCHOR_V2",
-  "status": "PASS",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
   "claim_level_ceiling_before": "L4",
   "claim_level_ceiling_after": "L5",
   "merkle_root": "0xb617cea2d5b8040d9ec5d8a4f2b536e6c3967d1d7d403196689e79b21018b1dc",
@@ -29,5 +29,9 @@
     "results/runtime_evidence_strength_report.json"
   ],
   "missing_optional_artifacts": [],
-  "verification_status": "ONCHAIN_KZG_BLOB_VERIFIED"
+  "verification_status": "ONCHAIN_KZG_BLOB_VERIFIED",
+  "blob_versioned_hashes": [
+    "0x01c1059d10245734012a7ca85de317008189a22241099e959d833e0b153cc2df"
+  ],
+  "normalized_to_schema": "ETHICBIT_KZG_BLOB_ANCHOR_V1"
 }
