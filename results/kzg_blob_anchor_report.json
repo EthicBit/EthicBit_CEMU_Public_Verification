@@ -1,23 +1,24 @@
 {
-  "schema_id": "ETHICBIT_KZG_BLOB_ANCHOR_V1",
-  "generated_at": "2026-04-27T03:14:30.199122+00:00",
-  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
-  "verification_method": "rpc_eth_getTransactionByHash_and_eth_getTransactionReceipt",
-  "rpc_endpoint": "https://ethereum-sepolia-rpc.publicnode.com",
-  "chain_id": 11155111,
-  "tx_hash": "0xbf603bf0695dbeea01199fc33084b9ccd97438968fb6b375e569873e53562e70",
-  "tx_type": "0x3",
-  "block_number": 10732589,
-  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
-  "to_address": "0xcd515c1da28f154a6f9b1260cbca9fefd1bfe884",
-  "blob_versioned_hashes": [
-    "0x01c1059d10245734012a7ca85de317008189a22241099e959d833e0b153cc2df"
-  ],
+  "anchored_at_unix": 1777290447,
+  "anchored_payload": {
+    "ceiling_sha256": "06393f21a90f3f85797ea9e21efdf4c1d8b234e33747e628eda7e27104db2133",
+    "git_commit_sha": "4d2063a3dd8313d4f2c83bbd2cecbfc6b1b7fa69",
+    "ts_unix": 1777290447
+  },
   "blob_count": 1,
-  "blob_gas_used_hex": "0x20000",
   "blob_gas_used_int": 131072,
-  "blob_gas_price_hex": "0x2e7553",
-  "max_fee_per_blob_gas_hex": "0x3b9aca00",
-  "receipt_status": "0x1",
-  "evidence_strength": "VERIFIED_BY_INDEPENDENT_PUBLIC_RPC"
+  "blob_versioned_hashes": [
+    "0x01337a33546d00af86fe889a2535ed5b85efc94a4cbee7b937fb24d7766aa524"
+  ],
+  "block_number": 10742400,
+  "chain_id": 11155111,
+  "evidence_strength": "VERIFIED_BY_INDEPENDENT_PUBLIC_RPC",
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "rpc_endpoint": "https://sepolia.drpc.org",
+  "schema_id": "ETHICBIT_KZG_BLOB_ANCHOR_V1",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+  "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "tx_hash": "0xfb1f2246f2064e6064a4b50e5f3f4d18c697229a819e52057114f505e0b3f13b",
+  "tx_type": "0x3",
+  "verification_method": "rpc_eth_sendRawTransaction_with_eip4844_blob_sidecar"
 }
