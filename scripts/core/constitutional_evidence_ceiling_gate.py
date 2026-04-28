@@ -102,6 +102,7 @@ report = {
     "status": status,
     "mechanical_ethics_status": mechanical_ethics_status,
     "current_ceiling": current_ceiling,
+    "claim_level_ceiling": current_ceiling,
     "target_ceiling": "L5",
     "eligible_for_l4": eligible_for_l4,
     "eligible_for_l5": eligible_for_l5,

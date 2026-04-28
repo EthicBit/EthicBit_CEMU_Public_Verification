@@ -1,9 +1,10 @@
 {
   "schema_id": "ETHICBIT_CONSTITUTIONAL_EVIDENCE_CEILING_V2_1",
-  "generated_at": "2026-04-27T12:30:00.374528+00:00",
+  "generated_at": "2026-04-28T02:28:59.069342+00:00",
   "status": "PASS",
   "mechanical_ethics_status": "PASS",
   "current_ceiling": "L5",
+  "claim_level_ceiling": "L5",
   "target_ceiling": "L5",
   "eligible_for_l4": true,
   "eligible_for_l5": true,
@@ -41,8 +42,7 @@
     "report_present": true,
     "liveness_confirmed": true,
     "feed": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
-    "price": 2391.74986877,
-    "age_seconds": 420
-  },
-  "claim_level_ceiling": "L5"
+    "price": 2290.93,
+    "age_seconds": 473
+  }
 }
