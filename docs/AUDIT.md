@@ -72,8 +72,11 @@ These are deliberate limits. Any reading that exceeds them is unsupported.
   not automatically bound by internal validation.
 - **Not on mainnet.** All anchors are on Sepolia testnet (no economic
   value). Mainnet migration is a separate decision.
-- **`confidence` is hardcoded** at `0.928`. Acceptable per current gates,
-  flagged as technical debt.
+- **`confidence` is computed**, not hardcoded. Derived from
+  `0.50*oracle_coverage + 0.30*anchor_strength + 0.20*chainlink_liveness`
+  in `agentic/real_agent_v1_0.py::_compute_confidence`. Recomputable by
+  any auditor from the same data the gate emits, so the value is
+  verifiable, not declarative.
 - **Single-key custody.** Wallet `0x9221456d...` is single-key, not
   multi-sig. Key compromise compromises issuance of new anchors.
 - **External RPC dependency.** STAGE 3 needs at least one of 4 public
