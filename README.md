@@ -1,5 +1,7 @@
 # EthicBit_CEMU
 
+[![L5 Full Chain Verification](https://github.com/EthicBit/EthicBit_CEMU/actions/workflows/l5_full_chain.yml/badge.svg)](https://github.com/EthicBit/EthicBit_CEMU/actions/workflows/l5_full_chain.yml)
+
 Canonical branch governance (effective 2026-04-18):
 
 - Canonical operational and audit branch: `main`

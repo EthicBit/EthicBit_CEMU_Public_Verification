@@ -1,13 +1,13 @@
 {
   "artifactType": "constitutional_controls_report",
-  "generatedAt": "2026-04-25T04:28:02.230115Z",
+  "generatedAt": "2026-04-28T02:29:13.235326Z",
   "constitutionVersion": "v1.0.0",
   "matrixVersion": "v1.1.0",
   "matrixPath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/config/constitutional_controls.v1.json",
   "root": "/Users/oskrmiranda/Documentos/EthicBit_CEMU",
   "summary": {
-    "total": 8,
-    "passed": 8,
+    "total": 13,
+    "passed": 13,
     "failed": 0,
     "mustFailed": 0,
     "shouldFailed": 0
@@ -42,7 +42,7 @@
         "government",
         "cross-economy"
       ],
-      "checkedAt": "2026-04-25T04:27:49.770698Z"
+      "checkedAt": "2026-04-28T02:29:01.191787Z"
     },
     {
       "controlId": "CTL-ETH-001",
@@ -55,7 +55,7 @@
       "status": "PASS",
       "execution": {
         "returnCode": 0,
-        "stdoutTail": "amp\": \"2026-04-25T04:27:50Z\", \"brokerReport\": {}, \"metadata\": {\"final_gate\": \"FAIL_CLOSED\"}}\nOK: REJECT triggered\n\n=== 5. CANONICAL MECHANICAL ETHICS GATE ===\n✅ EvidenceBroker v2.2b inicializado | modo=REAL_LOCAL | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: CORE\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: FINANZAS\n📦 Sector cargado: SECURITY\n📦 Sector cargado: TECHNICAL\n📦 Sector cargado: LEGAL\n📦 Sector cargado: REGULATORY\nmechanical_ethics_gate=/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/mechanical_ethics_gate.json\nstatus=PASS\nmode=REAL_LOCAL\nrequired_failed=[]\ngate.status=PASS\ngate.mode=REAL_LOCAL\n\n=== 6. PQ RUNTIME SECRET PROTECTION ARTIFACT ===\n/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/pq_runtime_secret_protection.json\nstatus=PROTECTED\npq_runtime_secret_protection.status=PROTECTED\npq_runtime_secret_protection.protector=MLKEM768Protector\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\n",
+        "stdoutTail": "amp\": \"2026-04-28T02:29:02Z\", \"brokerReport\": {}, \"metadata\": {\"final_gate\": \"FAIL_CLOSED\"}}\nOK: REJECT triggered\n\n=== 5. CANONICAL MECHANICAL ETHICS GATE ===\n✅ EvidenceBroker v2.2b inicializado | modo=REAL_LOCAL | providers=['self-attested', 'chainlink', 'jumio'] | quorum=2 | timeout=5.0s\n✅ RegistryManager v2.2b inicializado correctamente | Lazy Loading activo\n📦 Sector cargado: CORE\n📦 Sector cargado: JUSTICIA\n📦 Sector cargado: FINANZAS\n📦 Sector cargado: SECURITY\n📦 Sector cargado: TECHNICAL\n📦 Sector cargado: LEGAL\n📦 Sector cargado: REGULATORY\nmechanical_ethics_gate=/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/mechanical_ethics_gate.json\nstatus=PASS\nmode=REAL_LOCAL\nrequired_failed=[]\ngate.status=PASS\ngate.mode=REAL_LOCAL\n\n=== 6. PQ RUNTIME SECRET PROTECTION ARTIFACT ===\n/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/pq_runtime_secret_protection.json\nstatus=PROTECTED\npq_runtime_secret_protection.status=PROTECTED\npq_runtime_secret_protection.protector=MLKEM768Protector\n\n==============================================\nETHIC MECHANICS AUDIT: PASS\nValidated sectors: CORE, JUSTICIA, FINANZAS, SECURITY, TECHNICAL, LEGAL, REGULATORY\n==============================================\n",
         "stderrTail": ""
       },
       "evidence": {
@@ -79,7 +79,7 @@
         "regulatory",
         "government"
       ],
-      "checkedAt": "2026-04-25T04:27:49.943717Z"
+      "checkedAt": "2026-04-28T02:29:01.344891Z"
     },
     {
       "controlId": "CTL-MIX-001",
@@ -119,7 +119,7 @@
         "government",
         "cross-economy"
       ],
-      "checkedAt": "2026-04-25T04:27:51.133625Z"
+      "checkedAt": "2026-04-28T02:29:02.478577Z"
     },
     {
       "controlId": "CTL-CI-001",
@@ -147,7 +147,7 @@
         "regulatory",
         "government"
       ],
-      "checkedAt": "2026-04-25T04:27:59.234978Z"
+      "checkedAt": "2026-04-28T02:29:10.100303Z"
     },
     {
       "controlId": "CTL-SEC-001",
@@ -175,7 +175,7 @@
         "regulatory",
         "government"
       ],
-      "checkedAt": "2026-04-25T04:27:59.242846Z"
+      "checkedAt": "2026-04-28T02:29:10.109208Z"
     },
     {
       "controlId": "CTL-BUILD-001",
@@ -206,7 +206,7 @@
         "crypto",
         "cybersecurity"
       ],
-      "checkedAt": "2026-04-25T04:27:59.250044Z"
+      "checkedAt": "2026-04-28T02:29:10.116824Z"
     },
     {
       "controlId": "CTL-EV-001",
@@ -219,7 +219,7 @@
       "status": "PASS",
       "execution": {
         "returnCode": 0,
-        "stdoutTail": "claim_level=L4 confidence=0.928 sources=4\n",
+        "stdoutTail": "claim_level=L5 confidence=0.928 sources=5\n",
         "stderrTail": ""
       },
       "evidence": {
@@ -237,7 +237,117 @@
         "government",
         "cross-economy"
       ],
-      "checkedAt": "2026-04-25T04:28:02.208169Z"
+      "checkedAt": "2026-04-28T02:29:13.203002Z"
+    },
+    {
+      "controlId": "CTL-RT-001",
+      "articleId": null,
+      "title": "Realtime Snapshot Guard Must Preserve Constitutional Equivalence",
+      "normative": "SHOULD",
+      "failureBehavior": "WARN",
+      "command": "",
+      "timeoutSeconds": 120,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "",
+        "stderrTail": "",
+        "note": "no command configured"
+      },
+      "evidence": {
+        "paths": [],
+        "missing": []
+      },
+      "audiences": [],
+      "checkedAt": "2026-04-28T02:29:13.235290Z"
+    },
+    {
+      "controlId": "CTL-RT-002",
+      "articleId": null,
+      "title": "Snapshot Freshness Policy Must Be Defined",
+      "normative": "SHOULD",
+      "failureBehavior": "WARN",
+      "command": "",
+      "timeoutSeconds": 120,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "",
+        "stderrTail": "",
+        "note": "no command configured"
+      },
+      "evidence": {
+        "paths": [],
+        "missing": []
+      },
+      "audiences": [],
+      "checkedAt": "2026-04-28T02:29:13.235310Z"
+    },
+    {
+      "controlId": "CTL-EXT-001",
+      "articleId": null,
+      "title": "External Source Degradation Policy Must Be Defined",
+      "normative": "SHOULD",
+      "failureBehavior": "WARN",
+      "command": "",
+      "timeoutSeconds": 120,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "",
+        "stderrTail": "",
+        "note": "no command configured"
+      },
+      "evidence": {
+        "paths": [],
+        "missing": []
+      },
+      "audiences": [],
+      "checkedAt": "2026-04-28T02:29:13.235316Z"
+    },
+    {
+      "controlId": "CTL-REP-001",
+      "articleId": null,
+      "title": "Third-Party Representation Must Be Delimited",
+      "normative": "SHOULD",
+      "failureBehavior": "WARN",
+      "command": "",
+      "timeoutSeconds": 120,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "",
+        "stderrTail": "",
+        "note": "no command configured"
+      },
+      "evidence": {
+        "paths": [],
+        "missing": []
+      },
+      "audiences": [],
+      "checkedAt": "2026-04-28T02:29:13.235320Z"
+    },
+    {
+      "controlId": "CTL-VRF-001",
+      "articleId": null,
+      "title": "Verification Reproducible Guide Must Exist",
+      "normative": "SHOULD",
+      "failureBehavior": "WARN",
+      "command": "",
+      "timeoutSeconds": 120,
+      "status": "PASS",
+      "execution": {
+        "returnCode": 0,
+        "stdoutTail": "",
+        "stderrTail": "",
+        "note": "no command configured"
+      },
+      "evidence": {
+        "paths": [],
+        "missing": []
+      },
+      "audiences": [],
+      "checkedAt": "2026-04-28T02:29:13.235323Z"
     },
     {
       "controlId": "CTL-PQ-001",
@@ -267,7 +377,7 @@
         "regulatory",
         "government"
       ],
-      "checkedAt": "2026-04-25T04:28:02.230198Z",
+      "checkedAt": "2026-04-28T02:29:13.235411Z",
       "metadata": {
         "claimLevel": "ci_grade",
         "strictRequired": false,

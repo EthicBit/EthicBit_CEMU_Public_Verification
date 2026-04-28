@@ -3,22 +3,25 @@
   "mechanical_ethics_status": "PASS",
   "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
   "confidence": 0.928,
-  "health_score": "L4_QUAD_SOURCE_VERIFIED",
-  "claim_level_ceiling": "L4",
+  "health_score": "L5_KZG_PENTA_SOURCE_VERIFIED",
+  "current_ceiling": "L5",
+  "claim_level_ceiling": "L5",
   "eligible_for_l4": true,
-  "eligible_for_l5": false,
+  "eligible_for_l5": true,
   "sources": [
     "real_local",
     "arweave_external",
     "sepolia_external",
-    "pyth_external"
+    "pyth_external",
+    "chainlink_external"
   ],
   "reasons": [
     "REAL_LOCAL_SHA256_VERIFIED",
     "ARWEAVE_PERMANENT_ANCHOR_ACTIVE",
     "SEPOLIA_ONCHAIN_TX_VERIFIED",
     "PYTH_ORACLE_LIVENESS_CONFIRMED",
-    "FOUR_SOURCE_QUORUM_ACHIEVED",
-    "L5_REQUIRES_KZG_BLOB_TX"
+    "CHAINLINK_ORACLE_LIVENESS_CONFIRMED",
+    "FIVE_SOURCE_QUORUM_ACHIEVED",
+    "L5_INDEPENDENT_ORACLE_NETWORKS_CONFIRMED"
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "schema_id": "ethicbit.realtime_snapshot_freshness_policy.v1",
+  "policy": "CANONICAL_L5_SNAPSHOT_FRESHNESS",
+  "status": "ACTIVE",
+  "max_snapshot_age_ms": 7000,
+  "recommended_heavy_worker_interval_ms": 5000,
+  "alert_threshold_ms": 5000,
+  "blocked_threshold_ms": 7000,
+  "fail_closed_on_missing_snapshot": true,
+  "fail_closed_on_unreadable_snapshot": true,
+  "fail_closed_on_stale_snapshot": true,
+  "fail_closed_on_fingerprint_mismatch": true,
+  "fail_closed_on_non_l5_claim_level": true,
+  "hot_standby_snapshot": "RECOMMENDED",
+  "watchdog_required": true,
+  "constitutional_equivalence_model": "REALTIME_TICK_INHERITS_VALIDITY_FROM_CANONICAL_L5_SNAPSHOT",
+  "fast_loop_policy": {
+    "full_probative_apparatus_out_of_loop": true,
+    "o1_guard_only": true,
+    "no_external_oracle_calls_in_fast_loop": true,
+    "no_onchain_anchor_in_fast_loop": true,
+    "no_heavy_kzg_in_fast_loop": true,
+    "no_full_mechanical_ethics_recalculation_per_tick": true
+  }
+}

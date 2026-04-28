@@ -1,0 +1,45 @@
+{
+  "mode": "REALTIME_100MS",
+  "canonical_state": "ACTIVE_CANONICAL",
+  "pre_execution_guard": "OK",
+  "local_updated_at": 1777259332.4606788,
+  "external_updated_at": 1777259332.460711,
+  "mechanics_updated_at": 1777259334.6811059,
+  "mechanics": {
+    "mechanical_ethics_status": "PASS",
+    "updated_at": 1777259334.6811059
+  },
+  "external": {
+    "arweave": {
+      "valid": true,
+      "source": "arweave_external",
+      "confidence": 0.92,
+      "tx_id": "uwyyZu6hFfI3FaFaVKStqKmixSlmLLg4QhcPrnTE4Bw",
+      "gateway": "https://permagate.io",
+      "bytes": 1221
+    },
+    "sepolia": {
+      "valid": true,
+      "source": "sepolia_external",
+      "confidence": 0.93,
+      "tx_hash": "0x2a4ff6fb5f338a4835c9505663c005f9aebc60eaf7f126cc8b16fab41d6dea47",
+      "block": 10564127,
+      "rpc": "https://sepolia.gateway.tenderly.co"
+    },
+    "pyth": {
+      "valid": true,
+      "source": "pyth_external",
+      "confidence": 0.91,
+      "feed_id": "06c217a791f5c4f988b36629af4cb88fad827b2485400a358f3b02886b54de92",
+      "feeds_count": 18
+    },
+    "chainlink": {
+      "valid": true,
+      "source": "chainlink_external",
+      "confidence": 0.93,
+      "feed": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
+      "price": 2391.74986877,
+      "round_id": 18446744073709584062
+    }
+  }
+}

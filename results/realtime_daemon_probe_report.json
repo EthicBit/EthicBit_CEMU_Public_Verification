@@ -1,0 +1,19 @@
+{
+  "schema_id": "ethicbit.realtime_daemon_probe.v1",
+  "mode": "REALTIME_DAEMON_10MS_PROBE",
+  "status": "PASS",
+  "constitutional_equivalence": true,
+  "interval_ms": 10,
+  "duration_seconds": 5.009083,
+  "ticks_total": 409,
+  "ticks_ok": 409,
+  "ticks_blocked": 0,
+  "first_block_reason": null,
+  "max_tick_elapsed_ms": 2.0905,
+  "max_snapshot_age_ms": 4997.08,
+  "started_at": 1777297125.64307,
+  "ended_at": 1777297130.652213,
+  "claim_level_ceiling_required": "L5",
+  "fail_closed_policy": true,
+  "note": "Daemon probe validates realtime millisecond operation by canonical L5 snapshot inheritance; it does not recalculate the full probative apparatus per tick."
+}

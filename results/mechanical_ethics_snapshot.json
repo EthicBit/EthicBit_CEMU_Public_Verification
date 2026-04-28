@@ -1,0 +1,32 @@
+{
+  "schema_id": "ethicbit.mechanical_ethics_snapshot.v1",
+  "mode": "CANONICAL_L5_SNAPSHOT",
+  "generated_at": 1777299141.3440268,
+  "issued_at": 1777299141.3440268,
+  "valid_until": 1777299148.3440268,
+  "status": "PASS",
+  "mechanical_ethics": "PASS",
+  "l5_canonical_state": "PASS",
+  "canonical_state": "ACTIVE_CANONICAL",
+  "claim_level_ceiling": "L5",
+  "constitutional_equivalence_source": "constitutional_evidence_ceiling",
+  "constitutional_evidence_status": "PASS",
+  "confidence": 0.928,
+  "sources_count": 5,
+  "eligible_for_l4": true,
+  "eligible_for_l5": true,
+  "artifact_links": {
+    "constitutional_evidence_ceiling": "results/constitutional_evidence_ceiling.json",
+    "realtime_supervisor_status": "results/realtime_supervisor_status.json"
+  },
+  "fail_closed_policy": true,
+  "fast_loop_policy": {
+    "full_probative_apparatus_out_of_loop": true,
+    "o1_guard_only": true,
+    "no_oracle_calls_in_fast_loop": true,
+    "no_onchain_anchor_in_fast_loop": true,
+    "no_heavy_kzg_in_fast_loop": true,
+    "no_full_mechanical_ethics_recalc_per_tick": true
+  },
+  "fingerprint": "sha256:23971664770e77304d8913d779b21ee33fc46d836cf0344b1210a45ee4d4df29"
+}
