@@ -81,5 +81,3 @@ results/real_external_l4_candidate_gate.json
 results/real_local_constitutional_gate.json
 results/real_local_l3_candidate_gate.json
 
-# KZG trusted setup (official, ~800KB, downloaded on-demand by reanchor script)
-scripts/core/kzg_setup/trusted_setup.txt

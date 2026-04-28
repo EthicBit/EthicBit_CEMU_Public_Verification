@@ -1,0 +1,46 @@
+name: L5 Health Check (Weekly)
+
+# Detects silent decay: if any dependency change, RPC degradation,
+# or external service drift breaks the verifier on main without anyone
+# pushing, this workflow turns the badge red within 7 days.
+
+on:
+  schedule:
+    # Every Monday at 14:00 UTC
+    - cron: '0 14 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  health-check:
+    name: Weekly health check of L5 verifier on main
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install pinned dependencies
+        run: pip install -r requirements.txt --quiet
+
+      - name: Run L5 full chain verifier
+        run: python3 scripts/core/verify_l5_full_chain.py
+
+      - name: Notice on success
+        if: success()
+        run: echo "::notice::WEEKLY_HEALTH_CHECK=PASS - main verifies cleanly"
+
+      - name: Annotate failure
+        if: failure()
+        run: |
+          echo "::error::WEEKLY_HEALTH_CHECK=FAIL - main is not verifying"
+          echo "::error::Investigate: dep updates, RPC degradation, on-chain state"
