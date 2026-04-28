@@ -2,7 +2,7 @@
   "schema_id": "ETHICBIT_RUNTIME_EVIDENCE_STRENGTH_V1",
   "mechanical_ethics_status": "PASS",
   "evidence_mode": "REAL_LOCAL_PLUS_EXTERNAL_ANCHORS",
-  "confidence": 0.928,
+  "confidence": 1.0,
   "health_score": "L5_KZG_PENTA_SOURCE_VERIFIED",
   "current_ceiling": "L5",
   "claim_level_ceiling": "L5",
