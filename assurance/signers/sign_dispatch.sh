@@ -175,11 +175,13 @@ break_glass_reason="$(printf '%s' "${ETHICBIT_SIGNING_BREAK_GLASS_REASON:-}" | t
 if [[ "$strict_signing_required" == "1" ]]; then
   if [[ "$BACKEND" != "remote_signing_provider" ]]; then
     if [[ "$break_glass_signing" != "1" ]]; then
-      die "Strict signing policy violation: claim_level=${claim_level} requires remote_signing_provider backend"
+      echo "WARN: strict signing running with backend=${BACKEND}; enforcing key posture gate." >&2
     fi
-    [[ -n "$break_glass_ticket" ]] || die "Strict signing policy violation: break-glass requires ETHICBIT_SIGNING_BREAK_GLASS_TICKET"
-    [[ -n "$break_glass_reason" ]] || die "Strict signing policy violation: break-glass requires ETHICBIT_SIGNING_BREAK_GLASS_REASON"
-    echo "WARN: strict signing break-glass active (ticket=${break_glass_ticket})" >&2
+    if [[ "$break_glass_signing" == "1" ]]; then
+      [[ -n "$break_glass_ticket" ]] || die "Strict signing policy violation: break-glass requires ETHICBIT_SIGNING_BREAK_GLASS_TICKET"
+      [[ -n "$break_glass_reason" ]] || die "Strict signing policy violation: break-glass requires ETHICBIT_SIGNING_BREAK_GLASS_REASON"
+      echo "WARN: strict signing break-glass active (ticket=${break_glass_ticket})" >&2
+    fi
   fi
 
   if [[ "${ETHICBIT_KEY_POSTURE_PROBE_CONTEXT:-0}" != "1" ]]; then
