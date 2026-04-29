@@ -631,14 +631,41 @@ jobs:
           go version
           go_tmp="${RUNNER_TEMP:-/tmp}/ethicbit-go-tmp"
           go_cache="${RUNNER_TEMP:-/tmp}/ethicbit-go-cache"
+          compile_log="${RUNNER_TEMP:-/tmp}/ethicbit-go-compile.log"
+          rm -f "${compile_log}" || true
           rm -rf "${go_tmp}" "${go_cache}" || true
           mkdir -p "${go_tmp}" "${go_cache}"
           # Keep compile validation deterministic on low-memory self-hosted runners.
           export GOMAXPROCS=1
           export GOGC=20
           export GOMEMLIMIT=320MiB
-          export GOFLAGS="-p=1"
-          GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go build ./assurance/crypto ./mechanical_ethics
+          export GOFLAGS="-p=1 -trimpath"
+
+          compile_pair() {
+            local extra_gcflags="${1:-}"
+            : > "${compile_log}"
+            if [[ -n "${extra_gcflags}" ]]; then
+              GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go build -trimpath -gcflags="${extra_gcflags}" ./assurance/crypto 2>&1 | tee -a "${compile_log}"
+              GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go build -trimpath -gcflags="${extra_gcflags}" ./mechanical_ethics 2>&1 | tee -a "${compile_log}"
+            else
+              GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go build -trimpath ./assurance/crypto 2>&1 | tee -a "${compile_log}"
+              GOTMPDIR="${go_tmp}" GOCACHE="${go_cache}" GO111MODULE=on go build -trimpath ./mechanical_ethics 2>&1 | tee -a "${compile_log}"
+            fi
+          }
+
+          if ! compile_pair; then
+            if grep -qi "signal: killed" "${compile_log}"; then
+              echo "Detected compiler OOM signal. Retrying with low-memory compile flags."
+              rm -rf "${go_tmp}" "${go_cache}" || true
+              mkdir -p "${go_tmp}" "${go_cache}"
+              export GOGC=10
+              export GOMEMLIMIT=220MiB
+              export GOFLAGS="-p=1 -trimpath"
+              compile_pair "all=-l"
+            else
+              exit 1
+            fi
+          fi
           rm -rf "${go_tmp}" "${go_cache}" || true
 
       - name: Preflight sovereign crypto requirements
