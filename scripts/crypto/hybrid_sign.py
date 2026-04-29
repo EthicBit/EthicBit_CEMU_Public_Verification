@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import argparse
 import hashlib
 import json
@@ -21,6 +23,12 @@ TRUSTED_KEY_SOURCES = {
     "remote_non_exportable",
     "trusted_hsm_kms",
     "hsm_kms",
+}
+STRICT_KEY_POSTURE_STATUSES = {"SOVEREIGN_COMPLIANT", "PRODUCTION_HSM_READY"}
+BREAK_GLASS_MIN_KEY_POSTURE_STATUSES = {
+    "TRANSITIONAL_COMPLIANT",
+    "SOVEREIGN_COMPLIANT",
+    "PRODUCTION_HSM_READY",
 }
 
 
@@ -83,6 +91,22 @@ def _normalize_key_source(value: Any) -> str:
     if source in {"ephemeral", "ephemeral_runner", "runner_ephemeral"}:
         return "ephemeral_runner"
     return source
+
+
+def _normalize_signing_backend(value: Any) -> str:
+    backend = str(value or "").strip().lower()
+    if backend in {"remote_signing_provider", "remote_provider", "remote"}:
+        return "remote_signing_provider"
+    if backend in {"github_secrets_pem", "github_secrets", "local_pem", "pem"}:
+        return "github_secrets_pem"
+    return backend or "unknown"
+
+
+def _normalize_key_posture_status(value: Any) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return "UNKNOWN"
+    return raw.upper()
 
 
 def _is_native_mldsa(mode: str) -> bool:
@@ -160,6 +184,30 @@ def _normalize_truth(
         "claim_level": claim_level,
         "require_native_hybrid": bool(require_native_hybrid),
         "eligible_for_sovereign_release": eligible_for_sovereign_release,
+        "signing_backend": _normalize_signing_backend(
+            raw.get("signing_backend")
+            or raw.get("signingBackend")
+            or os.environ.get("ETHICBIT_SIGNING_BACKEND", "unknown")
+        ),
+        "key_posture_status": _normalize_key_posture_status(
+            raw.get("key_posture_status")
+            or raw.get("keyPostureStatus")
+            or os.environ.get("ETHICBIT_KEY_POSTURE_STATUS", "UNKNOWN")
+        ),
+        "break_glass_signing": _as_bool(
+            raw.get("break_glass_signing", raw.get("breakGlassSigning")),
+            default=_as_bool(os.environ.get("ETHICBIT_SIGNING_BREAK_GLASS"), default=False),
+        ),
+        "break_glass_ticket": str(
+            raw.get("break_glass_ticket")
+            or raw.get("breakGlassTicket")
+            or os.environ.get("ETHICBIT_SIGNING_BREAK_GLASS_TICKET", "")
+        ).strip(),
+        "break_glass_reason": str(
+            raw.get("break_glass_reason")
+            or raw.get("breakGlassReason")
+            or os.environ.get("ETHICBIT_SIGNING_BREAK_GLASS_REASON", "")
+        ).strip(),
     }
 
     key_provenance_mode = raw.get("key_provenance_mode") or raw.get("keyProvenanceMode")
@@ -206,6 +254,11 @@ def validate_crypto_truth_for_signing(
     runner_supports_mldsa = _as_bool(truth.get("runner_supports_mldsa"), default=False)
     eligible = _as_bool(truth.get("eligible_for_sovereign_release"), default=False)
     derived_ephemeral = _derive_ephemeral_from_sources(ed25519_key_source, mldsa_key_source)
+    signing_backend = _normalize_signing_backend(truth.get("signing_backend"))
+    key_posture_status = _normalize_key_posture_status(truth.get("key_posture_status"))
+    break_glass_signing = _as_bool(truth.get("break_glass_signing"), default=False)
+    break_glass_ticket = str(truth.get("break_glass_ticket") or "").strip()
+    break_glass_reason = str(truth.get("break_glass_reason") or "").strip()
 
     if ephemeral != derived_ephemeral:
         raise SystemExit(
@@ -237,6 +290,31 @@ def validate_crypto_truth_for_signing(
         )
 
     if claim_level in FREEZE_GRADE_LEVELS:
+        if signing_backend != "remote_signing_provider":
+            if not break_glass_signing:
+                raise SystemExit(
+                    "Strict signing policy violation: freeze/release-grade claims require remote_signing_provider backend"
+                )
+            if not break_glass_ticket:
+                raise SystemExit(
+                    "Strict signing policy violation: break-glass requires break_glass_ticket"
+                )
+            if not break_glass_reason:
+                raise SystemExit(
+                    "Strict signing policy violation: break-glass requires break_glass_reason"
+                )
+
+        if break_glass_signing:
+            if key_posture_status not in BREAK_GLASS_MIN_KEY_POSTURE_STATUSES:
+                raise SystemExit(
+                    "Strict signing policy violation: break-glass requires key posture >= TRANSITIONAL_COMPLIANT"
+                )
+        else:
+            if key_posture_status not in STRICT_KEY_POSTURE_STATUSES:
+                raise SystemExit(
+                    "Strict signing policy violation: key_posture_status must be SOVEREIGN_COMPLIANT or PRODUCTION_HSM_READY"
+                )
+
         if ephemeral:
             raise SystemExit("Ephemeral keys are not allowed for freeze/release-grade signature sets")
         if not _is_trusted_source(ed25519_key_source) or not _is_trusted_source(mldsa_key_source):
@@ -411,6 +489,9 @@ def build_hybrid_signature_set(
             "verificationPolicy": {
                 "claimLevel": claim_level,
                 "requireNativeHybrid": bool(require_native_hybrid),
+                "signingBackend": normalized_truth["signing_backend"],
+                "keyPostureStatus": normalized_truth["key_posture_status"],
+                "breakGlassSigning": bool(normalized_truth["break_glass_signing"]),
             },
             "signatures": signatures,
             # Backward-compatible mirror for existing consumers.

@@ -282,6 +282,94 @@ else:
 
 results.append(pq_record)
 
+# Dynamic constitutional control: Anti-RE hardening by claim level.
+anti_re_path_rel = "results/anti_re_guard_report.json"
+anti_re_path = (root / anti_re_path_rel).resolve()
+
+summary["total"] += 1
+anti_re_record = {
+    "controlId": "CTL-RE-001",
+    "articleId": "ART-11",
+    "title": "Anti-RE Runtime Hardening Claim-Level Enforcement",
+    "normative": "MUST",
+    "failureBehavior": "FAIL_CLOSED",
+    "command": "dynamic:claim-level-anti-re-hardening",
+    "timeoutSeconds": 0,
+    "status": "FAIL",
+    "execution": {},
+    "evidence": {"paths": [anti_re_path_rel], "missing": []},
+    "audiences": ["ai-agentic", "cybersecurity", "regulatory", "government"],
+    "checkedAt": now_utc_iso(),
+    "metadata": {
+        "claimLevel": claim_level,
+        "strictRequired": strict_required,
+        "strictClaimLevels": sorted(strict_claim_levels),
+    },
+}
+
+if not anti_re_path.exists():
+    anti_re_record["evidence"]["missing"] = [anti_re_path_rel]
+    if strict_required:
+        anti_re_record["status"] = "FAIL"
+        anti_re_record["execution"] = {
+            "returnCode": 1,
+            "note": f"missing {anti_re_path_rel} for strict claim level {claim_level}",
+        }
+    else:
+        anti_re_record["status"] = "PASS"
+        anti_re_record["execution"] = {
+            "returnCode": 0,
+            "note": f"{anti_re_path_rel} missing but allowed for non-strict claim level {claim_level}",
+        }
+else:
+    try:
+        anti_re_payload = json.loads(anti_re_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        anti_re_payload = None
+        anti_re_record["execution"] = {
+            "returnCode": 1,
+            "error": f"invalid JSON in {anti_re_path_rel}: {exc}",
+        }
+        anti_re_record["status"] = "FAIL" if strict_required else "PASS"
+
+    if anti_re_payload is not None:
+        artifact_type = str(anti_re_payload.get("artifactType") or "")
+        anti_re_status = str(anti_re_payload.get("status") or "UNKNOWN")
+        policy_version = str(anti_re_payload.get("policy_version") or "UNKNOWN")
+        anti_re_record["execution"] = {
+            "returnCode": 0,
+            "artifactType": artifact_type,
+            "antiReStatus": anti_re_status,
+            "policyVersion": policy_version,
+        }
+
+        if strict_required:
+            strict_ok = artifact_type == "anti_re_guard_report" and anti_re_status == "PASS"
+            anti_re_record["status"] = "PASS" if strict_ok else "FAIL"
+            if not strict_ok:
+                anti_re_record["execution"]["returnCode"] = 1
+                anti_re_record["execution"]["error"] = (
+                    "strict claim requires artifactType=anti_re_guard_report and status=PASS"
+                )
+        else:
+            anti_re_record["status"] = "PASS"
+
+if anti_re_record["status"] == "PASS":
+    summary["passed"] += 1
+    print(f"[PASS] {anti_re_record['controlId']} (MUST) - {anti_re_record['title']}")
+else:
+    summary["failed"] += 1
+    summary["mustFailed"] += 1
+    must_failed = True
+    print(f"[FAIL] {anti_re_record['controlId']} (MUST) - {anti_re_record['title']}")
+    if anti_re_record["execution"].get("returnCode", 0) != 0:
+        print(f"       command rc={anti_re_record['execution'].get('returnCode')}")
+    missing = anti_re_record["evidence"].get("missing", [])
+    if missing:
+        print(f"       missing evidence: {', '.join(missing)}")
+
+results.append(anti_re_record)
+
 output_path.parent.mkdir(parents=True, exist_ok=True)
 with open(output_path, "w", encoding="utf-8") as handle:
     json.dump(report, handle, indent=2, ensure_ascii=False)

@@ -40,6 +40,12 @@ die() {
   exit 1
 }
 
+as_bool() {
+  local raw="${1:-}"
+  raw="$(printf '%s' "$raw" | tr '[:upper:]' '[:lower:]')"
+  [[ "$raw" == "1" || "$raw" == "true" || "$raw" == "yes" || "$raw" == "y" || "$raw" == "on" ]]
+}
+
 require_executable() {
   local p="$1"
   [[ -x "$p" ]] || die "required executable not found: $p"
@@ -69,6 +75,59 @@ validate_endpoint() {
   [[ "$endpoint" != *$'\r'* ]] || die "ETHICBIT_SIGNING_ENDPOINT contains invalid carriage return"
 }
 
+is_strict_claim_level() {
+  local claim_level="${1:-}"
+  case "$claim_level" in
+    freeze_grade|sovereign_release)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+read_key_posture_status() {
+  local report_path="${ETHICBIT_KEY_POSTURE_REPORT_PATH:-}"
+  if [[ -n "${ETHICBIT_KEY_POSTURE_STATUS:-}" ]]; then
+    printf '%s\n' "${ETHICBIT_KEY_POSTURE_STATUS}"
+    return 0
+  fi
+
+  if [[ -z "$report_path" ]]; then
+    report_path="${REPO_ROOT}/results/key_posture_report.json"
+  fi
+
+  if [[ ! -f "$report_path" ]]; then
+    printf '%s\n' ""
+    return 0
+  fi
+
+  command -v python3 >/dev/null 2>&1 || {
+    printf '%s\n' ""
+    return 0
+  }
+
+  python3 - "$report_path" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+try:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+except Exception:
+    print("")
+    raise SystemExit(0)
+
+value = payload.get("status")
+if isinstance(value, str):
+    print(value.strip())
+else:
+    print("")
+PY
+}
+
 [[ $# -eq 2 ]] || usage
 
 ALG="$(normalize_algorithm "$1")"
@@ -94,6 +153,58 @@ esac
 
 BACKEND="${ETHICBIT_SIGNING_BACKEND:-github_secrets_pem}"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "${SCRIPT_DIR}/../.." && pwd)"
+
+claim_level="${ETHICBIT_CLAIM_LEVEL:-ci_grade}"
+require_trusted_keys="${ETHICBIT_REQUIRE_TRUSTED_KEYS:-0}"
+strict_signing_required="0"
+if is_strict_claim_level "$claim_level"; then
+  strict_signing_required="1"
+fi
+if as_bool "$require_trusted_keys"; then
+  strict_signing_required="1"
+fi
+
+break_glass_signing="0"
+if as_bool "${ETHICBIT_SIGNING_BREAK_GLASS:-0}"; then
+  break_glass_signing="1"
+fi
+break_glass_ticket="$(printf '%s' "${ETHICBIT_SIGNING_BREAK_GLASS_TICKET:-}" | tr -d '\r\n')"
+break_glass_reason="$(printf '%s' "${ETHICBIT_SIGNING_BREAK_GLASS_REASON:-}" | tr -d '\r\n')"
+
+if [[ "$strict_signing_required" == "1" ]]; then
+  if [[ "$BACKEND" != "remote_signing_provider" ]]; then
+    if [[ "$break_glass_signing" != "1" ]]; then
+      die "Strict signing policy violation: claim_level=${claim_level} requires remote_signing_provider backend"
+    fi
+    [[ -n "$break_glass_ticket" ]] || die "Strict signing policy violation: break-glass requires ETHICBIT_SIGNING_BREAK_GLASS_TICKET"
+    [[ -n "$break_glass_reason" ]] || die "Strict signing policy violation: break-glass requires ETHICBIT_SIGNING_BREAK_GLASS_REASON"
+    echo "WARN: strict signing break-glass active (ticket=${break_glass_ticket})" >&2
+  fi
+
+  if [[ "${ETHICBIT_KEY_POSTURE_PROBE_CONTEXT:-0}" != "1" ]]; then
+    key_posture_status="$(read_key_posture_status)"
+    key_posture_status="$(printf '%s' "${key_posture_status}" | tr '[:lower:]' '[:upper:]')"
+
+    if [[ "$break_glass_signing" == "1" ]]; then
+      case "$key_posture_status" in
+        TRANSITIONAL_COMPLIANT|SOVEREIGN_COMPLIANT|PRODUCTION_HSM_READY)
+          ;;
+        *)
+          die "Strict signing policy violation: break-glass requires key posture >= TRANSITIONAL_COMPLIANT (observed: ${key_posture_status:-MISSING})"
+          ;;
+      esac
+    else
+      case "$key_posture_status" in
+        SOVEREIGN_COMPLIANT|PRODUCTION_HSM_READY)
+          ;;
+        *)
+          die "Strict signing policy violation: key posture must be SOVEREIGN_COMPLIANT or PRODUCTION_HSM_READY (observed: ${key_posture_status:-MISSING})"
+          ;;
+      esac
+    fi
+  fi
+fi
 
 case "$BACKEND" in
   github_secrets_pem)

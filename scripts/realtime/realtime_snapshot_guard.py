@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -16,6 +17,12 @@ SUPERVISOR = RESULTS / "realtime_supervisor_status.json"
 OUT = RESULTS / "realtime_millisecond_guard.json"
 
 MAX_AGE_MS = int(os.environ.get("ETHICBIT_REALTIME_MAX_SNAPSHOT_AGE_MS", "7000"))
+DEFAULT_FORBIDDEN_HOOK_ENV = (
+    "LD_PRELOAD",
+    "DYLD_INSERT_LIBRARIES",
+    "ETHICBIT_DEBUG_BYPASS",
+    "ETHICBIT_ALLOW_TAMPER",
+)
 
 _last_mtime: float | None = None
 _last_snapshot: dict[str, Any] | None = None
@@ -48,6 +55,41 @@ def load_json(path: Path) -> dict[str, Any] | None:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return None
+
+
+def read_tracer_pid() -> int | None:
+    status_file = Path("/proc/self/status")
+    if not status_file.exists():
+        return None
+    try:
+        for line in status_file.read_text(encoding="utf-8").splitlines():
+            if line.startswith("TracerPid:"):
+                return int(line.split(":", 1)[1].strip())
+    except Exception:
+        return None
+    return None
+
+
+def detect_runtime_hook_or_debugger() -> tuple[bool, list[str], int | None, bool]:
+    indicators: list[str] = []
+    tracer_pid = read_tracer_pid()
+    debugger_attached = sys.gettrace() is not None
+
+    forbidden_env = list(DEFAULT_FORBIDDEN_HOOK_ENV)
+    raw_extra = str(os.environ.get("ETHICBIT_FORBIDDEN_HOOK_ENV", "")).strip()
+    if raw_extra:
+        forbidden_env.extend(item.strip() for item in raw_extra.split(",") if item.strip())
+
+    for env_name in forbidden_env:
+        if str(os.environ.get(env_name, "")).strip():
+            indicators.append("ENV:" + env_name)
+
+    if tracer_pid is not None and tracer_pid > 0:
+        indicators.append("TRACER_PID")
+    if debugger_attached:
+        indicators.append("PYTHON_DEBUGGER")
+
+    return (len(indicators) > 0, indicators, tracer_pid, debugger_attached)
 
 
 def build_snapshot_from_current_artifacts() -> dict[str, Any]:
@@ -149,6 +191,20 @@ def realtime_guard_from_snapshot() -> dict[str, Any]:
     snap, mtime = load_snapshot_cached()
     now = time.time()
 
+    hooks_detected, hook_indicators, tracer_pid, debugger_attached = detect_runtime_hook_or_debugger()
+    if hooks_detected:
+        return {
+            "schema_id": "ethicbit.realtime_millisecond_guard.v1",
+            "mode": "REALTIME_SNAPSHOT_GUARD",
+            "guard": "BLOCKED",
+            "constitutional_equivalence": False,
+            "reason": "RUNTIME_HOOK_OR_DEBUGGER_DETECTED",
+            "hook_indicators": hook_indicators,
+            "tracer_pid": tracer_pid,
+            "python_debugger_attached": debugger_attached,
+            "updated_at": now,
+        }
+
     if snap is None or mtime is None:
         return {
             "schema_id": "ethicbit.realtime_millisecond_guard.v1",
@@ -228,6 +284,8 @@ def realtime_guard_from_snapshot() -> dict[str, Any]:
         "canonical_state": "ACTIVE_CANONICAL",
         "claim_level_ceiling": "L5",
         "max_age_ms": MAX_AGE_MS,
+        "runtime_hook_debugger": "PASS",
+        "hook_indicators": [],
         "fast_loop_policy": snap.get("fast_loop_policy"),
         "updated_at": now,
     }
