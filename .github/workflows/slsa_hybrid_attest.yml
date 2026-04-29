@@ -630,10 +630,10 @@ jobs:
           set -euo pipefail
           go version
           go_tmp="${RUNNER_TEMP:-/tmp}/ethicbit-go-tmp"
-          go_cache="${RUNNER_TEMP:-/tmp}/ethicbit-go-cache"
+          go_cache="${HOME:-${RUNNER_TEMP:-/tmp}}/.cache/ethicbit-go-build"
           compile_log="${RUNNER_TEMP:-/tmp}/ethicbit-go-compile.log"
           rm -f "${compile_log}" || true
-          rm -rf "${go_tmp}" "${go_cache}" || true
+          rm -rf "${go_tmp}" || true
           mkdir -p "${go_tmp}" "${go_cache}"
           # Keep compile validation deterministic on low-memory self-hosted runners.
           export GOMAXPROCS=1
@@ -656,7 +656,7 @@ jobs:
           if ! compile_pair; then
             if grep -qi "signal: killed" "${compile_log}"; then
               echo "Detected compiler OOM signal. Retrying with low-memory compile flags."
-              rm -rf "${go_tmp}" "${go_cache}" || true
+              rm -rf "${go_tmp}" || true
               mkdir -p "${go_tmp}" "${go_cache}"
               export GOGC=10
               export GOMEMLIMIT=220MiB
@@ -666,7 +666,7 @@ jobs:
               exit 1
             fi
           fi
-          rm -rf "${go_tmp}" "${go_cache}" || true
+          rm -rf "${go_tmp}" || true
 
       - name: Preflight sovereign crypto requirements
         shell: bash
