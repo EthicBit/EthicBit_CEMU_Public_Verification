@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import argparse
 import hashlib
 import json
@@ -18,6 +20,12 @@ TRUSTED_KEY_SOURCES = {
     "remote_non_exportable",
     "trusted_hsm_kms",
     "hsm_kms",
+}
+STRICT_KEY_POSTURE_STATUSES = {"SOVEREIGN_COMPLIANT", "PRODUCTION_HSM_READY"}
+BREAK_GLASS_MIN_KEY_POSTURE_STATUSES = {
+    "TRANSITIONAL_COMPLIANT",
+    "SOVEREIGN_COMPLIANT",
+    "PRODUCTION_HSM_READY",
 }
 
 
@@ -61,6 +69,22 @@ def _normalize_key_source(value: Any) -> str:
     if source in {"ephemeral", "ephemeral_runner", "runner_ephemeral"}:
         return "ephemeral_runner"
     return source
+
+
+def _normalize_signing_backend(value: Any) -> str:
+    backend = str(value or "").strip().lower()
+    if backend in {"remote_signing_provider", "remote_provider", "remote"}:
+        return "remote_signing_provider"
+    if backend in {"github_secrets_pem", "github_secrets", "local_pem", "pem"}:
+        return "github_secrets_pem"
+    return backend or "unknown"
+
+
+def _normalize_key_posture_status(value: Any) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return "UNKNOWN"
+    return raw.upper()
 
 
 def _is_native_mldsa(mode: str) -> bool:
@@ -123,6 +147,22 @@ def validate_signature_set_semantics(signature_set: dict[str, Any]) -> list[str]
         policy.get("requireNativeHybrid", truth.get("require_native_hybrid")),
         default=False,
     )
+    signing_backend = _normalize_signing_backend(
+        truth.get("signing_backend")
+        or truth.get("signingBackend")
+        or policy.get("signingBackend")
+    )
+    key_posture_status = _normalize_key_posture_status(
+        truth.get("key_posture_status")
+        or truth.get("keyPostureStatus")
+        or policy.get("keyPostureStatus")
+    )
+    break_glass_signing = _as_bool(
+        truth.get("break_glass_signing", truth.get("breakGlassSigning")),
+        default=_as_bool(policy.get("breakGlassSigning"), default=False),
+    )
+    break_glass_ticket = str(truth.get("break_glass_ticket") or truth.get("breakGlassTicket") or "").strip()
+    break_glass_reason = str(truth.get("break_glass_reason") or truth.get("breakGlassReason") or "").strip()
     mode = str(truth.get("hybrid_claim_mode") or truth.get("hybridClaimMode") or "unknown")
     ed25519_key_source = _normalize_key_source(
         truth.get("ed25519_key_source") or truth.get("ed25519KeySource") or "unknown"
@@ -175,6 +215,31 @@ def validate_signature_set_semantics(signature_set: dict[str, Any]) -> list[str]
         )
 
     if claim_level in FREEZE_GRADE_LEVELS:
+        if signing_backend != "remote_signing_provider":
+            if not break_glass_signing:
+                errors.append(
+                    "Verification failed: strict claims require remote_signing_provider backend or explicit break-glass"
+                )
+            if break_glass_signing and not break_glass_ticket:
+                errors.append(
+                    "Verification failed: break-glass strict claim missing break_glass_ticket"
+                )
+            if break_glass_signing and not break_glass_reason:
+                errors.append(
+                    "Verification failed: break-glass strict claim missing break_glass_reason"
+                )
+
+        if break_glass_signing:
+            if key_posture_status not in BREAK_GLASS_MIN_KEY_POSTURE_STATUSES:
+                errors.append(
+                    "Verification failed: break-glass strict claim requires key posture >= TRANSITIONAL_COMPLIANT"
+                )
+        else:
+            if key_posture_status not in STRICT_KEY_POSTURE_STATUSES:
+                errors.append(
+                    "Verification failed: strict claim requires key_posture_status in {SOVEREIGN_COMPLIANT, PRODUCTION_HSM_READY}"
+                )
+
         if ephemeral:
             errors.append(
                 "Verification failed: ephemeral keys not allowed for freeze/release-grade claim"

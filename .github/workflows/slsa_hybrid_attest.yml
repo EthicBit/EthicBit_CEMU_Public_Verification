@@ -508,6 +508,23 @@ jobs:
             --output results/key_posture_report.json \
             --repo "${{ github.repository }}" \
             --probe-signing
+          key_posture_status="$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("results/key_posture_report.json")
+          if not path.exists():
+              raise SystemExit("Missing results/key_posture_report.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          status = str(payload.get("status") or "").strip()
+          if not status:
+              raise SystemExit("Missing key posture status")
+          print(status)
+          PY
+          )"
+          {
+            echo "ETHICBIT_KEY_POSTURE_STATUS=${key_posture_status}"
+            echo "ETHICBIT_KEY_POSTURE_REPORT_PATH=${{ github.workspace }}/results/key_posture_report.json"
+          } >> "$GITHUB_ENV"
 
       - name: Diagnose signing environment
         shell: bash

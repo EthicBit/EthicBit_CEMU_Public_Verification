@@ -144,8 +144,8 @@ if as_bool "$PROBE_SIGNING"; then
   if [[ -x "${REPO_ROOT}/assurance/signers/sign_dispatch.sh" ]]; then
     probe_file="$(mktemp)"
     printf '{"probe":"key_posture"}\n' > "$probe_file"
-    if ETHICBIT_SIGNING_BACKEND="$BACKEND" "${REPO_ROOT}/assurance/signers/sign_dispatch.sh" ED25519 "$probe_file" >/tmp/ethicbit_probe_ed.log 2>/tmp/ethicbit_probe_ed.err \
-      && ETHICBIT_SIGNING_BACKEND="$BACKEND" "${REPO_ROOT}/assurance/signers/sign_dispatch.sh" ML-DSA "$probe_file" >/tmp/ethicbit_probe_ml.log 2>/tmp/ethicbit_probe_ml.err; then
+    if ETHICBIT_KEY_POSTURE_PROBE_CONTEXT=1 ETHICBIT_SIGNING_BACKEND="$BACKEND" "${REPO_ROOT}/assurance/signers/sign_dispatch.sh" ED25519 "$probe_file" >/tmp/ethicbit_probe_ed.log 2>/tmp/ethicbit_probe_ed.err \
+      && ETHICBIT_KEY_POSTURE_PROBE_CONTEXT=1 ETHICBIT_SIGNING_BACKEND="$BACKEND" "${REPO_ROOT}/assurance/signers/sign_dispatch.sh" ML-DSA "$probe_file" >/tmp/ethicbit_probe_ml.log 2>/tmp/ethicbit_probe_ml.err; then
       sign_probe_ok="true"
     else
       sign_probe_ok="false"
