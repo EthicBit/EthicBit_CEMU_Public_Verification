@@ -20,6 +20,7 @@ ATTESTATION_STATUS_CANONICAL="${ROOT_DIR}/artifacts/history/swarm/attestation_st
 NORMALIZE_ATTESTATION_STATUS_SCRIPT="${ROOT_DIR}/scripts/status/normalize_attestation_status_canonical.py"
 HERMETIC_BUILD_REPORT="${ROOT_DIR}/results/hermetic_build_report.json"
 PQ_RUNTIME_SECRET_PROTECTION_REPORT="${ROOT_DIR}/results/pq_runtime_secret_protection.json"
+ANTI_RE_GUARD_REPORT="${ROOT_DIR}/results/anti_re_guard_report.json"
 
 fail() {
   local code="$1"
@@ -263,6 +264,45 @@ print(
 PY
 }
 
+ensure_anti_re_guard_posture() {
+  local claim_level="${ETHICBIT_CLAIM_LEVEL:-ci_grade}"
+  local strict_claim="0"
+
+  case "$claim_level" in
+    freeze_grade|sovereign_release)
+      strict_claim="1"
+      ;;
+  esac
+
+  if [[ ! -f "$ANTI_RE_GUARD_REPORT" ]]; then
+    if [[ "$strict_claim" == "1" ]]; then
+      fail "ANTI_RE_GUARD_FAIL" \
+        "missing results/anti_re_guard_report.json for claim level ${claim_level}"
+    fi
+    echo "INFO: anti-re guard artifact missing (allowed for claim level ${claim_level})"
+    return 0
+  fi
+
+  local artifact_type artifact_status
+  artifact_type="$(json_get "$ANTI_RE_GUARD_REPORT" "artifactType")" \
+    || fail "ANTI_RE_GUARD_FAIL" "invalid anti-re artifact structure (missing artifactType)"
+  artifact_status="$(json_get "$ANTI_RE_GUARD_REPORT" "status")" \
+    || fail "ANTI_RE_GUARD_FAIL" "invalid anti-re artifact structure (missing status)"
+
+  [[ "$artifact_type" == "anti_re_guard_report" ]] \
+    || fail "ANTI_RE_GUARD_FAIL" "unexpected anti-re artifact type: ${artifact_type}"
+
+  if [[ "$strict_claim" == "1" ]]; then
+    [[ "$artifact_status" == "PASS" ]] \
+      || fail "ANTI_RE_GUARD_FAIL" \
+        "strict claim ${claim_level} requires anti-re status PASS (observed: ${artifact_status})"
+    echo "ANTI_RE_GUARD=PASS (claim level ${claim_level})"
+    return 0
+  fi
+
+  echo "INFO: anti-re guard observed (claim level=${claim_level}, status=${artifact_status})"
+}
+
 ensure_no_known_competing_files() {
   local path
   for path in \
@@ -392,6 +432,7 @@ main() {
   ensure_hermetic_build_posture
   ensure_mechanical_ethics_go_gate
   ensure_pq_runtime_secret_protection_posture
+  ensure_anti_re_guard_posture
   ensure_no_known_competing_files
   ensure_manifest_shape
   ensure_hash_alignment

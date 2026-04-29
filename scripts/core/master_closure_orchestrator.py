@@ -143,7 +143,9 @@ def preflight(mode: str) -> None:
         "scripts/core/verify_l5_canonical_state.py",
         "scripts/core/verify_ceiling_signature.py",
         "scripts/core/verify_l5_onchain.py",
+        "scripts/security/anti_re_guard.py",
         "scripts/audit/verify_constitutional_controls.sh",
+        "config/anti_re_policy.v1.json",
         "config/constitutional_controls.v1.json",
         "docs/AUDIT.md",
     ]
@@ -180,6 +182,8 @@ def stages_for_mode(mode: str, with_tampering_test: bool = False) -> list:
              "L5 full chain verification (canonical + custody + on-chain)", 180),
             ("03", ["bash", "scripts/audit/verify_constitutional_controls.sh"],
              "Full constitutional gate (13 controls)", 300),
+            ("04", ["python3", "scripts/security/anti_re_guard.py", "--root", ".", "--enforce"],
+             "Anti-RE hardening guard", 120),
         ]
     else:
         stages = [
@@ -187,6 +191,8 @@ def stages_for_mode(mode: str, with_tampering_test: bool = False) -> list:
              "L5 full chain verification (canonical + custody + on-chain)", 180),
             ("02", ["bash", "scripts/audit/verify_constitutional_controls.sh"],
              "Constitutional gate (13 controls)", 300),
+            ("03", ["python3", "scripts/security/anti_re_guard.py", "--root", ".", "--enforce"],
+             "Anti-RE hardening guard", 120),
         ]
     if with_tampering_test:
         stages.append((
@@ -202,6 +208,7 @@ def build_summary(final_status: str) -> dict:
     sig = safe_read_json(RESULTS / "constitutional_evidence_ceiling.sig")
     anchor = safe_read_json(RESULTS / "kzg_blob_anchor_report.json")
     controls = safe_read_json(RESULTS / "constitutional_controls_report.json")
+    anti_re = safe_read_json(RESULTS / "anti_re_guard_report.json")
 
     constitutional_status = controls.get("constitutional_status") or controls.get("CONSTITUTIONAL_STATUS")
     if constitutional_status is None:
@@ -224,6 +231,7 @@ def build_summary(final_status: str) -> dict:
         "constitutional_status": constitutional_status,
         "claim_level_ceiling": claim_level_ceiling,
         "ceiling_status": ceiling.get("status", "UNVERIFIED"),
+        "anti_re_status": anti_re.get("status", "UNVERIFIED"),
         "anchor_status": anchor.get("status", "UNVERIFIED"),
         "anchor_tx_hash": anchor.get("tx_hash"),
         "anchor_block_number": anchor.get("block_number"),
@@ -297,6 +305,7 @@ def main() -> int:
             "scripts/core/verify_ceiling_signature.py",
             "scripts/core/verify_l5_onchain.py",
             "scripts/core/test_tampering_resistance.py",
+            "scripts/security/anti_re_guard.py",
             "scripts/audit/verify_constitutional_controls.sh",
         ],
         "evidence_artifacts": [
@@ -304,6 +313,7 @@ def main() -> int:
             "results/constitutional_evidence_ceiling.sig",
             "results/kzg_blob_anchor_report.json",
             "results/runtime_evidence_strength_report.json",
+            "results/anti_re_guard_report.json",
             "results/constitutional_controls_report.json",
         ],
         "audit_documents": ["docs/AUDIT.md"],

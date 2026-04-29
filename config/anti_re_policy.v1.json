@@ -1,0 +1,37 @@
+{
+  "schema_id": "ETHICBIT_ANTI_RE_POLICY_V1",
+  "version": "1.0.0",
+  "strictClaimLevels": [
+    "freeze_grade",
+    "sovereign_release"
+  ],
+  "forbiddenEnvVars": [
+    "LD_PRELOAD",
+    "DYLD_INSERT_LIBRARIES",
+    "ETHICBIT_DEBUG_BYPASS",
+    "ETHICBIT_ALLOW_TAMPER"
+  ],
+  "requireRealtimeGuardOk": true,
+  "requireSnapshotFingerprintValid": true,
+  "keyPostureByClaimLevel": {
+    "default": {
+      "allowedStatuses": [
+        "TRANSITIONAL_COMPLIANT",
+        "SOVEREIGN_COMPLIANT",
+        "PRODUCTION_HSM_READY"
+      ]
+    },
+    "freeze_grade": {
+      "allowedStatuses": [
+        "SOVEREIGN_COMPLIANT",
+        "PRODUCTION_HSM_READY"
+      ]
+    },
+    "sovereign_release": {
+      "allowedStatuses": [
+        "SOVEREIGN_COMPLIANT",
+        "PRODUCTION_HSM_READY"
+      ]
+    }
+  }
+}
