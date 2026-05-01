@@ -1,0 +1,113 @@
+{
+  "schema_id": "ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_SCHEMA_V1",
+  "registry_name": "AEM V1.1 - Global Public Verification Registry",
+  "registry_status": "GLOBAL_PUBLIC_VERIFICATION_REGISTRY_ACTIVE",
+  "registry_type": "aem_v1_1_public_verification_master_index",
+  "system": "EthicBit/CEMU",
+  "technology_artifact": "AEM V1.1 - Mechanical Ethical Agent",
+  "technology_version": "AEM V1.1",
+  "registry_schema_version": "V1.0",
+  "timestamp_utc": "2026-05-01T00:00:00Z",
+  "hashing": {
+    "hash_algorithm": "SHA-256",
+    "canonicalization": "json_sort_keys_no_whitespace_utf8",
+    "encoding": "utf-8",
+    "registry_sha256_record": "external_hash_record"
+  },
+  "scope": {
+    "purpose": "Global public-verifiable registry for AEM V1.1 published evidence artifacts, closure status, anchor receipts, filing references, hashes, and scope delimitation.",
+    "publicly_verifiable": true,
+    "automatic_third_party_binding": false,
+    "regulatory_approval_claimed": false,
+    "court_recognition_claimed": false,
+    "sovereign_authority_claimed": false,
+    "institutional_certification_claimed": false
+  },
+  "claims_boundary": {
+    "patent_grant_claimed": false,
+    "uspto_approval_claimed": false,
+    "regulatory_approval_claimed": false,
+    "court_recognition_claimed": false,
+    "sovereign_authority_claimed": false,
+    "third_party_binding_claimed": false
+  },
+  "published_artifacts": {
+    "aem_v1_1": {
+      "artifact_name": "AEM V1.1 - Mechanical Ethical Agent",
+      "artifact_status": "PUBLISHED_AND_MATERIALLY_ANCHORED",
+      "canonical_sha256": "0a51d3cb41495308c2987d00f3212aba4623896113d7ecc30f467ec4645ed2fb",
+      "freeze_pdf_sha256": "689992b6e73ffd897dfc75112abeda022cee6ad492037217f7bab28397b69696",
+      "thesis_sha256": "ee6c38056e1510a45831c74dcca7c6e01894530c436989f9bb29854d7ffe300b",
+      "system_state_sha256": "6f539a93cf05caeca3ba7d1a202bcac07e0946a918fd0cd061ac1028077eb88d",
+      "public_mixed_kit_zip_sha256": "a3933a6cac4badb07c29b0ed17f8529a059730e9a7d5efde0884afdcd96c98a0",
+      "repository_commit_sha": "4bc4a85c8f4a4c96ab0d4f1df01526c4e33ba140"
+    }
+  },
+  "system_state_source": {
+    "system_state_sha256": "6f539a93cf05caeca3ba7d1a202bcac07e0946a918fd0cd061ac1028077eb88d",
+    "source_file": "results/master_closure_report.json",
+    "source_commit_sha": "4bc4a85c8f4a4c96ab0d4f1df01526c4e33ba140",
+    "source_status": "historical_frozen_reference",
+    "monthly_reruns_may_generate_new_current_state": true
+  },
+  "historical_closure_state": {
+    "master_closure_status": "PASS",
+    "claim_level_ceiling": "L5",
+    "l5_full_chain": "PASS",
+    "constitutional_controls": {
+      "status": "PASS",
+      "total": 14,
+      "pass": 14,
+      "fail": 0,
+      "must_fail": 0
+    },
+    "tampering_resistance": "PROVEN",
+    "anti_re_hardening": "PASS",
+    "third_party_binding": false,
+    "presentation_scope": "READY_WITH_SCOPE_DELIMITATION"
+  },
+  "current_operational_state": {
+    "status": "updated_by_monthly_verification_reports",
+    "mutable": true,
+    "not_part_of_historical_anchor_state": true
+  },
+  "anchors": {
+    "aem_v1_1_mainnet_anchor": {
+      "schema_id": "ETHICBIT_AEM_V1_1_MAINNET_ANCHOR_RECEIPT_V1",
+      "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+      "network": "ethereum-mainnet",
+      "chain_id": 1,
+      "tx_hash": "0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+      "block_number": 24996672,
+      "block_explorer_url": "https://etherscan.io/tx/0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+      "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+      "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+      "blob_versioned_hashes": [
+        "0x019a48cf8578338425f30f6149ba4ed4b11ac02e21075813775a594214c0f041"
+      ]
+    }
+  },
+  "filing_reference": {
+    "attorney_docket": "ETHICBIT-CEMU-PROV-001",
+    "filing_type": "U.S. Provisional Patent Application",
+    "filing_date": "2026-04-30",
+    "filing_reference_scope": "administrative_reference_only",
+    "application_number_publicly_disclosed": false,
+    "confirmation_number_publicly_disclosed": false,
+    "uspto_approval_claimed": false,
+    "patent_grant_claimed": false
+  },
+  "preservation_policy": {
+    "aem_v1_1_canonical_editable": false,
+    "future_anchors_require_new_receipts": true,
+    "future_changes_require_dedicated_branch": true,
+    "future_canonical_changes_require_new_technology_version": true,
+    "monthly_master_closure_rerun": true,
+    "public_communications_scope_delimited": true,
+    "new_inventive_matter_requires_preservation_before_public_disclosure": true
+  },
+  "public_statement": {
+    "en": "AEM V1.1 is the updated technology artifact. The Global Public Verification Registry is the public verification layer for AEM V1.1. This registry records integrity, traceability, public verification posture, anchor references, and scope delimitation without asserting automatic third-party binding, regulatory approval, court recognition, sovereign authority, institutional certification, USPTO approval, or patent grant.",
+    "es": "AEM V1.1 es el artifact tecnologico actualizado. El Registro Publico Global de Verificacion es la capa publica de verificacion de AEM V1.1. Este registro documenta integridad, trazabilidad, postura de verificacion publica, referencias de anclaje y delimitacion de alcance, sin afirmar efecto vinculante automatico frente a terceros, aprobacion regulatoria, reconocimiento judicial, autoridad soberana, certificacion institucional, aprobacion USPTO o concesion de patente."
+  }
+}
