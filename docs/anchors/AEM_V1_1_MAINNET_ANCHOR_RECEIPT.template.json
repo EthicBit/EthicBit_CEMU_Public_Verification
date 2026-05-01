@@ -1,0 +1,31 @@
+{
+  "schema_id": "ETHICBIT_AEM_V1_1_MAINNET_ANCHOR_RECEIPT_V1",
+  "status": "PENDING_MAINNET_ANCHOR",
+  "network": "ethereum-mainnet",
+  "chain_id": 1,
+  "tx_hash": null,
+  "block_number": null,
+  "timestamp_utc": null,
+  "block_explorer_url": null,
+  "from_address": null,
+  "to_address": null,
+  "blob_versioned_hashes": [],
+  "gas_used": null,
+  "effective_gas_price_wei": null,
+  "fee_paid_wei": null,
+  "fee_paid_eth": null,
+  "payload": {
+    "canonical_sha256": "0a51d3cb41495308c2987d00f3212aba4623896113d7ecc30f467ec4645ed2fb",
+    "thesis_sha256": "ee6c38056e1510a45831c74dcca7c6e01894530c436989f9bb29854d7ffe300b",
+    "system_state_sha256": "6f539a93cf05caeca3ba7d1a202bcac07e0946a918fd0cd061ac1028077eb88d",
+    "freeze_pdf_sha256": "689992b6e73ffd897dfc75112abeda022cee6ad492037217f7bab28397b69696",
+    "repo_commit_sha": null,
+    "signer_identity": null,
+    "signer_address": null,
+    "ts_unix": null
+  },
+  "notes": [
+    "Fill this receipt only after confirmed mainnet transaction.",
+    "Canonical and thesis hashes are immutable references from V1.1 artifacts."
+  ]
+}
