@@ -276,7 +276,20 @@ def _main():
         sys.exit(2)
 
     block_n = int(receipt["blockNumber"], 16)
-    tx_data, _ = rpc_call("eth_getTransactionByHash", [tx_hash])
+    tx_data = None
+    tx_rpc = used_rpc
+    for _ in range(12):
+        try:
+            tx_candidate, tx_rpc = rpc_call("eth_getTransactionByHash", [tx_hash])
+            if tx_candidate:
+                tx_data = tx_candidate
+                break
+        except Exception:
+            pass
+        time.sleep(2)
+    if tx_data is None:
+        print("[WARN] tx lookup returned null; building report from receipt fallback.")
+        tx_data = {}
 
     report = {
         "schema_id": "ETHICBIT_AEM_MAINNET_ANCHOR_REPORT_V1",
@@ -284,12 +297,13 @@ def _main():
         "network": "ethereum-mainnet",
         "chain_id": 1,
         "rpc_endpoint": used_rpc,
+        "tx_lookup_rpc": tx_rpc,
         "tx_hash": tx_hash,
         "tx_type": tx_data.get("type", "0x3"),
         "block_number": block_n,
-        "from_address": tx_data.get("from", wallet),
-        "to_address": tx_data.get("to", wallet),
-        "blob_versioned_hashes": ["0x" + vh.hex()],
+        "from_address": tx_data.get("from", receipt.get("from", wallet)),
+        "to_address": tx_data.get("to", receipt.get("to", wallet)),
+        "blob_versioned_hashes": tx_data.get("blobVersionedHashes", ["0x" + vh.hex()]),
         "blob_count": 1,
         "blob_gas_used_int": int(receipt.get("blobGasUsed", "0x20000"), 16),
         "anchored_payload": payload_obj,
