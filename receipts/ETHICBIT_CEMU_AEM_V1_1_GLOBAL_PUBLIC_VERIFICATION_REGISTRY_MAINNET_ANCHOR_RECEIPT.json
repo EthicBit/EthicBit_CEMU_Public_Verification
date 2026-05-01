@@ -1,15 +1,18 @@
 {
   "schema_id": "ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_MAINNET_ANCHOR_RECEIPT_V1",
-  "status": "PENDING_MAINNET_ANCHOR",
+  "status": "ONCHAIN_REGISTRY_ANCHOR_VERIFIED",
   "network": "ethereum-mainnet",
   "chain_id": 1,
-  "tx_hash": null,
-  "block_number": null,
-  "timestamp_utc": null,
-  "block_explorer_url": null,
-  "from_address": null,
-  "to_address": null,
-  "blob_versioned_hashes": [],
+  "tx_hash": "0x2eb347df5db23a2fa9a0ff51e418912820b6025064cc40a9a6d2452d11da0308",
+  "block_number": 25001381,
+  "block_explorer_url": "https://etherscan.io/tx/0x2eb347df5db23a2fa9a0ff51e418912820b6025064cc40a9a6d2452d11da0308",
+  "timestamp_utc": "2026-05-01T16:46:38.623195+00:00",
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "gas_used": 68240,
+  "effective_gas_price_wei": 2464368699,
+  "fee_paid_wei": 168168520019760,
+  "fee_paid_eth": 0.00016816852001976,
   "payload": {
     "schema_id": "ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_MAINNET_ANCHOR_PAYLOAD_V1",
     "technology_artifact": "AEM V1.1 - Mechanical Ethical Agent",
@@ -32,10 +35,22 @@
     "uspto_approval_claimed": false,
     "regulatory_approval_claimed": false,
     "court_recognition_claimed": false,
-    "ts_unix": null
+    "ts_unix": 1777653987
   },
-  "notes": [
-    "Populate tx fields only after confirmed mainnet anchor.",
-    "Do not modify prior AEM V1.1 canonical artifacts when issuing this receipt."
-  ]
+  "payload_sha256": "527ef50fb32ddd39304294eb617664242114947b9ac87f00c73ec83bcb73fe64",
+  "registry": {
+    "registry_path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+    "registry_canonical_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+    "registry_file_sha256": "443c3423770456f3c8c49055d6e9eafbaa5762b29268b8b3470c8ee84439fac1",
+    "registry_canonicalization": "json_sort_keys_no_whitespace_utf8",
+    "hash_algorithm": "SHA-256"
+  },
+  "verification_rpcs": {
+    "broadcast": "https://ethereum-rpc.publicnode.com",
+    "receipt_lookup": "https://ethereum-rpc.publicnode.com",
+    "tx_lookup": "https://ethereum-rpc.publicnode.com",
+    "chain_check": "https://ethereum-rpc.publicnode.com",
+    "nonce_lookup": "https://ethereum-rpc.publicnode.com",
+    "gas_estimate": "https://ethereum-rpc.publicnode.com"
+  }
 }
