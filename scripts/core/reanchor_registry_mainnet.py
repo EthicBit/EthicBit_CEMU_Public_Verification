@@ -200,6 +200,11 @@ def main() -> int:
     print(f"canonical_sha256   = {canonical_sha}")
     print(f"file_sha256        = {file_sha}")
     print(f"expected_canonical = {expected_sha}")
+    print(
+        "NOTE: canonical_sha256 hashes deterministic canonical JSON; "
+        "file_sha256 hashes raw file bytes."
+    )
+    print("NOTE: integrity anchor uses canonical_sha256.")
     if canonical_sha.lower() != expected_sha.lower():
         print(
             "ERROR: canonical registry hash does not match expected official hash.",
@@ -227,7 +232,20 @@ def main() -> int:
         return 1
 
     if dry_run:
+        existing_receipt_status = "UNKNOWN"
+        existing_receipt_tx = "N/A"
+        if RECEIPT_PATH.exists():
+            try:
+                existing_receipt = json.loads(RECEIPT_PATH.read_text(encoding="utf-8"))
+                existing_receipt_status = existing_receipt.get("status", "UNKNOWN")
+                existing_receipt_tx = existing_receipt.get("tx_hash", "N/A")
+            except Exception:  # noqa: BLE001
+                pass
         print("\nDRY_RUN=1: no transaction will be broadcast.")
+        print(
+            "NOTE: current run is dry-run only; existing on-chain registry anchor "
+            f"status={existing_receipt_status} tx={existing_receipt_tx}"
+        )
         return 0
 
     if not broadcast:

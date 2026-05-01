@@ -219,6 +219,20 @@ class RegistryManager:
         return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
     def _create_fail_result(self, rule_id: str, reason: str) -> EvaluationResult:
+        broker_report = {
+            "mode": "REAL_LOCAL",
+            "final_gate": "FAIL_CLOSED",
+            "quorum_required": self.evidence_broker.quorum_threshold,
+            "quorum_met": False,
+            "providers_configured": self.evidence_broker.get_trusted_providers(),
+            "providers_used": [],
+            "external_provider_required": False,
+            "successful_count": 0,
+            "evidence_consensus_score": 0.0,
+            "fail_closed_reason": "RULE_NOT_FOUND",
+            "timeout_s": self.evidence_broker.timeout,
+            "timestamp": self._now(),
+        }
         return EvaluationResult(
             ruleId=rule_id,
             sector="UNKNOWN",
@@ -229,9 +243,38 @@ class RegistryManager:
             reason=reason,
             actionTaken="FAIL_CLOSED",
             timestamp=self._now(),
-            brokerReport={},
+            brokerReport=broker_report,
             metadata={"final_gate": "FAIL_CLOSED"},
         )
+
+    def _build_local_broker_report(
+        self,
+        status: str,
+        merged_evidence: Dict[str, Any],
+        missing: List[str],
+        fail_closed_reason: str,
+    ) -> Dict[str, Any]:
+        quorum_required = int(self.evidence_broker.quorum_threshold)
+        providers = self.evidence_broker.get_trusted_providers()
+        # In REAL_LOCAL mode without external broker fan-out, quorum is modeled as
+        # "required evidence satisfied".
+        quorum_met = len(missing) == 0 and status != "FAIL_CLOSED"
+        return {
+            "mode": "REAL_LOCAL",
+            "final_gate": "PASS" if status != "FAIL_CLOSED" else "FAIL_CLOSED",
+            "quorum_required": quorum_required,
+            "quorum_met": quorum_met,
+            "providers_configured": providers,
+            "providers_used": ["real_local"],
+            "external_provider_required": False,
+            "successful_count": 1 if quorum_met else 0,
+            "evidence_consensus_score": 1.0 if quorum_met else 0.0,
+            "fail_closed_reason": fail_closed_reason,
+            "timeout_s": self.evidence_broker.timeout,
+            "cross_validated_evidence": merged_evidence,
+            "missing_required_evidence": missing,
+            "timestamp": self._now(),
+        }
 
     async def _evaluate_external_evidence(
         self,
@@ -280,13 +323,28 @@ class RegistryManager:
         if not rule:
             return self._create_fail_result(rule_id, "Regla no encontrada")
 
-        fallback_used = sector is None and self.fallback_to_core
+        sector_resolved = rule.get("sector")
+        requested_upper = sector.upper() if isinstance(sector, str) else None
+        resolved_upper = sector_resolved.upper() if isinstance(sector_resolved, str) else None
+        fallback_used = (
+            (sector is None and self.fallback_to_core)
+            or (requested_upper is not None and resolved_upper is not None and requested_upper != resolved_upper)
+        )
+        fallback_reason = None
+        fallback_source = None
+        if sector is None and self.fallback_to_core:
+            fallback_reason = "sector_not_specified"
+            fallback_source = "CORE"
+        elif requested_upper is not None and resolved_upper is not None and requested_upper != resolved_upper:
+            fallback_reason = "sector_resolution_mismatch"
+            fallback_source = requested_upper
+
         metadata: Dict[str, Any] = {
             "fallback_used": fallback_used,
-            "fallback_source": "CORE" if fallback_used else None,
-            "fallback_reason": "sector_not_specified" if fallback_used else None,
+            "fallback_source": fallback_source,
+            "fallback_reason": fallback_reason,
             "sector_requested": sector,
-            "sector_resolved": rule.get("sector"),
+            "sector_resolved": sector_resolved,
         }
         metadata.update(self._extract_constitutional_rule_metadata(rule))
         metadata["cross_sector_review_required"] = bool(rule.get("cross_sector_activation", False))
@@ -356,9 +414,11 @@ class RegistryManager:
                 self.severity_mapping.get(rule["severity"], "FAIL_CLOSED"),
             )
             reason = "Faltan evidencias requeridas"
+            fail_closed_reason = "missing_required_evidence"
         else:
             status = "PASS"
             reason = "Regla satisfecha"
+            fail_closed_reason = "NONE"
 
         if self._is_critical_rule(rule) and broker_report:
             threshold = float(
@@ -371,6 +431,15 @@ class RegistryManager:
                 status = "FAIL_CLOSED"
                 reason = "EVIDENCE_CONSENSUS_BELOW_THRESHOLD"
                 metadata["final_gate"] = "FAIL_CLOSED"
+                fail_closed_reason = "evidence_consensus_below_threshold"
+
+        if not broker_report:
+            broker_report = self._build_local_broker_report(
+                status=status,
+                merged_evidence=merged_evidence,
+                missing=missing,
+                fail_closed_reason=fail_closed_reason,
+            )
 
         if status == "FAIL_CLOSED":
             print(f"🚨 FAIL_CLOSED → {rule_id} ({rule['sector']})")
