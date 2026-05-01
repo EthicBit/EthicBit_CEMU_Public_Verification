@@ -1,0 +1,52 @@
+{
+  "schema_id": "ETHICBIT_AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_EXTENSION_RECEIPT_V1",
+  "generated_at": "2026-05-01T20:20:30.754825Z",
+  "status": "PASS",
+  "extension_name": "AEM V1.1 Supply-Chain Verification Extension",
+  "claim_level": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "not_claimed": {
+    "fully_reproducible_build": false,
+    "end_to_end_deterministic_rebuild": false,
+    "independent_reproducible_build_proven": false,
+    "slsa_l4_fully_achieved": false
+  },
+  "preserves_canonical_boundaries": true,
+  "registry_reference": {
+    "registry_path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+    "canonical_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+    "file_sha256": "443c3423770456f3c8c49055d6e9eafbaa5762b29268b8b3470c8ee84439fac1",
+    "expected_canonical_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+    "canonicalization": "json_sort_keys_no_whitespace_utf8"
+  },
+  "anchor_reference": {
+    "tx_hash": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+    "block_number": 25001458,
+    "network": "ethereum-mainnet",
+    "chain_id": 1,
+    "status": "ONCHAIN_REGISTRY_ANCHOR_VERIFIED"
+  },
+  "manifest": {
+    "path": "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+    "sha256": "27db238656420cddc4d9825be8289e37b3624768af55fa664f7fd4f76fdba670",
+    "canonical_sha256": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef",
+    "jcs_path": "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.jcs.json",
+    "jcs_sha256": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef"
+  },
+  "signature_verification": {
+    "status": "PASS",
+    "report_path": "assurance/signatures/AEM_V1_1_SUPPLY_CHAIN_SIGNATURE_VERIFICATION.json",
+    "signature_set_path": "assurance/signatures/AEM_V1_1_SUPPLY_CHAIN_SIGNATURE_SET.json"
+  },
+  "closure_snapshot": {
+    "master_closure_status": "PASS",
+    "claim_level_ceiling": "L5",
+    "constitutional_status": "PASS",
+    "anti_re_status": "PASS",
+    "presentation_scope": "READY_WITH_SCOPE_DELIMITATION",
+    "third_party_binding": false,
+    "constitutional_total": 14,
+    "constitutional_passed": 14,
+    "constitutional_failed": 0,
+    "constitutional_must_failed": 0
+  }
+}

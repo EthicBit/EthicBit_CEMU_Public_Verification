@@ -1,0 +1,12 @@
+{
+  "ed25519_key_source": "trusted_secrets",
+  "mldsa_key_source": "trusted_secrets",
+  "mldsa_effective_mode": "compatibility_fallback",
+  "hybrid_claim_mode": "compatibility_hybrid",
+  "ephemeral_keys_used": false,
+  "runner_supports_mldsa": false,
+  "eligible_for_sovereign_release": false,
+  "signing_backend": "github_secrets_pem",
+  "key_posture_status": "TRANSITIONAL_COMPLIANT",
+  "break_glass_signing": false
+}

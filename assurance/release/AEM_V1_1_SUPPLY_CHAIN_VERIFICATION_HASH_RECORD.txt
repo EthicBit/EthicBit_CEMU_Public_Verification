@@ -1,0 +1,20 @@
+ETHICBIT/CEMU - AEM V1.1 Supply-Chain Verification Extension Hash Record
+Artifact:
+assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json
+Schema:
+ETHICBIT_AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST_V1
+Purpose:
+Public reproducible verification support layer for AEM V1.1 supply-chain evidence.
+SHA-256 (canonicalized JSON: RFC8785 canonical form):
+a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef
+SHA-256 (file bytes as stored in repository):
+27db238656420cddc4d9825be8289e37b3624768af55fa664f7fd4f76fdba670
+Timestamp UTC:
+2026-05-01T20:20:30.536826Z
+Claim level:
+PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT
+Not claimed:
+FULLY_REPRODUCIBLE_BUILD=false
+END_TO_END_DETERMINISTIC_REBUILD=false
+INDEPENDENT_REPRODUCIBLE_BUILD_PROVEN=false
+SLSA_L4_FULLY_ACHIEVED=false
