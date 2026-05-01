@@ -37,3 +37,11 @@ Publicly verifiable, with scope delimitation.
 - registry_sha256: `24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075`
 
 The registry hash above is the canonical SHA-256 over sorted JSON keys without whitespace, encoded as UTF-8.
+
+## Mainnet anchor reference
+
+- final_registry_anchor_tx: `0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4`
+- final_registry_anchor_block: `25001458`
+- final_registry_anchor_status: `ONCHAIN_REGISTRY_ANCHOR_VERIFIED`
+- prior_registry_anchor_reference: `0x2eb347df5db23a2fa9a0ff51e418912820b6025064cc40a9a6d2452d11da0308`
+- superseding_rule: final registry anchor tx supersedes prior public registry receipt for final publication.

@@ -6,6 +6,11 @@
   "tx_hash": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
   "block_number": 25001458,
   "block_explorer_url": "https://etherscan.io/tx/0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+  "anchor_sequence": {
+    "is_final_public_reference": true,
+    "supersedes_prior_public_registry_receipt": true,
+    "prior_registry_anchor_tx": "0x2eb347df5db23a2fa9a0ff51e418912820b6025064cc40a9a6d2452d11da0308"
+  },
   "timestamp_utc": "2026-05-01T17:02:03.894265+00:00",
   "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
   "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
