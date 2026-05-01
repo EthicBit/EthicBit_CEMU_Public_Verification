@@ -1,9 +1,9 @@
 {
   "schema_id": "ethicbit.mechanical_ethics_snapshot.v1",
   "mode": "CANONICAL_L5_SNAPSHOT",
-  "generated_at": 1777299141.3440268,
-  "issued_at": 1777299141.3440268,
-  "valid_until": 1777299148.3440268,
+  "generated_at": 1777567949.9383,
+  "issued_at": 1777567949.9383,
+  "valid_until": 1777567956.9383,
   "status": "PASS",
   "mechanical_ethics": "PASS",
   "l5_canonical_state": "PASS",
@@ -11,7 +11,7 @@
   "claim_level_ceiling": "L5",
   "constitutional_equivalence_source": "constitutional_evidence_ceiling",
   "constitutional_evidence_status": "PASS",
-  "confidence": 0.928,
+  "confidence": 1.0,
   "sources_count": 5,
   "eligible_for_l4": true,
   "eligible_for_l5": true,
@@ -28,5 +28,5 @@
     "no_heavy_kzg_in_fast_loop": true,
     "no_full_mechanical_ethics_recalc_per_tick": true
   },
-  "fingerprint": "sha256:23971664770e77304d8913d779b21ee33fc46d836cf0344b1210a45ee4d4df29"
+  "fingerprint": "sha256:985bbb1f0764e9ea17bb6255316fe607c7ce850d2ab705952bd477c0cfdc487b"
 }

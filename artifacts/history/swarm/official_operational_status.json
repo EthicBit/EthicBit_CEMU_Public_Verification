@@ -1,6 +1,6 @@
 {
   "artifactType": "official_operational_status",
-  "generatedAt": "2026-04-25T03:24:02.778405Z",
+  "generatedAt": "2026-04-30T16:52:17.279022Z",
   "policyVersion": "official-operational-status-policy.v2.0.0",
   "runContext": {
     "runId": "run-20260411T215540Z-33389",
@@ -40,11 +40,11 @@
   "freezeActive": false,
   "integrity": {
     "inputHashes": {
-      "gateReport": "6029a8322e2a8960c81e61ee4e06cc750f7f2de236617623993ef6805fb900aa",
+      "gateReport": "880858050abb6cfddd0eb3cd5aa20b2ca25d66e31aa8565e43042f51bd5b20fa",
       "liveReport": "ffed75a162e96349f76431ced523b630b6cb986fb4c97df02988cd2b92dc6024",
       "canonicalConfig": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093"
     },
-    "outputHash": "ecfe6a1afe0e32eab02cd05effb73b24434bfa09669e630dd008e57e574a1b36"
+    "outputHash": "dceebee9ff49946669cfcb90290f3e2e64593d9035512c235d43bb493d1874ba"
   },
   "paths": {
     "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
@@ -126,10 +126,10 @@
       "ED25519",
       "ML-DSA"
     ],
-    "payloadHash": "4cd808acae02f3d3d8ab0ed80f38aeb7b7e0b861e2af2a17a9175defb09ba788",
+    "payloadHash": "295b812b8bcb0145786cc2486afda35e5bf98c8da0ee2a7092ca8e356a7dbc02",
     "payload": {
-      "path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/ethicbit_hybrid_sign_itajamfj/payload.jcs.json",
-      "sha256": "4cd808acae02f3d3d8ab0ed80f38aeb7b7e0b861e2af2a17a9175defb09ba788",
+      "path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/ethicbit_hybrid_sign_hao56_zi/payload.jcs.json",
+      "sha256": "295b812b8bcb0145786cc2486afda35e5bf98c8da0ee2a7092ca8e356a7dbc02",
       "sourcePath": ""
     },
     "hybridCryptoTruth": {
@@ -142,6 +142,11 @@
       "claim_level": "ci_grade",
       "require_native_hybrid": false,
       "eligible_for_sovereign_release": false,
+      "signing_backend": "unknown",
+      "key_posture_status": "UNKNOWN",
+      "break_glass_signing": false,
+      "break_glass_ticket": "",
+      "break_glass_reason": "",
       "key_provenance_mode": "unknown",
       "keyProvenanceMode": "unknown",
       "crypto_claim_tier": "unspecified",
@@ -149,15 +154,18 @@
     },
     "verificationPolicy": {
       "claimLevel": "ci_grade",
-      "requireNativeHybrid": false
+      "requireNativeHybrid": false,
+      "signingBackend": "unknown",
+      "keyPostureStatus": "UNKNOWN",
+      "breakGlassSigning": false
     },
     "signatures": [
       {
         "algorithm": "ED25519",
         "keyId": "ED25519_UNSET",
         "status": "PASS",
-        "signature": "s4E067TfUBuDx4A/FLOHgThSbcv+h0LHy3gV+ryAsjwuk/mllGUkQCnkkRKbxZD9miQ5HfZGmkTSwgeEaiCxDg==",
-        "signedAt": "2026-04-25T03:24:02.780505Z",
+        "signature": "zKfsCItqOPkFfBD9n4S0h2lACvdkZA9F1UVUGAsXSSkLI+xBgGVHtdvqmMBrLiVbqqJgnspERYPL9qlXX2sTBA==",
+        "signedAt": "2026-04-30T16:52:17.280677Z",
         "commandConfigured": true,
         "timeoutSeconds": 25.0
       },
@@ -165,8 +173,8 @@
         "algorithm": "ML-DSA",
         "keyId": "MLDSA_UNSET",
         "status": "PASS",
-        "signature": "Sr1D4gSmH4+Hw8bY1MxE7W6NP4aaTVeqbKqjm3/eoXOvFwZeR/IHAZs1ozxBeOVUuLZfSQZPtdsjq7/Eq9ZLDg==",
-        "signedAt": "2026-04-25T03:24:02.812730Z",
+        "signature": "Sbaq1oTdNkmgtOuKCr8Wmbau8tjA+5ukuG+u616RTB4crh77CHZf63ILM7211WSEnr+pvD5TcdPT1VAWjWIUAw==",
+        "signedAt": "2026-04-30T16:52:17.305523Z",
         "commandConfigured": true,
         "timeoutSeconds": 25.0,
         "effectiveMode": "unknown"
