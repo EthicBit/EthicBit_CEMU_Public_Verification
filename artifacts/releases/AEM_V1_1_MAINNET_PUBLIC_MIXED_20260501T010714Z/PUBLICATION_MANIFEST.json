@@ -1,0 +1,52 @@
+{
+  "schema_id": "ETHICBIT_AEM_V1_1_PUBLIC_MIXED_MANIFEST_V1",
+  "release_dir": "artifacts/releases/AEM_V1_1_MAINNET_PUBLIC_MIXED_20260501T010714Z",
+  "file_count": 9,
+  "files": [
+    {
+      "path": "AEM_STRATEGIC_THESIS_FOR_AGENTIC_AI_V1_1.md",
+      "sha256": "ee6c38056e1510a45831c74dcca7c6e01894530c436989f9bb29854d7ffe300b",
+      "size_bytes": 4467
+    },
+    {
+      "path": "AEM_V1_1_ARTIFACT_HASH_RECORD_2026-04-30.md",
+      "sha256": "d3da26065839af67d1d994dbfcaf8736317b19eab3f023318233569bf2b65793",
+      "size_bytes": 675
+    },
+    {
+      "path": "AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json",
+      "sha256": "1b8318a3a23adf8188075c38be134c9fb09e31e5017115092f6595d458537406",
+      "size_bytes": 1602
+    },
+    {
+      "path": "AGENTE_ETICO_MECANICO_V1_1.md",
+      "sha256": "0a51d3cb41495308c2987d00f3212aba4623896113d7ecc30f467ec4645ed2fb",
+      "size_bytes": 6797
+    },
+    {
+      "path": "POST_FILING_PUBLIC_MIXED_STATEMENT_AEM_V1_1.md",
+      "sha256": "b13fdbae678274c472663e9ded7079bd248d1a7cf02196998909f05972ce61d7",
+      "size_bytes": 1711
+    },
+    {
+      "path": "aem_v1_1_mainnet_anchor_report.json",
+      "sha256": "1b8318a3a23adf8188075c38be134c9fb09e31e5017115092f6595d458537406",
+      "size_bytes": 1602
+    },
+    {
+      "path": "anti_re_guard_report.json",
+      "sha256": "73dfefae922a8dfd124f033e3090b647fe09fda9d0b658aaed0ea5d5923f5656",
+      "size_bytes": 859
+    },
+    {
+      "path": "constitutional_controls_report.json",
+      "sha256": "7739ea4d0107f726391d73bdc17e6806bd1abeb40e2d01d709125d7990b40637",
+      "size_bytes": 16014
+    },
+    {
+      "path": "master_closure_report.json",
+      "sha256": "16b324723f967ac053364954ef957bd5eb9b2329aac3064dd779a9456d974836",
+      "size_bytes": 10443
+    }
+  ]
+}

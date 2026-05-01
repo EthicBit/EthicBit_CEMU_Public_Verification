@@ -1,0 +1,29 @@
+{
+  "artifactType": "key_posture_report",
+  "generatedAt": "2026-04-29T16:59:21.500885Z",
+  "status": "SOVEREIGN_COMPLIANT",
+  "signing_backend": "github_secrets_pem",
+  "private_keys_in_repo": false,
+  "tracked_keys_under_assurance": [],
+  "runner_required_label": "mldsa-native",
+  "runner_mode": "mldsa-native",
+  "runner_status": "online",
+  "runner_busy": "true",
+  "runner_check_ok": true,
+  "github_repo": "EthicBit/EthicBit_CEMU",
+  "github_secrets_present": "true",
+  "production_hsm_ready": false,
+  "sovereign_compliant": true,
+  "transitional_compliant": true,
+  "remote": {
+    "endpoint_configured": false,
+    "token_present": false,
+    "ed25519_key_id_configured": false,
+    "mldsa_key_id_configured": false
+  },
+  "probe": {
+    "executed": false,
+    "sign_dispatch_ok": "unknown",
+    "error": ""
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "artifactType": "anti_re_guard_report",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-30T16:52:29.943428Z",
+  "status": "PASS",
+  "claim_level": "ci_grade",
+  "policy_version": "ETHICBIT_ANTI_RE_POLICY_V1",
+  "strict_required": false,
+  "checks": {
+    "snapshot_integrity": "PASS",
+    "snapshot_freshness": "PASS",
+    "runtime_hook_debugger": "PASS",
+    "key_posture": "PASS"
+  },
+  "failures": [],
+  "warnings": [],
+  "evidence_ref": {
+    "policy": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/config/anti_re_policy.v1.json",
+    "snapshot": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/mechanical_ethics_snapshot.json",
+    "realtime_guard": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/realtime_millisecond_guard.json",
+    "key_posture": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/key_posture_report.json"
+  }
+}

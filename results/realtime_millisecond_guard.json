@@ -6,11 +6,13 @@
   "snapshot_status": "PASS",
   "mechanical_ethics": "PASS",
   "l5_canonical_state": "PASS",
-  "snapshot_age_ms": 0.322,
+  "snapshot_age_ms": 0.349,
   "fingerprint_valid": true,
   "canonical_state": "ACTIVE_CANONICAL",
   "claim_level_ceiling": "L5",
   "max_age_ms": 7000,
+  "runtime_hook_debugger": "PASS",
+  "hook_indicators": [],
   "fast_loop_policy": {
     "full_probative_apparatus_out_of_loop": true,
     "o1_guard_only": true,
@@ -19,5 +21,5 @@
     "no_heavy_kzg_in_fast_loop": true,
     "no_full_mechanical_ethics_recalc_per_tick": true
   },
-  "updated_at": 1777299141.3448582
+  "updated_at": 1777567949.9388402
 }

@@ -14,7 +14,7 @@
   "payload": {
     "canonical_sha256": "0a51d3cb41495308c2987d00f3212aba4623896113d7ecc30f467ec4645ed2fb",
     "freeze_pdf_sha256": "689992b6e73ffd897dfc75112abeda022cee6ad492037217f7bab28397b69696",
-    "repo_commit_sha": "4bc4a85c8f4a4c96ab0d4f1df01526c4e33ba140",
+    "repo_commit_sha": "efd5f12a9bb3e07128e49b05404c1cc34d81bc78",
     "signer_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
     "signer_identity": "ETHICBIT_MAIN_SIGNER",
     "system_state_sha256": "6f539a93cf05caeca3ba7d1a202bcac07e0946a918fd0cd061ac1028077eb88d",
