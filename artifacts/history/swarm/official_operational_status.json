@@ -1,6 +1,6 @@
 {
   "artifactType": "official_operational_status",
-  "generatedAt": "2026-04-30T16:52:17.279022Z",
+  "generatedAt": "2026-05-01T17:37:34.712069Z",
   "policyVersion": "official-operational-status-policy.v2.0.0",
   "runContext": {
     "runId": "run-20260411T215540Z-33389",
@@ -40,11 +40,11 @@
   "freezeActive": false,
   "integrity": {
     "inputHashes": {
-      "gateReport": "880858050abb6cfddd0eb3cd5aa20b2ca25d66e31aa8565e43042f51bd5b20fa",
+      "gateReport": "454855c731262a6bd3b26d698e52d67bb7bb8b3e0dd150fe9670312fcc24a393",
       "liveReport": "ffed75a162e96349f76431ced523b630b6cb986fb4c97df02988cd2b92dc6024",
       "canonicalConfig": "6643b55ca51544059b8a8357cf333f83f98a59e76ebe40f4a128d6e82e9bc093"
     },
-    "outputHash": "dceebee9ff49946669cfcb90290f3e2e64593d9035512c235d43bb493d1874ba"
+    "outputHash": "a047e61d20becb45762d6cb78da8853f5075cad14bc1b43746218a8e55175685"
   },
   "paths": {
     "gate": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/GATE_REPORT.json",
@@ -126,10 +126,10 @@
       "ED25519",
       "ML-DSA"
     ],
-    "payloadHash": "295b812b8bcb0145786cc2486afda35e5bf98c8da0ee2a7092ca8e356a7dbc02",
+    "payloadHash": "01e81381254e1ec75746c15338b610b78341c4a5f3621c578d4b5dc23d14f24a",
     "payload": {
-      "path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/ethicbit_hybrid_sign_hao56_zi/payload.jcs.json",
-      "sha256": "295b812b8bcb0145786cc2486afda35e5bf98c8da0ee2a7092ca8e356a7dbc02",
+      "path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/ethicbit_hybrid_sign_xwjt20j3/payload.jcs.json",
+      "sha256": "01e81381254e1ec75746c15338b610b78341c4a5f3621c578d4b5dc23d14f24a",
       "sourcePath": ""
     },
     "hybridCryptoTruth": {
@@ -164,8 +164,8 @@
         "algorithm": "ED25519",
         "keyId": "ED25519_UNSET",
         "status": "PASS",
-        "signature": "zKfsCItqOPkFfBD9n4S0h2lACvdkZA9F1UVUGAsXSSkLI+xBgGVHtdvqmMBrLiVbqqJgnspERYPL9qlXX2sTBA==",
-        "signedAt": "2026-04-30T16:52:17.280677Z",
+        "signature": "MsHXdtSp2AVzVWCu4pQmp6qUHeW+I3UsEwozn6kmMct94xZI0YqRR/LOykhwUx+YlxWAdfNbX6O/jYeCsXf6CQ==",
+        "signedAt": "2026-05-01T17:37:34.715164Z",
         "commandConfigured": true,
         "timeoutSeconds": 25.0
       },
@@ -173,8 +173,8 @@
         "algorithm": "ML-DSA",
         "keyId": "MLDSA_UNSET",
         "status": "PASS",
-        "signature": "Sbaq1oTdNkmgtOuKCr8Wmbau8tjA+5ukuG+u616RTB4crh77CHZf63ILM7211WSEnr+pvD5TcdPT1VAWjWIUAw==",
-        "signedAt": "2026-04-30T16:52:17.305523Z",
+        "signature": "cbqIfWy6fxcH5pOnrGZu9l+H/gjwoPogeoLjuBuTfYa+XC2ZjJkxno7pZdvPT7CZrlpDekZUDwA7Nhe9josMBA==",
+        "signedAt": "2026-05-01T17:37:34.744675Z",
         "commandConfigured": true,
         "timeoutSeconds": 25.0,
         "effectiveMode": "unknown"

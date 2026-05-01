@@ -5,13 +5,13 @@
   "status": "PASS",
   "mode": "public-verify",
   "with_tampering_test": true,
-  "generated_at": "2026-04-30T16:52:36.822478Z",
-  "duration_seconds": 21.534,
+  "generated_at": "2026-05-01T17:37:52.828005Z",
+  "duration_seconds": 19.357,
   "git": {
-    "branch": "codex/anti-re-hardening-spec-v1",
-    "head_sha": "16a7bb8b1e81956785f289f1827255c1bc8ed0a3",
-    "main_head": "fa4e7e4fb60ebaffee9d7dba9ef823c64fc1c471",
-    "status_short": "M artifacts/history/swarm/attestation_status.canonical.json\n M artifacts/history/swarm/official_operational_status.json\n M results/GATE_REPORT.json\n M results/constitutional_controls_report.json\n M results/executive_onepager.md\n M results/finance_anchor_report.md\n M results/index.json\n M results/legal_claim_boundary.md\n M results/mechanical_ethics_gate.json\n M results/mechanical_ethics_snapshot.json\n M results/pq_runtime_secret_protection.json\n M results/public_summary.md\n M results/realtime_millisecond_guard.json\n M results/regulatory_control_report.md\n M results/technical_verification.md\n?? docs/APPENDICES_v1_4_2_FINAL_CLEAN.md\n?? results/anti_re_guard_report.json\n?? results/key_posture_report.json\n?? results/master_closure_report.json\n?? run_agent_realtime.sh"
+    "branch": "main",
+    "head_sha": "9ebdf348435bab07f0687da55974eb4fdd10cc20",
+    "main_head": "9ebdf348435bab07f0687da55974eb4fdd10cc20",
+    "status_short": "M artifacts/history/swarm/attestation_status.canonical.json\n M artifacts/history/swarm/official_operational_status.json\n M results/GATE_REPORT.json\n M results/anti_re_guard_report.json\n M results/constitutional_controls_report.json\n M results/executive_onepager.md\n M results/finance_anchor_report.md\n M results/index.json\n M results/legal_claim_boundary.md\n M results/mechanical_ethics_gate.json\n M results/mechanical_ethics_snapshot.json\n M results/pq_runtime_secret_protection.json\n M results/public_summary.md\n M results/realtime_millisecond_guard.json\n M results/regulatory_control_report.md\n M results/technical_verification.md"
   },
   "summary": {
     "constitutional_status": "PASS",
@@ -39,7 +39,7 @@
       ],
       "status": "PASS",
       "return_code": 0,
-      "duration_seconds": 1.899,
+      "duration_seconds": 1.15,
       "stdout_tail": "L5_CANONICAL_STATE=PASS\nruntime.claim_level_ceiling=L5\nceiling.claim_level_ceiling=L5\nanchor.status=ONCHAIN_BLOB_ANCHOR_VERIFIED\nanchor.tx_hash=0xfb1f2246f2064e6064a4b50e5f3f4d18c697229a819e52057114f505e0b3f13b\n[VERIFY] recovered_address   = 0x9221456deCC27547aA76EC5d53537dfe430C69B7\n[VERIFY] claimed_signer      = 0x9221456deCC27547aA76EC5d53537dfe430C69B7\n[VERIFY] blob_anchor.from    = 0x9221456decc27547aa76ec5d53537dfe430c69b7\nPASS: ceiling.sig recupera la misma dirección que firmó la TX EIP-4844\nCHAIN_OF_CUSTODY=VERIFIED\n[ONCHAIN] cross-verifying 0xfb1f2246f2064e6064a4b50e5f3f4d18c697229a819e52057114f505e0b3f13b\n[ONCHAIN] expected: type=0x3 from=0x9221456decc27547... block=10742400 vhashes=1\n\n[ONCHAIN] confirmed via https://sepolia.drpc.org\n  type      : 0x3 (EIP-4844 blob)\n  from      : 0x9221456decc27547aa76ec5d53537dfe430c69b7\n  block     : 10742400\n  vhashes   : 1 matching\n  receipt   : status=success\nONCHAIN_CROSS_VERIFICATION=PASS\n================================================================\nSTAGE 1: estado canónico L5 (runtime + ceiling + blob anchor JSON)\n================================================================\n\n[STAGE1 exit=0]\n\n================================================================\nSTAGE 2: cadena de custodia criptográfica (ceiling.sig <-> EIP-4844)\n================================================================\n\n[STAGE2 exit=0]\n\n================================================================\nSTAGE 3: cross-verify on-chain (TX existe en RPCs públicos)\n================================================================\n\n[STAGE3 exit=0]\n\n================================================================\nRESUMEN\n================================================================\n  estado_canonico  : PASS  (rc=0)\n  cadena_custodia  : PASS  (rc=0)\n  onchain_crossvfy : PASS  (rc=0)\n\nL5_FULL_CHAIN=PASS\n  - blob EIP-4844 verificado on-chain por RPC público independiente\n  - ceiling V2.1 con eligible_for_l5=True desde 5 fuentes\n  - firma EIP-191 del ceiling recupera la misma dirección que firmó la TX\n  - TX existe on-chain con propiedades coincidentes (anti-tampering)\n",
       "stderr_tail": ""
     },
@@ -52,7 +52,7 @@
       ],
       "status": "PASS",
       "return_code": 0,
-      "duration_seconds": 12.701,
+      "duration_seconds": 12.825,
       "stdout_tail": "Constitutional controls matrix: /Users/oskrmiranda/Documentos/EthicBit_CEMU/config/constitutional_controls.v1.json\n[PASS] CTL-SOV-001 (MUST) - Sovereign Operational Truth Is Canonical\n[PASS] CTL-ETH-001 (MUST) - Mechanical Ethics Must Be Executable And Sector-Aware\n[PASS] CTL-MIX-001 (MUST) - Mixed-Audience Audit Must Be Canonical\n[PASS] CTL-CI-001 (MUST) - Periodic Official Audit Must Run In Strict Mode\n[PASS] CTL-SEC-001 (MUST) - Operational Secret Handling Must Avoid Unsafe Defaults\n[PASS] CTL-BUILD-001 (SHOULD) - Build Reproducibility Must Be Maintained\n[PASS] CTL-EV-001 (MUST) - Evidence Claim Level Must Reach L4\n[PASS] CTL-RT-001 (SHOULD) - Realtime Snapshot Guard Must Preserve Constitutional Equivalence\n[PASS] CTL-RT-002 (SHOULD) - Snapshot Freshness Policy Must Be Defined\n[PASS] CTL-EXT-001 (SHOULD) - External Source Degradation Policy Must Be Defined\n[PASS] CTL-REP-001 (SHOULD) - Third-Party Representation Must Be Delimited\n[PASS] CTL-VRF-001 (SHOULD) - Verification Reproducible Guide Must Exist\n[PASS] CTL-PQ-001 (MUST) - PQ Runtime Secret Protection Claim-Level Enforcement\n[PASS] CTL-RE-001 (MUST) - Anti-RE Runtime Hardening Claim-Level Enforcement\n\nReport: /Users/oskrmiranda/Documentos/EthicBit_CEMU/results/constitutional_controls_report.json\nSummary: total=14 pass=14 fail=0 must_fail=0\nCONSTITUTIONAL_STATUS=PASS\n",
       "stderr_tail": ""
     },
@@ -68,7 +68,7 @@
       ],
       "status": "PASS",
       "return_code": 0,
-      "duration_seconds": 0.06,
+      "duration_seconds": 0.074,
       "stdout_tail": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/results/anti_re_guard_report.json\nstatus=PASS\n",
       "stderr_tail": ""
     },
@@ -81,8 +81,8 @@
       ],
       "status": "PASS",
       "return_code": 0,
-      "duration_seconds": 6.873,
-      "stdout_tail": "[BACKUP] anchor copied to /var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/tmppklyyz_k_kzg_anchor_backup.json\n[ORIGINAL] tx_hash=0xfb1f2246f2064e6064a4b50e5f3f4d18c697229a819e52057114f505e0b3f13b\n[ORIGINAL] from   =0x9221456decc27547aa76ec5d53537dfe430c69b7\n[ORIGINAL] block  =10742400\n\n====================================================================\nTEST 1 [INEXISTENCE] tampering with synthetic invalid tx_hash\n====================================================================\n  mutation: tx_hash -> 0x0000000000000000000000000000000000000000000000000000000000000000\n  observed exit : 1\n  expected      : NON-ZERO (detection)\n  verdict       : PASS\n\n====================================================================\nTEST 2 [WRONG-FROM] tx_hash kept real, from_address swapped\n====================================================================\n  mutation: from_address -> 0xffffffffffffffffffffffffffffffffffffffff\n  observed exit : 1\n  expected      : NON-ZERO (detection)\n  verdict       : PASS\n\n====================================================================\nTEST 3 [WRONG-BLOCK] tx_hash kept real, block_number swapped\n====================================================================\n  mutation: block_number -> 11742399\n  observed exit : 1\n  expected      : NON-ZERO (detection)\n  verdict       : PASS\n\n[RESTORE] anchor restored from backup, backup deleted\n\n====================================================================\nFINAL [HEALTHY] post-restoration verification\n====================================================================\n  expectation: system back to L5_FULL_CHAIN=PASS\n  observed exit : 0\n  expected      : ZERO (healthy)\n  verdict       : PASS\n\n====================================================================\nSUMMARY\n====================================================================\n  PASS  test1_inexistence          exit=1\n  PASS  test2_wrong_from           exit=1\n  PASS  test3_wrong_block          exit=1\n  PASS  final_healthy              exit=0\n\nTAMPERING_RESISTANCE=PROVEN\n  - 3 distinct attack classes detected (inexistence, wrong-from, wrong-block)\n  - system fails closed (exit non-zero) under each attack\n  - system recovers to PASS after restoration (no permanent damage)\n",
+      "duration_seconds": 5.308,
+      "stdout_tail": "[BACKUP] anchor copied to /var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/tmponjhxt24_kzg_anchor_backup.json\n[ORIGINAL] tx_hash=0xfb1f2246f2064e6064a4b50e5f3f4d18c697229a819e52057114f505e0b3f13b\n[ORIGINAL] from   =0x9221456decc27547aa76ec5d53537dfe430c69b7\n[ORIGINAL] block  =10742400\n\n====================================================================\nTEST 1 [INEXISTENCE] tampering with synthetic invalid tx_hash\n====================================================================\n  mutation: tx_hash -> 0x0000000000000000000000000000000000000000000000000000000000000000\n  observed exit : 1\n  expected      : NON-ZERO (detection)\n  verdict       : PASS\n\n====================================================================\nTEST 2 [WRONG-FROM] tx_hash kept real, from_address swapped\n====================================================================\n  mutation: from_address -> 0xffffffffffffffffffffffffffffffffffffffff\n  observed exit : 1\n  expected      : NON-ZERO (detection)\n  verdict       : PASS\n\n====================================================================\nTEST 3 [WRONG-BLOCK] tx_hash kept real, block_number swapped\n====================================================================\n  mutation: block_number -> 11742399\n  observed exit : 1\n  expected      : NON-ZERO (detection)\n  verdict       : PASS\n\n[RESTORE] anchor restored from backup, backup deleted\n\n====================================================================\nFINAL [HEALTHY] post-restoration verification\n====================================================================\n  expectation: system back to L5_FULL_CHAIN=PASS\n  observed exit : 0\n  expected      : ZERO (healthy)\n  verdict       : PASS\n\n====================================================================\nSUMMARY\n====================================================================\n  PASS  test1_inexistence          exit=1\n  PASS  test2_wrong_from           exit=1\n  PASS  test3_wrong_block          exit=1\n  PASS  final_healthy              exit=0\n\nTAMPERING_RESISTANCE=PROVEN\n  - 3 distinct attack classes detected (inexistence, wrong-from, wrong-block)\n  - system fails closed (exit non-zero) under each attack\n  - system recovers to PASS after restoration (no permanent damage)\n",
       "stderr_tail": ""
     }
   ],

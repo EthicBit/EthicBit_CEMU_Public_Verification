@@ -6,7 +6,7 @@
   "snapshot_status": "PASS",
   "mechanical_ethics": "PASS",
   "l5_canonical_state": "PASS",
-  "snapshot_age_ms": 0.349,
+  "snapshot_age_ms": 0.538,
   "fingerprint_valid": true,
   "canonical_state": "ACTIVE_CANONICAL",
   "claim_level_ceiling": "L5",
@@ -21,5 +21,5 @@
     "no_heavy_kzg_in_fast_loop": true,
     "no_full_mechanical_ethics_recalc_per_tick": true
   },
-  "updated_at": 1777567949.9388402
+  "updated_at": 1777657067.5081432
 }
