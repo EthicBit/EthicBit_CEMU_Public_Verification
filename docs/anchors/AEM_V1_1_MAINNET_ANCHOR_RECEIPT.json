@@ -1,0 +1,34 @@
+{
+  "blob_versioned_hashes": [
+    "0x019a48cf8578338425f30f6149ba4ed4b11ac02e21075813775a594214c0f041"
+  ],
+  "block_explorer_url": "https://etherscan.io/tx/0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+  "block_number": 24996672,
+  "chain_id": 1,
+  "effective_gas_price_wei": 2185787133,
+  "fee_paid_eth": 4.5901529793e-05,
+  "fee_paid_wei": 45901529793000,
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "gas_used": 21000,
+  "network": "ethereum-mainnet",
+  "payload": {
+    "canonical_sha256": "0a51d3cb41495308c2987d00f3212aba4623896113d7ecc30f467ec4645ed2fb",
+    "freeze_pdf_sha256": "689992b6e73ffd897dfc75112abeda022cee6ad492037217f7bab28397b69696",
+    "repo_commit_sha": "efd5f12a9bb3e07128e49b05404c1cc34d81bc78",
+    "signer_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+    "signer_identity": "ETHICBIT_MAIN_SIGNER",
+    "system_state_sha256": "6f539a93cf05caeca3ba7d1a202bcac07e0946a918fd0cd061ac1028077eb88d",
+    "thesis_sha256": "ee6c38056e1510a45831c74dcca7c6e01894530c436989f9bb29854d7ffe300b",
+    "ts_unix": 1777597283
+  },
+  "schema_id": "ETHICBIT_AEM_V1_1_MAINNET_ANCHOR_RECEIPT_V1",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+  "timestamp_utc": "2026-05-01T01:01:23+00:00",
+  "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "tx_hash": "0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+  "verification_rpcs": {
+    "block_lookup": "https://ethereum-rpc.publicnode.com",
+    "receipt_lookup": "https://ethereum-rpc.publicnode.com",
+    "tx_lookup": "https://ethereum-rpc.publicnode.com"
+  }
+}
