@@ -2,15 +2,15 @@ AEM V1.1 Independent Reproduction Challenge Hash Record
 Status:
 GENERATED
 Generated at:
-2026-05-02T01:39:52.229812+00:00
+2026-05-02T17:15:47+00:00
 Artifact:
 challenge/independent-reproduction/challenge_manifest.json
 Hash model:
 json_sort_keys_no_whitespace_utf8 (canonical) + file bytes
 Canonical SHA-256:
-2fa2c122b0779769b03fedf5eb6d41ad29c53b5fd481e360c837cd675a4435ff
+17f5f1ddea1ce7188badd483d6399d49c5589813562f55fe07be7f3d5966cd1e
 File SHA-256:
-c3ac3be496c4e6632d5e682b5ff084d9cfa89bfb9006b3d9c1ef3b44905dbc67
+f39d94cc705f1112133471926dc77aadfa44ef2a87cabfaee80ae4193f1c04dd
 Current closure:
 PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT
 Target closure:

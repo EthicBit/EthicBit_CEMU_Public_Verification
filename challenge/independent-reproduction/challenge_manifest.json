@@ -5,7 +5,8 @@
   "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
   "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
   "repository": "EthicBit/EthicBit_CEMU",
-  "public_release": "aem-v1.1-global-registry-final-2026-05-01",
+  "public_release": "aem-v1.1-independent-reproduction-challenge-2026-05-02",
+  "prior_registry_publication": "aem-v1.1-global-registry-final-2026-05-01",
   "reproducibility_extension_anchor": {
     "status": "ONCHAIN_REPRODUCIBILITY_EXTENSION_ANCHOR_VERIFIED",
     "tx_hash": "0x7c9651720faace92b6e66a739e1b5e176c202776bdf41ceea12e93386bcc196d",
@@ -34,4 +35,3 @@
     "patent_grant_claimed": false
   }
 }
-

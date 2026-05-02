@@ -16,9 +16,23 @@ Independent reproduction is achieved only if a separate environment or third-par
 
 ## Public References
 - Repository: `EthicBit/EthicBit_CEMU`
-- Public release: `aem-v1.1-global-registry-final-2026-05-01`
+- Public challenge release/tag: `aem-v1.1-independent-reproduction-challenge-2026-05-02`
+- Prior registry publication tag: `aem-v1.1-global-registry-final-2026-05-01`
 - Reproducibility Extension Anchor TX: `0x7c9651720faace92b6e66a739e1b5e176c202776bdf41ceea12e93386bcc196d`
 - Reproducibility Extension Anchor Block: `25003750`
+
+## Declared Subjects
+This challenge is limited to four declared subjects:
+
+- `global_public_verification_registry`: canonical JSON hash of the AEM V1.1 Global Public Verification Registry.
+- `supply_chain_manifest`: canonical JSON hash of the Supply-Chain Verification Extension manifest.
+- `slsa_provenance`: raw file SHA-256 of the published SLSA provenance artifact.
+- `toolchain_fingerprint`: raw file SHA-256 of the published toolchain fingerprint.
+
+These subjects test public registry integrity, supply-chain manifest integrity, provenance context, and toolchain context. They do not assert universal reproducibility for every repository output.
+
+## Host Environment Boundary
+The operator pre-send validation was performed on macOS and inside Docker Desktop. Docker mitigates most host-specific differences, but reviewers should record operating system, architecture, dependency versions, and any host-specific deviations in the environment fingerprint and reproduction report.
 
 ## Required Inputs
 The independent reviewer should inspect:
@@ -62,9 +76,11 @@ A successful independent run may support:
 
 `INDEPENDENTLY_REPRODUCED_RELEASE_BUILD`
 
-Only after the independent report and attestation are completed and reviewed.
+Only after the independent report and attestation are completed, reviewed, and accepted for the declared subjects.
 
 Until then, the correct claim remains:
 
 `PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT`
 
+## Supply-Chain Note
+This challenge includes supply-chain context such as provenance, toolchain fingerprinting, manifests, signatures, and SBOM references where present. It does not claim SLSA L4 certification or universal supply-chain certification.

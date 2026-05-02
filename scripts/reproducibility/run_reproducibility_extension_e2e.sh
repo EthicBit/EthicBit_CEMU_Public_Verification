@@ -23,6 +23,10 @@ from pathlib import Path
 
 comparison = json.loads(Path("assurance/reproducibility/comparison_report.json").read_text())
 receipt = json.loads(Path("receipts/AEM_V1_1_REPRODUCIBILITY_EXTENSION_RECEIPT.json").read_text())
+mainnet_receipt_path = Path("receipts/AEM_V1_1_REPRODUCIBILITY_EXTENSION_MAINNET_ANCHOR_RECEIPT.json")
+mainnet_receipt = {}
+if mainnet_receipt_path.exists():
+    mainnet_receipt = json.loads(mainnet_receipt_path.read_text())
 
 print("comparison.status =", comparison.get("status"))
 summary = comparison.get("summary", {})
@@ -31,6 +35,8 @@ print("subjects.matched  =", summary.get("matched"))
 print("subjects.mismatch =", summary.get("mismatched"))
 print("claim.current     =", receipt.get("current_closure"))
 print("claim.target      =", receipt.get("target_closure"))
-print("anchor.status     =", receipt.get("anchor_status"))
+print("anchor.status     =", mainnet_receipt.get("status") or receipt.get("anchor_status"))
+if mainnet_receipt:
+    print("anchor.tx         =", mainnet_receipt.get("tx_hash"))
+    print("anchor.block      =", mainnet_receipt.get("block_number"))
 PY
-
