@@ -1,0 +1,23 @@
+{
+  "schema_id": "AEM_V1_1_THIRD_PARTY_REPRODUCTION_ATTESTATION_TEMPLATE_V1",
+  "status": "TEMPLATE_ONLY",
+  "attestation_type": "INDEPENDENT_REPRODUCTION",
+  "statement": "The undersigned independently rebuilt the declared release subjects from the public repository commit or tag and compared the resulting hashes against official expected hashes.",
+  "attestor": {
+    "name": null,
+    "organization": null,
+    "role": null,
+    "contact": null
+  },
+  "reproduction_result": {
+    "status": null,
+    "matched_subjects": null,
+    "mismatched_subjects": null,
+    "comparison_report_path": null
+  },
+  "signature": {
+    "method": null,
+    "value": null
+  }
+}
+

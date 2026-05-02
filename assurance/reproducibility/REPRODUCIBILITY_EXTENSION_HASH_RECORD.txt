@@ -1,0 +1,24 @@
+AEM V1.1 Reproducibility Extension Hash Record
+Status:
+GENERATED
+Generated at:
+2026-05-02T00:24:22.448509+00:00
+Artifact:
+assurance/reproducibility/REPRODUCIBILITY_EXTENSION_MANIFEST.json
+Hash model:
+json_sort_keys_no_whitespace_utf8 (canonical) + file bytes
+Canonical SHA-256:
+3423ebeada78ee73a9cf6c30c3bacb307e94d17be575fe7e8b2938172cc6259a
+File SHA-256:
+190e69ec755c1ea734637ccd3553fb92153ad87c8a5669097404ccdc6a89ed57
+Current closure:
+PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT
+Target closure:
+INDEPENDENTLY_REPRODUCED_RELEASE_BUILD
+Scope boundary:
+- fully_reproducible_build_claimed=false
+- end_to_end_deterministic_rebuild_claimed=false
+- independently_reproduced_release_build_achieved=false
+- slsa_l4_fully_proven_claimed=false
+- third_party_reproduction_completed=false
+- universal_reproducibility_claimed=false

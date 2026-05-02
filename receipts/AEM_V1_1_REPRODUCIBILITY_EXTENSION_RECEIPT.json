@@ -1,0 +1,30 @@
+{
+  "schema_id": "AEM_V1_1_REPRODUCIBILITY_EXTENSION_RECEIPT_V1",
+  "artifact": "AEM V1.1",
+  "extension": "AEM V1.1 Reproducibility Extension",
+  "status": "REPRODUCIBILITY_EXTENSION_PREPARED",
+  "generated_at_utc": "2026-05-02T00:24:48.260304+00:00",
+  "source_commit_sha_short": "9d1e976f",
+  "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
+  "independent_reproduction_claimed": false,
+  "fully_reproducible_build_claimed": false,
+  "end_to_end_deterministic_rebuild_claimed": false,
+  "slsa_l4_fully_proven_claimed": false,
+  "third_party_reproduction_completed": false,
+  "universal_reproducibility_claimed": false,
+  "anchor_status": "NOT_ANCHORED_YET",
+  "verification_run": {
+    "build_script_status": "PASS",
+    "comparison_status": "PASS",
+    "declared_subjects_total": 4,
+    "declared_subjects_matched": 4,
+    "declared_subjects_mismatched": 0
+  },
+  "manifest_hashes": {
+    "canonicalization": "json_sort_keys_no_whitespace_utf8",
+    "manifest_canonical_sha256": "3423ebeada78ee73a9cf6c30c3bacb307e94d17be575fe7e8b2938172cc6259a",
+    "manifest_file_sha256": "190e69ec755c1ea734637ccd3553fb92153ad87c8a5669097404ccdc6a89ed57"
+  },
+  "notes": "Preparation receipt only. Independent reproduction is not claimed until completed by separate environment or third-party verifier."
+}

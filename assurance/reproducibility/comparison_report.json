@@ -1,0 +1,51 @@
+{
+  "schema_id": "AEM_V1_1_REPRODUCIBILITY_COMPARISON_REPORT_V1",
+  "status": "PASS",
+  "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
+  "generated_at": "2026-05-02T00:25:43.365884+00:00",
+  "subjects": [
+    {
+      "id": "global_public_verification_registry",
+      "path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+      "hash_type": "canonical_sha256",
+      "expected_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+      "observed_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+      "match": true,
+      "reason": "match"
+    },
+    {
+      "id": "supply_chain_manifest",
+      "path": "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+      "hash_type": "canonical_sha256",
+      "expected_sha256": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef",
+      "observed_sha256": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef",
+      "match": true,
+      "reason": "match"
+    },
+    {
+      "id": "slsa_provenance",
+      "path": "assurance/provenance/SLSA_PROVENANCE.json",
+      "hash_type": "file_sha256",
+      "expected_sha256": "41b91bde1a038d00257b7dd3d1137d8b792a816900b894fb0d20a550f2e41485",
+      "observed_sha256": "41b91bde1a038d00257b7dd3d1137d8b792a816900b894fb0d20a550f2e41485",
+      "match": true,
+      "reason": "match"
+    },
+    {
+      "id": "toolchain_fingerprint",
+      "path": "assurance/toolchain/toolchain_fingerprint.json",
+      "hash_type": "file_sha256",
+      "expected_sha256": "7fa2c1e2489e9c9efd8d432b9badd566b8989db95a867b78c063a9f73a4aeec0",
+      "observed_sha256": "7fa2c1e2489e9c9efd8d432b9badd566b8989db95a867b78c063a9f73a4aeec0",
+      "match": true,
+      "reason": "match"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "matched": 4,
+    "mismatched": 0,
+    "placeholders": 0
+  }
+}

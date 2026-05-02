@@ -1,0 +1,13 @@
+{
+  "name": "AEM V1.1 Reproducibility Environment",
+  "build": {
+    "dockerfile": "../Dockerfile.reproducible"
+  },
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": []
+    }
+  }
+}
+
