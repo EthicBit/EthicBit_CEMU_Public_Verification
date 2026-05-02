@@ -7,7 +7,8 @@
   "source_reference": {
     "repository": "EthicBit/EthicBit_CEMU",
     "branch": "main",
-    "release_tag": "aem-v1.1-global-registry-final-2026-05-01",
+    "release_tag": "aem-v1.1-independent-reproduction-challenge-2026-05-02",
+    "prior_registry_publication_tag": "aem-v1.1-global-registry-final-2026-05-01",
     "registry_anchor_tx": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
     "supply_chain_extension_anchor_tx": "0x2c9befb0398d90aee0c831837664c9c883700497ebb81fe7a7d9acf3b1d58fef"
   },
@@ -46,4 +47,3 @@
     "universal_reproducibility_claimed": false
   }
 }
-
