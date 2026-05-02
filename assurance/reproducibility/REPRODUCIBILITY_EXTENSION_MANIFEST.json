@@ -1,0 +1,35 @@
+{
+  "schema_id": "AEM_V1_1_REPRODUCIBILITY_EXTENSION_MANIFEST_V1",
+  "extension_name": "AEM V1.1 Reproducibility Extension",
+  "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
+  "does_not_modify": [
+    "AEM V1.1 canonical artifact",
+    "final Global Public Verification Registry",
+    "final Ethereum mainnet registry anchor",
+    "Supply-Chain Verification Extension anchor"
+  ],
+  "artifacts": [
+    "docs/reproducibility/REPRODUCIBLE_BUILD_GUIDE.md",
+    "docs/reproducibility/AEM_V1_1_REPRODUCIBILITY_EXTENSION.md",
+    "scripts/reproducibility/build_from_clean_environment.sh",
+    "scripts/reproducibility/compare_reproducible_outputs.py",
+    "scripts/reproducibility/generate_reproducibility_report.py",
+    "assurance/reproducibility/declared_subjects.json",
+    "assurance/reproducibility/expected_hashes.json",
+    "assurance/reproducibility/environment_fingerprint.json",
+    "assurance/reproducibility/comparison_report.json",
+    "assurance/reproducibility/independent_reproduction_report.json",
+    "assurance/reproducibility/third_party_reproduction_attestation_template.json",
+    "receipts/AEM_V1_1_REPRODUCIBILITY_EXTENSION_RECEIPT.json"
+  ],
+  "scope_boundary": {
+    "fully_reproducible_build_claimed": false,
+    "end_to_end_deterministic_rebuild_claimed": false,
+    "independently_reproduced_release_build_achieved": false,
+    "slsa_l4_fully_proven_claimed": false,
+    "third_party_reproduction_completed": false,
+    "universal_reproducibility_claimed": false
+  }
+}
+
