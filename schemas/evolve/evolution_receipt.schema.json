@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ethicbit.example/schemas/evolve/evolution_receipt.schema.json",
+  "title": "AEM-EVOLVE Evolution Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "receipt_payload",
+    "signature"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1"
+    },
+    "receipt_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt_id",
+        "event_id",
+        "gate_version",
+        "outcome",
+        "claim_scope",
+        "evidence_status",
+        "materiality_score",
+        "required_evidence",
+        "provided_evidence",
+        "missing_evidence",
+        "non_claims",
+        "timestamp_utc",
+        "receipt_message"
+      ],
+      "properties": {
+        "receipt_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_id": {
+          "type": "string",
+          "pattern": "^EVO-[A-Z]+-[0-9]{4}-[0-9]{4}$"
+        },
+        "gate_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "PASS",
+            "SCOPE_LIMITED",
+            "FAIL_CLOSED",
+            "REJECTED_OVERCLAIM",
+            "PENDING_EXTERNAL_REVIEW"
+          ]
+        },
+        "claim_scope": {
+          "type": "string",
+          "enum": [
+            "EVIDENCE_REVIEW_SUPPORT",
+            "RESEARCH_SUPPORT",
+            "TECHNICAL_DEMONSTRATION_ONLY"
+          ]
+        },
+        "evidence_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "materiality_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "required_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provided_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "missing_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "non_claims": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "clinical_claimed",
+            "diagnostic_claimed",
+            "regulatory_approval_claimed",
+            "third_party_binding"
+          ],
+          "properties": {
+            "clinical_claimed": {
+              "type": "boolean",
+              "const": false
+            },
+            "diagnostic_claimed": {
+              "type": "boolean",
+              "const": false
+            },
+            "regulatory_approval_claimed": {
+              "type": "boolean",
+              "const": false
+            },
+            "third_party_binding": {
+              "type": "boolean",
+              "const": false
+            }
+          }
+        },
+        "timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "receipt_message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signature_algorithm",
+        "receipt_payload_sha256",
+        "signature_payload_canonicalization",
+        "public_key_file",
+        "signature_file"
+      ],
+      "properties": {
+        "signature_algorithm": {
+          "const": "RSA-PSS-SHA256"
+        },
+        "receipt_payload_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "signature_payload_canonicalization": {
+          "const": "json_sort_keys_no_whitespace_utf8"
+        },
+        "public_key_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signature_file": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+  "event_id": "EVO-GEN-2026-0097",
+  "system_id": "EthicBit/CEMU",
+  "base_artifact": "AEM V1.1 - Mechanical Ethical Agent",
+  "change_type": "DATASET_UPDATE",
+  "sector_profile": "GENOMICS_RESEARCH_SUPPORT",
+  "materiality_score": 95.0,
+  "evidence_bundle": {
+    "evidence_bundle_id": "EVO-GEN-2026-0097-EVIDENCE-BUNDLE",
+    "sources": [
+      "ClinVar update example",
+      "gnomAD update example",
+      "controlled technical demonstration fixture"
+    ],
+    "evidence_hashes": [
+      "1111111111111111111111111111111111111111111111111111111111111111",
+      "2222222222222222222222222222222222222222222222222222222222222222"
+    ],
+    "review_notes": "Controlled non-clinical demonstration fixture for evidence review support only."
+  },
+  "requested_claim_scope": "EVIDENCE_REVIEW_SUPPORT",
+  "risk_flags": [
+    "genomics_domain",
+    "not_for_clinical_use",
+    "scope_limited"
+  ],
+  "timestamp_utc": "2026-05-05T00:00:00Z",
+  "operator": {
+    "name": "EthicBit controlled demonstration",
+    "role": "technical_operator"
+  },
+  "previous_state_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "proposed_state_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "scope_boundary": {
+    "clinical_use_claimed": false,
+    "diagnostic_use_claimed": false,
+    "regulatory_approval_claimed": false,
+    "third_party_binding_claimed": false
+  }
+}
