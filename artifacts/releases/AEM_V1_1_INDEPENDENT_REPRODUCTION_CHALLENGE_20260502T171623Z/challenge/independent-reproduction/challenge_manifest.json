@@ -1,0 +1,37 @@
+{
+  "schema_id": "AEM_V1_1_INDEPENDENT_REPRODUCTION_CHALLENGE_MANIFEST_V1",
+  "artifact": "AEM V1.1",
+  "challenge": "Independent Reproduction Pilot",
+  "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
+  "repository": "EthicBit/EthicBit_CEMU",
+  "public_release": "aem-v1.1-independent-reproduction-challenge-2026-05-02",
+  "prior_registry_publication": "aem-v1.1-global-registry-final-2026-05-01",
+  "reproducibility_extension_anchor": {
+    "status": "ONCHAIN_REPRODUCIBILITY_EXTENSION_ANCHOR_VERIFIED",
+    "tx_hash": "0x7c9651720faace92b6e66a739e1b5e176c202776bdf41ceea12e93386bcc196d",
+    "block_number": 25003750,
+    "network": "ethereum-mainnet",
+    "chain_id": 1
+  },
+  "challenge_inputs": [
+    "assurance/reproducibility/declared_subjects.json",
+    "assurance/reproducibility/expected_hashes.json",
+    "docs/reproducibility/REPRODUCIBLE_BUILD_GUIDE.md",
+    "scripts/reproducibility/run_reproducibility_extension_e2e.sh",
+    "receipts/AEM_V1_1_REPRODUCIBILITY_EXTENSION_MAINNET_ANCHOR_RECEIPT.json"
+  ],
+  "expected_outputs": [
+    "assurance/reproducibility/comparison_report.json",
+    "assurance/reproducibility/environment_fingerprint.json",
+    "assurance/reproducibility/independent_reproduction_report.json",
+    "assurance/reproducibility/third_party_reproduction_attestation_template.json"
+  ],
+  "claim_boundary": {
+    "independent_reproduction_already_claimed": false,
+    "fully_reproducible_build_claimed": false,
+    "slsa_l4_fully_proven_claimed": false,
+    "regulatory_approval_claimed": false,
+    "patent_grant_claimed": false
+  }
+}

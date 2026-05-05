@@ -1,14 +1,14 @@
 {
   "schema_id": "AEM_V1_1_INDEPENDENT_REPRODUCTION_REPORT_V1",
   "status": "LOCAL_PREPARATION_REPORT_NOT_INDEPENDENT_ATTESTATION",
-  "generated_at": "2026-05-02T00:25:43.445024+00:00",
+  "generated_at": "2026-05-02T21:01:58.258065+00:00",
   "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
   "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
   "independent_reproduction_claimed": false,
   "third_party_reproduction_completed": false,
   "source": {
     "repository": "EthicBit/EthicBit_CEMU",
-    "commit_or_tag": "9d1e976f"
+    "commit_or_tag": "600c3dd8"
   },
   "result": {
     "local_comparison_status": "PASS",

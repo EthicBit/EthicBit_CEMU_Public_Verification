@@ -1,0 +1,49 @@
+{
+  "schema_id": "AEM_V1_1_REPRODUCIBILITY_DECLARED_SUBJECTS_V1",
+  "artifact": "AEM V1.1",
+  "extension": "AEM V1.1 Reproducibility Extension",
+  "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
+  "source_reference": {
+    "repository": "EthicBit/EthicBit_CEMU",
+    "branch": "main",
+    "release_tag": "aem-v1.1-global-registry-final-2026-05-01",
+    "registry_anchor_tx": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+    "supply_chain_extension_anchor_tx": "0x2c9befb0398d90aee0c831837664c9c883700497ebb81fe7a7d9acf3b1d58fef"
+  },
+  "declared_subjects": [
+    {
+      "id": "global_public_verification_registry",
+      "path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+      "expected_hash_type": "canonical_sha256",
+      "scope": "declared_subject"
+    },
+    {
+      "id": "supply_chain_manifest",
+      "path": "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+      "expected_hash_type": "canonical_sha256",
+      "scope": "declared_subject"
+    },
+    {
+      "id": "slsa_provenance",
+      "path": "assurance/provenance/SLSA_PROVENANCE.json",
+      "expected_hash_type": "file_sha256",
+      "scope": "declared_subject"
+    },
+    {
+      "id": "toolchain_fingerprint",
+      "path": "assurance/toolchain/toolchain_fingerprint.json",
+      "expected_hash_type": "file_sha256",
+      "scope": "declared_subject"
+    }
+  ],
+  "scope_boundary": {
+    "fully_reproducible_build_claimed": false,
+    "end_to_end_deterministic_rebuild_claimed": false,
+    "independently_reproduced_release_build_achieved": false,
+    "slsa_l4_fully_proven_claimed": false,
+    "third_party_reproduction_completed": false,
+    "universal_reproducibility_claimed": false
+  }
+}
+

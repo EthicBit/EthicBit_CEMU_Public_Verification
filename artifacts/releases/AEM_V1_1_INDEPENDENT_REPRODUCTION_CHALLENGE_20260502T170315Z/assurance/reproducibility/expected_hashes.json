@@ -1,0 +1,34 @@
+{
+  "schema_id": "AEM_V1_1_REPRODUCIBILITY_EXPECTED_HASHES_V1",
+  "hash_algorithm": "SHA-256",
+  "canonicalization": {
+    "json": "json_sort_keys_no_whitespace_utf8"
+  },
+  "subjects": [
+    {
+      "id": "global_public_verification_registry",
+      "path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+      "hash_type": "canonical_sha256",
+      "expected_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075"
+    },
+    {
+      "id": "supply_chain_manifest",
+      "path": "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+      "hash_type": "canonical_sha256",
+      "expected_sha256": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef"
+    },
+    {
+      "id": "slsa_provenance",
+      "path": "assurance/provenance/SLSA_PROVENANCE.json",
+      "hash_type": "file_sha256",
+      "expected_sha256": "41b91bde1a038d00257b7dd3d1137d8b792a816900b894fb0d20a550f2e41485"
+    },
+    {
+      "id": "toolchain_fingerprint",
+      "path": "assurance/toolchain/toolchain_fingerprint.json",
+      "hash_type": "file_sha256",
+      "expected_sha256": "7fa2c1e2489e9c9efd8d432b9badd566b8989db95a867b78c063a9f73a4aeec0"
+    }
+  ]
+}
+

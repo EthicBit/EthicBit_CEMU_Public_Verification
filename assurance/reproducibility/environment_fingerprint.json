@@ -1,14 +1,14 @@
 {
   "schema_id": "AEM_V1_1_REPRODUCIBILITY_ENVIRONMENT_FINGERPRINT_V1",
   "status": "GENERATED",
-  "generated_at": "2026-05-02T00:25:43.365884+00:00",
+  "generated_at": "2026-05-02T21:01:58.004610+00:00",
   "environment": {
     "os": "macOS-26.4-arm64-arm-64bit",
     "kernel": "25.4.0",
     "architecture": "arm64",
     "python_version": "3.11.8",
-    "git_version": "git version 2.50.1 (Apple Git-155)",
-    "docker_version": null,
+    "git_version": "git version 2.53.0",
+    "docker_version": "Docker version 29.3.1, build c2be9cc",
     "nix_version": null
   },
   "notes": "Fingerprint for this reproducibility comparison execution."

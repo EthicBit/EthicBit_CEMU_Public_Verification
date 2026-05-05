@@ -1,0 +1,31 @@
+{
+  "schema_id": "ETHICBIT_AEM_V1_1_SLSA_PROVENANCE_V1",
+  "status": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "generated_at": "2026-05-01T20:20:30.508095Z",
+  "buildType": "https://slsa.dev/provenance/v1",
+  "builder": {
+    "id": "https://github.com/EthicBit/EthicBit_CEMU",
+    "tool": "scripts/supply_chain/build_aem_v1_1_supply_chain_extension.py"
+  },
+  "invocation": {
+    "source_uri": "https://github.com/EthicBit/EthicBit_CEMU.git",
+    "source_ref": "55c8fd5d375ff905797bbaba241d265c3d15da5a",
+    "branch": "aem-v1.1/supply-chain/verification-extension"
+  },
+  "subjects": [],
+  "upstream_references": {
+    "registry_canonical_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+    "registry_mainnet_anchor_tx": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+    "registry_mainnet_anchor_block": 25001458
+  },
+  "claim_boundaries": {
+    "claim_level": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+    "not_claimed": {
+      "fully_reproducible_build": false,
+      "end_to_end_deterministic_rebuild": false,
+      "independent_reproducible_build_proven": false,
+      "slsa_l4_fully_achieved": false
+    },
+    "third_party_binding": false
+  }
+}

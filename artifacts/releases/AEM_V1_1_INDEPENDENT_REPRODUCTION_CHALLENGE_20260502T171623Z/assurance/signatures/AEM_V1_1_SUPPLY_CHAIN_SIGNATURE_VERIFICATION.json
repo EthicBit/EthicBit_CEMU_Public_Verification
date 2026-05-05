@@ -1,0 +1,39 @@
+{
+  "schema_id": "ETHICBIT_AEM_V1_1_SUPPLY_CHAIN_SIGNATURE_VERIFICATION_V1",
+  "generated_at": "2026-05-01T20:20:30.753985Z",
+  "sign_command": [
+    "python3",
+    "scripts/crypto/hybrid_sign.py",
+    "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+    "--output",
+    "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/signatures/AEM_V1_1_SUPPLY_CHAIN_SIGNATURE_SET.json",
+    "--ed25519-sign-cmd",
+    "assurance/signers/ed25519_sign.sh {payload}",
+    "--mldsa-sign-cmd",
+    "assurance/signers/mldsa_sign.sh {payload}",
+    "--crypto-truth-json",
+    "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/signatures/AEM_V1_1_SUPPLY_CHAIN_CRYPTO_TRUTH.json",
+    "--claim-level",
+    "ci_grade"
+  ],
+  "verify_command": [
+    "python3",
+    "scripts/crypto/hybrid_verify.py",
+    "--payload",
+    "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.jcs.json",
+    "--signature-set",
+    "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/signatures/AEM_V1_1_SUPPLY_CHAIN_SIGNATURE_SET.json",
+    "--ed25519-verify-cmd",
+    "assurance/signers/ed25519_verify.sh {payload} {signature}",
+    "--mldsa-verify-cmd",
+    "assurance/signers/mldsa_verify.sh {payload} {signature}"
+  ],
+  "sign_return_code": 0,
+  "verify_return_code": 0,
+  "status": "PASS",
+  "sign_stdout_tail": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/signatures/AEM_V1_1_SUPPLY_CHAIN_SIGNATURE_SET.json\nPASS\n",
+  "sign_stderr_tail": "",
+  "verify_stdout_tail": "{\n  \"status\": \"PASS\",\n  \"riskMode\": \"HIGH\",\n  \"requiredAlgorithms\": [\n    \"ED25519\",\n    \"ML-DSA\"\n  ],\n  \"semanticStatus\": \"PASS\",\n  \"checks\": [\n    {\n      \"algorithm\": \"ED25519\",\n      \"status\": \"PASS\",\n      \"commandConfigured\": true,\n      \"timeoutSeconds\": 25.0\n    },\n    {\n      \"algorithm\": \"ML-DSA\",\n      \"status\": \"PASS\",\n      \"commandConfigured\": true,\n      \"timeoutSeconds\": 25.0\n    }\n  ]\n}\n",
+  "verify_stderr_tail": "",
+  "signature_set_path": "assurance/signatures/AEM_V1_1_SUPPLY_CHAIN_SIGNATURE_SET.json"
+}

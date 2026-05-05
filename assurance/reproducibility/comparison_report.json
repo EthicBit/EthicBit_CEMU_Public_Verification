@@ -3,7 +3,7 @@
   "status": "PASS",
   "current_closure": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
   "target_closure": "INDEPENDENTLY_REPRODUCED_RELEASE_BUILD",
-  "generated_at": "2026-05-02T00:25:43.365884+00:00",
+  "generated_at": "2026-05-02T21:01:58.004610+00:00",
   "subjects": [
     {
       "id": "global_public_verification_registry",

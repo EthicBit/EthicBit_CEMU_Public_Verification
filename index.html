@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthicBit — Mechanical Ethics Infrastructure for Agentic AI</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap');
+        
+        :root {
+            --ethicbit-black: #050505;
+            --ethicbit-graphite: #151515;
+            --ethicbit-charcoal: #242424;
+            --ethicbit-gray: #6B7280;
+            --ethicbit-light-gray: #E5E7EB;
+            --ethicbit-soft-gray: #F6F7F9;
+            --ethicbit-white: #FFFFFF;
+            --ethicbit-accent: #2563EB;
+            --ethicbit-accent-dark: #1D4ED8;
+            --ethicbit-success: #16A34A;
+            --ethicbit-warning: #D97706;
+            --ethicbit-danger: #DC2626;
+            --ethicbit-border: #DADDE3;
+            --ethicbit-card: #FFFFFF;
+            --ethicbit-background: #FAFAFA;
+            --primary: var(--ethicbit-accent);
+        }
+        
+        body {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-weight: 700;
+        }
+
+        .font-mono,
+        code,
+        .mono,
+        .hash,
+        .tx,
+        .badge-technical,
+        .metric-value {
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
+        }
+
+        .section-header {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+        }
+
+        .ethic-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .ethic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-active {
+            color: #22d3ee;
+            position: relative;
+        }
+        
+        .nav-active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #22d3ee, #67e8f9);
+        }
+
+        .flow-step {
+            position: relative;
+        }
+        
+        .flow-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            width: 3px;
+            height: 40px;
+            background: linear-gradient(to bottom, #22d3ee, transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 31px;
+            top: 0;
+            bottom: -24px;
+            width: 3px;
+            background: #334155;
+        }
+        
+        .timeline-item:last-child:before {
+            display: none;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .metric-value {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .ethic-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #334155, transparent);
+        }
+
+        .contact-section {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.72), rgba(2, 6, 23, 0.95));
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            padding: 0.9rem 1rem;
+            font-family: 'IBM Plex Sans', system-ui, sans-serif;
+            font-size: 0.95rem;
+            color: #f8fafc;
+            background: rgba(15, 23, 42, 0.86);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: var(--ethicbit-accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .brand-token-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+        }
+
+        .swatch {
+            width: 100%;
+            height: 54px;
+            border-radius: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+
+        /* EthicBit responsive hardening */
+        html, body { overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; }
+        section, div, article, aside, nav, footer { min-width: 0; }
+        img { max-width: 100%; height: auto; }
+        .glass, .ethic-card, .brand-token-card { min-width: 0; overflow: hidden; }
+        .font-mono, .mono, .hash, .tx, .metric-value, code {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            white-space: normal;
+            max-width: 100%;
+        }
+        .metric-value { font-size: clamp(0.78rem, 1.1vw, 0.95rem); line-height: 1.45; }
+        #evidencia .font-mono, #aem-v11 .font-mono { font-size: clamp(0.72rem, 1.05vw, 0.92rem); line-height: 1.5; }
+        #evidencia .grid > div, #aem-v11 .grid > div { min-width: 0; }
+
+        .brand-logo-img {
+            object-fit: contain !important;
+            background: #fff;
+        }
+
+        @media (max-width: 1024px) {
+            .section-header { font-size: 2rem; line-height: 2.25rem; }
+            nav .max-w-screen-2xl > div { padding-left: 1.25rem; padding-right: 1.25rem; }
+        }
+
+        @media (max-width: 768px) {
+            .section-header { font-size: 1.75rem; line-height: 2rem; }
+            .px-8 { padding-left: 1rem !important; padding-right: 1rem !important; }
+            .py-20 { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+            h1 { font-size: 3.2rem !important; }
+            nav a[href="#evidencia"] { display: none; }
+            .contact-form { padding: 1.25rem !important; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.75rem !important; }
+            .font-display.text-3xl { font-size: 1.35rem !important; }
+            nav img[alt="EthicBit logo"] { width: 2.5rem !important; height: 2.5rem !important; }
+            .section-header { font-size: 1.55rem; line-height: 1.9rem; }
+            .glass.rounded-3xl, .ethic-card.rounded-3xl { border-radius: 1.25rem !important; }
+        }
+
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200">
+    <!-- NAV -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 border-b border-slate-800 backdrop-blur-lg">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-x-3">
+                    <div class="flex items-center gap-x-2">
+                        <img src="/ethicbit-logo.png" alt="EthicBit logo" class="brand-logo-img w-11 h-11 rounded-full border border-slate-700 bg-white object-contain p-1 shadow-sm">
+                        <div>
+                            <span class="font-display text-3xl font-semibold tracking-tighter">EthicBit</span>
+                        </div>
+                    </div>
+                    <div class="px-3 py-1 rounded-full bg-slate-800 text-xs font-mono tracking-[1px] text-cyan-400">AEM V1.1</div>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-8 text-sm">
+                    <a href="#que-es" class="hover:text-cyan-400 transition-colors">Qué es</a>
+                    <a href="#mechanical-ethics" class="hover:text-cyan-400 transition-colors">Mechanical Ethics</a>
+                    <a href="#aem-v11" class="hover:text-cyan-400 transition-colors">AEM V1.1</a>
+                    <a href="#evidencia" class="hover:text-cyan-400 transition-colors">Evidencia</a>
+                    <a href="#evolve" class="hover:text-cyan-400 transition-colors">AEM-EVOLVE™</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <a href="https://github.com" target="_blank" 
+                       class="px-4 py-2 text-sm font-medium border border-slate-700 hover:bg-slate-900 rounded-3xl transition-all flex items-center gap-x-2">
+                        <i class="fa-brands fa-github"></i>
+                        <span class="hidden sm:inline">GitHub</span>
+                    </a>
+                    <a href="#evidencia" 
+                       class="px-5 py-2 text-sm font-semibold bg-white text-slate-950 hover:bg-white/90 rounded-3xl transition-all flex items-center gap-x-2">
+                        <span>Ver evidencia</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO PRINCIPAL -->
+    <section class="pt-20 pb-16 md:pt-24 md:pb-20 relative overflow-hidden">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <!-- Left content -->
+                <div class="md:col-span-7">
+                    <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-3xl bg-slate-900 border border-slate-700 mb-6">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span class="text-xs font-semibold tracking-[1px] text-emerald-400">PUBLIC VERIFIABLE • ETHEREUM MAINNET</span>
+                    </div>
+                    
+                    <h1 class="font-display text-6xl md:text-7xl leading-[1.05] tracking-tighter font-semibold mb-6">
+                        EthicBit<br>
+                        <span class="bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">Mechanical Ethics Infrastructure</span><br>
+                        <span class="text-4xl md:text-5xl text-slate-400">for Agentic AI</span>
+                    </h1>
+                    
+                    <p class="max-w-[560px] text-xl text-slate-300 mb-8">
+                        EthicBit convierte gobernanza, evidencia y límites de claim en controles ejecutables 
+                        para sistemas de IA agentiva y automatizada.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <div onclick="document.getElementById('evidencia').scrollIntoView({ behavior: 'smooth' })" 
+                             class="cursor-pointer group px-7 py-3.5 bg-white hover:bg-white/90 text-slate-950 font-semibold rounded-3xl flex items-center gap-x-3 transition-all active:scale-[0.985]">
+                            <span>Ver evidencia pública</span>
+                            <i class="fa-solid fa-arrow-right group-active:translate-x-1 transition"></i>
+                        </div>
+                        
+                        <a href="https://github.com" target="_blank"
+                           class="px-7 py-3.5 border border-slate-700 hover:bg-slate-900 font-medium rounded-3xl flex items-center gap-x-3 transition-all">
+                            <i class="fa-brands fa-github"></i>
+                            <span>Ver en GitHub</span>
+                        </a>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <div class="badge bg-slate-800 text-cyan-400 border border-cyan-900">AEM V1.1 — Public-Verifiable</div>
+                        <div class="badge bg-emerald-900/50 text-emerald-400 border border-emerald-800">Mechanical Ethics Audit — PASS</div>
+                        <div class="badge bg-slate-800 text-slate-300 border border-slate-700">Ethereum Mainnet Anchored</div>
+                        <div class="badge bg-violet-900/50 text-violet-400 border border-violet-800">AEM-EVOLVE™ — Controlled Demo</div>
+                    </div>
+                </div>
+                
+                <!-- Right visual -->
+                <div class="md:col-span-5 relative">
+                    <div class="glass border border-slate-700 rounded-3xl p-8">
+                        <div class="mb-7 flex justify-center">
+                            <img src="/ethicbit-logo.png" alt="EthicBit logo" class="brand-logo-img w-36 h-36 rounded-full border border-slate-700 bg-white object-contain p-2 shadow-xl shadow-cyan-950/20">
+                        </div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <div class="text-xs text-slate-400">CURRENT STATUS</div>
+                                <div class="font-display text-2xl font-semibold tracking-tight">AEM V1.1</div>
+                            </div>
+                            <div class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-mono rounded-2xl flex items-center gap-x-1.5">
+                                <i class="fa-solid fa-check-double"></i>
+                                <span>VERIFIED</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Registry Anchor</span>
+                                <span class="font-mono text-xs text-cyan-400">0xa204...5dddb4</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Claim-Level Ceiling</span>
+                                <span class="font-semibold">L5 within AEM V1.1 framework</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Third-Party Binding</span>
+                                <span class="text-rose-400">false</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 pt-6 border-t border-slate-700 text-[10px] text-slate-500 font-mono tracking-widest">
+                            SHA-256: 24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block">
+            <div class="flex flex-col items-center gap-y-1 text-xs text-slate-500">
+                <span>SCROLL TO EXPLORE</span>
+                <i class="fa-solid fa-chevron-down animate-bounce"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. ¿QUÉ ES ETHICBIT? -->
+    <section id="que-es" class="max-w-screen-2xl mx-auto px-8 py-20 border-t border-slate-800">
+        <div class="max-w-3xl">
+            <div class="uppercase tracking-[2px] text-xs font-semibold text-cyan-400 mb-3">IDENTIDAD TÉCNICA</div>
+            <h2 class="section-header mb-6">¿Qué es EthicBit?</h2>
+            
+            <div class="prose prose-invert max-w-none text-lg text-slate-300">
+                <p>EthicBit es una infraestructura técnica de Mechanical Ethics para IA agentiva y sistemas de decisión automatizada.</p>
+                <p>Su objetivo es transformar principios éticos, límites operativos, requisitos de evidencia y reglas de gobernanza en controles ejecutables, verificables y auditables.</p>
+            </div>
+            
+            <div class="mt-8 p-8 glass border border-slate-700 rounded-3xl">
+                <div class="flex items-start gap-4">
+                    <div class="mt-1 text-cyan-400">
+                        <i class="fa-solid fa-quote-left text-3xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xl font-medium text-white">EthicBit convierte gobernanza de IA en controles ejecutables y evidencia verificable.</p>
+                        <p class="mt-3 text-sm text-slate-400">— Principio fundamental de la plataforma</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ¿QUÉ ES MECHANICAL ETHICS? -->
+    <section id="mechanical-ethics" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-900">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="grid md:grid-cols-12 gap-x-12">
+                <div class="md:col-span-5 mb-12 md:mb-0">
+                    <div class="sticky top-24">
+                        <div class="uppercase tracking-[2px] text-xs font-semibold text-cyan-400 mb-3">CONCEPTO CENTRAL</div>
+                        <h2 class="section-header mb-6">¿Qué es Mechanical Ethics?</h2>
+                        
+                        <div class="text-lg text-slate-300 space-y-4">
+                            <p>Mechanical Ethics es la transformación de restricciones éticas, operativas, probatorias y de gobernanza en controles técnicos ejecutables.</p>
+                            <p>En lugar de declarar simplemente que una IA debe comportarse éticamente, Mechanical Ethics define reglas, evidencias requeridas, límites de claim y condiciones de cierre.</p>
+                        </div>
+                        
+                        <div class="mt-8 p-5 border-l-4 border-cyan-400 bg-slate-950">
+                            <p class="font-medium">Si la evidencia requerida no existe, es insuficiente o no soporta el claim solicitado, el sistema debe limitar el resultado o cerrar en <span class="font-mono text-rose-400">FAIL_CLOSED</span>.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Card 1 -->
+                        <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-7">
+                            <div class="w-11 h-11 flex items-center justify-center bg-rose-500/10 text-rose-400 rounded-2xl mb-5">
+                                <i class="fa-solid fa-ban text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">No claim elevation</h4>
+                            <p class="text-slate-400 text-sm">Sin elevación de claim sin evidencia suficiente.</p>
+                        </div>
+                        
+                        <!-- Card 2 -->
+                        <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-7">
+                            <div class="w-11 h-11 flex items-center justify-center bg-orange-500/10 text-orange-400 rounded-2xl mb-5">
+                                <i class="fa-solid fa-arrows-alt-h text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">No execution beyond scope</h4>
+                            <p class="text-slate-400 text-sm">Sin ejecución fuera del alcance declarado.</p>
+                        </div>
+                        
+                        <!-- Card 3 -->
+                        <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-7">
+                            <div class="w-11 h-11 flex items-center justify-center bg-amber-500/10 text-amber-400 rounded-2xl mb-5">
+                                <i class="fa-solid fa-exclamation-triangle text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">No missing evidence as neutral</h4>
+                            <p class="text-slate-400 text-sm">La evidencia faltante no se trata como neutral.</p>
+                        </div>
+                        
+                        <!-- Card 4 -->
+                        <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-7">
+                            <div class="w-11 h-11 flex items-center justify-center bg-red-500/10 text-red-400 rounded-2xl mb-5">
+                                <i class="fa-solid fa-link-slash text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg mb-2">No governance claim without audit trail</h4>
+                            <p class="text-slate-400 text-sm">Sin claim de gobernanza sin trazabilidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. EL PROBLEMA QUE RESUELVE -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20">
+        <div class="max-w-4xl mx-auto text-center mb-12">
+            <div class="uppercase tracking-[2px] text-xs font-semibold text-rose-400 mb-3">EL DESAFÍO</div>
+            <h2 class="section-header mb-4">El problema: la IA agentiva supera la gobernanza declarativa</h2>
+            <p class="text-xl text-slate-300">La IA agentiva puede recomendar, clasificar, ejecutar workflows, usar herramientas, modificar procesos, escalar decisiones o intervenir en sistemas operativos y económicos.</p>
+        </div>
+        
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-4 mb-10">
+                <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <h4 class="font-semibold mb-4 flex items-center gap-x-2 text-rose-400">
+                        <i class="fa-solid fa-exclamation-circle"></i> 
+                        <span>Riesgos actuales</span>
+                    </h4>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-x-3"><i class="fa-solid fa-times text-rose-500 mt-1"></i> Afirma más confianza de la que la evidencia permite</li>
+                        <li class="flex items-start gap-x-3"><i class="fa-solid fa-times text-rose-500 mt-1"></i> Ejecuta acciones sin evidencia suficiente</li>
+                        <li class="flex items-start gap-x-3"><i class="fa-solid fa-times text-rose-500 mt-1"></i> Produce outputs fuera de alcance</li>
+                        <li class="flex items-start gap-x-3"><i class="fa-solid fa-times text-rose-500 mt-1"></i> Depende de logs internos no verificables</li>
+                        <li class="flex items-start gap-x-3"><i class="fa-solid fa-times text-rose-500 mt-1"></i> Cambia de versión sin trazabilidad</li>
+                        <li class="flex items-start gap-x-3"><i class="fa-solid fa-times text-rose-500 mt-1"></i> Trata evidencia faltante como neutral</li>
+                        <li class="flex items-start gap-x-3"><i class="fa-solid fa-times text-rose-500 mt-1"></i> Genera apariencia de compliance sin control mecánico real</li>
+                    </ul>
+                </div>
+                
+                <div class="glass border border-cyan-900/50 rounded-3xl p-8 flex flex-col justify-center">
+                    <div class="text-center">
+                        <div class="mx-auto w-16 h-16 rounded-2xl bg-cyan-400/10 flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-link text-4xl text-cyan-400"></i>
+                        </div>
+                        <p class="text-2xl font-semibold leading-tight">La siguiente etapa de gobernanza de IA no requiere solo mejores principios.<br><span class="text-cyan-400">Requiere controles ejecutables vinculados a evidencia.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. AEM V1.1 -->
+    <section id="aem-v11" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-6 mb-10">
+                <div>
+                    <div class="badge bg-emerald-500/10 text-emerald-400 mb-4">ARTIFACT TÉCNICO BASE</div>
+                    <h2 class="section-header">AEM V1.1 — Mechanical Ethical Agent</h2>
+                </div>
+                <div class="text-sm text-slate-400 max-w-xs">Demuestra una capa pública verificable de gobernanza técnica para IA agentiva.</div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="ethic-card bg-slate-800 border border-emerald-700 rounded-3xl p-6">
+                    <div class="text-emerald-400 text-xs tracking-widest mb-1">STATUS</div>
+                    <div class="text-3xl font-semibold text-white">Mechanical Ethics Audit</div>
+                    <div class="mt-4 inline-flex items-center gap-x-2 text-emerald-400">
+                        <i class="fa-solid fa-check-circle text-xl"></i>
+                        <span class="font-mono text-sm font-bold">PASS</span>
+                    </div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs tracking-widest text-slate-400 mb-1">CURRENT CLAIM</div>
+                    <div class="font-mono text-xl leading-tight">PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs tracking-widest text-slate-400 mb-1">CLAIM-LEVEL CEILING</div>
+                    <div class="text-2xl font-semibold">L5</div>
+                    <div class="text-xs text-slate-400 mt-1">within the AEM V1.1 verification framework</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs tracking-widest text-slate-400 mb-1">REGISTRY ANCHOR</div>
+                    <div class="font-mono text-sm break-all">Ethereum Mainnet</div>
+                    <div class="mt-3 text-[10px] text-cyan-400">0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs tracking-widest text-slate-400 mb-1">SCOPE</div>
+                    <div class="font-semibold">READY_WITH_SCOPE_DELIMITATION</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs tracking-widest text-slate-400 mb-1">THIRD-PARTY BINDING</div>
+                    <div class="text-rose-400 font-mono text-lg">false</div>
+                    <div class="text-xs text-slate-500 mt-2">No automatic binding claimed</div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <p class="text-xs text-slate-500 max-w-md mx-auto">AEM V1.1 no afirma aprobación regulatoria, concesión de patente, reconocimiento judicial, certificación externa, cumplimiento universal ni vinculación automática frente a terceros.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CAPACIDADES DEL FRAMEWORK -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-cyan-400 mb-3">FRAMEWORK</div>
+                <h2 class="section-header mb-3">Capacidades del framework</h2>
+                <p class="text-xl text-slate-300 max-w-md mx-auto">Controles ejecutables para evidencia, claims, cierre, trazabilidad y verificación pública.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-400/10 flex-shrink-0 flex items-center justify-center">
+                            <i class="fa-solid fa-file-shield text-2xl text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-xl">Evidence-Bound Governance</h4>
+                            <p class="mt-3 text-slate-300">Convierte reglas de gobernanza en controles vinculados a evidencia. El sistema no debe aceptar un claim si la evidencia requerida no existe, está incompleta o no soporta el nivel de confianza solicitado.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-rose-400/10 flex-shrink-0 flex items-center justify-center">
+                            <i class="fa-solid fa-door-closed text-2xl text-rose-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-xl">Fail-Closed Controls</h4>
+                            <p class="mt-3 text-slate-300">Cuando falta evidencia crítica, el sistema no continúa de forma permisiva. El resultado debe cerrarse en FAIL_CLOSED o quedar limitado por scope.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-400/10 flex-shrink-0 flex items-center justify-center">
+                            <i class="fa-solid fa-balance-scale text-2xl text-amber-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-xl">Claim-Level Boundaries</h4>
+                            <p class="mt-3 text-slate-300">Evita que un sistema afirme más autoridad, confianza, precisión, cumplimiento o validez de lo que la evidencia disponible puede soportar.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-400/10 flex-shrink-0 flex items-center justify-center">
+                            <i class="fa-solid fa-receipt text-2xl text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-xl">Audit and Receipt Layer</h4>
+                            <p class="mt-3 text-slate-300">Genera registros verificables de evidencia provista, evidencia faltante, decisión del gate, resultado, alcance permitido y límites aplicables.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-violet-400/10 flex-shrink-0 flex items-center justify-center">
+                            <i class="fa-solid fa-globe text-2xl text-violet-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-xl">Public Verification Path</h4>
+                            <p class="mt-3 text-slate-300">Conecta whitepaper, release, registry, hashes, receipts, audit outputs y anchor público para permitir inspección externa del estado técnico declarado.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-400/10 flex-shrink-0 flex items-center justify-center">
+                            <i class="fa-solid fa-sitemap text-2xl text-sky-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-xl">Supply-Chain Verification Support</h4>
+                            <p class="mt-3 text-slate-300">Integra SBOMs, provenance, toolchain fingerprints, manifests, firmas y scripts de verificación para reforzar trazabilidad técnica del release.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CÓMO FUNCIONA -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="section-header mb-4">Cómo funciona</h2>
+                <p class="text-xl text-slate-300 max-w-lg mx-auto">El flujo técnico de Mechanical Ethics en acción.</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="space-y-3">
+                    <!-- Flow steps -->
+                    <div class="flow-step flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-3xl px-7 py-5">
+                        <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-white/5 flex items-center justify-center">
+                            <span class="font-mono text-xs font-bold">01</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Automated / Agentic System</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-3xl px-7 py-5">
+                        <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-white/5 flex items-center justify-center">
+                            <span class="font-mono text-xs font-bold">02</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Mechanical Ethics Controls</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-3xl px-7 py-5">
+                        <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-white/5 flex items-center justify-center">
+                            <span class="font-mono text-xs font-bold">03</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Evidence Broker + Registry Manager</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step flex items-center gap-4 bg-slate-800 border border-cyan-700 rounded-3xl px-7 py-5">
+                        <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-cyan-400/10 flex items-center justify-center">
+                            <span class="font-mono text-xs font-bold text-cyan-400">04</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Claim-Level Gate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 bg-slate-950 border border-emerald-700 rounded-3xl px-7 py-5">
+                        <div class="flex-1 grid grid-cols-3 gap-3">
+                            <div class="text-center">
+                                <div class="text-emerald-400 text-xs">PASS</div>
+                                <div class="font-mono text-xs">Result permitted</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-rose-400 text-xs">FAIL_CLOSED</div>
+                                <div class="font-mono text-xs">Evidence missing</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-amber-400 text-xs">SCOPE_LIMITED</div>
+                                <div class="font-mono text-xs">Within bounds</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-step flex items-center gap-4 bg-slate-800 border border-slate-700 rounded-3xl px-7 py-5">
+                        <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-white/5 flex items-center justify-center">
+                            <span class="font-mono text-xs font-bold">05</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold">Public Verification Registry</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 bg-emerald-900/20 border border-emerald-700 rounded-3xl px-7 py-5">
+                        <div class="flex-1">
+                            <div class="font-semibold flex items-center gap-x-2">Receipt / Hash / Anchor <span class="text-xs bg-emerald-400/20 text-emerald-400 px-2 py-px rounded">ONCHAIN</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-sm text-center text-slate-400 max-w-xs mx-auto">
+                    El sistema evalúa evidencia, reglas sectoriales, alcance, claim-level y estado de cierre. 
+                    Si la evidencia soporta el claim, produce un resultado permitido. Si no, limita o cierra.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. NIVELES INTERNOS -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="mb-10">
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-cyan-400 mb-3">FRAMEWORK PROGRESIVO</div>
+                <h2 class="section-header mb-3">Niveles internos de aseguramiento técnico</h2>
+                <p class="text-xl text-slate-300">Framework progresivo de claim y evidencia dentro de AEM.</p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-700">
+                            <th class="py-4 px-6 text-left font-normal text-xs text-slate-400">NIVEL</th>
+                            <th class="py-4 px-6 text-left font-normal text-xs text-slate-400">NOMBRE</th>
+                            <th class="py-4 px-6 text-left font-normal text-xs text-slate-400">DESCRIPCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800 text-sm">
+                        <tr>
+                            <td class="py-5 px-6"><span class="font-mono font-bold text-lg">L1</span></td>
+                            <td class="py-5 px-6 font-medium">Basic Evidence Logging</td>
+                            <td class="py-5 px-6 text-slate-300">Registro básico de inputs, outputs y eventos relevantes</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6"><span class="font-mono font-bold text-lg">L2</span></td>
+                            <td class="py-5 px-6 font-medium">Operational Boundaries</td>
+                            <td class="py-5 px-6 text-slate-300">Límites operativos, restricciones de alcance y rollback</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6"><span class="font-mono font-bold text-lg">L3</span></td>
+                            <td class="py-5 px-6 font-medium">Evidence-Bound Decisioning</td>
+                            <td class="py-5 px-6 text-slate-300">Decisiones vinculadas a evidencia requerida</td>
+                        </tr>
+                        <tr>
+                            <td class="py-5 px-6"><span class="font-mono font-bold text-lg">L4</span></td>
+                            <td class="py-5 px-6 font-medium">Fail-Closed Assurance</td>
+                            <td class="py-5 px-6 text-slate-300">Cierre automático ante evidencia faltante o insuficiente</td>
+                        </tr>
+                        <tr class="bg-emerald-900/10">
+                            <td class="py-5 px-6"><span class="font-mono font-bold text-lg text-emerald-400">L5</span></td>
+                            <td class="py-5 px-6 font-medium text-emerald-300">Public-Verifiable Claim-Level Ceiling</td>
+                            <td class="py-5 px-6 text-emerald-300">Techo de claim verificable públicamente dentro del framework AEM V1.1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-6 text-xs text-slate-500 max-w-2xl">
+                Estos niveles son internos al framework AEM. No constituyen certificación regulatoria, aprobación gubernamental, reconocimiento judicial ni certificación externa, salvo que exista evidencia separada que lo demuestre.
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. EVIDENCIA PÚBLICA -->
+    <section id="evidencia" class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-y-6">
+                <div>
+                    <div class="badge bg-emerald-500/10 text-emerald-400 mb-4">VERIFICACIÓN PÚBLICA</div>
+                    <h2 class="section-header">Evidencia pública</h2>
+                    <p class="text-xl text-slate-300">AEM V1.1 Public Verification Snapshot</p>
+                </div>
+                
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://github.com" target="_blank" class="px-5 py-2.5 text-sm font-medium border border-slate-700 hover:bg-slate-800 rounded-3xl flex items-center gap-x-2 transition">
+                        <i class="fa-brands fa-github"></i> <span>Ver GitHub Release</span>
+                    </a>
+                    <a href="#" class="px-5 py-2.5 text-sm font-medium border border-slate-700 hover:bg-slate-800 rounded-3xl flex items-center gap-x-2 transition">
+                        <span>Ver Registry</span>
+                    </a>
+                    <a href="#" class="px-5 py-2.5 text-sm font-medium border border-slate-700 hover:bg-slate-800 rounded-3xl flex items-center gap-x-2 transition">
+                        <span>Ver Anchor</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="ethic-card bg-slate-800 border border-emerald-600 rounded-3xl p-6">
+                    <div class="text-xs text-emerald-400 mb-1">AUDIT RESULT</div>
+                    <div class="text-4xl font-semibold text-white">PASS</div>
+                    <div class="text-emerald-400 text-sm mt-1">Mechanical Ethics Audit</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs text-slate-400 mb-1">CLAIM-LEVEL CEILING</div>
+                    <div class="font-semibold">L5 within AEM V1.1 framework</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs text-slate-400 mb-1">CURRENT CLAIM</div>
+                    <div class="font-mono text-sm">PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs text-slate-400 mb-1">REGISTRY CANONICAL SHA-256</div>
+                    <div class="font-mono text-xs break-all">24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6 col-span-1 md:col-span-2 lg:col-span-2">
+                    <div class="text-xs text-slate-400 mb-1">FINAL REGISTRY ANCHOR TX</div>
+                    <div class="font-mono text-xs break-all">0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4</div>
+                    <div class="mt-4 flex items-center gap-x-2 text-emerald-400 text-xs">
+                        <i class="fa-solid fa-link"></i>
+                        <span class="font-mono">ONCHAIN_REGISTRY_ANCHOR_VERIFIED</span>
+                    </div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs text-slate-400 mb-1">PRESENTATION SCOPE</div>
+                    <div class="font-medium">READY_WITH_SCOPE_DELIMITATION</div>
+                </div>
+                
+                <div class="ethic-card bg-slate-800 border border-slate-700 rounded-3xl p-6">
+                    <div class="text-xs text-slate-400 mb-1">THIRD-PARTY BINDING</div>
+                    <div class="text-rose-400 font-semibold">false</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="inline-flex flex-wrap justify-center gap-x-6 text-xs text-slate-500">
+                    <div>No patent grant claimed.</div>
+                    <div>No USPTO approval claimed.</div>
+                    <div>No regulatory approval claimed.</div>
+                    <div>No court recognition claimed.</div>
+                    <div>No automatic third-party binding claimed.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. AEM-EVOLVE™ -->
+    <section id="evolve" class="max-w-screen-2xl mx-auto px-8 py-20 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="grid md:grid-cols-12 gap-x-12 items-center">
+                <div class="md:col-span-7">
+                    <div class="badge bg-violet-500/10 text-violet-400 mb-5">EXTENSIÓN EN DESARROLLO</div>
+                    
+                    <h2 class="section-header mb-6">AEM-EVOLVE™<br><span class="text-4xl text-slate-400">Governed Evolution for AI Systems That Change Over Time</span></h2>
+                    
+                    <div class="text-lg text-slate-300 max-w-lg">
+                        <p>AEM-EVOLVE™ extiende Mechanical Ethics hacia sistemas de IA que cambian con el tiempo. Cada cambio material puede ser declarado como un Evolution Event, evaluado por un Evolution Gate y documentado mediante un Signed Evolution Receipt.</p>
+                        
+                        <p class="mt-4">Esto permite que modelos, agentes, reglas, workflows, prompts, tools o releases evolucionen sin perder evidencia, trazabilidad, límites de claim ni capacidad de fail-closed.</p>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap gap-2">
+                        <div class="badge bg-slate-800 text-violet-400 border border-violet-800">Concept + Controlled Technical Demonstration</div>
+                        <div class="badge bg-emerald-900/50 text-emerald-400">Signed Genomics Evolution Gate Demo Verified</div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-5 mt-10 md:mt-0">
+                    <div class="glass border border-violet-700/50 rounded-3xl p-8">
+                        <div class="uppercase text-xs tracking-widest text-violet-400 mb-4">ESTADO ACTUAL</div>
+                        
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span>Pilot-ready</span>
+                                <span class="text-emerald-400">✓ as technical demonstration</span>
+                            </div>
+                            <div class="flex justify-between items-center text-rose-400">
+                                <span>Not lab-ready</span>
+                                <i class="fa-solid fa-times"></i>
+                            </div>
+                            <div class="flex justify-between items-center text-rose-400">
+                                <span>Not regulated</span>
+                                <i class="fa-solid fa-times"></i>
+                            </div>
+                            <div class="flex justify-between items-center text-rose-400">
+                                <span>Not clinically validated</span>
+                                <i class="fa-solid fa-times"></i>
+                            </div>
+                            <div class="flex justify-between items-center text-rose-400">
+                                <span>Not for clinical use</span>
+                                <i class="fa-solid fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. DEMO TÉCNICA AEM-EVOLVE™ -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-900">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="mb-10">
+                <div class="uppercase tracking-[2px] text-xs font-semibold text-violet-400 mb-3">CONTROLLED TECHNICAL DEMONSTRATION</div>
+                <h2 class="section-header">Signed Genomics Evolution Gate Demo</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-950 border border-slate-700 rounded-3xl p-8 h-full">
+                        <div class="text-xs text-slate-400 mb-6">EVOLUTION RECEIPT SNAPSHOT</div>
+                        
+                        <div class="space-y-5 text-sm">
+                            <div><span class="text-slate-400">Event:</span> <span class="font-mono">EVO-GEN-2026-0097</span></div>
+                            <div><span class="text-slate-400">Sector:</span> <span class="font-medium">genomics</span></div>
+                            <div><span class="text-slate-400">Requested claim level:</span> <span class="font-mono">DIAGNOSTIC_SUPPORT</span></div>
+                            <div><span class="text-slate-400">Gate result:</span> <span class="font-semibold text-amber-400">SCOPE_LIMITED</span></div>
+                            <div><span class="text-slate-400">Materiality Score:</span> <span class="font-mono">95.0</span></div>
+                            <div><span class="text-slate-400">Signature:</span> <span class="font-mono">RSA-PSS-SHA256</span></div>
+                            <div><span class="text-slate-400">Verification:</span> <span class="text-emerald-400">successful in demonstrated environment</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-7">
+                    <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8">
+                        <div class="uppercase text-xs text-emerald-400 mb-3">RECEIPT MESSAGE</div>
+                        <div class="text-lg leading-tight">"Evolution approved within DIAGNOSTIC_SUPPORT scope only. No clinical, regulatory, or diagnostic approval claimed or validated."</div>
+                        
+                        <div class="mt-8 pt-8 border-t border-slate-700">
+                            <div class="uppercase text-xs text-slate-400 mb-3">INTERPRETACIÓN</div>
+                            <p class="text-slate-300">El sistema reconoció una evolución técnica del modelo y evidencia suficiente para soporte limitado, pero no permitió claims clínicos, regulatorios, diagnósticos ni vinculación frente a terceros.</p>
+                            
+                            <div class="mt-6 p-4 bg-emerald-900/10 border border-emerald-800 rounded-2xl text-sm">
+                                <span class="font-semibold text-emerald-400">Claim permitido:</span><br>
+                                AEM-EVOLVE™ provides a controlled technical demonstration of evidence-bound evolution events, scope-limited gate outcomes, and signed evolution receipt verification.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. ROADMAP -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="mb-10">
+                <div class="badge bg-amber-500/10 text-amber-400 mb-4">RUTA TÉCNICA</div>
+                <h2 class="section-header mb-4">Roadmap hacia Lab-Ready</h2>
+                <div class="max-w-2xl text-slate-300">Este roadmap no significa que AEM-EVOLVE™ sea actualmente lab-ready, producto regulado o sistema clínicamente validado. Define la ruta técnica desde una demostración controlada hacia un paquete de PoC no clínico en laboratorio.</div>
+            </div>
+            
+            <div class="space-y-6 max-w-3xl">
+                <!-- Fase 0 -->
+                <div class="timeline-item flex gap-6">
+                    <div class="w-16 flex-shrink-0">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                            <span class="font-mono text-xs font-bold">F0</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 pt-1">
+                        <div class="font-semibold">Fase 0 — Stabilize</div>
+                        <div class="text-sm text-slate-300 mt-1">Limpieza del repo, tag estable, Reproducibility Report y verificación completa del demo.</div>
+                    </div>
+                </div>
+                
+                <!-- Fase 1 -->
+                <div class="timeline-item flex gap-6">
+                    <div class="w-16 flex-shrink-0">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                            <span class="font-mono text-xs font-bold">F1</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 pt-1">
+                        <div class="font-semibold">Fase 1 — Core Implementation</div>
+                        <div class="text-sm text-slate-300 mt-1">Schemas JSON, Evolution Gate, Signed Receipt verification, Sector Rule Engine y CI/CD Gate.</div>
+                    </div>
+                </div>
+                
+                <!-- Fase 2 -->
+                <div class="timeline-item flex gap-6">
+                    <div class="w-16 flex-shrink-0">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400">
+                            <span class="font-mono text-xs font-bold">F2</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 pt-1">
+                        <div class="font-semibold">Fase 2 — Regulated Readiness</div>
+                        <div class="text-sm text-slate-300 mt-1">Paquete CSV/GxP-style: IQ/OQ/PQ, traceability matrix, SOPs, risk assessment, audit trail y threat model.</div>
+                    </div>
+                </div>
+                
+                <!-- Fase 3 -->
+                <div class="timeline-item flex gap-6">
+                    <div class="w-16 flex-shrink-0">
+                        <div class="w-14 h-14 rounded-2xl bg-violet-500/10 flex items-center justify-center text-violet-400">
+                            <span class="font-mono text-xs font-bold">F3</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 pt-1">
+                        <div class="font-semibold">Fase 3 — Laboratory Integration</div>
+                        <div class="text-sm text-slate-300 mt-1">Integraciones con MLflow, Benchling, LIMS, Veeva/eQMS o sistemas equivalentes; dashboard de auditoría y PoC no clínico.</div>
+                    </div>
+                </div>
+                
+                <!-- Fase 4 -->
+                <div class="timeline-item flex gap-6">
+                    <div class="w-16 flex-shrink-0">
+                        <div class="w-14 h-14 rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-400">
+                            <span class="font-mono text-xs font-bold">F4</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 pt-1">
+                        <div class="font-semibold">Fase 4 — External Adoption and Standards Path</div>
+                        <div class="text-sm text-slate-300 mt-1">Reference implementation, pilotos early adopters, open-core y posible contribución del formato Evolution Receipt a iniciativas técnicas o regulatorias-adjacent.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 p-6 border border-slate-700 rounded-3xl text-xs text-slate-400 max-w-3xl">
+                <strong class="text-white">Definición segura de Lab-Ready:</strong> Lab-Ready significa un paquete estable de PoC controlado en laboratorio para evaluación no clínica. No significa uso clínico, autorización diagnóstica, aprobación regulatoria ni certificación externa.
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. READINESS BOUNDARIES -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="section-header mb-4">Readiness Boundaries</h2>
+                <div class="inline-flex items-center gap-x-2 px-5 py-2 rounded-3xl bg-slate-800 text-sm">
+                    <div class="w-2 h-2 bg-amber-400 rounded-full"></div>
+                    <span class="font-medium">Estado actual correcto: Concept + Controlled Technical Demonstration</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No es producto regulado</div>
+                </div>
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No es lab-ready</div>
+                </div>
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No está clínicamente validado</div>
+                </div>
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No está aprobado por FDA/EMA</div>
+                </div>
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No es GxP-certified</div>
+                </div>
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No es CE marked</div>
+                </div>
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No es medical device approved</div>
+                </div>
+                <div class="bg-slate-800 border border-rose-700/60 rounded-3xl p-6 text-center">
+                    <i class="fa-solid fa-ban text-3xl text-rose-400 mb-4"></i>
+                    <div class="font-semibold">No es independently reproduced release build</div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <div class="inline-flex items-center text-xs text-emerald-400 font-mono tracking-widest">
+                    TECHNICAL DEMONSTRATION RELEASE → LAB POC PACKAGE → REGULATORY / CLINICAL VALIDATION STRATEGY
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. SECTORES -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="section-header mb-4">Sectores de aplicación técnica</h2>
+                <p class="text-xl text-slate-300">Áreas de aplicación técnica y exploración sectorial. No implican aprobación regulatoria, validación clínica ni autorización de uso.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex items-center gap-x-4 mb-5">
+                        <div class="w-12 h-12 bg-emerald-400/10 rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-dna text-emerald-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-2xl">Genomics / Pharmacogenomics</h4>
+                    </div>
+                    <p class="text-slate-300">Gobernanza de actualizaciones de modelos con nuevas variantes, nuevas bases de datos, nuevos benchmarks y cambios de performance.</p>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex items-center gap-x-4 mb-5">
+                        <div class="w-12 h-12 bg-sky-400/10 rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-pills text-sky-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-2xl">Pharmaceutical AI</h4>
+                    </div>
+                    <p class="text-slate-300">Aplicaciones en farmacovigilancia, manufacturing AI, real-time release testing, adaptive trials y personalized medicine.</p>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex items-center gap-x-4 mb-5">
+                        <div class="w-12 h-12 bg-violet-400/10 rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-flask text-violet-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-2xl">Biotechnology / ATMPs</h4>
+                    </div>
+                    <p class="text-slate-300">Aplicaciones en biomanufacturing, terapias celulares y génicas, biomarcadores, genómica, biología sintética y diseño de proteínas.</p>
+                </div>
+                
+                <div class="ethic-card bg-slate-900 border border-slate-700 rounded-3xl p-8">
+                    <div class="flex items-center gap-x-4 mb-5">
+                        <div class="w-12 h-12 bg-amber-400/10 rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-robot text-amber-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-2xl">Enterprise Agentic AI</h4>
+                    </div>
+                    <p class="text-slate-300">Gobernanza de agentes, herramientas, workflows, cambios de prompts, modelos y sistemas automatizados de decisión.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. PARA QUIÉN -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="section-header mb-4">Para quién es EthicBit</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">AI labs</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">DevSecOps teams</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">Regulated AI vendors</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">Pharmaceutical and biotechnology teams</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">Life-sciences AI governance teams</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">Enterprise AI governance teams</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">Audit and compliance teams</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">Release engineering teams</div>
+                <div class="bg-slate-800 border border-slate-700 rounded-3xl px-6 py-5 text-center text-sm font-medium">Public-verifiable AI infrastructure builders</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 16. QUÉ PUEDES HACER HOY -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="section-header mb-6">Qué puedes hacer hoy</h2>
+            <p class="text-xl text-slate-300 mb-10">Explora la evidencia pública, revisa el registry, ejecuta la verificación técnica del release y conoce la ruta hacia AEM-EVOLVE™.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#evidencia" class="px-8 py-4 bg-white text-slate-950 hover:bg-white/90 font-semibold rounded-3xl transition flex items-center justify-center gap-x-3">
+                    <span>Verificar AEM V1.1</span>
+                </a>
+                <a href="#evolve" class="px-8 py-4 border border-slate-700 hover:bg-slate-900 font-medium rounded-3xl transition flex items-center justify-center gap-x-3">
+                    <span>Explorar AEM-EVOLVE™</span>
+                </a>
+            </div>
+            
+            <div class="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs">
+                <a href="https://github.com" target="_blank" class="text-cyan-400 hover:underline">Ver GitHub Release</a>
+                <span class="text-slate-600">•</span>
+                <a href="#" class="text-cyan-400 hover:underline">Leer Whitepaper</a>
+            </div>
+            
+            <div class="mt-10 text-xs text-slate-500 max-w-xs mx-auto">
+                AEM-EVOLVE™ se encuentra actualmente en estado Concept + Controlled Technical Demonstration. No está destinado a uso clínico sin autorización regulatoria separada.
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section max-w-screen-2xl mx-auto px-8 py-20 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+                <div>
+                    <div class="uppercase tracking-[2px] text-xs font-semibold text-blue-400 mb-3">CONTACT</div>
+                    <h2 class="section-header mb-5">Contact EthicBit</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">For technical review, partnership inquiries, controlled demonstrations, or public-verification questions.</p>
+                    <div class="glass border border-slate-700 rounded-3xl p-6 text-sm text-slate-400">
+                        <div class="font-semibold text-white mb-2">Scope note</div>
+                        <p>Please do not submit confidential clinical, patient, regulated, or proprietary data through this form.</p>
+                    </div>
+                </div>
+
+                <form id="contactForm" class="contact-form glass border border-slate-700 rounded-3xl p-8 shadow-2xl">
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <input class="mb-4" type="text" name="organization" placeholder="Organization">
+                    <select class="mb-4" name="inquiryType" required>
+                        <option value="">Inquiry type</option>
+                        <option value="Technical review">Technical review</option>
+                        <option value="Partnership">Partnership</option>
+                        <option value="Investor inquiry">Investor inquiry</option>
+                        <option value="Regulatory / compliance discussion">Regulatory / compliance discussion</option>
+                        <option value="AEM V1.1 verification">AEM V1.1 verification</option>
+                        <option value="AEM-EVOLVE demonstration">AEM-EVOLVE™ demonstration</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <textarea class="mb-4" name="message" rows="6" placeholder="Message" required></textarea>
+                    <p class="text-xs text-slate-500 leading-relaxed mb-5">By sending this form, you confirm the message does not include confidential clinical, patient, regulated, or proprietary data.</p>
+                    <button type="submit" class="w-full px-8 py-4 bg-white text-slate-950 hover:bg-white/90 font-semibold rounded-3xl transition flex items-center justify-center gap-x-3">
+                        <span>Send Inquiry</span>
+                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                    </button>
+                    <p id="formStatus" class="mt-4 text-sm text-slate-400"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 17. DISCLAIMER GLOBAL -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-16 border-t border-slate-800">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="glass border border-slate-700 rounded-3xl p-10 max-w-4xl mx-auto">
+                <div class="uppercase tracking-[1.5px] text-xs font-semibold text-rose-400 mb-4">SCOPE BOUNDARY</div>
+                
+                <div class="prose prose-invert text-sm text-slate-300">
+                    <p>EthicBit provides technical assurance artifacts and public-verifiable governance infrastructure for AI systems.</p>
+                    <p class="mt-4">EthicBit does not currently claim regulatory approval, clinical validation, court recognition, patent grant, GxP certification, FDA/EMA approval, CE marking, medical device approval, or automatic third-party binding unless separately evidenced.</p>
+                    <p class="mt-4">AEM-EVOLVE™ is currently a Concept + Controlled Technical Demonstration, not a regulated, lab-ready, or clinically validated product.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 18. FOOTER -->
+    <footer class="border-t border-slate-800 bg-slate-950">
+        <div class="max-w-screen-2xl mx-auto px-8 py-16">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-8">
+                <div>
+                    <div class="flex items-center gap-x-3">
+                        <img src="/ethicbit-logo.png" alt="EthicBit logo" class="brand-logo-img w-10 h-10 rounded-full border border-slate-700 bg-white object-contain p-1">
+                        <span class="font-display text-2xl font-semibold tracking-tighter">EthicBit</span>
+                    </div>
+                    <div class="mt-3 text-xs text-slate-500 max-w-[260px]">Mechanical Ethics for agentic AI systems.<br>Not for clinical use without separate regulatory clearance.</div>
+                </div>
+                
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-x-8 gap-y-3 text-sm text-slate-400">
+                    <a href="https://github.com" target="_blank" class="hover:text-white transition">GitHub</a>
+                    <a href="#" class="hover:text-white transition">Whitepaper</a>
+                    <a href="#evidencia" class="hover:text-white transition">Public Registry</a>
+                    <a href="#evolve" class="hover:text-white transition">AEM-EVOLVE™</a>
+                    <a href="#" class="hover:text-white transition">Scope Boundary</a>
+                    <a href="#contact" class="hover:text-white transition">Contact</a>
+                </div>
+            </div>
+            
+            <div class="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-y-2">
+                <div>© 2026 EthicBit / CEMU. All rights reserved.</div>
+                <div class="font-mono">Mechanical Ethics Infrastructure • AEM V1.1</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#2563EB');
+        }
+        
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Simple animation on scroll for cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.ethic-card').forEach(card => {
+            card.style.opacity = '0.95';
+            card.style.transform = 'translateY(10px)';
+            card.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(card);
+        });
+        
+
+        // Contact form: static-site mailto fallback. Replace CONTACT_EMAIL with your production inbox or connect to /api/contact.
+        const CONTACT_EMAIL = 'contact@ethicbit.ai';
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const data = new FormData(contactForm);
+                const name = data.get('name') || '';
+                const email = data.get('email') || '';
+                const organization = data.get('organization') || '';
+                const inquiryType = data.get('inquiryType') || '';
+                const message = data.get('message') || '';
+                const subject = encodeURIComponent(`EthicBit Inquiry — ${inquiryType}`);
+                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganization: ${organization}\nInquiry type: ${inquiryType}\n\nMessage:\n${message}\n\n---\nSubmitted from EthicBit landing page.`);
+                window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+                if (formStatus) {
+                    formStatus.textContent = 'Opening your email client. For production, connect this form to Resend, Formspree, or /api/contact.';
+                }
+            });
+        }
+
+        // Keyboard shortcut hint
+        console.log('%c[EthicBit] Landing page initialized successfully. All claims scoped and verifiable.', 'color:#64748b');
+        
+        initializeTailwind();
+    </script>
+</body>
+</html>

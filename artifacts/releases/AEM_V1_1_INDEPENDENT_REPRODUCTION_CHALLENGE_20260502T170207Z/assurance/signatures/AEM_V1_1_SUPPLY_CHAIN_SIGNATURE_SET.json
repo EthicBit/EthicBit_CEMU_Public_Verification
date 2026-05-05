@@ -1,0 +1,76 @@
+{
+  "artifactType": "hybrid_signature_set",
+  "schemaVersion": "2.0.0",
+  "status": "PASS",
+  "policyVersion": "official-operational-status-policy.v2.0.0",
+  "riskMode": "HIGH",
+  "runContext": {
+    "runId": "CLI",
+    "releaseId": "CLI",
+    "verificationEpoch": "CLI"
+  },
+  "requiredAlgorithms": [
+    "ED25519",
+    "ML-DSA"
+  ],
+  "payloadHash": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef",
+  "payload": {
+    "path": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.jcs.json",
+    "sha256": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef",
+    "sourcePath": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json"
+  },
+  "hybridCryptoTruth": {
+    "ed25519_key_source": "trusted_secrets",
+    "mldsa_key_source": "trusted_secrets",
+    "mldsa_effective_mode": "compatibility_fallback",
+    "hybrid_claim_mode": "compatibility_hybrid",
+    "ephemeral_keys_used": false,
+    "runner_supports_mldsa": false,
+    "claim_level": "ci_grade",
+    "require_native_hybrid": false,
+    "eligible_for_sovereign_release": false,
+    "signing_backend": "github_secrets_pem",
+    "key_posture_status": "TRANSITIONAL_COMPLIANT",
+    "break_glass_signing": false,
+    "break_glass_ticket": "",
+    "break_glass_reason": ""
+  },
+  "verificationPolicy": {
+    "claimLevel": "ci_grade",
+    "requireNativeHybrid": false,
+    "signingBackend": "github_secrets_pem",
+    "keyPostureStatus": "TRANSITIONAL_COMPLIANT",
+    "breakGlassSigning": false
+  },
+  "signatures": [
+    {
+      "algorithm": "ED25519",
+      "keyId": "ED25519_UNSET",
+      "status": "PASS",
+      "signature": "rpE5PRqI3MNs7tw8HMr10tnA6+mxgJAEfzvlCrIV+1U4uTV2YLzR/64rAPDVtD4I/N69VbKhIeEIluT7xxl9AQ==",
+      "signedAt": "2026-05-01T20:20:30.581701Z",
+      "commandConfigured": true,
+      "timeoutSeconds": 25.0
+    },
+    {
+      "algorithm": "ML-DSA",
+      "keyId": "MLDSA_UNSET",
+      "status": "PASS",
+      "signature": "vHkl+NnnZi4WY3AkyYZkeehDIsVWiuUqx294QlS7D6tIW9POQyjsRzOODNqc7kv036LpLfxZ3ggGq+bIVteGAg==",
+      "signedAt": "2026-05-01T20:20:30.635303Z",
+      "commandConfigured": true,
+      "timeoutSeconds": 25.0,
+      "effectiveMode": "compatibility_fallback"
+    }
+  ],
+  "cryptoMode": {
+    "effectiveMode": "compatibility_fallback",
+    "mldsaMode": "compatibility_fallback",
+    "mldsaEffectiveMode": "compatibility_fallback",
+    "ed25519KeySource": "trusted_secrets",
+    "mldsaKeySource": "trusted_secrets",
+    "hybridClaimMode": "compatibility_hybrid",
+    "keyProvenanceMode": "unknown",
+    "claimTier": "unspecified"
+  }
+}
