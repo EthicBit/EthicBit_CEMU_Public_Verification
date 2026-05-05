@@ -1,0 +1,40 @@
+{
+  "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+  "receipt_payload": {
+    "receipt_id": "AEM-EVOLVE-RECEIPT-EVO-GEN-2026-0097",
+    "event_id": "EVO-GEN-2026-0097",
+    "gate_version": "AEM-EVOLVE-GATE-v0.3-controlled-demo",
+    "outcome": "SCOPE_LIMITED",
+    "claim_scope": "EVIDENCE_REVIEW_SUPPORT",
+    "evidence_status": "SUFFICIENT_FOR_SCOPE_LIMITED_REVIEW_SUPPORT",
+    "materiality_score": 95.0,
+    "required_evidence": [
+      "declared_event",
+      "source_references",
+      "state_hashes",
+      "claim_boundary"
+    ],
+    "provided_evidence": [
+      "declared_event",
+      "source_references",
+      "state_hashes",
+      "claim_boundary"
+    ],
+    "missing_evidence": [],
+    "non_claims": {
+      "clinical_claimed": false,
+      "diagnostic_claimed": false,
+      "regulatory_approval_claimed": false,
+      "third_party_binding": false
+    },
+    "timestamp_utc": "2026-05-05T00:00:00Z",
+    "receipt_message": "Evolution approved within EVIDENCE_REVIEW_SUPPORT scope only. No clinical, regulatory, or diagnostic approval claimed or validated."
+  },
+  "signature": {
+    "signature_algorithm": "RSA-PSS-SHA256",
+    "receipt_payload_sha256": "2559074f26fce8606e754d19eec45d8c726bedc82c4b79b8b2f8d8fa438f6c06",
+    "signature_payload_canonicalization": "json_sort_keys_no_whitespace_utf8",
+    "public_key_file": "examples/evolve/EVO_GEN_2026_0097_public_key.pem",
+    "signature_file": "examples/evolve/EVO_GEN_2026_0097_signature.sig"
+  }
+}
