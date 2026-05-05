@@ -1,0 +1,90 @@
+{
+  "schema_id": "AEM_EVOLVE_TECHNICAL_DEMONSTRATION_MANIFEST_V1",
+  "manifest_name": "AEM_EVOLVE_TECHNICAL_DEMONSTRATION_MANIFEST",
+  "version": "v0.3",
+  "generated_at_utc": "2026-05-05T21:39:16.796426+00:00",
+  "canonicalization": "json_sort_keys_no_whitespace_utf8",
+  "hash_algorithm": "SHA-256",
+  "base_system": "EthicBit/CEMU",
+  "base_artifact": "AEM V1.1",
+  "extension": "AEM-EVOLVE",
+  "current_status": "CONCEPT_CONTROLLED_TECHNICAL_DEMONSTRATION",
+  "source_commit": "5a3e850e00e72b971873bd062931eb1485578feb",
+  "demo_status": "PASS",
+  "closure_boundary": {
+    "production_ready_claimed": false,
+    "lab_ready_claimed": false,
+    "clinical_validation_claimed": false,
+    "regulatory_approval_claimed": false,
+    "gxp_certification_claimed": false,
+    "independently_reproduced": false,
+    "third_party_binding": false
+  },
+  "files": [
+    {
+      "path": "docs/evolve/AEM_EVOLVE_CONCEPT_PAPER_v0_3.md",
+      "role": "concept_paper",
+      "sha256": "bfb22b9f9369904d2339cd8737e04ee11e5ccf37070bba306db5bc158a8a95e6"
+    },
+    {
+      "path": "docs/evolve/AEM_EVOLVE_RELEASE_SCOPE_BOUNDARY.md",
+      "role": "scope_boundary",
+      "sha256": "6e85443b8af016902ee94cbd4753b24f65222c0bdf843120fe89a1000c0b2a1e"
+    },
+    {
+      "path": "docs/evolve/README.md",
+      "role": "readme",
+      "sha256": "6930e50a96065538bb72fced5713789994990e1b39f05d79b280979a7e16d70a"
+    },
+    {
+      "path": "schemas/evolve/evolution_event.schema.json",
+      "role": "event_schema",
+      "sha256": "9d0021412ae8624da61bb871f9826625ad4e18b60cd587748e87000d5ba95965"
+    },
+    {
+      "path": "schemas/evolve/evolution_receipt.schema.json",
+      "role": "receipt_schema",
+      "sha256": "1ace0aa4b7b63befb08b9de661aedcff0634a754fa110eb482f35ed78140e540"
+    },
+    {
+      "path": "examples/evolve/EVO_GEN_2026_0097_event.json",
+      "role": "event_example",
+      "sha256": "fa71c5db8c52b7340470cb51c392c4fac9f6d06302f8bfcd2bb2bd7e4cdfde56"
+    },
+    {
+      "path": "examples/evolve/EVO_GEN_2026_0097_receipt.json",
+      "role": "receipt_example",
+      "sha256": "e52601d70d6091a6176c05cf9febae451d2fabd9d0f4c7cfd0217d9d59686870"
+    },
+    {
+      "path": "examples/evolve/EVO_GEN_2026_0097_public_key.pem",
+      "role": "public_key",
+      "sha256": "edc4b63459dfaf6c0a11b600cb55c9c43a731f764d3c33258214bbdd76ae4da8"
+    },
+    {
+      "path": "examples/evolve/EVO_GEN_2026_0097_signature.sig",
+      "role": "detached_signature",
+      "sha256": "425b063465d98bf90b018c250c194ef444050e6dc2e7326df008cde763fac996"
+    },
+    {
+      "path": "scripts/evolve/verify_evolution_receipt.py",
+      "role": "verifier_script",
+      "sha256": "fa3bcbc5987bcecdcc1b74f9266f8393bad69c081f09474852b53b813667482f"
+    },
+    {
+      "path": "scripts/evolve/run_evolve_demo.sh",
+      "role": "e2e_demo_runner",
+      "sha256": "0664cfac0ab39944aba3c502820a1efb6083bcd270e1dc840d882ab743dfb8a1"
+    },
+    {
+      "path": "results/evolve/EVO_GEN_2026_0097_VERIFICATION_REPORT.json",
+      "role": "verification_report",
+      "sha256": "0ad50fe0d7851667db6a5b1b9c7aa1590d91bd7d17c8a5aa8502bd3db778884f"
+    },
+    {
+      "path": "receipts/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_RECEIPT.json",
+      "role": "technical_demonstration_receipt",
+      "sha256": "86025b026ed18750f34388bf1a597e19374b6d88a9a9e01a20b2f300263875d1"
+    }
+  ]
+}
