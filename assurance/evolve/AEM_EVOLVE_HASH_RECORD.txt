@@ -1,0 +1,39 @@
+AEM-EVOLVE Technical Demonstration Hash Record
+Status:
+GENERATED
+Generated UTC:
+2026-05-05T21:39:16.796426+00:00
+Commit:
+5a3e850e00e72b971873bd062931eb1485578feb
+Version:
+v0.3
+Demo status:
+PASS
+Manifest:
+assurance/evolve/AEM_EVOLVE_MANIFEST.json
+Manifest canonical SHA-256:
+7e5f3f735a01e317514cb5e93559be5ed42496ea89058f98e1fc15eb5407d7cf
+Manifest file SHA-256:
+a5b7a426823c9d1f5e43d80f2cb48bc60eda0dbf37ec21216144893bd9df5703
+Artifact SHA-256 records:
+- docs/evolve/AEM_EVOLVE_CONCEPT_PAPER_v0_3.md [concept_paper] bfb22b9f9369904d2339cd8737e04ee11e5ccf37070bba306db5bc158a8a95e6
+- docs/evolve/AEM_EVOLVE_RELEASE_SCOPE_BOUNDARY.md [scope_boundary] 6e85443b8af016902ee94cbd4753b24f65222c0bdf843120fe89a1000c0b2a1e
+- docs/evolve/README.md [readme] 6930e50a96065538bb72fced5713789994990e1b39f05d79b280979a7e16d70a
+- schemas/evolve/evolution_event.schema.json [event_schema] 9d0021412ae8624da61bb871f9826625ad4e18b60cd587748e87000d5ba95965
+- schemas/evolve/evolution_receipt.schema.json [receipt_schema] 1ace0aa4b7b63befb08b9de661aedcff0634a754fa110eb482f35ed78140e540
+- examples/evolve/EVO_GEN_2026_0097_event.json [event_example] fa71c5db8c52b7340470cb51c392c4fac9f6d06302f8bfcd2bb2bd7e4cdfde56
+- examples/evolve/EVO_GEN_2026_0097_receipt.json [receipt_example] e52601d70d6091a6176c05cf9febae451d2fabd9d0f4c7cfd0217d9d59686870
+- examples/evolve/EVO_GEN_2026_0097_public_key.pem [public_key] edc4b63459dfaf6c0a11b600cb55c9c43a731f764d3c33258214bbdd76ae4da8
+- examples/evolve/EVO_GEN_2026_0097_signature.sig [detached_signature] 425b063465d98bf90b018c250c194ef444050e6dc2e7326df008cde763fac996
+- scripts/evolve/verify_evolution_receipt.py [verifier_script] fa3bcbc5987bcecdcc1b74f9266f8393bad69c081f09474852b53b813667482f
+- scripts/evolve/run_evolve_demo.sh [e2e_demo_runner] 0664cfac0ab39944aba3c502820a1efb6083bcd270e1dc840d882ab743dfb8a1
+- results/evolve/EVO_GEN_2026_0097_VERIFICATION_REPORT.json [verification_report] 0ad50fe0d7851667db6a5b1b9c7aa1590d91bd7d17c8a5aa8502bd3db778884f
+- receipts/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_RECEIPT.json [technical_demonstration_receipt] 86025b026ed18750f34388bf1a597e19374b6d88a9a9e01a20b2f300263875d1
+Scope boundary:
+- production_ready_claimed=false
+- lab_ready_claimed=false
+- clinical_validation_claimed=false
+- regulatory_approval_claimed=false
+- gxp_certification_claimed=false
+- independently_reproduced=false
+- third_party_binding=false

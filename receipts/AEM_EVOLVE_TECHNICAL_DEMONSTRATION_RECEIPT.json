@@ -1,0 +1,22 @@
+{
+  "schema_id": "AEM_EVOLVE_TECHNICAL_DEMONSTRATION_RECEIPT_V1",
+  "receipt_name": "AEM_EVOLVE_TECHNICAL_DEMONSTRATION_RECEIPT",
+  "version": "v0.3",
+  "status": "TECHNICAL_DEMONSTRATION_PASS",
+  "demo_status": "AEM_EVOLVE_DEMO_STATUS=PASS",
+  "generated_at_utc": "2026-05-05T21:39:16.796426+00:00",
+  "source_commit": "5a3e850e00e72b971873bd062931eb1485578feb",
+  "event_id": "EVO-GEN-2026-0097",
+  "evolution_receipt_id": "AEM-EVOLVE-RECEIPT-EVO-GEN-2026-0097",
+  "verification_report": "results/evolve/EVO_GEN_2026_0097_VERIFICATION_REPORT.json",
+  "outcome": "SCOPE_LIMITED",
+  "claim_scope": "EVIDENCE_REVIEW_SUPPORT",
+  "clinical_claimed": false,
+  "diagnostic_claimed": false,
+  "regulatory_approval_claimed": false,
+  "third_party_binding": false,
+  "independently_reproduced": false,
+  "lab_ready_claimed": false,
+  "production_ready_claimed": false,
+  "signature_verified": true
+}

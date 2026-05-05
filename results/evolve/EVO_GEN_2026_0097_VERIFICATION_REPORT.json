@@ -1,0 +1,62 @@
+{
+  "schema_id": "AEM_EVOLVE_TECHNICAL_DEMONSTRATION_VERIFICATION_REPORT_V1",
+  "status": "PASS",
+  "generated_at_utc": "2026-05-05T21:39:16.796426+00:00",
+  "source_commit": "5a3e850e00e72b971873bd062931eb1485578feb",
+  "source_commit_short": "5a3e850e",
+  "command": "bash scripts/evolve/run_evolve_demo.sh",
+  "event_id": "EVO-GEN-2026-0097",
+  "receipt_id": "AEM-EVOLVE-RECEIPT-EVO-GEN-2026-0097",
+  "checks": {
+    "EVOLUTION_EVENT_SCHEMA": "PASS",
+    "EVOLUTION_RECEIPT_SCHEMA": "PASS",
+    "EVOLUTION_EVENT_MATCH": "PASS",
+    "EVOLUTION_RECEIPT_PAYLOAD_HASH": "PASS",
+    "EVOLUTION_RECEIPT_OUTCOME": "PASS",
+    "EVOLUTION_RECEIPT_CLAIM_SCOPE": "PASS",
+    "EVOLUTION_RECEIPT_CLAIM_BOUNDARY": "PASS",
+    "EVOLUTION_RECEIPT_SIGNATURE": "PASS"
+  },
+  "outcome": "SCOPE_LIMITED",
+  "claim_scope": "EVIDENCE_REVIEW_SUPPORT",
+  "non_claims": {
+    "clinical_claimed": false,
+    "diagnostic_claimed": false,
+    "regulatory_approval_claimed": false,
+    "third_party_binding": false
+  },
+  "signature": {
+    "algorithm": "RSA-PSS-SHA256",
+    "receipt_payload_sha256": "2559074f26fce8606e754d19eec45d8c726bedc82c4b79b8b2f8d8fa438f6c06",
+    "public_key_file": "examples/evolve/EVO_GEN_2026_0097_public_key.pem",
+    "signature_file": "examples/evolve/EVO_GEN_2026_0097_signature.sig",
+    "verification_status": "PASS"
+  },
+  "stdout": [
+    "=== AEM-EVOLVE CONTROLLED TECHNICAL DEMO ===",
+    "EVOLUTION_EVENT_SCHEMA=PASS",
+    "EVOLUTION_RECEIPT_SCHEMA=PASS",
+    "EVOLUTION_EVENT_MATCH=PASS",
+    "EVOLUTION_RECEIPT_PAYLOAD_HASH=PASS",
+    "EVOLUTION_RECEIPT_OUTCOME=PASS",
+    "EVOLUTION_RECEIPT_CLAIM_SCOPE=PASS",
+    "EVOLUTION_RECEIPT_CLAIM_BOUNDARY=PASS",
+    "EVOLUTION_RECEIPT_SIGNATURE=PASS",
+    "outcome=SCOPE_LIMITED",
+    "claim_scope=EVIDENCE_REVIEW_SUPPORT",
+    "clinical_claimed=false",
+    "diagnostic_claimed=false",
+    "regulatory_approval_claimed=false",
+    "third_party_binding=false",
+    "AEM_EVOLVE_DEMO_STATUS=PASS"
+  ],
+  "scope_boundary": {
+    "technical_demonstration_only": true,
+    "production_ready_claimed": false,
+    "lab_ready_claimed": false,
+    "clinical_validation_claimed": false,
+    "regulatory_approval_claimed": false,
+    "gxp_certification_claimed": false,
+    "independently_reproduced": false
+  }
+}
