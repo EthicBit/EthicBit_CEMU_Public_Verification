@@ -1,0 +1,267 @@
+{
+  "schema_id": "ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_UNIFIED_MANIFEST_V0_1",
+  "manifest_name": "EthicBit Mechanical Ethics Assurance Unified Manifest",
+  "version": "v0.1",
+  "generated_at_utc": "2026-05-06T15:45:52.556998+00:00",
+  "generation_base_commit": "cdc3e377d70f660c55a89db9a4bcaa4e4034f8d3",
+  "generation_base_commit_short": "cdc3e377",
+  "repository": "EthicBit/EthicBit_CEMU",
+  "canonicalization": "json_sort_keys_no_whitespace_utf8",
+  "hash_algorithm": "SHA-256",
+  "public_claim": "PUBLIC_REPRODUCIBLE_VERIFICATION_SUPPORT",
+  "status": "UNIFIED_ASSURANCE_SNAPSHOT_PRE_ANCHOR",
+  "architecture_document": "docs/architecture/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_STACK_v0_1.md",
+  "layers": [
+    {
+      "layer": 1,
+      "name": "Artifact Assurance",
+      "summary": "AEM V1.1 verifies the artifact.",
+      "primary_artifacts": [
+        "docs/AGENTE_ETICO_MECANICO_V1_1.md",
+        "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+        "receipts/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_MAINNET_ANCHOR_RECEIPT.json"
+      ],
+      "anchor": {
+        "status": "ONCHAIN_REGISTRY_ANCHOR_VERIFIED",
+        "tx_hash": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+        "block_number": 25001458
+      }
+    },
+    {
+      "layer": 2,
+      "name": "Governed Evolution Assurance",
+      "summary": "AEM-EVOLVE governs the change.",
+      "primary_artifacts": [
+        "docs/evolve/AEM_EVOLVE_CONCEPT_PAPER_v0_3.md",
+        "assurance/evolve/AEM_EVOLVE_MANIFEST.json",
+        "receipts/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_MAINNET_ANCHOR_RECEIPT.json"
+      ],
+      "anchor": {
+        "status": "ONCHAIN_AEM_EVOLVE_TECHNICAL_DEMONSTRATION_ANCHOR_VERIFIED",
+        "tx_hash": "0xaa23162993569913d557c98bc98703ffd716670551d9911c0d232dc8e860e40c",
+        "block_number": 25032920
+      }
+    },
+    {
+      "layer": 3,
+      "name": "Public Evidence Surface",
+      "summary": "GitHub exposes the evidence.",
+      "primary_artifacts": [
+        "artifacts/releases/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_v0_3.zip",
+        "artifacts/releases/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_v0_3.sha256",
+        "challenge/independent-reproduction/challenge_manifest.json"
+      ]
+    },
+    {
+      "layer": 4,
+      "name": "Integrity Anchoring",
+      "summary": "Ethereum mainnet anchors the integrity.",
+      "primary_artifacts": [
+        "receipts/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_MAINNET_ANCHOR_RECEIPT.json",
+        "receipts/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_EXTENSION_MAINNET_ANCHOR_RECEIPT.json",
+        "receipts/AEM_V1_1_REPRODUCIBILITY_EXTENSION_MAINNET_ANCHOR_RECEIPT.json",
+        "receipts/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_MAINNET_ANCHOR_RECEIPT.json"
+      ],
+      "anchors": [
+        {
+          "name": "registry",
+          "tx_hash": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+          "block_number": 25001458,
+          "status": "ONCHAIN_REGISTRY_ANCHOR_VERIFIED"
+        },
+        {
+          "name": "supply_chain",
+          "tx_hash": "0x2c9befb0398d90aee0c831837664c9c883700497ebb81fe7a7d9acf3b1d58fef",
+          "block_number": 25002628,
+          "status": "ONCHAIN_SUPPLY_CHAIN_EXTENSION_ANCHOR_VERIFIED"
+        },
+        {
+          "name": "reproducibility",
+          "tx_hash": "0x7c9651720faace92b6e66a739e1b5e176c202776bdf41ceea12e93386bcc196d",
+          "block_number": 25003750,
+          "status": "ONCHAIN_REPRODUCIBILITY_EXTENSION_ANCHOR_VERIFIED"
+        },
+        {
+          "name": "aem_evolve",
+          "tx_hash": "0xaa23162993569913d557c98bc98703ffd716670551d9911c0d232dc8e860e40c",
+          "block_number": 25032920,
+          "status": "ONCHAIN_AEM_EVOLVE_TECHNICAL_DEMONSTRATION_ANCHOR_VERIFIED"
+        }
+      ]
+    },
+    {
+      "layer": 5,
+      "name": "Supply-Chain Assurance",
+      "summary": "SLSA-style posture supports supply-chain assurance.",
+      "primary_artifacts": [
+        "docs/supply-chain/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_EXTENSION.md",
+        "assurance/provenance/SLSA_PROVENANCE.json",
+        "assurance/in-toto/attestation-index.json",
+        "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+        "receipts/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_EXTENSION_MAINNET_ANCHOR_RECEIPT.json"
+      ],
+      "anchor": {
+        "status": "ONCHAIN_SUPPLY_CHAIN_EXTENSION_ANCHOR_VERIFIED",
+        "tx_hash": "0x2c9befb0398d90aee0c831837664c9c883700497ebb81fe7a7d9acf3b1d58fef",
+        "block_number": 25002628
+      }
+    },
+    {
+      "layer": 6,
+      "name": "Runtime Secret Protection",
+      "summary": "ML-KEM768 + X25519 protects runtime secrets.",
+      "primary_artifacts": [
+        "docs/crypto/MLKEM768_RUNTIME_SECRET_PROTECTION.md",
+        "assurance/crypto/pq_kem.go",
+        "mechanical_ethics/gate.go",
+        "results/pq_runtime_secret_protection.json"
+      ]
+    },
+    {
+      "layer": 7,
+      "name": "Scope Boundary Layer",
+      "summary": "Scope boundaries prevent overclaiming.",
+      "primary_artifacts": [
+        "docs/third_party_representation_boundary.md",
+        "docs/evolve/AEM_EVOLVE_RELEASE_SCOPE_BOUNDARY.md",
+        "docs/crypto/MLKEM768_RUNTIME_SECRET_PROTECTION.md",
+        "results/legal_claim_boundary.md"
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "path": "artifacts/releases/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_v0_3.sha256",
+      "file_sha256": "de915aa7da8f6d27e79d063e4110c79551b81986ec15b585295e57bd8745c7f6"
+    },
+    {
+      "path": "artifacts/releases/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_v0_3.zip",
+      "file_sha256": "ebf55c372e8589afb5f936452522fba0849f562bb0c4d9513a832e499988b619"
+    },
+    {
+      "path": "assurance/crypto/pq_kem.go",
+      "file_sha256": "67da0566a1385cca47857b8d0d9221b1177f0c83f65345b787644503fd6a0e6d"
+    },
+    {
+      "path": "assurance/evolve/AEM_EVOLVE_MANIFEST.json",
+      "file_sha256": "a5b7a426823c9d1f5e43d80f2cb48bc60eda0dbf37ec21216144893bd9df5703",
+      "canonical_sha256": "7e5f3f735a01e317514cb5e93559be5ed42496ea89058f98e1fc15eb5407d7cf",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "assurance/in-toto/attestation-index.json",
+      "file_sha256": "c5b94eb3feacc1b6cbc55355575d4cb82fb3e1e5fba38de07d410080a32f6870",
+      "canonical_sha256": "c97aafefb98c50c10a9b7a22f758f78d68b4e294d1ac4cf31f2a4416f488a4ed",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "assurance/provenance/SLSA_PROVENANCE.json",
+      "file_sha256": "41b91bde1a038d00257b7dd3d1137d8b792a816900b894fb0d20a550f2e41485",
+      "canonical_sha256": "9294abf1ab03b711b9a34b3d2d26eaa3b0d375ca28f25793df7f256307441fc4",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+      "file_sha256": "27db238656420cddc4d9825be8289e37b3624768af55fa664f7fd4f76fdba670",
+      "canonical_sha256": "a03af5496d8c3fa89af5bf1b0d40e03741a89bbc23bb97fd37a287c22d43fcef",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "challenge/independent-reproduction/challenge_manifest.json",
+      "file_sha256": "f39d94cc705f1112133471926dc77aadfa44ef2a87cabfaee80ae4193f1c04dd",
+      "canonical_sha256": "17f5f1ddea1ce7188badd483d6399d49c5589813562f55fe07be7f3d5966cd1e",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "docs/AGENTE_ETICO_MECANICO_V1_1.md",
+      "file_sha256": "5f04bc0c1cdd8680af39d26954c3929047d8421787a79f6251107763e0551c0f"
+    },
+    {
+      "path": "docs/crypto/MLKEM768_RUNTIME_SECRET_PROTECTION.md",
+      "file_sha256": "c993f4a4b741568457be63b40bd8b3c6a11b6ca885b75cc199c2d09fa4a7b6ae"
+    },
+    {
+      "path": "docs/evolve/AEM_EVOLVE_CONCEPT_PAPER_v0_3.md",
+      "file_sha256": "bfb22b9f9369904d2339cd8737e04ee11e5ccf37070bba306db5bc158a8a95e6"
+    },
+    {
+      "path": "docs/evolve/AEM_EVOLVE_RELEASE_SCOPE_BOUNDARY.md",
+      "file_sha256": "6e85443b8af016902ee94cbd4753b24f65222c0bdf843120fe89a1000c0b2a1e"
+    },
+    {
+      "path": "docs/supply-chain/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_EXTENSION.md",
+      "file_sha256": "4e69460f3c73e1c6dde5ee245aa5286add8e8cb1106bc6a7208639b098d97443"
+    },
+    {
+      "path": "docs/third_party_representation_boundary.md",
+      "file_sha256": "4af9c43f88775e1014792af1152d1c62cab75383905773881165bfc4a65f88b5"
+    },
+    {
+      "path": "mechanical_ethics/gate.go",
+      "file_sha256": "9ef2329554197383e717c226970668107b4f8b51fdfa4e46e7658f352dd055f0"
+    },
+    {
+      "path": "receipts/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_MAINNET_ANCHOR_RECEIPT.json",
+      "file_sha256": "db795b56f1202db5c068de6ff7bac7c16f117e87fab5d842a512da517e0722a8",
+      "canonical_sha256": "f4700b58c36280e96e855e02faa10423b044e7f117f17e5d0899f2bd5e68b826",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "receipts/AEM_V1_1_REPRODUCIBILITY_EXTENSION_MAINNET_ANCHOR_RECEIPT.json",
+      "file_sha256": "96477647542273b6b7c66efc2f73633137d0c2e6b9c8760e6145f5d168057a18",
+      "canonical_sha256": "76cdae167a9bdd4d6b4c0b1ec65e602cb1a1304f96f49a5a58e84c59d41cc656",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "receipts/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_EXTENSION_MAINNET_ANCHOR_RECEIPT.json",
+      "file_sha256": "df22cabe5a653f096448a22f98cb52e1011a742c0c4c71b3a7014251c8ceca05",
+      "canonical_sha256": "40291b300028cb9e14d21e38ea1e01da137c67c53dd9f14eaba98237bec19635",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "receipts/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_MAINNET_ANCHOR_RECEIPT.json",
+      "file_sha256": "3b763b11e8552747db9ffe11180e1e639d36eafcd0a521fe8688067d4f087b4b",
+      "canonical_sha256": "b76dfbeadee52c29148162ef337c54c80371b9367f610755f0342c78a868b2cf",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+      "file_sha256": "443c3423770456f3c8c49055d6e9eafbaa5762b29268b8b3470c8ee84439fac1",
+      "canonical_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    },
+    {
+      "path": "results/legal_claim_boundary.md",
+      "file_sha256": "16869a7c3865391a2b8521bc78f3f661854e959e1ca3802e19c87f66a544f37d"
+    },
+    {
+      "path": "results/pq_runtime_secret_protection.json",
+      "file_sha256": "68b80dce0817fe479b2100e35b3169334534c88c5a451335fca19cc26256b9b9",
+      "canonical_sha256": "b259ebe1292c78388a6841d3ce52ef0c5ebff497398d453e3eb58eadc532d423",
+      "canonicalization": "json_sort_keys_no_whitespace_utf8"
+    }
+  ],
+  "non_claims": {
+    "regulatory_approval": false,
+    "clinical_validation": false,
+    "diagnostic_authorization": false,
+    "production_readiness": false,
+    "lab_readiness": false,
+    "full_slsa_l4_certification": false,
+    "fips_module_validation": false,
+    "cryptographic_module_certification": false,
+    "absolute_quantum_security": false,
+    "independent_reproduction_completed": false,
+    "automatic_third_party_binding": false,
+    "fda_ema_acceptance": false,
+    "gxp_certification": false
+  },
+  "future_anchor": {
+    "anchor_status": "NOT_ANCHORED_YET",
+    "anchor_target": "assurance/unified/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_UNIFIED_MANIFEST_v0_1.json",
+    "anchor_network": "ethereum-mainnet",
+    "anchor_chain_id": 1,
+    "receipt_path": "assurance/unified/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_UNIFIED_ANCHOR_RECEIPT_v0_1.json",
+    "rule": "Anchor only after this manifest is merged to main and local main is clean and synchronized."
+  }
+}
