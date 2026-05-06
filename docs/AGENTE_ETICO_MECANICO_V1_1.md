@@ -224,3 +224,16 @@ inmutable para trazabilidad documental.
 
 Cualquier cambio sustantivo posterior debera emitirse como nueva
 version, sin invalidar la evidencia historica de V1.0 ni V1.1.
+
+## 8. Runtime Secret Protection Posture
+
+AEM V1.1 includes ML-KEM768 + X25519 hybrid runtime secret protection for Mechanical Ethics, with HKDF-derived hybrid secrets, fail-closed behavior, and non-sensitive canonical metadata recording.
+
+Implementation and posture reference:
+
+- `assurance/crypto/pq_kem.go`
+- `mechanical_ethics/gate.go`
+- `docs/crypto/MLKEM768_RUNTIME_SECRET_PROTECTION.md`
+- `results/pq_runtime_secret_protection.json`
+
+This posture relies on NIST FIPS 203 ML-KEM assumptions and does not claim FIPS module validation, cryptographic module certification, absolute quantum security, production cryptographic certification, third-party cryptographic certification, regulatory approval, SLSA L4 cryptographic closure, clinical validation, or diagnostic authorization.
