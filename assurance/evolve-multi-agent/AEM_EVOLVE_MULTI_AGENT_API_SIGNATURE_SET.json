@@ -2,7 +2,7 @@
   "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_SIGNATURE_SET_V0_3_1",
   "artifact": "AEM-EVOLVE Multi-Agent Governance API",
   "version": "0.3.1-demo",
-  "current_milestone": "PR 4 - Tamper-Evident Audit Chain",
+  "current_milestone": "PR 5 - Independent Reproduction Challenge",
   "status": "DEMO_SIGNED",
   "signed_at_utc": "2026-05-07T19:00:43.701032+00:00",
   "canonicalization": "json_sort_keys_no_whitespace_utf8",
@@ -20,8 +20,8 @@
     {
       "name": "manifest",
       "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json",
-      "canonical_sha256": "3108f0744d863520f71dabedbe4079cd99f27ae8f34b4ac9c35f6f07d8265c04",
-      "signature_b64": "yKRVgGai3W4mcFGiG9Zi+eiwIP9DowQ3DhhX5vtN1yrzsSIOL9kwkq7ad5T22+EJgdurALGY21xf1CwT34h4AA=="
+      "canonical_sha256": "bce547d37f35d839a7201a919263d57df3d981ca320fbfeee76f8f457f93488b",
+      "signature_b64": "SYOB3TTW0E4c9aZhmihapVS8gDoAFu9ILRIstzTqju2hjNZmt6BI9YnymfUcDMsi8uFZKOkQnn8b4Eew1tMxBQ=="
     }
   ],
   "non_claims": {

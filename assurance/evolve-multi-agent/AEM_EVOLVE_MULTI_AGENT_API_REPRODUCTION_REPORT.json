@@ -1,0 +1,32 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_REPRODUCTION_REPORT_V0_3_1_DEMO",
+  "artifact": "AEM-EVOLVE Multi-Agent Governance API",
+  "version": "0.3.1-demo",
+  "current_milestone": "PR 5 - Independent Reproduction Challenge",
+  "status": "LOCAL_SELF_CHECK_PASS",
+  "generated_at_utc": "2026-05-07T19:18:01.067434+00:00",
+  "source_commit": "7aa52723",
+  "challenge_path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_REPRODUCTION_CHALLENGE.json",
+  "result": {
+    "subjects_total": 16,
+    "subjects_matched": 16,
+    "subjects_mismatched": 0,
+    "subjects_missing": 0,
+    "file_integrity_status": "ALL_MATCH",
+    "signature_verification_status": "DEMO_SIGNED_ED25519_PASS",
+    "chain_verification_status": "PASS_WHEN_DB_POPULATED"
+  },
+  "local_checks_run": [
+    "run_aem_evolve_multi_agent_reproduction_challenge.py",
+    "verify_demo_receipt_signatures.sh"
+  ],
+  "independent_reproduction_claimed": false,
+  "third_party_reproduction_completed": false,
+  "note": "Local self-check only. Independent reproduction requires a separate environment or third-party execution and is NOT claimed by this PR.",
+  "non_claims": {
+    "independently_reproduced": false,
+    "third_party_attested": false,
+    "production_ready": false,
+    "regulatory_approved": false
+  }
+}
