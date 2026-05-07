@@ -81,7 +81,58 @@ def init_audit_tables(conn: sqlite3.Connection):
     """
     )
 
+    # Hash-linked audit chain — each row commits to the previous row's chain_hash.
+    # chain_hash = SHA256(prev_chain_hash + ":" + entry_sha256)
+    # GENESIS row uses prev_chain_hash = "0" * 64.
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS audit_chain (
+            seq INTEGER PRIMARY KEY AUTOINCREMENT,
+            entry_type TEXT NOT NULL,
+            entry_id TEXT NOT NULL,
+            entry_sha256 TEXT NOT NULL,
+            prev_chain_hash TEXT NOT NULL,
+            chain_hash TEXT NOT NULL,
+            timestamp_utc TEXT NOT NULL
+        )
+    """
+    )
+
     conn.commit()
+
+
+GENESIS_HASH = "0" * 64
+
+
+def _append_audit_chain(
+    conn: sqlite3.Connection,
+    entry_type: str,
+    entry_id: str,
+    entry_sha256: str,
+) -> str:
+    cursor = conn.cursor()
+    cursor.execute("SELECT chain_hash FROM audit_chain ORDER BY seq DESC LIMIT 1")
+    row = cursor.fetchone()
+    prev_chain_hash = row[0] if row else GENESIS_HASH
+    chain_hash = hashlib.sha256(
+        f"{prev_chain_hash}:{entry_sha256}".encode()
+    ).hexdigest()
+    cursor.execute(
+        """
+        INSERT INTO audit_chain (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            entry_type,
+            entry_id,
+            entry_sha256,
+            prev_chain_hash,
+            chain_hash,
+            datetime.now(timezone.utc).isoformat(),
+        ),
+    )
+    conn.commit()
+    return chain_hash
 
 
 # ============================================
@@ -172,6 +223,7 @@ def create_evolution_event(
         ),
     )
     conn.commit()
+    _append_audit_chain(conn, "evolution_event", event["event_id"], event["event_canonical_sha256"])
 
     return event
 
@@ -231,6 +283,7 @@ def evaluate_evolution_gate(event: dict, conn: sqlite3.Connection, thread_id: st
         ),
     )
     conn.commit()
+    _append_audit_chain(conn, "evolution_receipt", receipt["receipt_id"], receipt["receipt_canonical_sha256"])
 
     return receipt
 
@@ -410,6 +463,19 @@ def approve_change(req: ApproveRequest):
     state["pending_change"] = None
     state["human_approval_needed"] = False
 
+    decision_ts = datetime.now(timezone.utc).isoformat()
+    decision_id = f"DEC-{req.thread_id}-{state['last_receipt']['event_id']}"
+    decision_payload = {
+        "decision_id": decision_id,
+        "thread_id": req.thread_id,
+        "event_id": state["last_receipt"]["event_id"],
+        "decision": req.decision,
+        "approver_id": req.approver_id,
+        "override_reason": req.override_reason,
+        "timestamp_utc": decision_ts,
+    }
+    decision_sha256 = compute_sha256(decision_payload)
+
     cursor = db_conn.cursor()
     cursor.execute(
         """
@@ -422,10 +488,11 @@ def approve_change(req: ApproveRequest):
             req.decision,
             req.approver_id,
             req.override_reason,
-            datetime.now(timezone.utc).isoformat(),
+            decision_ts,
         ),
     )
     db_conn.commit()
+    _append_audit_chain(db_conn, "human_decision", decision_id, decision_sha256)
 
     state = final_report_node(state)
     graph.update_state(config, state)
@@ -513,6 +580,88 @@ def get_audit(thread_id: str):
     }
 
 
+@app.get("/chain/{thread_id}")
+def get_chain(thread_id: str):
+    """Return all audit chain entries that reference events/receipts/decisions for this thread."""
+    cursor = db_conn.cursor()
+    # Collect entry_ids for this thread from all three tables.
+    cursor.execute("SELECT event_id FROM evolution_events WHERE thread_id = ?", (thread_id,))
+    event_ids = {row[0] for row in cursor.fetchall()}
+    cursor.execute("SELECT event_id FROM evolution_receipts WHERE thread_id = ?", (thread_id,))
+    receipt_entry_ids = {f"REC-{eid}" for eid in {row[0] for row in cursor.fetchall()}}
+    decision_prefix = f"DEC-{thread_id}-"
+    cursor.execute(
+        "SELECT entry_id FROM audit_chain WHERE entry_id LIKE ?",
+        (decision_prefix + "%",),
+    )
+    decision_ids = {row[0] for row in cursor.fetchall()}
+
+    all_ids = event_ids | receipt_entry_ids | decision_ids
+    if not all_ids:
+        raise HTTPException(404, f"No audit chain entries found for thread {thread_id}")
+
+    placeholders = ",".join("?" * len(all_ids))
+    cursor.execute(
+        f"SELECT seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc "
+        f"FROM audit_chain WHERE entry_id IN ({placeholders}) ORDER BY seq",
+        list(all_ids),
+    )
+    rows = cursor.fetchall()
+    entries = [
+        {
+            "seq": r[0], "entry_type": r[1], "entry_id": r[2],
+            "entry_sha256": r[3], "prev_chain_hash": r[4],
+            "chain_hash": r[5], "timestamp_utc": r[6],
+        }
+        for r in rows
+    ]
+    return {"thread_id": thread_id, "chain_entries": entries, "count": len(entries)}
+
+
+@app.get("/chain/verify")
+def verify_chain():
+    """Walk the full audit chain and verify every hash link. Detects any tampering."""
+    cursor = db_conn.cursor()
+    cursor.execute(
+        "SELECT seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash "
+        "FROM audit_chain ORDER BY seq"
+    )
+    rows = cursor.fetchall()
+
+    if not rows:
+        return {"status": "EMPTY", "entries_checked": 0, "errors": []}
+
+    errors = []
+    expected_prev = GENESIS_HASH
+
+    for seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash in rows:
+        if prev_chain_hash != expected_prev:
+            errors.append({
+                "seq": seq, "entry_id": entry_id,
+                "error": "prev_chain_hash_mismatch",
+                "expected": expected_prev, "got": prev_chain_hash,
+            })
+        recomputed = hashlib.sha256(f"{prev_chain_hash}:{entry_sha256}".encode()).hexdigest()
+        if recomputed != chain_hash:
+            errors.append({
+                "seq": seq, "entry_id": entry_id,
+                "error": "chain_hash_mismatch",
+                "expected": recomputed, "stored": chain_hash,
+            })
+        expected_prev = chain_hash
+
+    status = "PASS" if not errors else "TAMPER_DETECTED"
+    return {
+        "status": status,
+        "entries_checked": len(rows),
+        "errors": errors,
+        "head_chain_hash": rows[-1][5] if rows else None,
+        "tamper_evident": True,
+        "tamper_proof_claimed": False,
+        "note": "Hash-linked detection only. SQLite is demo storage — not tamper-proof.",
+    }
+
+
 @app.get("/health")
 def health():
     return {
@@ -520,9 +669,11 @@ def health():
         "demo_type": "technical_demonstration",
         "version": "0.3.1-demo",
         "local_only": True,
-        "signature_status": "NOT_SIGNED_DEMO",
-        "anchor_status": "NOT_ANCHORED_FOR_THIS_DEMO",
-        "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions"],
+        "signature_status": "DEMO_SIGNED_ED25519",
+        "anchor_status": "ANCHORED_ON_MAINNET_DEMO",
+        "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions", "audit_chain"],
+        "tamper_evident_chain": True,
+        "tamper_proof_claimed": False,
         "non_claims": [
             "not_production_ready",
             "not_independently_reproduced",
@@ -530,6 +681,7 @@ def health():
             "not_regulatory_approved",
             "not_clinical_or_diagnostic",
             "sqlite_not_production_audit_storage",
+            "not_tamper_proof",
         ],
     }
 
