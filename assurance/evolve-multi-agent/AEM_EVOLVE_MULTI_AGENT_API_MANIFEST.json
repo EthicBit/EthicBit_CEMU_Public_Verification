@@ -1,0 +1,34 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_MANIFEST_V0_3_1_DEMO",
+  "artifact": "AEM-EVOLVE Multi-Agent Governance API",
+  "version": "0.3.1-demo",
+  "status": "TECHNICAL_DEMONSTRATION_PACKAGE",
+  "claim": "AEM-EVOLVE Multi-Agent Governance API v0.3.1-demo provides an endpoint-level technical demonstration of Evolution Events, scope-limited Evolution Receipts, SQLite audit persistence, and Human-in-the-Loop approval for multi-agent workflow changes.",
+  "current_milestone": "PR 1 - Demo Package",
+  "anchor_status": "NOT_ANCHORED_FOR_THIS_DEMO",
+  "signature_status": "NOT_SIGNED_DEMO",
+  "storage": "SQLite demonstration storage only",
+  "local_only": true,
+  "non_claims": {
+    "production_ready": false,
+    "independently_reproduced": false,
+    "cryptographically_signed_receipts": false,
+    "ethereum_mainnet_anchored_for_this_demo": false,
+    "regulatory_approved": false,
+    "clinical_or_diagnostic": false,
+    "externally_certified": false,
+    "production_authentication_or_authorization": false,
+    "tamper_proof_audit_trail": false,
+    "production_grade_database_storage": false
+  },
+  "files": [
+    "demos/aem-evolve-multi-agent-api/README.md",
+    "demos/aem-evolve-multi-agent-api/main.py",
+    "demos/aem-evolve-multi-agent-api/requirements.txt",
+    "demos/aem-evolve-multi-agent-api/scripts/run_demo_e2e.sh",
+    "demos/aem-evolve-multi-agent-api/scripts/run_tamper_checklist.sh",
+    "demos/aem-evolve-multi-agent-api/docs/EVOLUTION_RECEIPTS_SPECIFICATION.md",
+    "demos/aem-evolve-multi-agent-api/docs/SCOPE_BOUNDARY.md",
+    "demos/aem-evolve-multi-agent-api/docs/ASSURANCE_LADDER.md"
+  ]
+}
