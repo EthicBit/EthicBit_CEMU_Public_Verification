@@ -1,0 +1,61 @@
+{
+  "schema_id": "ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_MAINNET_ANCHOR_RECEIPT_V1",
+  "status": "ONCHAIN_REGISTRY_ANCHOR_VERIFIED",
+  "network": "ethereum-mainnet",
+  "chain_id": 1,
+  "tx_hash": "0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+  "block_number": 25001458,
+  "block_explorer_url": "https://etherscan.io/tx/0xa2040997b6cccd182b5cf76daa23558540ab7be566f2e1c7527abcadbd5dddb4",
+  "anchor_sequence": {
+    "is_final_public_reference": true,
+    "supersedes_prior_public_registry_receipt": true,
+    "prior_registry_anchor_tx": "0x2eb347df5db23a2fa9a0ff51e418912820b6025064cc40a9a6d2452d11da0308"
+  },
+  "timestamp_utc": "2026-05-01T17:02:03.894265+00:00",
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "gas_used": 68240,
+  "effective_gas_price_wei": 2539256948,
+  "fee_paid_wei": 173278894131520,
+  "fee_paid_eth": 0.00017327889413152,
+  "payload": {
+    "schema_id": "ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY_MAINNET_ANCHOR_PAYLOAD_V1",
+    "technology_artifact": "AEM V1.1 - Mechanical Ethical Agent",
+    "technology_version": "AEM V1.1",
+    "registry_name": "AEM V1.1 - Global Public Verification Registry",
+    "registry_schema_version": "V1.0",
+    "registry_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+    "registry_canonicalization": "json_sort_keys_no_whitespace_utf8",
+    "registry_hash_algorithm": "SHA-256",
+    "aem_v1_1_anchor_tx": "0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+    "aem_v1_1_freeze_pdf_sha256": "689992b6e73ffd897dfc75112abeda022cee6ad492037217f7bab28397b69696",
+    "aem_v1_1_public_kit_zip_sha256": "a3933a6cac4badb07c29b0ed17f8529a059730e9a7d5efde0884afdcd96c98a0",
+    "historical_claim_level_ceiling": "L5",
+    "historical_constitutional_controls": "14/14 PASS",
+    "historical_tampering_resistance": "PROVEN",
+    "third_party_binding": false,
+    "presentation_scope": "READY_WITH_SCOPE_DELIMITATION",
+    "filing_reference_scope": "administrative_reference_only",
+    "patent_grant_claimed": false,
+    "uspto_approval_claimed": false,
+    "regulatory_approval_claimed": false,
+    "court_recognition_claimed": false,
+    "ts_unix": 1777654907
+  },
+  "payload_sha256": "ff4d7b57574ab045910262a56b0599e128e303cc109f9ec2a2336f9a63133c81",
+  "registry": {
+    "registry_path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+    "registry_canonical_sha256": "24b813071b7dac3ae29ac4571945f846554244ccea52e2b61c3ad4b6894ca075",
+    "registry_file_sha256": "443c3423770456f3c8c49055d6e9eafbaa5762b29268b8b3470c8ee84439fac1",
+    "registry_canonicalization": "json_sort_keys_no_whitespace_utf8",
+    "hash_algorithm": "SHA-256"
+  },
+  "verification_rpcs": {
+    "broadcast": "https://ethereum-rpc.publicnode.com",
+    "receipt_lookup": "https://ethereum-rpc.publicnode.com",
+    "tx_lookup": "https://ethereum-rpc.publicnode.com",
+    "chain_check": "https://ethereum-rpc.publicnode.com",
+    "nonce_lookup": "https://ethereum-rpc.publicnode.com",
+    "gas_estimate": "https://ethereum-rpc.publicnode.com"
+  }
+}

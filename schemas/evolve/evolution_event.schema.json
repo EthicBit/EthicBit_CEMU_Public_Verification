@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ethicbit.example/schemas/evolve/evolution_event.schema.json",
+  "title": "AEM-EVOLVE Evolution Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "event_id",
+    "system_id",
+    "base_artifact",
+    "change_type",
+    "sector_profile",
+    "materiality_score",
+    "evidence_bundle",
+    "requested_claim_scope",
+    "risk_flags",
+    "timestamp_utc",
+    "operator",
+    "previous_state_hash",
+    "proposed_state_hash",
+    "scope_boundary"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^EVO-[A-Z]+-[0-9]{4}-[0-9]{4}$"
+    },
+    "system_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "base_artifact": {
+      "type": "string",
+      "minLength": 1
+    },
+    "change_type": {
+      "type": "string",
+      "enum": [
+        "DATASET_UPDATE",
+        "MODEL_UPDATE",
+        "RULE_UPDATE",
+        "EVIDENCE_UPDATE",
+        "CONFIGURATION_UPDATE"
+      ]
+    },
+    "sector_profile": {
+      "type": "string",
+      "enum": [
+        "GENOMICS_RESEARCH_SUPPORT",
+        "LIFE_SCIENCES_NON_CLINICAL",
+        "GENERAL_TECHNICAL_DEMONSTRATION"
+      ]
+    },
+    "materiality_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "evidence_bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_bundle_id",
+        "sources",
+        "evidence_hashes",
+        "review_notes"
+      ],
+      "properties": {
+        "evidence_bundle_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence_hashes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "review_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "requested_claim_scope": {
+      "type": "string",
+      "enum": [
+        "EVIDENCE_REVIEW_SUPPORT",
+        "RESEARCH_SUPPORT",
+        "TECHNICAL_DEMONSTRATION_ONLY"
+      ]
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "operator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "role"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "previous_state_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "proposed_state_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "scope_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clinical_use_claimed",
+        "diagnostic_use_claimed",
+        "regulatory_approval_claimed",
+        "third_party_binding_claimed"
+      ],
+      "properties": {
+        "clinical_use_claimed": {
+          "type": "boolean",
+          "const": false
+        },
+        "diagnostic_use_claimed": {
+          "type": "boolean",
+          "const": false
+        },
+        "regulatory_approval_claimed": {
+          "type": "boolean",
+          "const": false
+        },
+        "third_party_binding_claimed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  }
+}
