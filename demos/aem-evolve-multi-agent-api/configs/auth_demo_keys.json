@@ -1,0 +1,19 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_AUTH_KEYS_V1",
+  "environment": "local-demo",
+  "note": "Demo keys only. Not for production. Rotate before any non-local deployment.",
+  "keys": {
+    "demo-initiator-key-001": {
+      "role": "INITIATOR",
+      "description": "May POST /start"
+    },
+    "demo-approver-key-001": {
+      "role": "APPROVER",
+      "description": "May POST /approve"
+    },
+    "demo-observer-key-001": {
+      "role": "OBSERVER",
+      "description": "May GET /status, /audit, /receipt, /event, /chain/*"
+    }
+  }
+}

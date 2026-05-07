@@ -1,11 +1,12 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
-FastAPI + LangGraph + SQLite + Explicit Audit Tables
+FastAPI + LangGraph + SQLite + Explicit Audit Tables + Role-Based Auth
 May 2026
 """
 
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException, Security
+from fastapi.security import APIKeyHeader
+from pydantic import BaseModel, field_validator
 from typing import Literal, Optional
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
@@ -19,9 +20,67 @@ from pathlib import Path
 
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
-    description="Multi-Agent Governance with Explicit Audit Tables",
+    description="Multi-Agent Governance with RBAC HITL Controls",
     version="0.3.1-demo",
 )
+
+# ============================================
+# AUTH — ROLE-BASED API KEY
+# ============================================
+
+DEMO_ROOT = Path(__file__).resolve().parent
+_AUTH_KEYS_PATH = DEMO_ROOT / "configs" / "auth_demo_keys.json"
+_API_KEY_HEADER = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+# Roles
+ROLE_INITIATOR = "INITIATOR"
+ROLE_APPROVER = "APPROVER"
+ROLE_OBSERVER = "OBSERVER"
+_ALL_ROLES = {ROLE_INITIATOR, ROLE_APPROVER, ROLE_OBSERVER}
+
+
+def _load_key_store() -> dict[str, str]:
+    """Return {api_key: role} mapping. Falls back to env var AEM_DEMO_AUTH_KEYS_JSON."""
+    import os
+    env_raw = os.environ.get("AEM_DEMO_AUTH_KEYS_JSON", "")
+    if env_raw:
+        try:
+            data = json.loads(env_raw)
+            return {k: v["role"] for k, v in data.get("keys", {}).items()}
+        except Exception:
+            pass
+    if _AUTH_KEYS_PATH.exists():
+        data = json.loads(_AUTH_KEYS_PATH.read_text(encoding="utf-8"))
+        return {k: v["role"] for k, v in data.get("keys", {}).items()}
+    return {}
+
+
+_KEY_STORE: dict[str, str] = _load_key_store()
+
+
+def _require_role(api_key: str | None, required_role: str) -> str:
+    """Validate key and role. Returns the role string. Raises 401/403 on failure."""
+    if not api_key:
+        raise HTTPException(status_code=401, detail="X-API-Key header required")
+    role = _KEY_STORE.get(api_key)
+    if role is None:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    if role != required_role:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Role {required_role} required; your key has role {role}",
+        )
+    return role
+
+
+def _require_any_auth(api_key: str | None) -> str:
+    """Validate key; any role allowed. Returns the role string."""
+    if not api_key:
+        raise HTTPException(status_code=401, detail="X-API-Key header required")
+    role = _KEY_STORE.get(api_key)
+    if role is None:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    return role
 
 # ============================================
 # CREAR TABLAS DE AUDITORÍA
@@ -144,12 +203,32 @@ class StartRequest(BaseModel):
     thread_id: str
     initial_prompt: str = "Eres un asistente general."
 
+    @field_validator("thread_id")
+    @classmethod
+    def _thread_id_safe(cls, v: str) -> str:
+        if not v or len(v) > 128 or not v.replace("-", "").replace("_", "").isalnum():
+            raise ValueError("thread_id must be 1-128 alphanumeric/dash/underscore chars")
+        return v
+
+    @field_validator("initial_prompt")
+    @classmethod
+    def _prompt_length(cls, v: str) -> str:
+        if len(v) > 4096:
+            raise ValueError("initial_prompt must be ≤ 4096 characters")
+        return v
+
 
 class ApproveRequest(BaseModel):
     thread_id: str
     decision: Literal["approve", "reject"]
-    approver_id: Optional[str] = "human-reviewer"
     override_reason: Optional[str] = None
+
+    @field_validator("thread_id")
+    @classmethod
+    def _thread_id_safe(cls, v: str) -> str:
+        if not v or len(v) > 128 or not v.replace("-", "").replace("_", "").isalnum():
+            raise ValueError("thread_id must be 1-128 alphanumeric/dash/underscore chars")
+        return v
 
 
 class StatusResponse(BaseModel):
@@ -355,7 +434,6 @@ def final_report_node(state):
 # ============================================
 
 
-DEMO_ROOT = Path(__file__).resolve().parent
 DEMO_DB_PATH = DEMO_ROOT / "ethicbit_demo.db"
 DEMO_HOST = "127.0.0.1"
 DEMO_PORT = 8000
@@ -411,7 +489,8 @@ graph, db_conn = build_graph()
 
 
 @app.post("/start")
-def start_session(req: StartRequest):
+def start_session(req: StartRequest, api_key: str = Security(_API_KEY_HEADER)):
+    _require_role(api_key, ROLE_INITIATOR)
     initial_state = {
         "thread_id": req.thread_id,
         "research_findings": "",
@@ -429,7 +508,8 @@ def start_session(req: StartRequest):
 
 
 @app.get("/status/{thread_id}", response_model=StatusResponse)
-def get_status(thread_id: str):
+def get_status(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
+    _require_any_auth(api_key)
     config = {"configurable": {"thread_id": thread_id}}
     try:
         state = graph.get_state(config).values
@@ -446,7 +526,13 @@ def get_status(thread_id: str):
 
 
 @app.post("/approve")
-def approve_change(req: ApproveRequest):
+def approve_change(req: ApproveRequest, api_key: str = Security(_API_KEY_HEADER)):
+    role = _require_role(api_key, ROLE_APPROVER)
+    # Derive approver_id from the authenticated key rather than the request body.
+    approver_id = next(
+        (k for k, v in _load_key_store().items() if k == api_key),
+        "authenticated-approver",
+    )
     config = {"configurable": {"thread_id": req.thread_id}}
     state = graph.get_state(config).values
 
@@ -470,7 +556,8 @@ def approve_change(req: ApproveRequest):
         "thread_id": req.thread_id,
         "event_id": state["last_receipt"]["event_id"],
         "decision": req.decision,
-        "approver_id": req.approver_id,
+        "approver_id": approver_id,
+        "approver_role": role,
         "override_reason": req.override_reason,
         "timestamp_utc": decision_ts,
     }
@@ -486,7 +573,7 @@ def approve_change(req: ApproveRequest):
             req.thread_id,
             state["last_receipt"]["event_id"],
             req.decision,
-            req.approver_id,
+            approver_id,
             req.override_reason,
             decision_ts,
         ),
@@ -501,7 +588,8 @@ def approve_change(req: ApproveRequest):
 
 
 @app.get("/receipt/{thread_id}")
-def get_receipt(thread_id: str):
+def get_receipt(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
+    _require_any_auth(api_key)
     config = {"configurable": {"thread_id": thread_id}}
     try:
         state = graph.get_state(config).values
@@ -513,7 +601,8 @@ def get_receipt(thread_id: str):
 
 
 @app.get("/event/{thread_id}")
-def get_event(thread_id: str):
+def get_event(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
+    _require_any_auth(api_key)
     cursor = db_conn.cursor()
     cursor.execute(
         """
@@ -529,7 +618,8 @@ def get_event(thread_id: str):
 
 
 @app.get("/audit/{thread_id}")
-def get_audit(thread_id: str):
+def get_audit(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
+    _require_any_auth(api_key)
     cursor = db_conn.cursor()
 
     cursor.execute(
@@ -581,7 +671,8 @@ def get_audit(thread_id: str):
 
 
 @app.get("/chain/{thread_id}")
-def get_chain(thread_id: str):
+def get_chain(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
+    _require_any_auth(api_key)
     """Return all audit chain entries that reference events/receipts/decisions for this thread."""
     cursor = db_conn.cursor()
     # Collect entry_ids for this thread from all three tables.
@@ -619,7 +710,8 @@ def get_chain(thread_id: str):
 
 
 @app.get("/chain/verify")
-def verify_chain():
+def verify_chain(api_key: str = Security(_API_KEY_HEADER)):
+    _require_any_auth(api_key)
     """Walk the full audit chain and verify every hash link. Detects any tampering."""
     cursor = db_conn.cursor()
     cursor.execute(
@@ -664,11 +756,20 @@ def verify_chain():
 
 @app.get("/health")
 def health():
+    roles_loaded = sorted(set(_KEY_STORE.values()))
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
         "version": "0.3.1-demo",
         "local_only": True,
+        "auth": {
+            "scheme": "X-API-Key header",
+            "roles_configured": roles_loaded,
+            "hitl_role_required": ROLE_APPROVER,
+            "initiation_role_required": ROLE_INITIATOR,
+            "environment": "local-demo",
+            "production_auth_claimed": False,
+        },
         "signature_status": "DEMO_SIGNED_ED25519",
         "anchor_status": "ANCHORED_ON_MAINNET_DEMO",
         "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions", "audit_chain"],
@@ -677,11 +778,12 @@ def health():
         "non_claims": [
             "not_production_ready",
             "not_independently_reproduced",
-            "not_signed_release_receipt",
             "not_regulatory_approved",
             "not_clinical_or_diagnostic",
             "sqlite_not_production_audit_storage",
             "not_tamper_proof",
+            "no_hsm_key_custody",
+            "no_production_identity_provider",
         ],
     }
 
