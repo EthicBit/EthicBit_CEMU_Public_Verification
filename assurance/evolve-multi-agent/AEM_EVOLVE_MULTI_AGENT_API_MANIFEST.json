@@ -4,7 +4,7 @@
   "version": "0.3.1-demo",
   "status": "TECHNICAL_DEMONSTRATION_PACKAGE",
   "claim": "AEM-EVOLVE Multi-Agent Governance API v0.3.1-demo provides an endpoint-level technical demonstration of Evolution Events, scope-limited Evolution Receipts, SQLite audit persistence, and Human-in-the-Loop approval for multi-agent workflow changes.",
-  "current_milestone": "PR 3 - Signed Demo Evolution Receipts",
+  "current_milestone": "PR 4 - Tamper-Evident Audit Chain",
   "anchor_status": "ANCHORED_ON_MAINNET_DEMO",
   "anchor_tx_hash": "0x30fc9e6c810078c42ac1b840c3712d165342436ec427471b7f955425ea4b8275",
   "anchor_block_number": 25045091,
@@ -26,6 +26,7 @@
     "clinical_or_diagnostic": false,
     "externally_certified": false,
     "production_authentication_or_authorization": false,
+    "tamper_evident_audit_chain": true,
     "tamper_proof_audit_trail": false,
     "production_grade_database_storage": false
   },
