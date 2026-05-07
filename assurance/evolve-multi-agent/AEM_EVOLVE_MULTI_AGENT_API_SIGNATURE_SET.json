@@ -1,0 +1,35 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_SIGNATURE_SET_V0_3_1",
+  "artifact": "AEM-EVOLVE Multi-Agent Governance API",
+  "version": "0.3.1-demo",
+  "current_milestone": "PR 3 - Signed Demo Evolution Receipts",
+  "status": "DEMO_SIGNED",
+  "signed_at_utc": "2026-05-07T19:00:43.701032+00:00",
+  "canonicalization": "json_sort_keys_no_whitespace_utf8",
+  "hash_algorithm": "SHA-256",
+  "signature_algorithm": "Ed25519",
+  "public_key_path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_DEMO_PUBLIC_KEY.pem",
+  "public_key_note": "Demo key — local verification only. Not HSM-backed, not third-party attested.",
+  "subjects": [
+    {
+      "name": "anchor_receipt",
+      "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_ANCHOR_RECEIPT.json",
+      "canonical_sha256": "802d51a7a414f30521b1e7eca8962847186fe508d73d19b99e5b035ac84635eb",
+      "signature_b64": "MT6qwgDyceuStffxqhU8JrW7bC+LC/wXRpOv0lx/NHdsEQ6bB/e5zxDSUJ9s4sUCwf0GIiGCK4/G/g+MmeDkDQ=="
+    },
+    {
+      "name": "manifest",
+      "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json",
+      "canonical_sha256": "6f7d2a12ab9cd97a2be50b1150537e276b5c12fac8a89c6b0f21b3adfe1043f1",
+      "signature_b64": "PEgDolWZzNZ4rklX3ZD+qNauuHa7KL8DbtvE2IMSIodGdBSjf56/tbA6j+6JDgMjb/N0OiT4WaWER7KjxWhzDQ=="
+    }
+  ],
+  "non_claims": {
+    "production_key_custody": false,
+    "hsm_backed": false,
+    "third_party_attested": false,
+    "production_ready": false,
+    "regulatory_approved": false,
+    "externally_certified": false
+  }
+}
