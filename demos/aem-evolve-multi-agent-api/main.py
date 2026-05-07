@@ -1,10 +1,66 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
-FastAPI + LangGraph + SQLite + Explicit Audit Tables + Role-Based Auth
+FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging
 May 2026
 """
 
-from fastapi import FastAPI, HTTPException, Security
+import logging
+import logging.config
+import os
+import sys
+
+# ── Structured logging ────────────────────────────────────────────────────────
+_LOG_LEVEL = os.environ.get("AEM_LOG_LEVEL", "INFO").upper()
+logging.config.dictConfig({
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "json": {
+            "()": "__main__._JsonFormatter",
+        }
+    },
+    "handlers": {
+        "stdout": {
+            "class": "logging.StreamHandler",
+            "stream": "ext://sys.stdout",
+            "formatter": "json",
+        }
+    },
+    "root": {"level": _LOG_LEVEL, "handlers": ["stdout"]},
+})
+
+
+class _JsonFormatter(logging.Formatter):
+    import json as _json
+
+    def format(self, record: logging.LogRecord) -> str:
+        import json as _json
+        from datetime import datetime, timezone
+        payload = {
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "level": record.levelname,
+            "logger": record.name,
+            "msg": record.getMessage(),
+        }
+        if record.exc_info:
+            payload["exc"] = self.formatException(record.exc_info)
+        extra_keys = {
+            k: v for k, v in record.__dict__.items()
+            if k not in logging.LogRecord.__dict__ and not k.startswith("_")
+            and k not in ("msg", "args", "levelname", "levelno", "name",
+                          "pathname", "filename", "module", "exc_info",
+                          "exc_text", "stack_info", "lineno", "funcName",
+                          "created", "msecs", "relativeCreated", "thread",
+                          "threadName", "processName", "process", "message",
+                          "taskName")
+        }
+        payload.update(extra_keys)
+        return _json.dumps(payload, ensure_ascii=False)
+
+
+log = logging.getLogger("aem_evolve_api")
+
+from fastapi import FastAPI, HTTPException, Request, Security
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, field_validator
 from typing import Literal, Optional
@@ -23,6 +79,20 @@ app = FastAPI(
     description="Multi-Agent Governance with RBAC HITL Controls",
     version="0.3.1-demo",
 )
+
+
+@app.middleware("http")
+async def _log_requests(request: Request, call_next):
+    response = await call_next(request)
+    log.info(
+        "request",
+        extra={
+            "method": request.method,
+            "path": request.url.path,
+            "status": response.status_code,
+        },
+    )
+    return response
 
 # ============================================
 # AUTH — ROLE-BASED API KEY
@@ -191,6 +261,7 @@ def _append_audit_chain(
         ),
     )
     conn.commit()
+    log.info("audit_chain_append", extra={"entry_type": entry_type, "entry_id": entry_id, "chain_hash": chain_hash})
     return chain_hash
 
 
@@ -580,6 +651,7 @@ def approve_change(req: ApproveRequest, api_key: str = Security(_API_KEY_HEADER)
     )
     db_conn.commit()
     _append_audit_chain(db_conn, "human_decision", decision_id, decision_sha256)
+    log.info("human_decision_recorded", extra={"decision_id": decision_id, "decision": req.decision, "approver_id": approver_id})
 
     state = final_report_node(state)
     graph.update_state(config, state)

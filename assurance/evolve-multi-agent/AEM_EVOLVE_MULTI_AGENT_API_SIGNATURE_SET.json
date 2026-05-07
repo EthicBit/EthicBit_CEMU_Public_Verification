@@ -2,7 +2,7 @@
   "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_SIGNATURE_SET_V0_3_1",
   "artifact": "AEM-EVOLVE Multi-Agent Governance API",
   "version": "0.3.1-demo",
-  "current_milestone": "PR 6 - Production Authentication / Authorization",
+  "current_milestone": "PR 7 - Production-Readiness Hardening",
   "status": "DEMO_SIGNED",
   "signed_at_utc": "2026-05-07T19:00:43.701032+00:00",
   "canonicalization": "json_sort_keys_no_whitespace_utf8",
@@ -20,8 +20,8 @@
     {
       "name": "manifest",
       "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json",
-      "canonical_sha256": "766697331b50109aacb762cb6511864528820e31af9ee9bf543386f63961ebc5",
-      "signature_b64": "pxexhCXROTGx+VSqNRLWNW0ftZLWTpCkdZDNJp/9OskTDSHA8pm5RbAtRlrVuPJ8JAcF7jipY1uNEeHlbOLMCQ=="
+      "canonical_sha256": "afe9a9b793f0d39620e755dafb1561f3e16db8c6bd71130d8bff9de2fe5429b3",
+      "signature_b64": "WPDffvJ4yjX78SyV/EcH/MT4RDncqw/Yeu7l4mceIhFqkwKrDIxHD0wx9MOcbar9So9JFYxD8Y5U4q9Sy+GqCw=="
     }
   ],
   "non_claims": {
