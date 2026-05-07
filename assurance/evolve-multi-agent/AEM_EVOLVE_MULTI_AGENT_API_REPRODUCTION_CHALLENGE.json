@@ -1,0 +1,126 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_REPRODUCTION_CHALLENGE_V0_3_1_DEMO",
+  "artifact": "AEM-EVOLVE Multi-Agent Governance API",
+  "version": "0.3.1-demo",
+  "current_milestone": "PR 5 - Independent Reproduction Challenge",
+  "status": "EXTERNAL_READY_REPRODUCTION_CHALLENGE",
+  "claim": "AEM-EVOLVE Multi-Agent Governance API v0.3.1-demo provides an external-ready independent reproduction challenge: all declared subjects have published SHA-256 hashes, all scripts are executable from a clean clone, and the local self-check passes.",
+  "source_repository": "https://github.com/EthicBit/EthicBit_CEMU",
+  "source_commit": "7aa52723",
+  "source_branch": "main",
+  "generated_at_utc": "2026-05-07T19:17:04.146156+00:00",
+  "hash_algorithm": "SHA-256",
+  "canonicalization": "json_sort_keys_no_whitespace_utf8",
+  "manifest_canonical_sha256": "bce547d37f35d839a7201a919263d57df3d981ca320fbfeee76f8f457f93488b",
+  "subjects_count": 16,
+  "subjects": [
+    {
+      "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json",
+      "sha256": "12ba4f05ccac34bed3b8e872c856efe41356fd8550bbfafbb0e686c78797d157",
+      "role": "manifest"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_ANCHOR_RECEIPT.json",
+      "sha256": "6be44bd55a43979a4d6cfd266eb55356f2c48d5799f2a81def168c93e94f5303",
+      "role": "mainnet_anchor_receipt"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_SIGNATURE_SET.json",
+      "sha256": "9ef3b5190bf07517354fb553f3d0f6f8a7d2cb65c771230fa3a62eaad6698cd2",
+      "role": "signature_set"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_DEMO_PUBLIC_KEY.pem",
+      "sha256": "836f7788a71df6020f2b531fc6b931c26ee5e5cc304300bb181fa7503bd44e71",
+      "role": "demo_public_key"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_HASH_RECORD.txt",
+      "sha256": "4614826062e311d2e28401ee476bd61a372dc3d1a5b9cbfdbb624e6ec2ae082e",
+      "role": "hash_record"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/main.py",
+      "sha256": "4d52d9ef8e31c1c73a0b9c3f93e3fb68be080f4df2e65f89ecb315dfb323a912",
+      "role": "api_server"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/README.md",
+      "sha256": "1dbc0b140e12543695a61fff283a3b7999987fc33b86709ce1e4fcb336fba688",
+      "role": "readme"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/requirements.txt",
+      "sha256": "47cc492f68cf61f06df77f24744da8a90657a9821d13aa63374bcf6adf6a5f89",
+      "role": "dependencies"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/scripts/run_demo_e2e.sh",
+      "sha256": "51b8d1fec5e3b2da90ba7e9e0c97225ab6b3817057d08753e7111d501dfff31c",
+      "role": "e2e_runner"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/scripts/run_tamper_checklist.sh",
+      "sha256": "4218edf31d0a2ca58bb4fa6269676dfc45cfe9ef0232a8fc288fa3f2fe48d981",
+      "role": "tamper_checklist"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/scripts/verify_demo_receipt_signatures.sh",
+      "sha256": "662207cde71340eec518c7f009fccc0fa70f4b274b316f7b1e173ea7637f8422",
+      "role": "signature_verifier"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/docs/EVOLUTION_RECEIPTS_SPECIFICATION.md",
+      "sha256": "cc76479e857a3d48a507b0b6a8d44a1b85e1a1e062a43c781ae4c146df6a395c",
+      "role": "receipts_spec"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/docs/SCOPE_BOUNDARY.md",
+      "sha256": "2fc406c17d7a38250288959edeae626fd8353ec5c00b92a9248179fd424a303c",
+      "role": "scope_boundary"
+    },
+    {
+      "path": "demos/aem-evolve-multi-agent-api/docs/ASSURANCE_LADDER.md",
+      "sha256": "28ee618b42ab85f351ebf3302257b964b8ccb4cfcb6c7ad91e36ad38bb734eaa",
+      "role": "assurance_ladder"
+    },
+    {
+      "path": "scripts/core/anchor_aem_evolve_multi_agent_api_mainnet.py",
+      "sha256": "fd35b1617883851385a8d2028771ff00fae676e6c791d3aa89e70917857763f8",
+      "role": "anchor_script"
+    },
+    {
+      "path": "scripts/core/verify_aem_evolve_multi_agent_audit_chain.py",
+      "sha256": "925f4d403a946ec4e232e570eab20dc0983ce313b1501d7928e97ed9f53b84c5",
+      "role": "chain_verifier"
+    }
+  ],
+  "expected_behavioral_outcomes": {
+    "run_demo_e2e_sh": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_STATUS=PASS",
+    "run_tamper_checklist_sh": "SIMULATED_TAMPER_CHECKLIST=PASS",
+    "verify_demo_receipt_signatures_sh": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_SIGNATURE_STATUS=PASS",
+    "verify_audit_chain_py": "AEM_EVOLVE_AUDIT_CHAIN_STATUS=PASS",
+    "chain_verify_endpoint": "status=PASS"
+  },
+  "reproduction_steps": [
+    "git clone https://github.com/EthicBit/EthicBit_CEMU.git",
+    "cd EthicBit_CEMU && git checkout 7aa52723",
+    "cd demos/aem-evolve-multi-agent-api && pip install -r requirements.txt",
+    "python main.py  # terminal 1",
+    "bash scripts/run_demo_e2e.sh  # terminal 2",
+    "bash scripts/run_tamper_checklist.sh",
+    "bash scripts/verify_demo_receipt_signatures.sh",
+    "python ../../scripts/core/verify_aem_evolve_multi_agent_audit_chain.py",
+    "python ../../scripts/core/run_reproduction_challenge.py  # verifies all declared file hashes"
+  ],
+  "non_claims": {
+    "independently_reproduced": false,
+    "third_party_attested": false,
+    "production_ready": false,
+    "regulatory_approved": false,
+    "clinical_or_diagnostic": false,
+    "externally_certified": false,
+    "production_authentication_or_authorization": false
+  },
+  "note": "External-ready challenge only. Independent reproduction requires a separate environment or third-party execution. This package is NOT a claim of independent reproduction."
+}
