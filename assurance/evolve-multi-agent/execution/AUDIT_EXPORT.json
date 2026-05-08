@@ -1,0 +1,111 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_AUDIT_EXPORT_V1",
+  "exported_at_utc": "2026-05-07T22:30:00.000000+00:00",
+  "source_db": "demos/aem-evolve-multi-agent-api/ethicbit_demo.db",
+  "audit_chain_count": 10,
+  "audit_chain": [
+    {
+      "seq": 1,
+      "entry_type": "evolution_event",
+      "entry_id": "EVO-API-a7aa3a0f-be6a-47de-a778-0eae8d6e617f",
+      "entry_sha256": "07699855c9d0bb1761551672feae88c90148841279bd122be5a8f65bb367252c",
+      "prev_chain_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "chain_hash": "ab97a030db88da66bdefcfa8c23be462aa9dbd8d5e8bbbb4def6b41f36b9193c",
+      "timestamp_utc": "2026-05-07T21:35:17.431733+00:00"
+    },
+    {
+      "seq": 2,
+      "entry_type": "evolution_receipt",
+      "entry_id": "REC-EVO-API-a7aa3a0f-be6a-47de-a778-0eae8d6e617f",
+      "entry_sha256": "83f1b137d1c58174875aa88e6288af8a3cafa663458247af168a6d03f9e618fc",
+      "prev_chain_hash": "ab97a030db88da66bdefcfa8c23be462aa9dbd8d5e8bbbb4def6b41f36b9193c",
+      "chain_hash": "d7855e293b7864792981e1cfc058f944a695f023ca81d495c1d7fdfb85f92d5b",
+      "timestamp_utc": "2026-05-07T21:35:17.432775+00:00"
+    },
+    {
+      "seq": 3,
+      "entry_type": "evolution_event",
+      "entry_id": "EVO-API-3a6ef281-843f-4671-b9b7-a865f400bf7a",
+      "entry_sha256": "ee29476e9aec45eece12472cf9dd6cf3de120296947be73bdf189228fa388cb7",
+      "prev_chain_hash": "d7855e293b7864792981e1cfc058f944a695f023ca81d495c1d7fdfb85f92d5b",
+      "chain_hash": "cccdb12d53edcff98f774555acb31fcdbcd09794049c8a9d4e0c8e75a1f387d4",
+      "timestamp_utc": "2026-05-07T21:49:54.281453+00:00"
+    },
+    {
+      "seq": 4,
+      "entry_type": "evolution_receipt",
+      "entry_id": "REC-EVO-API-3a6ef281-843f-4671-b9b7-a865f400bf7a",
+      "entry_sha256": "98c4ef4d461cb17b67b82b6b696418b9b5efb37e5358f657a572ae77bc0ccf59",
+      "prev_chain_hash": "cccdb12d53edcff98f774555acb31fcdbcd09794049c8a9d4e0c8e75a1f387d4",
+      "chain_hash": "735f83bafa26ed1e998049cb285fbdff5d98d0cbd57ee39769e8772899078faf",
+      "timestamp_utc": "2026-05-07T21:49:54.282287+00:00"
+    },
+    {
+      "seq": 5,
+      "entry_type": "evolution_event",
+      "entry_id": "EVO-API-5cbab70e-f1e4-4bfe-ad55-471c69ed95c9",
+      "entry_sha256": "11dc13c6dda5303c87f3f6d0176edff00c3816d89a9bcf8542b219c3d8751f31",
+      "prev_chain_hash": "735f83bafa26ed1e998049cb285fbdff5d98d0cbd57ee39769e8772899078faf",
+      "chain_hash": "1d0e8dceb6fe02dfc3c932ad4af67c166c969d02cf3294614de5c66e842c45fe",
+      "timestamp_utc": "2026-05-07T21:50:58.930556+00:00"
+    },
+    {
+      "seq": 6,
+      "entry_type": "evolution_receipt",
+      "entry_id": "REC-EVO-API-5cbab70e-f1e4-4bfe-ad55-471c69ed95c9",
+      "entry_sha256": "2509b15ceb1f71e9dedf9d4b7d5cd2f1ac547b2ce0f6df3c0b72f56f8f7623c6",
+      "prev_chain_hash": "1d0e8dceb6fe02dfc3c932ad4af67c166c969d02cf3294614de5c66e842c45fe",
+      "chain_hash": "3338e193013ec5d44ed72f5188e292e53e917e973ee5f6fdafe7946f1ea7e01d",
+      "timestamp_utc": "2026-05-07T21:50:58.932038+00:00"
+    },
+    {
+      "seq": 7,
+      "entry_type": "evolution_event",
+      "entry_id": "EVO-API-d135727b-3983-4155-a40e-c339514684ab",
+      "entry_sha256": "1e9aeb648fee4182424897f0ddf0ce2d4d35c525d27ce3eaa5f97a332d5000a2",
+      "prev_chain_hash": "3338e193013ec5d44ed72f5188e292e53e917e973ee5f6fdafe7946f1ea7e01d",
+      "chain_hash": "c370aee6a8e841d19e8ad0f11a954095a1cb61395eee821cf2b08a33f554c7e5",
+      "timestamp_utc": "2026-05-07T21:52:11.679513+00:00"
+    },
+    {
+      "seq": 8,
+      "entry_type": "evolution_receipt",
+      "entry_id": "REC-EVO-API-d135727b-3983-4155-a40e-c339514684ab",
+      "entry_sha256": "d82a1865a0aa2802f4d0fbb927f78afa9470eb78f61f39c5e14f293a92175f07",
+      "prev_chain_hash": "c370aee6a8e841d19e8ad0f11a954095a1cb61395eee821cf2b08a33f554c7e5",
+      "chain_hash": "62f9298035ebe9527fc5ce26851e204a727f3ed2db4b21915ba79274abfe5ebc",
+      "timestamp_utc": "2026-05-07T21:52:11.679701+00:00"
+    },
+    {
+      "seq": 9,
+      "entry_type": "evolution_event",
+      "entry_id": "EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+      "entry_sha256": "98e90aac190dfa77e8578a8072bdc812183ae4463c3cbf716aeec5e7eaea7bdb",
+      "prev_chain_hash": "62f9298035ebe9527fc5ce26851e204a727f3ed2db4b21915ba79274abfe5ebc",
+      "chain_hash": "374018ecd8784c22a4054caf3157a4b8c8e5fb75405b80b3f2a3c8c672834ec1",
+      "timestamp_utc": "2026-05-07T21:53:06.697248+00:00"
+    },
+    {
+      "seq": 10,
+      "entry_type": "evolution_receipt",
+      "entry_id": "REC-EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+      "entry_sha256": "b41e4ee743cf23892189c8636acd4c0950c5ef01756276c07c35365de99783ee",
+      "prev_chain_hash": "374018ecd8784c22a4054caf3157a4b8c8e5fb75405b80b3f2a3c8c672834ec1",
+      "chain_hash": "ecdb2f3032b8ce43d02ed423d994a01bc1d0a6b56bd70bdee329672a9c2afe2a",
+      "timestamp_utc": "2026-05-07T21:53:06.697450+00:00"
+    }
+  ],
+  "evolution_events_count": 8,
+  "evolution_receipts_count": 7,
+  "human_decisions_count": 1,
+  "chain_head": {
+    "seq": 10,
+    "entry_type": "evolution_receipt",
+    "entry_id": "REC-EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+    "entry_sha256": "b41e4ee743cf23892189c8636acd4c0950c5ef01756276c07c35365de99783ee",
+    "prev_chain_hash": "374018ecd8784c22a4054caf3157a4b8c8e5fb75405b80b3f2a3c8c672834ec1",
+    "chain_hash": "ecdb2f3032b8ce43d02ed423d994a01bc1d0a6b56bd70bdee329672a9c2afe2a",
+    "timestamp_utc": "2026-05-07T21:53:06.697450+00:00"
+  },
+  "chain_genesis_prev_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+}

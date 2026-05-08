@@ -1,0 +1,95 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_INPUT_V1",
+  "execution_date_utc": "2026-05-07T22:30:00.000000+00:00",
+  "api_version": "0.3.1-demo",
+  "threads_invoked": [
+    "auth-check-1778190594",
+    "auth-check-1778190658",
+    "demo-thread-001",
+    "direct-debug",
+    "direct-debug-2",
+    "e2e-demo-1778190731",
+    "e2e-demo-1778190786",
+    "t-authtest-1778189717"
+  ],
+  "canonical_thread_id": "e2e-demo-1778190786",
+  "inputs": [
+    {
+      "thread_id": "auth-check-1778190594",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "auth-check-1778190594",
+        "initial_prompt": "Eres un asistente general."
+      }
+    },
+    {
+      "thread_id": "auth-check-1778190658",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "auth-check-1778190658",
+        "initial_prompt": "Eres un asistente general."
+      }
+    },
+    {
+      "thread_id": "demo-thread-001",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "demo-thread-001",
+        "initial_prompt": "Eres un asistente general."
+      }
+    },
+    {
+      "thread_id": "direct-debug",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "direct-debug",
+        "initial_prompt": "Eres un asistente general."
+      }
+    },
+    {
+      "thread_id": "direct-debug-2",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "direct-debug-2",
+        "initial_prompt": "Eres un asistente general."
+      }
+    },
+    {
+      "thread_id": "e2e-demo-1778190731",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "e2e-demo-1778190731",
+        "initial_prompt": "Eres un asistente general."
+      }
+    },
+    {
+      "thread_id": "e2e-demo-1778190786",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "e2e-demo-1778190786",
+        "initial_prompt": "Eres un asistente general."
+      }
+    },
+    {
+      "thread_id": "t-authtest-1778189717",
+      "endpoint": "POST /start",
+      "payload": {
+        "thread_id": "t-authtest-1778189717",
+        "initial_prompt": "Eres un asistente general."
+      }
+    }
+  ],
+  "hitl_inputs": [
+    {
+      "thread_id": "demo-thread-001",
+      "endpoint": "POST /approve",
+      "payload": {
+        "thread_id": "demo-thread-001",
+        "decision": "approve",
+        "override_reason": "Approved for research-support scope only."
+      }
+    }
+  ],
+  "auth_config": "configs/auth_demo_keys.json (INITIATOR / APPROVER / OBSERVER roles)",
+  "db_path": "demos/aem-evolve-multi-agent-api/ethicbit_demo.db"
+}

@@ -1,0 +1,295 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_RECEIPTS_V1",
+  "exported_at_utc": "2026-05-07T22:30:00.000000+00:00",
+  "source_db": "demos/aem-evolve-multi-agent-api/ethicbit_demo.db",
+  "receipts_count": 7,
+  "receipts": [
+    {
+      "receipt_canonical_sha256": "6411f7a0dbdb8edccf8357560f01d72e3415e52e76bcc845e85cd9e5c33a2941",
+      "thread_id": "direct-debug-2",
+      "event_id": "EVO-API-99ab6210-6639-4c50-8109-394e8bc41872",
+      "outcome": "SCOPE_LIMITED",
+      "receipt_message": "Cambio aprobado con limitaciones de scope.",
+      "materiality_score": 78.0,
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "signature_status": "NOT_SIGNED_DEMO",
+      "timestamp_utc": "2026-05-07T17:46:36.865195+00:00",
+      "receipt_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+        "receipt_id": "REC-EVO-API-99ab6210-6639-4c50-8109-394e8bc41872",
+        "receipt_payload": {
+          "outcome": "SCOPE_LIMITED",
+          "receipt_message": "Cambio aprobado con limitaciones de scope.",
+          "materiality_score": 78.0,
+          "claim_boundary": {
+            "research_support_only": true,
+            "clinical_claimed": false,
+            "diagnostic_claimed": false,
+            "regulatory_approval_claimed": false,
+            "third_party_binding": false
+          },
+          "requested_claim_scope": "RESEARCH_SUPPORT"
+        },
+        "event_id": "EVO-API-99ab6210-6639-4c50-8109-394e8bc41872",
+        "thread_id": "direct-debug-2",
+        "event_canonical_sha256": "915bd11c962f22841fd6d61cacb9730a35689ab2759468fdad8aeb0ff8928165",
+        "signature_status": "NOT_SIGNED_DEMO",
+        "timestamp_utc": "2026-05-07T17:46:36.865195+00:00",
+        "receipt_canonical_sha256": "6411f7a0dbdb8edccf8357560f01d72e3415e52e76bcc845e85cd9e5c33a2941"
+      }
+    },
+    {
+      "receipt_canonical_sha256": "f78284e85581539a52798329d6abb02662fede407cf8cd9f1337421046a195e4",
+      "thread_id": "demo-thread-001",
+      "event_id": "EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899",
+      "outcome": "SCOPE_LIMITED",
+      "receipt_message": "Cambio aprobado con limitaciones de scope.",
+      "materiality_score": 78.0,
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "signature_status": "NOT_SIGNED_DEMO",
+      "timestamp_utc": "2026-05-07T17:46:58.548585+00:00",
+      "receipt_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+        "receipt_id": "REC-EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899",
+        "receipt_payload": {
+          "outcome": "SCOPE_LIMITED",
+          "receipt_message": "Cambio aprobado con limitaciones de scope.",
+          "materiality_score": 78.0,
+          "claim_boundary": {
+            "research_support_only": true,
+            "clinical_claimed": false,
+            "diagnostic_claimed": false,
+            "regulatory_approval_claimed": false,
+            "third_party_binding": false
+          },
+          "requested_claim_scope": "RESEARCH_SUPPORT"
+        },
+        "event_id": "EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899",
+        "thread_id": "demo-thread-001",
+        "event_canonical_sha256": "89a5076623e1b096f7b8a34b989022cfa1b603c8135619d15f88d2a4915a92f2",
+        "signature_status": "NOT_SIGNED_DEMO",
+        "timestamp_utc": "2026-05-07T17:46:58.548585+00:00",
+        "receipt_canonical_sha256": "f78284e85581539a52798329d6abb02662fede407cf8cd9f1337421046a195e4"
+      }
+    },
+    {
+      "receipt_canonical_sha256": "83f1b137d1c58174875aa88e6288af8a3cafa663458247af168a6d03f9e618fc",
+      "thread_id": "t-authtest-1778189717",
+      "event_id": "EVO-API-a7aa3a0f-be6a-47de-a778-0eae8d6e617f",
+      "outcome": "SCOPE_LIMITED",
+      "receipt_message": "Cambio aprobado con limitaciones de scope.",
+      "materiality_score": 78.0,
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "signature_status": "NOT_SIGNED_DEMO",
+      "timestamp_utc": "2026-05-07T21:35:17.432637+00:00",
+      "receipt_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+        "receipt_id": "REC-EVO-API-a7aa3a0f-be6a-47de-a778-0eae8d6e617f",
+        "receipt_payload": {
+          "outcome": "SCOPE_LIMITED",
+          "receipt_message": "Cambio aprobado con limitaciones de scope.",
+          "materiality_score": 78.0,
+          "claim_boundary": {
+            "research_support_only": true,
+            "clinical_claimed": false,
+            "diagnostic_claimed": false,
+            "regulatory_approval_claimed": false,
+            "third_party_binding": false
+          },
+          "requested_claim_scope": "RESEARCH_SUPPORT"
+        },
+        "event_id": "EVO-API-a7aa3a0f-be6a-47de-a778-0eae8d6e617f",
+        "thread_id": "t-authtest-1778189717",
+        "event_canonical_sha256": "07699855c9d0bb1761551672feae88c90148841279bd122be5a8f65bb367252c",
+        "signature_status": "NOT_SIGNED_DEMO",
+        "timestamp_utc": "2026-05-07T21:35:17.432637+00:00",
+        "receipt_canonical_sha256": "83f1b137d1c58174875aa88e6288af8a3cafa663458247af168a6d03f9e618fc"
+      }
+    },
+    {
+      "receipt_canonical_sha256": "98c4ef4d461cb17b67b82b6b696418b9b5efb37e5358f657a572ae77bc0ccf59",
+      "thread_id": "auth-check-1778190594",
+      "event_id": "EVO-API-3a6ef281-843f-4671-b9b7-a865f400bf7a",
+      "outcome": "SCOPE_LIMITED",
+      "receipt_message": "Cambio aprobado con limitaciones de scope.",
+      "materiality_score": 78.0,
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "signature_status": "NOT_SIGNED_DEMO",
+      "timestamp_utc": "2026-05-07T21:49:54.282076+00:00",
+      "receipt_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+        "receipt_id": "REC-EVO-API-3a6ef281-843f-4671-b9b7-a865f400bf7a",
+        "receipt_payload": {
+          "outcome": "SCOPE_LIMITED",
+          "receipt_message": "Cambio aprobado con limitaciones de scope.",
+          "materiality_score": 78.0,
+          "claim_boundary": {
+            "research_support_only": true,
+            "clinical_claimed": false,
+            "diagnostic_claimed": false,
+            "regulatory_approval_claimed": false,
+            "third_party_binding": false
+          },
+          "requested_claim_scope": "RESEARCH_SUPPORT"
+        },
+        "event_id": "EVO-API-3a6ef281-843f-4671-b9b7-a865f400bf7a",
+        "thread_id": "auth-check-1778190594",
+        "event_canonical_sha256": "ee29476e9aec45eece12472cf9dd6cf3de120296947be73bdf189228fa388cb7",
+        "signature_status": "NOT_SIGNED_DEMO",
+        "timestamp_utc": "2026-05-07T21:49:54.282076+00:00",
+        "receipt_canonical_sha256": "98c4ef4d461cb17b67b82b6b696418b9b5efb37e5358f657a572ae77bc0ccf59"
+      }
+    },
+    {
+      "receipt_canonical_sha256": "2509b15ceb1f71e9dedf9d4b7d5cd2f1ac547b2ce0f6df3c0b72f56f8f7623c6",
+      "thread_id": "auth-check-1778190658",
+      "event_id": "EVO-API-5cbab70e-f1e4-4bfe-ad55-471c69ed95c9",
+      "outcome": "SCOPE_LIMITED",
+      "receipt_message": "Cambio aprobado con limitaciones de scope.",
+      "materiality_score": 78.0,
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "signature_status": "NOT_SIGNED_DEMO",
+      "timestamp_utc": "2026-05-07T21:50:58.931824+00:00",
+      "receipt_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+        "receipt_id": "REC-EVO-API-5cbab70e-f1e4-4bfe-ad55-471c69ed95c9",
+        "receipt_payload": {
+          "outcome": "SCOPE_LIMITED",
+          "receipt_message": "Cambio aprobado con limitaciones de scope.",
+          "materiality_score": 78.0,
+          "claim_boundary": {
+            "research_support_only": true,
+            "clinical_claimed": false,
+            "diagnostic_claimed": false,
+            "regulatory_approval_claimed": false,
+            "third_party_binding": false
+          },
+          "requested_claim_scope": "RESEARCH_SUPPORT"
+        },
+        "event_id": "EVO-API-5cbab70e-f1e4-4bfe-ad55-471c69ed95c9",
+        "thread_id": "auth-check-1778190658",
+        "event_canonical_sha256": "11dc13c6dda5303c87f3f6d0176edff00c3816d89a9bcf8542b219c3d8751f31",
+        "signature_status": "NOT_SIGNED_DEMO",
+        "timestamp_utc": "2026-05-07T21:50:58.931824+00:00",
+        "receipt_canonical_sha256": "2509b15ceb1f71e9dedf9d4b7d5cd2f1ac547b2ce0f6df3c0b72f56f8f7623c6"
+      }
+    },
+    {
+      "receipt_canonical_sha256": "d82a1865a0aa2802f4d0fbb927f78afa9470eb78f61f39c5e14f293a92175f07",
+      "thread_id": "e2e-demo-1778190731",
+      "event_id": "EVO-API-d135727b-3983-4155-a40e-c339514684ab",
+      "outcome": "SCOPE_LIMITED",
+      "receipt_message": "Cambio aprobado con limitaciones de scope.",
+      "materiality_score": 78.0,
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "signature_status": "NOT_SIGNED_DEMO",
+      "timestamp_utc": "2026-05-07T21:52:11.679596+00:00",
+      "receipt_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+        "receipt_id": "REC-EVO-API-d135727b-3983-4155-a40e-c339514684ab",
+        "receipt_payload": {
+          "outcome": "SCOPE_LIMITED",
+          "receipt_message": "Cambio aprobado con limitaciones de scope.",
+          "materiality_score": 78.0,
+          "claim_boundary": {
+            "research_support_only": true,
+            "clinical_claimed": false,
+            "diagnostic_claimed": false,
+            "regulatory_approval_claimed": false,
+            "third_party_binding": false
+          },
+          "requested_claim_scope": "RESEARCH_SUPPORT"
+        },
+        "event_id": "EVO-API-d135727b-3983-4155-a40e-c339514684ab",
+        "thread_id": "e2e-demo-1778190731",
+        "event_canonical_sha256": "1e9aeb648fee4182424897f0ddf0ce2d4d35c525d27ce3eaa5f97a332d5000a2",
+        "signature_status": "NOT_SIGNED_DEMO",
+        "timestamp_utc": "2026-05-07T21:52:11.679596+00:00",
+        "receipt_canonical_sha256": "d82a1865a0aa2802f4d0fbb927f78afa9470eb78f61f39c5e14f293a92175f07"
+      }
+    },
+    {
+      "receipt_canonical_sha256": "b41e4ee743cf23892189c8636acd4c0950c5ef01756276c07c35365de99783ee",
+      "thread_id": "e2e-demo-1778190786",
+      "event_id": "EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+      "outcome": "SCOPE_LIMITED",
+      "receipt_message": "Cambio aprobado con limitaciones de scope.",
+      "materiality_score": 78.0,
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "signature_status": "NOT_SIGNED_DEMO",
+      "timestamp_utc": "2026-05-07T21:53:06.697338+00:00",
+      "receipt_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+        "receipt_id": "REC-EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+        "receipt_payload": {
+          "outcome": "SCOPE_LIMITED",
+          "receipt_message": "Cambio aprobado con limitaciones de scope.",
+          "materiality_score": 78.0,
+          "claim_boundary": {
+            "research_support_only": true,
+            "clinical_claimed": false,
+            "diagnostic_claimed": false,
+            "regulatory_approval_claimed": false,
+            "third_party_binding": false
+          },
+          "requested_claim_scope": "RESEARCH_SUPPORT"
+        },
+        "event_id": "EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+        "thread_id": "e2e-demo-1778190786",
+        "event_canonical_sha256": "98e90aac190dfa77e8578a8072bdc812183ae4463c3cbf716aeec5e7eaea7bdb",
+        "signature_status": "NOT_SIGNED_DEMO",
+        "timestamp_utc": "2026-05-07T21:53:06.697338+00:00",
+        "receipt_canonical_sha256": "b41e4ee743cf23892189c8636acd4c0950c5ef01756276c07c35365de99783ee"
+      }
+    }
+  ]
+}

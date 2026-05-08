@@ -1,0 +1,17 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_HUMAN_DECISIONS_V1",
+  "exported_at_utc": "2026-05-07T22:30:00.000000+00:00",
+  "source_db": "demos/aem-evolve-multi-agent-api/ethicbit_demo.db",
+  "decisions_count": 1,
+  "decisions": [
+    {
+      "id": 1,
+      "thread_id": "demo-thread-001",
+      "event_id": "EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899",
+      "decision": "approve",
+      "approver_id": "human-reviewer",
+      "override_reason": "Approved for research-support scope only.",
+      "timestamp_utc": "2026-05-07T17:46:58.558093+00:00"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_MANIFEST_V1",
+  "artifact": "AEM-EVOLVE Multi-Agent Governance API — Execution Export",
+  "api_version": "0.3.1-demo",
+  "exported_at_utc": "2026-05-07T22:30:00.000000+00:00",
+  "exporter": "scripts/core export — EthicBit demo",
+  "source_db": "demos/aem-evolve-multi-agent-api/ethicbit_demo.db",
+  "source_commit": "46cf228d44c6b9446fe2fe340b06a60a1c948d82",
+  "assurance_milestone": "PR 7 - Production-Readiness Hardening (conditional gates documented)",
+  "canonical_thread_id": "e2e-demo-1778190786",
+  "threads_total": 8,
+  "threads": [
+    "auth-check-1778190594",
+    "auth-check-1778190658",
+    "demo-thread-001",
+    "direct-debug",
+    "direct-debug-2",
+    "e2e-demo-1778190731",
+    "e2e-demo-1778190786",
+    "t-authtest-1778189717"
+  ],
+  "summary": {
+    "evolution_events": 8,
+    "evolution_receipts": 7,
+    "human_decisions": 1,
+    "audit_chain_entries": 10,
+    "outcome_distribution": {
+      "SCOPE_LIMITED": 7
+    }
+  },
+  "artifacts": [
+    "EXECUTION_MANIFEST.json",
+    "EXECUTION_INPUT.json",
+    "MULTI_AGENT_TRACE.json",
+    "EVOLUTION_EVENTS.json",
+    "EVOLUTION_RECEIPTS.json",
+    "HUMAN_DECISIONS.json",
+    "AUDIT_EXPORT.json",
+    "FINAL_REPORT.md",
+    "EXECUTION_STATUS_REPORT.md",
+    "EXECUTION_SIGNATURE_SET.json",
+    "EXECUTION_HASH_RECORD.txt"
+  ],
+  "non_claims": {
+    "production_execution": false,
+    "clinical_or_diagnostic": false,
+    "regulatory_approved": false,
+    "independently_reproduced": false,
+    "tamper_proof": false
+  }
+}

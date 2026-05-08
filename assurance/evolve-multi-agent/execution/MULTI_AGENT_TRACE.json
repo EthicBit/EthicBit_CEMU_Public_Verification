@@ -1,0 +1,312 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_MULTI_AGENT_TRACE_V1",
+  "exported_at_utc": "2026-05-07T22:30:00.000000+00:00",
+  "api_version": "0.3.1-demo",
+  "graph_id": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+  "threads_total": 8,
+  "threads": [
+    {
+      "thread_id": "auth-check-1778190594",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate",
+        "awaiting_approval_node"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=SCOPE_LIMITED"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 1,
+      "final_outcome": "SCOPE_LIMITED",
+      "final_status": "awaiting_human_approval",
+      "audit_chain_entries": 2
+    },
+    {
+      "thread_id": "auth-check-1778190658",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate",
+        "awaiting_approval_node"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=SCOPE_LIMITED"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 1,
+      "final_outcome": "SCOPE_LIMITED",
+      "final_status": "awaiting_human_approval",
+      "audit_chain_entries": 2
+    },
+    {
+      "thread_id": "demo-thread-001",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate",
+        "awaiting_approval_node",
+        "final_report_node"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=SCOPE_LIMITED"
+        },
+        {
+          "from": "awaiting_approval_node",
+          "to": "final_report_node",
+          "trigger": "human_decision=approve"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 1,
+      "final_outcome": "SCOPE_LIMITED",
+      "final_status": "completed",
+      "audit_chain_entries": 0
+    },
+    {
+      "thread_id": "direct-debug",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=UNKNOWN"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 0,
+      "final_outcome": "UNKNOWN",
+      "final_status": "awaiting_human_approval",
+      "audit_chain_entries": 0
+    },
+    {
+      "thread_id": "direct-debug-2",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate",
+        "awaiting_approval_node"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=SCOPE_LIMITED"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 1,
+      "final_outcome": "SCOPE_LIMITED",
+      "final_status": "awaiting_human_approval",
+      "audit_chain_entries": 0
+    },
+    {
+      "thread_id": "e2e-demo-1778190731",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate",
+        "awaiting_approval_node"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=SCOPE_LIMITED"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 1,
+      "final_outcome": "SCOPE_LIMITED",
+      "final_status": "awaiting_human_approval",
+      "audit_chain_entries": 2
+    },
+    {
+      "thread_id": "e2e-demo-1778190786",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate",
+        "awaiting_approval_node"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=SCOPE_LIMITED"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 1,
+      "final_outcome": "SCOPE_LIMITED",
+      "final_status": "awaiting_human_approval",
+      "audit_chain_entries": 2
+    },
+    {
+      "thread_id": "t-authtest-1778189717",
+      "graph": "AEM_EVOLVE_MULTI_AGENT_GRAPH_V1",
+      "nodes_visited": [
+        "research_agent",
+        "writer_agent",
+        "governance_gate",
+        "awaiting_approval_node"
+      ],
+      "state_transitions": [
+        {
+          "from": null,
+          "to": "research_agent",
+          "trigger": "START"
+        },
+        {
+          "from": "research_agent",
+          "to": "writer_agent",
+          "trigger": "research_completed"
+        },
+        {
+          "from": "writer_agent",
+          "to": "governance_gate",
+          "trigger": "change_proposed"
+        },
+        {
+          "from": "governance_gate",
+          "to": "awaiting_approval_node",
+          "trigger": "outcome=SCOPE_LIMITED"
+        }
+      ],
+      "evolution_events_emitted": 1,
+      "receipts_emitted": 1,
+      "final_outcome": "SCOPE_LIMITED",
+      "final_status": "awaiting_human_approval",
+      "audit_chain_entries": 2
+    }
+  ],
+  "checkpoints_in_db": 48,
+  "writes_in_db": 69
+}
