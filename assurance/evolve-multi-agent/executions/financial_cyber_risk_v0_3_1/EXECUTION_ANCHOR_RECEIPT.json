@@ -1,0 +1,24 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_ANCHOR_RECEIPT_V0_3_1",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "execution_name": "AEM-EVOLVE Multi-Agent Governance Execution Demonstration — Financial Risk & Cybersecurity Response",
+  "anchor_scope": "execution_manifest_integrity_timestamp_only",
+  "manifest_canonical_sha256": "70a6c931a4ad48b5cf19222ce907169601cffea8ae13d25c672b8c02b5f27475",
+  "ethereum_tx": "0x5067b7c194eed0578f22d54332c6eb9620bb7aee5d2421fe257116a88e3f7091",
+  "ethereum_block": 25047486,
+  "anchor_timestamp_utc": "2026-05-08T02:56:47Z",
+  "anchor_network": "ethereum-mainnet",
+  "anchor_to": "0x9221456deCC27547aA76EC5d53537dfe430C69B7",
+  "transaction_status": "success",
+  "certification_claimed": false,
+  "regulatory_approval_claimed": false,
+  "production_readiness_claimed": false,
+  "independent_reproduction_claimed": false,
+  "financial_advice_claimed": false,
+  "cybersecurity_certification_claimed": false,
+  "tamper_proof_claimed": false,
+  "non_claims": [
+    "Ethereum mainnet anchoring provides a public timestamped integrity reference only.",
+    "It does not constitute certification, regulatory approval, independent reproduction, production readiness, financial advice, cybersecurity certification, or third-party validation."
+  ]
+}
