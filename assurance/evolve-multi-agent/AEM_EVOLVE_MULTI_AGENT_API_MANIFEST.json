@@ -4,7 +4,7 @@
   "version": "0.3.1-demo",
   "status": "TECHNICAL_DEMONSTRATION_PACKAGE",
   "claim": "AEM-EVOLVE Multi-Agent Governance API v0.3.1-demo provides an endpoint-level technical demonstration of Evolution Events, scope-limited Evolution Receipts, SQLite audit persistence, Human-in-the-Loop approval for multi-agent workflow changes, RBAC API key controls, structured JSON logging, and a documented database adapter interface for PostgreSQL migration.",
-  "current_milestone": "Phase 1 - Foundation & Independent Verification (v0.3.5)",
+  "current_milestone": "Phase 2 - Security & Adversarial Resilience (v0.4)",
   "anchor_status": "ANCHORED_ON_MAINNET_DEMO",
   "anchor_tx_hash": "0x30fc9e6c810078c42ac1b840c3712d165342436ec427471b7f955425ea4b8275",
   "anchor_block_number": 25045091,
@@ -35,7 +35,10 @@
     "production_readiness_plan_documented": true,
     "conditional_gate_conditions_documented": true,
     "phase1_reproduction_package_published": true,
-    "phase1_independent_reproductions_received": false
+    "phase1_independent_reproductions_received": false,
+    "phase2_adversarial_tests_published": true,
+    "phase2_adversarial_all_pass": true,
+    "phase2_threat_model_documented": true
   },
   "files": [
     "demos/aem-evolve-multi-agent-api/README.md",
@@ -54,6 +57,14 @@
     "docs/reproduction/REPRODUCTION_REPORT_TEMPLATE.md",
     "docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_3.md",
     "docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md",
-    "independent-reproductions/README.md"
+    "independent-reproductions/README.md",
+    "demos/aem-evolve-multi-agent-api/adversarial_tests/run_all_adversarial_tests.sh",
+    "demos/aem-evolve-multi-agent-api/adversarial_tests/test_prompt_injection.sh",
+    "demos/aem-evolve-multi-agent-api/adversarial_tests/test_unauthorized_approval.sh",
+    "demos/aem-evolve-multi-agent-api/adversarial_tests/test_malformed_payloads.sh",
+    "demos/aem-evolve-multi-agent-api/adversarial_tests/test_tampering_detection.py",
+    "demos/aem-evolve-multi-agent-api/docs/THREAT_MODEL.md",
+    "demos/aem-evolve-multi-agent-api/docs/ADVERSARIAL_RESILIENCE_REPORT.md",
+    "docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_4.md"
   ]
 }
