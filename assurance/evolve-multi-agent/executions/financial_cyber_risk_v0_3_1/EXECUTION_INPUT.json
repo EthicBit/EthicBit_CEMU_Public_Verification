@@ -1,0 +1,38 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_INPUT_V0_3_1",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "scenario": "Financial Risk + Cybersecurity Response",
+  "input_type": "sandbox_synthetic_scenario",
+  "current_policy": {
+    "name": "transaction_review_policy",
+    "manual_review_threshold": "standard_high_risk_threshold",
+    "suspicious_access_signal_handling": "standard_monitoring"
+  },
+  "sample_signals": [
+    {
+      "signal": "multiple_failed_login_attempts",
+      "severity": "medium"
+    },
+    {
+      "signal": "new_device_access_to_financial_console",
+      "severity": "medium"
+    },
+    {
+      "signal": "transaction_velocity_increase",
+      "severity": "high"
+    },
+    {
+      "signal": "geo_velocity_anomaly",
+      "severity": "medium"
+    }
+  ],
+  "proposed_policy_change": "Increase manual review requirement for high-risk transactions when suspicious access signals are detected.",
+  "expected_governance_outcome": "SCOPE_LIMITED",
+  "expected_human_approval": true,
+  "data_boundary": {
+    "synthetic_data_only": true,
+    "real_customer_data": false,
+    "real_funds": false,
+    "production_environment": false
+  }
+}

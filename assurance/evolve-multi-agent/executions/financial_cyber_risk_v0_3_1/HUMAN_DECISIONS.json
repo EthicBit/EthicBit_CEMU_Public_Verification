@@ -1,0 +1,22 @@
+{
+  "schema_id": "AEM_EVOLVE_HUMAN_DECISIONS_EXPORT_V0_3_1",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "decisions": [
+    {
+      "decision_id": "HITL-FIN-CYBER-001",
+      "event_id": "EVO-FIN-CYBER-001",
+      "receipt_id": "REC-EVO-FIN-CYBER-001",
+      "approver_role": "APPROVER",
+      "approver_label": "Chief Risk Officer demo approver",
+      "decision": "APPROVED_WITH_CONDITIONS",
+      "conditions": [
+        "sandbox demonstration only",
+        "no real funds or live customer data",
+        "no automated transaction blocking in production",
+        "not financial advice",
+        "professional risk/security review remains required"
+      ],
+      "timestamp_utc": "2026-05-07T20:00:00Z"
+    }
+  ]
+}
