@@ -2,9 +2,9 @@
   "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_SIGNATURE_SET_V0_3_1",
   "artifact": "AEM-EVOLVE Multi-Agent Governance API",
   "version": "0.3.1-demo",
-  "current_milestone": "Phase 4 - Quality, Documentation & Polish (v0.6)",
+  "current_milestone": "Phase 5 - v1.0 Release",
   "status": "DEMO_SIGNED",
-  "signed_at_utc": "2026-05-08T14:00:00.000000+00:00",
+  "signed_at_utc": "2026-05-08T14:30:00.000000+00:00",
   "canonicalization": "json_sort_keys_no_whitespace_utf8",
   "hash_algorithm": "SHA-256",
   "signature_algorithm": "Ed25519",
@@ -20,8 +20,8 @@
     {
       "name": "manifest",
       "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json",
-      "canonical_sha256": "00d314b18289625f875e85d8e51b20a61aefbe1bcfb585a70a3e2de1c529458a",
-      "signature_b64": "dGmeO0aHDiniYG62B4CdfyliPGvg6OW0OOihSfFvXMS+4aTCaZogPqZqjjp6pyF5wHtI0Ee95tZjMQduPatiBg=="
+      "canonical_sha256": "a68942b4e7b1da24ae38afba83e8101692fc4cd8f4b12a7760bb1de1f19af1dd",
+      "signature_b64": "orT+6CAN/j3GL/p0eF7XzuQfj36dq9umlVZ7/4hwSOjG4Cmgs414gp6LsqHloa3EYsJYsmR5LRNIf5RierJpAg=="
     }
   ],
   "non_claims": {
