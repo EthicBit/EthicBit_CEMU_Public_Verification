@@ -1,0 +1,304 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_EVENTS_V1",
+  "exported_at_utc": "2026-05-07T22:30:00.000000+00:00",
+  "source_db": "demos/aem-evolve-multi-agent-api/ethicbit_demo.db",
+  "events_count": 8,
+  "events": [
+    {
+      "event_id": "EVO-API-a6645086-0628-4d8b-aa10-2fcc4deb2715",
+      "thread_id": "direct-debug",
+      "event_canonical_sha256": "e615d8f71fb3de04035dc93b909ed72a099125b57cc2f4b299e137ae1527dbb7",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T17:46:23.117885+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-a6645086-0628-4d8b-aa10-2fcc4deb2715",
+        "thread_id": "direct-debug",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T17:46:23.117885+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "e615d8f71fb3de04035dc93b909ed72a099125b57cc2f4b299e137ae1527dbb7"
+      }
+    },
+    {
+      "event_id": "EVO-API-99ab6210-6639-4c50-8109-394e8bc41872",
+      "thread_id": "direct-debug-2",
+      "event_canonical_sha256": "915bd11c962f22841fd6d61cacb9730a35689ab2759468fdad8aeb0ff8928165",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T17:46:36.854754+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-99ab6210-6639-4c50-8109-394e8bc41872",
+        "thread_id": "direct-debug-2",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T17:46:36.854754+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "915bd11c962f22841fd6d61cacb9730a35689ab2759468fdad8aeb0ff8928165"
+      }
+    },
+    {
+      "event_id": "EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899",
+      "thread_id": "demo-thread-001",
+      "event_canonical_sha256": "89a5076623e1b096f7b8a34b989022cfa1b603c8135619d15f88d2a4915a92f2",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T17:46:58.535818+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899",
+        "thread_id": "demo-thread-001",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T17:46:58.535818+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "89a5076623e1b096f7b8a34b989022cfa1b603c8135619d15f88d2a4915a92f2"
+      }
+    },
+    {
+      "event_id": "EVO-API-a7aa3a0f-be6a-47de-a778-0eae8d6e617f",
+      "thread_id": "t-authtest-1778189717",
+      "event_canonical_sha256": "07699855c9d0bb1761551672feae88c90148841279bd122be5a8f65bb367252c",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T21:35:17.429615+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-a7aa3a0f-be6a-47de-a778-0eae8d6e617f",
+        "thread_id": "t-authtest-1778189717",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T21:35:17.429615+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "07699855c9d0bb1761551672feae88c90148841279bd122be5a8f65bb367252c"
+      }
+    },
+    {
+      "event_id": "EVO-API-3a6ef281-843f-4671-b9b7-a865f400bf7a",
+      "thread_id": "auth-check-1778190594",
+      "event_canonical_sha256": "ee29476e9aec45eece12472cf9dd6cf3de120296947be73bdf189228fa388cb7",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T21:49:54.278162+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-3a6ef281-843f-4671-b9b7-a865f400bf7a",
+        "thread_id": "auth-check-1778190594",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T21:49:54.278162+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "ee29476e9aec45eece12472cf9dd6cf3de120296947be73bdf189228fa388cb7"
+      }
+    },
+    {
+      "event_id": "EVO-API-5cbab70e-f1e4-4bfe-ad55-471c69ed95c9",
+      "thread_id": "auth-check-1778190658",
+      "event_canonical_sha256": "11dc13c6dda5303c87f3f6d0176edff00c3816d89a9bcf8542b219c3d8751f31",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T21:50:58.927857+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-5cbab70e-f1e4-4bfe-ad55-471c69ed95c9",
+        "thread_id": "auth-check-1778190658",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T21:50:58.927857+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "11dc13c6dda5303c87f3f6d0176edff00c3816d89a9bcf8542b219c3d8751f31"
+      }
+    },
+    {
+      "event_id": "EVO-API-d135727b-3983-4155-a40e-c339514684ab",
+      "thread_id": "e2e-demo-1778190731",
+      "event_canonical_sha256": "1e9aeb648fee4182424897f0ddf0ce2d4d35c525d27ce3eaa5f97a332d5000a2",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T21:52:11.675161+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-d135727b-3983-4155-a40e-c339514684ab",
+        "thread_id": "e2e-demo-1778190731",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T21:52:11.675161+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "1e9aeb648fee4182424897f0ddf0ce2d4d35c525d27ce3eaa5f97a332d5000a2"
+      }
+    },
+    {
+      "event_id": "EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+      "thread_id": "e2e-demo-1778190786",
+      "event_canonical_sha256": "98e90aac190dfa77e8578a8072bdc812183ae4463c3cbf716aeec5e7eaea7bdb",
+      "change_type": "CONFIGURATION_UPDATE",
+      "base_artifact": "writer_prompt",
+      "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+      "materiality_score": 78.0,
+      "requested_claim_scope": "RESEARCH_SUPPORT",
+      "timestamp_utc": "2026-05-07T21:53:06.697084+00:00",
+      "claim_boundary": {
+        "research_support_only": true,
+        "clinical_claimed": false,
+        "diagnostic_claimed": false,
+        "regulatory_approval_claimed": false,
+        "third_party_binding": false
+      },
+      "event_json": {
+        "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
+        "event_id": "EVO-API-dd9492d5-c75f-4149-b753-535cdb9d9d13",
+        "thread_id": "e2e-demo-1778190786",
+        "change_type": "CONFIGURATION_UPDATE",
+        "base_artifact": "writer_prompt",
+        "proposed_state": "Eres un escritor experto en ética de IA y gobernanza verificable.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "RESEARCH_SUPPORT",
+        "timestamp_utc": "2026-05-07T21:53:06.697084+00:00",
+        "claim_boundary": {
+          "research_support_only": true,
+          "clinical_claimed": false,
+          "diagnostic_claimed": false,
+          "regulatory_approval_claimed": false,
+          "third_party_binding": false
+        },
+        "event_canonical_sha256": "98e90aac190dfa77e8578a8072bdc812183ae4463c3cbf716aeec5e7eaea7bdb"
+      }
+    }
+  ]
+}
