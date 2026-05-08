@@ -1,0 +1,132 @@
+# Changelog
+
+All notable changes to AEM-EVOLVE Multi-Agent Governance API.
+
+Format: [version] — date — description.  
+Non-claims are additive; no prior non-claim is retracted without explicit record.
+
+---
+
+## [1.0.0] — 2026-05-08
+
+### Added
+- `RELEASE_NOTES_V1_0.md` — v1.0 release notes
+- `CHANGELOG.md` — this file
+- Whitepaper v1.0 (`docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V1_0.md`)
+- Git tag `v1.0.0` + GitHub Release
+
+### Feature freeze
+No new features. All Phase 0–4 deliverables locked.
+
+---
+
+## [0.6 / Phase 4] — 2026-05-08
+
+### Added
+- `tests/` — 75-test pytest suite (88% coverage on `main.py` + `metrics.py`)
+  - `test_auth.py` — RBAC: missing/unknown/wrong-role/valid key coverage
+  - `test_governance_logic.py` — SHA-256, gate outcomes, audit chain linking
+  - `test_metrics.py` — MetricsRegistry timer, counter, snapshot, reset
+  - `test_endpoints.py` — all endpoints via TestClient
+- `pytest.ini` — test configuration
+- `.github/workflows/aem-evolve-ci.yml` — CI: test job + assurance hash check
+- `docs/API_REFERENCE.md` — full endpoint reference
+- `docs/ARCHITECTURE.md` — component map, data flows, security design
+- `docs/CLAIMS_AND_NON_CLAIMS.md` — canonical versioned claims + evidence map
+- `docs/adr/ADR-001-sqlite-demo-storage.md`
+- `docs/adr/ADR-002-langgraph-state-machine.md`
+- `docs/adr/ADR-003-rbac-api-keys.md`
+- `sdk/aem_evolve_client.py` — `AEMEvolveClient` Python SDK
+
+### Fixed
+- `GET /chain/verify` was shadowed by `GET /chain/{thread_id}` (FastAPI route ordering); moved `verify` before parameterized route
+
+### Assurance
+- Manifest milestone → Phase 4; 10 `phase4_*` flags added
+- Re-signed (SHA `00d314b1`)
+- Hash record → 50 files
+
+---
+
+## [0.5 / Phase 3] — 2026-05-08
+
+### Added
+- `metrics.py` — `MetricsRegistry` singleton (per-operation timer context manager, counters, snapshot with p95)
+- `GET /metrics` endpoint (any authenticated role)
+- `GET /healthz` endpoint (no auth required; DB liveness probe)
+- `db_adapter.py` — `PostgresAdapter` skeleton (documented migration target; not active)
+- `migrations/001_initial_schema.sql` — PostgreSQL 14+ schema
+- `migrations/002_metrics_table.sql` — optional persistent metrics table
+- `scripts/run_benchmark.sh` — reproducible N-iteration benchmark
+- `docs/BENCHMARK_REPORT_V1.md` — real measured values (e2e median 4.077 ms, P95 31.49 ms)
+- `docs/METRICS_SCHEMA.json` — formal `/metrics` field definitions
+- Whitepaper v0.5
+
+### Changed
+- `main.py` — `end_to_end` timer wraps `graph.invoke()`; counter increments in `create_evolution_event` and `evaluate_evolution_gate`; `duration_ms` per request in HTTP log entries
+
+### Fixed
+- `_JsonFormatter` class reference in `dictConfig` changed from string `"__main__._JsonFormatter"` to direct class reference — resolves `ValueError` when server started from non-standard directory
+
+### Assurance
+- Manifest milestone → Phase 3; `phase3_*` flags added
+- Re-signed (SHA `b1bf95d8`)
+- Hash record → 35 files
+
+---
+
+## [0.4 / Phase 2] — 2026-05-07
+
+### Added
+- `adversarial_tests/` — 27-vector test suite:
+  - `test_prompt_injection.sh` (8 vectors)
+  - `test_unauthorized_approval.sh` (7 vectors)
+  - `test_malformed_payloads.sh` (7 vectors)
+  - `test_tampering_detection.py` (5 vectors)
+  - `run_all_adversarial_tests.sh`
+- `docs/THREAT_MODEL.md` — attack surface, threat actors, mitigations
+- `docs/ADVERSARIAL_RESILIENCE_REPORT.md` — all 27 vectors pass
+- Whitepaper v0.4
+
+### Assurance
+- Manifest milestone → Phase 2; `phase2_*` flags added
+- Re-signed
+- Hash record updated
+
+---
+
+## [0.3.5 / Phase 1] — 2026-05-07
+
+### Added
+- `QUICKSTART_30_MIN.md` — 30-minute guided reproduction
+- `docs/reproduction/REPRODUCTION_GUIDE.md` — extended guide
+- `docs/reproduction/REPRODUCTION_REPORT_TEMPLATE.md` — external report template
+- `independent-reproductions/README.md` — submission process; threshold tracker (0/3 min, 0/5 v1.0)
+- Whitepaper v0.3
+- `docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md`
+- `docs/ASSURANCE_LADDER_CONDITIONS.md` — PR 8/9/10 gate conditions
+
+### Assurance
+- Manifest milestone → Phase 1
+- Hash record updated
+
+---
+
+## [0.3.1-demo / Phase 0] — 2026-05-07
+
+### Added (initial release)
+- FastAPI governance API with LangGraph `StateGraph`
+- Evolution Events (`evolution_events` table) with canonical SHA-256
+- Evolution Receipts (`evolution_receipts` table) with canonical SHA-256
+- Governance gate: PASS (≤70) / SCOPE_LIMITED (70–85) / FAIL_CLOSED (>85)
+- Human-in-the-Loop approval (`POST /approve`, APPROVER role)
+- Hash-linked audit chain (`audit_chain` table); `GET /chain/verify`
+- RBAC: INITIATOR / APPROVER / OBSERVER via `X-API-Key`
+- Structured JSON logging (`_JsonFormatter`, `dictConfig`)
+- `DBAdapter` ABC + `SQLiteAdapter`
+- `configs/auth_demo_keys.json` — demo keys
+- Ethereum mainnet anchor (TX `0x30fc9e6c…`, block 25045091)
+- Execution export package (11 signed artifacts)
+- `docs/ASSURANCE_LADDER.md`, `docs/PRODUCTION_READINESS_PLAN.md`
+- `docs/EVOLUTION_RECEIPTS_SPECIFICATION.md`, `docs/SCOPE_BOUNDARY.md`
+- `scripts/run_demo_e2e.sh`, `scripts/run_tamper_checklist.sh`

@@ -1,10 +1,12 @@
 # AEM-EVOLVE Multi-Agent Governance API — Hash Record
-# Phase 4 — Quality, Documentation & Polish (v0.6)
-# Generated: 2026-05-08T13:52:54Z
+# v1.0.0 — Phase 5 — Release
+# Generated: 2026-05-08T13:57:53Z
 # Format: SHA256  path
 
 1dbc0b140e12543695a61fff283a3b7999987fc33b86709ce1e4fcb336fba688  demos/aem-evolve-multi-agent-api/README.md
 6eaf826098fd9b69c82406cd12c6939ffd857f4efe514f17ca6d97741810805a  demos/aem-evolve-multi-agent-api/QUICKSTART_30_MIN.md
+08eddcc28d0b6ad8cc2f1bc25ebae75e2d3c306ea6db56bdf8b3f92e35c36218  demos/aem-evolve-multi-agent-api/RELEASE_NOTES_V1_0.md
+5a89fd7bdbacdca1f099e420b898b974406adfbfaff0f97d24329dac23542aab  demos/aem-evolve-multi-agent-api/CHANGELOG.md
 b6a18d8fdce5b573889fa26c25eeebe6ca557bd991298492d7a2782f4078eb19  demos/aem-evolve-multi-agent-api/main.py
 b74c5bee76a2830cfb26d1afdba1feaf1666d611f693b22cf2fbb509b0b79e60  demos/aem-evolve-multi-agent-api/db_adapter.py
 0664ea7337f44c32d18fd5943b0f030d075934f8d18a5d03a8ac4578c2e0eff1  demos/aem-evolve-multi-agent-api/metrics.py
@@ -48,9 +50,10 @@ cb1a11c29adcdba626f3961884b9df22d6ae0932594f55b23b3df21186c93327  docs/whitepape
 d7653e6cc9fbaa6f9466f236b6a221ee35f13a31ea911cca8e6e8843f2bfaa03  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_4.md
 76f67ddc127a86d0f27cd613b7f5aae1572a2435466bde7c9e1c0e8e158c0068  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_5.md
 3fd42255124ebe225927da18dabfec656bc739414aebbfdc5dd9a41255623eab  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_6.md
+e5a0122b2a59b53fd6de6b07aa18b38f9c7e7e0d967c6e39d3ad7b82449db6ae  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V1_0.md
 e96b760669b47f7e81fed9bff8c533df32273f2d5d8db7665f1b9f4efb06a2a5  docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md
 027bff48e48cee55f05cf2c8b1a0e139f19760aea366af5e695f89925005f5a1  independent-reproductions/README.md
 1bc558fb516392fa9351d68bb044e321ecfd04fe08abe622717df8419c049579  .github/workflows/aem-evolve-ci.yml
-aca842bdb86ceb9d8cc3eda92b8c206aa842054365dd7b2740fbf9121a3210ea  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json
-ab38ecef2bb98f0e504c41c70756ae5a463ca9ef6b5d6426ef51c53647eea58f  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_SIGNATURE_SET.json
+71387c860940b251210f84971afbcb7a91d5756ea1dc82902f3963830a766c95  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json
+3b2b7c37d7d6307ac6b86f26496d2f6674907ff8ff600b8c3b580104dde97d5a  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_SIGNATURE_SET.json
 6be44bd55a43979a4d6cfd266eb55356f2c48d5799f2a81def168c93e94f5303  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_ANCHOR_RECEIPT.json
