@@ -765,45 +765,6 @@ def get_audit(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
     }
 
 
-@app.get("/chain/{thread_id}")
-def get_chain(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
-    _require_any_auth(api_key)
-    """Return all audit chain entries that reference events/receipts/decisions for this thread."""
-    cursor = db_conn.cursor()
-    # Collect entry_ids for this thread from all three tables.
-    cursor.execute("SELECT event_id FROM evolution_events WHERE thread_id = ?", (thread_id,))
-    event_ids = {row[0] for row in cursor.fetchall()}
-    cursor.execute("SELECT event_id FROM evolution_receipts WHERE thread_id = ?", (thread_id,))
-    receipt_entry_ids = {f"REC-{eid}" for eid in {row[0] for row in cursor.fetchall()}}
-    decision_prefix = f"DEC-{thread_id}-"
-    cursor.execute(
-        "SELECT entry_id FROM audit_chain WHERE entry_id LIKE ?",
-        (decision_prefix + "%",),
-    )
-    decision_ids = {row[0] for row in cursor.fetchall()}
-
-    all_ids = event_ids | receipt_entry_ids | decision_ids
-    if not all_ids:
-        raise HTTPException(404, f"No audit chain entries found for thread {thread_id}")
-
-    placeholders = ",".join("?" * len(all_ids))
-    cursor.execute(
-        f"SELECT seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc "
-        f"FROM audit_chain WHERE entry_id IN ({placeholders}) ORDER BY seq",
-        list(all_ids),
-    )
-    rows = cursor.fetchall()
-    entries = [
-        {
-            "seq": r[0], "entry_type": r[1], "entry_id": r[2],
-            "entry_sha256": r[3], "prev_chain_hash": r[4],
-            "chain_hash": r[5], "timestamp_utc": r[6],
-        }
-        for r in rows
-    ]
-    return {"thread_id": thread_id, "chain_entries": entries, "count": len(entries)}
-
-
 @app.get("/chain/verify")
 def verify_chain(api_key: str = Security(_API_KEY_HEADER)):
     _require_any_auth(api_key)
@@ -847,6 +808,45 @@ def verify_chain(api_key: str = Security(_API_KEY_HEADER)):
         "tamper_proof_claimed": False,
         "note": "Hash-linked detection only. SQLite is demo storage — not tamper-proof.",
     }
+
+
+@app.get("/chain/{thread_id}")
+def get_chain(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
+    """Return all audit chain entries that reference events/receipts/decisions for this thread."""
+    _require_any_auth(api_key)
+    cursor = db_conn.cursor()
+    # Collect entry_ids for this thread from all three tables.
+    cursor.execute("SELECT event_id FROM evolution_events WHERE thread_id = ?", (thread_id,))
+    event_ids = {row[0] for row in cursor.fetchall()}
+    cursor.execute("SELECT event_id FROM evolution_receipts WHERE thread_id = ?", (thread_id,))
+    receipt_entry_ids = {f"REC-{eid}" for eid in {row[0] for row in cursor.fetchall()}}
+    decision_prefix = f"DEC-{thread_id}-"
+    cursor.execute(
+        "SELECT entry_id FROM audit_chain WHERE entry_id LIKE ?",
+        (decision_prefix + "%",),
+    )
+    decision_ids = {row[0] for row in cursor.fetchall()}
+
+    all_ids = event_ids | receipt_entry_ids | decision_ids
+    if not all_ids:
+        raise HTTPException(404, f"No audit chain entries found for thread {thread_id}")
+
+    placeholders = ",".join("?" * len(all_ids))
+    cursor.execute(
+        f"SELECT seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc "
+        f"FROM audit_chain WHERE entry_id IN ({placeholders}) ORDER BY seq",
+        list(all_ids),
+    )
+    rows = cursor.fetchall()
+    entries = [
+        {
+            "seq": r[0], "entry_type": r[1], "entry_id": r[2],
+            "entry_sha256": r[3], "prev_chain_hash": r[4],
+            "chain_hash": r[5], "timestamp_utc": r[6],
+        }
+        for r in rows
+    ]
+    return {"thread_id": thread_id, "chain_entries": entries, "count": len(entries)}
 
 
 @app.get("/health")
