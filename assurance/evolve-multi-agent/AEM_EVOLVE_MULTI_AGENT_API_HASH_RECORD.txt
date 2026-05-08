@@ -1,14 +1,22 @@
 # AEM-EVOLVE Multi-Agent Governance API — Hash Record
-# Phase 3 — Performance, Metrics & Architecture (v0.5)
-# Generated: 2026-05-08T13:40:35Z
+# Phase 4 — Quality, Documentation & Polish (v0.6)
+# Generated: 2026-05-08T13:52:54Z
 # Format: SHA256  path
 
 1dbc0b140e12543695a61fff283a3b7999987fc33b86709ce1e4fcb336fba688  demos/aem-evolve-multi-agent-api/README.md
 6eaf826098fd9b69c82406cd12c6939ffd857f4efe514f17ca6d97741810805a  demos/aem-evolve-multi-agent-api/QUICKSTART_30_MIN.md
-fac03161007a0a46a0c8fb8c4985317cc2bdfd0ab05551686a38819022c1f74d  demos/aem-evolve-multi-agent-api/main.py
+b6a18d8fdce5b573889fa26c25eeebe6ca557bd991298492d7a2782f4078eb19  demos/aem-evolve-multi-agent-api/main.py
 b74c5bee76a2830cfb26d1afdba1feaf1666d611f693b22cf2fbb509b0b79e60  demos/aem-evolve-multi-agent-api/db_adapter.py
 0664ea7337f44c32d18fd5943b0f030d075934f8d18a5d03a8ac4578c2e0eff1  demos/aem-evolve-multi-agent-api/metrics.py
 47cc492f68cf61f06df77f24744da8a90657a9821d13aa63374bcf6adf6a5f89  demos/aem-evolve-multi-agent-api/requirements.txt
+cd22fe1b7051c7711b48a41b162efc89976a3c8aaef76ac6d22670e44aa9d75f  demos/aem-evolve-multi-agent-api/pytest.ini
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  demos/aem-evolve-multi-agent-api/tests/__init__.py
+a5928f2b8d77ac0a91fac13eb65cba919816cd4bdfc6b4bb37750372edcc0dc0  demos/aem-evolve-multi-agent-api/tests/conftest.py
+8ca7bdad51fbd39cdc247242c8784a659d559ff51c8f40633cc64b2b98e52282  demos/aem-evolve-multi-agent-api/tests/test_auth.py
+579e3748507d800331a04255feb4d4861171210a3f8d5798fbf407fb1ea8cecf  demos/aem-evolve-multi-agent-api/tests/test_governance_logic.py
+afddbeb6ede881278757e1109fa509f41b8b7d25f33f5ca60d3c90c4ddbf5208  demos/aem-evolve-multi-agent-api/tests/test_metrics.py
+8c907731af28a86211116a39cf90d3a42a69286dcde0e76699011dbc6d657935  demos/aem-evolve-multi-agent-api/tests/test_endpoints.py
+84a127044cadbcb2cd2bb2e6c383bd7b5d5f22213ee84d791d2b7f55ef51822a  demos/aem-evolve-multi-agent-api/sdk/aem_evolve_client.py
 51b8d1fec5e3b2da90ba7e9e0c97225ab6b3817057d08753e7111d501dfff31c  demos/aem-evolve-multi-agent-api/scripts/run_demo_e2e.sh
 4218edf31d0a2ca58bb4fa6269676dfc45cfe9ef0232a8fc288fa3f2fe48d981  demos/aem-evolve-multi-agent-api/scripts/run_tamper_checklist.sh
 188c7f15e4b1db763d41a32592b4d6cf86e9bdceb703eba2200b4ff402945f34  demos/aem-evolve-multi-agent-api/scripts/run_benchmark.sh
@@ -21,8 +29,14 @@ c65d407935af71448a6756071cd019097645ddb5ec1d548055a09fd58380f5bc  demos/aem-evol
 4add9936170bce4ffdb6ad243ddbb2ec5e97870a37ba44879f6b97e9fc3b1824  demos/aem-evolve-multi-agent-api/docs/ASSURANCE_LADDER_CONDITIONS.md
 819d27ab2b88cde81aa6988a022a79c0979a06cdcfea380a6185f105619edad3  demos/aem-evolve-multi-agent-api/docs/METRICS_SCHEMA.json
 e45eb0d7c93791081d3b221dd5a6f01133592b2bd3e2671188dfb243a26bac9b  demos/aem-evolve-multi-agent-api/docs/BENCHMARK_REPORT_V1.md
+ca558761d613cf3d10f489d445b045709a74550727a8f724a1ee92ad241e41af  demos/aem-evolve-multi-agent-api/docs/API_REFERENCE.md
+3cf2c1198ee037ccae2cdf273413eeff5e52530267795f7a69ab206ec9a1db7a  demos/aem-evolve-multi-agent-api/docs/ARCHITECTURE.md
+ae47a179403746ec3aeb0877954a79ea4912d13c7cfd29018433bd9f07b3de0d  demos/aem-evolve-multi-agent-api/docs/CLAIMS_AND_NON_CLAIMS.md
 d683467f0d28b6f7ee8d0c73171fcfceaa2b9b58054dd58bba3d72f3f51e74c8  demos/aem-evolve-multi-agent-api/docs/THREAT_MODEL.md
 290e9e598a8a39e2d1bcb70cee54e766f0c020e50fcb70ca68dba5d6fb8229cc  demos/aem-evolve-multi-agent-api/docs/ADVERSARIAL_RESILIENCE_REPORT.md
+7e44f6e7de9febb297d135c448f4802f209c7208b2151bed0f4f335276adb466  demos/aem-evolve-multi-agent-api/docs/adr/ADR-001-sqlite-demo-storage.md
+64594d0e4a50604be797160f6e202676e158682037fad69c843be2f946009add  demos/aem-evolve-multi-agent-api/docs/adr/ADR-002-langgraph-state-machine.md
+0cdaeb4ffe3ac8e12598b0ea8602d925768a49948e062cf1fd5e0cd040987788  demos/aem-evolve-multi-agent-api/docs/adr/ADR-003-rbac-api-keys.md
 214891d68d11d1cb9c3531d2b5b7fda9919a1e1da640d8c8b03c0a362349acb2  demos/aem-evolve-multi-agent-api/adversarial_tests/run_all_adversarial_tests.sh
 9638905db13f760f4b6d9bf39eaeb9df7ddfe9158c5cd06aee75bc08a866cbda  demos/aem-evolve-multi-agent-api/adversarial_tests/test_prompt_injection.sh
 b3b9b8b503133f6e9372b9ca991d77607b0797e565a60948204f6e787e1752d6  demos/aem-evolve-multi-agent-api/adversarial_tests/test_unauthorized_approval.sh
@@ -33,8 +47,10 @@ f73902bb2bec518c419983797f197e87f817624549367ae65a87818c96922fbb  docs/reproduct
 cb1a11c29adcdba626f3961884b9df22d6ae0932594f55b23b3df21186c93327  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_3.md
 d7653e6cc9fbaa6f9466f236b6a221ee35f13a31ea911cca8e6e8843f2bfaa03  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_4.md
 76f67ddc127a86d0f27cd613b7f5aae1572a2435466bde7c9e1c0e8e158c0068  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_5.md
+3fd42255124ebe225927da18dabfec656bc739414aebbfdc5dd9a41255623eab  docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_6.md
 e96b760669b47f7e81fed9bff8c533df32273f2d5d8db7665f1b9f4efb06a2a5  docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md
 027bff48e48cee55f05cf2c8b1a0e139f19760aea366af5e695f89925005f5a1  independent-reproductions/README.md
-2cf7f97903375c85819e63dfeb7a9fbd4b8d41156becee896601249673628f65  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json
-149e796356155c119a0c0d31aa5f435227d1cdfe0c82bdcfa9ec0e532ad6a2bf  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_SIGNATURE_SET.json
+1bc558fb516392fa9351d68bb044e321ecfd04fe08abe622717df8419c049579  .github/workflows/aem-evolve-ci.yml
+aca842bdb86ceb9d8cc3eda92b8c206aa842054365dd7b2740fbf9121a3210ea  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json
+ab38ecef2bb98f0e504c41c70756ae5a463ca9ef6b5d6426ef51c53647eea58f  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_SIGNATURE_SET.json
 6be44bd55a43979a4d6cfd266eb55356f2c48d5799f2a81def168c93e94f5303  assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_ANCHOR_RECEIPT.json

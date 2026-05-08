@@ -1,0 +1,87 @@
+name: AEM-EVOLVE CI
+
+on:
+  push:
+    branches:
+      - main
+      - "docs/aem-evolve-phase4-quality-v0.6"
+      - "perf/aem-evolve-phase*"
+      - "security/aem-evolve-phase*"
+      - "docs/aem-evolve-phase*"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test Suite (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    defaults:
+      run:
+        working-directory: demos/aem-evolve-multi-agent-api
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov httpx
+
+      - name: Run test suite with coverage
+        run: |
+          python -m pytest tests/ \
+            --cov=main --cov=metrics \
+            --cov-report=term-missing \
+            --cov-fail-under=65 \
+            -q
+
+      - name: Verify server starts
+        run: |
+          timeout 10 python main.py &
+          sleep 3
+          curl -sf http://127.0.0.1:8000/healthz | python3 -c "import json,sys; d=json.load(sys.stdin); assert d['status']=='ok', d"
+          kill %1 || true
+
+  assurance-check:
+    name: Assurance Integrity Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify hash record — no missing files
+        run: |
+          RECORD="assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_HASH_RECORD.txt"
+          FAIL=0
+          while IFS= read -r line; do
+            [[ "$line" =~ ^#.*$ || -z "$line" ]] && continue
+            HASH=$(echo "$line" | awk '{print $1}')
+            FILE=$(echo "$line" | awk '{print $2}')
+            if [ ! -f "$FILE" ]; then
+              echo "MISSING: $FILE"
+              FAIL=$((FAIL+1))
+            else
+              COMPUTED=$(sha256sum "$FILE" | awk '{print $1}')
+              if [ "$COMPUTED" != "$HASH" ]; then
+                echo "HASH_MISMATCH: $FILE (expected $HASH, got $COMPUTED)"
+                FAIL=$((FAIL+1))
+              fi
+            fi
+          done < "$RECORD"
+          if [ "$FAIL" -gt 0 ]; then
+            echo "Assurance check FAILED: $FAIL file(s) with errors"
+            exit 1
+          fi
+          echo "Assurance check PASSED"
