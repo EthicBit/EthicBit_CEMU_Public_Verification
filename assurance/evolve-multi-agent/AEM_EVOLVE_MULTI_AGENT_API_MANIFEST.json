@@ -4,7 +4,7 @@
   "version": "0.3.1-demo",
   "status": "TECHNICAL_DEMONSTRATION_PACKAGE",
   "claim": "AEM-EVOLVE Multi-Agent Governance API v0.3.1-demo provides an endpoint-level technical demonstration of Evolution Events, scope-limited Evolution Receipts, SQLite audit persistence, Human-in-the-Loop approval for multi-agent workflow changes, RBAC API key controls, structured JSON logging, and a documented database adapter interface for PostgreSQL migration.",
-  "current_milestone": "PR 7 - Production-Readiness Hardening (conditional gates documented)",
+  "current_milestone": "Phase 1 - Foundation & Independent Verification (v0.3.5)",
   "anchor_status": "ANCHORED_ON_MAINNET_DEMO",
   "anchor_tx_hash": "0x30fc9e6c810078c42ac1b840c3712d165342436ec427471b7f955425ea4b8275",
   "anchor_block_number": 25045091,
@@ -33,10 +33,13 @@
     "structured_json_logging": true,
     "production_grade_database_storage": false,
     "production_readiness_plan_documented": true,
-    "conditional_gate_conditions_documented": true
+    "conditional_gate_conditions_documented": true,
+    "phase1_reproduction_package_published": true,
+    "phase1_independent_reproductions_received": false
   },
   "files": [
     "demos/aem-evolve-multi-agent-api/README.md",
+    "demos/aem-evolve-multi-agent-api/QUICKSTART_30_MIN.md",
     "demos/aem-evolve-multi-agent-api/main.py",
     "demos/aem-evolve-multi-agent-api/db_adapter.py",
     "demos/aem-evolve-multi-agent-api/requirements.txt",
@@ -46,6 +49,11 @@
     "demos/aem-evolve-multi-agent-api/docs/SCOPE_BOUNDARY.md",
     "demos/aem-evolve-multi-agent-api/docs/ASSURANCE_LADDER.md",
     "demos/aem-evolve-multi-agent-api/docs/PRODUCTION_READINESS_PLAN.md",
-    "demos/aem-evolve-multi-agent-api/docs/ASSURANCE_LADDER_CONDITIONS.md"
+    "demos/aem-evolve-multi-agent-api/docs/ASSURANCE_LADDER_CONDITIONS.md",
+    "docs/reproduction/REPRODUCTION_GUIDE.md",
+    "docs/reproduction/REPRODUCTION_REPORT_TEMPLATE.md",
+    "docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_3.md",
+    "docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md",
+    "independent-reproductions/README.md"
   ]
 }

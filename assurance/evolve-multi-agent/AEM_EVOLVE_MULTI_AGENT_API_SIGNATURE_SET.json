@@ -2,7 +2,7 @@
   "schema_id": "AEM_EVOLVE_MULTI_AGENT_API_DEMO_SIGNATURE_SET_V0_3_1",
   "artifact": "AEM-EVOLVE Multi-Agent Governance API",
   "version": "0.3.1-demo",
-  "current_milestone": "PR 7 - Production-Readiness Hardening (conditional gates documented)",
+  "current_milestone": "Phase 1 - Foundation & Independent Verification (v0.3.5)",
   "status": "DEMO_SIGNED",
   "signed_at_utc": "2026-05-07T19:00:43.701032+00:00",
   "canonicalization": "json_sort_keys_no_whitespace_utf8",
@@ -20,8 +20,8 @@
     {
       "name": "manifest",
       "path": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json",
-      "canonical_sha256": "7f6d60edff3d2384083ecefb608ebeadc35f019e0d41467878690a153fa10358",
-      "signature_b64": "jDYQDop0tGcOg3hTyHGZKCR/2fSSoFqE24Hnt9WaaXApt63iqKNqPFhMEF5VHTnMCa97g+GFvv5W0WnOkd0LCg=="
+      "canonical_sha256": "c831b358e10e01092a77b16559d8533b6d2d34695a96d20233cf68dfabc6cbd2",
+      "signature_b64": "2pmzMVsffAY+1ZhHdKizEVn7GX/ERZbtfbV7oRZYaS5Xj9znV1ilBuy8aUGMFbAMtyh7gfQIvgSBBwTxneZODw=="
     }
   ],
   "non_claims": {
