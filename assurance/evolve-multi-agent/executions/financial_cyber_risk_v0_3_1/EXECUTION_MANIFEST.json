@@ -1,0 +1,87 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_AGENT_EXECUTION_MANIFEST_V0_3_1",
+  "execution_name": "AEM-EVOLVE Multi-Agent Governance Execution Demonstration — Financial Risk & Cybersecurity Response",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "version": "0.3.1-demo",
+  "created_utc": "2026-05-07T20:00:00Z",
+  "execution_type": "CONTROLLED_MULTI_AGENT_WORKFLOW_DEMONSTRATION",
+  "execution_scope": "local_controlled_demo",
+  "domain": "financial_risk_and_cybersecurity_response",
+  "status": "LOCAL_EXECUTION_VERIFICATION_PASS",
+  "system": "AEM-EVOLVE Multi-Agent Governance API",
+  "environment": {
+    "type": "sandbox_demonstration_only",
+    "production_systems_used": false,
+    "real_funds_used": false,
+    "live_customer_data_used": false
+  },
+  "agents": [
+    "risk_agent",
+    "cybersecurity_agent",
+    "policy_agent",
+    "governance_gate",
+    "human_approver",
+    "audit_layer"
+  ],
+  "governed_change": {
+    "change_type": "RISK_CONTROL_POLICY_UPDATE",
+    "base_artifact": "transaction_review_policy",
+    "proposed_state": "Increase manual review requirement for high-risk transactions when suspicious access signals are detected.",
+    "outcome": "SCOPE_LIMITED",
+    "human_approval_required": true,
+    "human_decision": "APPROVED_WITH_CONDITIONS"
+  },
+  "verified_paths": [
+    "runtime_health",
+    "evolution_event_created",
+    "evolution_receipt_created",
+    "scope_boundary_preserved",
+    "human_in_the_loop_decision_recorded",
+    "audit_retrieval_pass",
+    "receipt_retrieval_pass",
+    "signature_verification_pass",
+    "hash_record_generated"
+  ],
+  "metrics": {
+    "evolution_events_total": 4,
+    "evolution_receipts_total": 1,
+    "human_decisions_total": 1,
+    "audit_events_total": 8,
+    "materiality_score": 78.0
+  },
+  "signature_status": "DEMO_SIGNED_ED25519_AND_HMAC_LOCAL",
+  "anchor_claimed": false,
+  "execution_anchor_receipt": "omitted",
+  "independent_reproduction_completed": false,
+  "production_authentication_claimed": false,
+  "production_database_claimed": false,
+  "claim_boundary": {
+    "financial_advice_claimed": false,
+    "cybersecurity_certification_claimed": false,
+    "fraud_detection_certification_claimed": false,
+    "incident_response_certification_claimed": false,
+    "banking_approval_claimed": false,
+    "regulatory_approval_claimed": false,
+    "clinical_or_diagnostic_claimed": false,
+    "third_party_binding": false,
+    "production_ready_claimed": false
+  },
+  "non_claims": [
+    "not_financial_advice",
+    "not_cybersecurity_certification",
+    "not_fraud_detection_certification",
+    "not_incident_response_certification",
+    "not_banking_or_payment_institution_approved",
+    "not_production_ready",
+    "not_independently_reproduced",
+    "not_externally_certified",
+    "not_regulatory_approved",
+    "not_clinical_or_diagnostic",
+    "not_hsm_backed",
+    "not_tamper_proof",
+    "no_production_identity_provider",
+    "no_production_grade_database_storage",
+    "not_suitable_for_automated_transaction_blocking_in_live_environments",
+    "not_a_substitute_for_professional_financial_legal_compliance_or_security_review"
+  ]
+}

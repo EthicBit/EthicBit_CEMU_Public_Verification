@@ -1,0 +1,64 @@
+{
+  "schema_id": "AEM_EVOLVE_EXECUTION_SIGNATURE_SET_V0_3_1_DEMO",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "signature_status": "LOCAL_DEMO_SIGNATURES_ONLY",
+  "hsm_backed": false,
+  "third_party_attested": false,
+  "production_key_custody": false,
+  "entries": [
+    {
+      "path": "EXECUTION_MANIFEST.json",
+      "sha256": "1c064f277c0bf7192a8f831a9d4b3fd52a83d957408631fd4605158ca802a60f",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "6c38e4a4da16ee2c3be9073b2fa939aac0fdb5c63b38e0a55a64784271deb9af"
+    },
+    {
+      "path": "EXECUTION_INPUT.json",
+      "sha256": "0dc52e26990027575de0c4bd3b24d676a946fd8e7571ccd8ed3b1c7cc77fa445",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "ab12193c83271e2036a44e796c1f367e245fac3f54cb31ebe9f5b3ffc3e778e3"
+    },
+    {
+      "path": "MULTI_AGENT_TRACE.json",
+      "sha256": "4d537c3460a34e42bb5d2c81a6da8f761ca4ec68f369cdf46ba34e470e6d52fb",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "cc541d8bd2ec44f96540ce8261fcf9ba0eb86b7847cfa767c38b692264b17b70"
+    },
+    {
+      "path": "EVOLUTION_EVENTS.json",
+      "sha256": "b0914b3bf34ae61919092b05420a8b29f0f6b5bf9979c0b9c9b4cd4f7cb206fd",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "59a702be261bef1b6546b93b3d0e690f40e459ee54338e5fd09d22036b5740fd"
+    },
+    {
+      "path": "EVOLUTION_RECEIPTS.json",
+      "sha256": "1cfa16488e3a393f2c6eead962b42c3afd6f78875b35563f6a603f4597db4cf9",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "85df93f121a8925d83532032b8e770e7a0f83e94ce31c3ae44976cb2e7c13a5a"
+    },
+    {
+      "path": "HUMAN_DECISIONS.json",
+      "sha256": "4bd07e856caefc1605d65a009b7adcf35ec7e2f401aa09b88cc4a9615c9c7fe0",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "55dddffebf25ab1f583c04a5ffa42d74d9ccc4905002c7d0dc4a514ce4a0468a"
+    },
+    {
+      "path": "AUDIT_EXPORT.json",
+      "sha256": "ad3d711b673813ab196a98df7d6448cb2c2e87bb6cec21d004811a429a06b789",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "1a380fcc04f213bc809e46b235bce995de83ccfb771024428a6f11339589a5ab"
+    },
+    {
+      "path": "FINAL_REPORT.md",
+      "sha256": "5001f0577dc4189673449e6ed0cbd4a6385d3abf26dd45c8e6ce600ffcab2cad",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "affe65f0b3a3c30d62d8636c45c79168b99569cafd62a3136feae6ebd850a5e8"
+    },
+    {
+      "path": "EXECUTION_STATUS_REPORT.md",
+      "sha256": "1120d081a962b2c08c5fbfaf0d5c7d937e53ab30b1058cfbd477cc032e280b24",
+      "demo_signature_algorithm": "HMAC-SHA256_LOCAL_DEMO",
+      "demo_signature": "e054ee754179086575e8e80c34220bee4241b45d66650a531111dc33d58390a4"
+    }
+  ]
+}

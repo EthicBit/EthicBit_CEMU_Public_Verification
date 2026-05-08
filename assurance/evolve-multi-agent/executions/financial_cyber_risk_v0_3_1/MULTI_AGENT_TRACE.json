@@ -1,0 +1,61 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_AGENT_TRACE_V0_3_1",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "trace": [
+    {
+      "step": 1,
+      "agent": "risk_agent",
+      "action": "assess_financial_exposure",
+      "finding": "High-risk transaction review policy change may reduce exposure but increase false positives.",
+      "status": "completed"
+    },
+    {
+      "step": 2,
+      "agent": "cybersecurity_agent",
+      "action": "assess_access_signals",
+      "finding": "Suspicious access signals create elevated operational risk requiring bounded response.",
+      "status": "completed"
+    },
+    {
+      "step": 3,
+      "agent": "policy_agent",
+      "action": "evaluate_claim_boundary",
+      "finding": "Policy update must remain scope-limited and cannot claim fraud-detection certification or production suitability.",
+      "status": "completed"
+    },
+    {
+      "step": 4,
+      "agent": "governance_gate",
+      "action": "create_evolution_event",
+      "finding": "RISK_CONTROL_POLICY_UPDATE event created.",
+      "status": "completed"
+    },
+    {
+      "step": 5,
+      "agent": "governance_gate",
+      "action": "evaluate_materiality",
+      "finding": "Materiality score 78.0 produces SCOPE_LIMITED outcome.",
+      "status": "completed"
+    },
+    {
+      "step": 6,
+      "agent": "human_approver",
+      "action": "review_scope_limited_change",
+      "finding": "Approved with five conditions; sandbox only; no live blocking.",
+      "status": "completed"
+    },
+    {
+      "step": 7,
+      "agent": "audit_layer",
+      "action": "export_audit_evidence",
+      "finding": "Events, receipt, human decision, and audit chain exported.",
+      "status": "completed"
+    }
+  ],
+  "consensus": {
+    "governed_change_required": true,
+    "automatic_approval_allowed": false,
+    "human_approval_required": true,
+    "final_outcome": "APPROVED_WITH_CONDITIONS"
+  }
+}

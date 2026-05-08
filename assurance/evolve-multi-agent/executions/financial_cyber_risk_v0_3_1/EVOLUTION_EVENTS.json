@@ -1,0 +1,39 @@
+{
+  "schema_id": "AEM_EVOLVE_EVOLUTION_EVENTS_EXPORT_V0_3_1",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "events": [
+    {
+      "event_id": "EVO-FIN-CYBER-001",
+      "event_type": "AGENT_POLICY_CHANGE_PROPOSAL",
+      "change_type": "RISK_CONTROL_POLICY_UPDATE",
+      "base_artifact": "transaction_review_policy",
+      "proposed_state": "Increase manual review requirement for high-risk transactions when suspicious access signals are detected.",
+      "materiality_score": 78.0,
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "event_canonical_sha256": "b925e7bd9d4547ab346868299b36effc629c23b079308be9162640d58072ff36"
+    },
+    {
+      "event_id": "EVO-FIN-CYBER-002",
+      "event_type": "SCOPE_LIMITING_DECISION",
+      "outcome": "SCOPE_LIMITED",
+      "scope": "high-risk transactions only when suspicious access signals are detected",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "event_canonical_sha256": "f1d1a38299aa1807ca13b1f9ea8a7ff156f17fead90ff63d1014361e51e544e1"
+    },
+    {
+      "event_id": "EVO-FIN-CYBER-003",
+      "event_type": "HUMAN_APPROVAL_REQUIRED",
+      "required_role": "APPROVER",
+      "rbac_gate": "enabled_demo",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "event_canonical_sha256": "2b33dc068dfa38842a252674417f64e0aa4be0a11ccfaf951dccbc57cd0a6f89"
+    },
+    {
+      "event_id": "EVO-FIN-CYBER-004",
+      "event_type": "CONTROLLED_EXECUTION_RECORDED",
+      "status": "LOCAL_EXECUTION_VERIFICATION_PASS",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "event_canonical_sha256": "2fd6653b5126c47a27064215d241c852e93e310e1561dca4fc4f45fafa864451"
+    }
+  ]
+}

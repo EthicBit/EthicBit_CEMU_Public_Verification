@@ -1,0 +1,32 @@
+{
+  "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPTS_EXPORT_V0_3_1",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "receipts": [
+    {
+      "schema_id": "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1",
+      "receipt_id": "REC-EVO-FIN-CYBER-001",
+      "execution_id": "financial_cyber_risk_v0_3_1",
+      "event_id": "EVO-FIN-CYBER-001",
+      "receipt_payload": {
+        "outcome": "SCOPE_LIMITED",
+        "receipt_message": "Policy update allowed only as a sandbox controlled demonstration with Human-in-the-Loop approval and explicit non-claims.",
+        "materiality_score": 78.0,
+        "requested_claim_scope": "FINANCIAL_RISK_AND_CYBERSECURITY_RESPONSE_DEMO",
+        "claim_boundary": {
+          "financial_advice_claimed": false,
+          "cybersecurity_certification_claimed": false,
+          "fraud_detection_certification_claimed": false,
+          "incident_response_certification_claimed": false,
+          "banking_approval_claimed": false,
+          "regulatory_approval_claimed": false,
+          "clinical_or_diagnostic_claimed": false,
+          "third_party_binding": false,
+          "production_ready_claimed": false
+        }
+      },
+      "signature_status": "DEMO_SIGNED_ED25519_LOCAL",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "receipt_canonical_sha256": "da75660913de44f10c93d741ed10c7fabf1e356dffbe07288b687975f3bf33c6"
+    }
+  ]
+}

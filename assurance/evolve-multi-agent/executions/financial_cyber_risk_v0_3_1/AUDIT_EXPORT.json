@@ -1,0 +1,74 @@
+{
+  "schema_id": "AEM_EVOLVE_AUDIT_EXPORT_V0_3_1",
+  "execution_id": "financial_cyber_risk_v0_3_1",
+  "tamper_evident": true,
+  "tamper_proof_claimed": false,
+  "audit_events_total": 8,
+  "audit_chain": [
+    {
+      "index": 1,
+      "type": "event",
+      "reference": "EVO-FIN-CYBER-001",
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "64b77c9d48fa275b9c1f8c2450236bb62573c1d3736407fa807898dc0988b597"
+    },
+    {
+      "index": 2,
+      "type": "event",
+      "reference": "EVO-FIN-CYBER-002",
+      "previous_hash": "64b77c9d48fa275b9c1f8c2450236bb62573c1d3736407fa807898dc0988b597",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "0ce4a6c5cc67bdf06f992e9ff98358824249e88c849829b6f78fc068379857b3"
+    },
+    {
+      "index": 3,
+      "type": "event",
+      "reference": "EVO-FIN-CYBER-003",
+      "previous_hash": "0ce4a6c5cc67bdf06f992e9ff98358824249e88c849829b6f78fc068379857b3",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "4cb42e168637a3b745d59e3e4c68698273d345f789a97122a86c331d7a1098f9"
+    },
+    {
+      "index": 4,
+      "type": "event",
+      "reference": "EVO-FIN-CYBER-004",
+      "previous_hash": "4cb42e168637a3b745d59e3e4c68698273d345f789a97122a86c331d7a1098f9",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "6ebfee93968cf3ec13f5a5f54b4e54c2debf81beeed400d1c6842e2c2451109b"
+    },
+    {
+      "index": 5,
+      "type": "receipt",
+      "reference": "REC-EVO-FIN-CYBER-001",
+      "previous_hash": "6ebfee93968cf3ec13f5a5f54b4e54c2debf81beeed400d1c6842e2c2451109b",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "d7fd87eeca8d59ed289216abab3f6aa563bcfdd2bab99c1442a2e074526d2ed6"
+    },
+    {
+      "index": 6,
+      "type": "human_decision",
+      "reference": "HITL-FIN-CYBER-001",
+      "previous_hash": "d7fd87eeca8d59ed289216abab3f6aa563bcfdd2bab99c1442a2e074526d2ed6",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "6cebecf9787f2e653e13bf163dd46dc0b924bd14dce160eeec5d56245abcdb7a"
+    },
+    {
+      "index": 7,
+      "type": "status",
+      "reference": "LOCAL_EXECUTION_VERIFICATION_PASS",
+      "previous_hash": "6cebecf9787f2e653e13bf163dd46dc0b924bd14dce160eeec5d56245abcdb7a",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "2bfc9b0c65024d74a4058a764c5c2924ec5059344bc38fd818680913a2c7e5c8"
+    },
+    {
+      "index": 8,
+      "type": "final_report",
+      "reference": "FINAL_REPORT.md",
+      "previous_hash": "2bfc9b0c65024d74a4058a764c5c2924ec5059344bc38fd818680913a2c7e5c8",
+      "timestamp_utc": "2026-05-07T20:00:00Z",
+      "entry_hash": "93fa897afdd002544b35943a9a2f90af3dd6b7785d3cd17e398fe9cb3d1b4a48"
+    }
+  ],
+  "audit_batch_hash": "eeac169cf24b9771603661387fb1b9f7eaaa7ad231b5c53ceffc5b41614023ea"
+}
