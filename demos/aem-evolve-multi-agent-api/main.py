@@ -1,6 +1,6 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
-FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging
+FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
 May 2026
 """
 
@@ -11,28 +11,9 @@ import sys
 
 # ── Structured logging ────────────────────────────────────────────────────────
 _LOG_LEVEL = os.environ.get("AEM_LOG_LEVEL", "INFO").upper()
-logging.config.dictConfig({
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "json": {
-            "()": "__main__._JsonFormatter",
-        }
-    },
-    "handlers": {
-        "stdout": {
-            "class": "logging.StreamHandler",
-            "stream": "ext://sys.stdout",
-            "formatter": "json",
-        }
-    },
-    "root": {"level": _LOG_LEVEL, "handlers": ["stdout"]},
-})
 
 
 class _JsonFormatter(logging.Formatter):
-    import json as _json
-
     def format(self, record: logging.LogRecord) -> str:
         import json as _json
         from datetime import datetime, timezone
@@ -58,6 +39,20 @@ class _JsonFormatter(logging.Formatter):
         return _json.dumps(payload, ensure_ascii=False)
 
 
+logging.config.dictConfig({
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {"json": {"()": _JsonFormatter}},
+    "handlers": {
+        "stdout": {
+            "class": "logging.StreamHandler",
+            "stream": "ext://sys.stdout",
+            "formatter": "json",
+        }
+    },
+    "root": {"level": _LOG_LEVEL, "handlers": ["stdout"]},
+})
+
 log = logging.getLogger("aem_evolve_api")
 
 from fastapi import FastAPI, HTTPException, Request, Security
@@ -67,12 +62,14 @@ from typing import Literal, Optional
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
 import sqlite3
+import time
 from datetime import datetime, timezone
 import hashlib
 import json
 from uuid import uuid4
 import uvicorn
 from pathlib import Path
+from metrics import registry as _metrics
 
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
@@ -83,13 +80,17 @@ app = FastAPI(
 
 @app.middleware("http")
 async def _log_requests(request: Request, call_next):
+    t0 = time.perf_counter()
     response = await call_next(request)
+    elapsed_ms = round((time.perf_counter() - t0) * 1000, 3)
+    _metrics._timings[f"http_{request.method.lower()}_{request.url.path.strip('/').replace('/', '_')}"].append(elapsed_ms)
     log.info(
         "request",
         extra={
             "method": request.method,
             "path": request.url.path,
             "status": response.status_code,
+            "duration_ms": elapsed_ms,
         },
     )
     return response
@@ -374,6 +375,7 @@ def create_evolution_event(
     )
     conn.commit()
     _append_audit_chain(conn, "evolution_event", event["event_id"], event["event_canonical_sha256"])
+    _metrics.increment("events_created")
 
     return event
 
@@ -434,6 +436,8 @@ def evaluate_evolution_gate(event: dict, conn: sqlite3.Connection, thread_id: st
     )
     conn.commit()
     _append_audit_chain(conn, "evolution_receipt", receipt["receipt_id"], receipt["receipt_canonical_sha256"])
+    _metrics.increment("receipts_issued")
+    _metrics.increment(f"outcome_{outcome.lower()}")
 
     return receipt
 
@@ -559,6 +563,23 @@ graph, db_conn = build_graph()
 # ============================================
 
 
+@app.get("/healthz")
+def healthz():
+    try:
+        db_conn.cursor().execute("SELECT 1")
+        db_ok = True
+    except Exception:
+        db_ok = False
+    status = "ok" if db_ok else "degraded"
+    return {"status": status, "db": "sqlite" if db_ok else "unreachable", "version": "0.3.1-demo"}
+
+
+@app.get("/metrics")
+def get_metrics(api_key: str = Security(_API_KEY_HEADER)):
+    _require_any_auth(api_key)
+    return _metrics.snapshot()
+
+
 @app.post("/start")
 def start_session(req: StartRequest, api_key: str = Security(_API_KEY_HEADER)):
     _require_role(api_key, ROLE_INITIATOR)
@@ -574,7 +595,9 @@ def start_session(req: StartRequest, api_key: str = Security(_API_KEY_HEADER)):
         "human_approval_needed": False,
     }
     config = {"configurable": {"thread_id": req.thread_id}}
-    result = graph.invoke(initial_state, config=config)
+    with _metrics.timer("end_to_end"):
+        result = graph.invoke(initial_state, config=config)
+    _metrics.increment("sessions_started")
     return {"thread_id": req.thread_id, "status": result["status"]}
 
 

@@ -1,0 +1,56 @@
+{
+  "schema_id": "AEM_EVOLVE_METRICS_SCHEMA_V1",
+  "version": "1.0",
+  "description": "Schema for the /metrics endpoint response",
+  "fields": {
+    "counters": {
+      "type": "object",
+      "description": "Accumulated event counts since server start",
+      "keys": {
+        "sessions_started": "Total POST /start calls that completed",
+        "events_created": "Total evolution events written to DB",
+        "receipts_issued": "Total evolution receipts written to DB",
+        "outcome_pass": "Receipts with outcome PASS (materiality ≤70)",
+        "outcome_scope_limited": "Receipts with outcome SCOPE_LIMITED (70 < materiality ≤85)",
+        "outcome_fail_closed": "Receipts with outcome FAIL_CLOSED (materiality >85)"
+      }
+    },
+    "timings": {
+      "type": "object",
+      "description": "Per-operation timing statistics in milliseconds",
+      "entry_fields": {
+        "count": "Number of observations",
+        "mean_ms": "Arithmetic mean (ms)",
+        "median_ms": "Median (ms)",
+        "min_ms": "Minimum observed (ms)",
+        "max_ms": "Maximum observed (ms)",
+        "p95_ms": "95th percentile (ms)"
+      },
+      "operations": {
+        "end_to_end": "Full graph.invoke() duration for POST /start",
+        "http_post_start": "HTTP handler duration for POST /start (includes auth + graph)",
+        "http_post_approve": "HTTP handler duration for POST /approve",
+        "http_get_healthz": "HTTP handler duration for GET /healthz",
+        "http_get_metrics": "HTTP handler duration for GET /metrics"
+      }
+    },
+    "governance_overhead_ratio": {
+      "type": "number",
+      "description": "mean(governance_gate_ms) / mean(end_to_end_ms) — fraction of execution time spent in governance evaluation"
+    },
+    "outcome_distribution": {
+      "type": "object",
+      "fields": {
+        "SCOPE_LIMITED": "Count of SCOPE_LIMITED outcomes",
+        "PASS": "Count of PASS outcomes",
+        "FAIL_CLOSED": "Count of FAIL_CLOSED outcomes",
+        "scope_limited_ratio": "SCOPE_LIMITED / total receipts"
+      }
+    }
+  },
+  "non_claims": {
+    "persistent_metrics": false,
+    "thread_safe_under_concurrent_workers": false,
+    "production_observability": false
+  }
+}
