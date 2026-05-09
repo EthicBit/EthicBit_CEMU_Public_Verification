@@ -7,6 +7,38 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.6.0] — 2026-05-09
+
+### Added
+- `RELEASE_NOTES_V1_6.md`
+- `main.py` — `_init_signing_provider()`: Ed25519 signing wired into events + receipts (PR #133)
+- `main.py` — `ApproveRequest.hitl_token + hitl_approver_id`: HMAC HITL token enforced in /approve (PR #133)
+- `main.py` — `SQLiteAdapter` activated: all DB calls routed through DBAdapter interface (PR #133)
+- `main.py` — `/health` + `/healthz` report actual `signing_status` (PR #133)
+- `tools/__init__.py`, `tools/signing/__init__.py`, `tools/hitl/__init__.py` — package markers (PR #133)
+- `tools/integration/e2e_api_test.py` — 10-check end-to-end TestClient test (PR #134)
+- `tools/signing/verify_signed_receipts.py` — 10-check signed receipts verifier (PR #134)
+- `tools/reproduction/verify_all_v1_6.py` — 18-check full-stack verifier (PR #134)
+- `.github/workflows/aem-evolve-reproduction.yml` — updated: v1.5 + v1.6 verifiers + E2E test (PR #134)
+- `assurance/evolve-multi-agent/v1_6/signed_receipts_report.json`
+- `assurance/evolve-multi-agent/v1_6/e2e_api_report.json`
+- `assurance/evolve-multi-agent/v1_6/REPRODUCTION_REPORT.json`
+- `docs/whitepapers/WHITEPAPER_V1_6_AEM_EVOLVE_CRITICAL_GAPS_CLOSURE.md` (PR #138)
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_6.md`
+- Git tag `v1.6.0` + GitHub Release
+
+### Changed
+- `tests/test_endpoints.py` — approve tests now generate valid HITL tokens
+- `tests/test_governance_logic.py` — fixture uses SQLiteAdapter; new signature assertions
+- API version bumped to `0.4.0-demo`
+
+### Non-claims (v1.6 additions)
+- Ephemeral signing key is not persisted across server restarts.
+- HITL enforcement uses HMAC shared secret — not enterprise IAM.
+- SQLiteAdapter is demo storage — not production audit storage.
+
+---
+
 ## [1.5.0] — 2026-05-09
 
 ### Added

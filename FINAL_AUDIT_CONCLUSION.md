@@ -426,3 +426,39 @@ External independent reproductions remain at 0 received.
 This release is not regulatory approval.
 This release is not external certification.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.6.0 — Critical Gaps Closure (2026-05-09)
+
+**Commit SHA (main):** TBD — to be updated after tag push
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (18/18)`
+**Official status:** `READY`
+
+v1.6.0 closes the five critical gaps identified in the v1.5.0 audit: signing provider wired into the API server, HITL identity token enforced on /approve, SQLiteAdapter activated, health endpoint false claim fixed, and end-to-end integration test added.
+
+### v1.6.0 PRs
+
+| PR | Change | Verification |
+|---|---|---|
+| #133 | SigningProvider wired — Ed25519 on events/receipts; HITL token enforced; SQLiteAdapter active | `SIGNED_RECEIPTS_VERIFICATION=PASS (10/10)` |
+| #134 | E2E integration test + verify_all_v1_6.py + CI update | `E2E_API_VERIFICATION=PASS (10/10)` / `FULL_STACK_VERIFICATION=PASS (18/18)` |
+| #138 | Whitepaper v1.6 | — |
+
+### v1.6.0 claim
+
+> AEM-EVOLVE™ v1.6 closes all critical gaps from the v1.5.0 audit: the signing provider is connected to the API (every event and receipt carries a cryptographic Ed25519 signature), HITL identity tokens are enforced on the /approve endpoint, the SQLiteAdapter is the active database interface, and an end-to-end integration test validates the full governance flow. Full-stack verification: 18/18 checks pass.
+
+### v1.6.0 non-claims
+
+```
+PKCS#11 provider is not a real HSM integration.
+KMS provider is not a real AWS KMS integration.
+OIDC verifier uses locally generated JWKS — not a real IdP.
+Ephemeral signing key is not persisted across server restarts.
+HITL enforcement uses HMAC shared secret — not enterprise IAM.
+SQLiteAdapter is demo storage — not production audit storage.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+```

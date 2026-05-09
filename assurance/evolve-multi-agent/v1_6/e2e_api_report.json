@@ -1,0 +1,13 @@
+{
+  "check_id": "V1_6-E2E-API",
+  "timestamp": "2026-05-09T14:12:27.490557+00:00",
+  "result": "PASS",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "status": "E2E_API_VERIFICATION=PASS (10/10)",
+  "flow": "start \u2192 status \u2192 receipt \u2192 approve(HITL) \u2192 audit \u2192 chain/verify",
+  "non_claims": [
+    "TestClient is not a real HTTP server.",
+    "Ephemeral signing key regenerated per test run."
+  ]
+}

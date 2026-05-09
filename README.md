@@ -5,7 +5,27 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.5.0 — Enterprise Hardening
+## Latest release: AEM-EVOLVE™ v1.6.0 — Critical Gaps Closure
+
+**Tag:** `v1.6.0` — 2026-05-09
+**Type:** Critical gaps closure — signing wired · HITL token enforced · SQLiteAdapter activated · E2E integration test · CI updated
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (18/18)`
+
+> AEM-EVOLVE™ v1.6 closes all five critical gaps from the v1.5.0 audit: signing provider connected to API, HITL identity enforced in /approve, SQLiteAdapter activated, health endpoint fixed, and end-to-end integration test added.
+
+- [Public Status Bulletin v1.6.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_6.md)
+- [Whitepaper v1.6](docs/whitepapers/WHITEPAPER_V1_6_AEM_EVOLVE_CRITICAL_GAPS_CLOSURE.md)
+- [GitHub Release v1.6.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.6.0)
+
+```bash
+pip install cryptography mlkem asyncpg fastapi langgraph starlette httpx
+python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_6.py
+# FULL_STACK_VERIFICATION=PASS  (18/18)
+```
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.5.0 — Enterprise Hardening
 
 **Tag:** `v1.5.0` — 2026-05-09
 **Type:** Enterprise hardening — PKCS#11/KMS stubs · OIDC JWT HITL · dependency validation · async concurrency · pgbouncer · v1.4 challenge
