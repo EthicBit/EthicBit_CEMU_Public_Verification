@@ -1,0 +1,19 @@
+{
+  "policy_id": "HITL_IDENTITY_POLICY_V1_4",
+  "version": "1.4.0",
+  "description": "HITL HMAC-SHA256 token identity verification policy.",
+  "token_format": "HMAC-SHA256(shared_secret, approver_id + ':' + event_id + ':' + timestamp_floor_minutes)",
+  "token_ttl_minutes": 10,
+  "shared_secret_env_var": "ETHICBIT_HITL_SHARED_SECRET",
+  "approver_registry": [
+    {"approver_id": "approver-001", "role": "APPROVER", "active": true},
+    {"approver_id": "approver-002", "role": "APPROVER", "active": true},
+    {"approver_id": "approver-003", "role": "APPROVER", "active": true}
+  ],
+  "non_claims": [
+    "HITL identity is not enterprise IAM.",
+    "Shared secret is demo-grade.",
+    "HSM-backed identity requires external IdP integration.",
+    "This policy does not replace PKI or certificate-based authentication."
+  ]
+}
