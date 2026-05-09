@@ -1,0 +1,65 @@
+{
+  "component": "hsm_signing_providers",
+  "version": "v1.5",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "Pkcs11SigningProvider is not production-tested against real hardware.",
+    "KmsSigningProvider is not production-tested against a live AWS KMS key.",
+    "SoftHSM is a software HSM suitable for testing only.",
+    "Production use requires a FIPS 140-2/3 certified HSM or valid AWS credentials."
+  ],
+  "checks": [
+    {
+      "check": "C-01-pkcs11-class-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-02-pkcs11-inherits-abc",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-03-pkcs11-import-error",
+      "status": "PASS",
+      "detail": "pkcs11 library is required for Pkcs11SigningProvider. Instal"
+    },
+    {
+      "check": "C-04-pkcs11-error-guidance",
+      "status": "PASS",
+      "detail": "pkcs11 library is required for Pkcs11SigningProvider. Install with: pip install "
+    },
+    {
+      "check": "C-05-kms-class-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-06-kms-inherits-abc",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-07-kms-import-error",
+      "status": "PASS",
+      "detail": "boto3 is required for KmsSigningProvider. Install with: pip "
+    },
+    {
+      "check": "C-08-kms-error-guidance",
+      "status": "PASS",
+      "detail": "boto3 is required for KmsSigningProvider. Install with: pip install boto3  Then "
+    },
+    {
+      "check": "C-09-software-fallback-drop-in",
+      "status": "PASS",
+      "detail": "isinstance(SigningProvider)=True"
+    },
+    {
+      "check": "C-10-algorithm-non-empty",
+      "status": "PASS",
+      "detail": "algorithm='Ed25519'"
+    }
+  ]
+}
