@@ -5,7 +5,26 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.4.0 — Production Hardening
+## Latest release: AEM-EVOLVE™ v1.5.0 — Enterprise Hardening
+
+**Tag:** `v1.5.0` — 2026-05-09
+**Type:** Enterprise hardening — PKCS#11/KMS stubs · OIDC JWT HITL · dependency validation · async concurrency · pgbouncer · v1.4 challenge
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (16/16)`
+
+> AEM-EVOLVE™ v1.5 closes all enterprise hardening gaps from the v1.4.0 audit.
+
+- [Public Status Bulletin v1.5.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_5.md)
+- [Whitepaper v1.5](docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md)
+- [GitHub Release v1.5.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.5.0)
+
+```bash
+python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_5.py
+# FULL_STACK_VERIFICATION=PASS  (16/16)
+```
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.4.0 — Production Hardening
 
 **Tag:** `v1.4.0` — 2026-05-09
 **Type:** Production hardening — signing abstraction · HMAC-token HITL identity · ML-KEM768 real library · async PostgreSQL · CI reproduction

@@ -383,3 +383,46 @@ CI reproduction is not external independent reproduction.
 This release is not regulatory approval.
 This release is not external certification.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.5.0 release update (2026-05-09)
+
+**Release tag:** `v1.5.0`
+**Commit SHA (main):** `8297a0c1`
+**PRs merged:** #126 · #127 · #128 · #129 · #130 · #131 · #132
+
+AEM-EVOLVE™ v1.5.0 was released from `main` after merging 7 ordered PRs. Full-stack verification passed on updated `main`:
+
+```
+FULL_STACK_VERIFICATION=PASS  (16/16)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4  ·  v1.4: 2/2  ·  v1.5: 2/2
+```
+
+### Gaps closed in v1.5.0
+
+| PR | Gap | Verification output |
+|---|---|---|
+| #126 | v1.5 roadmap | — |
+| #127 | PKCS#11 + KMS signing provider stubs | `HSM_SIGNING_VERIFICATION=PASS (10/10)` |
+| #128 | OIDC RS256 JWT HITL identity verifier | `OIDC_HITL_VERIFICATION=PASS (10/10)` |
+| #129 | Runtime dependency validator + server smoke test | `DEPENDENCY_VALIDATION=PASS (10/10)` |
+| #130 | AsyncPostgresAdapter N=20 concurrency test + pgbouncer guide | `ASYNC_POSTGRES_CONCURRENCY=PASS (6/6)` |
+| #131 | v1.4 reproduction challenge + 16-check verifier | `FULL_STACK_VERIFICATION=PASS (16/16)` |
+| #132 | Whitepaper v1.5 | — |
+
+### v1.5.0 claim
+
+> AEM-EVOLVE™ v1.5 closes all enterprise hardening gaps from the v1.4.0 audit: PKCS#11/KMS signing stubs, OIDC JWT HITL identity, dependency validation, async concurrency testing, pgbouncer documentation. Full-stack verification: 16/16 checks pass.
+
+### v1.5.0 non-claims
+
+```
+PKCS#11 provider is not a real HSM integration.
+KMS provider is not a real AWS KMS integration.
+OIDC verifier uses locally generated JWKS — not a real IdP.
+AsyncPostgresAdapter concurrency test uses mocks, not a live database.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+```

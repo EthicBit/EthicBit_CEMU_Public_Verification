@@ -7,6 +7,41 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.5.0] — 2026-05-09
+
+### Added
+- `RELEASE_NOTES_V1_5.md`
+- `docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md` (PR #126)
+- `tools/signing/pkcs11_signing_provider.py` — PKCS#11 signing stub (PR #127)
+- `tools/signing/kms_signing_provider.py` — AWS KMS signing stub (PR #127)
+- `tools/signing/verify_hsm_signing_providers.py` — 10-check HSM verifier (PR #127)
+- `tools/hitl/HITL_OIDC_POLICY.json` — OIDC provider config (PR #128)
+- `tools/hitl/oidc_token_generator.py` — ephemeral RSA-2048 JWT generator (PR #128)
+- `tools/hitl/oidc_hitl_identity_verifier.py` — 10-check RS256 JWT verifier (PR #128)
+- `tools/runtime/dependency_validator.py` — REQUIRED/OPTIONAL tiering (PR #129)
+- `tools/runtime/server_smoke_test.py` — in-process FastAPI health check (PR #129)
+- `tools/db/async_postgres_concurrency_test.py` — N=20 concurrent mock test (PR #130)
+- `docs/PGBOUNCER_INTEGRATION_GUIDE.md` — transaction-pooling config (PR #130)
+- `challenge/independent-reproduction/AEM_V1_4_INDEPENDENT_REPRODUCTION_CHALLENGE.md` (PR #131)
+- `tools/reproduction/verify_all_v1_5.py` — 16-check full-stack verifier (PR #131)
+- `docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md` (PR #132)
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_5.md`
+- Git tag `v1.5.0` + GitHub Release
+
+### Changed
+- `README.md` — promoted v1.5.0 as latest release
+- `FINAL_AUDIT_CONCLUSION.md` — updated with v1.5.0 release record
+
+### No breaking changes
+
+### Verification
+```
+FULL_STACK_VERIFICATION=PASS  (16/16)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4  ·  v1.4: 2/2  ·  v1.5: 2/2
+```
+
+---
+
 ## [1.4.0] — 2026-05-09
 
 ### Added
