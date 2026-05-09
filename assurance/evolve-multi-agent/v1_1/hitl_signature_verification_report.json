@@ -1,0 +1,20 @@
+{
+  "schema_id": "AEM_EVOLVE_HITL_SIGNATURE_VERIFICATION_REPORT_V1_1",
+  "generated_at": "2026-05-09T03:13:10.939883+00:00",
+  "status": "PASS_DEMO",
+  "hitl_decisions_checked": 1,
+  "approver_role_verified": true,
+  "decision_hash_verified": true,
+  "production_identity_claimed": false,
+  "hsm_backed_claimed": false,
+  "enterprise_iam_claimed": false,
+  "errors": [],
+  "non_claims": [
+    "This verification is demo-grade.",
+    "Not HSM-backed.",
+    "Not enterprise IAM.",
+    "Not production identity provider.",
+    "Not cybersecurity certified.",
+    "Not tamper-proof."
+  ]
+}
