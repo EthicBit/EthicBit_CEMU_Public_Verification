@@ -431,7 +431,7 @@ This release is not external certification.
 
 ## AEM-EVOLVE™ v1.6.0 — Critical Gaps Closure (2026-05-09)
 
-**Commit SHA (main):** TBD — to be updated after tag push
+**Commit SHA (main):** `d2083e17`
 **Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (18/18)`
 **Official status:** `READY`
 
