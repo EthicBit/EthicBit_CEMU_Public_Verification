@@ -1,0 +1,44 @@
+{
+  "component": "async_postgres_concurrency",
+  "version": "v1.5",
+  "concurrency": 20,
+  "checks_passed": 6,
+  "checks_total": 6,
+  "result": "PASS",
+  "non_claims": [
+    "This test uses a mock pool \u2014 not a live PostgreSQL instance.",
+    "Performance gate is for mock latency only \u2014 real latency depends on network + DB."
+  ],
+  "checks": [
+    {
+      "check": "C-01-concurrent-execute-no-error",
+      "status": "PASS",
+      "detail": "N=20"
+    },
+    {
+      "check": "C-02-execute-all-results-non-null",
+      "status": "PASS",
+      "detail": "results=20"
+    },
+    {
+      "check": "C-03-concurrent-fetch-no-error",
+      "status": "PASS",
+      "detail": "N=20"
+    },
+    {
+      "check": "C-04-concurrent-ping-all-true",
+      "status": "PASS",
+      "detail": "true=20/20"
+    },
+    {
+      "check": "C-05-sequential-concurrent-determinism",
+      "status": "PASS",
+      "detail": "match=True"
+    },
+    {
+      "check": "C-06-performance-gate",
+      "status": "PASS",
+      "detail": "elapsed=0.0001s  (< 5.0s)"
+    }
+  ]
+}
