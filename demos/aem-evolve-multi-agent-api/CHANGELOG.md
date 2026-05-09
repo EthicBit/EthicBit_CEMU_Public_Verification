@@ -7,6 +7,42 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.1.0] — 2026-05-09
+
+### Added
+- `RELEASE_NOTES_V1_1.md` — v1.1 release notes
+- `docs/history/ETHICBIT_CEERV_CEMU_V10_1_MASTER_REPO_TREE.md` — historical v10.1 baseline (PR #99)
+- `docs/architecture/AEM_AEM_EVOLVE_ALIGNMENT_WITH_ETHICBIT_CEERV_CEMU_V10_1.md` — alignment mapping (PR #100)
+- `tools/regulatory/regulatory_mapping_checker.py` + 3 framework JSONs + check report (PR #101)
+- `tools/metrics/governance_effectiveness_metrics.py` + report (PR #102)
+- `tools/anchors/multi_anchor_verifier.py` + report (PR #103)
+- `tools/hitl/HITL_signature_verifier.py` + report (PR #104)
+- `adversarial_tests/test_receipt_forgery.py` + report — 8-scenario forgery battery (PR #104)
+- `tools/status/official_status_signer.py` + `OFFICIAL_STATUS_SIGNED.json` + `V1_1_HASH_RECORD.txt` (PR #105)
+- `docs/LINGO_AND_CLAIM_DICTIONARY.md` — canonical claim-language controls (PR #105)
+- `docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md` (PR #106)
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md`
+- Git tag `v1.1.0` + GitHub Release
+
+### Changed
+- `README.md` — added latest release section for v1.1.0
+- `FINAL_AUDIT_CONCLUSION.md` — updated with v1.1.0 release record
+
+### No breaking changes
+API surface, RBAC, receipt schema, audit chain, and storage layer are unchanged.
+
+### Verification
+```
+REGULATORY_MAPPING_CHECK=PASS
+GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS
+MULTI_ANCHOR_VERIFICATION=PASS
+HITL_SIGNATURE_VERIFICATION=PASS_DEMO
+RECEIPT_FORGERY_TESTS=PASS
+OFFICIAL_STATUS_SIGNED=PASS
+```
+
+---
+
 ## [1.0.0] — 2026-05-08
 
 ### Added
