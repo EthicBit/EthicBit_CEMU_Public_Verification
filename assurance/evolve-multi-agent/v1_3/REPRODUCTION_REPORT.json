@@ -1,0 +1,93 @@
+{
+  "schema_id": "AEM_EVOLVE_REPRODUCTION_REPORT_V1_3",
+  "generated_at": "2026-05-09T12:44:42.264547+00:00",
+  "stack_versions": [
+    "v1.1",
+    "v1.2",
+    "v1.3"
+  ],
+  "verification_result": "PASS",
+  "checks_passed": 12,
+  "checks_failed": 0,
+  "total_checks": 12,
+  "results": [
+    {
+      "check_id": "V1_1-REGULATORY-MAPPING",
+      "status": "PASS",
+      "detail": "expected 'REGULATORY_MAPPING_CHECK=PASS' in output \u2014 found",
+      "stdout": "REGULATORY_MAPPING_CHECK=PASS"
+    },
+    {
+      "check_id": "V1_1-GOVERNANCE-METRICS",
+      "status": "PASS",
+      "detail": "expected 'GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS' in output \u2014 found",
+      "stdout": "GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS"
+    },
+    {
+      "check_id": "V1_1-MULTI-ANCHOR",
+      "status": "PASS",
+      "detail": "expected 'MULTI_ANCHOR_VERIFICATION=PASS' in output \u2014 found",
+      "stdout": "MULTI_ANCHOR_VERIFICATION=PASS"
+    },
+    {
+      "check_id": "V1_1-HITL-SIGNATURE",
+      "status": "PASS",
+      "detail": "expected 'HITL_SIGNATURE_VERIFICATION=PASS_DEMO' in output \u2014 found",
+      "stdout": "HITL_SIGNATURE_VERIFICATION=PASS_DEMO"
+    },
+    {
+      "check_id": "V1_1-RECEIPT-FORGERY",
+      "status": "PASS",
+      "detail": "expected 'RECEIPT_FORGERY_TESTS=PASS' in output \u2014 found",
+      "stdout": "RECEIPT_FORGERY_TESTS=PASS"
+    },
+    {
+      "check_id": "V1_1-OFFICIAL-STATUS",
+      "status": "PASS",
+      "detail": "expected 'OFFICIAL_STATUS_SIGNED=PASS' in output \u2014 found",
+      "stdout": "OFFICIAL_STATUS_SIGNED=PASS"
+    },
+    {
+      "check_id": "V1_2-MECH-REASON-ENGINE",
+      "status": "PASS",
+      "detail": "expected 'MECH_REASON_STATUS=PASS' in output \u2014 found",
+      "stdout": "[MECH-REASON\u2122] Running sub-components...\nMECH_REASON_STATUS=PASS\n  recommended_outcome: PASS\n  hitl_required:       True\n  triggered_rules:     []"
+    },
+    {
+      "check_id": "V1_2-MECH-REASON-VERIFY",
+      "status": "PASS",
+      "detail": "expected 'MECH_REASON_VERIFICATION=PASS' in output \u2014 found",
+      "stdout": "RIGGERED-RULES] 0 rule(s), all strings\n  \u2713 [C-07-OUTCOME] recommended_outcome=PASS\n  \u2713 [C-08-EXPLANATION] explanation present, non-LLM marker confirmed\n  \u2713 [C-09-NON-CLAIMS] all 9 non-claims present\n  \u2713 [C-10-DETERMINISM] two runs agree: outcome=PASS, triggered_rules=[]\nMECH_REASON_VERIFICATION=PASS"
+    },
+    {
+      "check_id": "V1_3-LLM-ADVISORY",
+      "status": "PASS",
+      "detail": "expected 'LLM_ADVISORY_STATUS=PASS' in output \u2014 found",
+      "stdout": "ed report_hash: dfef2309f193ee9a\u2026\n  recommended_outcome (sealed, read-only): PASS\n[LLM ADVISORY ADAPTER] Generating advisory narrative (does not modify governance)...\n  advisory_only: true\n  governance_binding: false\n  simulation_mode: True\n  advisory_hash: b48e9032a5ec59f3\u2026\nLLM_ADVISORY_STATUS=PASS"
+    },
+    {
+      "check_id": "V1_3-MLKEM768",
+      "status": "PASS",
+      "detail": "expected 'MLKEM768_STATUS=PASS' in output \u2014 found",
+      "stdout": "-KEYGEN-SIZES] pk=1184B sk=2400B\n  \u2713 [C-02-ENC-SIZES] ct=1088B ss=32B\n  \u2713 [C-03-ROUND-TRIP] decapsulate(sk, ct) == enc.shared_secret\n  \u2713 [C-04-RANDOMNESS] two encapsulations produce different ciphertexts\n  \u2713 [C-05-ISOLATION] different key pairs produce independent shared secrets\nMLKEM768_STATUS=PASS"
+    },
+    {
+      "check_id": "V1_3-HITL-QUORUM",
+      "status": "PASS",
+      "detail": "expected 'HITL_QUORUM_VERIFICATION=PASS' in output \u2014 found",
+      "stdout": "hread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] canonical SHA-256 verified (or not recorded \u2014 demo-grade)\n  \u2713 [C-E-QUORUM[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] 1-of-1 unique approvers (required 1-of-1) \u2014 quorum met\nHITL_QUORUM_VERIFICATION=PASS"
+    },
+    {
+      "check_id": "V1_3-POSTGRES-ADAPTER",
+      "status": "PASS",
+      "detail": "expected 'POSTGRES_ADAPTER_VALIDATION=PASS' in output \u2014 found",
+      "stdout": "W-METHODS] v1.3 methods present: ['ping', 'close_pool']\n  \u2713 [C-04-CONNECTION-POOL] ThreadedConnectionPool used in __init__\n  \u2713 [C-05-SQLITE-REGRESSION] SQLiteAdapter still satisfies DBAdapter contract\n  \u2713 [C-06-PING-SIGNATURE] ping() present (return annotation: bool)\nPOSTGRES_ADAPTER_VALIDATION=PASS"
+    }
+  ],
+  "non_claims": [
+    "This reproduction report is not a regulatory audit.",
+    "This reproduction report is not external certification.",
+    "This reproduction report does not replace HITL human review.",
+    "Passing all checks does not constitute production readiness."
+  ]
+}
