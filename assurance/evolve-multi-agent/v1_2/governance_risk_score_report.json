@@ -1,0 +1,18 @@
+{
+  "schema_id": "AEM_EVOLVE_GOVERNANCE_RISK_SCORE_REPORT_V1_2",
+  "generated_at": "2026-05-09T12:13:19.463565+00:00",
+  "status": "PASS",
+  "governance_risk_score": 0.0,
+  "claim_boundary_risk_score": 0.0,
+  "hitl_necessity_score": 1.0,
+  "anchor_integrity_score": 1.0,
+  "receipt_integrity_score": 1.0,
+  "regulatory_mapping_presence_score": 1.0,
+  "evidence_completeness_score_input": 1.0,
+  "llm_involved": false,
+  "non_claims": [
+    "This score is not regulatory proof.",
+    "This score is not production SLA.",
+    "LLM output did not contribute to this score."
+  ]
+}
