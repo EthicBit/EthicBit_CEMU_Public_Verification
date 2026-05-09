@@ -1,0 +1,59 @@
+{
+  "component": "mlkem768_library",
+  "version": "v1.4",
+  "mode": "mlkem",
+  "checks_passed": 9,
+  "checks_total": 9,
+  "result": "PASS",
+  "non_claims": [
+    "ML-KEM768 is not independently audited.",
+    "This wrapper is not a certified cryptographic implementation."
+  ],
+  "checks": [
+    {
+      "check": "C-01-mlkem-importable",
+      "status": "PASS",
+      "detail": "version=unknown"
+    },
+    {
+      "check": "C-02-ML_KEM-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-03-ML_KEM_768-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-04-instantiation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-05-key-gen-sizes",
+      "status": "PASS",
+      "detail": "ek=1184  dk=2400"
+    },
+    {
+      "check": "C-06-encaps-returns-ss-ct",
+      "status": "PASS",
+      "detail": "ss=32  ct=1088"
+    },
+    {
+      "check": "C-07-decaps-runs",
+      "status": "PASS",
+      "detail": "ss2_len=32"
+    },
+    {
+      "check": "C-08-round-trip",
+      "status": "PASS",
+      "detail": "match=True"
+    },
+    {
+      "check": "C-09-mode-is-mlkem",
+      "status": "PASS",
+      "detail": "mode=mlkem"
+    }
+  ]
+}
