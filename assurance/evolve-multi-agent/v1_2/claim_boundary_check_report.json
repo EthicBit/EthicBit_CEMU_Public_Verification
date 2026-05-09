@@ -1,0 +1,119 @@
+{
+  "schema_id": "AEM_EVOLVE_CLAIM_BOUNDARY_CHECK_REPORT_V1_2",
+  "generated_at": "2026-05-09T12:11:35.548456+00:00",
+  "policy_version": "1.2.0",
+  "overall_status": "PASS",
+  "triggered_rules": [],
+  "rules_evaluated": 10,
+  "rule_results": [
+    {
+      "rule_id": "R-CLAIM-001",
+      "field": "regulatory_approval_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Regulatory approval cannot be claimed without a named regulator decision."
+    },
+    {
+      "rule_id": "R-CLAIM-002",
+      "field": "legal_compliance_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Legal compliance cannot be claimed without admitted counsel opinion."
+    },
+    {
+      "rule_id": "R-CLAIM-003",
+      "field": "external_certification_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "External certification cannot be claimed without named certification body certificate."
+    },
+    {
+      "rule_id": "R-CLAIM-004",
+      "field": "production_readiness_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Production readiness cannot be claimed without declared production evidence."
+    },
+    {
+      "rule_id": "R-CLAIM-005",
+      "field": "cybersecurity_certification_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Cybersecurity certification cannot be claimed without named certification body."
+    },
+    {
+      "rule_id": "R-CLAIM-006",
+      "field": "financial_advice_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Financial advice cannot be claimed by this system."
+    },
+    {
+      "rule_id": "R-CLAIM-007",
+      "field": "clinical_or_diagnostic_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Clinical or diagnostic use cannot be claimed without medical device regulatory clearance."
+    },
+    {
+      "rule_id": "R-CLAIM-008",
+      "field": "tamper_proof_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Tamper-proof cannot be claimed without independent security audit."
+    },
+    {
+      "rule_id": "R-CLAIM-009",
+      "field": "hsm_backed_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "HSM-backed cannot be claimed without HSM vendor attestation."
+    },
+    {
+      "rule_id": "R-CLAIM-010",
+      "field": "independent_reproduction_claimed",
+      "expected_trigger_value": true,
+      "actual_value": false,
+      "triggered": false,
+      "outcome_if_triggered": "FAIL_CLOSED",
+      "severity": "CRITICAL",
+      "explanation": "Independent reproduction cannot be claimed without external reproduction report."
+    }
+  ],
+  "claim_boundary_risk_score": 0.0,
+  "llm_involved": false,
+  "non_claims": [
+    "This check is not regulatory approval.",
+    "This check is not legal compliance.",
+    "This check is not external certification.",
+    "LLM output is not a policy rule.",
+    "LLM output does not override this check."
+  ]
+}
