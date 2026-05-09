@@ -1,0 +1,65 @@
+{
+  "component": "oidc_hitl_identity_verifier",
+  "version": "v1.5",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "token_type": "OIDC RS256 JWT",
+  "non_claims": [
+    "This verifier does not connect to a real OIDC provider.",
+    "CI JWKS is locally generated for testing only.",
+    "Production requires an external OIDC provider (Okta, Auth0, Keycloak, Azure AD)."
+  ],
+  "checks": [
+    {
+      "check": "C-01-policy-loads",
+      "status": "PASS",
+      "detail": "missing=none"
+    },
+    {
+      "check": "C-02-token-is-jwt",
+      "status": "PASS",
+      "detail": "parts=3"
+    },
+    {
+      "check": "C-03-valid-token-verifies",
+      "status": "PASS",
+      "detail": "verified"
+    },
+    {
+      "check": "C-04-expired-token-rejected",
+      "status": "PASS",
+      "detail": "token expired (exp=1778332765 now=1778333466)"
+    },
+    {
+      "check": "C-05-wrong-issuer-rejected",
+      "status": "PASS",
+      "detail": "wrong issuer: 'https://attacker.example.com'"
+    },
+    {
+      "check": "C-06-wrong-audience-rejected",
+      "status": "PASS",
+      "detail": "wrong audience: 'wrong-audience'"
+    },
+    {
+      "check": "C-07-tampered-payload-rejected",
+      "status": "PASS",
+      "detail": "JWT parse error: Invalid control character at: line 1 column 146 (char 145)"
+    },
+    {
+      "check": "C-08-unregistered-approver-rejected",
+      "status": "PASS",
+      "detail": "sub 'attacker-999' not in approver registry"
+    },
+    {
+      "check": "C-09-event-id-claim-present",
+      "status": "PASS",
+      "detail": "event_id='evt-test-v1.5'"
+    },
+    {
+      "check": "C-10-non-claims-present",
+      "status": "PASS",
+      "detail": "count=4"
+    }
+  ]
+}

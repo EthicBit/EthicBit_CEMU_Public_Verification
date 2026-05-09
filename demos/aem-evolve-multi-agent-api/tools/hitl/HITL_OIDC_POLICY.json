@@ -1,0 +1,23 @@
+{
+  "policy_id": "HITL_OIDC_POLICY_V1_5",
+  "version": "1.5.0",
+  "description": "HITL OIDC JWT identity verification policy (RS256).",
+  "token_type": "OIDC ID Token (RS256 JWT)",
+  "required_claims": ["iss", "aud", "sub", "iat", "exp", "event_id"],
+  "issuer": "https://hitl.ethicbit.internal",
+  "audience": "aem-evolve-hitl",
+  "token_ttl_seconds": 600,
+  "approver_registry": [
+    {"sub": "approver-001", "role": "APPROVER", "active": true},
+    {"sub": "approver-002", "role": "APPROVER", "active": true},
+    {"sub": "approver-003", "role": "APPROVER", "active": true}
+  ],
+  "jwks_uri": "https://hitl.ethicbit.internal/.well-known/jwks.json",
+  "jwks_note": "In CI, JWKS is sourced inline from oidc_token_generator.py (no network required).",
+  "non_claims": [
+    "This policy does not connect to a real OIDC provider.",
+    "CI JWKS is locally generated for testing only.",
+    "Production requires an external OIDC provider (Okta, Auth0, Keycloak, Azure AD).",
+    "This verifier does not implement OIDC Discovery or JWKS rotation."
+  ]
+}
