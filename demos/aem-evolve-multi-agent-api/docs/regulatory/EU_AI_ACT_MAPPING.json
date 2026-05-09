@@ -1,0 +1,68 @@
+{
+  "schema_id": "AEM_EVOLVE_REGULATORY_MAPPING_V1_1",
+  "framework": "EU_AI_ACT",
+  "framework_version": "2024/1689",
+  "mapping_date": "2026-05-08",
+  "mapping_type": "technical_mapping_non_approval",
+  "approval_claimed": false,
+  "certification_claimed": false,
+  "legal_compliance_claimed": false,
+  "conformity_assessment_claimed": false,
+  "scope": "controlled_environment_release",
+  "jurisdictions": ["EU"],
+  "mapped_capabilities": [
+    {
+      "capability": "Human oversight mechanism",
+      "eu_ai_act_reference": "Article 14 — Human oversight",
+      "aem_evolve_implementation": "HITL gate in governance pipeline; human decision required before high-materiality executions",
+      "evidence_artifact": "assurance/evolve-multi-agent/execution/HUMAN_DECISIONS.json"
+    },
+    {
+      "capability": "Record-keeping and logging",
+      "eu_ai_act_reference": "Article 12 — Record-keeping",
+      "aem_evolve_implementation": "Sealed evolution receipts; execution manifest; audit export; EVOLUTION_EVENTS.json",
+      "evidence_artifact": "assurance/evolve-multi-agent/execution/AUDIT_EXPORT.json"
+    },
+    {
+      "capability": "Transparency to users",
+      "eu_ai_act_reference": "Article 13 — Transparency and provision of information",
+      "aem_evolve_implementation": "Claims and non-claims document; public scope boundary declaration; CLAIMS_AND_NON_CLAIMS.md",
+      "evidence_artifact": "demos/aem-evolve-multi-agent-api/docs/CLAIMS_AND_NON_CLAIMS.md"
+    },
+    {
+      "capability": "Risk management system",
+      "eu_ai_act_reference": "Article 9 — Risk management system",
+      "aem_evolve_implementation": "Materiality assessment gate; fail-closed policy; adversarial test battery; threat model",
+      "evidence_artifact": "demos/aem-evolve-multi-agent-api/docs/THREAT_MODEL.md"
+    },
+    {
+      "capability": "Technical documentation",
+      "eu_ai_act_reference": "Article 11 — Technical documentation",
+      "aem_evolve_implementation": "Architecture docs; AEM alignment mapping; whitepaper v1.1; API reference",
+      "evidence_artifact": "docs/architecture/AEM_AEM_EVOLVE_ALIGNMENT_WITH_ETHICBIT_CEERV_CEMU_V10_1.md"
+    }
+  ],
+  "unmapped_requirements": [
+    {
+      "requirement": "Conformity assessment (Article 43)",
+      "reason": "Not applicable — no conformity assessment conducted; explicitly declared as non-claim"
+    },
+    {
+      "requirement": "CE marking",
+      "reason": "Not applicable — no certification process initiated"
+    },
+    {
+      "requirement": "Notified body assessment",
+      "reason": "Not applicable — controlled-environment scope only"
+    }
+  ],
+  "non_claims": [
+    "This mapping is not regulatory approval.",
+    "This mapping is not legal compliance.",
+    "This mapping is not conformity assessment.",
+    "This mapping is not external certification.",
+    "AEM-EVOLVE™ v1.1 is not EU AI Act certified.",
+    "AEM-EVOLVE™ v1.1 has not undergone a conformity assessment under Regulation (EU) 2024/1689.",
+    "This document does not constitute legal advice."
+  ]
+}

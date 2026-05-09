@@ -1,0 +1,58 @@
+{
+  "schema_id": "AEM_EVOLVE_REGULATORY_MAPPING_V1_1",
+  "framework": "NIST_AI_RMF",
+  "framework_version": "1.0",
+  "mapping_date": "2026-05-08",
+  "mapping_type": "technical_mapping_non_approval",
+  "approval_claimed": false,
+  "certification_claimed": false,
+  "legal_compliance_claimed": false,
+  "conformity_assessment_claimed": false,
+  "scope": "controlled_environment_release",
+  "jurisdictions": ["US"],
+  "mapped_capabilities": [
+    {
+      "capability": "GOVERN — Policies and accountability",
+      "nist_ai_rmf_reference": "GOVERN 1 — Policies, processes, procedures established",
+      "aem_evolve_implementation": "EthicBit doctrine layer; Release Grade Discipline Policy; claim boundary policy v1.1",
+      "evidence_artifact": "docs/policies/RELEASE_GRADE_DISCIPLINE_POLICY.md"
+    },
+    {
+      "capability": "MAP — Risk identification",
+      "nist_ai_rmf_reference": "MAP 1 — Context established; MAP 2 — Risk or harm identified",
+      "aem_evolve_implementation": "Scope boundary declaration; materiality assessment gate; threat model",
+      "evidence_artifact": "demos/aem-evolve-multi-agent-api/docs/SCOPE_BOUNDARY.md"
+    },
+    {
+      "capability": "MEASURE — Metrics and monitoring",
+      "nist_ai_rmf_reference": "MEASURE 2 — AI risk measurement",
+      "aem_evolve_implementation": "Governance-effectiveness metrics; execution metrics; pass/fail/scope-limited counters",
+      "evidence_artifact": "assurance/evolve-multi-agent/v1_1/governance_effectiveness_report.json"
+    },
+    {
+      "capability": "MANAGE — Risk response",
+      "nist_ai_rmf_reference": "MANAGE 1 — Risk response plans activated",
+      "aem_evolve_implementation": "Fail-closed policy; HITL escalation; scope-limited outcome enforcement",
+      "evidence_artifact": "assurance/evolve-multi-agent/execution/EVOLUTION_RECEIPTS.json"
+    }
+  ],
+  "unmapped_requirements": [
+    {
+      "requirement": "NIST AI RMF Profile — sector-specific",
+      "reason": "No sector-specific profile applied; mapping is framework-level only"
+    },
+    {
+      "requirement": "External AI RMF audit",
+      "reason": "Not applicable — controlled-environment scope only"
+    }
+  ],
+  "non_claims": [
+    "This mapping is not regulatory approval.",
+    "This mapping is not legal compliance.",
+    "This mapping is not conformity assessment.",
+    "This mapping is not external certification.",
+    "AEM-EVOLVE™ v1.1 is not NIST AI RMF certified or validated.",
+    "This mapping does not constitute a NIST-approved AI risk management profile.",
+    "This document does not constitute legal advice."
+  ]
+}
