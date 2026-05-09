@@ -1,0 +1,40 @@
+{
+  "schema_id": "AEM_EVOLVE_REGULATORY_MAPPING_CHECK_REPORT_V1_1",
+  "generated_at": "2026-05-09T03:13:10.585376+00:00",
+  "status": "PASS",
+  "frameworks_checked": [
+    "EU_AI_ACT",
+    "NIST_AI_RMF",
+    "ISO_42001"
+  ],
+  "regulatory_mapping_check": "PASS",
+  "approval_claimed": false,
+  "certification_claimed": false,
+  "legal_compliance_claimed": false,
+  "conformity_assessment_claimed": false,
+  "non_approval_boundary_confirmed": true,
+  "framework_results": {
+    "EU_AI_ACT": {
+      "framework": "EU_AI_ACT",
+      "status": "PASS",
+      "issues": []
+    },
+    "NIST_AI_RMF": {
+      "framework": "NIST_AI_RMF",
+      "status": "PASS",
+      "issues": []
+    },
+    "ISO_42001": {
+      "framework": "ISO_42001",
+      "status": "PASS",
+      "issues": []
+    }
+  },
+  "errors": [],
+  "non_claims": [
+    "This report is not regulatory approval.",
+    "This report is not legal compliance.",
+    "This report is not conformity assessment.",
+    "This report is not external certification."
+  ]
+}

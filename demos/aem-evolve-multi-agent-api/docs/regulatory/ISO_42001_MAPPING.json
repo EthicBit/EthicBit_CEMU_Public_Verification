@@ -1,0 +1,70 @@
+{
+  "schema_id": "AEM_EVOLVE_REGULATORY_MAPPING_V1_1",
+  "framework": "ISO_42001",
+  "framework_version": "ISO/IEC 42001:2023",
+  "mapping_date": "2026-05-08",
+  "mapping_type": "technical_mapping_non_approval",
+  "approval_claimed": false,
+  "certification_claimed": false,
+  "legal_compliance_claimed": false,
+  "conformity_assessment_claimed": false,
+  "scope": "controlled_environment_release",
+  "jurisdictions": ["US", "EU", "UK", "CO"],
+  "mapped_capabilities": [
+    {
+      "capability": "AI management system — Scope definition",
+      "iso_42001_reference": "Clause 4.3 — Determining the scope of the AIMS",
+      "aem_evolve_implementation": "Declared scope boundary; jurisdiction declarations; deployment target declarations",
+      "evidence_artifact": "demos/aem-evolve-multi-agent-api/docs/SCOPE_BOUNDARY.md"
+    },
+    {
+      "capability": "Leadership and commitment",
+      "iso_42001_reference": "Clause 5 — Leadership",
+      "aem_evolve_implementation": "EthicBit doctrine layer; claim boundary policy; lingo dictionary enforcement",
+      "evidence_artifact": "docs/LINGO_AND_CLAIM_DICTIONARY.md"
+    },
+    {
+      "capability": "Risk and impact assessment",
+      "iso_42001_reference": "Clause 6.1 — Actions to address risks and opportunities",
+      "aem_evolve_implementation": "Materiality assessment gate; adversarial test battery; fail-closed policy",
+      "evidence_artifact": "demos/aem-evolve-multi-agent-api/docs/THREAT_MODEL.md"
+    },
+    {
+      "capability": "Documented information",
+      "iso_42001_reference": "Clause 7.5 — Documented information",
+      "aem_evolve_implementation": "Evolution receipts; execution manifest; HITL decisions; audit export; anchor receipts",
+      "evidence_artifact": "assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json"
+    },
+    {
+      "capability": "Operational planning and control",
+      "iso_42001_reference": "Clause 8.1 — Operational planning and control",
+      "aem_evolve_implementation": "Governance pipeline; event → gate → receipt → HITL → audit flow",
+      "evidence_artifact": "demos/aem-evolve-multi-agent-api/docs/ARCHITECTURE.md"
+    },
+    {
+      "capability": "Monitoring and evaluation",
+      "iso_42001_reference": "Clause 9.1 — Monitoring, measurement, analysis and evaluation",
+      "aem_evolve_implementation": "Governance-effectiveness metrics; execution metrics; multi-anchor verification",
+      "evidence_artifact": "assurance/evolve-multi-agent/v1_1/governance_effectiveness_report.json"
+    }
+  ],
+  "unmapped_requirements": [
+    {
+      "requirement": "ISO/IEC 42001 certification (third-party audit)",
+      "reason": "Not applicable — controlled-environment scope only; no certification body engaged"
+    },
+    {
+      "requirement": "Statement of Applicability",
+      "reason": "Not completed — mapping is technical evidence only, not a formal SoA"
+    }
+  ],
+  "non_claims": [
+    "This mapping is not regulatory approval.",
+    "This mapping is not legal compliance.",
+    "This mapping is not conformity assessment.",
+    "This mapping is not external certification.",
+    "AEM-EVOLVE™ v1.1 is not ISO/IEC 42001 certified.",
+    "This mapping has not been reviewed or validated by an ISO accredited certification body.",
+    "This document does not constitute legal advice."
+  ]
+}
