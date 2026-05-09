@@ -1,0 +1,63 @@
+{
+  "component": "async_postgres_adapter",
+  "version": "v1.4",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "AsyncPostgresAdapter is not production-tested at scale.",
+    "Does not replace PostgresAdapter for synchronous workloads."
+  ],
+  "checks": [
+    {
+      "check": "C-01-class-defined",
+      "status": "PASS",
+      "detail": "AsyncPostgresAdapter from db_adapter"
+    },
+    {
+      "check": "C-02-create-async-classmethod",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-03-execute-async",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-04-fetch-async",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-05-fetchrow-async",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-06-fetchval-async",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-07-ping-async",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-08-close-async",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-09-asyncpg-importable",
+      "status": "PASS",
+      "detail": "version=0.31.0"
+    },
+    {
+      "check": "C-10-missing-asyncpg-helpful-error",
+      "status": "PASS",
+      "detail": "asyncpg is required for AsyncPostgresAdapter. Install with: pip install asyncpg"
+    }
+  ]
+}
