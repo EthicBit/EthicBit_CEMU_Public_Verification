@@ -1,0 +1,26 @@
+{
+  "schema_id": "AEM_EVOLVE_MULTI_ANCHOR_VERIFICATION_REPORT_V1_1",
+  "generated_at": "2026-05-09T03:13:10.841438+00:00",
+  "status": "PASS",
+  "ethereum_mainnet_anchor": "PASS",
+  "ethereum_anchor_details": {
+    "network": "ethereum-mainnet",
+    "tx_hash": "0x30fc9e6c810078c42ac1b840c3712d165342436ec427471b7f955425ea4b8275",
+    "status_field": "ONCHAIN_AEM_EVOLVE_MULTI_AGENT_API_DEMO_ANCHOR_VERIFIED"
+  },
+  "triple_public_anchor": "PASS",
+  "anchor_conflicts": 0,
+  "manifest_hash_match": true,
+  "certification_claimed": false,
+  "regulatory_approval_claimed": false,
+  "semantic_correctness_claimed": false,
+  "production_readiness_claimed": false,
+  "errors": [],
+  "non_claims": [
+    "Anchor verification proves timestamped integrity references.",
+    "Anchor verification does not prove semantic correctness.",
+    "Anchor verification does not prove certification.",
+    "Anchor verification does not prove regulatory approval.",
+    "Anchor verification does not prove production readiness."
+  ]
+}
