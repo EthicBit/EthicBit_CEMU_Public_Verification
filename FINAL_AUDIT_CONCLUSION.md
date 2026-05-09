@@ -211,3 +211,70 @@ Not clinical or diagnostic.
 Not tamper-proof.
 Not HSM-backed unless separately implemented.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.2.0 release update (2026-05-09)
+
+**Release tag:** `v1.2.0`
+**Commit SHA (main):** `202367ee`
+**PRs merged:** #107 · #108 · #109 · #110 · #111 · #112
+
+AEM-EVOLVE™ v1.2.0 was released from `main` after merging 6 ordered PRs. All verification scripts passed on updated `main`:
+
+```
+MECH_REASON_STATUS=PASS
+MECH_REASON_VERIFICATION=PASS  (10/10 checks)
+recommended_outcome: PASS
+hitl_required: true
+triggered_rules: []
+llm_involved: false
+```
+
+### Capabilities added in v1.2.0
+
+| PR | Capability |
+|---|---|
+| #107 | Policy-as-code `AEM_EVOLVE_POLICY_V1_2.json` (17 rules: R-CLAIM-*, R-HITL-*, R-SCOPE-*) + claim boundary checker |
+| #108 | Evidence completeness scorer (8-artifact weighted) + governance risk scorer (7-dimension composite) |
+| #109 | MECH-REASON™ engine — decision table, state machine, HITL inference, mechanical explanation, SHA-256 sealing |
+| #110 | 10-check deterministic verifier (`verify_mech_reason.py`) + assurance artifacts + hash record |
+| #111 | Optional LLM advisory adapter boundary definition (constitutional, read-only, post-hoc) |
+| #112 | Whitepaper v1.2 — Mechanical Reasoning Layer |
+
+### v1.2.0 assurance artifacts
+
+- `assurance/evolve-multi-agent/v1_2/MECH_REASON_REPORT.json`
+- `assurance/evolve-multi-agent/v1_2/MECH_REASON_VERIFICATION_REPORT.json`
+- `assurance/evolve-multi-agent/v1_2/MECH_REASON_VERIFICATION.md`
+- `assurance/evolve-multi-agent/v1_2/V1_2_HASH_RECORD.txt`
+- `assurance/evolve-multi-agent/v1_2/claim_boundary_check_report.json`
+- `assurance/evolve-multi-agent/v1_2/evidence_completeness_report.json`
+- `assurance/evolve-multi-agent/v1_2/governance_risk_score_report.json`
+
+### v1.2.0 claim
+
+> AEM-EVOLVE™ v1.2 introduces MECH-REASON™, a deterministic reasoning engine for policy-bound, evidence-based governance recommendations.
+
+### v1.2.0 constitutional rule
+
+```
+MECH-REASON™ recommends mechanically.
+MechanicalGate decides deterministically.
+ReceiptSealer seals.
+EthicBit audits, hashes, anchors, and preserves the claim boundary.
+```
+
+### v1.2.0 non-claims
+
+```
+LLM output is not final governance.
+LLM output is not official status.
+LLM output is not regulatory approval.
+LLM output is not legal compliance.
+LLM output is not certification.
+LLM output is not receipt sealing.
+This recommendation is not regulatory approval.
+This recommendation is not legal compliance.
+This recommendation is not external certification.
+```
