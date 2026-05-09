@@ -1,0 +1,47 @@
+{
+  "schema_id": "AEM_EVOLVE_MLKEM768_KEM_REPORT_V1_3",
+  "generated_at": "2026-05-09T12:44:42.201696+00:00",
+  "mode": "simulation",
+  "verification_result": "PASS",
+  "checks_passed": 5,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "check_id": "C-01-KEYGEN-SIZES",
+      "status": "PASS",
+      "detail": "pk=1184B sk=2400B"
+    },
+    {
+      "check_id": "C-02-ENC-SIZES",
+      "status": "PASS",
+      "detail": "ct=1088B ss=32B"
+    },
+    {
+      "check_id": "C-03-ROUND-TRIP",
+      "status": "PASS",
+      "detail": "decapsulate(sk, ct) == enc.shared_secret"
+    },
+    {
+      "check_id": "C-04-RANDOMNESS",
+      "status": "PASS",
+      "detail": "two encapsulations produce different ciphertexts"
+    },
+    {
+      "check_id": "C-05-ISOLATION",
+      "status": "PASS",
+      "detail": "different key pairs produce independent shared secrets"
+    }
+  ],
+  "expected_sizes": {
+    "pk": 1184,
+    "sk": 2400,
+    "ct": 1088,
+    "ss": 32
+  },
+  "non_claims": [
+    "This wrapper is not a certified cryptographic implementation.",
+    "This wrapper does not replace Ed25519/ML-DSA signing.",
+    "Simulation mode is NOT cryptographically secure.",
+    "This wrapper has not been independently audited."
+  ]
+}
