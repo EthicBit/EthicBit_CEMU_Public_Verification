@@ -1,0 +1,39 @@
+{
+  "schema_id": "AEM_EVOLVE_HITL_QUORUM_POLICY_V1_3",
+  "version": "1.3.0",
+  "description": "HITL quorum enforcement policy for production-grade approval gates.",
+  "decision_classes": [
+    {
+      "class_id": "STANDARD",
+      "description": "Standard governance decision",
+      "quorum_required": 1,
+      "quorum_total": 1,
+      "approval_ttl_seconds": 86400,
+      "ttl_enforcement": "warn",
+      "valid_decisions": ["approve", "reject", "escalate"]
+    },
+    {
+      "class_id": "HIGH_RISK",
+      "description": "High-risk or ESCALATE_TO_HITL outcome decision",
+      "quorum_required": 2,
+      "quorum_total": 3,
+      "approval_ttl_seconds": 3600,
+      "valid_decisions": ["approve", "reject"]
+    },
+    {
+      "class_id": "FAIL_CLOSED_OVERRIDE",
+      "description": "Override of a FAIL_CLOSED recommendation — maximum scrutiny",
+      "quorum_required": 3,
+      "quorum_total": 3,
+      "approval_ttl_seconds": 1800,
+      "valid_decisions": ["approve", "reject"]
+    }
+  ],
+  "valid_approver_roles": ["APPROVER", "SENIOR_APPROVER", "GOVERNANCE_OFFICER"],
+  "non_claims": [
+    "This quorum model is not HSM-backed.",
+    "This quorum model is not enterprise IAM.",
+    "This quorum model is not a certified identity system.",
+    "Approver identity verification is demo-grade."
+  ]
+}
