@@ -9,7 +9,7 @@ on:
 
 jobs:
   reproduce:
-    name: Full-Stack Verification (v1.4)
+    name: Full-Stack Verification (v1.6)
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install cryptography mlkem asyncpg
+          pip install cryptography mlkem asyncpg fastapi langgraph starlette httpx
 
       - name: Run v1.3 full-stack verifier
         run: |
@@ -33,6 +33,18 @@ jobs:
         run: |
           python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_4.py
 
+      - name: Run v1.5 full-stack verifier
+        run: |
+          python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_5.py
+
+      - name: Run v1.6 full-stack verifier
+        run: |
+          python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_6.py
+
+      - name: Run E2E integration test
+        run: |
+          python3 demos/aem-evolve-multi-agent-api/tools/integration/e2e_api_test.py
+
       - name: Upload reproduction reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -41,3 +53,5 @@ jobs:
           path: |
             assurance/evolve-multi-agent/v1_3/REPRODUCTION_REPORT.json
             assurance/evolve-multi-agent/v1_4/REPRODUCTION_REPORT.json
+            assurance/evolve-multi-agent/v1_5/REPRODUCTION_REPORT.json
+            assurance/evolve-multi-agent/v1_6/REPRODUCTION_REPORT.json
