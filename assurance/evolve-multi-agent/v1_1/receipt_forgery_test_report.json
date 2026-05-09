@@ -1,0 +1,58 @@
+{
+  "schema_id": "AEM_EVOLVE_RECEIPT_FORGERY_TEST_REPORT_V1_1",
+  "generated_at": "2026-05-09T03:13:38.992019+00:00",
+  "status": "PASS",
+  "tests_run": 8,
+  "tamper_detected": 8,
+  "tamper_detected_rate": 1.0,
+  "production_ready_injection_blocked": true,
+  "non_claim_removal_detected": true,
+  "test_results": [
+    {
+      "test": "modify_outcome",
+      "tamper_detected": true,
+      "status": "PASS"
+    },
+    {
+      "test": "modify_materiality_score",
+      "tamper_detected": true,
+      "status": "PASS"
+    },
+    {
+      "test": "remove_non_claims",
+      "tamper_detected": true,
+      "status": "PASS"
+    },
+    {
+      "test": "change_scope_boundary",
+      "tamper_detected": true,
+      "status": "PASS"
+    },
+    {
+      "test": "change_hitl_requirement",
+      "tamper_detected": true,
+      "status": "PASS"
+    },
+    {
+      "test": "replay_old_receipt",
+      "tamper_detected": true,
+      "status": "PASS"
+    },
+    {
+      "test": "inject_production_ready_claim",
+      "tamper_detected": true,
+      "status": "PASS"
+    },
+    {
+      "test": "replace_receipt_hash",
+      "tamper_detected": true,
+      "status": "PASS"
+    }
+  ],
+  "non_claims": [
+    "These are controlled forgery-detection tests.",
+    "Not tamper-proof in production.",
+    "Not cybersecurity certified.",
+    "Not HSM-backed."
+  ]
+}
