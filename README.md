@@ -5,36 +5,59 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.1.0
+## Latest release: AEM-EVOLVE™ v1.2.0 — Mechanical Reasoning Layer
+
+**Tag:** `v1.2.0` — 2026-05-09
+**Type:** Deterministic mechanical reasoning engine
+**LLM in governance path:** `false`
+
+> AEM-EVOLVE™ v1.2 introduces MECH-REASON™, a deterministic reasoning engine for policy-bound, evidence-based governance recommendations.
+
+```
+MECH-REASON™ recommends mechanically.
+MechanicalGate decides deterministically.
+ReceiptSealer seals.
+EthicBit audits, hashes, anchors, and preserves the claim boundary.
+```
+
+- [Public Status Bulletin v1.2.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_2.md)
+- [Whitepaper v1.2](docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md)
+- [GitHub Release v1.2.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.2.0)
+
+### v1.2.0 verification
+
+```bash
+python3 demos/aem-evolve-multi-agent-api/tools/reasoning/mech_reason.py
+python3 demos/aem-evolve-multi-agent-api/tools/reasoning/verify_mech_reason.py
+```
+
+```
+MECH_REASON_STATUS=PASS
+  recommended_outcome: PASS
+  hitl_required:       true
+  triggered_rules:     []
+
+MECH_REASON_VERIFICATION=PASS  (10/10 checks)
+```
+
+v1.2.0 assurance artifacts:
+
+- [MECH_REASON_REPORT](assurance/evolve-multi-agent/v1_2/MECH_REASON_REPORT.json)
+- [MECH_REASON_VERIFICATION_REPORT](assurance/evolve-multi-agent/v1_2/MECH_REASON_VERIFICATION_REPORT.json)
+- [Hash Record v1.2](assurance/evolve-multi-agent/v1_2/V1_2_HASH_RECORD.txt)
+- [Optional LLM Advisory Adapter Boundary](demos/aem-evolve-multi-agent-api/docs/OPTIONAL_LLM_ADVISORY_ADAPTER_BOUNDARY.md)
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.1.0
 
 **Tag:** `v1.1.0` — 2026-05-09
-**Type:** Public controlled-environment assurance update
 
 > AEM-EVOLVE™ v1.1 is regulator-mappable, governance-measurable, multi-anchor-verifiable, HITL-hardened, receipt-forgery-tested, and official-status-signed.
 
 - [Public Status Bulletin (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md)
 - [Whitepaper v1.1](docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md)
 - [GitHub Release v1.1.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.1.0)
-
-### v1.1.0 verification
-
-```bash
-python3 demos/aem-evolve-multi-agent-api/tools/regulatory/regulatory_mapping_checker.py
-python3 demos/aem-evolve-multi-agent-api/tools/metrics/governance_effectiveness_metrics.py
-python3 demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py
-python3 demos/aem-evolve-multi-agent-api/tools/hitl/HITL_signature_verifier.py
-python3 demos/aem-evolve-multi-agent-api/adversarial_tests/test_receipt_forgery.py
-python3 demos/aem-evolve-multi-agent-api/tools/status/official_status_signer.py
-```
-
-```
-REGULATORY_MAPPING_CHECK=PASS
-GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS
-MULTI_ANCHOR_VERIFICATION=PASS
-HITL_SIGNATURE_VERIFICATION=PASS_DEMO
-RECEIPT_FORGERY_TESTS=PASS
-OFFICIAL_STATUS_SIGNED=PASS
-```
 
 ---
 
@@ -52,7 +75,8 @@ Release discipline references:
 - [Final Release Approval Checklist](docs/checks/FINAL_RELEASE_APPROVAL_CHECKLIST.md)
 - [Release Notes - Hybrid Claim Enforcement Closure (2026-04-20)](docs/checks/RELEASE_NOTES_v2.2b_HYBRID_CLAIM_ENFORCEMENT_2026-04-20.md)
 - [Public Status Bulletin (2026-04-20)](docs/STATUS_BULLETIN_PUBLIC_2026-04-20.md)
-- [Public Status Bulletin (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md)
+- [Public Status Bulletin v1.1.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md)
+- [Public Status Bulletin v1.2.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_2.md)
 - [Independent Reproduction Challenge Pack](challenge/independent-reproduction/AEM_V1_1_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
 
 Final closure evidence snapshot:
@@ -60,6 +84,12 @@ Final closure evidence snapshot:
 - [Final Snapshot Manifest](results/final_snapshot/FINAL_SNAPSHOT_MANIFEST.json)
 - [Final Snapshot Hashes](results/final_snapshot/artifact_hashes.sha256)
 - [Final Audit Conclusion](FINAL_AUDIT_CONCLUSION.md)
+
+v1.2.0 assurance artifacts:
+
+- [MECH_REASON_REPORT](assurance/evolve-multi-agent/v1_2/MECH_REASON_REPORT.json)
+- [MECH_REASON_VERIFICATION_REPORT](assurance/evolve-multi-agent/v1_2/MECH_REASON_VERIFICATION_REPORT.json)
+- [Hash Record v1.2](assurance/evolve-multi-agent/v1_2/V1_2_HASH_RECORD.txt)
 
 v1.1.0 assurance artifacts:
 
