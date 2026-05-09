@@ -1,0 +1,22 @@
+{
+  "schema_id": "AEM_EVOLVE_LLM_ADVISORY_LOG_V1_3",
+  "generated_at": "2026-05-09T12:38:07.680736+00:00",
+  "source_report_hash": "5bb1fea1c70a18832a86bbad9c95b832772e3cf643591d8251fdbfcb0a70a160",
+  "recommended_outcome_at_read_time": "PASS",
+  "advisory_only": true,
+  "governance_binding": false,
+  "llm_model": "claude-sonnet-4-6",
+  "simulation_mode": true,
+  "advisory_narrative": "[SIMULATION MODE \u2014 anthropic package not installed] Advisory narrative would be generated here by Claude API. Install with: pip install anthropic",
+  "advisory_hash": "b48e9032a5ec59f36f7a364cb34a7db129d063ff11f0dca6bf078afc76d74261",
+  "non_claims": [
+    "LLM advisory output is not governance.",
+    "LLM advisory output does not override MECH-REASON\u2122 recommended_outcome.",
+    "LLM advisory output is not a receipt.",
+    "LLM advisory output is not regulatory approval.",
+    "LLM advisory output is not legal compliance.",
+    "LLM advisory output does not satisfy HITL approval requirements.",
+    "LLM advisory output is not an anchor event.",
+    "LLM advisory output is tagged advisory_only: true."
+  ]
+}
