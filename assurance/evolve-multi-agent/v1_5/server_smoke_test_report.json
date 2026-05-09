@@ -1,0 +1,39 @@
+{
+  "component": "server_smoke_test",
+  "version": "v1.5",
+  "checks_passed": 6,
+  "checks_total": 6,
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "S-01-fastapi-import",
+      "status": "PASS",
+      "detail": "v0.136.1"
+    },
+    {
+      "check": "S-02-db-adapter-import",
+      "status": "PASS",
+      "detail": "DBAdapter+SQLite+Postgres+Async"
+    },
+    {
+      "check": "S-03-metrics-import",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "S-04-main-import",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "S-05-fastapi-testclient",
+      "status": "PASS",
+      "detail": "status=200"
+    },
+    {
+      "check": "S-06-sqlite-adapter-smoke",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
