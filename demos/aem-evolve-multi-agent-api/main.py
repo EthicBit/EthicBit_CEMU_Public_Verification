@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026
+May 2026 — v1.6.0: signing wired, HITL enforced, DBAdapter integrated
 """
 
 import logging
@@ -55,13 +55,51 @@ logging.config.dictConfig({
 
 log = logging.getLogger("aem_evolve_api")
 
+# ── Signing provider — initialized at import time ─────────────────────────────
+def _init_signing_provider():
+    """Try EnvSigningProvider; fall back to ephemeral Ed25519 for demo/CI."""
+    try:
+        from signing.env_signing_provider import EnvSigningProvider
+        provider = EnvSigningProvider()
+        log.info("signing_provider_loaded", extra={"provider": "EnvSigningProvider"})
+        return provider, "SIGNED_Ed25519_ENV"
+    except Exception:
+        pass
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+    from cryptography.hazmat.primitives import serialization
+    _key = Ed25519PrivateKey.generate()
+
+    class _EphemeralSigningProvider:
+        def sign(self, msg: bytes) -> bytes:
+            return _key.sign(msg)
+
+        def verify(self, msg: bytes, sig: bytes) -> bool:
+            from cryptography.exceptions import InvalidSignature
+            try:
+                _key.public_key().verify(sig, msg)
+                return True
+            except InvalidSignature:
+                return False
+
+        def public_key_pem(self) -> bytes:
+            return _key.public_key().public_bytes(
+                serialization.Encoding.PEM,
+                serialization.PublicFormat.SubjectPublicKeyInfo,
+            )
+
+        def algorithm(self) -> str:
+            return "Ed25519"
+
+    log.info("signing_provider_loaded", extra={"provider": "EphemeralSigningProvider"})
+    return _EphemeralSigningProvider(), "SIGNED_EPHEMERAL_Ed25519"
+
+
 from fastapi import FastAPI, HTTPException, Request, Security
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, field_validator
 from typing import Literal, Optional
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.sqlite import SqliteSaver
-import sqlite3
 import time
 from datetime import datetime, timezone
 import hashlib
@@ -70,11 +108,19 @@ from uuid import uuid4
 import uvicorn
 from pathlib import Path
 from metrics import registry as _metrics
+from db_adapter import DBAdapter, SQLiteAdapter
+
+DEMO_ROOT = Path(__file__).resolve().parent
+
+# ── Tool path for signing + hitl packages ────────────────────────────────────
+_TOOLS_PATH = str(DEMO_ROOT / "tools")
+if _TOOLS_PATH not in sys.path:
+    sys.path.insert(0, _TOOLS_PATH)
 
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
-    description="Multi-Agent Governance with RBAC HITL Controls",
-    version="0.3.1-demo",
+    description="Multi-Agent Governance with RBAC HITL Controls — v1.6.0 critical gaps closed",
+    version="0.4.0-demo",
 )
 
 
@@ -99,7 +145,6 @@ async def _log_requests(request: Request, call_next):
 # AUTH — ROLE-BASED API KEY
 # ============================================
 
-DEMO_ROOT = Path(__file__).resolve().parent
 _AUTH_KEYS_PATH = DEMO_ROOT / "configs" / "auth_demo_keys.json"
 _API_KEY_HEADER = APIKeyHeader(name="X-API-Key", auto_error=False)
 
@@ -153,17 +198,42 @@ def _require_any_auth(api_key: str | None) -> str:
         raise HTTPException(status_code=401, detail="Invalid API key")
     return role
 
+
+# ── Signing + HITL — module-level singletons ─────────────────────────────────
+_signing_provider, _SIGNING_STATUS = _init_signing_provider()
+
+
+def _load_hitl_policy() -> dict:
+    policy_path = DEMO_ROOT / "tools" / "hitl" / "HITL_IDENTITY_POLICY.json"
+    if policy_path.exists():
+        return json.loads(policy_path.read_text(encoding="utf-8"))
+    return {"token_ttl_minutes": 10, "approver_registry": []}
+
+
+def _get_hitl_secret() -> str:
+    return os.environ.get("ETHICBIT_HITL_SHARED_SECRET", "ethicbit-hitl-demo-secret-v1.4")
+
+
+def _verify_hitl_token(token: str, approver_id: str, event_id: str) -> tuple[bool, str]:
+    try:
+        from hitl.hitl_identity_verifier import verify_token
+        policy = _load_hitl_policy()
+        secret = _get_hitl_secret()
+        return verify_token(token, approver_id, event_id, secret, policy)
+    except ImportError as exc:
+        return False, f"HITL verifier unavailable: {exc}"
+
+
+_hitl_policy: dict = _load_hitl_policy()
+
 # ============================================
 # CREAR TABLAS DE AUDITORÍA
 # ============================================
 
 
-def init_audit_tables(conn: sqlite3.Connection):
-    cursor = conn.cursor()
-
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS evolution_events (
+def init_audit_tables(adapter: DBAdapter) -> None:
+    for sql in [
+        """CREATE TABLE IF NOT EXISTS evolution_events (
             event_id TEXT PRIMARY KEY,
             thread_id TEXT,
             event_canonical_sha256 TEXT,
@@ -175,13 +245,8 @@ def init_audit_tables(conn: sqlite3.Connection):
             timestamp_utc TEXT,
             claim_boundary TEXT,
             event_json TEXT
-        )
-    """
-    )
-
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS evolution_receipts (
+        )""",
+        """CREATE TABLE IF NOT EXISTS evolution_receipts (
             receipt_canonical_sha256 TEXT PRIMARY KEY,
             thread_id TEXT,
             event_id TEXT,
@@ -193,13 +258,8 @@ def init_audit_tables(conn: sqlite3.Connection):
             signature_status TEXT,
             timestamp_utc TEXT,
             receipt_json TEXT
-        )
-    """
-    )
-
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS human_decisions (
+        )""",
+        """CREATE TABLE IF NOT EXISTS human_decisions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             thread_id TEXT,
             event_id TEXT,
@@ -207,16 +267,9 @@ def init_audit_tables(conn: sqlite3.Connection):
             approver_id TEXT,
             override_reason TEXT,
             timestamp_utc TEXT
-        )
-    """
-    )
-
-    # Hash-linked audit chain — each row commits to the previous row's chain_hash.
-    # chain_hash = SHA256(prev_chain_hash + ":" + entry_sha256)
-    # GENESIS row uses prev_chain_hash = "0" * 64.
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS audit_chain (
+        )""",
+        # Hash-linked audit chain: chain_hash = SHA256(prev + ":" + entry_sha256)
+        """CREATE TABLE IF NOT EXISTS audit_chain (
             seq INTEGER PRIMARY KEY AUTOINCREMENT,
             entry_type TEXT NOT NULL,
             entry_id TEXT NOT NULL,
@@ -224,44 +277,32 @@ def init_audit_tables(conn: sqlite3.Connection):
             prev_chain_hash TEXT NOT NULL,
             chain_hash TEXT NOT NULL,
             timestamp_utc TEXT NOT NULL
-        )
-    """
-    )
-
-    conn.commit()
+        )""",
+    ]:
+        adapter.execute_write(sql)
+    adapter.commit()
 
 
 GENESIS_HASH = "0" * 64
 
 
 def _append_audit_chain(
-    conn: sqlite3.Connection,
+    adapter: DBAdapter,
     entry_type: str,
     entry_id: str,
     entry_sha256: str,
 ) -> str:
-    cursor = conn.cursor()
-    cursor.execute("SELECT chain_hash FROM audit_chain ORDER BY seq DESC LIMIT 1")
-    row = cursor.fetchone()
-    prev_chain_hash = row[0] if row else GENESIS_HASH
-    chain_hash = hashlib.sha256(
-        f"{prev_chain_hash}:{entry_sha256}".encode()
-    ).hexdigest()
-    cursor.execute(
-        """
-        INSERT INTO audit_chain (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc)
-        VALUES (?, ?, ?, ?, ?, ?)
-        """,
-        (
-            entry_type,
-            entry_id,
-            entry_sha256,
-            prev_chain_hash,
-            chain_hash,
-            datetime.now(timezone.utc).isoformat(),
-        ),
+    rows = adapter.execute("SELECT chain_hash FROM audit_chain ORDER BY seq DESC LIMIT 1")
+    prev_chain_hash = rows[0][0] if rows else GENESIS_HASH
+    chain_hash = hashlib.sha256(f"{prev_chain_hash}:{entry_sha256}".encode()).hexdigest()
+    adapter.execute_write(
+        """INSERT INTO audit_chain
+           (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc)
+           VALUES (?, ?, ?, ?, ?, ?)""",
+        (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash,
+         datetime.now(timezone.utc).isoformat()),
     )
-    conn.commit()
+    adapter.commit()
     log.info("audit_chain_append", extra={"entry_type": entry_type, "entry_id": entry_id, "chain_hash": chain_hash})
     return chain_hash
 
@@ -294,6 +335,8 @@ class ApproveRequest(BaseModel):
     thread_id: str
     decision: Literal["approve", "reject"]
     override_reason: Optional[str] = None
+    hitl_token: Optional[str] = None
+    hitl_approver_id: Optional[str] = None
 
     @field_validator("thread_id")
     @classmethod
@@ -327,9 +370,9 @@ def create_evolution_event(
     base_artifact: str,
     proposed_state: str,
     materiality: float,
-    conn: sqlite3.Connection,
+    adapter: DBAdapter,
     thread_id: str,
-):
+) -> dict:
     event = {
         "schema_id": "AEM_EVOLVE_EVOLUTION_EVENT_SCHEMA_V1",
         "event_id": f"EVO-API-{uuid4()}",
@@ -349,38 +392,33 @@ def create_evolution_event(
         },
     }
     event["event_canonical_sha256"] = compute_sha256(event)
+    # Sign the event canonical hash
+    sig_hex = _signing_provider.sign(event["event_canonical_sha256"].encode()).hex()
+    event["signature_hex"] = sig_hex
+    event["signature_algorithm"] = _signing_provider.algorithm()
+    event["signature_status"] = _SIGNING_STATUS
 
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        INSERT OR REPLACE INTO evolution_events
-        (event_id, thread_id, event_canonical_sha256, change_type, base_artifact,
-         proposed_state, materiality_score, requested_claim_scope, timestamp_utc,
-         claim_boundary, event_json)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """,
+    adapter.execute_write(
+        """INSERT OR REPLACE INTO evolution_events
+           (event_id, thread_id, event_canonical_sha256, change_type, base_artifact,
+            proposed_state, materiality_score, requested_claim_scope, timestamp_utc,
+            claim_boundary, event_json)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         (
-            event["event_id"],
-            event["thread_id"],
-            event["event_canonical_sha256"],
-            event["change_type"],
-            event["base_artifact"],
-            event["proposed_state"],
-            event["materiality_score"],
-            event["requested_claim_scope"],
-            event["timestamp_utc"],
-            json.dumps(event["claim_boundary"], ensure_ascii=False),
+            event["event_id"], event["thread_id"], event["event_canonical_sha256"],
+            event["change_type"], event["base_artifact"], event["proposed_state"],
+            event["materiality_score"], event["requested_claim_scope"],
+            event["timestamp_utc"], json.dumps(event["claim_boundary"], ensure_ascii=False),
             json.dumps(event, ensure_ascii=False),
         ),
     )
-    conn.commit()
-    _append_audit_chain(conn, "evolution_event", event["event_id"], event["event_canonical_sha256"])
+    adapter.commit()
+    _append_audit_chain(adapter, "evolution_event", event["event_id"], event["event_canonical_sha256"])
     _metrics.increment("events_created")
-
     return event
 
 
-def evaluate_evolution_gate(event: dict, conn: sqlite3.Connection, thread_id: str):
+def evaluate_evolution_gate(event: dict, adapter: DBAdapter, thread_id: str) -> dict:
     score = event["materiality_score"]
 
     if score > 85:
@@ -406,39 +444,32 @@ def evaluate_evolution_gate(event: dict, conn: sqlite3.Connection, thread_id: st
         "event_id": event["event_id"],
         "thread_id": thread_id,
         "event_canonical_sha256": event["event_canonical_sha256"],
-        "signature_status": "NOT_SIGNED_DEMO",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
     }
     receipt["receipt_canonical_sha256"] = compute_sha256(receipt)
+    # Sign the receipt canonical hash
+    sig_hex = _signing_provider.sign(receipt["receipt_canonical_sha256"].encode()).hex()
+    receipt["signature_hex"] = sig_hex
+    receipt["signature_algorithm"] = _signing_provider.algorithm()
+    receipt["signature_status"] = _SIGNING_STATUS
 
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        INSERT OR REPLACE INTO evolution_receipts
-        (receipt_canonical_sha256, thread_id, event_id, outcome, receipt_message,
-         materiality_score, claim_boundary, requested_claim_scope, signature_status,
-         timestamp_utc, receipt_json)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """,
+    adapter.execute_write(
+        """INSERT OR REPLACE INTO evolution_receipts
+           (receipt_canonical_sha256, thread_id, event_id, outcome, receipt_message,
+            materiality_score, claim_boundary, requested_claim_scope, signature_status,
+            timestamp_utc, receipt_json)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         (
-            receipt["receipt_canonical_sha256"],
-            receipt["thread_id"],
-            receipt["event_id"],
-            outcome,
-            message,
-            score,
-            json.dumps(event["claim_boundary"], ensure_ascii=False),
-            event["requested_claim_scope"],
-            "NOT_SIGNED_DEMO",
-            receipt["timestamp_utc"],
+            receipt["receipt_canonical_sha256"], receipt["thread_id"], receipt["event_id"],
+            outcome, message, score, json.dumps(event["claim_boundary"], ensure_ascii=False),
+            event["requested_claim_scope"], _SIGNING_STATUS, receipt["timestamp_utc"],
             json.dumps(receipt, ensure_ascii=False),
         ),
     )
-    conn.commit()
-    _append_audit_chain(conn, "evolution_receipt", receipt["receipt_id"], receipt["receipt_canonical_sha256"])
+    adapter.commit()
+    _append_audit_chain(adapter, "evolution_receipt", receipt["receipt_id"], receipt["receipt_canonical_sha256"])
     _metrics.increment("receipts_issued")
     _metrics.increment(f"outcome_{outcome.lower()}")
-
     return receipt
 
 
@@ -453,13 +484,13 @@ def research_agent(state):
     return state
 
 
-def writer_agent(state, conn):
+def writer_agent(state, adapter):
     new_prompt = "Eres un escritor experto en ética de IA y gobernanza verificable."
     thread_id = state.get("thread_id", "unknown")
     event = create_evolution_event(
-        "CONFIGURATION_UPDATE", "writer_prompt", new_prompt, 78.0, conn, thread_id
+        "CONFIGURATION_UPDATE", "writer_prompt", new_prompt, 78.0, adapter, thread_id
     )
-    receipt = evaluate_evolution_gate(event, conn, thread_id)
+    receipt = evaluate_evolution_gate(event, adapter, thread_id)
 
     state["last_receipt"] = receipt
     state["pending_change"] = {"new_value": new_prompt, "event": event}
@@ -515,17 +546,19 @@ DEMO_PORT = 8000
 
 
 def build_graph():
-    checkpoint_conn = sqlite3.connect(str(DEMO_DB_PATH), check_same_thread=False)
-    audit_conn = sqlite3.connect(str(DEMO_DB_PATH), check_same_thread=False)
-    init_audit_tables(audit_conn)
+    # Separate connections: LangGraph checkpointer gets its own conn to avoid
+    # threading conflicts when SqliteSaver writes concurrently with audit inserts.
+    import sqlite3 as _sqlite3
+    _checkpoint_conn = _sqlite3.connect(str(DEMO_DB_PATH), check_same_thread=False)
+    db_adapter = SQLiteAdapter(DEMO_DB_PATH)
+    init_audit_tables(db_adapter)
 
-    def writer_agent_with_conn(state):
-        return writer_agent(state, audit_conn)
+    def writer_agent_with_adapter(state):
+        return writer_agent(state, db_adapter)
 
     workflow = StateGraph(dict)
-
     workflow.add_node("research", research_agent)
-    workflow.add_node("writer", writer_agent_with_conn)
+    workflow.add_node("writer", writer_agent_with_adapter)
     workflow.add_node("governance", governance_gate)
     workflow.add_node("awaiting_approval", awaiting_approval_node)
     workflow.add_node("final_report", final_report_node)
@@ -542,21 +575,17 @@ def build_graph():
         return "final_report"
 
     workflow.add_conditional_edges(
-        "governance",
-        route,
-        {
-            "awaiting_approval": "awaiting_approval",
-            "final_report": "final_report",
-        },
+        "governance", route,
+        {"awaiting_approval": "awaiting_approval", "final_report": "final_report"},
     )
 
     workflow.add_edge("awaiting_approval", END)
     workflow.add_edge("final_report", END)
 
-    return workflow.compile(checkpointer=SqliteSaver(checkpoint_conn)), audit_conn
+    return workflow.compile(checkpointer=SqliteSaver(_checkpoint_conn)), db_adapter
 
 
-graph, db_conn = build_graph()
+graph, db_adapter = build_graph()
 
 # ============================================
 # ENDPOINTS
@@ -566,12 +595,13 @@ graph, db_conn = build_graph()
 @app.get("/healthz")
 def healthz():
     try:
-        db_conn.cursor().execute("SELECT 1")
+        db_adapter.execute("SELECT 1")
         db_ok = True
     except Exception:
         db_ok = False
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": "sqlite" if db_ok else "unreachable", "version": "0.3.1-demo"}
+    return {"status": status, "db": "sqlite" if db_ok else "unreachable", "version": "0.4.0-demo",
+            "signing_status": _SIGNING_STATUS}
 
 
 @app.get("/metrics")
@@ -622,16 +652,26 @@ def get_status(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
 @app.post("/approve")
 def approve_change(req: ApproveRequest, api_key: str = Security(_API_KEY_HEADER)):
     role = _require_role(api_key, ROLE_APPROVER)
-    # Derive approver_id from the authenticated key rather than the request body.
-    approver_id = next(
-        (k for k, v in _load_key_store().items() if k == api_key),
-        "authenticated-approver",
-    )
     config = {"configurable": {"thread_id": req.thread_id}}
     state = graph.get_state(config).values
 
     if not state.get("human_approval_needed"):
         raise HTTPException(400, "No human approval needed")
+
+    # ── HITL identity enforcement — mandatory for SCOPE_LIMITED outcomes ──────
+    event_id = state["last_receipt"]["event_id"]
+    if not req.hitl_token or not req.hitl_approver_id:
+        raise HTTPException(
+            400,
+            "hitl_token and hitl_approver_id are required for SCOPE_LIMITED approvals. "
+            "Generate a token with: tools/hitl/hitl_token_generator.py"
+        )
+    ok, reason = _verify_hitl_token(req.hitl_token, req.hitl_approver_id, event_id)
+    if not ok:
+        raise HTTPException(403, f"HITL token invalid: {reason}")
+    approver_id = req.hitl_approver_id
+    log.info("hitl_identity_verified", extra={"approver_id": approver_id, "event_id": event_id, "reason": reason})
+    # ─────────────────────────────────────────────────────────────────────────
 
     if req.decision == "approve":
         state["current_prompt"] = state["pending_change"]["new_value"]
@@ -644,11 +684,11 @@ def approve_change(req: ApproveRequest, api_key: str = Security(_API_KEY_HEADER)
     state["human_approval_needed"] = False
 
     decision_ts = datetime.now(timezone.utc).isoformat()
-    decision_id = f"DEC-{req.thread_id}-{state['last_receipt']['event_id']}"
+    decision_id = f"DEC-{req.thread_id}-{event_id}"
     decision_payload = {
         "decision_id": decision_id,
         "thread_id": req.thread_id,
-        "event_id": state["last_receipt"]["event_id"],
+        "event_id": event_id,
         "decision": req.decision,
         "approver_id": approver_id,
         "approver_role": role,
@@ -657,28 +697,18 @@ def approve_change(req: ApproveRequest, api_key: str = Security(_API_KEY_HEADER)
     }
     decision_sha256 = compute_sha256(decision_payload)
 
-    cursor = db_conn.cursor()
-    cursor.execute(
-        """
-        INSERT INTO human_decisions (thread_id, event_id, decision, approver_id, override_reason, timestamp_utc)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """,
-        (
-            req.thread_id,
-            state["last_receipt"]["event_id"],
-            req.decision,
-            approver_id,
-            req.override_reason,
-            decision_ts,
-        ),
+    db_adapter.execute_write(
+        """INSERT INTO human_decisions
+           (thread_id, event_id, decision, approver_id, override_reason, timestamp_utc)
+           VALUES (?, ?, ?, ?, ?, ?)""",
+        (req.thread_id, event_id, req.decision, approver_id, req.override_reason, decision_ts),
     )
-    db_conn.commit()
-    _append_audit_chain(db_conn, "human_decision", decision_id, decision_sha256)
+    db_adapter.commit()
+    _append_audit_chain(db_adapter, "human_decision", decision_id, decision_sha256)
     log.info("human_decision_recorded", extra={"decision_id": decision_id, "decision": req.decision, "approver_id": approver_id})
 
     state = final_report_node(state)
     graph.update_state(config, state)
-
     return {"status": state["status"]}
 
 
@@ -698,109 +728,65 @@ def get_receipt(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
 @app.get("/event/{thread_id}")
 def get_event(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
     _require_any_auth(api_key)
-    cursor = db_conn.cursor()
-    cursor.execute(
-        """
-        SELECT event_json FROM evolution_events
-        WHERE thread_id = ?
-        ORDER BY timestamp_utc DESC
-    """,
+    rows = db_adapter.execute(
+        "SELECT event_json FROM evolution_events WHERE thread_id = ? ORDER BY timestamp_utc DESC",
         (thread_id,),
     )
-    rows = cursor.fetchall()
-    events = [json.loads(row[0]) for row in rows]
+    events = [json.loads(r[0]) for r in rows]
     return {"thread_id": thread_id, "events": events}
 
 
 @app.get("/audit/{thread_id}")
 def get_audit(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
     _require_any_auth(api_key)
-    cursor = db_conn.cursor()
-
-    cursor.execute(
-        """
-        SELECT event_json FROM evolution_events
-        WHERE thread_id = ?
-        ORDER BY timestamp_utc DESC
-    """,
+    events = [json.loads(r[0]) for r in db_adapter.execute(
+        "SELECT event_json FROM evolution_events WHERE thread_id = ? ORDER BY timestamp_utc DESC",
         (thread_id,),
-    )
-    events = [json.loads(row[0]) for row in cursor.fetchall()]
-
-    cursor.execute(
-        """
-        SELECT receipt_json FROM evolution_receipts
-        WHERE thread_id = ?
-        ORDER BY timestamp_utc DESC
-    """,
+    )]
+    receipts = [json.loads(r[0]) for r in db_adapter.execute(
+        "SELECT receipt_json FROM evolution_receipts WHERE thread_id = ? ORDER BY timestamp_utc DESC",
         (thread_id,),
-    )
-    receipts = [json.loads(row[0]) for row in cursor.fetchall()]
-
-    cursor.execute(
-        """
-        SELECT event_id, decision, approver_id, override_reason, timestamp_utc
-        FROM human_decisions
-        WHERE thread_id = ?
-        ORDER BY timestamp_utc DESC
-    """,
+    )]
+    raw_decisions = db_adapter.execute(
+        "SELECT event_id, decision, approver_id, override_reason, timestamp_utc "
+        "FROM human_decisions WHERE thread_id = ? ORDER BY timestamp_utc DESC",
         (thread_id,),
     )
     decisions = [
-        {
-            "event_id": row[0],
-            "decision": row[1],
-            "approver_id": row[2],
-            "override_reason": row[3],
-            "timestamp_utc": row[4],
-        }
-        for row in cursor.fetchall()
+        {"event_id": r[0], "decision": r[1], "approver_id": r[2],
+         "override_reason": r[3], "timestamp_utc": r[4]}
+        for r in raw_decisions
     ]
-
-    return {
-        "thread_id": thread_id,
-        "events": events,
-        "receipts": receipts,
-        "human_decisions": decisions,
-    }
+    return {"thread_id": thread_id, "events": events, "receipts": receipts, "human_decisions": decisions}
 
 
 @app.get("/chain/verify")
 def verify_chain(api_key: str = Security(_API_KEY_HEADER)):
+    """Walk the full audit chain and verify every hash link."""
     _require_any_auth(api_key)
-    """Walk the full audit chain and verify every hash link. Detects any tampering."""
-    cursor = db_conn.cursor()
-    cursor.execute(
+    rows = db_adapter.execute(
         "SELECT seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash "
         "FROM audit_chain ORDER BY seq"
     )
-    rows = cursor.fetchall()
-
     if not rows:
         return {"status": "EMPTY", "entries_checked": 0, "errors": []}
 
     errors = []
     expected_prev = GENESIS_HASH
-
     for seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash in rows:
         if prev_chain_hash != expected_prev:
-            errors.append({
-                "seq": seq, "entry_id": entry_id,
-                "error": "prev_chain_hash_mismatch",
-                "expected": expected_prev, "got": prev_chain_hash,
-            })
+            errors.append({"seq": seq, "entry_id": entry_id,
+                           "error": "prev_chain_hash_mismatch",
+                           "expected": expected_prev, "got": prev_chain_hash})
         recomputed = hashlib.sha256(f"{prev_chain_hash}:{entry_sha256}".encode()).hexdigest()
         if recomputed != chain_hash:
-            errors.append({
-                "seq": seq, "entry_id": entry_id,
-                "error": "chain_hash_mismatch",
-                "expected": recomputed, "stored": chain_hash,
-            })
+            errors.append({"seq": seq, "entry_id": entry_id,
+                           "error": "chain_hash_mismatch",
+                           "expected": recomputed, "stored": chain_hash})
         expected_prev = chain_hash
 
-    status = "PASS" if not errors else "TAMPER_DETECTED"
     return {
-        "status": status,
+        "status": "PASS" if not errors else "TAMPER_DETECTED",
         "entries_checked": len(rows),
         "errors": errors,
         "head_chain_hash": rows[-1][5] if rows else None,
@@ -812,38 +798,27 @@ def verify_chain(api_key: str = Security(_API_KEY_HEADER)):
 
 @app.get("/chain/{thread_id}")
 def get_chain(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
-    """Return all audit chain entries that reference events/receipts/decisions for this thread."""
+    """Return all audit chain entries for this thread."""
     _require_any_auth(api_key)
-    cursor = db_conn.cursor()
-    # Collect entry_ids for this thread from all three tables.
-    cursor.execute("SELECT event_id FROM evolution_events WHERE thread_id = ?", (thread_id,))
-    event_ids = {row[0] for row in cursor.fetchall()}
-    cursor.execute("SELECT event_id FROM evolution_receipts WHERE thread_id = ?", (thread_id,))
-    receipt_entry_ids = {f"REC-{eid}" for eid in {row[0] for row in cursor.fetchall()}}
-    decision_prefix = f"DEC-{thread_id}-"
-    cursor.execute(
-        "SELECT entry_id FROM audit_chain WHERE entry_id LIKE ?",
-        (decision_prefix + "%",),
-    )
-    decision_ids = {row[0] for row in cursor.fetchall()}
-
-    all_ids = event_ids | receipt_entry_ids | decision_ids
+    event_ids = {r[0] for r in db_adapter.execute(
+        "SELECT event_id FROM evolution_events WHERE thread_id = ?", (thread_id,))}
+    receipt_ids = {f"REC-{r[0]}" for r in db_adapter.execute(
+        "SELECT event_id FROM evolution_receipts WHERE thread_id = ?", (thread_id,))}
+    decision_ids = {r[0] for r in db_adapter.execute(
+        "SELECT entry_id FROM audit_chain WHERE entry_id LIKE ?", (f"DEC-{thread_id}-%",))}
+    all_ids = event_ids | receipt_ids | decision_ids
     if not all_ids:
         raise HTTPException(404, f"No audit chain entries found for thread {thread_id}")
-
     placeholders = ",".join("?" * len(all_ids))
-    cursor.execute(
+    rows = db_adapter.execute(
         f"SELECT seq, entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc "
         f"FROM audit_chain WHERE entry_id IN ({placeholders}) ORDER BY seq",
-        list(all_ids),
+        tuple(all_ids),
     )
-    rows = cursor.fetchall()
     entries = [
-        {
-            "seq": r[0], "entry_type": r[1], "entry_id": r[2],
-            "entry_sha256": r[3], "prev_chain_hash": r[4],
-            "chain_hash": r[5], "timestamp_utc": r[6],
-        }
+        {"seq": r[0], "entry_type": r[1], "entry_id": r[2],
+         "entry_sha256": r[3], "prev_chain_hash": r[4],
+         "chain_hash": r[5], "timestamp_utc": r[6]}
         for r in rows
     ]
     return {"thread_id": thread_id, "chain_entries": entries, "count": len(entries)}
@@ -855,7 +830,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.3.1-demo",
+        "version": "0.4.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -865,8 +840,10 @@ def health():
             "environment": "local-demo",
             "production_auth_claimed": False,
         },
-        "signature_status": "DEMO_SIGNED_ED25519",
-        "anchor_status": "ANCHORED_ON_MAINNET_DEMO",
+        "signing_provider": _signing_provider.algorithm(),
+        "signing_status": _SIGNING_STATUS,
+        "hitl_identity_enforcement": "HMAC_TOKEN_REQUIRED_FOR_SCOPE_LIMITED",
+        "db_adapter": "SQLiteAdapter",
         "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions", "audit_chain"],
         "tamper_evident_chain": True,
         "tamper_proof_claimed": False,
@@ -878,12 +855,13 @@ def health():
             "sqlite_not_production_audit_storage",
             "not_tamper_proof",
             "no_hsm_key_custody",
-            "no_production_identity_provider",
+            "no_production_oidc_idp",
+            "ephemeral_signing_key_not_persisted",
         ],
     }
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.3.1-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.4.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)

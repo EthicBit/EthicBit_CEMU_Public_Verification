@@ -2,6 +2,10 @@
 Integration tests for AEM-EVOLVE API endpoints.
 Runs against the TestClient using real SQLite storage.
 """
+import hashlib
+import hmac
+import math
+import time
 import pytest
 from .conftest import (
     client,
@@ -12,6 +16,15 @@ from .conftest import (
     unique_tid,
 )
 
+_HITL_SECRET = "ethicbit-hitl-demo-secret-v1.4"
+_HITL_APPROVER = "approver-001"
+
+
+def _make_hitl_token(approver_id: str, event_id: str, secret: str = _HITL_SECRET) -> str:
+    ts_floor = math.floor(time.time() / 60)
+    payload = f"{approver_id}:{event_id}:{ts_floor}".encode()
+    return hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
+
 
 class TestHealth:
     def test_health_returns_200(self, client):
@@ -21,7 +34,7 @@ class TestHealth:
     def test_health_body(self, client):
         body = client.get("/health").json()
         assert body["status"] == "healthy"
-        assert body["version"] == "0.3.1-demo"
+        assert body["version"] == "0.4.0-demo"
         assert body["tamper_proof_claimed"] is False
         assert "non_claims" in body
 
@@ -36,7 +49,7 @@ class TestHealth:
 
     def test_healthz_version(self, client):
         body = client.get("/healthz").json()
-        assert body["version"] == "0.3.1-demo"
+        assert body["version"] == "0.4.0-demo"
 
 
 class TestMetricsEndpoint:
@@ -126,40 +139,62 @@ class TestReceiptEndpoint:
 
 
 class TestApproveEndpoint:
-    def _start_session(self, client):
+    def _start_and_get_event_id(self, client):
+        """Start a session and return (thread_id, event_id) for HITL token generation."""
         tid = unique_tid()
         client.post("/start", json={"thread_id": tid}, headers={"X-API-Key": INITIATOR_KEY})
-        return tid
+        receipt = client.get(f"/receipt/{tid}", headers={"X-API-Key": OBSERVER_KEY}).json()
+        event_id = receipt["event_id"]
+        return tid, event_id
 
     def test_approve_decision(self, client):
-        tid = self._start_session(client)
+        tid, event_id = self._start_and_get_event_id(client)
+        token = _make_hitl_token(_HITL_APPROVER, event_id)
         r = client.post("/approve",
-                        json={"thread_id": tid, "decision": "approve", "override_reason": "test"},
+                        json={"thread_id": tid, "decision": "approve", "override_reason": "test",
+                              "hitl_token": token, "hitl_approver_id": _HITL_APPROVER},
                         headers={"X-API-Key": APPROVER_KEY})
         assert r.status_code == 200
         assert r.json()["status"] in ("completed", "change_human_approved", "completed_approved")
 
     def test_reject_decision(self, client):
-        tid = self._start_session(client)
+        tid, event_id = self._start_and_get_event_id(client)
+        token = _make_hitl_token(_HITL_APPROVER, event_id)
         r = client.post("/approve",
-                        json={"thread_id": tid, "decision": "reject"},
+                        json={"thread_id": tid, "decision": "reject",
+                              "hitl_token": token, "hitl_approver_id": _HITL_APPROVER},
                         headers={"X-API-Key": APPROVER_KEY})
         assert r.status_code == 200
         assert "rejected" in r.json()["status"]
 
     def test_approve_requires_approver_role(self, client):
-        tid = self._start_session(client)
+        tid, event_id = self._start_and_get_event_id(client)
+        token = _make_hitl_token(_HITL_APPROVER, event_id)
         r = client.post("/approve",
-                        json={"thread_id": tid, "decision": "approve"},
+                        json={"thread_id": tid, "decision": "approve",
+                              "hitl_token": token, "hitl_approver_id": _HITL_APPROVER},
                         headers={"X-API-Key": INITIATOR_KEY})
         assert r.status_code == 403
 
+    def test_approve_missing_token_returns_400(self, client):
+        tid, _ = self._start_and_get_event_id(client)
+        r = client.post("/approve",
+                        json={"thread_id": tid, "decision": "approve"},
+                        headers={"X-API-Key": APPROVER_KEY})
+        assert r.status_code == 400
+
+    def test_approve_invalid_token_returns_403(self, client):
+        tid, event_id = self._start_and_get_event_id(client)
+        r = client.post("/approve",
+                        json={"thread_id": tid, "decision": "approve",
+                              "hitl_token": "deadbeef" * 8, "hitl_approver_id": _HITL_APPROVER},
+                        headers={"X-API-Key": APPROVER_KEY})
+        assert r.status_code == 403
+
     def test_approve_no_pending_returns_400(self, client):
-        # Thread that hasn't started has no pending approval.
         r = client.post("/approve",
                         json={"thread_id": "t-nopending123", "decision": "approve"},
                         headers={"X-API-Key": APPROVER_KEY})
-        # Either 400 (no approval needed) or 404 (thread not found)
         assert r.status_code in (400, 404)
 
 

@@ -1,7 +1,6 @@
 """
 Unit tests for core governance logic: SHA-256 hashing, gate outcomes, audit chain.
 """
-import sqlite3
 import hashlib
 import json
 import sys
@@ -20,14 +19,15 @@ from main import (
     _append_audit_chain,
     GENESIS_HASH,
 )
+from db_adapter import SQLiteAdapter
 
 
 @pytest.fixture
 def mem_db():
-    conn = sqlite3.connect(":memory:")
-    init_audit_tables(conn)
-    yield conn
-    conn.close()
+    adapter = SQLiteAdapter(":memory:")
+    init_audit_tables(adapter)
+    yield adapter
+    adapter.close()
 
 
 # ── compute_sha256 ─────────────────────────────────────────────────────────────
@@ -111,14 +111,20 @@ class TestGateOutcomes:
         receipt = evaluate_evolution_gate(event, mem_db, "t-schema")
         assert receipt["schema_id"] == "AEM_EVOLVE_EVOLUTION_RECEIPT_SCHEMA_V1"
 
+    def test_receipt_has_signature(self, mem_db):
+        event = self._make_event(50.0)
+        receipt = evaluate_evolution_gate(event, mem_db, "t-sig")
+        assert "signature_hex" in receipt
+        assert len(receipt["signature_hex"]) > 0
+        assert receipt["signature_status"] != "NOT_SIGNED_DEMO"
+
     def test_receipt_persisted_in_db(self, mem_db):
         event = self._make_event(60.0)
         evaluate_evolution_gate(event, mem_db, "t-persist")
-        cursor = mem_db.cursor()
-        cursor.execute("SELECT outcome FROM evolution_receipts WHERE thread_id = 't-persist'")
-        row = cursor.fetchone()
-        assert row is not None
-        assert row[0] == "PASS"
+        rows = mem_db.execute(
+            "SELECT outcome FROM evolution_receipts WHERE thread_id = 't-persist'"
+        )
+        assert rows and rows[0][0] == "PASS"
 
 
 # ── create_evolution_event ─────────────────────────────────────────────────────
@@ -129,17 +135,24 @@ class TestCreateEvolutionEvent:
         for field in ("event_id", "event_canonical_sha256", "materiality_score", "claim_boundary"):
             assert field in evt
 
+    def test_event_has_signature(self, mem_db):
+        evt = create_evolution_event("CONFIG_UPDATE", "artifact", "state", 55.0, mem_db, "t-sig-evt")
+        assert "signature_hex" in evt
+        assert evt["signature_status"] != "NOT_SIGNED_DEMO"
+
     def test_event_persisted(self, mem_db):
         create_evolution_event("CONFIG_UPDATE", "artifact", "state", 55.0, mem_db, "t-evtdb")
-        cursor = mem_db.cursor()
-        cursor.execute("SELECT COUNT(*) FROM evolution_events WHERE thread_id = 't-evtdb'")
-        assert cursor.fetchone()[0] == 1
+        rows = mem_db.execute(
+            "SELECT COUNT(*) FROM evolution_events WHERE thread_id = 't-evtdb'"
+        )
+        assert rows[0][0] == 1
 
     def test_event_sha_matches_recompute(self, mem_db):
         evt = create_evolution_event("CONFIG_UPDATE", "art", "st", 55.0, mem_db, "t-sha-evt")
         stored_sha = evt["event_canonical_sha256"]
-        # SHA is computed before the field is added to the dict, so removing it and recomputing must match.
-        evt_copy = {k: v for k, v in evt.items() if k != "event_canonical_sha256"}
+        # SHA is computed before signature and sha fields are added; exclude them from recompute.
+        _exclude = {"event_canonical_sha256", "signature_hex", "signature_algorithm", "signature_status"}
+        evt_copy = {k: v for k, v in evt.items() if k not in _exclude}
         assert stored_sha == compute_sha256(evt_copy)
 
     def test_event_id_format(self, mem_db):
@@ -152,25 +165,29 @@ class TestCreateEvolutionEvent:
 class TestAuditChain:
     def test_genesis_uses_zero_prev(self, mem_db):
         _append_audit_chain(mem_db, "test_entry", "entry-1", "sha" * 10 + "abcd")
-        cursor = mem_db.cursor()
-        cursor.execute("SELECT prev_chain_hash FROM audit_chain WHERE entry_id = 'entry-1'")
-        row = cursor.fetchone()
-        assert row[0] == GENESIS_HASH
+        rows = mem_db.execute(
+            "SELECT prev_chain_hash FROM audit_chain WHERE entry_id = 'entry-1'"
+        )
+        assert rows[0][0] == GENESIS_HASH
 
     def test_chain_hash_computed_correctly(self, mem_db):
         entry_sha = "a" * 64
         _append_audit_chain(mem_db, "evt", "entry-chain-1", entry_sha)
         expected = hashlib.sha256(f"{GENESIS_HASH}:{entry_sha}".encode()).hexdigest()
-        cursor = mem_db.cursor()
-        cursor.execute("SELECT chain_hash FROM audit_chain WHERE entry_id = 'entry-chain-1'")
-        assert cursor.fetchone()[0] == expected
+        rows = mem_db.execute(
+            "SELECT chain_hash FROM audit_chain WHERE entry_id = 'entry-chain-1'"
+        )
+        assert rows[0][0] == expected
 
     def test_second_entry_links_to_first(self, mem_db):
         _append_audit_chain(mem_db, "e1", "link-1", "x" * 64)
-        cursor = mem_db.cursor()
-        cursor.execute("SELECT chain_hash FROM audit_chain WHERE entry_id = 'link-1'")
-        first_chain_hash = cursor.fetchone()[0]
+        rows1 = mem_db.execute(
+            "SELECT chain_hash FROM audit_chain WHERE entry_id = 'link-1'"
+        )
+        first_chain_hash = rows1[0][0]
 
         _append_audit_chain(mem_db, "e2", "link-2", "y" * 64)
-        cursor.execute("SELECT prev_chain_hash FROM audit_chain WHERE entry_id = 'link-2'")
-        assert cursor.fetchone()[0] == first_chain_hash
+        rows2 = mem_db.execute(
+            "SELECT prev_chain_hash FROM audit_chain WHERE entry_id = 'link-2'"
+        )
+        assert rows2[0][0] == first_chain_hash
