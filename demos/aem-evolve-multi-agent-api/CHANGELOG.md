@@ -7,6 +7,37 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.3.0] — 2026-05-09
+
+### Added
+- `RELEASE_NOTES_V1_3.md` — v1.3 release notes
+- `docs/roadmap/AEM_EVOLVE_V1_3_PR_ROADMAP.md` — v1.3 gap closure roadmap (PR #113)
+- `tools/advisory/llm_advisory_adapter.py` — LLM advisory adapter, advisory_only=true (PR #114)
+- `tools/crypto/mlkem768_wrapper.py` + `verify_mlkem768.py` — ML-KEM768 KEM runtime (PR #115)
+- `tools/hitl/HITL_QUORUM_POLICY.json` + `hitl_quorum_verifier.py` — HITL N-of-M quorum model (PR #116)
+- `tools/db/validate_postgres_adapter.py` + `migrations/003_langraph_checkpointer.sql` (PR #117)
+- `tools/reproduction/verify_all_v1_3.py` — 12-check full-stack verifier (PR #118)
+- `challenge/independent-reproduction/AEM_V1_3_INDEPENDENT_REPRODUCTION_CHALLENGE.md`
+- `docs/whitepapers/WHITEPAPER_V1_3_AEM_EVOLVE_GAPS_CLOSURE.md`
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_3.md`
+- Git tag `v1.3.0` + GitHub Release
+
+### Changed
+- `db_adapter.py` — PostgresAdapter upgraded: `ThreadedConnectionPool`, `ping()`, `close_pool()`
+- `README.md` — promoted v1.3.0 as latest release
+- `FINAL_AUDIT_CONCLUSION.md` — updated with v1.3.0 release record
+
+### No breaking changes
+API surface, RBAC, receipt schema, audit chain, and storage layer are unchanged.
+
+### Verification
+```
+FULL_STACK_VERIFICATION=PASS  (12/12)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4
+```
+
+---
+
 ## [1.2.0] — 2026-05-09
 
 ### Added

@@ -5,47 +5,49 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.2.0 — Mechanical Reasoning Layer
+## Latest release: AEM-EVOLVE™ v1.3.0 — Gaps Closure
+
+**Tag:** `v1.3.0` — 2026-05-09
+**Type:** Gaps closure — LLM adapter · ML-KEM768 · HITL quorum · PostgreSQL · reproduction toolkit
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (12/12)`
+
+> AEM-EVOLVE™ v1.3 closes the five gaps identified in the v1.2.0 audit: LLM advisory adapter, ML-KEM768 KEM runtime, HITL quorum model, PostgreSQL adapter activation, and independent reproduction toolkit.
+
+- [Public Status Bulletin v1.3.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_3.md)
+- [Whitepaper v1.3](docs/whitepapers/WHITEPAPER_V1_3_AEM_EVOLVE_GAPS_CLOSURE.md)
+- [GitHub Release v1.3.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.3.0)
+
+### v1.3.0 verification
+
+```bash
+python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_3.py
+```
+
+```
+FULL_STACK_VERIFICATION=PASS  (12/12)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4
+```
+
+v1.3.0 assurance artifacts:
+
+- [LLM Advisory Log](assurance/evolve-multi-agent/v1_3/LLM_ADVISORY_LOG.json)
+- [ML-KEM768 Report](assurance/evolve-multi-agent/v1_3/mlkem768_kem_report.json)
+- [HITL Quorum Report](assurance/evolve-multi-agent/v1_3/hitl_quorum_report.json)
+- [PostgreSQL Adapter Validation](assurance/evolve-multi-agent/v1_3/postgres_adapter_validation_report.json)
+- [Reproduction Report](assurance/evolve-multi-agent/v1_3/REPRODUCTION_REPORT.json)
+- [Independent Reproduction Challenge](challenge/independent-reproduction/AEM_V1_3_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.2.0 — Mechanical Reasoning Layer
 
 **Tag:** `v1.2.0` — 2026-05-09
-**Type:** Deterministic mechanical reasoning engine
-**LLM in governance path:** `false`
 
 > AEM-EVOLVE™ v1.2 introduces MECH-REASON™, a deterministic reasoning engine for policy-bound, evidence-based governance recommendations.
-
-```
-MECH-REASON™ recommends mechanically.
-MechanicalGate decides deterministically.
-ReceiptSealer seals.
-EthicBit audits, hashes, anchors, and preserves the claim boundary.
-```
 
 - [Public Status Bulletin v1.2.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_2.md)
 - [Whitepaper v1.2](docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md)
 - [GitHub Release v1.2.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.2.0)
-
-### v1.2.0 verification
-
-```bash
-python3 demos/aem-evolve-multi-agent-api/tools/reasoning/mech_reason.py
-python3 demos/aem-evolve-multi-agent-api/tools/reasoning/verify_mech_reason.py
-```
-
-```
-MECH_REASON_STATUS=PASS
-  recommended_outcome: PASS
-  hitl_required:       true
-  triggered_rules:     []
-
-MECH_REASON_VERIFICATION=PASS  (10/10 checks)
-```
-
-v1.2.0 assurance artifacts:
-
-- [MECH_REASON_REPORT](assurance/evolve-multi-agent/v1_2/MECH_REASON_REPORT.json)
-- [MECH_REASON_VERIFICATION_REPORT](assurance/evolve-multi-agent/v1_2/MECH_REASON_VERIFICATION_REPORT.json)
-- [Hash Record v1.2](assurance/evolve-multi-agent/v1_2/V1_2_HASH_RECORD.txt)
-- [Optional LLM Advisory Adapter Boundary](demos/aem-evolve-multi-agent-api/docs/OPTIONAL_LLM_ADVISORY_ADAPTER_BOUNDARY.md)
 
 ---
 
@@ -77,7 +79,9 @@ Release discipline references:
 - [Public Status Bulletin (2026-04-20)](docs/STATUS_BULLETIN_PUBLIC_2026-04-20.md)
 - [Public Status Bulletin v1.1.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md)
 - [Public Status Bulletin v1.2.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_2.md)
-- [Independent Reproduction Challenge Pack](challenge/independent-reproduction/AEM_V1_1_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
+- [Public Status Bulletin v1.3.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_3.md)
+- [Independent Reproduction Challenge v1.1](challenge/independent-reproduction/AEM_V1_1_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
+- [Independent Reproduction Challenge v1.3](challenge/independent-reproduction/AEM_V1_3_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
 
 Final closure evidence snapshot:
 

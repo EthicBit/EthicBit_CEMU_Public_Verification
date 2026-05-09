@@ -278,3 +278,55 @@ This recommendation is not regulatory approval.
 This recommendation is not legal compliance.
 This recommendation is not external certification.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.3.0 release update (2026-05-09)
+
+**Release tag:** `v1.3.0`
+**Commit SHA (main):** `da36ac12`
+**PRs merged:** #113 · #114 · #115 · #116 · #117 · #118
+
+AEM-EVOLVE™ v1.3.0 was released from `main` after merging 6 ordered PRs. Full-stack verification passed on updated `main`:
+
+```
+FULL_STACK_VERIFICATION=PASS  (12/12)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4
+```
+
+### Gaps closed in v1.3.0
+
+| PR | Gap | Verification output |
+|---|---|---|
+| #113 | v1.3 roadmap | — |
+| #114 | LLM advisory adapter (read-only, post-hoc, advisory_only=true) | `LLM_ADVISORY_STATUS=PASS` |
+| #115 | ML-KEM768 post-quantum KEM runtime (5-check round-trip verified) | `MLKEM768_STATUS=PASS` |
+| #116 | HITL production-grade quorum model (3 classes, N-of-M) | `HITL_QUORUM_VERIFICATION=PASS` |
+| #117 | PostgreSQL adapter activated (ThreadedConnectionPool + ping) | `POSTGRES_ADAPTER_VALIDATION=PASS` |
+| #118 | Independent reproduction toolkit (12 checks) + whitepaper v1.3 | `FULL_STACK_VERIFICATION=PASS` |
+
+### v1.3.0 assurance artifacts
+
+- `assurance/evolve-multi-agent/v1_3/LLM_ADVISORY_LOG.json`
+- `assurance/evolve-multi-agent/v1_3/mlkem768_kem_report.json`
+- `assurance/evolve-multi-agent/v1_3/hitl_quorum_report.json`
+- `assurance/evolve-multi-agent/v1_3/postgres_adapter_validation_report.json`
+- `assurance/evolve-multi-agent/v1_3/REPRODUCTION_REPORT.json`
+
+### v1.3.0 claim
+
+> AEM-EVOLVE™ v1.3 closes the five gaps identified in the v1.2.0 audit: LLM advisory adapter, ML-KEM768 KEM runtime, HITL quorum model, PostgreSQL adapter activation, and independent reproduction toolkit. Full-stack verification: 12/12 checks pass.
+
+### v1.3.0 non-claims
+
+```
+HITL quorum model is not HSM-backed.
+HITL quorum model is not enterprise IAM.
+ML-KEM768 wrapper is not a certified cryptographic implementation.
+Simulation mode is NOT cryptographically secure.
+PostgreSQL adapter is not production-tested at scale.
+LLM advisory output is not governance.
+LLM advisory output does not override MECH-REASON™ recommended_outcome.
+This release is not regulatory approval.
+This release is not external certification.
+```
