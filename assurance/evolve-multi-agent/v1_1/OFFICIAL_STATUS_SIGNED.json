@@ -1,0 +1,40 @@
+{
+  "schema_id": "AEM_EVOLVE_OFFICIAL_STATUS_SIGNED_V1_1",
+  "official_status": "V1_1_CONTROLLED_ENVIRONMENT_ASSURANCE_UPDATE",
+  "version": "1.1",
+  "input_hashes": {
+    "ETHICBIT_CEERV_CEMU_V10_1_MASTER_REPO_TREE.md": "13746aafde9efbeb160eaadebcd33c763dd2cdef3dd04d021489afb01d6d020d",
+    "AEM_AEM_EVOLVE_ALIGNMENT.md": "bfe6e7d738f597ec4c9a9840a046af5e6b5ee1045c554081c1d1d0c80ef8f38c",
+    "regulatory_mapping_check_report.json": "1bf612205deb7e0c10d161bb957aa6a37c5d3c0b689eb3a59a10bc190337c0ee",
+    "governance_effectiveness_report.json": "6a5a719b815b3d5ce7f4df488d7623cb3098d81db21bf24fabe0ca6a7a85e704",
+    "multi_anchor_verification_report.json": "8aa8c21b4e305aa90562db35906c10956f04bdbbcabe6cbddbf818c2c24ad5dc",
+    "hitl_signature_verification_report.json": "7cf060f4d1a4005d6ae83807c4cd83b63f52caaaedebdffa722e67121620aa37",
+    "receipt_forgery_test_report.json": "b572b4d1c5892e1a9aa63fcec02ea0fd310a30a8db5ad044971c2e285d4b6ddf"
+  },
+  "manifest_hash": "9ad858b161f606099805a2936499940de6d91ff80d1295021e00752e5d84a89e",
+  "policy_version": "v1.1-claim-boundary-policy",
+  "run_id": "a458b0d3-7a86-4bf0-8024-a1eb41e86f7c",
+  "generated_at": "2026-05-09T03:13:39.106319+00:00",
+  "signature_status": "DEMO_SIGNED_ED25519",
+  "regulatory_approval_claimed": false,
+  "legal_compliance_claimed": false,
+  "conformity_assessment_claimed": false,
+  "production_readiness_claimed": false,
+  "independent_reproduction_claimed": false,
+  "cybersecurity_certification_claimed": false,
+  "hsm_backed_claimed": false,
+  "non_claims": [
+    "Not regulatory-approved.",
+    "Not externally certified.",
+    "Not legal compliance.",
+    "Not conformity assessed.",
+    "Not production-ready universal.",
+    "Not independently reproduced unless external reports exist.",
+    "Not cybersecurity certified.",
+    "Not financial advice.",
+    "Not clinical or diagnostic.",
+    "Not tamper-proof.",
+    "Not HSM-backed unless separately implemented.",
+    "Signature is demo Ed25519 \u2014 not production key custody."
+  ]
+}
