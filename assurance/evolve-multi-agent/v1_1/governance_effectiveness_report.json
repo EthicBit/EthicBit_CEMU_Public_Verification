@@ -1,0 +1,30 @@
+{
+  "schema_id": "AEM_EVOLVE_GOVERNANCE_EFFECTIVENESS_REPORT_V1_1",
+  "generated_at": "2026-05-09T03:13:10.685643+00:00",
+  "status": "PASS",
+  "scenario_scope": "controlled_demonstration",
+  "pass_count": 0,
+  "scope_limited_count": 7,
+  "fail_closed_count": 0,
+  "total_receipts": 7,
+  "scope_limited_rate": 1.0,
+  "fail_closed_rate": 0.0,
+  "unauthorized_action_prevention_rate": 1.0,
+  "receipt_boundary_preservation_rate": 1.0,
+  "tamper_detection_rate": 1.0,
+  "hitl_required_rate": 0.0,
+  "hitl_required_count": 0,
+  "hitl_decisions_count": 1,
+  "hitl_approval_rate": 1.0,
+  "claim_boundary_violation_attempts": 0,
+  "claim_boundary_violation_block_rate": 1.0,
+  "production_sla_claimed": false,
+  "regulatory_proof_claimed": false,
+  "non_claims": [
+    "These are controlled-demonstration governance metrics.",
+    "These metrics are not production SLAs.",
+    "These metrics are not regulatory proof.",
+    "These metrics are not external certification.",
+    "These metrics do not guarantee tamper-proof operation."
+  ]
+}
