@@ -1,6 +1,6 @@
 {
   "schema_id": "AEM_EVOLVE_MECH_REASON_REPORT_V1_2",
-  "generated_at": "2026-05-09T12:15:37.705974+00:00",
+  "generated_at": "2026-05-09T12:20:00.278355+00:00",
   "policy_version": "1.2.0",
   "recommended_outcome": "PASS",
   "hitl_required": true,
@@ -21,12 +21,12 @@
   },
   "mechanical_explanation": "No claim boundary rules triggered. Evidence completeness score: 1.000 (sufficient). Governance risk score: 0.000 (low). Claim boundary risk score: 0.000. Anchor integrity score: 1.000. Receipt integrity score: 1.000. Regulatory mapping presence score: 1.000. HITL necessity score: 1.000. Recommended outcome: PASS. All claim boundary checks passed and scores are within acceptable thresholds. LLM output was not used to generate this explanation.",
   "input_hashes": {
-    "claim_boundary_check_report.json": "9c82367860696d36ec672767f938131043aa024cdb32fab715436c8495fbac35",
-    "evidence_completeness_report.json": "c2370e51c23682191a06705ba9314729df1c41bdaf31a06a7c602a4801ba40a4",
-    "governance_risk_score_report.json": "b2640e79dbb1e25418ea98c7e42f2e382b363f1aab935beee580992a4c73c8f1",
+    "claim_boundary_check_report.json": "62ff32ff75b01efa074abcb31f4ec55d6eb104371bca76c33e871b6e1193303a",
+    "evidence_completeness_report.json": "24f2fd1354e4a0f6300c84711753eac1185e9529ba362d223fe4cfdcb7ded031",
+    "governance_risk_score_report.json": "704a28d783c5b43004eed4ddca35a90d8069febe792c5777fd4edd393427b2eb",
     "AEM_EVOLVE_POLICY_V1_2.json": "1e78e1d2a667251340c999f3954b528b5a1116fc29f66f0f55f64d650640d230"
   },
-  "report_hash": "ded194192cc76a770d941f33ec7f81d95605b381713fffb9c2a4b075e99a6d37",
+  "report_hash": "905f696f044444a3b479e2d035966763d450dca3973f59abcf263d53a95c223f",
   "llm_involved": false,
   "non_claims_preserved": [
     "LLM output is not final governance.",

@@ -1,0 +1,9 @@
+AEM-EVOLVE™ v1.2 — V1_2 Artifact Hash Record
+Generated: 2026-05-09T12:20:24.620229+00:00
+Algorithm: SHA-256
+
+036d75bd45d98157d76bcba9b7e2dd59e0cf04414a06a3afc226c2f077514f1c  MECH_REASON_REPORT.json
+65e5ec4d77871a5668b4bd881491a1abb6acc3704c67073108d8edd95294f3b8  MECH_REASON_VERIFICATION_REPORT.json
+62ff32ff75b01efa074abcb31f4ec55d6eb104371bca76c33e871b6e1193303a  claim_boundary_check_report.json
+24f2fd1354e4a0f6300c84711753eac1185e9529ba362d223fe4cfdcb7ded031  evidence_completeness_report.json
+704a28d783c5b43004eed4ddca35a90d8069febe792c5777fd4edd393427b2eb  governance_risk_score_report.json

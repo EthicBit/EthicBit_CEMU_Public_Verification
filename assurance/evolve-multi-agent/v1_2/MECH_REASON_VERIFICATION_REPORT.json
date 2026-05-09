@@ -1,0 +1,78 @@
+{
+  "schema_id": "AEM_EVOLVE_MECH_REASON_VERIFICATION_REPORT_V1_2",
+  "source_report_hash": "905f696f044444a3b479e2d035966763d450dca3973f59abcf263d53a95c223f",
+  "policy_version": "1.2.0",
+  "verification_result": "PASS",
+  "checks_passed": 10,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "check_id": "C-01-SCHEMA",
+      "status": "PASS",
+      "detail": "schema_id=AEM_EVOLVE_MECH_REASON_REPORT_V1_2, llm_involved=false"
+    },
+    {
+      "check_id": "C-02-POLICY-VER",
+      "status": "PASS",
+      "detail": "policy_version=1.2.0"
+    },
+    {
+      "check_id": "C-03-INPUT-HASHES",
+      "status": "PASS",
+      "detail": "all 4 input hashes verified"
+    },
+    {
+      "check_id": "C-04-REPORT-HASH",
+      "status": "PASS",
+      "detail": "report_hash=ded194192cc76a77\u2026"
+    },
+    {
+      "check_id": "C-05-SCORES",
+      "status": "PASS",
+      "detail": "all 7 scores in [0.0, 1.0]"
+    },
+    {
+      "check_id": "C-06-TRIGGERED-RULES",
+      "status": "PASS",
+      "detail": "0 rule(s), all strings"
+    },
+    {
+      "check_id": "C-07-OUTCOME",
+      "status": "PASS",
+      "detail": "recommended_outcome=PASS"
+    },
+    {
+      "check_id": "C-08-EXPLANATION",
+      "status": "PASS",
+      "detail": "explanation present, non-LLM marker confirmed"
+    },
+    {
+      "check_id": "C-09-NON-CLAIMS",
+      "status": "PASS",
+      "detail": "all 9 non-claims present"
+    },
+    {
+      "check_id": "C-10-DETERMINISM",
+      "status": "PASS",
+      "detail": "two runs agree: outcome=PASS, triggered_rules=[]"
+    }
+  ],
+  "non_claims_verified": [
+    "LLM output is not final governance.",
+    "LLM output is not official status.",
+    "LLM output is not regulatory approval.",
+    "LLM output is not legal compliance.",
+    "LLM output is not certification.",
+    "LLM output is not receipt sealing.",
+    "This recommendation is not regulatory approval.",
+    "This recommendation is not legal compliance.",
+    "This recommendation is not external certification."
+  ],
+  "llm_involved": false,
+  "verification_non_claims": [
+    "This verification is not a regulatory audit.",
+    "This verification is not legal compliance certification.",
+    "This verification does not replace HITL human review.",
+    "LLM output was not used in this verification."
+  ]
+}
