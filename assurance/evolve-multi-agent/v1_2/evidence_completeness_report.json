@@ -1,0 +1,97 @@
+{
+  "schema_id": "AEM_EVOLVE_EVIDENCE_COMPLETENESS_REPORT_V1_2",
+  "generated_at": "2026-05-09T12:13:19.367128+00:00",
+  "status": "PASS",
+  "evidence_completeness_score": 1.0,
+  "artifacts_checked": 8,
+  "artifacts_present": 8,
+  "artifacts_valid": 8,
+  "artifact_results": [
+    {
+      "key": "regulatory_mapping",
+      "present": true,
+      "valid": true,
+      "actual_value": "PASS",
+      "expected_value": "PASS",
+      "score": 1.0,
+      "weight": 0.15,
+      "reason": "ok"
+    },
+    {
+      "key": "governance_effectiveness",
+      "present": true,
+      "valid": true,
+      "actual_value": "PASS",
+      "expected_value": "PASS",
+      "score": 1.0,
+      "weight": 0.15,
+      "reason": "ok"
+    },
+    {
+      "key": "multi_anchor",
+      "present": true,
+      "valid": true,
+      "actual_value": "PASS",
+      "expected_value": "PASS",
+      "score": 1.0,
+      "weight": 0.15,
+      "reason": "ok"
+    },
+    {
+      "key": "hitl_verification",
+      "present": true,
+      "valid": true,
+      "actual_value": "PASS_DEMO",
+      "expected_value": "PASS_DEMO",
+      "score": 1.0,
+      "weight": 0.15,
+      "reason": "ok"
+    },
+    {
+      "key": "receipt_forgery",
+      "present": true,
+      "valid": true,
+      "actual_value": "PASS",
+      "expected_value": "PASS",
+      "score": 1.0,
+      "weight": 0.15,
+      "reason": "ok"
+    },
+    {
+      "key": "official_status",
+      "present": true,
+      "valid": true,
+      "actual_value": "V1_1_CONTROLLED_ENVIRONMENT_ASSURANCE_UPDATE",
+      "expected_value": "V1_1_CONTROLLED_ENVIRONMENT_ASSURANCE_UPDATE",
+      "score": 1.0,
+      "weight": 0.1,
+      "reason": "ok"
+    },
+    {
+      "key": "anchor_receipt",
+      "present": true,
+      "valid": true,
+      "actual_value": "ethereum-mainnet",
+      "expected_value": "ethereum-mainnet",
+      "score": 1.0,
+      "weight": 0.1,
+      "reason": "ok"
+    },
+    {
+      "key": "human_decisions",
+      "present": true,
+      "valid": true,
+      "actual_value": 1,
+      "expected_value": null,
+      "score": 1.0,
+      "weight": 0.05,
+      "reason": "ok"
+    }
+  ],
+  "llm_involved": false,
+  "non_claims": [
+    "This score is not regulatory proof.",
+    "This score is not production SLA.",
+    "LLM output did not contribute to this score."
+  ]
+}
