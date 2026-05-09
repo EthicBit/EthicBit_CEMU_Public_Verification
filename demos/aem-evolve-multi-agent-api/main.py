@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v1.6.0: signing wired, HITL enforced, DBAdapter integrated
+May 2026 — v1.7.0: read-time signature verification, key persistence, replay mitigation
 """
 
 import logging
@@ -56,8 +56,15 @@ logging.config.dictConfig({
 log = logging.getLogger("aem_evolve_api")
 
 # ── Signing provider — initialized at import time ─────────────────────────────
+_SIGNING_KEY_FILE_NAME = "signing_key.pem"
+
+
 def _init_signing_provider():
-    """Try EnvSigningProvider; fall back to ephemeral Ed25519 for demo/CI."""
+    """
+    Priority: (1) env var PEM, (2) file-based persistent key, (3) generate + persist.
+    File path: <DEMO_ROOT>/signing_key.pem — survives server restarts.
+    """
+    # (1) Env var — explicit secret wins
     try:
         from signing.env_signing_provider import EnvSigningProvider
         provider = EnvSigningProvider()
@@ -65,33 +72,35 @@ def _init_signing_provider():
         return provider, "SIGNED_Ed25519_ENV"
     except Exception:
         pass
+
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
     from cryptography.hazmat.primitives import serialization
+
+    key_file = DEMO_ROOT / _SIGNING_KEY_FILE_NAME
+
+    # (2) Persistent file key — reload across restarts
+    try:
+        from signing.file_signing_provider import FileSigningProvider
+        provider = FileSigningProvider(key_file)
+        log.info("signing_provider_loaded", extra={"provider": "FileSigningProvider", "key_file": str(key_file)})
+        return provider, "SIGNED_Ed25519_FILE"
+    except FileNotFoundError:
+        pass  # file doesn't exist yet — generate and persist below
+
+    # (3) Generate a new key and write it to the persistent file
     _key = Ed25519PrivateKey.generate()
+    pem = _key.private_bytes(
+        serialization.Encoding.PEM,
+        serialization.PrivateFormat.PKCS8,
+        serialization.NoEncryption(),
+    )
+    key_file.write_bytes(pem)
+    log.info("signing_key_generated", extra={"key_file": str(key_file)})
 
-    class _EphemeralSigningProvider:
-        def sign(self, msg: bytes) -> bytes:
-            return _key.sign(msg)
-
-        def verify(self, msg: bytes, sig: bytes) -> bool:
-            from cryptography.exceptions import InvalidSignature
-            try:
-                _key.public_key().verify(sig, msg)
-                return True
-            except InvalidSignature:
-                return False
-
-        def public_key_pem(self) -> bytes:
-            return _key.public_key().public_bytes(
-                serialization.Encoding.PEM,
-                serialization.PublicFormat.SubjectPublicKeyInfo,
-            )
-
-        def algorithm(self) -> str:
-            return "Ed25519"
-
-    log.info("signing_provider_loaded", extra={"provider": "EphemeralSigningProvider"})
-    return _EphemeralSigningProvider(), "SIGNED_EPHEMERAL_Ed25519"
+    from signing.file_signing_provider import FileSigningProvider
+    provider = FileSigningProvider(key_file)
+    log.info("signing_provider_loaded", extra={"provider": "FileSigningProvider(generated)", "key_file": str(key_file)})
+    return provider, "SIGNED_Ed25519_FILE"
 
 
 from fastapi import FastAPI, HTTPException, Request, Security
@@ -119,8 +128,8 @@ if _TOOLS_PATH not in sys.path:
 
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
-    description="Multi-Agent Governance with RBAC HITL Controls — v1.6.0 critical gaps closed",
-    version="0.4.0-demo",
+    description="Multi-Agent Governance with RBAC HITL Controls — v1.7.0 read-verify, key-persist, anti-replay",
+    version="0.5.0-demo",
 )
 
 
@@ -278,6 +287,14 @@ def init_audit_tables(adapter: DBAdapter) -> None:
             chain_hash TEXT NOT NULL,
             timestamp_utc TEXT NOT NULL
         )""",
+        # Nonce store: SHA256(token) keyed by (token_hash, event_id) — replay prevention
+        """CREATE TABLE IF NOT EXISTS hitl_used_tokens (
+            token_hash TEXT NOT NULL,
+            event_id TEXT NOT NULL,
+            approver_id TEXT NOT NULL,
+            used_at TEXT NOT NULL,
+            PRIMARY KEY (token_hash, event_id)
+        )""",
     ]:
         adapter.execute_write(sql)
     adapter.commit()
@@ -363,6 +380,63 @@ class StatusResponse(BaseModel):
 def compute_sha256(data: dict) -> str:
     canonical = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(canonical.encode()).hexdigest()
+
+
+_SIG_FIELDS = {"signature_hex", "signature_algorithm", "signature_status", "signature_verified",
+               "signature_verification_note"}
+
+
+def _verify_artifact_signature(artifact: dict) -> dict:
+    """Return artifact copy with signature_verified + signature_verification_note fields."""
+    result = dict(artifact)
+    sig_hex = artifact.get("signature_hex")
+
+    # Receipts may include both event_canonical_sha256 and receipt_canonical_sha256.
+    # Verify receipts against receipt_canonical_sha256 first; otherwise verify events
+    # against event_canonical_sha256.
+    if "receipt_canonical_sha256" in artifact:
+        canonical_sha256 = artifact.get("receipt_canonical_sha256")
+    elif "event_canonical_sha256" in artifact:
+        canonical_sha256 = artifact.get("event_canonical_sha256")
+    else:
+        canonical_sha256 = None
+
+    if not sig_hex or not canonical_sha256:
+        result["signature_verified"] = False
+        result["signature_verification_note"] = "missing_signature_fields"
+        return result
+
+    try:
+        sig_bytes = bytes.fromhex(sig_hex)
+        ok = _signing_provider.verify(canonical_sha256.encode(), sig_bytes)
+        result["signature_verified"] = ok
+        result["signature_verification_note"] = (
+            "verified_at_read_time" if ok else "signature_invalid"
+        )
+    except Exception as exc:
+        result["signature_verified"] = False
+        result["signature_verification_note"] = f"verification_error:{exc}"
+
+    return result
+
+
+def _is_token_used(token: str, event_id: str, adapter: DBAdapter) -> bool:
+    token_hash = hashlib.sha256(token.encode()).hexdigest()
+    rows = adapter.execute(
+        "SELECT 1 FROM hitl_used_tokens WHERE token_hash = ? AND event_id = ?",
+        (token_hash, event_id),
+    )
+    return len(rows) > 0
+
+
+def _mark_token_used(token: str, event_id: str, approver_id: str, adapter: DBAdapter) -> None:
+    token_hash = hashlib.sha256(token.encode()).hexdigest()
+    adapter.execute_write(
+        "INSERT OR IGNORE INTO hitl_used_tokens (token_hash, event_id, approver_id, used_at) "
+        "VALUES (?, ?, ?, ?)",
+        (token_hash, event_id, approver_id, datetime.now(timezone.utc).isoformat()),
+    )
+    adapter.commit()
 
 
 def create_evolution_event(
@@ -600,7 +674,7 @@ def healthz():
     except Exception:
         db_ok = False
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": "sqlite" if db_ok else "unreachable", "version": "0.4.0-demo",
+    return {"status": status, "db": "sqlite" if db_ok else "unreachable", "version": "0.5.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -669,6 +743,13 @@ def approve_change(req: ApproveRequest, api_key: str = Security(_API_KEY_HEADER)
     ok, reason = _verify_hitl_token(req.hitl_token, req.hitl_approver_id, event_id)
     if not ok:
         raise HTTPException(403, f"HITL token invalid: {reason}")
+
+    # ── Replay mitigation — one-time use per (token, event_id) pair ──────────
+    if _is_token_used(req.hitl_token, event_id, db_adapter):
+        raise HTTPException(409, "HITL token already used (replay detected). Generate a new token.")
+    _mark_token_used(req.hitl_token, event_id, req.hitl_approver_id, db_adapter)
+    # ─────────────────────────────────────────────────────────────────────────
+
     approver_id = req.hitl_approver_id
     log.info("hitl_identity_verified", extra={"approver_id": approver_id, "event_id": event_id, "reason": reason})
     # ─────────────────────────────────────────────────────────────────────────
@@ -720,7 +801,7 @@ def get_receipt(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
         state = graph.get_state(config).values
         if not state.get("last_receipt"):
             raise HTTPException(404, "No receipt found")
-        return state["last_receipt"]
+        return _verify_artifact_signature(state["last_receipt"])
     except Exception as e:
         raise HTTPException(404, f"Thread not found or unavailable: {str(e)}")
 
@@ -732,18 +813,18 @@ def get_event(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
         "SELECT event_json FROM evolution_events WHERE thread_id = ? ORDER BY timestamp_utc DESC",
         (thread_id,),
     )
-    events = [json.loads(r[0]) for r in rows]
+    events = [_verify_artifact_signature(json.loads(r[0])) for r in rows]
     return {"thread_id": thread_id, "events": events}
 
 
 @app.get("/audit/{thread_id}")
 def get_audit(thread_id: str, api_key: str = Security(_API_KEY_HEADER)):
     _require_any_auth(api_key)
-    events = [json.loads(r[0]) for r in db_adapter.execute(
+    events = [_verify_artifact_signature(json.loads(r[0])) for r in db_adapter.execute(
         "SELECT event_json FROM evolution_events WHERE thread_id = ? ORDER BY timestamp_utc DESC",
         (thread_id,),
     )]
-    receipts = [json.loads(r[0]) for r in db_adapter.execute(
+    receipts = [_verify_artifact_signature(json.loads(r[0])) for r in db_adapter.execute(
         "SELECT receipt_json FROM evolution_receipts WHERE thread_id = ? ORDER BY timestamp_utc DESC",
         (thread_id,),
     )]
@@ -830,7 +911,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.4.0-demo",
+        "version": "0.5.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -843,8 +924,11 @@ def health():
         "signing_provider": _signing_provider.algorithm(),
         "signing_status": _SIGNING_STATUS,
         "hitl_identity_enforcement": "HMAC_TOKEN_REQUIRED_FOR_SCOPE_LIMITED",
+        "hitl_replay_mitigation": "ONE_TIME_USE_PER_TOKEN_EVENT_PAIR",
+        "read_time_signature_verification": True,
+        "key_persistence": "FILE_BASED" if "FILE" in _SIGNING_STATUS else "ENV_VAR",
         "db_adapter": "SQLiteAdapter",
-        "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions", "audit_chain"],
+        "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions", "audit_chain", "hitl_used_tokens"],
         "tamper_evident_chain": True,
         "tamper_proof_claimed": False,
         "non_claims": [
@@ -856,12 +940,13 @@ def health():
             "not_tamper_proof",
             "no_hsm_key_custody",
             "no_production_oidc_idp",
-            "ephemeral_signing_key_not_persisted",
+            "file_key_not_hsm_backed",
+            "local_sqlite_replay_store_not_distributed",
         ],
     }
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.4.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.5.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)

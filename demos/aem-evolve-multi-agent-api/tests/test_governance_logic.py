@@ -17,6 +17,9 @@ from main import (
     evaluate_evolution_gate,
     init_audit_tables,
     _append_audit_chain,
+    _verify_artifact_signature,
+    _is_token_used,
+    _mark_token_used,
     GENESIS_HASH,
 )
 from db_adapter import SQLiteAdapter
@@ -158,6 +161,75 @@ class TestCreateEvolutionEvent:
     def test_event_id_format(self, mem_db):
         evt = create_evolution_event("CONFIG_UPDATE", "art", "st", 55.0, mem_db, "t-id")
         assert evt["event_id"].startswith("EVO-API-")
+
+
+# ── read-time signature verification ──────────────────────────────────────────
+
+class TestReadTimeSignatureVerification:
+    def _make_event(self, score):
+        return {
+            "event_id": f"EVO-TEST-{score}",
+            "materiality_score": score,
+            "requested_claim_scope": "RESEARCH_SUPPORT",
+            "claim_boundary": {
+                "research_support_only": True,
+                "clinical_claimed": False,
+                "diagnostic_claimed": False,
+                "regulatory_approval_claimed": False,
+                "third_party_binding": False,
+            },
+            "event_canonical_sha256": "abc123",
+        }
+
+    def test_event_signature_verified_at_read(self, mem_db):
+        evt = create_evolution_event("CONFIG_UPDATE", "art", "st", 55.0, mem_db, "t-rv-evt")
+        verified = _verify_artifact_signature(evt)
+        assert verified["signature_verified"] is True
+        assert verified["signature_verification_note"] == "verified_at_read_time"
+
+    def test_receipt_signature_verified_at_read(self, mem_db):
+        event = self._make_event(50.0)
+        receipt = evaluate_evolution_gate(event, mem_db, "t-rv-rec")
+        verified = _verify_artifact_signature(receipt)
+        assert verified["signature_verified"] is True
+
+    def test_tampered_sig_fails_verification(self, mem_db):
+        evt = create_evolution_event("CONFIG_UPDATE", "art", "st", 55.0, mem_db, "t-rv-tamper")
+        tampered = dict(evt)
+        tampered["signature_hex"] = "00" * 64
+        verified = _verify_artifact_signature(tampered)
+        assert verified["signature_verified"] is False
+
+    def test_missing_sig_fields_returns_false(self):
+        artifact = {"event_canonical_sha256": "abc", "outcome": "PASS"}
+        verified = _verify_artifact_signature(artifact)
+        assert verified["signature_verified"] is False
+        assert verified["signature_verification_note"] == "missing_signature_fields"
+
+    def test_verification_note_present(self, mem_db):
+        evt = create_evolution_event("CONFIG_UPDATE", "art", "st", 55.0, mem_db, "t-rv-note")
+        verified = _verify_artifact_signature(evt)
+        assert "signature_verification_note" in verified
+
+
+# ── replay mitigation ──────────────────────────────────────────────────────────
+
+class TestReplayMitigation:
+    def test_token_not_used_initially(self, mem_db):
+        assert not _is_token_used("some-token-hex", "evt-001", mem_db)
+
+    def test_mark_then_is_used(self, mem_db):
+        _mark_token_used("tok-abc", "evt-002", "approver-001", mem_db)
+        assert _is_token_used("tok-abc", "evt-002", mem_db)
+
+    def test_different_event_not_used(self, mem_db):
+        _mark_token_used("tok-xyz", "evt-003", "approver-001", mem_db)
+        assert not _is_token_used("tok-xyz", "evt-999", mem_db)
+
+    def test_mark_idempotent(self, mem_db):
+        _mark_token_used("tok-dup", "evt-004", "approver-001", mem_db)
+        _mark_token_used("tok-dup", "evt-004", "approver-001", mem_db)
+        assert _is_token_used("tok-dup", "evt-004", mem_db)
 
 
 # ── audit chain ───────────────────────────────────────────────────────────────

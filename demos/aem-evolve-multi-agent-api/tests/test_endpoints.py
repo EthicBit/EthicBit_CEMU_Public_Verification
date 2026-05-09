@@ -34,7 +34,7 @@ class TestHealth:
     def test_health_body(self, client):
         body = client.get("/health").json()
         assert body["status"] == "healthy"
-        assert body["version"] == "0.4.0-demo"
+        assert body["version"] == "0.5.0-demo"
         assert body["tamper_proof_claimed"] is False
         assert "non_claims" in body
 
@@ -49,7 +49,7 @@ class TestHealth:
 
     def test_healthz_version(self, client):
         body = client.get("/healthz").json()
-        assert body["version"] == "0.4.0-demo"
+        assert body["version"] == "0.5.0-demo"
 
 
 class TestMetricsEndpoint:
@@ -196,6 +196,37 @@ class TestApproveEndpoint:
                         json={"thread_id": "t-nopending123", "decision": "approve"},
                         headers={"X-API-Key": APPROVER_KEY})
         assert r.status_code in (400, 404)
+
+    def test_approve_replay_returns_409(self, client):
+        tid, event_id = self._start_and_get_event_id(client)
+        token = _make_hitl_token(_HITL_APPROVER, event_id)
+        r1 = client.post("/approve",
+                         json={"thread_id": tid, "decision": "approve",
+                               "hitl_token": token, "hitl_approver_id": _HITL_APPROVER},
+                         headers={"X-API-Key": APPROVER_KEY})
+        assert r1.status_code == 200
+        # Second call with same token must be rejected — no pending approval exists now,
+        # but the 409 replay guard fires before the 400 no-pending guard only if the
+        # session still has human_approval_needed. Start a fresh session to test replay.
+        tid2, event_id2 = self._start_and_get_event_id(client)
+        # Reuse same token bytes but for the new event_id — this token is valid for event_id2
+        # only if we generate it for event_id2. Test with the SAME token against event_id2
+        # to verify cross-event tokens are rejected at the 403 layer.
+        # To specifically test replay: start another session that reuses the EXACT same event_id
+        # (not possible; event_ids are UUIDs). Instead test that a second approve on event_id
+        # fails once the session is consumed (400 no-pending), which is covered above.
+        # Replay guard test: patch the used_tokens table directly.
+        from main import db_adapter as _da, _is_token_used, _mark_token_used
+        import hashlib as _hl
+        token3 = _make_hitl_token(_HITL_APPROVER, event_id2)
+        # Pre-mark token3 as used
+        _mark_token_used(token3, event_id2, _HITL_APPROVER, _da)
+        assert _is_token_used(token3, event_id2, _da)
+        r2 = client.post("/approve",
+                         json={"thread_id": tid2, "decision": "approve",
+                               "hitl_token": token3, "hitl_approver_id": _HITL_APPROVER},
+                         headers={"X-API-Key": APPROVER_KEY})
+        assert r2.status_code == 409
 
 
 class TestAuditEndpoint:
