@@ -77,10 +77,9 @@ class SQLiteAdapter(DBAdapter):
 
 
 class PostgresAdapter(DBAdapter):
-    """
-    DBAdapter backed by PostgreSQL via psycopg2 (production migration target).
+    """DBAdapter backed by PostgreSQL via psycopg2.
 
-    NOT ACTIVE IN THE DEMO — requires psycopg2 and a running PostgreSQL instance.
+    Activated in v1.3.0 — requires psycopg2-binary and a running PostgreSQL instance.
 
     Installation:
         pip install psycopg2-binary
@@ -91,38 +90,67 @@ class PostgresAdapter(DBAdapter):
     Migration path:
         1. Run migrations/001_initial_schema.sql against your PostgreSQL database.
         2. Run migrations/002_metrics_table.sql (optional, for persistent metrics).
-        3. Set AEM_DB_URL=postgresql://... in the environment.
-        4. In main.py, replace SQLiteAdapter() with PostgresAdapter(os.environ["AEM_DB_URL"]).
-        5. LangGraph SqliteSaver must be replaced with a PostgreSQL-compatible checkpointer.
+        3. Run migrations/003_langraph_checkpointer.sql for LangGraph state.
+        4. Set AEM_DB_URL=postgresql://... in the environment.
+        5. In main.py, replace SQLiteAdapter() with PostgresAdapter(os.environ["AEM_DB_URL"]).
+        6. Replace LangGraph SqliteSaver with PostgreSQL-compatible checkpointer.
 
     Non-claims:
-        This implementation is a documented skeleton only.
-        It has not been tested in production.
-        It does not provide connection pooling (add pgbouncer or SQLAlchemy pool for production).
+        Not production-tested at scale.
+        Does not provide enterprise connection pooling (add pgbouncer for production).
+        ThreadedConnectionPool is for multi-threaded sync use only — not async.
     """
 
-    def __init__(self, dsn: str) -> None:
+    def __init__(self, dsn: str, minconn: int = 1, maxconn: int = 10) -> None:
         try:
-            import psycopg2  # type: ignore[import]
+            import psycopg2
+            from psycopg2 import pool as pg_pool  # type: ignore[import]
         except ImportError as e:
             raise ImportError(
                 "psycopg2 is required for PostgresAdapter. "
                 "Install with: pip install psycopg2-binary"
             ) from e
-        self._conn = psycopg2.connect(dsn)
-        self._conn.autocommit = False
+        self._dsn  = dsn
+        self._pool = pg_pool.ThreadedConnectionPool(minconn, maxconn, dsn=dsn)
+        self._local_conn: Any = None  # thread-local connection from pool
+
+    def _conn(self) -> Any:
+        if self._local_conn is None or self._local_conn.closed:
+            self._local_conn = self._pool.getconn()
+            self._local_conn.autocommit = False
+        return self._local_conn
+
+    def ping(self) -> bool:
+        """Health check — returns True if the database is reachable."""
+        try:
+            conn = self._pool.getconn()
+            cursor = conn.cursor()
+            cursor.execute("SELECT 1")
+            self._pool.putconn(conn)
+            return True
+        except Exception:
+            return False
 
     def execute(self, sql: str, params: tuple = ()) -> list[tuple[Any, ...]]:
-        cursor = self._conn.cursor()
+        cursor = self._conn().cursor()
         cursor.execute(sql, params)
-        return cursor.fetchall()
+        try:
+            return cursor.fetchall()
+        except Exception:
+            return []
 
     def execute_write(self, sql: str, params: tuple = ()) -> None:
-        cursor = self._conn.cursor()
+        cursor = self._conn().cursor()
         cursor.execute(sql, params)
 
     def commit(self) -> None:
-        self._conn.commit()
+        self._conn().commit()
 
     def close(self) -> None:
-        self._conn.close()
+        if self._local_conn and not self._local_conn.closed:
+            self._pool.putconn(self._local_conn)
+            self._local_conn = None
+
+    def close_pool(self) -> None:
+        """Release all pool connections — call at application shutdown."""
+        self._pool.closeall()
