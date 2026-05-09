@@ -1,0 +1,42 @@
+{
+  "schema_id": "AEM_EVOLVE_MECH_REASON_REPORT_V1_2",
+  "generated_at": "2026-05-09T12:15:37.705974+00:00",
+  "policy_version": "1.2.0",
+  "recommended_outcome": "PASS",
+  "hitl_required": true,
+  "triggered_rules": [],
+  "scores": {
+    "evidence_completeness_score": 1.0,
+    "governance_risk_score": 0.0,
+    "claim_boundary_risk_score": 0.0,
+    "hitl_necessity_score": 1.0,
+    "anchor_integrity_score": 1.0,
+    "receipt_integrity_score": 1.0,
+    "regulatory_mapping_presence_score": 1.0
+  },
+  "state_machine_validation": {
+    "outcome": "PASS",
+    "state_transition_valid": true,
+    "reason": "ok"
+  },
+  "mechanical_explanation": "No claim boundary rules triggered. Evidence completeness score: 1.000 (sufficient). Governance risk score: 0.000 (low). Claim boundary risk score: 0.000. Anchor integrity score: 1.000. Receipt integrity score: 1.000. Regulatory mapping presence score: 1.000. HITL necessity score: 1.000. Recommended outcome: PASS. All claim boundary checks passed and scores are within acceptable thresholds. LLM output was not used to generate this explanation.",
+  "input_hashes": {
+    "claim_boundary_check_report.json": "9c82367860696d36ec672767f938131043aa024cdb32fab715436c8495fbac35",
+    "evidence_completeness_report.json": "c2370e51c23682191a06705ba9314729df1c41bdaf31a06a7c602a4801ba40a4",
+    "governance_risk_score_report.json": "b2640e79dbb1e25418ea98c7e42f2e382b363f1aab935beee580992a4c73c8f1",
+    "AEM_EVOLVE_POLICY_V1_2.json": "1e78e1d2a667251340c999f3954b528b5a1116fc29f66f0f55f64d650640d230"
+  },
+  "report_hash": "ded194192cc76a770d941f33ec7f81d95605b381713fffb9c2a4b075e99a6d37",
+  "llm_involved": false,
+  "non_claims_preserved": [
+    "LLM output is not final governance.",
+    "LLM output is not official status.",
+    "LLM output is not regulatory approval.",
+    "LLM output is not legal compliance.",
+    "LLM output is not certification.",
+    "LLM output is not receipt sealing.",
+    "This recommendation is not regulatory approval.",
+    "This recommendation is not legal compliance.",
+    "This recommendation is not external certification."
+  ]
+}
