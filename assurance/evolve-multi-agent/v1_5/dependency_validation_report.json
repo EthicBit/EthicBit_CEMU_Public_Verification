@@ -1,0 +1,64 @@
+{
+  "component": "dependency_validator",
+  "version": "v1.5",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "failed_required": [],
+  "warned_optional": [
+    "C-07-anthropic",
+    "C-08-psycopg2"
+  ],
+  "checks": [
+    {
+      "check": "C-01-python-version",
+      "status": "PASS",
+      "detail": "3.11.8"
+    },
+    {
+      "check": "C-02-fastapi",
+      "status": "PASS",
+      "detail": "v0.136.1  [REQUIRED]"
+    },
+    {
+      "check": "C-03-cryptography",
+      "status": "PASS",
+      "detail": "v48.0.0  [REQUIRED]"
+    },
+    {
+      "check": "C-04-mlkem",
+      "status": "PASS",
+      "detail": "vunknown  [REQUIRED]"
+    },
+    {
+      "check": "C-05-asyncpg",
+      "status": "PASS",
+      "detail": "v0.31.0  [REQUIRED]"
+    },
+    {
+      "check": "C-06-langgraph",
+      "status": "PASS",
+      "detail": "vunknown  [OPTIONAL]"
+    },
+    {
+      "check": "C-07-anthropic",
+      "status": "WARN",
+      "detail": "NOT INSTALLED  [OPTIONAL]  \u2192 pip install anthropic"
+    },
+    {
+      "check": "C-08-psycopg2",
+      "status": "WARN",
+      "detail": "NOT INSTALLED  [OPTIONAL]  \u2192 pip install psycopg2"
+    },
+    {
+      "check": "C-09-uvicorn",
+      "status": "PASS",
+      "detail": "v0.46.0  [OPTIONAL]"
+    },
+    {
+      "check": "C-10-pytest",
+      "status": "PASS",
+      "detail": "v9.0.3  [OPTIONAL]"
+    }
+  ]
+}
