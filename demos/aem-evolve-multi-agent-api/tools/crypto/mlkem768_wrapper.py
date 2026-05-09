@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""ML-KEM768 post-quantum KEM runtime wrapper — AEM-EVOLVE™ v1.3.
+"""ML-KEM768 post-quantum KEM runtime wrapper — AEM-EVOLVE™ v1.4.
 
 Implements key generation, encapsulation, and decapsulation using ML-KEM768
 (FIPS 203 / formerly Kyber768). Used for runtime secret protection — does NOT
 replace Ed25519/ML-DSA signing on the governance path.
 
 Library priority:
-  1. `mlkem` package  (pip install mlkem)
+  1. `mlkem` package  (pip install mlkem)  — real FIPS 203 implementation
   2. `kyber-py` package (pip install kyber-py)
   3. Simulation mode — deterministic test vectors, clearly marked
+
+v1.4 change: uses correct mlkem library API (ML_KEM / ML_KEM_768).
 
 Non-claims:
   - This wrapper is not a certified cryptographic implementation.
@@ -43,7 +45,8 @@ class KEMResult:
 
 def _detect_mode() -> MODE:
     try:
-        import mlkem  # type: ignore[import]
+        from mlkem.ml_kem import ML_KEM  # type: ignore[import]
+        from mlkem.parameter_set import ML_KEM_768  # type: ignore[import]
         return "mlkem"
     except ImportError:
         pass
@@ -102,9 +105,11 @@ def _sim_decapsulate(secret_key: bytes, ciphertext: bytes) -> bytes:
 def keygen(seed: bytes | None = None) -> KEMKeyPair:
     mode = _detect_mode()
     if mode == "mlkem":
-        import mlkem  # type: ignore[import]
-        pk, sk = mlkem.keygen768()
-        return KEMKeyPair(public_key=pk, secret_key=sk, mode="mlkem")
+        from mlkem.ml_kem import ML_KEM  # type: ignore[import]
+        from mlkem.parameter_set import ML_KEM_768  # type: ignore[import]
+        kem = ML_KEM(ML_KEM_768)
+        ek, dk = kem.key_gen()  # ek = encapsulation key (public), dk = decapsulation key (secret)
+        return KEMKeyPair(public_key=ek, secret_key=dk, mode="mlkem")
     if mode == "kyber_py":
         from kyber import Kyber768  # type: ignore[import]
         pk, sk = Kyber768.keygen()
@@ -115,8 +120,10 @@ def keygen(seed: bytes | None = None) -> KEMKeyPair:
 def encapsulate(public_key: bytes) -> KEMResult:
     mode = _detect_mode()
     if mode == "mlkem":
-        import mlkem  # type: ignore[import]
-        ct, ss = mlkem.enc768(public_key)
+        from mlkem.ml_kem import ML_KEM  # type: ignore[import]
+        from mlkem.parameter_set import ML_KEM_768  # type: ignore[import]
+        kem = ML_KEM(ML_KEM_768)
+        ss, ct = kem.encaps(public_key)  # returns (shared_secret, ciphertext)
         return KEMResult(ciphertext=ct, shared_secret=ss, mode="mlkem")
     if mode == "kyber_py":
         from kyber import Kyber768  # type: ignore[import]
@@ -128,8 +135,10 @@ def encapsulate(public_key: bytes) -> KEMResult:
 def decapsulate(secret_key: bytes, ciphertext: bytes) -> bytes:
     mode = _detect_mode()
     if mode == "mlkem":
-        import mlkem  # type: ignore[import]
-        return mlkem.dec768(secret_key, ciphertext)
+        from mlkem.ml_kem import ML_KEM  # type: ignore[import]
+        from mlkem.parameter_set import ML_KEM_768  # type: ignore[import]
+        kem = ML_KEM(ML_KEM_768)
+        return kem.decaps(secret_key, ciphertext)
     if mode == "kyber_py":
         from kyber import Kyber768  # type: ignore[import]
         return Kyber768.dec(secret_key, ciphertext)
