@@ -1,0 +1,65 @@
+{
+  "component": "hitl_identity_verifier",
+  "version": "v1.4",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "token_format": "HMAC-SHA256(secret, approver_id + ':' + event_id + ':' + timestamp_floor_minutes)",
+  "non_claims": [
+    "HITL identity is not enterprise IAM.",
+    "Shared secret is demo-grade.",
+    "HSM-backed identity requires external IdP integration."
+  ],
+  "checks": [
+    {
+      "check": "C-01-policy-loads",
+      "status": "PASS",
+      "detail": "missing=none"
+    },
+    {
+      "check": "C-02-token-generated",
+      "status": "PASS",
+      "detail": "len=64"
+    },
+    {
+      "check": "C-03-correct-token-verifies",
+      "status": "PASS",
+      "detail": "verified at offset=0 minutes"
+    },
+    {
+      "check": "C-04-wrong-approver-rejected",
+      "status": "PASS",
+      "detail": "approver_id 'attacker-999' not in registry"
+    },
+    {
+      "check": "C-05-wrong-event-rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-06-wrong-secret-rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-07-expired-token-rejected",
+      "status": "PASS",
+      "detail": "token does not match any valid time window"
+    },
+    {
+      "check": "C-08-live-roundtrip",
+      "status": "PASS",
+      "detail": "verified at offset=0 minutes"
+    },
+    {
+      "check": "C-09-unregistered-approver-rejected",
+      "status": "PASS",
+      "detail": "approver_id 'unregistered-999' not in registry"
+    },
+    {
+      "check": "C-10-non-claims-present",
+      "status": "PASS",
+      "detail": "count=4"
+    }
+  ]
+}
