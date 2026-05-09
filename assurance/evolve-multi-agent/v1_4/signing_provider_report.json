@@ -1,0 +1,53 @@
+{
+  "component": "signing_provider",
+  "version": "v1.4",
+  "checks_passed": 8,
+  "checks_total": 8,
+  "result": "PASS",
+  "non_claims": [
+    "SigningProvider is not HSM-backed.",
+    "HSM integration requires an external implementation of this ABC."
+  ],
+  "checks": [
+    {
+      "check": "C-01-ABC-abstract-methods",
+      "status": "PASS",
+      "detail": "abstract=['public_key_pem', 'sign', 'verify']"
+    },
+    {
+      "check": "C-02-EnvProvider-missing-var",
+      "status": "PASS",
+      "detail": "Environment variable 'ETHICBIT_ED25519_PRIVATE_KEY_PEM' is n"
+    },
+    {
+      "check": "C-03-FileProvider-missing-file",
+      "status": "PASS",
+      "detail": "Key file not found: /nonexistent/path/key.pem"
+    },
+    {
+      "check": "C-04-FileProvider-public-key-pem",
+      "status": "PASS",
+      "detail": "length=113"
+    },
+    {
+      "check": "C-05-roundtrip-sign-verify",
+      "status": "PASS",
+      "detail": "sig_length=64"
+    },
+    {
+      "check": "C-06-tampered-message-rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-07-tampered-signature-rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-08-public-key-pem-format",
+      "status": "PASS",
+      "detail": "-----BEGIN PUBLIC KEY-----\n"
+    }
+  ]
+}
