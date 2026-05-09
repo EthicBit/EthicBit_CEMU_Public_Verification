@@ -5,7 +5,41 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.3.0 — Gaps Closure
+## Latest release: AEM-EVOLVE™ v1.4.0 — Production Hardening
+
+**Tag:** `v1.4.0` — 2026-05-09
+**Type:** Production hardening — signing abstraction · HMAC-token HITL identity · ML-KEM768 real library · async PostgreSQL · CI reproduction
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (14/14)`
+
+> AEM-EVOLVE™ v1.4 closes all production hardening gaps from the v1.3.0 audit: signing provider abstraction, HMAC-token HITL identity, real ML-KEM768 library, async PostgreSQL adapter, and CI-enforced reproduction workflow.
+
+- [Public Status Bulletin v1.4.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_4.md)
+- [Whitepaper v1.4](docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md)
+- [GitHub Release v1.4.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.4.0)
+
+### v1.4.0 verification
+
+```bash
+pip install cryptography mlkem asyncpg
+python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_4.py
+```
+
+```
+FULL_STACK_VERIFICATION=PASS  (14/14)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4  ·  v1.4: 2/2
+```
+
+v1.4.0 assurance artifacts:
+
+- [Signing Provider Report](assurance/evolve-multi-agent/v1_4/signing_provider_report.json)
+- [HITL Identity Report](assurance/evolve-multi-agent/v1_4/hitl_identity_report.json)
+- [ML-KEM768 Library Report](assurance/evolve-multi-agent/v1_4/mlkem768_library_report.json)
+- [Async PostgreSQL Adapter Report](assurance/evolve-multi-agent/v1_4/async_postgres_adapter_report.json)
+- [Reproduction Report](assurance/evolve-multi-agent/v1_4/REPRODUCTION_REPORT.json)
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.3.0 — Gaps Closure
 
 **Tag:** `v1.3.0` — 2026-05-09
 **Type:** Gaps closure — LLM adapter · ML-KEM768 · HITL quorum · PostgreSQL · reproduction toolkit
@@ -16,26 +50,6 @@
 - [Public Status Bulletin v1.3.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_3.md)
 - [Whitepaper v1.3](docs/whitepapers/WHITEPAPER_V1_3_AEM_EVOLVE_GAPS_CLOSURE.md)
 - [GitHub Release v1.3.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.3.0)
-
-### v1.3.0 verification
-
-```bash
-python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_3.py
-```
-
-```
-FULL_STACK_VERIFICATION=PASS  (12/12)
-  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4
-```
-
-v1.3.0 assurance artifacts:
-
-- [LLM Advisory Log](assurance/evolve-multi-agent/v1_3/LLM_ADVISORY_LOG.json)
-- [ML-KEM768 Report](assurance/evolve-multi-agent/v1_3/mlkem768_kem_report.json)
-- [HITL Quorum Report](assurance/evolve-multi-agent/v1_3/hitl_quorum_report.json)
-- [PostgreSQL Adapter Validation](assurance/evolve-multi-agent/v1_3/postgres_adapter_validation_report.json)
-- [Reproduction Report](assurance/evolve-multi-agent/v1_3/REPRODUCTION_REPORT.json)
-- [Independent Reproduction Challenge](challenge/independent-reproduction/AEM_V1_3_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
 
 ---
 
@@ -80,6 +94,7 @@ Release discipline references:
 - [Public Status Bulletin v1.1.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md)
 - [Public Status Bulletin v1.2.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_2.md)
 - [Public Status Bulletin v1.3.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_3.md)
+- [Public Status Bulletin v1.4.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_4.md)
 - [Independent Reproduction Challenge v1.1](challenge/independent-reproduction/AEM_V1_1_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
 - [Independent Reproduction Challenge v1.3](challenge/independent-reproduction/AEM_V1_3_INDEPENDENT_REPRODUCTION_CHALLENGE.md)
 

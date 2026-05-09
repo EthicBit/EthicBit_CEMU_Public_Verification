@@ -330,3 +330,56 @@ LLM advisory output does not override MECH-REASON™ recommended_outcome.
 This release is not regulatory approval.
 This release is not external certification.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.4.0 release update (2026-05-09)
+
+**Release tag:** `v1.4.0`
+**Commit SHA (main):** `e3eda3ce`
+**PRs merged:** #119 · #120 · #121 · #122 · #123 · #124 · #125
+
+AEM-EVOLVE™ v1.4.0 was released from `main` after merging 7 ordered PRs. Full-stack verification passed on updated `main`:
+
+```
+FULL_STACK_VERIFICATION=PASS  (14/14)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4  ·  v1.4: 2/2
+```
+
+### Gaps closed in v1.4.0
+
+| PR | Gap | Verification output |
+|---|---|---|
+| #119 | v1.4 roadmap | — |
+| #120 | SigningProvider ABC + EnvSigningProvider + FileSigningProvider | `SIGNING_PROVIDER_VERIFICATION=PASS (8/8)` |
+| #121 | HITL HMAC-SHA256 time-bounded token identity verifier | `HITL_IDENTITY_VERIFICATION=PASS (10/10)` |
+| #122 | ML-KEM768 real library activation (correct API) | `MLKEM768_LIBRARY_STATUS=PASS mode=mlkem` |
+| #123 | AsyncPostgresAdapter via asyncpg + performance indexes | `ASYNC_POSTGRES_ADAPTER_VALIDATION=PASS (10/10)` |
+| #124 | CI reproduction workflow (GitHub Actions) + Dockerfile | `FULL_STACK_VERIFICATION=PASS (14/14)` |
+| #125 | Whitepaper v1.4 | — |
+
+### v1.4.0 assurance artifacts
+
+- `assurance/evolve-multi-agent/v1_4/signing_provider_report.json`
+- `assurance/evolve-multi-agent/v1_4/hitl_identity_report.json`
+- `assurance/evolve-multi-agent/v1_4/mlkem768_library_report.json`
+- `assurance/evolve-multi-agent/v1_4/async_postgres_adapter_report.json`
+- `assurance/evolve-multi-agent/v1_4/REPRODUCTION_REPORT.json`
+
+### v1.4.0 claim
+
+> AEM-EVOLVE™ v1.4 closes all production hardening gaps from the v1.3.0 audit: signing provider abstraction, HMAC-token HITL identity, real ML-KEM768 library, async PostgreSQL adapter, and CI-enforced reproduction workflow. Full-stack verification: 14/14 checks pass.
+
+### v1.4.0 non-claims
+
+```
+SigningProvider is not HSM-backed.
+HSM integration requires an external implementation of the SigningProvider ABC.
+HITL identity is not enterprise IAM.
+HITL tokens are not production-grade without external IdP.
+AsyncPostgresAdapter is not production-tested at scale.
+ML-KEM768 is not independently audited.
+CI reproduction is not external independent reproduction.
+This release is not regulatory approval.
+This release is not external certification.
+```

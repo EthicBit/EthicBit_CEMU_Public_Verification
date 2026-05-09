@@ -7,6 +7,46 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.4.0] — 2026-05-09
+
+### Added
+- `RELEASE_NOTES_V1_4.md` — v1.4 release notes
+- `docs/roadmap/AEM_EVOLVE_V1_4_PR_ROADMAP.md` — v1.4 production hardening roadmap (PR #119)
+- `tools/signing/signing_provider.py` — `SigningProvider` ABC (PR #120)
+- `tools/signing/env_signing_provider.py` — Ed25519 env-var provider (PR #120)
+- `tools/signing/file_signing_provider.py` — Ed25519 file provider (PR #120)
+- `tools/signing/verify_signing_provider.py` — 8-check round-trip verifier (PR #120)
+- `tools/hitl/HITL_IDENTITY_POLICY.json` — HMAC token TTL + approver registry (PR #121)
+- `tools/hitl/hitl_identity_verifier.py` — 10-check HMAC-SHA256 token verifier (PR #121)
+- `tools/hitl/hitl_token_generator.py` — CI token generator (PR #121)
+- `tools/crypto/mlkem768_setup_check.py` — 9-check library installation validator (PR #122)
+- `tools/db/validate_async_postgres_adapter.py` — 10-check async adapter contract validator (PR #123)
+- `tools/db/postgres_mock_integration_test.py` — 6-check async mock integration test (PR #123)
+- `migrations/004_indexes.sql` — production performance indexes (PR #123)
+- `.github/workflows/aem-evolve-reproduction.yml` — CI reproduction workflow (PR #124)
+- `Dockerfile.reproduction` — Python 3.11-slim reproduction container (PR #124)
+- `tools/reproduction/verify_all_v1_4.py` — 14-check full-stack verifier (PR #124)
+- `docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md` (PR #125)
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_4.md`
+- Git tag `v1.4.0` + GitHub Release
+
+### Changed
+- `tools/crypto/mlkem768_wrapper.py` — corrected `mlkem` library API (key_gen/encaps/decaps)
+- `db_adapter.py` — adds `AsyncPostgresAdapter` using `asyncpg`
+- `README.md` — promoted v1.4.0 as latest release
+- `FINAL_AUDIT_CONCLUSION.md` — updated with v1.4.0 release record
+
+### No breaking changes
+API surface, RBAC, receipt schema, audit chain, and storage layer are unchanged.
+
+### Verification
+```
+FULL_STACK_VERIFICATION=PASS  (14/14)
+  v1.1: 6/6  ·  v1.2: 2/2  ·  v1.3: 4/4  ·  v1.4: 2/2
+```
+
+---
+
 ## [1.3.0] — 2026-05-09
 
 ### Added
