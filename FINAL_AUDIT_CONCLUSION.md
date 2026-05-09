@@ -145,3 +145,69 @@ Post-quantum KEM note:
 
 - active attestations in this repository cut remain focused on hybrid signature evidence (`ED25519` + `ML-DSA`) and strict verification gates.
 - no `pq_kem.go` wrapper is currently present in this repository tree, so ML-KEM768 attestation materialization is tracked as next hardening step and is not over-claimed in this conclusion.
+
+---
+
+## AEM-EVOLVE™ v1.1.0 release update (2026-05-09)
+
+**Release tag:** `v1.1.0`
+**Commit SHA (main):** `0e5562a165eac38eb225ca5af8614d2316dfdd74`
+**PRs merged:** #99 · #100 · #101 · #102 · #103 · #104 · #105 · #106
+
+AEM-EVOLVE™ v1.1.0 was released from `main` after merging 8 ordered PRs. All verification scripts passed on updated `main`:
+
+```
+REGULATORY_MAPPING_CHECK=PASS
+GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS
+MULTI_ANCHOR_VERIFICATION=PASS
+HITL_SIGNATURE_VERIFICATION=PASS_DEMO
+RECEIPT_FORGERY_TESTS=PASS
+OFFICIAL_STATUS_SIGNED=PASS
+```
+
+### Capabilities added in v1.1.0
+
+| PR | Capability |
+|---|---|
+| #99 | Historical EthicBit / CEERV / CEMU v10.1 baseline (`docs/history/`) |
+| #100 | AEM / AEM-EVOLVE™ architectural alignment mapping (`docs/architecture/`) |
+| #101 | Regulatory mapping evidence — EU AI Act, NIST AI RMF, ISO/IEC 42001 |
+| #102 | Governance-effectiveness metrics (controlled demonstration) |
+| #103 | Multi-anchor verification — Ethereum mainnet + triple public anchor |
+| #104 | Demo HITL signature verification + 8-scenario receipt-forgery test battery |
+| #105 | Demo Ed25519 signed official status + canonical lingo dictionary |
+| #106 | Whitepaper v1.1 |
+
+### v1.1.0 assurance artifacts
+
+- `assurance/evolve-multi-agent/v1_1/OFFICIAL_STATUS_SIGNED.json`
+- `assurance/evolve-multi-agent/v1_1/V1_1_HASH_RECORD.txt`
+- `assurance/evolve-multi-agent/v1_1/regulatory_mapping_check_report.json`
+- `assurance/evolve-multi-agent/v1_1/governance_effectiveness_report.json`
+- `assurance/evolve-multi-agent/v1_1/multi_anchor_verification_report.json`
+- `assurance/evolve-multi-agent/v1_1/hitl_signature_verification_report.json`
+- `assurance/evolve-multi-agent/v1_1/receipt_forgery_test_report.json`
+
+### v1.1.0 claim
+
+> AEM-EVOLVE™ v1.1 extends the v1.0 public controlled-environment release with regulatory mapping evidence, governance-effectiveness metrics, multi-anchor verification, HITL signature verification, receipt-forgery testing, signed official status evidence, and canonical claim-language controls.
+
+### v1.1.0 formula
+
+> AEM-EVOLVE™ v1.1 is regulator-mappable, governance-measurable, multi-anchor-verifiable, HITL-hardened, receipt-forgery-tested, and official-status-signed.
+
+### v1.1.0 non-claims
+
+```
+Not regulatory-approved.
+Not externally certified.
+Not legal compliance.
+Not conformity assessed.
+Not production-ready universal.
+Not independently reproduced unless external reports exist.
+Not cybersecurity certified.
+Not financial advice.
+Not clinical or diagnostic.
+Not tamper-proof.
+Not HSM-backed unless separately implemented.
+```
