@@ -1,0 +1,131 @@
+{
+  "version": "v1.4",
+  "timestamp": "2026-05-09T13:14:38.075228+00:00",
+  "result": "PASS",
+  "checks_passed": 14,
+  "checks_total": 14,
+  "non_claims": [
+    "SigningProvider is not HSM-backed.",
+    "HITL identity is not enterprise IAM.",
+    "HITL tokens are not production-grade without external IdP.",
+    "AsyncPostgresAdapter is not production-tested at scale.",
+    "ML-KEM768 is not independently audited.",
+    "CI reproduction is not external independent reproduction.",
+    "This release is not regulatory approval.",
+    "This release is not external certification."
+  ],
+  "checks": [
+    {
+      "check_id": "V1_1-REGULATORY-MAPPING",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/regulatory/regulatory_mapping_checker.py",
+      "expected_status": "REGULATORY_MAPPING_CHECK=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "REGULATORY_MAPPING_CHECK=PASS\n"
+    },
+    {
+      "check_id": "V1_1-GOVERNANCE-METRICS",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/metrics/governance_effectiveness_metrics.py",
+      "expected_status": "GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS\n"
+    },
+    {
+      "check_id": "V1_1-MULTI-ANCHOR",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py",
+      "expected_status": "MULTI_ANCHOR_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "MULTI_ANCHOR_VERIFICATION=PASS\n"
+    },
+    {
+      "check_id": "V1_1-HITL-SIGNATURE",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/HITL_signature_verifier.py",
+      "expected_status": "HITL_SIGNATURE_VERIFICATION=PASS_DEMO",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "HITL_SIGNATURE_VERIFICATION=PASS_DEMO\n"
+    },
+    {
+      "check_id": "V1_1-RECEIPT-FORGERY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/adversarial_tests/test_receipt_forgery.py",
+      "expected_status": "RECEIPT_FORGERY_TESTS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "RECEIPT_FORGERY_TESTS=PASS\n"
+    },
+    {
+      "check_id": "V1_1-OFFICIAL-STATUS",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/status/official_status_signer.py",
+      "expected_status": "OFFICIAL_STATUS_SIGNED=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "OFFICIAL_STATUS_SIGNED=PASS\n"
+    },
+    {
+      "check_id": "V1_2-MECH-REASON-ENGINE",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/reasoning/mech_reason.py",
+      "expected_status": "MECH_REASON_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[MECH-REASON\u2122] Running sub-components...\nMECH_REASON_STATUS=PASS\n  recommended_outcome: PASS\n  hitl_required:       True\n  triggered_rules:     []\n"
+    },
+    {
+      "check_id": "V1_2-MECH-REASON-VERIFY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/reasoning/verify_mech_reason.py",
+      "expected_status": "MECH_REASON_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[MECH-REASON\u2122 VERIFIER] Starting verification...\n  \u2713 [C-01-SCHEMA] schema_id=AEM_EVOLVE_MECH_REASON_REPORT_V1_2, llm_involved=false\n  \u2713 [C-02-POLICY-VER] policy_version=1.2.0\n  \u2713 [C-03-INPUT-HASHES] all 4 input hashes verified\n  \u2713 [C-04-REPORT-HASH] report_hash=41cefdc45a8e2d2e\u2026\n  \u2713 [C-05-SCORES] all 7 scores in [0.0, 1.0]\n  \u2713 [C-06-TRIGGERED-RULES] 0 rule(s), all strings\n  \u2713 [C-07-OUTCOME] recommended_outcome=PASS\n  \u2713 [C-08-EXPLANATION] explanation present, non-LLM marker confirmed\n  \u2713 [C-09-NON-CLAIMS] all 9 non-claims present\n  \u2713 [C-10-DETERMINISM] two runs agree: outcome=PASS, triggered_rules=[]\nMECH_REASON_VERIFICATION=PASS\n"
+    },
+    {
+      "check_id": "V1_3-LLM-ADVISORY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/advisory/llm_advisory_adapter.py",
+      "expected_status": "LLM_ADVISORY_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[LLM ADVISORY ADAPTER] Reading sealed MECH_REASON_REPORT...\n  sealed report_hash: 3e78a8916ddf85db\u2026\n  recommended_outcome (sealed, read-only): PASS\n[LLM ADVISORY ADAPTER] Generating advisory narrative (does not modify governance)...\n  advisory_only: true\n  governance_binding: false\n  simulation_mode: True\n  advisory_hash: b48e9032a5ec59f3\u2026\nLLM_ADVISORY_STATUS=PASS\n"
+    },
+    {
+      "check_id": "V1_3-MLKEM768",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/crypto/verify_mlkem768.py",
+      "expected_status": "MLKEM768_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[ML-KEM768 VERIFIER] mode=mlkem\n  \u2713 [C-01-KEYGEN-SIZES] pk=1184B sk=2400B\n  \u2713 [C-02-ENC-SIZES] ct=1088B ss=32B\n  \u2713 [C-03-ROUND-TRIP] decapsulate(sk, ct) == enc.shared_secret\n  \u2713 [C-04-RANDOMNESS] two encapsulations produce different ciphertexts\n  \u2713 [C-05-ISOLATION] different key pairs produce independent shared secrets\nMLKEM768_STATUS=PASS\n"
+    },
+    {
+      "check_id": "V1_3-HITL-QUORUM",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/hitl_quorum_verifier.py",
+      "expected_status": "HITL_QUORUM_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[HITL QUORUM VERIFIER] Loading policy and decisions...\n  decisions: 1\n  \u2713 [C-A-ROLES[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] all 1 approver(s) have valid roles\n  \u2713 [C-B-DECISION-VALIDITY[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] all decisions valid for class STANDARD\n  \u2713 [C-C-TTL[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] expired approvals (TTL=86400s, warn-mode \u2014 demo/historical data): ['human-reviewer']\n  \u2713 [C-D-CANONICAL-HASH[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] canonical SHA-256 verified (or not recorded \u2014 demo-grade)\n  \u2713 [C-E-QUORUM[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] 1-of-1 unique approvers (required 1-of-1) \u2014 quorum met\nHITL_QUORUM_VERIFICATION=PASS\n"
+    },
+    {
+      "check_id": "V1_3-POSTGRES-ADAPTER",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/db/validate_postgres_adapter.py",
+      "expected_status": "POSTGRES_ADAPTER_VALIDATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[POSTGRES ADAPTER VALIDATOR] Running contract checks...\n  \u2713 [C-01-INHERITANCE] PostgresAdapter is a subclass of DBAdapter\n  \u2713 [C-02-ABSTRACT-METHODS] all 4 abstract methods overridden: ['close', 'commit', 'execute', 'execute_write']\n  \u2713 [C-03-NEW-METHODS] v1.3 methods present: ['ping', 'close_pool']\n  \u2713 [C-04-CONNECTION-POOL] ThreadedConnectionPool used in __init__\n  \u2713 [C-05-SQLITE-REGRESSION] SQLiteAdapter still satisfies DBAdapter contract\n  \u2713 [C-06-PING-SIGNATURE] ping() present (return annotation: bool)\nPOSTGRES_ADAPTER_VALIDATION=PASS\n"
+    },
+    {
+      "check_id": "V1_4-SIGNING-PROVIDER",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/signing/verify_signing_provider.py",
+      "expected_status": "SIGNING_PROVIDER_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "SigningProvider Verification\n============================================\n  PASS  C-01-ABC-abstract-methods  \u2014 abstract=['public_key_pem', 'sign', 'verify']\n  PASS  C-02-EnvProvider-missing-var  \u2014 Environment variable 'ETHICBIT_ED25519_PRIVATE_KEY_PEM' is n\n  PASS  C-03-FileProvider-missing-file  \u2014 Key file not found: /nonexistent/path/key.pem\n  PASS  C-04-FileProvider-public-key-pem  \u2014 length=113\n  PASS  C-05-roundtrip-sign-verify  \u2014 sig_length=64\n  PASS  C-06-tampered-message-rejected\n  PASS  C-07-tampered-signature-rejected\n  PASS  C-08-public-key-pem-format  \u2014 -----BEGIN PUBLIC KEY-----\n\n\nSIGNING_PROVIDER_VERIFICATION=PASS  (8/8)\nreport \u2192 assurance/evolve-multi-agent/v1_4/signing_provider_report.json\n"
+    },
+    {
+      "check_id": "V1_4-HITL-IDENTITY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/hitl_identity_verifier.py",
+      "expected_status": "HITL_IDENTITY_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "HITL Identity Verifier\n============================================\n  PASS  C-01-policy-loads  \u2014 missing=none\n  PASS  C-02-token-generated  \u2014 len=64\n  PASS  C-03-correct-token-verifies  \u2014 verified at offset=0 minutes\n  PASS  C-04-wrong-approver-rejected  \u2014 approver_id 'attacker-999' not in registry\n  PASS  C-05-wrong-event-rejected\n  PASS  C-06-wrong-secret-rejected\n  PASS  C-07-expired-token-rejected  \u2014 token does not match any valid time window\n  PASS  C-08-live-roundtrip  \u2014 verified at offset=0 minutes\n  PASS  C-09-unregistered-approver-rejected  \u2014 approver_id 'unregistered-999' not in registry\n  PASS  C-10-non-claims-present  \u2014 count=4\n\nHITL_IDENTITY_VERIFICATION=PASS  (10/10)\n"
+    }
+  ]
+}
