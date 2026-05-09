@@ -7,6 +7,43 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.2.0] — 2026-05-09
+
+### Added
+- `RELEASE_NOTES_V1_2.md` — v1.2 release notes
+- `tools/reasoning/policies/AEM_EVOLVE_POLICY_V1_2.json` — 17-rule policy-as-code (R-CLAIM-*, R-HITL-*, R-SCOPE-*) (PR #107)
+- `tools/reasoning/claim_boundary_checker.py` — deterministic R-CLAIM-* evaluator (PR #107)
+- `tools/reasoning/evidence_completeness_scorer.py` — 8-artifact weighted scorer (PR #108)
+- `tools/reasoning/governance_risk_scorer.py` — 7-dimension composite risk scorer (PR #108)
+- `tools/reasoning/mech_reason.py` — MECH-REASON™ engine: decision table, state machine, HITL inference, explanation, SHA-256 sealing (PR #109)
+- `tools/reasoning/mechanical_explanation.py` — deterministic LLM-free explanation generator (PR #109)
+- `tools/reasoning/verify_mech_reason.py` — 10-check deterministic verifier (PR #110)
+- `docs/MECH_REASON_ENGINE.md`, `docs/MECH_REASON_POLICY_V1_2.md`, `docs/MECH_REASON_SCORING.md` (PRs #107–#109)
+- `docs/OPTIONAL_LLM_ADVISORY_ADAPTER_BOUNDARY.md` — constitutional LLM boundary definition (PR #111)
+- `docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md` (PR #112)
+- `assurance/evolve-multi-agent/v1_2/` — MECH_REASON_REPORT.json, MECH_REASON_VERIFICATION_REPORT.json, MECH_REASON_VERIFICATION.md, V1_2_HASH_RECORD.txt, claim_boundary_check_report.json, evidence_completeness_report.json, governance_risk_score_report.json
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_2.md`
+- Git tag `v1.2.0` + GitHub Release
+
+### Changed
+- `README.md` — promoted v1.2.0 as latest release, v1.1.0 as previous release
+- `FINAL_AUDIT_CONCLUSION.md` — updated with v1.2.0 release record
+
+### No breaking changes
+API surface, RBAC, receipt schema, audit chain, and storage layer are unchanged.
+
+### Verification
+```
+MECH_REASON_STATUS=PASS
+  recommended_outcome: PASS
+  hitl_required:       true
+  triggered_rules:     []
+MECH_REASON_VERIFICATION=PASS  (10/10 checks)
+llm_involved: false
+```
+
+---
+
 ## [1.1.0] — 2026-05-09
 
 ### Added
