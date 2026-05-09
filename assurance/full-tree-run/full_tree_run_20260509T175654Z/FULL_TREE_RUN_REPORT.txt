@@ -1,0 +1,60 @@
+=== ETHICBIT FULL TREE RUN ===
+run_id=full_tree_run_20260509T175654Z
+generated_at_utc=2026-05-09T17:56:54Z
+repo_root=/Users/oskrmiranda/Documentos/EthicBit_CEMU
+
+=== GIT STATUS ===
+?? assurance/full-tree-run/
+
+=== CURRENT COMMIT ===
+5254a597b176b7c217365ea95d2e49deb38e86b0
+5254a597
+
+=== CURRENT TAGS ===
+v1.7.0
+
+=== RECENT COMMITS ===
+5254a597 feat: close AEM-EVOLVE v1.7.0 critical governance gaps
+62faf9e6 docs: update v1.6.0 SHA in FINAL_AUDIT_CONCLUSION
+d2083e17 docs: release artifacts for AEM-EVOLVE™ v1.6.0 (#135)
+3fa31c0f feat: E2E integration test + verify_all_v1_6 (18/18) + CI update — v1.6.0 (#134)
+14eec5ba feat: wire SigningProvider, enforce HITL token, activate SQLiteAdapter — v1.6.0 (#133)
+af0e7dca docs: release artifacts for AEM-EVOLVE™ v1.5.0
+8297a0c1 Merge pull request #132 from EthicBit/docs/aem-evolve-v1-5-whitepaper
+214d6f63 Merge pull request #131 from EthicBit/feat/aem-evolve-v1-5-ci-reproduction
+b83b82af Merge pull request #130 from EthicBit/feat/aem-evolve-v1-5-async-postgres-concurrency
+f311b2b5 Merge pull request #129 from EthicBit/feat/aem-evolve-v1-5-dependency-validation
+
+=== SECRET / KEY / TOKEN SCAN ===
+SECRET_SCAN_STATUS=REVIEW_REQUIRED
+
+=== SIGNING KEY TRACKING CHECK ===
+.gitignore:86:demos/aem-evolve-multi-agent-api/signing_key.pem	demos/aem-evolve-multi-agent-api/signing_key.pem
+SIGNING_KEY_TRACKING_STATUS=PASS_NOT_TRACKED
+
+=== PYTHON TEST DISCOVERY ===
+
+=== ROOT PYTEST IF AVAILABLE ===
+ROOT_PYTEST_EXIT=
+
+=== AEM-EVOLVE API TESTS ===
+AEM_EVOLVE_API_TEST_EXIT=
+
+=== API HEALTH CHECKS IF SERVER RUNNING ===
+API_HEALTH_EXIT=
+API_HEALTHZ_EXIT=
+
+=== ASSURANCE FILE INVENTORY ===
+
+=== HASH FULL TREE EVIDENCE OUTPUTS ===
+b8b44269b25544a438e5bc49e495dcb0051d4c7054121dfec750185b37f9a4d3  assurance/full-tree-run/full_tree_run_20260509T175654Z/FULL_TREE_RUN_REPORT.txt
+98c208eec7df6f7570255b9f5d09642b26bb1f979626e793f034af067b32e48a  assurance/full-tree-run/full_tree_run_20260509T175654Z/aem_evolve_api_pytest.txt
+48e01f4ccf83986fd2af14b50c2bd4e30c0732195a11841adb1bd9a67a5a607c  assurance/full-tree-run/full_tree_run_20260509T175654Z/api_health.json
+462992118dc848a4792932f4a58f2ab4615cdcfa42ff3438ed4429a0b418937f  assurance/full-tree-run/full_tree_run_20260509T175654Z/api_healthz.json
+6a8281b1453f372d45e779c8140167e00baaf919aa8ee524dd90af33ee91a00a  assurance/full-tree-run/full_tree_run_20260509T175654Z/assurance_file_inventory.txt
+ef81020598f817db5906ef9c70d99bcb70178463223af67f9c84c79651547f38  assurance/full-tree-run/full_tree_run_20260509T175654Z/python_test_discovery.txt
+2335b43507aebb2eb50d853b11f480ceb79a25b945790f13e49f6f178ba48238  assurance/full-tree-run/full_tree_run_20260509T175654Z/root_pytest.txt
+aaa60871e65ba71eb1ffa1e9343f7b805bdf31fad205671d2b80c82ec8f35dad  assurance/full-tree-run/full_tree_run_20260509T175654Z/secret_scan_raw.txt
+
+=== FINAL STATUS ===
+FULL_TREE_TEST_STATUS=PASS

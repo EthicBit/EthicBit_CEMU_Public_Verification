@@ -1,0 +1,6 @@
+./.git
+./.venv
+./demos/aem-evolve-multi-agent-api/pytest.ini
+./demos/aem-evolve-multi-agent-api/requirements.txt
+./pyproject.toml
+./requirements.txt

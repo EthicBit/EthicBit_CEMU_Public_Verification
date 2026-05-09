@@ -1,0 +1,46 @@
+{
+    "status": "healthy",
+    "demo_type": "technical_demonstration",
+    "version": "0.5.0-demo",
+    "local_only": true,
+    "auth": {
+        "scheme": "X-API-Key header",
+        "roles_configured": [
+            "APPROVER",
+            "INITIATOR",
+            "OBSERVER"
+        ],
+        "hitl_role_required": "APPROVER",
+        "initiation_role_required": "INITIATOR",
+        "environment": "local-demo",
+        "production_auth_claimed": false
+    },
+    "signing_provider": "Ed25519",
+    "signing_status": "SIGNED_Ed25519_FILE",
+    "hitl_identity_enforcement": "HMAC_TOKEN_REQUIRED_FOR_SCOPE_LIMITED",
+    "hitl_replay_mitigation": "ONE_TIME_USE_PER_TOKEN_EVENT_PAIR",
+    "read_time_signature_verification": true,
+    "key_persistence": "FILE_BASED",
+    "db_adapter": "SQLiteAdapter",
+    "audit_tables": [
+        "evolution_events",
+        "evolution_receipts",
+        "human_decisions",
+        "audit_chain",
+        "hitl_used_tokens"
+    ],
+    "tamper_evident_chain": true,
+    "tamper_proof_claimed": false,
+    "non_claims": [
+        "not_production_ready",
+        "not_independently_reproduced",
+        "not_regulatory_approved",
+        "not_clinical_or_diagnostic",
+        "sqlite_not_production_audit_storage",
+        "not_tamper_proof",
+        "no_hsm_key_custody",
+        "no_production_oidc_idp",
+        "file_key_not_hsm_backed",
+        "local_sqlite_replay_store_not_distributed"
+    ]
+}
