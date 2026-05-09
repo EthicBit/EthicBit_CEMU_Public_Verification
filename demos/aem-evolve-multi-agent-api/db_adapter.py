@@ -154,3 +154,79 @@ class PostgresAdapter(DBAdapter):
     def close_pool(self) -> None:
         """Release all pool connections — call at application shutdown."""
         self._pool.closeall()
+
+
+class AsyncPostgresAdapter:
+    """Async PostgreSQL adapter using asyncpg — AEM-EVOLVE™ v1.4.
+
+    Provides an async interface for high-throughput governance event storage.
+    Must be initialised with `await AsyncPostgresAdapter.create(dsn)`.
+
+    Installation:
+        pip install asyncpg
+
+    Usage:
+        adapter = await AsyncPostgresAdapter.create("postgresql://user:pass@host:5432/dbname")
+        rows = await adapter.fetch("SELECT * FROM evolution_events WHERE id=$1", event_id)
+        await adapter.execute("INSERT INTO ...", ...)
+        await adapter.close()
+
+    Non-claims:
+        Not production-tested at scale.
+        Does not replace PostgresAdapter for synchronous workloads.
+        Connection pool size defaults are conservative; tune for production.
+        Does not provide enterprise connection pooling (add pgbouncer if needed).
+    """
+
+    def __init__(self, pool: Any) -> None:
+        self._pool = pool
+
+    @classmethod
+    async def create(
+        cls,
+        dsn: str,
+        min_size: int = 2,
+        max_size: int = 10,
+    ) -> "AsyncPostgresAdapter":
+        """Async factory — creates and initialises the connection pool."""
+        try:
+            import asyncpg  # type: ignore[import]
+        except ImportError as exc:
+            raise ImportError(
+                "asyncpg is required for AsyncPostgresAdapter. "
+                "Install with: pip install asyncpg"
+            ) from exc
+        pool = await asyncpg.create_pool(dsn=dsn, min_size=min_size, max_size=max_size)
+        return cls(pool)
+
+    async def execute(self, sql: str, *args: Any) -> str:
+        """Execute a write statement; returns the command status string."""
+        async with self._pool.acquire() as conn:
+            return await conn.execute(sql, *args)
+
+    async def fetch(self, sql: str, *args: Any) -> list[Any]:
+        """Execute a SELECT and return all rows as asyncpg Record objects."""
+        async with self._pool.acquire() as conn:
+            return await conn.fetch(sql, *args)
+
+    async def fetchrow(self, sql: str, *args: Any) -> Any | None:
+        """Execute a SELECT and return the first row, or None."""
+        async with self._pool.acquire() as conn:
+            return await conn.fetchrow(sql, *args)
+
+    async def fetchval(self, sql: str, *args: Any, column: int = 0) -> Any:
+        """Execute a SELECT and return a single value from the first row."""
+        async with self._pool.acquire() as conn:
+            return await conn.fetchval(sql, *args, column=column)
+
+    async def ping(self) -> bool:
+        """Health check — returns True if the database is reachable."""
+        try:
+            await self.fetchval("SELECT 1")
+            return True
+        except Exception:
+            return False
+
+    async def close(self) -> None:
+        """Close the connection pool gracefully."""
+        await self._pool.close()
