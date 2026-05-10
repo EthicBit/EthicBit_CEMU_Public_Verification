@@ -1,0 +1,93 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "EXTERNAL_REPRODUCTION_CHECK",
+  "pr": "PR8",
+  "version": "0.15.0-demo",
+  "generated_utc": "2026-05-10T18:11:48.263037+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr8",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "EXTERNAL_REPRODUCTION_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "independent_reproduction_claimed": false,
+    "reproducer_id": null,
+    "reproduction_date": null,
+    "fail_reason": "External reproduction not yet completed: AEM_REPRODUCER_ID, AEM_REPRODUCTION_DATE not set. independent_reproduction_claimed=false",
+    "checks": {
+      "C-01_report_v2": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/REPRODUCTION_REPORT_V2.md",
+        "sha256": "5b1348898ca8e879d8b4b71e3adaf748e4a941d9b3c4dc769483a7d6ad606c25",
+        "size_bytes": 6380
+      },
+      "C-02_challenge_doc": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/REPRODUCTION_CHALLENGE.md",
+        "sha256": "59b200700efb062e9b8c4da8593765b2adbc87044802e3499cae4e9e0cd9bf3b",
+        "referenced_in_v2_report": false
+      },
+      "C-03_pr_coverage": {
+        "ok": true,
+        "prs_required": 7,
+        "prs_covered": 7,
+        "missing_prs": []
+      },
+      "C-04_outcome_coverage": {
+        "ok": true,
+        "outcomes_required": 3,
+        "outcomes_covered": 3,
+        "missing_outcomes": []
+      },
+      "C-05_evidence_artifact": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/reproduction/reproduction_evidence_v2_2026_05.json",
+        "sha256": "2ef9790ee5a8dd7f3989671bc4445aff7fc120f05a04392c79299fadbff195ad",
+        "subjects_hashed": 20,
+        "subjects_total": 20,
+        "pr_coverage": "PR1-PR7"
+      },
+      "C-06_hitl_coverage": {
+        "ok": true,
+        "hitl_terms_required": 3,
+        "hitl_terms_present": 3,
+        "missing_terms": []
+      },
+      "C-07_chain_coverage": {
+        "ok": true,
+        "chain_terms_required": 3,
+        "chain_terms_present": 3,
+        "missing_terms": []
+      },
+      "C-08_artifact_fingerprint": {
+        "ok": true,
+        "file": "reproduction_evidence_v2_2026_05.json",
+        "has_artifact_sha256": true,
+        "artifact_sha256": "e4bae6adfd384d885973f0d7ba2a653553813b092bed63646323d568de5761db"
+      },
+      "C-09_reproducer_id": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_REPRODUCER_ID not set — set to external reproducer identity (name or organisation) before claiming external reproduction"
+      },
+      "C-10_reproduction_date": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_REPRODUCTION_DATE not set — set to ISO8601 date of external reproduction"
+      }
+    }
+  },
+  "non_claims": [
+    "independent_reproduction_not_yet_completed",
+    "third_party_attested=false",
+    "external_reproducer_identity_not_confirmed",
+    "reproduction_steps_not_executed_in_separate_environment"
+  ]
+}

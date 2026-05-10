@@ -1,0 +1,115 @@
+{
+  "report_type": "AEM_EVOLVE_V2_REPRODUCTION_EVIDENCE",
+  "version": "0.14.0-demo",
+  "pr_coverage": "PR1-PR7",
+  "generated_utc": "2026-05-10T18:07:53.326290+00:00",
+  "source_commit": "HEAD",
+  "summary": {
+    "subjects_total": 20,
+    "subjects_hashed": 20,
+    "subjects_missing": 0
+  },
+  "subjects": [
+    {
+      "path": "security/oidc_config.py",
+      "sha256": "6f04883400c6d7dbbd79d6d7b1f0b2fd45e042e83aaccc606cb7719b7cb40530",
+      "size_bytes": 905
+    },
+    {
+      "path": "security/oidc_provider.py",
+      "sha256": "702290de0d9aa952e0d6b7201de7e3aa3d7d6ea5d43f38013a304d1885e3204c",
+      "size_bytes": 5554
+    },
+    {
+      "path": "tools/signing/production_kms_provider.py",
+      "sha256": "6522ae2855064f519a677d5904f3492ad51d00eba44cf59316f0c711b319d9c7",
+      "size_bytes": 13418
+    },
+    {
+      "path": "db/postgres_production_gate.py",
+      "sha256": "bc3df6241079ff0f3bbc3a28db7ef5fd50affb008fe27d0597300643d264382b",
+      "size_bytes": 13888
+    },
+    {
+      "path": "db/migration_recovery_evidence.py",
+      "sha256": "93b099fd3dd28dd324fead3a3fa71b9c0b86f36eb9f00c50e63be8979c5c1072",
+      "size_bytes": 17478
+    },
+    {
+      "path": "migrations/001_initial_schema.sql",
+      "sha256": "cd21109574d7fd12fee555c6279ed739a44ab2e1f0bbd25eb5b7ac463a5e43e2",
+      "size_bytes": 2288
+    },
+    {
+      "path": "migrations/rollback/001_rollback_initial_schema.sql",
+      "sha256": "4749ea5c598e05b9395d17bd3a9d99b91d7c116d218b894a1c6fab7f3aa4c75b",
+      "size_bytes": 896
+    },
+    {
+      "path": "monitoring/alert_rules.yaml",
+      "sha256": "5c808ee1a866cc57a0e3c69f174001ec9bc5a3a1c6b2eabd5aff0fe05d5dfa6a",
+      "size_bytes": 5738
+    },
+    {
+      "path": "monitoring/alertmanager_config.yaml",
+      "sha256": "82722787bfa79683399decd7ed6e0cff38272df7b1cfad2cb1b2c7327b4b8511",
+      "size_bytes": 1735
+    },
+    {
+      "path": "monitoring/grafana_dashboard.json",
+      "sha256": "dee64a8c1149836ec3af0aa037b658ac6b3e5051dfd3342802f185f151511e7f",
+      "size_bytes": 7453
+    },
+    {
+      "path": "monitoring/monitoring_gate.py",
+      "sha256": "83b932f8fc8235d9f0928c85544098420d1d9e3de0a728dde40f719887a6be61",
+      "size_bytes": 14141
+    },
+    {
+      "path": "docs/INCIDENT_RESPONSE.md",
+      "sha256": "7671e6de3bb0459f16a86860638bd9ce58d4a1c77ef62185a90933dbcd59e64d",
+      "size_bytes": 9392
+    },
+    {
+      "path": "incident_response/incident_response_gate.py",
+      "sha256": "3d80cd5157a3700a87b9fa1440fdbec68ff44bba72060cb3adc5a4a3f4928f87",
+      "size_bytes": 11674
+    },
+    {
+      "path": "tools/incident_response/drill_scenario.py",
+      "sha256": "7109e3e1e214680aa7696e37c8eaacb5b9597d371a61a4f05dcb40936e137704",
+      "size_bytes": 8625
+    },
+    {
+      "path": "docs/SECURITY_REVIEW.md",
+      "sha256": "8fa1623671f13e532abe5f28e4fc9da2d031dec395cf078d72fc6e6225dfac03",
+      "size_bytes": 5880
+    },
+    {
+      "path": "docs/THREAT_MODEL.md",
+      "sha256": "a6e49875a0d72b030b31bd97e05627a32ce3f307ce81eed684157a66ce451cb9",
+      "size_bytes": 4335
+    },
+    {
+      "path": "tools/security/dependency_scan_2026_05.json",
+      "sha256": "028d34b68a8331249dd5d55cf2a8c52a2d5ae6ba15eb45ebcc119b465cc0116e",
+      "size_bytes": 4162
+    },
+    {
+      "path": "tools/security/static_analysis_2026_05.json",
+      "sha256": "90933ab75da1695683df6f888e7a60f22182b38ae76935aa8b64b0ed04aa61ea",
+      "size_bytes": 19216
+    },
+    {
+      "path": "security_review/security_review_gate.py",
+      "sha256": "ced1b2ab47f973de77ea0305116aa7f5b92c2ed432035ea36cd25437954f4cc8",
+      "size_bytes": 12967
+    },
+    {
+      "path": "main.py",
+      "sha256": "51218f902b7ffab598bb80cf2560c9833127111a9412c9e5e63292ee7d30bf16",
+      "size_bytes": 49639
+    }
+  ],
+  "artifact_sha256": "e4bae6adfd384d885973f0d7ba2a653553813b092bed63646323d568de5761db"
+}
