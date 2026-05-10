@@ -1,0 +1,98 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "INCIDENT_RESPONSE_CHECK",
+  "pr": "PR6",
+  "version": "0.13.0-demo",
+  "generated_utc": "2026-05-10T17:53:50.621384+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr6",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "INCIDENT_RESPONSE_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "drill_completed_at": null,
+    "drill_signoff_approver": null,
+    "fail_reason": "Live drill evidence missing: AEM_DRILL_COMPLETED_AT, AEM_DRILL_SIGNOFF_APPROVER",
+    "checks": {
+      "C-01_runbook_exists": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/INCIDENT_RESPONSE.md",
+        "sha256": "7671e6de3bb0459f16a86860638bd9ce58d4a1c77ef62185a90933dbcd59e64d",
+        "size_bytes": 9392
+      },
+      "C-02_runbook_coverage": {
+        "ok": true,
+        "incidents_required": 7,
+        "incidents_present": 7,
+        "missing_incidents": []
+      },
+      "C-03_severity_levels": {
+        "ok": true,
+        "severity_levels_present": [
+          "P1",
+          "P2",
+          "P3"
+        ],
+        "missing_severity_levels": []
+      },
+      "C-04_escalation_matrix": {
+        "ok": true,
+        "has_escalation_matrix": true,
+        "roles_present": [
+          "Governance Lead",
+          "Security Lead",
+          "Database Admin"
+        ],
+        "missing_roles": []
+      },
+      "C-05_recovery_procedures": {
+        "ok": true,
+        "has_recovery_steps": true,
+        "has_postmortem_template": true
+      },
+      "C-06_alert_cross_reference": {
+        "ok": true,
+        "alerts_required": 7,
+        "alerts_cross_referenced": 7,
+        "missing_alerts": []
+      },
+      "C-07_drill_script": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/incident_response/drill_scenario.py",
+        "sha256": "7109e3e1e214680aa7696e37c8eaacb5b9597d371a61a4f05dcb40936e137704",
+        "scenarios_defined": 14
+      },
+      "C-08_drill_evidence": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/incident_response/drill_evidence_2026_05.json",
+        "sha256": "eee447c1994181b7db45fe4890cca0fc18b9b8920c3f155726961f8778d7aa7b",
+        "scenarios_documented": 7,
+        "drill_date_utc": "2026-05-10T17:50:12.553419+00:00",
+        "dry_run": true
+      },
+      "C-09_drill_completed": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_DRILL_COMPLETED_AT not set — set to ISO8601 timestamp of live drill"
+      },
+      "C-10_drill_signoff": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_DRILL_SIGNOFF_APPROVER not set — set to approver identity for sign-off"
+      }
+    }
+  },
+  "non_claims": [
+    "drill_not_executed_against_live_environment",
+    "alert_delivery_not_verified",
+    "sign_off_requires_AEM_DRILL_SIGNOFF_APPROVER",
+    "post_mortem_not_yet_completed"
+  ]
+}

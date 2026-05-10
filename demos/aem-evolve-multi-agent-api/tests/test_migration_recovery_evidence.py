@@ -180,7 +180,7 @@ class TestHealthMigrationRecoveryGate:
 
     def test_version_bumped(self, client):
         resp = client.get("/health")
-        assert resp.json()["version"] == "0.12.0-demo"
+        assert resp.json()["version"] == "0.13.0-demo"
 
 
 # ── Live DB tests ────────────────────────────────────────────────────────────

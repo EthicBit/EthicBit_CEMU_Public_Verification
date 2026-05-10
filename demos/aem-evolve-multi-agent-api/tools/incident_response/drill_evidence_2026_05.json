@@ -1,0 +1,307 @@
+{
+  "report_type": "AEM_EVOLVE_DRILL_EVIDENCE",
+  "gate": "INCIDENT_RESPONSE_CHECK",
+  "version": "0.13.0-demo",
+  "drill_date_utc": "2026-05-10T17:50:12.553419+00:00",
+  "dry_run": true,
+  "scenarios_run": 7,
+  "executed_by": "",
+  "environment": "local-demo",
+  "completed_at": "",
+  "scenarios": [
+    {
+      "scenario_id": "INC-01",
+      "scenario_name": "HITL Approval Failure",
+      "alert": "AEM_HITLApprovalFailed",
+      "counter": "hitl_approval_failed",
+      "severity": "P1",
+      "gate": "PR1_OIDC",
+      "runbook_section": "INC-01",
+      "dry_run": true,
+      "started_utc": "2026-05-10T17:50:12.553124+00:00",
+      "completed_utc": "2026-05-10T17:50:12.553328+00:00",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Simulate invalid HITL token submission",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 2,
+          "description": "Observe 403 response from /approve endpoint",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 3,
+          "description": "Verify hitl_approval_failed counter increments",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 4,
+          "description": "Check OIDC provider connectivity",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 5,
+          "description": "Re-issue valid token and confirm approval succeeds",
+          "status": "DOCUMENTED"
+        }
+      ],
+      "drill_canonical_sha256": "39ede7726dda9b79be1368129038bf81e8ea7bc7454372b40bdd0be70ccffe9a",
+      "executed_by": "",
+      "environment": "local-demo"
+    },
+    {
+      "scenario_id": "INC-02",
+      "scenario_name": "Signature Verification Failure",
+      "alert": "AEM_SignatureVerificationFailed",
+      "counter": "signature_verification_failed",
+      "severity": "P1",
+      "gate": "PR2_KMS",
+      "runbook_section": "INC-02",
+      "dry_run": true,
+      "started_utc": "2026-05-10T17:50:12.553354+00:00",
+      "completed_utc": "2026-05-10T17:50:12.553358+00:00",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Corrupt signature_hex field in a stored receipt",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 2,
+          "description": "Fetch receipt via /receipt/{id}",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 3,
+          "description": "Observe signature_verified: false in response",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 4,
+          "description": "Verify signature_verification_failed counter increments",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 5,
+          "description": "Restore correct signature; confirm verification passes",
+          "status": "DOCUMENTED"
+        }
+      ],
+      "drill_canonical_sha256": "9985af52cb283d1f24c39b1a5f06cd066427658cf71f7eda4b9a828ce5a7e556",
+      "executed_by": "",
+      "environment": "local-demo"
+    },
+    {
+      "scenario_id": "INC-03",
+      "scenario_name": "Replay Attempt",
+      "alert": "AEM_ReplayAttemptDetected",
+      "counter": "replay_attempt_detected",
+      "severity": "P2",
+      "gate": "HITL",
+      "runbook_section": "INC-03",
+      "dry_run": true,
+      "started_utc": "2026-05-10T17:50:12.553368+00:00",
+      "completed_utc": "2026-05-10T17:50:12.553371+00:00",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Submit same HITL token twice for the same event_id",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 2,
+          "description": "Observe 409 response on second submission",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 3,
+          "description": "Verify replay_attempt_detected counter increments",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 4,
+          "description": "Review hitl_used_tokens table for the used token hash",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 5,
+          "description": "Generate fresh token and confirm approval proceeds",
+          "status": "DOCUMENTED"
+        }
+      ],
+      "drill_canonical_sha256": "5c463b900668be0b05f78f09cae2114fa72aa02ef8372bd07d6088a0f6cec613",
+      "executed_by": "",
+      "environment": "local-demo"
+    },
+    {
+      "scenario_id": "INC-04",
+      "scenario_name": "Audit Chain Mismatch",
+      "alert": "AEM_AuditChainMismatch",
+      "counter": "audit_chain_mismatch",
+      "severity": "P1",
+      "gate": "PR3_POSTGRES",
+      "runbook_section": "INC-04",
+      "dry_run": true,
+      "started_utc": "2026-05-10T17:50:12.553378+00:00",
+      "completed_utc": "2026-05-10T17:50:12.553380+00:00",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Manually corrupt a chain_hash value in audit_chain table (drill DB only)",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 2,
+          "description": "Run GET /chain/verify",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 3,
+          "description": "Observe TAMPER_DETECTED status",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 4,
+          "description": "Verify audit_chain_mismatch counter increments",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 5,
+          "description": "Restore correct hash; re-verify chain returns PASS",
+          "status": "DOCUMENTED"
+        }
+      ],
+      "drill_canonical_sha256": "0ced98cf4e3dd0e29a47f94c43cd58eeadfd2e32ce5a9b647fdf39f57acf5b29",
+      "executed_by": "",
+      "environment": "local-demo"
+    },
+    {
+      "scenario_id": "INC-05",
+      "scenario_name": "Database Unavailable",
+      "alert": "AEM_DatabaseUnavailable",
+      "counter": "database_unavailable",
+      "severity": "P1",
+      "gate": "PR3_POSTGRES",
+      "runbook_section": "INC-05",
+      "dry_run": true,
+      "started_utc": "2026-05-10T17:50:12.553388+00:00",
+      "completed_utc": "2026-05-10T17:50:12.553389+00:00",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Stop PostgreSQL service (drill environment only)",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 2,
+          "description": "Submit POST /start — observe 500 error",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 3,
+          "description": "Verify database_unavailable counter increments",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 4,
+          "description": "Restart PostgreSQL",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 5,
+          "description": "Run verify_postgres_persistence.py — confirm PASS",
+          "status": "DOCUMENTED"
+        }
+      ],
+      "drill_canonical_sha256": "99a35ed7722f08085bfb10b4bfde0bc14f210af7b84a3d7f7622e7f0c93a0e24",
+      "executed_by": "",
+      "environment": "local-demo"
+    },
+    {
+      "scenario_id": "INC-06",
+      "scenario_name": "KMS Signing Failure",
+      "alert": "AEM_KMSSigningFailed",
+      "counter": "kms_signing_failed",
+      "severity": "P1",
+      "gate": "PR2_KMS",
+      "runbook_section": "INC-06",
+      "dry_run": true,
+      "started_utc": "2026-05-10T17:50:12.553399+00:00",
+      "completed_utc": "2026-05-10T17:50:12.553401+00:00",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Revoke KMS key permissions temporarily (drill environment only)",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 2,
+          "description": "Submit POST /start — observe signing failure",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 3,
+          "description": "Verify kms_signing_failed counter increments",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 4,
+          "description": "Restore KMS key permissions",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 5,
+          "description": "Run verify_kms_signing.py — confirm PASS",
+          "status": "DOCUMENTED"
+        }
+      ],
+      "drill_canonical_sha256": "fb8705ae187744d1e4e5e1551c7c2f7ac0a7287c17222d16bf90422cdb1b2fa8",
+      "executed_by": "",
+      "environment": "local-demo"
+    },
+    {
+      "scenario_id": "INC-07",
+      "scenario_name": "OIDC Provider Outage",
+      "alert": "AEM_OIDCProviderOutage",
+      "counter": "oidc_provider_outage",
+      "severity": "P1",
+      "gate": "PR1_OIDC",
+      "runbook_section": "INC-07",
+      "dry_run": true,
+      "started_utc": "2026-05-10T17:50:12.553408+00:00",
+      "completed_utc": "2026-05-10T17:50:12.553410+00:00",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Set OIDC_ISSUER to an unreachable URL",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 2,
+          "description": "Submit OIDC HITL token for approval",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 3,
+          "description": "Observe oidc_provider_outage counter increments",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 4,
+          "description": "Restore OIDC_ISSUER to correct value; restart API",
+          "status": "DOCUMENTED"
+        },
+        {
+          "step": 5,
+          "description": "Run verify_oidc_provider.py — confirm PASS",
+          "status": "DOCUMENTED"
+        }
+      ],
+      "drill_canonical_sha256": "da35a6e08f0721ffb0f8f439b3f5a5b95e8485c4debb8ca8debaba70d85b1f16",
+      "executed_by": "",
+      "environment": "local-demo"
+    }
+  ]
+}
