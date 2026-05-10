@@ -1,0 +1,96 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "ROLLBACK_PROCEDURE_CHECK",
+  "pr": "PR11",
+  "version": "0.18.0-demo",
+  "generated_utc": "2026-05-10T18:41:07.484611+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr11",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "ROLLBACK_PROCEDURE_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "rollback_tested": false,
+    "rollback_tester": null,
+    "rollback_test_date": null,
+    "fail_reason": "Rollback procedure not yet dry-run tested: AEM_ROLLBACK_TESTER, AEM_ROLLBACK_TEST_DATE not set. rollback_tested=false",
+    "checks": {
+      "C-01_runbook": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/ROLLBACK_RUNBOOK.md",
+        "sha256": "be0717f287ad44e1f9331b2676ff934ea8ca57d83cc3e3a2a71f0b0cf5e30b91",
+        "size_bytes": 7984
+      },
+      "C-02_runbook_steps": {
+        "ok": true,
+        "steps_required": 7,
+        "steps_present": 7,
+        "missing_steps": []
+      },
+      "C-03_db_rollback_scripts": {
+        "ok": true,
+        "scripts_required": 3,
+        "scripts_present": 3,
+        "missing_scripts": []
+      },
+      "C-04_gate_coverage": {
+        "ok": true,
+        "gates_required": 9,
+        "gates_covered": 9,
+        "missing_gates": []
+      },
+      "C-05_container_rollback": {
+        "ok": true,
+        "has_docker_command": true,
+        "has_previous_image_reference": true,
+        "has_kubernetes_reference": true
+      },
+      "C-06_test_evidence": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/rollback/rollback_test_evidence_2026_05.json",
+        "sha256": "dbacd2201357d76862d0139df9fc599f52ee41b6b348efed78dc35b46f9b5e6e",
+        "artifact_sha256": "075d39aee3f62a28fe07527f9b32532eecaa5f0da706c2eb870e008dcdf83d25",
+        "subjects_hashed": 20,
+        "subjects_total": 20,
+        "has_artifact_sha256": true,
+        "scenarios_tested": 5,
+        "scenarios_passed": 5,
+        "missing_scenarios": []
+      },
+      "C-07_scenarios_passed": {
+        "ok": true,
+        "scenarios_total": 5,
+        "scenarios_passed": 5,
+        "failed_scenarios": []
+      },
+      "C-08_artifact_fingerprint": {
+        "ok": true,
+        "has_artifact_sha256": true,
+        "artifact_sha256": "075d39aee3f62a28fe07527f9b32532eecaa5f0da706c2eb870e008dcdf83d25"
+      },
+      "C-09_rollback_tester": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_ROLLBACK_TESTER not set — set to identity of person who executed the rollback dry-run test before claiming rollback_tested=true"
+      },
+      "C-10_rollback_test_date": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_ROLLBACK_TEST_DATE not set — set to ISO8601 date of rollback dry-run test"
+      }
+    }
+  },
+  "non_claims": [
+    "rollback_tested=false",
+    "production_rollback_not_executed",
+    "live_database_rollback_not_run",
+    "dry_run_only"
+  ]
+}

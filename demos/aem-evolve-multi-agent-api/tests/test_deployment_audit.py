@@ -384,4 +384,4 @@ class TestHealthDeploymentGate:
 
     def test_version_bumped_to_pr9(self, client):
         resp = client.get("/health")
-        assert resp.json()["version"] == "0.17.0-demo"
+        assert resp.json()["version"] == "0.18.0-demo"

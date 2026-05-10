@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v2.0 PR 10: SLO evidence
+May 2026 — v2.0 PR 11: Tested rollback procedure evidence
 """
 
 import logging
@@ -147,7 +147,7 @@ if _TOOLS_PATH not in sys.path:
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
     description="Multi-Agent Governance with RBAC HITL Controls — v2.0 PR 1: Production OIDC provider enforcement layer",
-    version="0.17.0-demo",
+    version="0.18.0-demo",
 )
 
 
@@ -888,6 +888,17 @@ except Exception as _slo_gate_exc:
     _slo_gate = None
     log.warning("slo_gate_init_failed", extra={"exc": str(_slo_gate_exc)})
 
+# ── v2.0 PR 11 — Rollback procedure gate ─────────────────────────────────────
+try:
+    from rollback.rollback_gate import RollbackGate as _RollbackGate
+    _rollback_gate = _RollbackGate.from_env()
+    log.info("rollback_gate_loaded", extra={
+        "tester_set": _rollback_gate._rollback_tester is not None,
+    })
+except Exception as _rollback_gate_exc:
+    _rollback_gate = None
+    log.warning("rollback_gate_init_failed", extra={"exc": str(_rollback_gate_exc)})
+
 # ============================================
 # ENDPOINTS
 # ============================================
@@ -910,7 +921,7 @@ def healthz():
         db_ok = False
     db_label = "postgres" if "Postgres" in _db_adapter_label else "sqlite"
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.17.0-demo",
+    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.18.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -1152,7 +1163,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.17.0-demo",
+        "version": "0.18.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -1255,6 +1266,16 @@ def health():
                 "reason": "slo package unavailable",
             }
         ),
+        "rollback_gate": (
+            _rollback_gate.gate_check()  # type: ignore[union-attr]
+            if _rollback_gate is not None
+            else {
+                "gate": "ROLLBACK_PROCEDURE_CHECK",
+                "status": "NOT_CONFIGURED",
+                "rollback_tested": False,
+                "reason": "rollback package unavailable",
+            }
+        ),
         "postgres_persistence_gate": (
             {"gate": "POSTGRES_PRODUCTION_PERSISTENCE_CHECK", "status": "NOT_CONFIGURED",
              "reason": "AEM_DB_URL env var not set"}
@@ -1285,6 +1306,6 @@ def health():
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.17.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.18.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)
