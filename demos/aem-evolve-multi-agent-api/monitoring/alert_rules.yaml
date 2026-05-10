@@ -1,0 +1,127 @@
+# AEM-EVOLVE™ v2.0 PR 5 — Prometheus Alert Rules
+# Covers all seven mandatory governance-critical alert types.
+#
+# Deploy: copy to Prometheus rules directory and reload.
+#   prometheus --config.file=prometheus.yml
+#   alertmanager --config.file=alertmanager.yml
+#
+# These rules reference counters exported by the AEM-EVOLVE /metrics endpoint
+# via a JSON-to-Prometheus exporter (e.g. json_exporter or custom scraper).
+# Counter names map directly to MetricsRegistry keys in metrics.py.
+#
+# Non-claims:
+#   Alert delivery requires a running Alertmanager with a configured receiver.
+#   These rules are configuration evidence — fire+receive evidence requires live infra.
+
+groups:
+  - name: aem_evolve_governance_alerts
+    interval: 30s
+    rules:
+
+      # ── 1. Failed HITL approval ─────────────────────────────────────────────
+      - alert: AEM_HITLApprovalFailed
+        expr: increase(aem_hitl_approval_failed_total[5m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          gate: PR1_OIDC
+          component: hitl
+        annotations:
+          summary: "HITL approval failure detected"
+          description: >
+            AEM-EVOLVE HITL token verification failed {{ $value }} time(s) in the last 5m.
+            Check OIDC provider connectivity and token validity.
+          runbook: "docs/OIDC_PROVIDER_ENFORCEMENT.md"
+
+      # ── 2. Signature verification failure ──────────────────────────────────
+      - alert: AEM_SignatureVerificationFailed
+        expr: increase(aem_signature_verification_failed_total[5m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          gate: PR2_KMS
+          component: signing
+        annotations:
+          summary: "Artifact signature verification failure"
+          description: >
+            AEM-EVOLVE signature verification failed {{ $value }} time(s) in the last 5m.
+            This may indicate key rotation without re-signing, or artifact tampering.
+          runbook: "docs/HITL_SIGNATURE_VERIFICATION.md"
+
+      # ── 3. Replay attempt detected ──────────────────────────────────────────
+      - alert: AEM_ReplayAttemptDetected
+        expr: increase(aem_replay_attempt_detected_total[5m]) > 0
+        for: 0m
+        labels:
+          severity: warning
+          gate: HITL
+          component: hitl
+        annotations:
+          summary: "HITL replay attempt detected"
+          description: >
+            A HITL token was submitted more than once for the same event_id.
+            {{ $value }} replay attempt(s) in the last 5m.
+          runbook: "docs/HITL_SIGNATURE_VERIFICATION.md"
+
+      # ── 4. Audit-chain mismatch ─────────────────────────────────────────────
+      - alert: AEM_AuditChainMismatch
+        expr: increase(aem_audit_chain_mismatch_total[5m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          gate: PR3_POSTGRES
+          component: audit_chain
+        annotations:
+          summary: "Audit chain hash mismatch detected"
+          description: >
+            An audit_chain entry failed hash-linkage verification.
+            This may indicate tampering or a storage corruption event.
+            {{ $value }} mismatch(es) in the last 5m.
+          runbook: "docs/ARCHITECTURE.md"
+
+      # ── 5. Database unavailable ─────────────────────────────────────────────
+      - alert: AEM_DatabaseUnavailable
+        expr: increase(aem_database_unavailable_total[2m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          gate: PR3_POSTGRES
+          component: database
+        annotations:
+          summary: "Audit database unreachable"
+          description: >
+            AEM-EVOLVE lost connectivity to the PostgreSQL audit database.
+            {{ $value }} failure(s) in the last 2m.
+          runbook: "db/postgres_production_gate.py"
+
+      # ── 6. KMS/HSM signing failure ──────────────────────────────────────────
+      - alert: AEM_KMSSigningFailed
+        expr: increase(aem_kms_signing_failed_total[5m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          gate: PR2_KMS
+          component: signing
+        annotations:
+          summary: "KMS/HSM signing operation failed"
+          description: >
+            A signing operation against the configured KMS/HSM failed.
+            {{ $value }} failure(s) in the last 5m.
+            Check KMS key permissions and provider connectivity.
+          runbook: "tools/signing/production_kms_provider.py"
+
+      # ── 7. OIDC provider outage ─────────────────────────────────────────────
+      - alert: AEM_OIDCProviderOutage
+        expr: increase(aem_oidc_provider_outage_total[5m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+          gate: PR1_OIDC
+          component: oidc
+        annotations:
+          summary: "OIDC provider unreachable"
+          description: >
+            AEM-EVOLVE failed to reach the external OIDC provider for token verification.
+            {{ $value }} failure(s) in the last 5m.
+            HITL approvals requiring OIDC verification will be blocked.
+          runbook: "docs/OIDC_PROVIDER_ENFORCEMENT.md"

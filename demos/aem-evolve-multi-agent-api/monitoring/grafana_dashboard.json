@@ -1,0 +1,202 @@
+{
+  "__inputs": [],
+  "__requires": [
+    {"type": "grafana", "id": "grafana", "name": "Grafana", "version": "10.0.0"},
+    {"type": "panel", "id": "stat", "name": "Stat", "version": ""},
+    {"type": "panel", "id": "timeseries", "name": "Time series", "version": ""}
+  ],
+  "annotations": {"list": []},
+  "description": "AEM-EVOLVE™ v2.0 Governance Operations Dashboard — covers all 7 mandatory alert metrics",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0},
+      "id": 100,
+      "title": "Governance Health — 7 Mandatory Alert Metrics",
+      "type": "row"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "red", "value": 1}
+          ]}
+        }
+      },
+      "gridPos": {"h": 4, "w": 4, "x": 0, "y": 1},
+      "id": 1,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+      "title": "HITL Approval Failures (5m)",
+      "type": "stat",
+      "targets": [{"expr": "increase(aem_hitl_approval_failed_total[5m])", "legendFormat": "HITL Failures"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "red", "value": 1}
+          ]}
+        }
+      },
+      "gridPos": {"h": 4, "w": 4, "x": 4, "y": 1},
+      "id": 2,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+      "title": "Signature Verification Failures (5m)",
+      "type": "stat",
+      "targets": [{"expr": "increase(aem_signature_verification_failed_total[5m])", "legendFormat": "Sig Failures"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "orange", "value": 1}
+          ]}
+        }
+      },
+      "gridPos": {"h": 4, "w": 4, "x": 8, "y": 1},
+      "id": 3,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+      "title": "Replay Attempts (5m)",
+      "type": "stat",
+      "targets": [{"expr": "increase(aem_replay_attempt_detected_total[5m])", "legendFormat": "Replay Attempts"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "red", "value": 1}
+          ]}
+        }
+      },
+      "gridPos": {"h": 4, "w": 4, "x": 12, "y": 1},
+      "id": 4,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+      "title": "Audit Chain Mismatches (5m)",
+      "type": "stat",
+      "targets": [{"expr": "increase(aem_audit_chain_mismatch_total[5m])", "legendFormat": "Chain Mismatches"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "red", "value": 1}
+          ]}
+        }
+      },
+      "gridPos": {"h": 4, "w": 4, "x": 16, "y": 1},
+      "id": 5,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+      "title": "DB Unavailable (2m)",
+      "type": "stat",
+      "targets": [{"expr": "increase(aem_database_unavailable_total[2m])", "legendFormat": "DB Failures"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "red", "value": 1}
+          ]}
+        }
+      },
+      "gridPos": {"h": 4, "w": 4, "x": 20, "y": 1},
+      "id": 6,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+      "title": "KMS Signing Failures (5m)",
+      "type": "stat",
+      "targets": [{"expr": "increase(aem_kms_signing_failed_total[5m])", "legendFormat": "KMS Failures"}]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "thresholds": {"mode": "absolute", "steps": [
+            {"color": "green", "value": null},
+            {"color": "red", "value": 1}
+          ]}
+        }
+      },
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 5},
+      "id": 7,
+      "options": {"reduceOptions": {"calcs": ["lastNotNull"]}, "orientation": "auto", "textMode": "auto", "colorMode": "background"},
+      "title": "OIDC Provider Outage (5m)",
+      "type": "stat",
+      "targets": [{"expr": "increase(aem_oidc_provider_outage_total[5m])", "legendFormat": "OIDC Failures"}]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 9},
+      "id": 200,
+      "title": "Governance Throughput",
+      "type": "row"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 10},
+      "id": 10,
+      "title": "Sessions Started vs Receipts Issued",
+      "type": "timeseries",
+      "targets": [
+        {"expr": "rate(aem_sessions_started_total[5m])", "legendFormat": "Sessions Started"},
+        {"expr": "rate(aem_receipts_issued_total[5m])", "legendFormat": "Receipts Issued"}
+      ]
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "${datasource}"},
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 10},
+      "id": 11,
+      "title": "Governance Outcome Distribution",
+      "type": "timeseries",
+      "targets": [
+        {"expr": "rate(aem_outcome_scope_limited_total[5m])", "legendFormat": "SCOPE_LIMITED"},
+        {"expr": "rate(aem_outcome_pass_total[5m])", "legendFormat": "PASS"},
+        {"expr": "rate(aem_outcome_fail_closed_total[5m])", "legendFormat": "FAIL_CLOSED"}
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "tags": ["aem-evolve", "governance", "v2.0", "pr5"],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "hide": 0,
+        "includeAll": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": {"from": "now-1h", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "AEM-EVOLVE Governance Operations",
+  "uid": "aem-evolve-governance-v2",
+  "version": 1
+}

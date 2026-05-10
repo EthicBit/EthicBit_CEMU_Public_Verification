@@ -1,0 +1,63 @@
+# AEM-EVOLVE™ v2.0 PR 5 — Alertmanager Configuration Template
+# Replace placeholder values before deploying to production.
+#
+# Non-claims:
+#   This is a template. Receiver credentials must be supplied separately.
+#   Alert delivery evidence requires a running Alertmanager with a verified receiver.
+
+global:
+  resolve_timeout: 5m
+  smtp_from: "aem-alerts@your-domain.example.com"
+  smtp_smarthost: "smtp.your-domain.example.com:587"
+
+route:
+  group_by: ["alertname", "component", "gate"]
+  group_wait: 10s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: "aem-ops-team"
+
+  routes:
+    - match:
+        severity: critical
+      receiver: "aem-ops-team"
+      continue: true
+
+    - match:
+        component: hitl
+      receiver: "aem-governance-team"
+
+    - match:
+        component: signing
+      receiver: "aem-security-team"
+
+receivers:
+  - name: "aem-ops-team"
+    email_configs:
+      - to: "ops@your-domain.example.com"
+        send_resolved: true
+        headers:
+          subject: "[AEM-EVOLVE ALERT] {{ .CommonLabels.alertname }}"
+    slack_configs:
+      - api_url: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
+        channel: "#aem-alerts"
+        title: "AEM-EVOLVE Alert: {{ .CommonLabels.alertname }}"
+        text: "{{ range .Alerts }}{{ .Annotations.description }}{{ end }}"
+        send_resolved: true
+
+  - name: "aem-governance-team"
+    email_configs:
+      - to: "governance@your-domain.example.com"
+        send_resolved: true
+
+  - name: "aem-security-team"
+    email_configs:
+      - to: "security@your-domain.example.com"
+        send_resolved: true
+
+inhibit_rules:
+  - source_match:
+      severity: "critical"
+    target_match:
+      severity: "warning"
+    equal: ["alertname", "component"]

@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v2.0 PR 4: Migration and recovery evidence
+May 2026 — v2.0 PR 5: Monitoring and alerting evidence
 """
 
 import logging
@@ -147,7 +147,7 @@ if _TOOLS_PATH not in sys.path:
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
     description="Multi-Agent Governance with RBAC HITL Controls — v2.0 PR 1: Production OIDC provider enforcement layer",
-    version="0.11.0-demo",
+    version="0.12.0-demo",
 )
 
 
@@ -323,6 +323,7 @@ def _verify_hitl_token_oidc(token: str, approver_id: str, event_id: str) -> tupl
                 return False, f"OIDC(prod) event_id {token_event_id!r} != {event_id!r}"
             return True, f"OIDC(prod) verified sub={claims.get('sub')!r}"
         except Exception as exc:
+            _metrics.increment("oidc_provider_outage")
             return False, f"OIDC(prod) verification error: {exc}"
 
     # ── Demo path — local RSA key pair ────────────────────────────────────────
@@ -420,17 +421,21 @@ def _append_audit_chain(
     entry_id: str,
     entry_sha256: str,
 ) -> str:
-    rows = adapter.execute("SELECT chain_hash FROM audit_chain ORDER BY seq DESC LIMIT 1")
-    prev_chain_hash = rows[0][0] if rows else GENESIS_HASH
-    chain_hash = hashlib.sha256(f"{prev_chain_hash}:{entry_sha256}".encode()).hexdigest()
-    adapter.execute_write(
-        """INSERT INTO audit_chain
-           (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc)
-           VALUES (?, ?, ?, ?, ?, ?)""",
-        (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash,
-         datetime.now(timezone.utc).isoformat()),
-    )
-    adapter.commit()
+    try:
+        rows = adapter.execute("SELECT chain_hash FROM audit_chain ORDER BY seq DESC LIMIT 1")
+        prev_chain_hash = rows[0][0] if rows else GENESIS_HASH
+        chain_hash = hashlib.sha256(f"{prev_chain_hash}:{entry_sha256}".encode()).hexdigest()
+        adapter.execute_write(
+            """INSERT INTO audit_chain
+               (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash, timestamp_utc)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (entry_type, entry_id, entry_sha256, prev_chain_hash, chain_hash,
+             datetime.now(timezone.utc).isoformat()),
+        )
+        adapter.commit()
+    except Exception:
+        _metrics.increment("database_unavailable")
+        raise
     log.info("audit_chain_append", extra={"entry_type": entry_type, "entry_id": entry_id, "chain_hash": chain_hash})
     return chain_hash
 
@@ -532,6 +537,8 @@ def _verify_artifact_signature(artifact: dict) -> dict:
         result["signature_verification_note"] = (
             "verified_at_read_time" if ok else "signature_invalid"
         )
+        if not ok:
+            _metrics.increment("signature_verification_failed")
     except Exception as exc:
         result["signature_verified"] = False
         result["signature_verification_note"] = f"verification_error:{exc}"
@@ -586,7 +593,11 @@ def create_evolution_event(
     }
     event["event_canonical_sha256"] = compute_sha256(event)
     # Sign the event canonical hash
-    sig_hex = _signing_provider.sign(event["event_canonical_sha256"].encode()).hex()
+    try:
+        sig_hex = _signing_provider.sign(event["event_canonical_sha256"].encode()).hex()
+    except Exception:
+        _metrics.increment("kms_signing_failed")
+        raise
     event["signature_hex"] = sig_hex
     event["signature_algorithm"] = _signing_provider.algorithm()
     event["signature_status"] = _SIGNING_STATUS
@@ -641,7 +652,11 @@ def evaluate_evolution_gate(event: dict, adapter: DBAdapter, thread_id: str) -> 
     }
     receipt["receipt_canonical_sha256"] = compute_sha256(receipt)
     # Sign the receipt canonical hash
-    sig_hex = _signing_provider.sign(receipt["receipt_canonical_sha256"].encode()).hex()
+    try:
+        sig_hex = _signing_provider.sign(receipt["receipt_canonical_sha256"].encode()).hex()
+    except Exception:
+        _metrics.increment("kms_signing_failed")
+        raise
     receipt["signature_hex"] = sig_hex
     receipt["signature_algorithm"] = _signing_provider.algorithm()
     receipt["signature_status"] = _SIGNING_STATUS
@@ -807,6 +822,17 @@ try:
 except Exception as _pg_gate_exc:
     log.warning("postgres_production_gate_init_failed", extra={"exc": str(_pg_gate_exc)})
 
+# ── v2.0 PR 5 — Monitoring and alerting gate ──────────────────────────────────
+try:
+    from monitoring.monitoring_gate import MonitoringGate as _MonitoringGate
+    _monitoring_gate = _MonitoringGate.from_env()
+    log.info("monitoring_gate_loaded", extra={
+        "prometheus_url_configured": _monitoring_gate._prometheus_url is not None,
+    })
+except Exception as _mon_gate_exc:
+    _monitoring_gate = None
+    log.warning("monitoring_gate_init_failed", extra={"exc": str(_mon_gate_exc)})
+
 # ============================================
 # ENDPOINTS
 # ============================================
@@ -829,7 +855,7 @@ def healthz():
         db_ok = False
     db_label = "postgres" if "Postgres" in _db_adapter_label else "sqlite"
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.11.0-demo",
+    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.12.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -898,10 +924,12 @@ def approve_change(req: ApproveRequest, api_key: str = Security(_API_KEY_HEADER)
         )
     ok, reason = _verify_hitl_token(req.hitl_token, req.hitl_approver_id, event_id)
     if not ok:
+        _metrics.increment("hitl_approval_failed")
         raise HTTPException(403, f"HITL token invalid: {reason}")
 
     # ── Replay mitigation — one-time use per (token, event_id) pair ──────────
     if _is_token_used(req.hitl_token, event_id, db_adapter):
+        _metrics.increment("replay_attempt_detected")
         raise HTTPException(409, "HITL token already used (replay detected). Generate a new token.")
     _mark_token_used(req.hitl_token, event_id, req.hitl_approver_id, db_adapter)
     # ─────────────────────────────────────────────────────────────────────────
@@ -1022,6 +1050,8 @@ def verify_chain(api_key: str = Security(_API_KEY_HEADER)):
                            "expected": recomputed, "stored": chain_hash})
         expected_prev = chain_hash
 
+    if errors:
+        _metrics.increment("audit_chain_mismatch", len(errors))
     return {
         "status": "PASS" if not errors else "TAMPER_DETECTED",
         "entries_checked": len(rows),
@@ -1067,7 +1097,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.11.0-demo",
+        "version": "0.12.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -1113,6 +1143,15 @@ def health():
             "status": "CONFIGURED" if os.getenv("AEM_DB_URL") else "NOT_CONFIGURED",
             "note": "Run verify_migration_recovery.py for full gate check",
         },
+        "monitoring_alerting_gate": (
+            _monitoring_gate.gate_check()  # type: ignore[union-attr]
+            if _monitoring_gate is not None
+            else {
+                "gate": "MONITORING_ALERTING_CHECK",
+                "status": "NOT_CONFIGURED",
+                "reason": "monitoring package unavailable",
+            }
+        ),
         "postgres_persistence_gate": (
             {"gate": "POSTGRES_PRODUCTION_PERSISTENCE_CHECK", "status": "NOT_CONFIGURED",
              "reason": "AEM_DB_URL env var not set"}
@@ -1143,6 +1182,6 @@ def health():
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.11.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.12.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)

@@ -1,0 +1,111 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "MONITORING_ALERTING_CHECK",
+  "pr": "PR5",
+  "version": "0.12.0-demo",
+  "generated_utc": "2026-05-10T17:46:09.408773+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr5",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "MONITORING_ALERTING_CHECK",
+    "status": "FAIL",
+    "checks_passed": 7,
+    "checks_failed": 3,
+    "prometheus_url_configured": false,
+    "fail_reason": "AEM_PROMETHEUS_URL not configured — C-08/C-09/C-10 require live Prometheus",
+    "checks": {
+      "C-01_alert_rules_yaml": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/monitoring/alert_rules.yaml",
+        "sha256": "5c808ee1a866cc57a0e3c69f174001ec9bc5a3a1c6b2eabd5aff0fe05d5dfa6a",
+        "alerts_required": 7,
+        "alerts_present": 7,
+        "missing_alerts": [],
+        "missing_prom_metrics": []
+      },
+      "C-02_alertmanager_config": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/monitoring/alertmanager_config.yaml",
+        "sha256": "82722787bfa79683399decd7ed6e0cff38272df7b1cfad2cb1b2c7327b4b8511",
+        "has_receiver": true,
+        "has_route": true
+      },
+      "C-03_grafana_dashboard": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/monitoring/grafana_dashboard.json",
+        "sha256": "dee64a8c1149836ec3af0aa037b658ac6b3e5051dfd3342802f185f151511e7f",
+        "dashboard_uid": "aem-evolve-governance-v2",
+        "dashboard_title": "AEM-EVOLVE Governance Operations",
+        "total_panels": 11,
+        "stat_panels": 7,
+        "missing_metric_panels": []
+      },
+      "C-04_counter_registration": {
+        "ok": true,
+        "registered_counters": [
+          "hitl_approval_failed",
+          "signature_verification_failed",
+          "replay_attempt_detected",
+          "audit_chain_mismatch",
+          "database_unavailable",
+          "kms_signing_failed",
+          "oidc_provider_outage"
+        ],
+        "missing_counters": [],
+        "total_counters_in_registry": 7
+      },
+      "C-05_counter_name_consistency": {
+        "ok": true,
+        "checked_pairs": 7,
+        "mismatches": []
+      },
+      "C-06_metrics_endpoint": {
+        "ok": true,
+        "metrics_endpoint_present": true,
+        "counters_wired_in_code": [
+          "hitl_approval_failed",
+          "signature_verification_failed",
+          "replay_attempt_detected",
+          "audit_chain_mismatch",
+          "database_unavailable",
+          "kms_signing_failed",
+          "oidc_provider_outage"
+        ],
+        "counters_not_yet_wired": []
+      },
+      "C-07_receiver_configured": {
+        "ok": true,
+        "email_configured": true,
+        "slack_configured": true,
+        "note": "Placeholder credentials — replace before production deploy"
+      },
+      "C-08_prometheus_reachable": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_PROMETHEUS_URL not set"
+      },
+      "C-09_alert_rules_loaded": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_PROMETHEUS_URL not set"
+      },
+      "C-10_alert_can_fire": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_PROMETHEUS_URL not set"
+      }
+    }
+  },
+  "non_claims": [
+    "alert_delivery_not_verified_without_live_alertmanager",
+    "prometheus_scrape_not_verified_without_AEM_PROMETHEUS_URL",
+    "grafana_dashboard_not_imported_into_live_grafana",
+    "counter_values_are_in_memory_not_persistent"
+  ]
+}
