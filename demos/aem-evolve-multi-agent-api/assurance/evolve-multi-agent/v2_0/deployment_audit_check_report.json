@@ -1,0 +1,94 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "PRODUCTION_DEPLOYMENT_AUDIT_CHECK",
+  "pr": "PR9",
+  "version": "0.16.0-demo",
+  "generated_utc": "2026-05-10T18:23:42.098182+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr9",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "PRODUCTION_DEPLOYMENT_AUDIT_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "production_deployed": false,
+    "deployment_target": null,
+    "deployment_timestamp": null,
+    "fail_reason": "Production deployment not yet executed: AEM_DEPLOYMENT_TARGET, AEM_DEPLOYMENT_TIMESTAMP not set. production_deployed=false",
+    "checks": {
+      "C-01_manifest": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/DEPLOYMENT_MANIFEST.md",
+        "sha256": "889f7f1c4c871043408c2c6f8e14f932ee38b706b900e9f4e8d97a0f6a79e535",
+        "size_bytes": 5867
+      },
+      "C-02_target_environment": {
+        "ok": true,
+        "fields_required": 6,
+        "fields_present": 6,
+        "missing_fields": []
+      },
+      "C-03_env_vars_documented": {
+        "ok": true,
+        "env_vars_required": 14,
+        "env_vars_documented": 14,
+        "missing_env_vars": []
+      },
+      "C-04_gate_checklist": {
+        "ok": true,
+        "gates_required": 9,
+        "gates_in_checklist": 9,
+        "missing_gates": []
+      },
+      "C-05_gate_verifiers": {
+        "ok": true,
+        "verifiers_required": 9,
+        "verifiers_present": 9,
+        "missing_verifiers": []
+      },
+      "C-06_rollback_plan": {
+        "ok": true,
+        "has_rollback_section": true,
+        "has_rollback_steps": true,
+        "has_db_rollback_reference": true
+      },
+      "C-07_health_endpoints": {
+        "ok": true,
+        "endpoints_required": 3,
+        "endpoints_documented": 3,
+        "missing_endpoints": []
+      },
+      "C-08_audit_artifact": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/deployment/deployment_audit_2026_05.json",
+        "sha256": "eb0557b387dfc409489de5fcce35723d4062b0b9e49b4efb324e95720e685fa2",
+        "artifact_sha256": "192630b39ebe278edc66d16768052da3e7c0145402400b60a3d4c6b986f5728c",
+        "subjects_hashed": 20,
+        "subjects_total": 20,
+        "has_artifact_sha256": true
+      },
+      "C-09_deployment_target": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_DEPLOYMENT_TARGET not set — set to production deployment identifier (e.g. 'aws-us-east-1-prod') before claiming production deployment"
+      },
+      "C-10_deployment_timestamp": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_DEPLOYMENT_TIMESTAMP not set — set to ISO8601 timestamp of production deployment"
+      }
+    }
+  },
+  "non_claims": [
+    "production_deployment_not_yet_executed",
+    "deployment_target_not_set",
+    "deployment_timestamp_not_set",
+    "production_deployed=false"
+  ]
+}
