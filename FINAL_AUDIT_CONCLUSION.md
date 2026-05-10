@@ -533,3 +533,39 @@ External independent reproductions remain at 0 received.
 This release is not regulatory approval.
 This release is not external certification.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.9.0 — OIDC Key Persistence · Materiality Parametrized · Postgres Live Test (2026-05-10)
+
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (27/27)`
+**Official status:** `READY`
+
+v1.9.0 closes the three technical gaps from the v1.8.0 audit, completing the v1.x hardening sequence.
+
+### v1.9.0 gaps closed
+
+| Gap | Closure | Verification |
+|---|---|---|
+| OIDC key pair ephemeral (restart invalidates tokens) | `OidcTestKeyPair.load_or_generate(oidc_key.pem)` — deterministic kid | `OIDC_KEY_PERSISTENCE_VERIFICATION=PASS (10/10)` |
+| Governance graph hardcoded to materiality=78 | `StartRequest.materiality_score` (0–100); all 3 paths reachable | `MATERIALITY_PATHS_VERIFICATION=PASS (10/10)` |
+| PostgreSQL never tested against live DB | `verify_postgres_live.py` — SKIP-safe without AEM_DB_URL | `POSTGRES_LIVE_VERIFICATION=PASS` |
+
+### v1.9.0 claim
+
+> AEM-EVOLVE™ v1.9 closes the three remaining technical gaps from the v1.8.0 audit: the OIDC RSA key pair persists across server restarts via `oidc_key.pem` with a deterministic kid, the governance graph accepts a caller-supplied `materiality_score` parameter enabling all three paths (FAIL_CLOSED/SCOPE_LIMITED/PASS), and a Postgres live integration verifier is provided with graceful SKIP when no database is available. Full-stack verification: 27/27 checks pass. This release completes the v1.x production-hardening sequence.
+
+### v1.9.0 non-claims
+
+```
+OIDC key file is not HSM-backed key custody.
+Key stored unencrypted on disk — not enterprise key management.
+PostgreSQL live test skipped when AEM_DB_URL not set.
+Materiality score is caller-supplied — not externally audited.
+HITL enforcement uses HMAC shared secret — not enterprise IAM.
+SQLiteAdapter is demo storage — not production audit storage.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+v1.9 closes the v1.x hardening sequence — v2.0 gate is required for production-readiness evidence.
+```

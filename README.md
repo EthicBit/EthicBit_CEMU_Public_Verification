@@ -5,7 +5,25 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.8.0 — Production Hardening: OIDC HITL · DB Adapter Switch · 109 Tests
+## Latest release: AEM-EVOLVE™ v1.9.0 — OIDC Key Persistence · Materiality Parametrized · Postgres Live Test
+
+**Tag:** `v1.9.0` — 2026-05-10
+**Type:** Production hardening — OIDC key persistence (`oidc_key.pem`) · materiality parametrized (3 paths) · Postgres live verifier
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (27/27)`
+
+> AEM-EVOLVE™ v1.9 closes the three remaining technical gaps from the v1.8.0 audit: the OIDC RSA key pair is now file-based and stable across restarts, the governance graph accepts a `materiality_score` parameter covering all three paths (FAIL_CLOSED/SCOPE_LIMITED/PASS), and a Postgres live integration verifier is included (SKIP-safe when no DB available). Completes the v1.x hardening sequence.
+
+- [Release Notes v1.9.0](demos/aem-evolve-multi-agent-api/RELEASE_NOTES_V1_9.md)
+
+```bash
+pip install cryptography mlkem asyncpg fastapi langgraph starlette httpx jose
+python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_9.py
+# FULL_STACK_VERIFICATION=PASS  (27/27)
+```
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.8.0 — Production Hardening: OIDC HITL · DB Adapter Switch · 109 Tests
 
 **Tag:** `v1.8.0` — 2026-05-09
 **Type:** Production hardening — OIDC dual-path HITL · PostgreSQL adapter switch · expanded pytest suite (109 tests)

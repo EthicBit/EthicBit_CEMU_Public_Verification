@@ -40,13 +40,43 @@ def _int_to_b64url(n: int) -> str:
 
 @dataclass
 class OidcTestKeyPair:
-    """Ephemeral RSA-2048 key pair for CI OIDC token signing."""
+    """RSA-2048 key pair for OIDC token signing. Use load_or_generate() for persistence."""
 
     key_id: str = field(default_factory=lambda: _b64url(os.urandom(8)))
     _private_key: RSAPrivateKey = field(init=False)
 
     def __post_init__(self) -> None:
         self._private_key = generate_private_key(public_exponent=65537, key_size=2048)
+
+    @classmethod
+    def load_or_generate(cls, pem_path) -> "OidcTestKeyPair":
+        """Load RSA key from pem_path if it exists, otherwise generate and persist.
+
+        kid is derived deterministically from the public key DER — stable across restarts.
+        """
+        import hashlib as _hashlib
+        from pathlib import Path as _Path
+        from cryptography.hazmat.primitives import serialization as _ser
+
+        pem_path = _Path(pem_path)
+        if pem_path.exists():
+            private_key = _ser.load_pem_private_key(pem_path.read_bytes(), password=None)
+        else:
+            private_key = generate_private_key(public_exponent=65537, key_size=2048)
+            pem = private_key.private_bytes(
+                _ser.Encoding.PEM, _ser.PrivateFormat.PKCS8, _ser.NoEncryption()
+            )
+            pem_path.write_bytes(pem)
+
+        pub_der = private_key.public_key().public_bytes(
+            _ser.Encoding.DER, _ser.PublicFormat.SubjectPublicKeyInfo
+        )
+        kid = _b64url(_hashlib.sha256(pub_der).digest()[:8])
+
+        instance = cls.__new__(cls)
+        instance.key_id = kid
+        instance._private_key = private_key
+        return instance
 
     def jwks(self) -> dict:
         """Return inline JWKS (JSON Web Key Set) for this key pair."""

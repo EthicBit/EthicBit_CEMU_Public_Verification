@@ -1,0 +1,65 @@
+{
+  "component": "verify_postgres_live",
+  "version": "v1.9",
+  "checks_passed": 0,
+  "checks_total": 10,
+  "result": "PASS",
+  "skipped": true,
+  "non_claims": [
+    "This verifier does not test connection pooling under load.",
+    "Audit-chain continuity under concurrent writes is not verified here.",
+    "Production PostgreSQL requires additional hardening (TLS, pgbouncer, backups)."
+  ],
+  "checks": [
+    {
+      "check": "C-01-aem-db-url-present",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-02-psycopg2-importable",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-03-connection-reachable",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-04-ping-true",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-05-create-table",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-06-insert-select-roundtrip",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-07-audit-tables-created",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-08-audit-chain-roundtrip",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-09-hitl-tokens-on-conflict",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "check": "C-10-cleanup",
+      "status": "SKIP",
+      "detail": "AEM_DB_URL not set"
+    }
+  ]
+}

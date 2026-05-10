@@ -1,0 +1,64 @@
+{
+  "component": "verify_oidc_key_persistence",
+  "version": "v1.9",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "OIDC key file is not HSM-backed.",
+    "Key stored unencrypted on disk \u2014 not enterprise key management.",
+    "Production requires external OIDC provider with managed key custody."
+  ],
+  "checks": [
+    {
+      "check": "C-01-oidc-key-pem-exists",
+      "status": "PASS",
+      "detail": "path=/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/oidc_key.pem"
+    },
+    {
+      "check": "C-02-valid-rsa-pem",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-03-key-size-2048",
+      "status": "PASS",
+      "detail": "size=2048"
+    },
+    {
+      "check": "C-04-deterministic-kid",
+      "status": "PASS",
+      "detail": "kid1='MFjlBmn_fKA' kid2='MFjlBmn_fKA'"
+    },
+    {
+      "check": "C-05-kid-matches-main",
+      "status": "PASS",
+      "detail": "file='MFjlBmn_fKA' main='MFjlBmn_fKA'"
+    },
+    {
+      "check": "C-06-sign-verify-roundtrip",
+      "status": "PASS",
+      "detail": "verified"
+    },
+    {
+      "check": "C-07-cross-reload-verify",
+      "status": "PASS",
+      "detail": "verified"
+    },
+    {
+      "check": "C-08-jwks-kid-matches-file",
+      "status": "PASS",
+      "detail": "jwks='MFjlBmn_fKA' file='MFjlBmn_fKA'"
+    },
+    {
+      "check": "C-09-health-oidc-key-persistence",
+      "status": "PASS",
+      "detail": "field='FILE_BASED'"
+    },
+    {
+      "check": "C-10-kid-not-random",
+      "status": "PASS",
+      "detail": "stable=True"
+    }
+  ]
+}

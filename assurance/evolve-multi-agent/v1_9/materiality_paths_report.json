@@ -1,0 +1,64 @@
+{
+  "component": "verify_materiality_paths",
+  "version": "v1.9",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "Materiality score is set by the initiator \u2014 not externally audited.",
+    "Governance paths are deterministic based on hardcoded thresholds.",
+    "This verifier does not test concurrent approval flows."
+  ],
+  "checks": [
+    {
+      "check": "C-01-materiality-score-field",
+      "status": "PASS",
+      "detail": "default=78.0"
+    },
+    {
+      "check": "C-02-fail-closed-path",
+      "status": "PASS",
+      "detail": "status='completed_fail_closed'"
+    },
+    {
+      "check": "C-03-scope-limited-path",
+      "status": "PASS",
+      "detail": "status='awaiting_human_approval'"
+    },
+    {
+      "check": "C-04-pass-path",
+      "status": "PASS",
+      "detail": "status='completed'"
+    },
+    {
+      "check": "C-05-fail-closed-receipt-outcome",
+      "status": "PASS",
+      "detail": "outcome='FAIL_CLOSED'"
+    },
+    {
+      "check": "C-06-scope-limited-receipt-outcome",
+      "status": "PASS",
+      "detail": "outcome='SCOPE_LIMITED'"
+    },
+    {
+      "check": "C-07-pass-receipt-outcome",
+      "status": "PASS",
+      "detail": "outcome='PASS'"
+    },
+    {
+      "check": "C-08-above-100-rejected",
+      "status": "PASS",
+      "detail": "status=422"
+    },
+    {
+      "check": "C-09-below-0-rejected",
+      "status": "PASS",
+      "detail": "status=422"
+    },
+    {
+      "check": "C-10-health-materiality-fields",
+      "status": "PASS",
+      "detail": "parametrized=True paths=['FAIL_CLOSED', 'SCOPE_LIMITED', 'PASS']"
+    }
+  ]
+}

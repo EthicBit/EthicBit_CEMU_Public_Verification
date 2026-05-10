@@ -7,6 +7,39 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.9.0] — 2026-05-10
+
+### Added
+- `RELEASE_NOTES_V1_9.md`
+- `tools/hitl/oidc_token_generator.py` — `OidcTestKeyPair.load_or_generate(path)`: deterministic kid from public key DER; persists to `oidc_key.pem`
+- `main.py` — `_OIDC_KEY_FILE_NAME = "oidc_key.pem"`; `_init_oidc_provider()` uses `load_or_generate` instead of ephemeral `OidcTestKeyPair()`
+- `main.py` — `StartRequest.materiality_score: float = 78.0` (0.0–100.0); `writer_agent` reads from state; all 3 governance paths reachable
+- `main.py` — version bumped to `0.7.0-demo`; `/health` adds `oidc_key_persistence`, `materiality_parametrized`, `governance_paths`
+- `tests/test_oidc_key_persistence.py` — 10 tests: file exists, RSA 2048, deterministic kid, cross-reload verify
+- `tests/test_materiality_paths.py` — 11 tests: FAIL_CLOSED / SCOPE_LIMITED / PASS paths, receipt outcomes, validation errors
+- `tests/test_postgres_live.py` — 9 tests (skipped if AEM_DB_URL not set)
+- `tools/signing/verify_oidc_key_persistence.py` — 10 checks: `OIDC_KEY_PERSISTENCE_VERIFICATION=PASS (10/10)`
+- `tools/governance/verify_materiality_paths.py` — 10 checks: `MATERIALITY_PATHS_VERIFICATION=PASS (10/10)`
+- `tools/db/verify_postgres_live.py` — 10 checks: `POSTGRES_LIVE_VERIFICATION=PASS` (SKIP if no AEM_DB_URL)
+- `tools/reproduction/verify_all_v1_9.py` — 27-check full-stack verifier
+- `assurance/evolve-multi-agent/v1_9/` — all assurance reports
+
+### Non-claims (v1.9.0)
+```
+OIDC key file is not HSM-backed key custody.
+Key stored unencrypted on disk — not enterprise key management.
+PostgreSQL live test skipped when AEM_DB_URL not set.
+Materiality score is caller-supplied — not externally audited.
+HITL enforcement uses HMAC shared secret — not enterprise IAM.
+SQLiteAdapter is demo storage — not production audit storage.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+v1.9 closes the v1.x hardening sequence — v2.0 gate is required for production-readiness evidence.
+```
+
+---
+
 ## [1.8.0] — 2026-05-09
 
 ### Added

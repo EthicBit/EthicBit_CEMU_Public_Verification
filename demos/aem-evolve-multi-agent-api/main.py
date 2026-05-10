@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v1.8.0: OIDC wired into /approve, AEM_DB_ADAPTER switch, pytest fast-path controls
+May 2026 — v1.9.0: OIDC key persistence, materiality parametrized, Postgres live test
 """
 
 import logging
@@ -57,6 +57,7 @@ log = logging.getLogger("aem_evolve_api")
 
 # ── Signing provider — initialized at import time ─────────────────────────────
 _SIGNING_KEY_FILE_NAME = "signing_key.pem"
+_OIDC_KEY_FILE_NAME    = "oidc_key.pem"
 
 
 def _init_signing_provider():
@@ -128,8 +129,8 @@ if _TOOLS_PATH not in sys.path:
 
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
-    description="Multi-Agent Governance with RBAC HITL Controls — v1.8.0 OIDC wired, DB adapter switch, pytest controls",
-    version="0.6.0-demo",
+    description="Multi-Agent Governance with RBAC HITL Controls — v1.9.0 OIDC key persistence, materiality parametrized, Postgres live test",
+    version="0.7.0-demo",
 )
 
 
@@ -252,8 +253,13 @@ def _init_oidc_provider() -> None:
     try:
         _OIDC_POLICY = json.loads(policy_path.read_text(encoding="utf-8"))
         from hitl.oidc_token_generator import OidcTestKeyPair
-        _oidc_key_pair = OidcTestKeyPair()
-        log.info("oidc_provider_loaded", extra={"issuer": _OIDC_POLICY.get("issuer")})
+        key_file = DEMO_ROOT / _OIDC_KEY_FILE_NAME
+        _oidc_key_pair = OidcTestKeyPair.load_or_generate(key_file)
+        log.info("oidc_provider_loaded", extra={
+            "issuer": _OIDC_POLICY.get("issuer"),
+            "key_file": str(key_file),
+            "kid": _oidc_key_pair.key_id,
+        })
     except Exception as exc:
         log.warning("oidc_provider_unavailable", extra={"exc": str(exc)})
 
@@ -377,6 +383,7 @@ def _append_audit_chain(
 class StartRequest(BaseModel):
     thread_id: str
     initial_prompt: str = "Eres un asistente general."
+    materiality_score: float = 78.0
 
     @field_validator("thread_id")
     @classmethod
@@ -390,6 +397,13 @@ class StartRequest(BaseModel):
     def _prompt_length(cls, v: str) -> str:
         if len(v) > 4096:
             raise ValueError("initial_prompt must be ≤ 4096 characters")
+        return v
+
+    @field_validator("materiality_score")
+    @classmethod
+    def _materiality_range(cls, v: float) -> float:
+        if not (0.0 <= v <= 100.0):
+            raise ValueError("materiality_score must be between 0.0 and 100.0 inclusive")
         return v
 
 
@@ -606,8 +620,9 @@ def research_agent(state):
 def writer_agent(state, adapter):
     new_prompt = "Eres un escritor experto en ética de IA y gobernanza verificable."
     thread_id = state.get("thread_id", "unknown")
+    materiality = float(state.get("materiality_score", 78.0))
     event = create_evolution_event(
-        "CONFIGURATION_UPDATE", "writer_prompt", new_prompt, 78.0, adapter, thread_id
+        "CONFIGURATION_UPDATE", "writer_prompt", new_prompt, materiality, adapter, thread_id
     )
     receipt = evaluate_evolution_gate(event, adapter, thread_id)
 
@@ -744,7 +759,7 @@ def healthz():
         db_ok = False
     db_label = "postgres" if "Postgres" in _db_adapter_label else "sqlite"
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.6.0-demo",
+    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.7.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -762,6 +777,7 @@ def start_session(req: StartRequest, api_key: str = Security(_API_KEY_HEADER)):
         "research_findings": "",
         "final_report": "",
         "current_prompt": req.initial_prompt,
+        "materiality_score": req.materiality_score,
         "pending_change": None,
         "last_receipt": None,
         "status": "initialized",
@@ -981,7 +997,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.6.0-demo",
+        "version": "0.7.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -998,6 +1014,9 @@ def health():
         "hitl_replay_mitigation": "ONE_TIME_USE_PER_TOKEN_EVENT_PAIR",
         "read_time_signature_verification": True,
         "key_persistence": "FILE_BASED" if "FILE" in _SIGNING_STATUS else "ENV_VAR",
+        "oidc_key_persistence": "FILE_BASED" if (DEMO_ROOT / _OIDC_KEY_FILE_NAME).exists() else "EPHEMERAL",
+        "materiality_parametrized": True,
+        "governance_paths": ["FAIL_CLOSED", "SCOPE_LIMITED", "PASS"],
         "db_adapter": _db_adapter_label,
         "db_adapter_switch": "AEM_DB_ADAPTER env var (sqlite|postgres)",
         "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions", "audit_chain", "hitl_used_tokens"],
@@ -1019,6 +1038,6 @@ def health():
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.6.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.7.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)
