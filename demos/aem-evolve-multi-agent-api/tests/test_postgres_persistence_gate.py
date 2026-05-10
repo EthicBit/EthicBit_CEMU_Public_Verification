@@ -156,7 +156,7 @@ class TestHealthPostgresGate:
     def test_version_bumped(self, client):
         resp = client.get("/health")
         assert resp.status_code == 200
-        assert resp.json()["version"] == "0.10.0-demo"
+        assert resp.json()["version"] == "0.11.0-demo"
 
 
 # ── Live DB tests (skip without AEM_DB_URL) ──────────────────────────────────

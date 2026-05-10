@@ -1,0 +1,91 @@
+{
+  "gate": "MIGRATION_RECOVERY_CHECK",
+  "gate_version": "v2.0-PR4",
+  "result": "FAIL",
+  "timestamp_utc": "2026-05-10T13:37:16.937868+00:00",
+  "environment": {
+    "db_url_configured": false,
+    "db_url_prefix": null
+  },
+  "checks": [
+    {
+      "id": "C-01",
+      "label": "AEM_DB_URL env var configured",
+      "status": "FAIL",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "id": "C-02",
+      "label": "db.migration_recovery_evidence importable",
+      "status": "PASS"
+    },
+    {
+      "id": "C-03",
+      "label": "Rollback migration files exist and hashed",
+      "status": "PASS",
+      "detail": "3 file(s): 001_rollback_initial_schema.sql, 002_rollback_metrics_table.sql, 003_rollback_langraph_checkpointer.sql"
+    },
+    {
+      "id": "C-04",
+      "label": "Forward migration hash before/after N/A",
+      "status": "FAIL",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    },
+    {
+      "id": "C-05",
+      "label": "Rollback simulation evidence N/A",
+      "status": "FAIL",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    },
+    {
+      "id": "C-06",
+      "label": "Count reconciliation PASS N/A",
+      "status": "FAIL",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    },
+    {
+      "id": "C-07",
+      "label": "Audit-chain continuity N/A",
+      "status": "FAIL",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    },
+    {
+      "id": "C-08",
+      "label": "Backup tooling available N/A",
+      "status": "FAIL",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    },
+    {
+      "id": "C-09",
+      "label": "Backup file produced N/A",
+      "status": "FAIL",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    },
+    {
+      "id": "C-10",
+      "label": "Restore verification PASS N/A",
+      "status": "FAIL",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 2,
+    "failed": 8
+  },
+  "evidence": {
+    "rollback_file_hashes": {
+      "001_rollback_initial_schema.sql": "4749ea5c598e05b9395d17bd3a9d99b91d7c116d218b894a1c6fab7f3aa4c75b",
+      "002_rollback_metrics_table.sql": "631cb430670ccfdd8e57cd755e26eb89f2b275f3875a4ca3442f8f6c21e8f384",
+      "003_rollback_langraph_checkpointer.sql": "b7d6c09ee5155e4cb90c76ddeb8ce83da803652e7d9244881d1c3c3be858c9a4"
+    }
+  },
+  "non_claims": [
+    "Full restore evidence requires a secondary PostgreSQL instance",
+    "Not disaster recovery complete by itself",
+    "Not zero data loss unless RPO evidence separately supports it",
+    "This gate does not grant regulatory approval",
+    "This gate is not production-ready by itself \u2014 one of 12 required gates"
+  ],
+  "fail_reason": "AEM_DB_URL not configured \u2014 PostgreSQL instance required"
+}
