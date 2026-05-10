@@ -1,0 +1,94 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "SLO_EVIDENCE_CHECK",
+  "pr": "PR10",
+  "version": "0.17.0-demo",
+  "generated_utc": "2026-05-10T18:34:18.663678+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr10",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "SLO_EVIDENCE_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "slo_evidence_verified": false,
+    "slo_reviewer": null,
+    "slo_review_date": null,
+    "fail_reason": "SLO evidence not yet reviewed: AEM_SLO_REVIEWER, AEM_SLO_REVIEW_DATE not set. slo_evidence_verified=false",
+    "checks": {
+      "C-01_slo_document": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/SLO.md",
+        "sha256": "ba6a7c63cb13813771b4d0345b0c7289e930690a932210eb1f0362c8ebd5192e",
+        "size_bytes": 7039
+      },
+      "C-02_slo_targets": {
+        "ok": true,
+        "dimensions_required": 4,
+        "dimensions_present": 4,
+        "missing_dimensions": []
+      },
+      "C-03_error_budgets": {
+        "ok": true,
+        "has_budget_table": true,
+        "has_burn_threshold": true,
+        "missing_fields": []
+      },
+      "C-04_burn_rate_alerts": {
+        "ok": true,
+        "has_fast_burn": true,
+        "has_slow_burn": true,
+        "missing_terms": []
+      },
+      "C-05_measurement_methodology": {
+        "ok": true,
+        "has_methodology_section": true,
+        "has_counter_mapping": true,
+        "missing_terms": []
+      },
+      "C-06_governance_gate_coverage": {
+        "ok": true,
+        "gates_required": 9,
+        "gates_covered": 9,
+        "missing_gates": []
+      },
+      "C-07_slo_evidence_artifact": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/slo/slo_evidence_2026_05.json",
+        "sha256": "6468c1ecb7d8898e3593622c3d6efbdd896a4181545ca6253a4b2cd23eed6983",
+        "artifact_sha256": "687f892d4a0a1b46938a6b8aafb5d36b4bd3f9a0bd99d9e48f4354b48f3f8247",
+        "subjects_hashed": 20,
+        "subjects_total": 20,
+        "has_artifact_sha256": true,
+        "gate_coverage": "PR1-PR9"
+      },
+      "C-08_artifact_fingerprint": {
+        "ok": true,
+        "has_artifact_sha256": true,
+        "artifact_sha256": "687f892d4a0a1b46938a6b8aafb5d36b4bd3f9a0bd99d9e48f4354b48f3f8247"
+      },
+      "C-09_slo_reviewer": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_SLO_REVIEWER not set — set to external SLO reviewer identity before claiming SLO evidence verified"
+      },
+      "C-10_slo_review_date": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_SLO_REVIEW_DATE not set — set to ISO8601 date of SLO review"
+      }
+    }
+  },
+  "non_claims": [
+    "slo_evidence_verified=false",
+    "live_slo_measurement_not_running",
+    "production_prometheus_not_connected",
+    "error_budget_not_tracked_in_production"
+  ]
+}

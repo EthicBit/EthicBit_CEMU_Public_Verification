@@ -326,4 +326,4 @@ class TestHealthSecurityReviewGate:
 
     def test_version_bumped_to_pr7(self, client):
         resp = client.get("/health")
-        assert resp.json()["version"] == "0.16.0-demo"
+        assert resp.json()["version"] == "0.17.0-demo"

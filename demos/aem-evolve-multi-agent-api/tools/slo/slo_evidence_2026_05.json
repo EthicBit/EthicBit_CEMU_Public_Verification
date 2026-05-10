@@ -1,0 +1,127 @@
+{
+  "artifact_type": "AEM_EVOLVE_SLO_EVIDENCE",
+  "pr": "PR10",
+  "version": "0.17.0-demo",
+  "generated_utc": "2026-05-10T00:00:00+00:00",
+  "purpose": "SHA256 checksums of SLO-relevant gate evidence files for SLO_EVIDENCE_CHECK",
+  "gate_coverage": "PR1-PR9",
+  "slo_dimensions": [
+    "availability",
+    "latency_p99",
+    "error_rate",
+    "governance_gate_pass_rate"
+  ],
+  "subjects": [
+    {
+      "subject": "main.py",
+      "sha256": "8778ad7a9d116e16b3d0dc78be4437b7257d5fb145eb3bd24a541da7c59a84b4",
+      "size_bytes": 51587
+    },
+    {
+      "subject": "metrics.py",
+      "sha256": "0664ea7337f44c32d18fd5943b0f030d075934f8d18a5d03a8ac4578c2e0eff1",
+      "size_bytes": 2775
+    },
+    {
+      "subject": "monitoring/monitoring_gate.py",
+      "sha256": "83b932f8fc8235d9f0928c85544098420d1d9e3de0a728dde40f719887a6be61",
+      "size_bytes": 14141
+    },
+    {
+      "subject": "monitoring/alert_rules.yaml",
+      "sha256": "5c808ee1a866cc57a0e3c69f174001ec9bc5a3a1c6b2eabd5aff0fe05d5dfa6a",
+      "size_bytes": 5738
+    },
+    {
+      "subject": "monitoring/alertmanager_config.yaml",
+      "sha256": "82722787bfa79683399decd7ed6e0cff38272df7b1cfad2cb1b2c7327b4b8511",
+      "size_bytes": 1735
+    },
+    {
+      "subject": "monitoring/grafana_dashboard.json",
+      "sha256": "dee64a8c1149836ec3af0aa037b658ac6b3e5051dfd3342802f185f151511e7f",
+      "size_bytes": 7453
+    },
+    {
+      "subject": "incident_response/incident_response_gate.py",
+      "sha256": "3d80cd5157a3700a87b9fa1440fdbec68ff44bba72060cb3adc5a4a3f4928f87",
+      "size_bytes": 11674
+    },
+    {
+      "subject": "tools/incident_response/drill_evidence_2026_05.json",
+      "sha256": "eee447c1994181b7db45fe4890cca0fc18b9b8920c3f155726961f8778d7aa7b",
+      "size_bytes": 9579
+    },
+    {
+      "subject": "security_review/security_review_gate.py",
+      "sha256": "ced1b2ab47f973de77ea0305116aa7f5b92c2ed432035ea36cd25437954f4cc8",
+      "size_bytes": 12967
+    },
+    {
+      "subject": "tools/security/dependency_scan_2026_05.json",
+      "sha256": "028d34b68a8331249dd5d55cf2a8c52a2d5ae6ba15eb45ebcc119b465cc0116e",
+      "size_bytes": 4162
+    },
+    {
+      "subject": "tools/security/static_analysis_2026_05.json",
+      "sha256": "90933ab75da1695683df6f888e7a60f22182b38ae76935aa8b64b0ed04aa61ea",
+      "size_bytes": 19216
+    },
+    {
+      "subject": "docs/SECURITY_REVIEW.md",
+      "sha256": "8fa1623671f13e532abe5f28e4fc9da2d031dec395cf078d72fc6e6225dfac03",
+      "size_bytes": 5880
+    },
+    {
+      "subject": "docs/THREAT_MODEL.md",
+      "sha256": "a6e49875a0d72b030b31bd97e05627a32ce3f307ce81eed684157a66ce451cb9",
+      "size_bytes": 4335
+    },
+    {
+      "subject": "reproduction/reproduction_gate.py",
+      "sha256": "bce267051f53717d5f2aa0075501fd0a22ca636fca2614ef9f7815353df77733",
+      "size_bytes": 11894
+    },
+    {
+      "subject": "tools/reproduction/reproduction_evidence_v2_2026_05.json",
+      "sha256": "2ef9790ee5a8dd7f3989671bc4445aff7fc120f05a04392c79299fadbff195ad",
+      "size_bytes": 3853
+    },
+    {
+      "subject": "deployment/deployment_gate.py",
+      "sha256": "18c2cf9b3c05e8777128f98a4d1097736ac39c4ca03474f72571401b5db38177",
+      "size_bytes": 12763
+    },
+    {
+      "subject": "docs/DEPLOYMENT_MANIFEST.md",
+      "sha256": "889f7f1c4c871043408c2c6f8e14f932ee38b706b900e9f4e8d97a0f6a79e535",
+      "size_bytes": 5867
+    },
+    {
+      "subject": "tools/deployment/deployment_audit_2026_05.json",
+      "sha256": "eb0557b387dfc409489de5fcce35723d4062b0b9e49b4efb324e95720e685fa2",
+      "size_bytes": 4559
+    },
+    {
+      "subject": "docs/INCIDENT_RESPONSE.md",
+      "sha256": "7671e6de3bb0459f16a86860638bd9ce58d4a1c77ef62185a90933dbcd59e64d",
+      "size_bytes": 9392
+    },
+    {
+      "subject": "requirements.txt",
+      "sha256": "47cc492f68cf61f06df77f24744da8a90657a9821d13aa63374bcf6adf6a5f89",
+      "size_bytes": 111
+    }
+  ],
+  "summary": {
+    "subjects_total": 20,
+    "subjects_hashed": 20
+  },
+  "non_claims": [
+    "slo_evidence_verified=false",
+    "live_slo_measurement_not_running",
+    "production_prometheus_not_connected",
+    "error_budget_not_tracked_in_production"
+  ],
+  "artifact_sha256": "687f892d4a0a1b46938a6b8aafb5d36b4bd3f9a0bd99d9e48f4354b48f3f8247"
+}
