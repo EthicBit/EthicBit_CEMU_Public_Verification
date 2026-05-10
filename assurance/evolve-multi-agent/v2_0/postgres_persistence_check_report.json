@@ -1,0 +1,86 @@
+{
+  "gate": "POSTGRES_PRODUCTION_PERSISTENCE_CHECK",
+  "gate_version": "v2.0-PR3",
+  "result": "FAIL",
+  "timestamp_utc": "2026-05-10T13:27:36.108549+00:00",
+  "environment": {
+    "db_url_configured": false,
+    "db_url_prefix": null,
+    "db_adapter_env": ""
+  },
+  "checks": [
+    {
+      "id": "C-01",
+      "label": "AEM_DB_URL env var configured",
+      "status": "FAIL",
+      "detail": "AEM_DB_URL not set"
+    },
+    {
+      "id": "C-02",
+      "label": "PostgresAdapter importable",
+      "status": "PASS"
+    },
+    {
+      "id": "C-03",
+      "label": "PostgreSQL connection reachable N/A",
+      "status": "PASS",
+      "detail": "Skipped \u2014 AEM_DB_URL not set"
+    },
+    {
+      "id": "C-04",
+      "label": "SQLite disabled N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-05",
+      "label": "Migrations applied N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-06",
+      "label": "Schema validated N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-07",
+      "label": "Connection pooling N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-08",
+      "label": "Concurrent writes N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-09",
+      "label": "Audit-chain integrity N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-10",
+      "label": "Backup tooling N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 9,
+    "failed": 1
+  },
+  "non_claims": [
+    "This gate does not certify enterprise-scale database performance",
+    "pgbouncer configuration requires separate infrastructure evidence",
+    "Backup/restore schedule requires separate operational evidence",
+    "This gate does not grant regulatory approval",
+    "PASS requires a real PostgreSQL instance \u2014 not SQLite",
+    "This gate is not production-ready by itself \u2014 one of 12 required gates"
+  ],
+  "fail_reason": "AEM_DB_URL not configured \u2014 PostgreSQL instance required"
+}
