@@ -1,0 +1,133 @@
+{
+  "artifact_type": "AEM_EVOLVE_AGGREGATE_READINESS_EVIDENCE",
+  "pr": "PR13",
+  "version": "0.20.0-demo",
+  "generated_utc": "2026-05-10T00:00:00+00:00",
+  "purpose": "Aggregate SHA256 checksums of all gate evidence artifacts for PRODUCTION_READINESS_GATE",
+  "gates_covered": [
+    "PR5",
+    "PR6",
+    "PR7",
+    "PR8",
+    "PR9",
+    "PR10",
+    "PR11",
+    "PR12"
+  ],
+  "assurance_reports_included": 8,
+  "gate_evidence_artifacts_included": 8,
+  "gate_modules_included": 4,
+  "subjects": [
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/monitoring_alerting_check_report.json",
+      "sha256": "31d0342daf806a392a76fc0f8a100c258bbc85ae9f2013e402fc8d26bef350fe",
+      "size_bytes": 3768
+    },
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/incident_response_check_report.json",
+      "sha256": "1729ea2ae6a9fb4bae87e8ab2b9a75bd73f21690b493c0e6411d7446eb8f5de4",
+      "size_bytes": 3205
+    },
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/security_review_check_report.json",
+      "sha256": "5682dc671c8209bfebfe10ec6e9def822e743e4930043696f362b413cb798bcb",
+      "size_bytes": 3814
+    },
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/reproduction_check_report.json",
+      "sha256": "42faa9a9a5cf1603760f2fb3deb95e68d2bc73b3d3e364bb83a27e3d06caaf3e",
+      "size_bytes": 3307
+    },
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/deployment_audit_check_report.json",
+      "sha256": "6116dab2303338b9fea8f991f16b21b36169d77c5b56ff66bc6ee8151c3d73d1",
+      "size_bytes": 3156
+    },
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/slo_evidence_check_report.json",
+      "sha256": "0a744a56b698d93e83148eb3b8aeb5e3c9a53b578c8b9961bddf99422e5fdb7b",
+      "size_bytes": 3107
+    },
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/rollback_procedure_check_report.json",
+      "sha256": "a33de8ff2c7e2d8aed20a62079bb5c2893371044b86731647bc5d920f2af2a85",
+      "size_bytes": 3205
+    },
+    {
+      "subject": "assurance/evolve-multi-agent/v2_0/disaster_recovery_check_report.json",
+      "sha256": "b837f25bdd78212a0b322bc704966ce3e55512a238ff452803adbe97e40b989d",
+      "size_bytes": 3161
+    },
+    {
+      "subject": "tools/incident_response/drill_evidence_2026_05.json",
+      "sha256": "eee447c1994181b7db45fe4890cca0fc18b9b8920c3f155726961f8778d7aa7b",
+      "size_bytes": 9579
+    },
+    {
+      "subject": "tools/security/dependency_scan_2026_05.json",
+      "sha256": "028d34b68a8331249dd5d55cf2a8c52a2d5ae6ba15eb45ebcc119b465cc0116e",
+      "size_bytes": 4162
+    },
+    {
+      "subject": "tools/security/static_analysis_2026_05.json",
+      "sha256": "90933ab75da1695683df6f888e7a60f22182b38ae76935aa8b64b0ed04aa61ea",
+      "size_bytes": 19216
+    },
+    {
+      "subject": "tools/reproduction/reproduction_evidence_v2_2026_05.json",
+      "sha256": "2ef9790ee5a8dd7f3989671bc4445aff7fc120f05a04392c79299fadbff195ad",
+      "size_bytes": 3853
+    },
+    {
+      "subject": "tools/deployment/deployment_audit_2026_05.json",
+      "sha256": "eb0557b387dfc409489de5fcce35723d4062b0b9e49b4efb324e95720e685fa2",
+      "size_bytes": 4559
+    },
+    {
+      "subject": "tools/slo/slo_evidence_2026_05.json",
+      "sha256": "6468c1ecb7d8898e3593622c3d6efbdd896a4181545ca6253a4b2cd23eed6983",
+      "size_bytes": 4246
+    },
+    {
+      "subject": "tools/rollback/rollback_test_evidence_2026_05.json",
+      "sha256": "dbacd2201357d76862d0139df9fc599f52ee41b6b348efed78dc35b46f9b5e6e",
+      "size_bytes": 5286
+    },
+    {
+      "subject": "tools/disaster_recovery/dr_test_evidence_2026_05.json",
+      "sha256": "8c1c59df8328e12422d34c46929a57878c2e288ada88f7383383b40e6cf8d8a2",
+      "size_bytes": 5645
+    },
+    {
+      "subject": "monitoring/monitoring_gate.py",
+      "sha256": "83b932f8fc8235d9f0928c85544098420d1d9e3de0a728dde40f719887a6be61",
+      "size_bytes": 14141
+    },
+    {
+      "subject": "security_review/security_review_gate.py",
+      "sha256": "ced1b2ab47f973de77ea0305116aa7f5b92c2ed432035ea36cd25437954f4cc8",
+      "size_bytes": 12967
+    },
+    {
+      "subject": "deployment/deployment_gate.py",
+      "sha256": "18c2cf9b3c05e8777128f98a4d1097736ac39c4ca03474f72571401b5db38177",
+      "size_bytes": 12763
+    },
+    {
+      "subject": "disaster_recovery/disaster_recovery_gate.py",
+      "sha256": "66bd09edf89b2edeab982ecb5b240f3e2ef96ee3f2312271745dc889742596ef",
+      "size_bytes": 13099
+    }
+  ],
+  "summary": {
+    "subjects_total": 20,
+    "subjects_hashed": 20
+  },
+  "non_claims": [
+    "production_ready=false",
+    "live_infrastructure_not_validated",
+    "independent_reproduction_not_claimed",
+    "regulatory_approval_not_claimed"
+  ],
+  "artifact_sha256": "9ceffdc9c78b1673511b9d239718a8b6bb16995a6165e73a9c19f419e611a25d"
+}

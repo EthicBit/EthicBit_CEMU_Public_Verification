@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v2.0 PR 12: Disaster recovery evidence
+May 2026 — v2.0 PR 13: Production readiness gate aggregator
 """
 
 import logging
@@ -147,7 +147,7 @@ if _TOOLS_PATH not in sys.path:
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
     description="Multi-Agent Governance with RBAC HITL Controls — v2.0 PR 1: Production OIDC provider enforcement layer",
-    version="0.19.0-demo",
+    version="0.20.0-demo",
 )
 
 
@@ -910,6 +910,17 @@ except Exception as _dr_gate_exc:
     _disaster_recovery_gate = None
     log.warning("disaster_recovery_gate_init_failed", extra={"exc": str(_dr_gate_exc)})
 
+# ── v2.0 PR 13 — Production readiness gate aggregator ────────────────────────
+try:
+    from readiness.readiness_gate import ReadinessGate as _ReadinessGate
+    _readiness_gate = _ReadinessGate.from_env()
+    log.info("readiness_gate_loaded", extra={
+        "reviewer_set": _readiness_gate._readiness_reviewer is not None,
+    })
+except Exception as _readiness_gate_exc:
+    _readiness_gate = None
+    log.warning("readiness_gate_init_failed", extra={"exc": str(_readiness_gate_exc)})
+
 # ============================================
 # ENDPOINTS
 # ============================================
@@ -932,7 +943,7 @@ def healthz():
         db_ok = False
     db_label = "postgres" if "Postgres" in _db_adapter_label else "sqlite"
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.19.0-demo",
+    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.20.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -1174,7 +1185,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.19.0-demo",
+        "version": "0.20.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -1297,6 +1308,17 @@ def health():
                 "reason": "disaster_recovery package unavailable",
             }
         ),
+        "readiness_gate": (
+            _readiness_gate.gate_check()  # type: ignore[union-attr]
+            if _readiness_gate is not None
+            else {
+                "gate": "PRODUCTION_READINESS_GATE",
+                "status": "NOT_CONFIGURED",
+                "production_ready": False,
+                "gates_evidence_complete": False,
+                "reason": "readiness package unavailable",
+            }
+        ),
         "postgres_persistence_gate": (
             {"gate": "POSTGRES_PRODUCTION_PERSISTENCE_CHECK", "status": "NOT_CONFIGURED",
              "reason": "AEM_DB_URL env var not set"}
@@ -1327,6 +1349,6 @@ def health():
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.19.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.20.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)

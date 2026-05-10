@@ -1,0 +1,189 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "PRODUCTION_READINESS_GATE",
+  "pr": "PR13",
+  "version": "0.20.0-demo",
+  "generated_utc": "2026-05-10T18:59:53.236431+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr13",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "PRODUCTION_READINESS_GATE",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "production_ready": false,
+    "gates_evidence_complete": true,
+    "readiness_reviewer": null,
+    "readiness_review_date": null,
+    "gate_summary": {
+      "MonitoringGate": {
+        "gate": "MONITORING_ALERTING_CHECK",
+        "status": "FAIL",
+        "checks_passed": 7,
+        "checks_failed": 3,
+        "file_checks_passed": 8
+      },
+      "IncidentResponseGate": {
+        "gate": "INCIDENT_RESPONSE_CHECK",
+        "status": "FAIL",
+        "checks_passed": 8,
+        "checks_failed": 2,
+        "file_checks_passed": 8
+      },
+      "SecurityReviewGate": {
+        "gate": "SECURITY_REVIEW_CHECK",
+        "status": "FAIL",
+        "checks_passed": 8,
+        "checks_failed": 2,
+        "file_checks_passed": 8
+      },
+      "ReproductionGate": {
+        "gate": "EXTERNAL_REPRODUCTION_CHECK",
+        "status": "FAIL",
+        "checks_passed": 8,
+        "checks_failed": 2,
+        "file_checks_passed": 8
+      },
+      "DeploymentGate": {
+        "gate": "PRODUCTION_DEPLOYMENT_AUDIT_CHECK",
+        "status": "FAIL",
+        "checks_passed": 8,
+        "checks_failed": 2,
+        "file_checks_passed": 8
+      },
+      "SLOGate": {
+        "gate": "SLO_EVIDENCE_CHECK",
+        "status": "FAIL",
+        "checks_passed": 8,
+        "checks_failed": 2,
+        "file_checks_passed": 8
+      },
+      "RollbackGate": {
+        "gate": "ROLLBACK_PROCEDURE_CHECK",
+        "status": "FAIL",
+        "checks_passed": 8,
+        "checks_failed": 2,
+        "file_checks_passed": 8
+      },
+      "DisasterRecoveryGate": {
+        "gate": "DISASTER_RECOVERY_CHECK",
+        "status": "FAIL",
+        "checks_passed": 8,
+        "checks_failed": 2,
+        "file_checks_passed": 8
+      }
+    },
+    "fail_reason": "Production readiness review not yet completed: AEM_READINESS_REVIEWER, AEM_READINESS_REVIEW_DATE not set. production_ready=false",
+    "checks": {
+      "C-01_verifiers_present": {
+        "ok": true,
+        "verifiers_required": 12,
+        "verifiers_present": 12,
+        "missing_verifiers": []
+      },
+      "C-02_gate_modules_load": {
+        "ok": true,
+        "modules_required": 8,
+        "modules_loaded": 8,
+        "failed_modules": []
+      },
+      "C-03_pr5_pr6": {
+        "ok": true,
+        "gates": {
+          "MonitoringGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "MONITORING_ALERTING_CHECK"
+          },
+          "IncidentResponseGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "INCIDENT_RESPONSE_CHECK"
+          }
+        }
+      },
+      "C-04_pr7_pr8": {
+        "ok": true,
+        "gates": {
+          "SecurityReviewGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "SECURITY_REVIEW_CHECK"
+          },
+          "ReproductionGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "EXTERNAL_REPRODUCTION_CHECK"
+          }
+        }
+      },
+      "C-05_pr9_pr10": {
+        "ok": true,
+        "gates": {
+          "DeploymentGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "PRODUCTION_DEPLOYMENT_AUDIT_CHECK"
+          },
+          "SLOGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "SLO_EVIDENCE_CHECK"
+          }
+        }
+      },
+      "C-06_pr11_pr12": {
+        "ok": true,
+        "gates": {
+          "RollbackGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "ROLLBACK_PROCEDURE_CHECK"
+          },
+          "DisasterRecoveryGate": {
+            "ok": true,
+            "file_checks_passed": 8,
+            "gate": "DISASTER_RECOVERY_CHECK"
+          }
+        }
+      },
+      "C-07_aggregate_evidence": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/readiness/aggregate_readiness_evidence_2026_05.json",
+        "sha256": "6f04c9121cfecaca88bd1e4a399a005c57407734ae5972e30a2f02a2fcacf1d7",
+        "artifact_sha256": "9ceffdc9c78b1673511b9d239718a8b6bb16995a6165e73a9c19f419e611a25d",
+        "subjects_hashed": 20,
+        "subjects_total": 20,
+        "has_artifact_sha256": true
+      },
+      "C-08_artifact_fingerprint": {
+        "ok": true,
+        "has_artifact_sha256": true,
+        "artifact_sha256": "9ceffdc9c78b1673511b9d239718a8b6bb16995a6165e73a9c19f419e611a25d"
+      },
+      "C-09_readiness_reviewer": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_READINESS_REVIEWER not set — set to governance lead identity before claiming production_ready=true"
+      },
+      "C-10_readiness_review_date": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_READINESS_REVIEW_DATE not set — set to ISO8601 date of production readiness review"
+      }
+    }
+  },
+  "non_claims": [
+    "production_ready=false",
+    "live_infrastructure_not_validated",
+    "independent_reproduction_not_claimed",
+    "regulatory_approval_not_claimed",
+    "not_tamper_proof"
+  ]
+}
