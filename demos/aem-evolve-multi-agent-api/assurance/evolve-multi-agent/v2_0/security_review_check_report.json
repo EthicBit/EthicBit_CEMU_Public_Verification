@@ -1,0 +1,108 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "SECURITY_REVIEW_CHECK",
+  "pr": "PR7",
+  "version": "0.14.0-demo",
+  "generated_utc": "2026-05-10T18:05:25.819313+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr7",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "SECURITY_REVIEW_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "security_reviewer": null,
+    "security_review_date": null,
+    "fail_reason": "External review evidence missing: AEM_SECURITY_REVIEWER, AEM_SECURITY_REVIEW_DATE",
+    "checks": {
+      "C-01_review_document": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/SECURITY_REVIEW.md",
+        "sha256": "8fa1623671f13e532abe5f28e4fc9da2d031dec395cf078d72fc6e6225dfac03",
+        "size_bytes": 5880
+      },
+      "C-02_threat_model": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/THREAT_MODEL.md",
+        "sha256": "a6e49875a0d72b030b31bd97e05627a32ce3f307ce81eed684157a66ce451cb9",
+        "threats_checked": 4,
+        "missing_threats": []
+      },
+      "C-03_controls_coverage": {
+        "ok": true,
+        "controls_required": 7,
+        "controls_present": 7,
+        "missing_controls": []
+      },
+      "C-04_dependency_scan": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/security/dependency_scan_2026_05.json",
+        "sha256": "028d34b68a8331249dd5d55cf2a8c52a2d5ae6ba15eb45ebcc119b465cc0116e",
+        "dependencies_scanned": 44,
+        "vulnerabilities_found": 0,
+        "scan_result": "CLEAN"
+      },
+      "C-05_static_analysis": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/security/static_analysis_2026_05.json",
+        "sha256": "90933ab75da1695683df6f888e7a60f22182b38ae76935aa8b64b0ed04aa61ea",
+        "issues_high": 0,
+        "issues_medium": 10,
+        "issues_low": 45,
+        "scan_result": "PASS_NO_HIGH_SEVERITY",
+        "production_blocking": 0
+      },
+      "C-06_owasp_coverage": {
+        "ok": true,
+        "owasp_items_required": 4,
+        "owasp_items_present": 4,
+        "missing_items": []
+      },
+      "C-07_findings_documented": {
+        "ok": true,
+        "has_findings_table": true,
+        "has_known_limitations": true,
+        "has_mitigations": true
+      },
+      "C-08_artifact_fingerprints": {
+        "ok": true,
+        "artifacts": {
+          "dependency_scan": {
+            "ok": true,
+            "file": "dependency_scan_2026_05.json",
+            "has_sha256": true,
+            "sha256": "49db8ee42a2f3b00eb4ed9f5bdef5eb8f7be22242c0d771fef9a3df4aa9cb7fa"
+          },
+          "static_analysis": {
+            "ok": true,
+            "file": "static_analysis_2026_05.json",
+            "has_sha256": true,
+            "sha256": "8548d87c261de62790f3d236edc1889fd1d0045526c5b8c6c39726a91de743ca"
+          }
+        }
+      },
+      "C-09_external_reviewer": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_SECURITY_REVIEWER not set — set to external reviewer identity before production deploy"
+      },
+      "C-10_review_date": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_SECURITY_REVIEW_DATE not set — set to ISO8601 date of external review"
+      }
+    }
+  },
+  "non_claims": [
+    "external_review_not_yet_completed",
+    "scan_covers_demo_codebase_not_production_infrastructure",
+    "no_penetration_testing_performed",
+    "regulatory_approval_not_claimed"
+  ]
+}

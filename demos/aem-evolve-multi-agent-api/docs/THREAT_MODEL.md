@@ -57,6 +57,9 @@
 | Audit chain tampering | Hash-linked chain: any mutation propagates to `TAMPER_DETECTED` on verify | Strong (tamper-evident) |
 | Event/receipt SHA-256 forgery | Canonical SHA-256 over canonical JSON; verifier re-computes on read | Strong |
 | Role escalation | No privilege escalation path; keys map to fixed roles; no role modification endpoint | Strong (demo) |
+| HITL token replay attack | `hitl_used_tokens` table: one-time-use per (token_hash, event_id) pair; 409 on replay | Strong |
+| OIDC provider outage | Dual-path fallback (HMAC demo path); `oidc_provider_outage` counter alerts ops | Medium |
+| KMS signing failure | `kms_signing_failed` counter + Prometheus alert; runbook INC-06 documents recovery | Medium |
 
 ---
 

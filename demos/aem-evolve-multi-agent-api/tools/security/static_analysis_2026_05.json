@@ -1,0 +1,573 @@
+{
+  "report_type": "AEM_EVOLVE_STATIC_ANALYSIS",
+  "tool": "bandit",
+  "scan_date_utc": "2026-05-10T17:59:50.350041+00:00",
+  "version": "0.13.0-demo",
+  "summary": {
+    "loc_scanned": 9944,
+    "issues_high": 0,
+    "issues_medium": 10,
+    "issues_low": 45,
+    "issues_total": 55,
+    "production_blocking": 0,
+    "scan_result": "PASS_NO_HIGH_SEVERITY"
+  },
+  "disposition_summary": {
+    "FALSE_POSITIVE_DOCUMENTED": 30,
+    "REVIEWED_MEDIUM": 2,
+    "ACCEPTED_LOW_RISK": 23
+  },
+  "findings": [
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./db/migration_recovery_evidence.py",
+      "line": 26,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions",
+      "severity": "MEDIUM",
+      "confidence": "MEDIUM",
+      "filename": "./db/migration_recovery_evidence.py",
+      "line": 119,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Possible SQL injection vector through string-based query construction."
+    },
+    {
+      "test_id": "B306",
+      "test_name": "blacklist",
+      "severity": "MEDIUM",
+      "confidence": "HIGH",
+      "filename": "./db/migration_recovery_evidence.py",
+      "line": 213,
+      "disposition": "REVIEWED_MEDIUM",
+      "text": "Use of insecure and deprecated function (mktemp)."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./db/migration_recovery_evidence.py",
+      "line": 215,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B306",
+      "test_name": "blacklist",
+      "severity": "MEDIUM",
+      "confidence": "HIGH",
+      "filename": "./db/migration_recovery_evidence.py",
+      "line": 405,
+      "disposition": "REVIEWED_MEDIUM",
+      "text": "Use of insecure and deprecated function (mktemp)."
+    },
+    {
+      "test_id": "B110",
+      "test_name": "try_except_pass",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./db/migration_recovery_evidence.py",
+      "line": 414,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Try, Except, Pass detected."
+    },
+    {
+      "test_id": "B110",
+      "test_name": "try_except_pass",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./db/postgres_production_gate.py",
+      "line": 167,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Try, Except, Pass detected."
+    },
+    {
+      "test_id": "B110",
+      "test_name": "try_except_pass",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./main.py",
+      "line": 91,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Try, Except, Pass detected."
+    },
+    {
+      "test_id": "B110",
+      "test_name": "try_except_pass",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./main.py",
+      "line": 193,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Try, Except, Pass detected."
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./main.py",
+      "line": 243,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: '10'"
+    },
+    {
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions",
+      "severity": "MEDIUM",
+      "confidence": "MEDIUM",
+      "filename": "./main.py",
+      "line": 1092,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Possible SQL injection vector through string-based query construction."
+    },
+    {
+      "test_id": "B310",
+      "test_name": "blacklist",
+      "severity": "MEDIUM",
+      "confidence": "HIGH",
+      "filename": "./monitoring/monitoring_gate.py",
+      "line": 231,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected."
+    },
+    {
+      "test_id": "B310",
+      "test_name": "blacklist",
+      "severity": "MEDIUM",
+      "confidence": "HIGH",
+      "filename": "./monitoring/monitoring_gate.py",
+      "line": 244,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected."
+    },
+    {
+      "test_id": "B310",
+      "test_name": "blacklist",
+      "severity": "MEDIUM",
+      "confidence": "HIGH",
+      "filename": "./monitoring/monitoring_gate.py",
+      "line": 270,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected."
+    },
+    {
+      "test_id": "B101",
+      "test_name": "assert_used",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/db/verify_db_adapter_switch.py",
+      "line": 52,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions",
+      "severity": "MEDIUM",
+      "confidence": "LOW",
+      "filename": "./tools/db/verify_postgres_live.py",
+      "line": 109,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Possible SQL injection vector through string-based query construction."
+    },
+    {
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions",
+      "severity": "MEDIUM",
+      "confidence": "MEDIUM",
+      "filename": "./tools/db/verify_postgres_live.py",
+      "line": 112,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Possible SQL injection vector through string-based query construction."
+    },
+    {
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions",
+      "severity": "MEDIUM",
+      "confidence": "MEDIUM",
+      "filename": "./tools/db/verify_postgres_live.py",
+      "line": 178,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Possible SQL injection vector through string-based query construction."
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/governance/verify_materiality_paths.py",
+      "line": 87,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'completed'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/governance/verify_materiality_paths.py",
+      "line": 105,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'PASS'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/hitl_identity_verifier.py",
+      "line": 33,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ETHICBIT_HITL_SHARED_SECRET'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/hitl_identity_verifier.py",
+      "line": 34,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ethicbit-hitl-demo-secret-v1.4'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/hitl_identity_verifier.py",
+      "line": 102,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: '10'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/hitl_identity_verifier.py",
+      "line": 172,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'HMAC-SHA256(secret, approver_id + ':' + event_id + ':' + timestamp_floor_minutes)'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/hitl_token_generator.py",
+      "line": 26,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ETHICBIT_HITL_SHARED_SECRET'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/hitl_token_generator.py",
+      "line": 27,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ethicbit-hitl-demo-secret-v1.4'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/oidc_hitl_identity_verifier.py",
+      "line": 213,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'OIDC RS256 JWT'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/verify_oidc_wired.py",
+      "line": 46,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ethicbit-hitl-demo-secret-v1.4'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/hitl/verify_replay_mitigation.py",
+      "line": 42,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ethicbit-hitl-demo-secret-v1.4'"
+    },
+    {
+      "test_id": "B110",
+      "test_name": "try_except_pass",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/incident_response/drill_scenario.py",
+      "line": 157,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Try, Except, Pass detected."
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/integration/e2e_api_test.py",
+      "line": 50,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ethicbit-hitl-demo-secret-v1.4'"
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/integration/e2e_api_test.py",
+      "line": 137,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: ''"
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reasoning/mech_reason.py",
+      "line": 22,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reasoning/mech_reason.py",
+      "line": 51,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reasoning/verify_mech_reason.py",
+      "line": 23,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reasoning/verify_mech_reason.py",
+      "line": 213,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_3.py",
+      "line": 13,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_3.py",
+      "line": 101,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_4.py",
+      "line": 16,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_4.py",
+      "line": 114,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_5.py",
+      "line": 12,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_5.py",
+      "line": 85,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_6.py",
+      "line": 12,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_6.py",
+      "line": 92,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_7.py",
+      "line": 12,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_7.py",
+      "line": 102,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_8.py",
+      "line": 12,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_8.py",
+      "line": 111,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_8.py",
+      "line": 125,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B404",
+      "test_name": "blacklist",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_9.py",
+      "line": 12,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "Consider possible security implications associated with the subprocess module."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_9.py",
+      "line": 121,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/reproduction/verify_all_v1_9.py",
+      "line": 135,
+      "disposition": "FALSE_POSITIVE_DOCUMENTED",
+      "text": "subprocess call - check for execution of untrusted input."
+    },
+    {
+      "test_id": "B101",
+      "test_name": "assert_used",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/signing/verify_key_persistence.py",
+      "line": 61,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "filename": "./tools/signing/verify_read_time_signatures.py",
+      "line": 47,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Possible hardcoded password: 'ethicbit-hitl-demo-secret-v1.4'"
+    },
+    {
+      "test_id": "B101",
+      "test_name": "assert_used",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "filename": "./tools/signing/verify_read_time_signatures.py",
+      "line": 92,
+      "disposition": "ACCEPTED_LOW_RISK",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    }
+  ],
+  "artifact_sha256": "8548d87c261de62790f3d236edc1889fd1d0045526c5b8c6c39726a91de743ca"
+}
