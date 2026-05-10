@@ -1,0 +1,86 @@
+{
+  "gate": "HSM_KMS_SIGNING_CHECK",
+  "gate_version": "v2.0-PR2",
+  "result": "FAIL",
+  "timestamp_utc": "2026-05-10T13:20:10.865163+00:00",
+  "environment": {
+    "kms_provider_configured": false,
+    "kms_provider": null,
+    "kms_key_id": null,
+    "kms_algorithm": null
+  },
+  "checks": [
+    {
+      "id": "C-01",
+      "label": "AEM_KMS_PROVIDER env var configured",
+      "status": "FAIL",
+      "detail": "AEM_KMS_PROVIDER not set"
+    },
+    {
+      "id": "C-02",
+      "label": "signing.production_kms_provider importable",
+      "status": "PASS"
+    },
+    {
+      "id": "C-03",
+      "label": "all four provider types supported",
+      "status": "PASS",
+      "detail": "supported=['aws_kms', 'azure_key_vault', 'gcp_kms', 'pkcs11']"
+    },
+    {
+      "id": "C-04",
+      "label": "load_kms_config returns None (AEM_KMS_PROVIDER unset)",
+      "status": "PASS",
+      "detail": "Correct: gate not satisfied without KMS/HSM provider"
+    },
+    {
+      "id": "C-05",
+      "label": "from_env() returns provider iff config present",
+      "status": "PASS",
+      "detail": "provider=None"
+    },
+    {
+      "id": "C-06",
+      "label": "gate NOT_CONFIGURED when AEM_KMS_PROVIDER unset",
+      "status": "PASS",
+      "detail": "Correct gate behavior \u2014 FAIL_CLOSED: KMS/HSM required"
+    },
+    {
+      "id": "C-07",
+      "label": "key accessible N/A (no provider)",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-08",
+      "label": "sign/verify round-trip N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-09",
+      "label": "non-exportable key posture N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-10",
+      "label": "audit log active N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 9,
+    "failed": 1
+  },
+  "non_claims": [
+    "This gate does not certify FIPS compliance unless the underlying HSM is separately certified",
+    "This gate does not certify HSM tamper-proof status",
+    "This gate does not grant regulatory approval",
+    "PASS requires a real KMS/HSM \u2014 not a local software key",
+    "This gate is not production-ready by itself \u2014 one of 12 required gates"
+  ],
+  "fail_reason": "AEM_KMS_PROVIDER not configured \u2014 KMS/HSM provider required"
+}

@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v2.0 PR 1: Production OIDC provider enforcement layer
+May 2026 — v2.0 PR 2: HSM/KMS-backed production signing layer
 """
 
 import logging
@@ -62,9 +62,26 @@ _OIDC_KEY_FILE_NAME    = "oidc_key.pem"
 
 def _init_signing_provider():
     """
-    Priority: (1) env var PEM, (2) file-based persistent key, (3) generate + persist.
-    File path: <DEMO_ROOT>/signing_key.pem — survives server restarts.
+    Priority:
+      (0) v2.0 PR 2 — KMS/HSM production provider (AEM_KMS_PROVIDER set)
+      (1) env var PEM
+      (2) file-based persistent key
+      (3) generate + persist
     """
+    # (0) v2.0 PR 2 — production KMS/HSM path
+    try:
+        from signing.production_kms_provider import ProductionKmsProvider
+        kms = ProductionKmsProvider.from_env()
+        if kms is not None:
+            log.info("kms_signing_provider_loaded", extra={
+                "provider": kms.config.provider,
+                "key_id": kms.config.key_id,
+                "algorithm": kms.config.algorithm,
+            })
+            return kms, f"SIGNED_KMS_{kms.config.provider.upper()}"
+    except Exception as exc:
+        log.warning("kms_signing_provider_init_failed", extra={"exc": str(exc)})
+
     # (1) Env var — explicit secret wins
     try:
         from signing.env_signing_provider import EnvSigningProvider
@@ -130,7 +147,7 @@ if _TOOLS_PATH not in sys.path:
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
     description="Multi-Agent Governance with RBAC HITL Controls — v2.0 PR 1: Production OIDC provider enforcement layer",
-    version="0.8.0-demo",
+    version="0.9.0-demo",
 )
 
 
@@ -211,6 +228,12 @@ def _require_any_auth(api_key: str | None) -> str:
 
 # ── Signing + HITL — module-level singletons ─────────────────────────────────
 _signing_provider, _SIGNING_STATUS = _init_signing_provider()
+# v2.0 PR 2 — expose KMS provider directly for gate_check() in /health
+_production_kms_provider = (
+    _signing_provider
+    if _SIGNING_STATUS.startswith("SIGNED_KMS_")
+    else None
+)
 
 
 def _load_hitl_policy() -> dict:
@@ -796,7 +819,7 @@ def healthz():
         db_ok = False
     db_label = "postgres" if "Postgres" in _db_adapter_label else "sqlite"
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.8.0-demo",
+    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.9.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -1034,7 +1057,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.8.0-demo",
+        "version": "0.9.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -1046,6 +1069,16 @@ def health():
         },
         "signing_provider": _signing_provider.algorithm(),
         "signing_status": _SIGNING_STATUS,
+        "kms_signing_gate": (
+            _production_kms_provider.gate_check()  # type: ignore[union-attr]
+            if _production_kms_provider is not None
+            else {
+                "gate": "HSM_KMS_SIGNING_CHECK",
+                "status": "NOT_CONFIGURED",
+                "reason": "AEM_KMS_PROVIDER env var not set",
+                "non_exportable_posture": False,
+            }
+        ),
         "hitl_identity_enforcement": "HMAC_AND_OIDC_DUAL_PATH",
         "hitl_oidc_mode": "PRODUCTION" if _production_oidc_provider is not None else "DEMO",
         "hitl_oidc_path": "ENABLED" if (_oidc_key_pair is not None or _production_oidc_provider is not None) else "UNAVAILABLE",
@@ -1081,6 +1114,6 @@ def health():
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.8.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.9.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)
