@@ -7,6 +7,45 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.8.0] — 2026-05-09
+
+### Added
+- `RELEASE_NOTES_V1_8.md`
+- `main.py` — `_oidc_key_pair` + `_OIDC_POLICY`: module-level OIDC state; `_init_oidc_provider()` at startup
+- `main.py` — `_verify_hitl_token_oidc()`: RS256 JWT verification (sig, sub, event_id, registry, replay)
+- `main.py` — `_verify_hitl_token()`: dual-path dispatch via `token.count(".") == 2`
+- `main.py` — `_build_db_adapter()`: `AEM_DB_ADAPTER` env var factory; SQLite/Postgres with fallback
+- `main.py` — `GET /oidc/jwks`: ephemeral RSA-2048 public key as JWKS (RS256)
+- `main.py` — version bumped to `0.6.0-demo`; `/health` adds `hitl_oidc_path`, `db_adapter`, `db_adapter_switch`; `/healthz` `db` field reflects adapter
+- `tests/test_signing_controls.py` — `TestKeyPersistence` (8 tests), `TestDbAdapterLabel` (2 tests)
+- `tests/test_oidc_hitl.py` — `TestOIDCProviderInit` (4 tests), `TestOIDCApproval` (6 tests)
+- `tools/hitl/verify_oidc_wired.py` — 10-check OIDC wired verifier
+- `tools/db/verify_db_adapter_switch.py` — 10-check DB adapter switch verifier
+- `tools/reproduction/verify_all_v1_8.py` — 24-check full-stack verifier
+- `assurance/evolve-multi-agent/v1_8/oidc_wired_report.json`
+- `assurance/evolve-multi-agent/v1_8/db_adapter_switch_report.json`
+- `assurance/evolve-multi-agent/v1_8/REPRODUCTION_REPORT.json`
+- `docs/whitepapers/WHITEPAPER_V1_8_AEM_EVOLVE_PRODUCTION_HARDENING.md`
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_8.md`
+- Git tag `v1.8.0` + GitHub Release
+
+### Non-claims (v1.8.0)
+```
+OIDC key pair is locally generated — not a real IdP.
+JWKS is served in-process — not a real OIDC provider endpoint.
+Production requires external OIDC provider (Okta, Auth0, Keycloak).
+PostgreSQL path not tested with a live database in this verifier.
+Connection pool sizing is demo-grade.
+File-based signing key is not HSM-backed key custody.
+HITL enforcement uses HMAC shared secret — not enterprise IAM.
+SQLiteAdapter is demo storage — not production audit storage.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+```
+
+---
+
 ## [1.7.0] — 2026-05-10
 
 ### Added

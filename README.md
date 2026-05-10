@@ -5,7 +5,26 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.7.0 — Read-Time Verification, Key Persistence, Anti-Replay
+## Latest release: AEM-EVOLVE™ v1.8.0 — Production Hardening: OIDC HITL · DB Adapter Switch · 109 Tests
+
+**Tag:** `v1.8.0` — 2026-05-09
+**Type:** Production hardening — OIDC dual-path HITL · PostgreSQL adapter switch · expanded pytest suite (109 tests)
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (24/24)`
+
+> AEM-EVOLVE™ v1.8 adds three production hardening measures: OIDC RS256 JWT support alongside HMAC in /approve (dual-path, backwards-compatible), an AEM_DB_ADAPTER env var for SQLite/PostgreSQL switching, and a 109-test pytest suite covering all governance controls.
+
+- [Public Status Bulletin v1.8.0 (2026-05-09)](docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_8.md)
+- [Whitepaper v1.8](docs/whitepapers/WHITEPAPER_V1_8_AEM_EVOLVE_PRODUCTION_HARDENING.md)
+
+```bash
+pip install cryptography mlkem asyncpg fastapi langgraph starlette httpx jose
+python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_8.py
+# FULL_STACK_VERIFICATION=PASS  (24/24)
+```
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.7.0 — Read-Time Verification, Key Persistence, Anti-Replay
 
 **Tag:** `v1.7.0` — 2026-05-10
 **Type:** Security gap closure — read-time Ed25519 verification · file-based key persistence · HITL replay mitigation (409)
@@ -25,7 +44,7 @@ python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_7.py
 
 ---
 
-## Previous release: AEM-EVOLVE™ v1.6.0 — Critical Gaps Closure
+## AEM-EVOLVE™ v1.6.0 — Critical Gaps Closure
 
 **Tag:** `v1.6.0` — 2026-05-09
 **Type:** Critical gaps closure — signing wired · HITL token enforced · SQLiteAdapter activated · E2E integration test · CI updated

@@ -1,0 +1,212 @@
+{
+  "version": "v1.8",
+  "timestamp": "2026-05-10T12:16:51.368817+00:00",
+  "result": "PASS",
+  "checks_passed": 24,
+  "checks_total": 24,
+  "non_claims": [
+    "OIDC key pair is locally generated \u2014 not a real IdP.",
+    "PostgreSQL path verified at env-var logic level only \u2014 no live DB required.",
+    "File-based signing key is not HSM-backed key custody.",
+    "HITL enforcement uses HMAC shared secret \u2014 not enterprise IAM.",
+    "SQLiteAdapter is demo storage \u2014 not production audit storage.",
+    "External independent reproductions remain at 0 received.",
+    "This release is not regulatory approval.",
+    "This release is not external certification."
+  ],
+  "checks": [
+    {
+      "check_id": "V1_1-REGULATORY-MAPPING",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/regulatory/regulatory_mapping_checker.py",
+      "expected_status": "REGULATORY_MAPPING_CHECK=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "REGULATORY_MAPPING_CHECK=PASS\n"
+    },
+    {
+      "check_id": "V1_1-GOVERNANCE-METRICS",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/metrics/governance_effectiveness_metrics.py",
+      "expected_status": "GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "GOVERNANCE_EFFECTIVENESS_METRICS_STATUS=PASS\n"
+    },
+    {
+      "check_id": "V1_1-MULTI-ANCHOR",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py",
+      "expected_status": "MULTI_ANCHOR_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "MULTI_ANCHOR_VERIFICATION=PASS\n"
+    },
+    {
+      "check_id": "V1_1-HITL-SIGNATURE",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/HITL_signature_verifier.py",
+      "expected_status": "HITL_SIGNATURE_VERIFICATION=PASS_DEMO",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "HITL_SIGNATURE_VERIFICATION=PASS_DEMO\n"
+    },
+    {
+      "check_id": "V1_1-RECEIPT-FORGERY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/adversarial_tests/test_receipt_forgery.py",
+      "expected_status": "RECEIPT_FORGERY_TESTS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "RECEIPT_FORGERY_TESTS=PASS\n"
+    },
+    {
+      "check_id": "V1_1-OFFICIAL-STATUS",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/status/official_status_signer.py",
+      "expected_status": "OFFICIAL_STATUS_SIGNED=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "OFFICIAL_STATUS_SIGNED=PASS\n"
+    },
+    {
+      "check_id": "V1_2-MECH-REASON-ENGINE",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/reasoning/mech_reason.py",
+      "expected_status": "MECH_REASON_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[MECH-REASON\u2122] Running sub-components...\nMECH_REASON_STATUS=PASS\n  recommended_outcome: PASS\n  hitl_required:       True\n  triggered_rules:     []\n"
+    },
+    {
+      "check_id": "V1_2-MECH-REASON-VERIFY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/reasoning/verify_mech_reason.py",
+      "expected_status": "MECH_REASON_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[MECH-REASON\u2122 VERIFIER] Starting verification...\n  \u2713 [C-01-SCHEMA] schema_id=AEM_EVOLVE_MECH_REASON_REPORT_V1_2, llm_involved=false\n  \u2713 [C-02-POLICY-VER] policy_version=1.2.0\n  \u2713 [C-03-INPUT-HASHES] all 4 input hashes verified\n  \u2713 [C-04-REPORT-HASH] report_hash=eb045c4994ee296a\u2026\n  \u2713 [C-05-SCORES] all 7 scores in [0.0, 1.0]\n  \u2713 [C-06-TRIGGERED-RULES] 0 rule(s), all strings\n  \u2713 [C-07-OUTCOME] recommended_outcome=PASS\n  \u2713 [C-08-EXPLANATION] explanation present, non-LLM marker confirmed\n  \u2713 [C-09-NON-CLAIMS] all 9 non-claims present\n  \u2713 [C-10-DETERMINISM] two runs agree: outcome=PASS, triggered_rules=[]\nMECH_REASON_VERIFICATION=PASS\n"
+    },
+    {
+      "check_id": "V1_3-LLM-ADVISORY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/advisory/llm_advisory_adapter.py",
+      "expected_status": "LLM_ADVISORY_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[LLM ADVISORY ADAPTER] Reading sealed MECH_REASON_REPORT...\n  sealed report_hash: 967754736724788f\u2026\n  recommended_outcome (sealed, read-only): PASS\n[LLM ADVISORY ADAPTER] Generating advisory narrative (does not modify governance)...\n  advisory_only: true\n  governance_binding: false\n  simulation_mode: True\n  advisory_hash: b48e9032a5ec59f3\u2026\nLLM_ADVISORY_STATUS=PASS\n"
+    },
+    {
+      "check_id": "V1_3-MLKEM768",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/crypto/verify_mlkem768.py",
+      "expected_status": "MLKEM768_STATUS=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[ML-KEM768 VERIFIER] mode=mlkem\n  \u2713 [C-01-KEYGEN-SIZES] pk=1184B sk=2400B\n  \u2713 [C-02-ENC-SIZES] ct=1088B ss=32B\n  \u2713 [C-03-ROUND-TRIP] decapsulate(sk, ct) == enc.shared_secret\n  \u2713 [C-04-RANDOMNESS] two encapsulations produce different ciphertexts\n  \u2713 [C-05-ISOLATION] different key pairs produce independent shared secrets\nMLKEM768_STATUS=PASS\n"
+    },
+    {
+      "check_id": "V1_3-HITL-QUORUM",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/hitl_quorum_verifier.py",
+      "expected_status": "HITL_QUORUM_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[HITL QUORUM VERIFIER] Loading policy and decisions...\n  decisions: 1\n  \u2713 [C-A-ROLES[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] all 1 approver(s) have valid roles\n  \u2713 [C-B-DECISION-VALIDITY[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] all decisions valid for class STANDARD\n  \u2713 [C-C-TTL[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] expired approvals (TTL=86400s, warn-mode \u2014 demo/historical data): ['human-reviewer']\n  \u2713 [C-D-CANONICAL-HASH[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] canonical SHA-256 verified (or not recorded \u2014 demo-grade)\n  \u2713 [C-E-QUORUM[demo-thread-001::EVO-API-906c936c-0a05-467f-aafc-73c1a2eb7899][STANDARD]] 1-of-1 unique approvers (required 1-of-1) \u2014 quorum met\nHITL_QUORUM_VERIFICATION=PASS\n"
+    },
+    {
+      "check_id": "V1_3-POSTGRES-ADAPTER",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/db/validate_postgres_adapter.py",
+      "expected_status": "POSTGRES_ADAPTER_VALIDATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "[POSTGRES ADAPTER VALIDATOR] Running contract checks...\n  \u2713 [C-01-INHERITANCE] PostgresAdapter is a subclass of DBAdapter\n  \u2713 [C-02-ABSTRACT-METHODS] all 4 abstract methods overridden: ['close', 'commit', 'execute', 'execute_write']\n  \u2713 [C-03-NEW-METHODS] v1.3 methods present: ['ping', 'close_pool']\n  \u2713 [C-04-CONNECTION-POOL] ThreadedConnectionPool used in __init__\n  \u2713 [C-05-SQLITE-REGRESSION] SQLiteAdapter still satisfies DBAdapter contract\n  \u2713 [C-06-PING-SIGNATURE] ping() present (return annotation: bool)\nPOSTGRES_ADAPTER_VALIDATION=PASS\n"
+    },
+    {
+      "check_id": "V1_4-SIGNING-PROVIDER",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/signing/verify_signing_provider.py",
+      "expected_status": "SIGNING_PROVIDER_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "SigningProvider Verification\n============================================\n  PASS  C-01-ABC-abstract-methods  \u2014 abstract=['public_key_pem', 'sign', 'verify']\n  PASS  C-02-EnvProvider-missing-var  \u2014 Environment variable 'ETHICBIT_ED25519_PRIVATE_KEY_PEM' is n\n  PASS  C-03-FileProvider-missing-file  \u2014 Key file not found: /nonexistent/path/key.pem\n  PASS  C-04-FileProvider-public-key-pem  \u2014 length=113\n  PASS  C-05-roundtrip-sign-verify  \u2014 sig_length=64\n  PASS  C-06-tampered-message-rejected\n  PASS  C-07-tampered-signature-rejected\n  PASS  C-08-public-key-pem-format  \u2014 -----BEGIN PUBLIC KEY-----\n\n\nSIGNING_PROVIDER_VERIFICATION=PASS  (8/8)\nreport \u2192 assurance/evolve-multi-agent/v1_4/signing_provider_report.json\n"
+    },
+    {
+      "check_id": "V1_4-HITL-IDENTITY",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/hitl_identity_verifier.py",
+      "expected_status": "HITL_IDENTITY_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "HITL Identity Verifier\n============================================\n  PASS  C-01-policy-loads  \u2014 missing=none\n  PASS  C-02-token-generated  \u2014 len=64\n  PASS  C-03-correct-token-verifies  \u2014 verified at offset=0 minutes\n  PASS  C-04-wrong-approver-rejected  \u2014 approver_id 'attacker-999' not in registry\n  PASS  C-05-wrong-event-rejected\n  PASS  C-06-wrong-secret-rejected\n  PASS  C-07-expired-token-rejected  \u2014 token does not match any valid time window\n  PASS  C-08-live-roundtrip  \u2014 verified at offset=0 minutes\n  PASS  C-09-unregistered-approver-rejected  \u2014 approver_id 'unregistered-999' not in registry\n  PASS  C-10-non-claims-present  \u2014 count=4\n\nHITL_IDENTITY_VERIFICATION=PASS  (10/10)\n"
+    },
+    {
+      "check_id": "V1_5-HSM-SIGNING",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/signing/verify_hsm_signing_providers.py",
+      "expected_status": "HSM_SIGNING_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "HSM Signing Provider Verification\n============================================\n  PASS  C-01-pkcs11-class-importable\n  PASS  C-02-pkcs11-inherits-abc\n  PASS  C-03-pkcs11-import-error  \u2014 pkcs11 library is required for Pkcs11SigningProvider. Instal\n  PASS  C-04-pkcs11-error-guidance  \u2014 pkcs11 library is required for Pkcs11SigningProvider. Install with: pip install \n  PASS  C-05-kms-class-importable\n  PASS  C-06-kms-inherits-abc\n  PASS  C-07-kms-import-error  \u2014 boto3 is required for KmsSigningProvider. Install with: pip \n  PASS  C-08-kms-error-guidance  \u2014 boto3 is required for KmsSigningProvider. Install with: pip install boto3  Then \n  PASS  C-09-software-fallback-drop-in  \u2014 isinstance(SigningProvider)=True\n  PASS  C-10-algorithm-non-empty  \u2014 algorithm='Ed25519'\n\nHSM_SIGNING_VERIFICATION=PASS  (10/10)\n"
+    },
+    {
+      "check_id": "V1_5-OIDC-HITL",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/oidc_hitl_identity_verifier.py",
+      "expected_status": "OIDC_HITL_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "OIDC HITL Identity Verifier\n============================================\n  PASS  C-01-policy-loads  \u2014 missing=none\n  PASS  C-02-token-is-jwt  \u2014 parts=3\n  PASS  C-03-valid-token-verifies  \u2014 verified\n  PASS  C-04-expired-token-rejected  \u2014 token expired (exp=1778414704 now=1778415405)\n  PASS  C-05-wrong-issuer-rejected  \u2014 wrong issuer: 'https://attacker.example.com'\n  PASS  C-06-wrong-audience-rejected  \u2014 wrong audience: 'wrong-audience'\n  PASS  C-07-tampered-payload-rejected  \u2014 JWT parse error: Invalid control character at: line 1 column 146 (char 145)\n  PASS  C-08-unregistered-approver-rejected  \u2014 sub 'attacker-999' not in approver registry\n  PASS  C-09-event-id-claim-present  \u2014 event_id='evt-test-v1.5'\n  PASS  C-10-non-claims-present  \u2014 count=4\n\nOIDC_HITL_VERIFICATION=PASS  (10/10)\n"
+    },
+    {
+      "check_id": "V1_6-SIGNED-RECEIPTS",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/signing/verify_signed_receipts.py",
+      "expected_status": "SIGNED_RECEIPTS_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "AEM-EVOLVE\u2122 v1.6 Signed Receipts Verification\n====================================================\n  PASS  C-01  API server imports without error\n  PASS  C-02  _signing_provider initialized\n  PASS  C-03  _SIGNING_STATUS='SIGNED_Ed25519_FILE' (real)\n  PASS  C-04  /start event has signature_hex\n  PASS  C-05  event signature_status='SIGNED_Ed25519_FILE'\n  PASS  C-06  event signature_hex is valid 128-char hex (Ed25519)\n  PASS  C-07  /receipt has signature_hex\n  PASS  C-08  receipt signature_status='SIGNED_Ed25519_FILE'\n  PASS  C-09  event signature verifiable with provider public key\n  PASS  C-10  /health signing_status='SIGNED_Ed25519_FILE' (real)\n\nSIGNED_RECEIPTS_VERIFICATION=PASS (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+    },
+    {
+      "check_id": "V1_6-E2E-API",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/integration/e2e_api_test.py",
+      "expected_status": "E2E_API_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "============================================================\nE2E API INTEGRATION TEST \u2014 AEM-EVOLVE\u2122 v1.7.0\n============================================================\n  PASS  C-01  POST /start \u2192 awaiting_human_approval\n  PASS  C-02  GET /status \u2192 human_approval_needed=True\n  PASS  C-03  GET /receipt \u2192 SCOPE_LIMITED + signature_hex present\n  PASS  C-04  Receipt signature_status='SIGNED_Ed25519_FILE' (real)\n  PASS  C-05  POST /approve without token \u2192 400\n  PASS  C-06  POST /approve with invalid token \u2192 403\n  PASS  C-07  POST /approve with valid token \u2192 200\n  PASS  C-08  GET /audit \u2192 events + receipts + human_decisions\n  PASS  C-09  GET /chain/verify \u2192 PASS (1125 entries)\n  PASS  C-10  GET /health signing_status='SIGNED_Ed25519_FILE' (real)\n  PASS  C-11  GET /receipt \u2192 signature_verified=True (read-time)\n  PASS  C-12  GET /audit events \u2192 signature_verified=True\n  PASS  C-13  POST /approve with replayed token \u2192 409\n  PASS  C-14  GET /health \u2192 read_time_signature_verification=True\n============================================================\nE2E_API_VERIFICATION=PASS (14/14)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+    },
+    {
+      "check_id": "V1_7-READ-TIME-SIG",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/signing/verify_read_time_signatures.py",
+      "expected_status": "READ_TIME_SIG_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "Read-Time Signature Verification \u2014 AEM-EVOLVE\u2122 v1.7.0\n========================================================\n  PASS  C-01-verify-artifact-importable\n  PASS  C-02-event-verified-at-read  \u2014 verified=True\n  PASS  C-03-receipt-verified-at-read  \u2014 verified=True\n  PASS  C-04-tampered-sig-rejected  \u2014 verified=False\n  PASS  C-05-missing-sig-fields  \u2014 note='missing_signature_fields'\n  PASS  C-06-receipt-endpoint-verified  \u2014 verified=True\n  PASS  C-07-event-endpoint-verified  \u2014 count=1 all_verified=True\n  PASS  C-08-audit-events-verified  \u2014 count=1\n  PASS  C-09-audit-receipts-verified  \u2014 count=1\n  PASS  C-10-verification-note-present\n\nREAD_TIME_SIG_VERIFICATION=PASS  (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+    },
+    {
+      "check_id": "V1_7-REPLAY-MITIGATION",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/verify_replay_mitigation.py",
+      "expected_status": "REPLAY_MITIGATION_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "HITL Replay Mitigation Verification \u2014 AEM-EVOLVE\u2122 v1.7.0\n==========================================================\n  PASS  C-01-hitl-used-tokens-table-exists\n  PASS  C-02-unused-token-returns-false  \u2014 result=False\n  PASS  C-03-mark-persists-hash  \u2014 stored=fa3833407e6d199e...\n  PASS  C-04-used-after-mark  \u2014 result=True\n  PASS  C-05-different-event-not-used  \u2014 result=False\n  PASS  C-06-mark-idempotent\n  PASS  C-07-replay-returns-409  \u2014 status=409\n  PASS  C-08-409-body-mentions-replay  \u2014 body={\"detail\":\"HITL token already used (replay detected). Generate a new token.\"}\n  PASS  C-09-no-pending-is-400-not-409  \u2014 status=400\n  PASS  C-10-health-shows-replay-mitigation  \u2014 field='ONE_TIME_USE_PER_TOKEN_EVENT_PAIR'\n\nREPLAY_MITIGATION_VERIFICATION=PASS  (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+    },
+    {
+      "check_id": "V1_7-KEY-PERSISTENCE",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/signing/verify_key_persistence.py",
+      "expected_status": "KEY_PERSISTENCE_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "Key Persistence Verification \u2014 AEM-EVOLVE\u2122 v1.7.0\n====================================================\n  PASS  C-01-file-signing-provider-importable\n  PASS  C-02-init-signing-provider-importable\n  PASS  C-03-signing-key-pem-exists  \u2014 path=/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/signing_key.pem\n  PASS  C-04-pem-is-valid-ed25519\n  PASS  C-05-signing-status-not-ephemeral  \u2014 status='SIGNED_Ed25519_FILE'\n  PASS  C-06-file-provider-sign-64-bytes  \u2014 len=64\n  PASS  C-07-verify-roundtrip  \u2014 ok=True\n  PASS  C-08-same-file-same-public-key\n  PASS  C-09-health-key-persistence-field  \u2014 field='FILE_BASED'\n  PASS  C-10-health-algo-matches-provider  \u2014 health='Ed25519' provider='Ed25519'\n\nKEY_PERSISTENCE_VERIFICATION=PASS  (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+    },
+    {
+      "check_id": "V1_8-OIDC-WIRED",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/hitl/verify_oidc_wired.py",
+      "expected_status": "OIDC_WIRED_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "OIDC Wired HITL Verification \u2014 AEM-EVOLVE\u2122 v1.8.0\n====================================================\n  PASS  C-01-oidc-key-pair-initialized\n  PASS  C-02-oidc-policy-required-fields  \u2014 missing=none\n  PASS  C-03-jwks-endpoint-rs256  \u2014 status=200 keys=1\n  PASS  C-04-oidc-approve-200  \u2014 status=200\n  PASS  C-05-hmac-still-works-200  \u2014 status=200\n  PASS  C-06-oidc-wrong-sub-403  \u2014 status=403\n  PASS  C-07-oidc-wrong-event-403  \u2014 status=403\n  PASS  C-08-oidc-unregistered-sub-403  \u2014 status=403\n  PASS  C-09-oidc-replay-409  \u2014 status=409\n  PASS  C-10-health-oidc-enabled  \u2014 field='ENABLED'\n\nOIDC_WIRED_VERIFICATION=PASS  (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+    },
+    {
+      "check_id": "V1_8-DB-ADAPTER-SWITCH",
+      "script": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/db/verify_db_adapter_switch.py",
+      "expected_status": "DB_ADAPTER_SWITCH_VERIFICATION=PASS",
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "DB Adapter Switch Verification \u2014 AEM-EVOLVE\u2122 v1.8.0\n======================================================\n  PASS  C-01-build-db-adapter-importable\n  PASS  C-02-default-is-sqlite  \u2014 label=SQLiteAdapter\n  PASS  C-03-explicit-sqlite  \u2014 label=SQLiteAdapter\n  PASS  C-04-postgres-no-url-fallback-sqlite  \u2014 label=SQLiteAdapter (expected SQLiteAdapter fallback when no AEM_DB_URL)\n{\"ts\": \"2026-05-10T12:16:50.027577+00:00\", \"level\": \"WARNING\", \"logger\": \"aem_evolve_api\", \"msg\": \"postgres_adapter_failed_fallback_sqlite\", \"exc\": \"psycopg2 is required for PostgresAdapter. Install with: pip install psycopg2-binary\"}\n  PASS  C-05-postgres-bad-url-fallback  \u2014 label=SQLiteAdapter\n  PASS  C-06-label-reflects-adapter  \u2014 label='SQLiteAdapter'\n  PASS  C-07-health-db-adapter-field  \u2014 health='SQLiteAdapter' label='SQLiteAdapter'\n  PASS  C-08-health-db-adapter-switch-field  \u2014 field='AEM_DB_ADAPTER env var (sqlite|postgres)'\n  PASS  C-09-healthz-db-field  \u2014 got='sqlite' expected='sqlite'\n  PASS  C-10-sqlite-audit-tables-init  \u2014 tables={'human_decisions', 'hitl_used_tokens', 'evolution_receipts', 'audit_chain', 'evolution_events', 'sqlite_sequence'}\n\nDB_ADAPTER_SWITCH_VERIFICATION=PASS  (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+    },
+    {
+      "check_id": "V1_8-PYTEST-SUITE",
+      "script": "pytest tests/",
+      "expected_status": "passed",
+      "pytest": true,
+      "result": "PASS",
+      "exit_code": 0,
+      "stdout": "........................................................................ [ 66%]\n.....................................                                    [100%]\n109 passed in 0.26s\n"
+    }
+  ]
+}

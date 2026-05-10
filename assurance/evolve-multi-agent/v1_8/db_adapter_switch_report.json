@@ -1,0 +1,64 @@
+{
+  "component": "verify_db_adapter_switch",
+  "version": "v1.8",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "PostgreSQL path not tested with a live database in this verifier.",
+    "Connection pool sizing is demo-grade.",
+    "SQLiteAdapter is not production audit storage."
+  ],
+  "checks": [
+    {
+      "check": "C-01-build-db-adapter-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-02-default-is-sqlite",
+      "status": "PASS",
+      "detail": "label=SQLiteAdapter"
+    },
+    {
+      "check": "C-03-explicit-sqlite",
+      "status": "PASS",
+      "detail": "label=SQLiteAdapter"
+    },
+    {
+      "check": "C-04-postgres-no-url-fallback-sqlite",
+      "status": "PASS",
+      "detail": "label=SQLiteAdapter (expected SQLiteAdapter fallback when no AEM_DB_URL)"
+    },
+    {
+      "check": "C-05-postgres-bad-url-fallback",
+      "status": "PASS",
+      "detail": "label=SQLiteAdapter"
+    },
+    {
+      "check": "C-06-label-reflects-adapter",
+      "status": "PASS",
+      "detail": "label='SQLiteAdapter'"
+    },
+    {
+      "check": "C-07-health-db-adapter-field",
+      "status": "PASS",
+      "detail": "health='SQLiteAdapter' label='SQLiteAdapter'"
+    },
+    {
+      "check": "C-08-health-db-adapter-switch-field",
+      "status": "PASS",
+      "detail": "field='AEM_DB_ADAPTER env var (sqlite|postgres)'"
+    },
+    {
+      "check": "C-09-healthz-db-field",
+      "status": "PASS",
+      "detail": "got='sqlite' expected='sqlite'"
+    },
+    {
+      "check": "C-10-sqlite-audit-tables-init",
+      "status": "PASS",
+      "detail": "tables={'human_decisions', 'hitl_used_tokens', 'evolution_receipts', 'audit_chain', 'evolution_events', 'sqlite_sequence'}"
+    }
+  ]
+}

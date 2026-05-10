@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v1.7.0: read-time signature verification, key persistence, replay mitigation
+May 2026 — v1.8.0: OIDC wired into /approve, AEM_DB_ADAPTER switch, pytest fast-path controls
 """
 
 import logging
@@ -128,8 +128,8 @@ if _TOOLS_PATH not in sys.path:
 
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
-    description="Multi-Agent Governance with RBAC HITL Controls — v1.7.0 read-verify, key-persist, anti-replay",
-    version="0.5.0-demo",
+    description="Multi-Agent Governance with RBAC HITL Controls — v1.8.0 OIDC wired, DB adapter switch, pytest controls",
+    version="0.6.0-demo",
 )
 
 
@@ -224,6 +224,9 @@ def _get_hitl_secret() -> str:
 
 
 def _verify_hitl_token(token: str, approver_id: str, event_id: str) -> tuple[bool, str]:
+    # Auto-detect format: JWT (3 dot-separated segments) → OIDC; hex string → HMAC
+    if token.count(".") == 2:
+        return _verify_hitl_token_oidc(token, approver_id, event_id)
     try:
         from hitl.hitl_identity_verifier import verify_token
         policy = _load_hitl_policy()
@@ -234,6 +237,48 @@ def _verify_hitl_token(token: str, approver_id: str, event_id: str) -> tuple[boo
 
 
 _hitl_policy: dict = _load_hitl_policy()
+
+# ── OIDC provider — initialized after sys.path is set ────────────────────────
+_oidc_key_pair: object | None = None
+_OIDC_POLICY: dict = {}
+
+
+def _init_oidc_provider() -> None:
+    global _oidc_key_pair, _OIDC_POLICY
+    policy_path = DEMO_ROOT / "tools" / "hitl" / "HITL_OIDC_POLICY.json"
+    if not policy_path.exists():
+        log.warning("oidc_policy_not_found", extra={"path": str(policy_path)})
+        return
+    try:
+        _OIDC_POLICY = json.loads(policy_path.read_text(encoding="utf-8"))
+        from hitl.oidc_token_generator import OidcTestKeyPair
+        _oidc_key_pair = OidcTestKeyPair()
+        log.info("oidc_provider_loaded", extra={"issuer": _OIDC_POLICY.get("issuer")})
+    except Exception as exc:
+        log.warning("oidc_provider_unavailable", extra={"exc": str(exc)})
+
+
+def _verify_hitl_token_oidc(token: str, approver_id: str, event_id: str) -> tuple[bool, str]:
+    """Verify an OIDC RS256 JWT HITL token."""
+    if _oidc_key_pair is None:
+        return False, "OIDC provider not initialized"
+    try:
+        from hitl.oidc_hitl_identity_verifier import verify_oidc_token
+        jwks = _oidc_key_pair.jwks()  # type: ignore[attr-defined]
+        ok, reason, payload = verify_oidc_token(token, jwks, _OIDC_POLICY)
+        if not ok:
+            return False, f"OIDC: {reason}"
+        if payload.get("sub") != approver_id:
+            return False, f"OIDC sub {payload.get('sub')!r} != approver_id {approver_id!r}"
+        token_event_id = payload.get("event_id", "")
+        if token_event_id and token_event_id != event_id:
+            return False, f"OIDC event_id {token_event_id!r} != {event_id!r}"
+        return True, f"OIDC verified sub={payload.get('sub')!r}"
+    except Exception as exc:
+        return False, f"OIDC verification error: {exc}"
+
+
+_init_oidc_provider()
 
 # ============================================
 # CREAR TABLAS DE AUDITORÍA
@@ -619,12 +664,28 @@ DEMO_HOST = "127.0.0.1"
 DEMO_PORT = 8000
 
 
+def _build_db_adapter() -> tuple[DBAdapter, str]:
+    """Instantiate the audit adapter from AEM_DB_ADAPTER / AEM_DB_URL env vars."""
+    adapter_type = os.environ.get("AEM_DB_ADAPTER", "sqlite").lower()
+    db_url = os.environ.get("AEM_DB_URL", "")
+    if adapter_type == "postgres" and db_url:
+        try:
+            from db_adapter import PostgresAdapter
+            adapter = PostgresAdapter(db_url)
+            log.info("db_adapter_loaded", extra={"adapter": "PostgresAdapter", "url": db_url[:40]})
+            return adapter, "PostgresAdapter"
+        except Exception as exc:
+            log.warning("postgres_adapter_failed_fallback_sqlite",
+                        extra={"exc": str(exc)[:120]})
+    return SQLiteAdapter(DEMO_DB_PATH), "SQLiteAdapter"
+
+
 def build_graph():
     # Separate connections: LangGraph checkpointer gets its own conn to avoid
     # threading conflicts when SqliteSaver writes concurrently with audit inserts.
     import sqlite3 as _sqlite3
     _checkpoint_conn = _sqlite3.connect(str(DEMO_DB_PATH), check_same_thread=False)
-    db_adapter = SQLiteAdapter(DEMO_DB_PATH)
+    db_adapter, adapter_label = _build_db_adapter()
     init_audit_tables(db_adapter)
 
     def writer_agent_with_adapter(state):
@@ -656,14 +717,22 @@ def build_graph():
     workflow.add_edge("awaiting_approval", END)
     workflow.add_edge("final_report", END)
 
-    return workflow.compile(checkpointer=SqliteSaver(_checkpoint_conn)), db_adapter
+    return workflow.compile(checkpointer=SqliteSaver(_checkpoint_conn)), db_adapter, adapter_label
 
 
-graph, db_adapter = build_graph()
+graph, db_adapter, _db_adapter_label = build_graph()
 
 # ============================================
 # ENDPOINTS
 # ============================================
+
+
+@app.get("/oidc/jwks")
+def get_oidc_jwks():
+    """Return the server-side OIDC JWKS for demo token verification."""
+    if _oidc_key_pair is None:
+        raise HTTPException(503, "OIDC provider not available")
+    return _oidc_key_pair.jwks()  # type: ignore[attr-defined]
 
 
 @app.get("/healthz")
@@ -673,8 +742,9 @@ def healthz():
         db_ok = True
     except Exception:
         db_ok = False
+    db_label = "postgres" if "Postgres" in _db_adapter_label else "sqlite"
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": "sqlite" if db_ok else "unreachable", "version": "0.5.0-demo",
+    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.6.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -911,7 +981,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.5.0-demo",
+        "version": "0.6.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -923,11 +993,13 @@ def health():
         },
         "signing_provider": _signing_provider.algorithm(),
         "signing_status": _SIGNING_STATUS,
-        "hitl_identity_enforcement": "HMAC_TOKEN_REQUIRED_FOR_SCOPE_LIMITED",
+        "hitl_identity_enforcement": "HMAC_AND_OIDC_DUAL_PATH",
+        "hitl_oidc_path": "ENABLED" if _oidc_key_pair is not None else "UNAVAILABLE",
         "hitl_replay_mitigation": "ONE_TIME_USE_PER_TOKEN_EVENT_PAIR",
         "read_time_signature_verification": True,
         "key_persistence": "FILE_BASED" if "FILE" in _SIGNING_STATUS else "ENV_VAR",
-        "db_adapter": "SQLiteAdapter",
+        "db_adapter": _db_adapter_label,
+        "db_adapter_switch": "AEM_DB_ADAPTER env var (sqlite|postgres)",
         "audit_tables": ["evolution_events", "evolution_receipts", "human_decisions", "audit_chain", "hitl_used_tokens"],
         "tamper_evident_chain": True,
         "tamper_proof_claimed": False,
@@ -947,6 +1019,6 @@ def health():
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.5.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.6.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)

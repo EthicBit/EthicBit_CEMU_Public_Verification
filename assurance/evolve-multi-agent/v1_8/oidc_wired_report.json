@@ -1,0 +1,64 @@
+{
+  "component": "verify_oidc_wired",
+  "version": "v1.8",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "OIDC key pair is locally generated \u2014 not a real IdP.",
+    "JWKS is served in-process \u2014 not a real OIDC provider endpoint.",
+    "Production requires external OIDC provider (Okta, Auth0, Keycloak)."
+  ],
+  "checks": [
+    {
+      "check": "C-01-oidc-key-pair-initialized",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-02-oidc-policy-required-fields",
+      "status": "PASS",
+      "detail": "missing=none"
+    },
+    {
+      "check": "C-03-jwks-endpoint-rs256",
+      "status": "PASS",
+      "detail": "status=200 keys=1"
+    },
+    {
+      "check": "C-04-oidc-approve-200",
+      "status": "PASS",
+      "detail": "status=200"
+    },
+    {
+      "check": "C-05-hmac-still-works-200",
+      "status": "PASS",
+      "detail": "status=200"
+    },
+    {
+      "check": "C-06-oidc-wrong-sub-403",
+      "status": "PASS",
+      "detail": "status=403"
+    },
+    {
+      "check": "C-07-oidc-wrong-event-403",
+      "status": "PASS",
+      "detail": "status=403"
+    },
+    {
+      "check": "C-08-oidc-unregistered-sub-403",
+      "status": "PASS",
+      "detail": "status=403"
+    },
+    {
+      "check": "C-09-oidc-replay-409",
+      "status": "PASS",
+      "detail": "status=409"
+    },
+    {
+      "check": "C-10-health-oidc-enabled",
+      "status": "PASS",
+      "detail": "field='ENABLED'"
+    }
+  ]
+}

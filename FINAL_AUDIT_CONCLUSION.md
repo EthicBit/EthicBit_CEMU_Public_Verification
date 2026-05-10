@@ -496,3 +496,40 @@ External independent reproductions remain at 0 received.
 This release is not regulatory approval.
 This release is not external certification.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.8.0 — Production Hardening: OIDC HITL · DB Adapter Switch · 109 Tests (2026-05-09)
+
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (24/24)`
+**Official status:** `READY`
+
+v1.8.0 delivers three production hardening measures identified in the v1.7.0 post-release audit.
+
+### v1.8.0 gaps closed
+
+| Gap | Closure | Verification |
+|---|---|---|
+| HITL limited to HMAC shared secret | OIDC dual-path: JWT → RS256 verify; hex → HMAC verify | `OIDC_WIRED_VERIFICATION=PASS (10/10)` |
+| DB adapter hardcoded to SQLite | `AEM_DB_ADAPTER` env var + `_build_db_adapter()` factory | `DB_ADAPTER_SWITCH_VERIFICATION=PASS (10/10)` |
+| No fast-path developer test suite | 109 pytest tests across four test files | `V1_8-PYTEST-SUITE=PASS` |
+
+### v1.8.0 claim
+
+> AEM-EVOLVE™ v1.8 closes the three production hardening gaps from the v1.7.0 audit: HITL approval now accepts OIDC RS256 JWTs alongside HMAC tokens (backwards-compatible dual-path), the database adapter is switchable via environment variable with safe fallback, and a 109-test pytest suite validates all governance controls end-to-end. Full-stack verification: 24/24 checks pass.
+
+### v1.8.0 non-claims
+
+```
+OIDC key pair is locally generated — not a real IdP.
+JWKS is served in-process — not a real OIDC provider endpoint.
+Production requires external OIDC provider (Okta, Auth0, Keycloak).
+PostgreSQL path not tested with a live database in this verifier.
+Connection pool sizing is demo-grade.
+File-based signing key is not HSM-backed key custody.
+HITL enforcement uses HMAC shared secret — not enterprise IAM.
+SQLiteAdapter is demo storage — not production audit storage.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+```
