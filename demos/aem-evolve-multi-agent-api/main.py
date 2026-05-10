@@ -1,7 +1,7 @@
 """
 Technical Demonstration: Multi-Agent AEM-EVOLVE™ Governance API
 FastAPI + LangGraph + SQLite + Explicit Audit Tables + RBAC + Structured Logging + Metrics
-May 2026 — v1.9.0: OIDC key persistence, materiality parametrized, Postgres live test
+May 2026 — v2.0 PR 1: Production OIDC provider enforcement layer
 """
 
 import logging
@@ -129,8 +129,8 @@ if _TOOLS_PATH not in sys.path:
 
 app = FastAPI(
     title="EthicBit AEM-EVOLVE™ Technical Demonstration",
-    description="Multi-Agent Governance with RBAC HITL Controls — v1.9.0 OIDC key persistence, materiality parametrized, Postgres live test",
-    version="0.7.0-demo",
+    description="Multi-Agent Governance with RBAC HITL Controls — v2.0 PR 1: Production OIDC provider enforcement layer",
+    version="0.8.0-demo",
 )
 
 
@@ -242,10 +242,31 @@ _hitl_policy: dict = _load_hitl_policy()
 # ── OIDC provider — initialized after sys.path is set ────────────────────────
 _oidc_key_pair: object | None = None
 _OIDC_POLICY: dict = {}
+# v2.0 PR 1 — production OIDC provider (external IdP; None when OIDC_ISSUER not set)
+_production_oidc_provider: object | None = None
 
 
 def _init_oidc_provider() -> None:
-    global _oidc_key_pair, _OIDC_POLICY
+    global _oidc_key_pair, _OIDC_POLICY, _production_oidc_provider
+
+    # ── v2.0 PR 1: Production path — external OIDC provider via env vars ──────
+    try:
+        _demo_root_str = str(DEMO_ROOT)
+        if _demo_root_str not in sys.path:
+            sys.path.insert(0, _demo_root_str)
+        from security.oidc_provider import ProductionOidcProvider
+        provider = ProductionOidcProvider.from_env()
+        if provider is not None:
+            _production_oidc_provider = provider
+            log.info("production_oidc_provider_loaded", extra={
+                "issuer": provider.config.issuer,
+                "jwks_uri": provider.config.jwks_uri,
+                "audience": provider.config.audience,
+            })
+    except Exception as exc:
+        log.warning("production_oidc_provider_init_failed", extra={"exc": str(exc)})
+
+    # ── Demo path — local RSA key pair (fallback) ─────────────────────────────
     policy_path = DEMO_ROOT / "tools" / "hitl" / "HITL_OIDC_POLICY.json"
     if not policy_path.exists():
         log.warning("oidc_policy_not_found", extra={"path": str(policy_path)})
@@ -255,7 +276,7 @@ def _init_oidc_provider() -> None:
         from hitl.oidc_token_generator import OidcTestKeyPair
         key_file = DEMO_ROOT / _OIDC_KEY_FILE_NAME
         _oidc_key_pair = OidcTestKeyPair.load_or_generate(key_file)
-        log.info("oidc_provider_loaded", extra={
+        log.info("oidc_demo_provider_loaded", extra={
             "issuer": _OIDC_POLICY.get("issuer"),
             "key_file": str(key_file),
             "kid": _oidc_key_pair.key_id,
@@ -265,7 +286,23 @@ def _init_oidc_provider() -> None:
 
 
 def _verify_hitl_token_oidc(token: str, approver_id: str, event_id: str) -> tuple[bool, str]:
-    """Verify an OIDC RS256 JWT HITL token."""
+    """Verify an OIDC RS256 JWT HITL token — production path first, then demo path."""
+    # ── v2.0 PR 1: Production path (external IdP) ─────────────────────────────
+    if _production_oidc_provider is not None:
+        try:
+            ok, reason, claims = _production_oidc_provider.verify_token(token)  # type: ignore[union-attr]
+            if not ok:
+                return False, f"OIDC(prod): {reason}"
+            if claims.get("sub") != approver_id:
+                return False, f"OIDC(prod) sub {claims.get('sub')!r} != approver_id {approver_id!r}"
+            token_event_id = claims.get("event_id", "")
+            if token_event_id and token_event_id != event_id:
+                return False, f"OIDC(prod) event_id {token_event_id!r} != {event_id!r}"
+            return True, f"OIDC(prod) verified sub={claims.get('sub')!r}"
+        except Exception as exc:
+            return False, f"OIDC(prod) verification error: {exc}"
+
+    # ── Demo path — local RSA key pair ────────────────────────────────────────
     if _oidc_key_pair is None:
         return False, "OIDC provider not initialized"
     try:
@@ -759,7 +796,7 @@ def healthz():
         db_ok = False
     db_label = "postgres" if "Postgres" in _db_adapter_label else "sqlite"
     status = "ok" if db_ok else "degraded"
-    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.7.0-demo",
+    return {"status": status, "db": db_label if db_ok else "unreachable", "version": "0.8.0-demo",
             "signing_status": _SIGNING_STATUS}
 
 
@@ -997,7 +1034,7 @@ def health():
     return {
         "status": "healthy",
         "demo_type": "technical_demonstration",
-        "version": "0.7.0-demo",
+        "version": "0.8.0-demo",
         "local_only": True,
         "auth": {
             "scheme": "X-API-Key header",
@@ -1010,7 +1047,13 @@ def health():
         "signing_provider": _signing_provider.algorithm(),
         "signing_status": _SIGNING_STATUS,
         "hitl_identity_enforcement": "HMAC_AND_OIDC_DUAL_PATH",
-        "hitl_oidc_path": "ENABLED" if _oidc_key_pair is not None else "UNAVAILABLE",
+        "hitl_oidc_mode": "PRODUCTION" if _production_oidc_provider is not None else "DEMO",
+        "hitl_oidc_path": "ENABLED" if (_oidc_key_pair is not None or _production_oidc_provider is not None) else "UNAVAILABLE",
+        "production_oidc_gate": (
+            _production_oidc_provider.gate_check()  # type: ignore[union-attr]
+            if _production_oidc_provider is not None
+            else {"gate": "PRODUCTION_OIDC_PROVIDER_CHECK", "status": "NOT_CONFIGURED", "reason": "OIDC_ISSUER env var not set"}
+        ),
         "hitl_replay_mitigation": "ONE_TIME_USE_PER_TOKEN_EVENT_PAIR",
         "read_time_signature_verification": True,
         "key_persistence": "FILE_BASED" if "FILE" in _SIGNING_STATUS else "ENV_VAR",
@@ -1038,6 +1081,6 @@ def health():
 
 
 if __name__ == "__main__":
-    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.7.0-demo")
+    print("Starting EthicBit AEM-EVOLVE Multi-Agent Governance API v0.8.0-demo")
     print(f"Docs: http://{DEMO_HOST}:{DEMO_PORT}/docs")
     uvicorn.run(app, host=DEMO_HOST, port=DEMO_PORT)

@@ -1,0 +1,84 @@
+{
+  "gate": "PRODUCTION_OIDC_PROVIDER_CHECK",
+  "gate_version": "v2.0-PR1",
+  "result": "FAIL",
+  "timestamp_utc": "2026-05-10T13:13:11.261755+00:00",
+  "environment": {
+    "oidc_issuer_configured": false,
+    "oidc_issuer": null,
+    "oidc_jwks_uri": null,
+    "oidc_audience": null
+  },
+  "checks": [
+    {
+      "id": "C-01",
+      "label": "OIDC_ISSUER env var configured",
+      "status": "FAIL",
+      "detail": "OIDC_ISSUER not set"
+    },
+    {
+      "id": "C-02",
+      "label": "security.oidc_config importable",
+      "status": "PASS"
+    },
+    {
+      "id": "C-03",
+      "label": "security.oidc_provider importable",
+      "status": "PASS"
+    },
+    {
+      "id": "C-04",
+      "label": "load_oidc_config returns None (OIDC_ISSUER unset)",
+      "status": "PASS",
+      "detail": "Correct: gate not satisfied without external provider"
+    },
+    {
+      "id": "C-05",
+      "label": "from_env() returns provider iff config present",
+      "status": "PASS",
+      "detail": "provider=None"
+    },
+    {
+      "id": "C-06",
+      "label": "gate status NOT_CONFIGURED when issuer unset",
+      "status": "PASS",
+      "detail": "Correct gate behavior \u2014 FAIL_CLOSED: external IdP required"
+    },
+    {
+      "id": "C-07",
+      "label": "JWKS reachability check N/A (no issuer)",
+      "status": "PASS",
+      "detail": "Skipped \u2014 OIDC_ISSUER not configured"
+    },
+    {
+      "id": "C-08",
+      "label": "Issuer validation N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-09",
+      "label": "Audience validation N/A",
+      "status": "PASS",
+      "detail": "Skipped"
+    },
+    {
+      "id": "C-10",
+      "label": "gate_check() output structure valid",
+      "status": "PASS",
+      "detail": "Skipped \u2014 no provider to check"
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 9,
+    "failed": 1
+  },
+  "non_claims": [
+    "This gate result does not certify the external OIDC provider",
+    "This gate does not grant regulatory approval",
+    "This gate does not replace external IAM certification",
+    "PASS requires a real external OIDC provider \u2014 not a demo key pair"
+  ],
+  "fail_reason": "OIDC_ISSUER not configured \u2014 external OIDC provider required"
+}

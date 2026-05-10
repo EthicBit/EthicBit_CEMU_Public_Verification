@@ -34,7 +34,7 @@ class TestHealth:
     def test_health_body(self, client):
         body = client.get("/health").json()
         assert body["status"] == "healthy"
-        assert body["version"] == "0.7.0-demo"
+        assert body["version"] == "0.8.0-demo"
         assert body["tamper_proof_claimed"] is False
         assert "non_claims" in body
 
@@ -49,7 +49,7 @@ class TestHealth:
 
     def test_healthz_version(self, client):
         body = client.get("/healthz").json()
-        assert body["version"] == "0.7.0-demo"
+        assert body["version"] == "0.8.0-demo"
 
 
 class TestMetricsEndpoint:
