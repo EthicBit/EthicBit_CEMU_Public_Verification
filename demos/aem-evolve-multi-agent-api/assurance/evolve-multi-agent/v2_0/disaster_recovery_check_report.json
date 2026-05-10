@@ -1,0 +1,98 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "DISASTER_RECOVERY_CHECK",
+  "pr": "PR12",
+  "version": "0.19.0-demo",
+  "generated_utc": "2026-05-10T18:46:56.464371+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr12",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "DISASTER_RECOVERY_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "dr_tested": false,
+    "dr_tester": null,
+    "dr_test_date": null,
+    "fail_reason": "DR procedure not yet dry-run tested: AEM_DR_TESTER, AEM_DR_TEST_DATE not set. dr_tested=false",
+    "checks": {
+      "C-01_dr_plan": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/DISASTER_RECOVERY.md",
+        "sha256": "c2159d47020266931294c028a773aaa27c3c6ced2de4edc55def91800b2b22cc",
+        "size_bytes": 8460
+      },
+      "C-02_rto_rpo": {
+        "ok": true,
+        "has_rto": true,
+        "has_rpo": true,
+        "missing_fields": []
+      },
+      "C-03_backup_strategy": {
+        "ok": true,
+        "has_backup_section": true,
+        "has_retention": true,
+        "missing_fields": []
+      },
+      "C-04_dr_scenarios": {
+        "ok": true,
+        "scenarios_required": 5,
+        "scenarios_documented": 5,
+        "missing_scenarios": []
+      },
+      "C-05_recovery_procedures": {
+        "ok": true,
+        "terms_required": 5,
+        "terms_present": 5,
+        "missing_terms": []
+      },
+      "C-06_dr_evidence": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/disaster_recovery/dr_test_evidence_2026_05.json",
+        "sha256": "8c1c59df8328e12422d34c46929a57878c2e288ada88f7383383b40e6cf8d8a2",
+        "artifact_sha256": "311e0d2423eb85a90268c7f454eadd2367179f0b5b9844eb5f06c659aaa7fc63",
+        "subjects_hashed": 20,
+        "subjects_total": 20,
+        "has_artifact_sha256": true,
+        "dr_scenarios_tested": 5,
+        "dr_scenarios_passed": 5,
+        "rto_target_minutes": 240,
+        "rpo_target_minutes": 60
+      },
+      "C-07_scenarios_passed": {
+        "ok": true,
+        "scenarios_total": 5,
+        "scenarios_passed": 5,
+        "failed_scenarios": []
+      },
+      "C-08_artifact_fingerprint": {
+        "ok": true,
+        "has_artifact_sha256": true,
+        "artifact_sha256": "311e0d2423eb85a90268c7f454eadd2367179f0b5b9844eb5f06c659aaa7fc63"
+      },
+      "C-09_dr_tester": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_DR_TESTER not set — set to identity of person who executed the DR dry-run test before claiming dr_tested=true"
+      },
+      "C-10_dr_test_date": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_DR_TEST_DATE not set — set to ISO8601 date of DR dry-run test"
+      }
+    }
+  },
+  "non_claims": [
+    "dr_tested=false",
+    "production_dr_exercise_not_executed",
+    "live_database_restore_not_run",
+    "region_failover_not_executed",
+    "dry_run_only"
+  ]
+}

@@ -384,4 +384,4 @@ class TestHealthSLOGate:
 
     def test_version_bumped_to_pr10(self, client):
         resp = client.get("/health")
-        assert resp.json()["version"] == "0.18.0-demo"
+        assert resp.json()["version"] == "0.19.0-demo"

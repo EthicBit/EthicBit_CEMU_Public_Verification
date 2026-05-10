@@ -1,0 +1,168 @@
+{
+  "artifact_type": "AEM_EVOLVE_DR_TEST_EVIDENCE",
+  "pr": "PR12",
+  "version": "0.19.0-demo",
+  "generated_utc": "2026-05-10T00:00:00+00:00",
+  "test_mode": "DRY_RUN",
+  "purpose": "Disaster recovery dry-run test evidence for DISASTER_RECOVERY_CHECK",
+  "dr_scenarios_tested": 5,
+  "dr_scenarios_passed": 5,
+  "rto_target_minutes": 240,
+  "rpo_target_minutes": 60,
+  "scenarios": [
+    {
+      "scenario_id": "dr_scenario_data_loss",
+      "type": "dry_run",
+      "status": "PASS",
+      "rto_minutes": 240,
+      "rpo_minutes": 60,
+      "detail": "Database restore procedure validated: pg_dump/pg_restore commands verified, WAL archive path documented"
+    },
+    {
+      "scenario_id": "dr_scenario_region_failure",
+      "type": "dry_run",
+      "status": "PASS",
+      "rto_minutes": 240,
+      "rpo_minutes": 60,
+      "detail": "Secondary region failover steps validated: standby promotion commands verified, DNS failover documented"
+    },
+    {
+      "scenario_id": "dr_scenario_key_compromise",
+      "type": "dry_run",
+      "status": "PASS",
+      "rto_minutes": 120,
+      "rpo_minutes": 0,
+      "detail": "KMS key rotation procedure validated: disable/create commands verified for AWS KMS and GCP KMS"
+    },
+    {
+      "scenario_id": "dr_scenario_service_outage",
+      "type": "dry_run",
+      "status": "PASS",
+      "rto_minutes": 60,
+      "rpo_minutes": 60,
+      "detail": "Cold restart procedure validated: docker/kubectl restart commands verified, health check sequence documented"
+    },
+    {
+      "scenario_id": "dr_scenario_audit_chain_corruption",
+      "type": "dry_run",
+      "status": "PASS",
+      "rto_minutes": 240,
+      "rpo_minutes": 0,
+      "detail": "Chain restore procedure validated: forensic export, corruption boundary identification, and restore steps documented"
+    }
+  ],
+  "subjects": [
+    {
+      "subject": "docs/DISASTER_RECOVERY.md",
+      "sha256": "c2159d47020266931294c028a773aaa27c3c6ced2de4edc55def91800b2b22cc",
+      "size_bytes": 8460
+    },
+    {
+      "subject": "docs/ROLLBACK_RUNBOOK.md",
+      "sha256": "be0717f287ad44e1f9331b2676ff934ea8ca57d83cc3e3a2a71f0b0cf5e30b91",
+      "size_bytes": 7984
+    },
+    {
+      "subject": "docs/DEPLOYMENT_MANIFEST.md",
+      "sha256": "889f7f1c4c871043408c2c6f8e14f932ee38b706b900e9f4e8d97a0f6a79e535",
+      "size_bytes": 5867
+    },
+    {
+      "subject": "docs/INCIDENT_RESPONSE.md",
+      "sha256": "7671e6de3bb0459f16a86860638bd9ce58d4a1c77ef62185a90933dbcd59e64d",
+      "size_bytes": 9392
+    },
+    {
+      "subject": "docs/SLO.md",
+      "sha256": "ba6a7c63cb13813771b4d0345b0c7289e930690a932210eb1f0362c8ebd5192e",
+      "size_bytes": 7039
+    },
+    {
+      "subject": "migrations/rollback/001_rollback_initial_schema.sql",
+      "sha256": "4749ea5c598e05b9395d17bd3a9d99b91d7c116d218b894a1c6fab7f3aa4c75b",
+      "size_bytes": 896
+    },
+    {
+      "subject": "migrations/rollback/002_rollback_metrics_table.sql",
+      "sha256": "631cb430670ccfdd8e57cd755e26eb89f2b275f3875a4ca3442f8f6c21e8f384",
+      "size_bytes": 152
+    },
+    {
+      "subject": "migrations/rollback/003_rollback_langraph_checkpointer.sql",
+      "sha256": "b7d6c09ee5155e4cb90c76ddeb8ce83da803652e7d9244881d1c3c3be858c9a4",
+      "size_bytes": 194
+    },
+    {
+      "subject": "tools/rollback/rollback_test_evidence_2026_05.json",
+      "sha256": "dbacd2201357d76862d0139df9fc599f52ee41b6b348efed78dc35b46f9b5e6e",
+      "size_bytes": 5286
+    },
+    {
+      "subject": "deployment/deployment_gate.py",
+      "sha256": "18c2cf9b3c05e8777128f98a4d1097736ac39c4ca03474f72571401b5db38177",
+      "size_bytes": 12763
+    },
+    {
+      "subject": "rollback/rollback_gate.py",
+      "sha256": "1e5f801fbe448260e3eefada917ac59728d1751689ad01a4ebeec96ed1a51e3d",
+      "size_bytes": 13166
+    },
+    {
+      "subject": "monitoring/alert_rules.yaml",
+      "sha256": "5c808ee1a866cc57a0e3c69f174001ec9bc5a3a1c6b2eabd5aff0fe05d5dfa6a",
+      "size_bytes": 5738
+    },
+    {
+      "subject": "tools/deployment/deployment_audit_2026_05.json",
+      "sha256": "eb0557b387dfc409489de5fcce35723d4062b0b9e49b4efb324e95720e685fa2",
+      "size_bytes": 4559
+    },
+    {
+      "subject": "main.py",
+      "sha256": "bb57853257724a10b61ee2a73b0a31569a9dceb53b0d18ba9a297dd32616f83f",
+      "size_bytes": 53373
+    },
+    {
+      "subject": "db_adapter.py",
+      "sha256": "f9508fdce84fdeff32feb351c3131f652173ca84d3cec88a4df264357e721440",
+      "size_bytes": 8483
+    },
+    {
+      "subject": "requirements.txt",
+      "sha256": "47cc492f68cf61f06df77f24744da8a90657a9821d13aa63374bcf6adf6a5f89",
+      "size_bytes": 111
+    },
+    {
+      "subject": "monitoring/monitoring_gate.py",
+      "sha256": "83b932f8fc8235d9f0928c85544098420d1d9e3de0a728dde40f719887a6be61",
+      "size_bytes": 14141
+    },
+    {
+      "subject": "security_review/security_review_gate.py",
+      "sha256": "ced1b2ab47f973de77ea0305116aa7f5b92c2ed432035ea36cd25437954f4cc8",
+      "size_bytes": 12967
+    },
+    {
+      "subject": "docs/SECURITY_REVIEW.md",
+      "sha256": "8fa1623671f13e532abe5f28e4fc9da2d031dec395cf078d72fc6e6225dfac03",
+      "size_bytes": 5880
+    },
+    {
+      "subject": "docs/THREAT_MODEL.md",
+      "sha256": "a6e49875a0d72b030b31bd97e05627a32ce3f307ce81eed684157a66ce451cb9",
+      "size_bytes": 4335
+    }
+  ],
+  "summary": {
+    "subjects_total": 20,
+    "subjects_hashed": 20
+  },
+  "non_claims": [
+    "dr_tested=false",
+    "production_dr_exercise_not_executed",
+    "live_database_restore_not_run",
+    "region_failover_not_executed",
+    "dry_run_only"
+  ],
+  "artifact_sha256": "311e0d2423eb85a90268c7f454eadd2367179f0b5b9844eb5f06c659aaa7fc63"
+}
