@@ -462,3 +462,37 @@ External independent reproductions remain at 0 received.
 This release is not regulatory approval.
 This release is not external certification.
 ```
+
+---
+
+## AEM-EVOLVE™ v1.7.0 — Read-Time Verification, Key Persistence, Anti-Replay (2026-05-10)
+
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (21/21)`
+**Official status:** `READY`
+
+v1.7.0 closes the three critical gaps identified in the v1.6.0 post-release audit.
+
+### v1.7.0 gaps closed
+
+| Gap | Closure | Verification |
+|---|---|---|
+| Read-time signature verification | `_verify_artifact_signature()` on GET /receipt, /event, /audit | `READ_TIME_SIG_VERIFICATION=PASS (10/10)` |
+| Key persistence | `signing_key.pem` + `FileSigningProvider`; status `SIGNED_Ed25519_FILE` | `KEY_PERSISTENCE_VERIFICATION=PASS (10/10)` |
+| Replay attack mitigation | `hitl_used_tokens` table; 409 on second approve with same token | `REPLAY_MITIGATION_VERIFICATION=PASS (10/10)` |
+
+### v1.7.0 claim
+
+> AEM-EVOLVE™ v1.7 closes the three critical gaps from the v1.6.0 post-release audit: read-time Ed25519 signature verification is enforced on all artifact read endpoints, the signing key persists across server restarts via file-based storage, and HITL tokens are one-time-use enforced at the database layer with 409 replay detection. Full-stack verification: 21/21 checks pass.
+
+### v1.7.0 non-claims
+
+```
+File-based signing key is not HSM-backed key custody.
+Key stored unencrypted on disk — not enterprise key management.
+Replay nonce store is SQLite-backed — not tamper-proof.
+HITL enforcement uses HMAC shared secret — not enterprise IAM.
+SQLiteAdapter is demo storage — not production audit storage.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+```

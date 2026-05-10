@@ -1,0 +1,64 @@
+{
+  "component": "verify_key_persistence",
+  "version": "v1.7",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "File-based key is not HSM-backed.",
+    "Key stored unencrypted on disk \u2014 not enterprise key custody.",
+    "File key persists across restarts but is not rotated automatically."
+  ],
+  "checks": [
+    {
+      "check": "C-01-file-signing-provider-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-02-init-signing-provider-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-03-signing-key-pem-exists",
+      "status": "PASS",
+      "detail": "path=/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/signing_key.pem"
+    },
+    {
+      "check": "C-04-pem-is-valid-ed25519",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-05-signing-status-not-ephemeral",
+      "status": "PASS",
+      "detail": "status='SIGNED_Ed25519_FILE'"
+    },
+    {
+      "check": "C-06-file-provider-sign-64-bytes",
+      "status": "PASS",
+      "detail": "len=64"
+    },
+    {
+      "check": "C-07-verify-roundtrip",
+      "status": "PASS",
+      "detail": "ok=True"
+    },
+    {
+      "check": "C-08-same-file-same-public-key",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-09-health-key-persistence-field",
+      "status": "PASS",
+      "detail": "field='FILE_BASED'"
+    },
+    {
+      "check": "C-10-health-algo-matches-provider",
+      "status": "PASS",
+      "detail": "health='Ed25519' provider='Ed25519'"
+    }
+  ]
+}

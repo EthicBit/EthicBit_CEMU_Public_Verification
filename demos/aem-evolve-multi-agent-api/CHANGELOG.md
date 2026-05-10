@@ -7,6 +7,45 @@ Non-claims are additive; no prior non-claim is retracted without explicit record
 
 ---
 
+## [1.7.0] — 2026-05-10
+
+### Added
+- `RELEASE_NOTES_V1_7.md`
+- `main.py` — `_init_signing_provider()`: file-based key persistence (`signing_key.pem`); survives restarts (gap 2)
+- `main.py` — `_verify_artifact_signature()`: read-time Ed25519 signature verification on GET /receipt, /event, /audit (gap 1)
+- `main.py` — `hitl_used_tokens` table + `_is_token_used()` + `_mark_token_used()`: one-time-use HITL tokens, 409 on replay (gap 3)
+- `main.py` — version bumped to `0.5.0-demo`; `/health` reflects all three new controls
+- `tools/signing/verify_read_time_signatures.py` — 10-check read-time verification verifier
+- `tools/hitl/verify_replay_mitigation.py` — 10-check replay mitigation verifier
+- `tools/signing/verify_key_persistence.py` — 10-check key persistence verifier
+- `tools/integration/e2e_api_test.py` — extended to 14 checks (C-11 through C-14)
+- `tools/reproduction/verify_all_v1_7.py` — 21-check full-stack verifier
+- `assurance/evolve-multi-agent/v1_7/read_time_sig_report.json`
+- `assurance/evolve-multi-agent/v1_7/replay_mitigation_report.json`
+- `assurance/evolve-multi-agent/v1_7/key_persistence_report.json`
+- `assurance/evolve-multi-agent/v1_7/REPRODUCTION_REPORT.json`
+- `docs/whitepapers/WHITEPAPER_V1_7_AEM_EVOLVE_READ_VERIFY_PERSIST_ANTIREPLAY.md`
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-10_V1_7.md`
+- Git tag `v1.7.0` + GitHub Release
+
+### Changed
+- `tests/test_endpoints.py` — version assertions updated to `0.5.0-demo`; `test_approve_replay_returns_409` added
+- `tests/test_governance_logic.py` — `TestReadTimeSignatureVerification` + `TestReplayMitigation` classes added
+
+### Non-claims (v1.7.0)
+```
+File-based signing key is not HSM-backed key custody.
+Key stored unencrypted on disk — not enterprise key management.
+Replay nonce store is SQLite-backed — not tamper-proof.
+HITL enforcement uses HMAC shared secret — not enterprise IAM.
+SQLiteAdapter is demo storage — not production audit storage.
+External independent reproductions remain at 0 received.
+This release is not regulatory approval.
+This release is not external certification.
+```
+
+---
+
 ## [1.6.0] — 2026-05-09
 
 ### Added

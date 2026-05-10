@@ -5,7 +5,27 @@
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.6.0 — Critical Gaps Closure
+## Latest release: AEM-EVOLVE™ v1.7.0 — Read-Time Verification, Key Persistence, Anti-Replay
+
+**Tag:** `v1.7.0` — 2026-05-10
+**Type:** Security gap closure — read-time Ed25519 verification · file-based key persistence · HITL replay mitigation (409)
+**Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (21/21)`
+
+> AEM-EVOLVE™ v1.7 closes the three critical gaps from the v1.6.0 post-release audit: artifacts are now verified at read time, the signing key persists across restarts, and HITL tokens are one-time-use enforced at the DB layer.
+
+- [Public Status Bulletin v1.7.0 (2026-05-10)](docs/STATUS_BULLETIN_PUBLIC_2026-05-10_V1_7.md)
+- [Whitepaper v1.7](docs/whitepapers/WHITEPAPER_V1_7_AEM_EVOLVE_READ_VERIFY_PERSIST_ANTIREPLAY.md)
+- [GitHub Release v1.7.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.7.0)
+
+```bash
+pip install cryptography mlkem asyncpg fastapi langgraph starlette httpx
+python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_7.py
+# FULL_STACK_VERIFICATION=PASS  (21/21)
+```
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.6.0 — Critical Gaps Closure
 
 **Tag:** `v1.6.0` — 2026-05-09
 **Type:** Critical gaps closure — signing wired · HITL token enforced · SQLiteAdapter activated · E2E integration test · CI updated
@@ -18,7 +38,6 @@
 - [GitHub Release v1.6.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v1.6.0)
 
 ```bash
-pip install cryptography mlkem asyncpg fastapi langgraph starlette httpx
 python3 demos/aem-evolve-multi-agent-api/tools/reproduction/verify_all_v1_6.py
 # FULL_STACK_VERIFICATION=PASS  (18/18)
 ```

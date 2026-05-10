@@ -1,0 +1,63 @@
+{
+  "component": "verify_read_time_signatures",
+  "version": "v1.7",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "Verification uses the same in-process key \u2014 not an independent verifier.",
+    "Does not cover HSM-backed key custody."
+  ],
+  "checks": [
+    {
+      "check": "C-01-verify-artifact-importable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-02-event-verified-at-read",
+      "status": "PASS",
+      "detail": "verified=True"
+    },
+    {
+      "check": "C-03-receipt-verified-at-read",
+      "status": "PASS",
+      "detail": "verified=True"
+    },
+    {
+      "check": "C-04-tampered-sig-rejected",
+      "status": "PASS",
+      "detail": "verified=False"
+    },
+    {
+      "check": "C-05-missing-sig-fields",
+      "status": "PASS",
+      "detail": "note='missing_signature_fields'"
+    },
+    {
+      "check": "C-06-receipt-endpoint-verified",
+      "status": "PASS",
+      "detail": "verified=True"
+    },
+    {
+      "check": "C-07-event-endpoint-verified",
+      "status": "PASS",
+      "detail": "count=1 all_verified=True"
+    },
+    {
+      "check": "C-08-audit-events-verified",
+      "status": "PASS",
+      "detail": "count=1"
+    },
+    {
+      "check": "C-09-audit-receipts-verified",
+      "status": "PASS",
+      "detail": "count=1"
+    },
+    {
+      "check": "C-10-verification-note-present",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

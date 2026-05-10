@@ -1,0 +1,64 @@
+{
+  "component": "verify_replay_mitigation",
+  "version": "v1.7",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "result": "PASS",
+  "non_claims": [
+    "Nonce store is DB-backed but SQLite is not tamper-proof.",
+    "Token hash is SHA256 \u2014 not a formal nonce protocol.",
+    "Server restart clears in-memory state but DB persists nonces."
+  ],
+  "checks": [
+    {
+      "check": "C-01-hitl-used-tokens-table-exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-02-unused-token-returns-false",
+      "status": "PASS",
+      "detail": "result=False"
+    },
+    {
+      "check": "C-03-mark-persists-hash",
+      "status": "PASS",
+      "detail": "stored=fa3833407e6d199e..."
+    },
+    {
+      "check": "C-04-used-after-mark",
+      "status": "PASS",
+      "detail": "result=True"
+    },
+    {
+      "check": "C-05-different-event-not-used",
+      "status": "PASS",
+      "detail": "result=False"
+    },
+    {
+      "check": "C-06-mark-idempotent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "C-07-replay-returns-409",
+      "status": "PASS",
+      "detail": "status=409"
+    },
+    {
+      "check": "C-08-409-body-mentions-replay",
+      "status": "PASS",
+      "detail": "body={\"detail\":\"HITL token already used (replay detected). Generate a new token.\"}"
+    },
+    {
+      "check": "C-09-no-pending-is-400-not-409",
+      "status": "PASS",
+      "detail": "status=400"
+    },
+    {
+      "check": "C-10-health-shows-replay-mitigation",
+      "status": "PASS",
+      "detail": "field='ONE_TIME_USE_PER_TOKEN_EVENT_PAIR'"
+    }
+  ]
+}

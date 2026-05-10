@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-e2e_api_test.py — End-to-end integration test for AEM-EVOLVE™ API v1.6.0.
+e2e_api_test.py — End-to-end integration test for AEM-EVOLVE™ API v1.7.0.
 
 Tests the full governance flow via FastAPI TestClient:
   start → status → receipt → approve (with HITL token) → audit → chain/verify
@@ -16,8 +16,12 @@ Checks:
   C-08  GET /audit shows events, receipts, and human_decisions
   C-09  GET /chain/verify returns PASS and entries_checked >= 3
   C-10  GET /health shows actual signing_status (not DEMO_SIGNED_ED25519)
+  C-11  GET /receipt includes signature_verified=True (read-time verification)
+  C-12  GET /audit events include signature_verified=True
+  C-13  POST /approve with replayed token returns 409
+  C-14  GET /health shows read_time_signature_verification=True
 
-Expected output: E2E_API_VERIFICATION=PASS (10/10)
+Expected output: E2E_API_VERIFICATION=PASS (14/14)
 """
 from __future__ import annotations
 
@@ -130,6 +134,7 @@ def run_e2e() -> tuple[int, int, list[str]]:
             fail("C-06  POST /approve with invalid token", f"expected 403, got {r.status_code}")
 
         # C-07 /approve with valid HITL token → 200
+        token = ""
         if event_id:
             token = _make_hitl_token(_HITL_APPROVER, event_id)
             r = client.post("/approve",
@@ -171,12 +176,61 @@ def run_e2e() -> tuple[int, int, list[str]]:
         else:
             fail("C-10  GET /health signing_status", f"got {signing_status!r}")
 
+        # ── v1.7.0 checks ─────────────────────────────────────────────────────
+
+        # C-11 GET /receipt includes signature_verified=True
+        r = client.get(f"/receipt/{tid}", headers={"X-API-Key": _OBSERVER_KEY})
+        rec17 = r.json() if r.status_code == 200 else {}
+        if r.status_code == 200 and rec17.get("signature_verified") is True:
+            ok("C-11  GET /receipt → signature_verified=True (read-time)")
+        else:
+            fail("C-11  GET /receipt signature_verified", f"got {rec17.get('signature_verified')!r}")
+
+        # C-12 GET /audit events include signature_verified=True
+        r = client.get(f"/audit/{tid}", headers={"X-API-Key": _OBSERVER_KEY})
+        audit17 = r.json() if r.status_code == 200 else {}
+        events17 = audit17.get("events", [])
+        if events17 and all(e.get("signature_verified") is True for e in events17):
+            ok("C-12  GET /audit events → signature_verified=True")
+        else:
+            svs = [e.get("signature_verified") for e in events17]
+            fail("C-12  GET /audit events signature_verified", f"values={svs}")
+
+        # C-13 POST /approve with replayed token → 409
+        tid2 = _tid()
+        r2 = client.post("/start", json={"thread_id": tid2},
+                         headers={"X-API-Key": _INITIATOR_KEY})
+        rec2 = client.get(f"/receipt/{tid2}", headers={"X-API-Key": _OBSERVER_KEY}).json()
+        event_id2 = rec2.get("event_id", "")
+        if event_id2:
+            token2 = _make_hitl_token(_HITL_APPROVER, event_id2)
+            _main._mark_token_used(token2, event_id2, _HITL_APPROVER, _main.db_adapter)
+            r_replay = client.post("/approve",
+                                   json={"thread_id": tid2, "decision": "approve",
+                                         "hitl_token": token2, "hitl_approver_id": _HITL_APPROVER},
+                                   headers={"X-API-Key": _APPROVER_KEY})
+            if r_replay.status_code == 409:
+                ok("C-13  POST /approve with replayed token → 409")
+            else:
+                fail("C-13  POST /approve replay", f"expected 409, got {r_replay.status_code}")
+        else:
+            fail("C-13  POST /approve replay", "no event_id2 available")
+
+        # C-14 GET /health shows read_time_signature_verification=True
+        r = client.get("/health")
+        health14 = r.json() if r.status_code == 200 else {}
+        if health14.get("read_time_signature_verification") is True:
+            ok("C-14  GET /health → read_time_signature_verification=True")
+        else:
+            fail("C-14  GET /health read_time_signature_verification",
+                 f"got {health14.get('read_time_signature_verification')!r}")
+
     return passed, failed, errors
 
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("E2E API INTEGRATION TEST — AEM-EVOLVE™ v1.6.0")
+    print("E2E API INTEGRATION TEST — AEM-EVOLVE™ v1.7.0")
     print("=" * 60)
     passed, failed, errors = run_e2e()
     total = passed + failed
