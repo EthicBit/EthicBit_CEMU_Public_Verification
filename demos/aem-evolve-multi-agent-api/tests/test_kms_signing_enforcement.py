@@ -209,4 +209,4 @@ class TestHealthKmsGate:
     def test_version_bumped(self, client):
         resp = client.get("/health")
         assert resp.status_code == 200
-        assert resp.json()["version"] == "0.20.0-demo"
+        assert resp.json()["version"] == "0.21.0-demo"

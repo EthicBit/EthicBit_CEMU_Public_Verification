@@ -1,0 +1,93 @@
+{
+  "report_type": "AEM_EVOLVE_GATE_EVIDENCE",
+  "gate": "GOVERNANCE_SIGNOFF_CHECK",
+  "pr": "PR14",
+  "version": "0.21.0-demo",
+  "generated_utc": "2026-05-10T19:09:22.133880+00:00",
+  "environment": {
+    "environment_name": "local-demo",
+    "cloud_provider": "N/A",
+    "region": "N/A",
+    "deployment_date": "N/A",
+    "version_tag": "v2.0.0-pr14",
+    "container_image_digest": "N/A"
+  },
+  "result": {
+    "gate": "GOVERNANCE_SIGNOFF_CHECK",
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "governance_signed_off": false,
+    "governance_approver": null,
+    "governance_signoff_date": null,
+    "fail_reason": "Governance sign-off not yet completed: AEM_GOVERNANCE_APPROVER, AEM_GOVERNANCE_SIGNOFF_DATE not set. governance_signed_off=false",
+    "checks": {
+      "C-01_signoff_document": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/docs/GOVERNANCE_SIGNOFF.md",
+        "sha256": "07fba3d4c7a8ab697fe38d94cacd9a3cc0cbb5248a017ea03dc1089ca8ab54de",
+        "size_bytes": 5208
+      },
+      "C-02_regulatory_mappings": {
+        "ok": true,
+        "regulatory_files_required": 3,
+        "regulatory_files_present": 3,
+        "missing_regulatory_files": []
+      },
+      "C-03_assurance_reports": {
+        "ok": true,
+        "assurance_reports_required": 9,
+        "assurance_reports_present": 9,
+        "missing_reports": []
+      },
+      "C-04_pr13_evidence_complete": {
+        "ok": true,
+        "has_pr13_report": true,
+        "gates_evidence_complete": true
+      },
+      "C-05_claims_document": {
+        "ok": true,
+        "has_claims_doc": true,
+        "terms_required": 5,
+        "missing_terms": []
+      },
+      "C-06_signoff_evidence": {
+        "ok": true,
+        "file": "/Users/oskrmiranda/Documentos/EthicBit_CEMU/demos/aem-evolve-multi-agent-api/tools/governance_signoff/governance_signoff_evidence_2026_05.json",
+        "sha256": "3473e6b4fbfd40f94bb06cb62916e16ce625eba81fb183afeb579583263013f6",
+        "artifact_sha256": "315374639edf0a36e4497c61f0095e5305fff7d955956702953c51261b30bf47",
+        "subjects_hashed": 20,
+        "subjects_total": 20,
+        "has_artifact_sha256": true
+      },
+      "C-07_gate_ids_verified": {
+        "ok": true,
+        "gates_required": 8,
+        "gates_verified": 8,
+        "missing_gate_ids": []
+      },
+      "C-08_artifact_fingerprint": {
+        "ok": true,
+        "has_artifact_sha256": true,
+        "artifact_sha256": "315374639edf0a36e4497c61f0095e5305fff7d955956702953c51261b30bf47"
+      },
+      "C-09_governance_approver": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_GOVERNANCE_APPROVER not set — set to governance lead identity before claiming governance_signed_off=true"
+      },
+      "C-10_governance_signoff_date": {
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_GOVERNANCE_SIGNOFF_DATE not set — set to ISO8601 date of governance sign-off before claiming governance_signed_off=true"
+      }
+    }
+  },
+  "non_claims": [
+    "governance_signed_off=false",
+    "production_ready=false",
+    "live_infrastructure_not_validated",
+    "regulatory_approval_not_claimed",
+    "not_independently_certified"
+  ]
+}

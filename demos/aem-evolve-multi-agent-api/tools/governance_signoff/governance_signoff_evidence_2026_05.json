@@ -1,0 +1,129 @@
+{
+  "artifact_type": "AEM_EVOLVE_GOVERNANCE_SIGNOFF_EVIDENCE",
+  "gate": "GOVERNANCE_SIGNOFF_CHECK",
+  "pr": "PR14",
+  "version": "0.21.0-demo",
+  "generated_utc": "2026-05-10T19:04:40.711762+00:00",
+  "summary": {
+    "subjects_total": 20,
+    "subjects_hashed": 20,
+    "governance_signed_off": false,
+    "regulatory_frameworks": [
+      "EU_AI_ACT",
+      "ISO_42001",
+      "NIST_AI_RMF"
+    ],
+    "assurance_reports_hashed": 9,
+    "gate_modules_hashed": 6
+  },
+  "subjects": [
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/monitoring_alerting_check_report.json",
+      "type": "assurance_report",
+      "sha256": "31d0342daf806a392a76fc0f8a100c258bbc85ae9f2013e402fc8d26bef350fe"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/incident_response_check_report.json",
+      "type": "assurance_report",
+      "sha256": "1729ea2ae6a9fb4bae87e8ab2b9a75bd73f21690b493c0e6411d7446eb8f5de4"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/security_review_check_report.json",
+      "type": "assurance_report",
+      "sha256": "5682dc671c8209bfebfe10ec6e9def822e743e4930043696f362b413cb798bcb"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/reproduction_check_report.json",
+      "type": "assurance_report",
+      "sha256": "42faa9a9a5cf1603760f2fb3deb95e68d2bc73b3d3e364bb83a27e3d06caaf3e"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/deployment_audit_check_report.json",
+      "type": "assurance_report",
+      "sha256": "6116dab2303338b9fea8f991f16b21b36169d77c5b56ff66bc6ee8151c3d73d1"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/slo_evidence_check_report.json",
+      "type": "assurance_report",
+      "sha256": "0a744a56b698d93e83148eb3b8aeb5e3c9a53b578c8b9961bddf99422e5fdb7b"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/rollback_procedure_check_report.json",
+      "type": "assurance_report",
+      "sha256": "a33de8ff2c7e2d8aed20a62079bb5c2893371044b86731647bc5d920f2af2a85"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/disaster_recovery_check_report.json",
+      "type": "assurance_report",
+      "sha256": "b837f25bdd78212a0b322bc704966ce3e55512a238ff452803adbe97e40b989d"
+    },
+    {
+      "path": "assurance/evolve-multi-agent/v2_0/production_readiness_gate_report.json",
+      "type": "assurance_report",
+      "sha256": "c4279484c9a6f5fba763bb6a95b11e1cde7f67c4942b38a5c7f529c1eb684ab2"
+    },
+    {
+      "path": "docs/regulatory/EU_AI_ACT_MAPPING.json",
+      "type": "regulatory_mapping",
+      "sha256": "05d8167cdf60bf3a2ac5ba873c5da1bc50161e3970e7d4c647569e04306fca1e"
+    },
+    {
+      "path": "docs/regulatory/ISO_42001_MAPPING.json",
+      "type": "regulatory_mapping",
+      "sha256": "666fdbd5f8210c47a888b4a60ede0413ea41e91858c6b48493304b06b78fddcd"
+    },
+    {
+      "path": "docs/regulatory/NIST_AI_RMF_MAPPING.json",
+      "type": "regulatory_mapping",
+      "sha256": "f01e1d324d850b737a1bc81a5fe06a8ca5aca9faff7fdbf499885606d34c78e0"
+    },
+    {
+      "path": "docs/GOVERNANCE_SIGNOFF.md",
+      "type": "governance_doc",
+      "sha256": "07fba3d4c7a8ab697fe38d94cacd9a3cc0cbb5248a017ea03dc1089ca8ab54de"
+    },
+    {
+      "path": "docs/CLAIMS_AND_NON_CLAIMS.md",
+      "type": "governance_doc",
+      "sha256": "ae47a179403746ec3aeb0877954a79ea4912d13c7cfd29018433bd9f07b3de0d"
+    },
+    {
+      "path": "monitoring/monitoring_gate.py",
+      "type": "gate_module",
+      "sha256": "83b932f8fc8235d9f0928c85544098420d1d9e3de0a728dde40f719887a6be61"
+    },
+    {
+      "path": "incident_response/incident_response_gate.py",
+      "type": "gate_module",
+      "sha256": "3d80cd5157a3700a87b9fa1440fdbec68ff44bba72060cb3adc5a4a3f4928f87"
+    },
+    {
+      "path": "security_review/security_review_gate.py",
+      "type": "gate_module",
+      "sha256": "ced1b2ab47f973de77ea0305116aa7f5b92c2ed432035ea36cd25437954f4cc8"
+    },
+    {
+      "path": "reproduction/reproduction_gate.py",
+      "type": "gate_module",
+      "sha256": "bce267051f53717d5f2aa0075501fd0a22ca636fca2614ef9f7815353df77733"
+    },
+    {
+      "path": "deployment/deployment_gate.py",
+      "type": "gate_module",
+      "sha256": "18c2cf9b3c05e8777128f98a4d1097736ac39c4ca03474f72571401b5db38177"
+    },
+    {
+      "path": "readiness/readiness_gate.py",
+      "type": "gate_module",
+      "sha256": "f25caad7593889a2bd3ed5a557f4dd0bd65dd4581daafb8f6e7df20aa633722e"
+    }
+  ],
+  "non_claims": [
+    "governance_signed_off=false",
+    "production_ready=false",
+    "live_infrastructure_not_validated",
+    "regulatory_approval_not_claimed",
+    "not_independently_certified"
+  ],
+  "artifact_sha256": "315374639edf0a36e4497c61f0095e5305fff7d955956702953c51261b30bf47"
+}

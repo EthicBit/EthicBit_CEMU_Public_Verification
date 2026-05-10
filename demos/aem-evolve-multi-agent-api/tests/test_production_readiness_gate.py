@@ -368,4 +368,4 @@ class TestHealthReadinessGate:
 
     def test_version_bumped_to_pr13(self, client):
         resp = client.get("/health")
-        assert resp.json()["version"] == "0.20.0-demo"
+        assert resp.json()["version"] == "0.21.0-demo"
