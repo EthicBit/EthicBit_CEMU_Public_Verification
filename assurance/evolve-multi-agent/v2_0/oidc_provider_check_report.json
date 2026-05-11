@@ -1,20 +1,20 @@
 {
   "gate": "PRODUCTION_OIDC_PROVIDER_CHECK",
   "gate_version": "v2.0-PR1",
-  "result": "FAIL",
-  "timestamp_utc": "2026-05-10T13:13:11.261755+00:00",
+  "result": "PASS",
+  "timestamp_utc": "2026-05-11T03:01:34.855776+00:00",
   "environment": {
-    "oidc_issuer_configured": false,
-    "oidc_issuer": null,
-    "oidc_jwks_uri": null,
-    "oidc_audience": null
+    "oidc_issuer_configured": true,
+    "oidc_issuer": "http://localhost:8080/realms/aem-evolve",
+    "oidc_jwks_uri": "http://localhost:8080/realms/aem-evolve/protocol/openid-connect/certs",
+    "oidc_audience": "aem-evolve"
   },
   "checks": [
     {
       "id": "C-01",
       "label": "OIDC_ISSUER env var configured",
-      "status": "FAIL",
-      "detail": "OIDC_ISSUER not set"
+      "status": "PASS",
+      "detail": "http://localhost:8080/realms/aem-evolve"
     },
     {
       "id": "C-02",
@@ -28,57 +28,56 @@
     },
     {
       "id": "C-04",
-      "label": "load_oidc_config returns None (OIDC_ISSUER unset)",
+      "label": "load_oidc_config returns config (OIDC_ISSUER set)",
       "status": "PASS",
-      "detail": "Correct: gate not satisfied without external provider"
+      "detail": "issuer=http://localhost:8080/realms/aem-evolve"
     },
     {
       "id": "C-05",
       "label": "from_env() returns provider iff config present",
       "status": "PASS",
-      "detail": "provider=None"
+      "detail": "provider=present"
     },
     {
       "id": "C-06",
-      "label": "gate status NOT_CONFIGURED when issuer unset",
+      "label": "Provider issuer matches OIDC_ISSUER",
       "status": "PASS",
-      "detail": "Correct gate behavior \u2014 FAIL_CLOSED: external IdP required"
+      "detail": "http://localhost:8080/realms/aem-evolve"
     },
     {
       "id": "C-07",
-      "label": "JWKS reachability check N/A (no issuer)",
+      "label": "JWKS URI reachable",
       "status": "PASS",
-      "detail": "Skipped \u2014 OIDC_ISSUER not configured"
+      "detail": "2 key(s) returned"
     },
     {
       "id": "C-08",
-      "label": "Issuer validation N/A",
+      "label": "JWKS contains at least one RSA key",
       "status": "PASS",
-      "detail": "Skipped"
+      "detail": "2 RSA key(s)"
     },
     {
       "id": "C-09",
-      "label": "Audience validation N/A",
+      "label": "Audience configured",
       "status": "PASS",
-      "detail": "Skipped"
+      "detail": "aem-evolve"
     },
     {
       "id": "C-10",
-      "label": "gate_check() output structure valid",
+      "label": "gate_check() returns valid structure",
       "status": "PASS",
-      "detail": "Skipped \u2014 no provider to check"
+      "detail": "status=PASS"
     }
   ],
   "summary": {
     "total": 10,
-    "passed": 9,
-    "failed": 1
+    "passed": 10,
+    "failed": 0
   },
   "non_claims": [
     "This gate result does not certify the external OIDC provider",
     "This gate does not grant regulatory approval",
     "This gate does not replace external IAM certification",
     "PASS requires a real external OIDC provider \u2014 not a demo key pair"
-  ],
-  "fail_reason": "OIDC_ISSUER not configured \u2014 external OIDC provider required"
+  ]
 }
