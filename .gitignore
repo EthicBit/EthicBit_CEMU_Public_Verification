@@ -84,3 +84,4 @@ results/real_local_l3_candidate_gate.json
 .vercel
 .env*.local
 demos/aem-evolve-multi-agent-api/signing_key.pem
+assurance/evolve-multi-agent/v2_0/state_reports/
