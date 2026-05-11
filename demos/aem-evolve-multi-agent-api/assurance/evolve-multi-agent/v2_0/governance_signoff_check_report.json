@@ -3,7 +3,7 @@
   "gate": "GOVERNANCE_SIGNOFF_CHECK",
   "pr": "PR14",
   "version": "0.21.0-demo",
-  "generated_utc": "2026-05-10T19:09:22.133880+00:00",
+  "generated_utc": "2026-05-11T04:19:42.236674+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,13 +14,13 @@
   },
   "result": {
     "gate": "GOVERNANCE_SIGNOFF_CHECK",
-    "status": "FAIL",
-    "checks_passed": 8,
-    "checks_failed": 2,
-    "governance_signed_off": false,
-    "governance_approver": null,
-    "governance_signoff_date": null,
-    "fail_reason": "Governance sign-off not yet completed: AEM_GOVERNANCE_APPROVER, AEM_GOVERNANCE_SIGNOFF_DATE not set. governance_signed_off=false",
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
+    "governance_signed_off": true,
+    "governance_approver": "oskrmiranda@staging_controlled_cloud",
+    "governance_signoff_date": "2026-05-11",
+    "fail_reason": null,
     "checks": {
       "C-01_signoff_document": {
         "ok": true,
@@ -72,14 +72,12 @@
         "artifact_sha256": "315374639edf0a36e4497c61f0095e5305fff7d955956702953c51261b30bf47"
       },
       "C-09_governance_approver": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_GOVERNANCE_APPROVER not set — set to governance lead identity before claiming governance_signed_off=true"
+        "ok": true,
+        "governance_approver": "oskrmiranda@staging_controlled_cloud"
       },
       "C-10_governance_signoff_date": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_GOVERNANCE_SIGNOFF_DATE not set — set to ISO8601 date of governance sign-off before claiming governance_signed_off=true"
+        "ok": true,
+        "governance_signoff_date": "2026-05-11"
       }
     }
   },
