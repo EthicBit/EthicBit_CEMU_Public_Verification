@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install cryptography mlkem asyncpg fastapi langgraph starlette httpx
+          pip install cryptography mlkem asyncpg fastapi langgraph langgraph-checkpoint-sqlite starlette httpx uvicorn
 
       - name: Run v1.3 full-stack verifier
         run: |

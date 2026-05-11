@@ -1,7 +1,7 @@
 {
   "schema_id": "AEM_EVOLVE_MLKEM768_KEM_REPORT_V1_3",
-  "generated_at": "2026-05-09T12:40:13.575829+00:00",
-  "mode": "simulation",
+  "generated_at": "2026-05-11T00:37:49.856097+00:00",
+  "mode": "mlkem",
   "verification_result": "PASS",
   "checks_passed": 5,
   "checks_failed": 0,

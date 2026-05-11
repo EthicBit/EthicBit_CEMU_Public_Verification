@@ -113,6 +113,10 @@ def main() -> int:
         if res["result"] == "PASS":
             passed += 1
         print(f"  {res['result']}  {check['check_id']}")
+        if res["result"] == "FAIL":
+            print("    --- failure detail begin ---")
+            print(res.get("stdout", "")[-4000:])
+            print("    --- failure detail end ---")
 
     print()
     v11 = sum(1 for r in results[:6]   if r["result"] == "PASS")

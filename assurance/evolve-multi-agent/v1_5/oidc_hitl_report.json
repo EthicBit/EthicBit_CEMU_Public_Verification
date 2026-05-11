@@ -29,7 +29,7 @@
     {
       "check": "C-04-expired-token-rejected",
       "status": "PASS",
-      "detail": "token expired (exp=1778332765 now=1778333466)"
+      "detail": "token expired (exp=1778459169 now=1778459870)"
     },
     {
       "check": "C-05-wrong-issuer-rejected",

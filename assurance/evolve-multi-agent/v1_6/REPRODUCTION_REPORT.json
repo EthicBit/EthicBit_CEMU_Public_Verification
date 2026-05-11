@@ -1,6 +1,6 @@
 {
   "version": "v1.6",
-  "timestamp": "2026-05-09T14:12:06.574412+00:00",
+  "timestamp": "2026-05-11T00:37:52.578697+00:00",
   "result": "PASS",
   "checks_passed": 18,
   "checks_total": 18,
@@ -78,7 +78,7 @@
       "expected_status": "MECH_REASON_VERIFICATION=PASS",
       "result": "PASS",
       "exit_code": 0,
-      "stdout": "[MECH-REASON\u2122 VERIFIER] Starting verification...\n  \u2713 [C-01-SCHEMA] schema_id=AEM_EVOLVE_MECH_REASON_REPORT_V1_2, llm_involved=false\n  \u2713 [C-02-POLICY-VER] policy_version=1.2.0\n  \u2713 [C-03-INPUT-HASHES] all 4 input hashes verified\n  \u2713 [C-04-REPORT-HASH] report_hash=b4e15e69629799c3\u2026\n  \u2713 [C-05-SCORES] all 7 scores in [0.0, 1.0]\n  \u2713 [C-06-TRIGGERED-RULES] 0 rule(s), all strings\n  \u2713 [C-07-OUTCOME] recommended_outcome=PASS\n  \u2713 [C-08-EXPLANATION] explanation present, non-LLM marker confirmed\n  \u2713 [C-09-NON-CLAIMS] all 9 non-claims present\n  \u2713 [C-10-DETERMINISM] two runs agree: outcome=PASS, triggered_rules=[]\nMECH_REASON_VERIFICATION=PASS\n"
+      "stdout": "[MECH-REASON\u2122 VERIFIER] Starting verification...\n  \u2713 [C-01-SCHEMA] schema_id=AEM_EVOLVE_MECH_REASON_REPORT_V1_2, llm_involved=false\n  \u2713 [C-02-POLICY-VER] policy_version=1.2.0\n  \u2713 [C-03-INPUT-HASHES] all 4 input hashes verified\n  \u2713 [C-04-REPORT-HASH] report_hash=b4d5ba2d3d07f2cb\u2026\n  \u2713 [C-05-SCORES] all 7 scores in [0.0, 1.0]\n  \u2713 [C-06-TRIGGERED-RULES] 0 rule(s), all strings\n  \u2713 [C-07-OUTCOME] recommended_outcome=PASS\n  \u2713 [C-08-EXPLANATION] explanation present, non-LLM marker confirmed\n  \u2713 [C-09-NON-CLAIMS] all 9 non-claims present\n  \u2713 [C-10-DETERMINISM] two runs agree: outcome=PASS, triggered_rules=[]\nMECH_REASON_VERIFICATION=PASS\n"
     },
     {
       "check_id": "V1_3-LLM-ADVISORY",
@@ -86,7 +86,7 @@
       "expected_status": "LLM_ADVISORY_STATUS=PASS",
       "result": "PASS",
       "exit_code": 0,
-      "stdout": "[LLM ADVISORY ADAPTER] Reading sealed MECH_REASON_REPORT...\n  sealed report_hash: a57c7eeb4ef44328\u2026\n  recommended_outcome (sealed, read-only): PASS\n[LLM ADVISORY ADAPTER] Generating advisory narrative (does not modify governance)...\n  advisory_only: true\n  governance_binding: false\n  simulation_mode: True\n  advisory_hash: b48e9032a5ec59f3\u2026\nLLM_ADVISORY_STATUS=PASS\n"
+      "stdout": "[LLM ADVISORY ADAPTER] Reading sealed MECH_REASON_REPORT...\n  sealed report_hash: d4bb4965f41542e3\u2026\n  recommended_outcome (sealed, read-only): PASS\n[LLM ADVISORY ADAPTER] Generating advisory narrative (does not modify governance)...\n  advisory_only: true\n  governance_binding: false\n  simulation_mode: True\n  advisory_hash: b48e9032a5ec59f3\u2026\nLLM_ADVISORY_STATUS=PASS\n"
     },
     {
       "check_id": "V1_3-MLKEM768",
@@ -118,7 +118,7 @@
       "expected_status": "SIGNING_PROVIDER_VERIFICATION=PASS",
       "result": "PASS",
       "exit_code": 0,
-      "stdout": "SigningProvider Verification\n============================================\n  PASS  C-01-ABC-abstract-methods  \u2014 abstract=['public_key_pem', 'sign', 'verify']\n  PASS  C-02-EnvProvider-missing-var  \u2014 Environment variable 'ETHICBIT_ED25519_PRIVATE_KEY_PEM' is n\n  PASS  C-03-FileProvider-missing-file  \u2014 Key file not found: /nonexistent/path/key.pem\n  PASS  C-04-FileProvider-public-key-pem  \u2014 length=113\n  PASS  C-05-roundtrip-sign-verify  \u2014 sig_length=64\n  PASS  C-06-tampered-message-rejected\n  PASS  C-07-tampered-signature-rejected\n  PASS  C-08-public-key-pem-format  \u2014 -----BEGIN PUBLIC KEY-----\n\n\nSIGNING_PROVIDER_VERIFICATION=PASS  (8/8)\nreport \u2192 /Users/oskrmiranda/Documentos/EthicBit_CEMU/assurance/evolve-multi-agent/v1_4/signing_provider_report.json\n"
+      "stdout": "SigningProvider Verification\n============================================\n  PASS  C-01-ABC-abstract-methods  \u2014 abstract=['public_key_pem', 'sign', 'verify']\n  PASS  C-02-EnvProvider-missing-var  \u2014 Environment variable 'ETHICBIT_ED25519_PRIVATE_KEY_PEM' is n\n  PASS  C-03-FileProvider-missing-file  \u2014 Key file not found: /nonexistent/path/key.pem\n  PASS  C-04-FileProvider-public-key-pem  \u2014 length=113\n  PASS  C-05-roundtrip-sign-verify  \u2014 sig_length=64\n  PASS  C-06-tampered-message-rejected\n  PASS  C-07-tampered-signature-rejected\n  PASS  C-08-public-key-pem-format  \u2014 -----BEGIN PUBLIC KEY-----\n\n\nSIGNING_PROVIDER_VERIFICATION=PASS  (8/8)\nreport \u2192 assurance/evolve-multi-agent/v1_4/signing_provider_report.json\n"
     },
     {
       "check_id": "V1_4-HITL-IDENTITY",
@@ -142,7 +142,7 @@
       "expected_status": "OIDC_HITL_VERIFICATION=PASS",
       "result": "PASS",
       "exit_code": 0,
-      "stdout": "OIDC HITL Identity Verifier\n============================================\n  PASS  C-01-policy-loads  \u2014 missing=none\n  PASS  C-02-token-is-jwt  \u2014 parts=3\n  PASS  C-03-valid-token-verifies  \u2014 verified\n  PASS  C-04-expired-token-rejected  \u2014 token expired (exp=1778335224 now=1778335925)\n  PASS  C-05-wrong-issuer-rejected  \u2014 wrong issuer: 'https://attacker.example.com'\n  PASS  C-06-wrong-audience-rejected  \u2014 wrong audience: 'wrong-audience'\n  PASS  C-07-tampered-payload-rejected  \u2014 JWT parse error: Invalid control character at: line 1 column 146 (char 145)\n  PASS  C-08-unregistered-approver-rejected  \u2014 sub 'attacker-999' not in approver registry\n  PASS  C-09-event-id-claim-present  \u2014 event_id='evt-test-v1.5'\n  PASS  C-10-non-claims-present  \u2014 count=4\n\nOIDC_HITL_VERIFICATION=PASS  (10/10)\n"
+      "stdout": "OIDC HITL Identity Verifier\n============================================\n  PASS  C-01-policy-loads  \u2014 missing=none\n  PASS  C-02-token-is-jwt  \u2014 parts=3\n  PASS  C-03-valid-token-verifies  \u2014 verified\n  PASS  C-04-expired-token-rejected  \u2014 token expired (exp=1778459169 now=1778459870)\n  PASS  C-05-wrong-issuer-rejected  \u2014 wrong issuer: 'https://attacker.example.com'\n  PASS  C-06-wrong-audience-rejected  \u2014 wrong audience: 'wrong-audience'\n  PASS  C-07-tampered-payload-rejected  \u2014 JWT parse error: Invalid control character at: line 1 column 146 (char 145)\n  PASS  C-08-unregistered-approver-rejected  \u2014 sub 'attacker-999' not in approver registry\n  PASS  C-09-event-id-claim-present  \u2014 event_id='evt-test-v1.5'\n  PASS  C-10-non-claims-present  \u2014 count=4\n\nOIDC_HITL_VERIFICATION=PASS  (10/10)\n"
     },
     {
       "check_id": "V1_6-SIGNED-RECEIPTS",
@@ -150,7 +150,7 @@
       "expected_status": "SIGNED_RECEIPTS_VERIFICATION=PASS",
       "result": "PASS",
       "exit_code": 0,
-      "stdout": "AEM-EVOLVE\u2122 v1.6 Signed Receipts Verification\n====================================================\n  PASS  C-01  API server imports without error\n  PASS  C-02  _signing_provider initialized\n  PASS  C-03  _SIGNING_STATUS='SIGNED_EPHEMERAL_Ed25519' (real)\n  PASS  C-04  /start event has signature_hex\n  PASS  C-05  event signature_status='SIGNED_EPHEMERAL_Ed25519'\n  PASS  C-06  event signature_hex is valid 128-char hex (Ed25519)\n  PASS  C-07  /receipt has signature_hex\n  PASS  C-08  receipt signature_status='SIGNED_EPHEMERAL_Ed25519'\n  PASS  C-09  event signature verifiable with provider public key\n  PASS  C-10  /health signing_status='SIGNED_EPHEMERAL_Ed25519' (real)\n\nSIGNED_RECEIPTS_VERIFICATION=PASS (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+      "stdout": "AEM-EVOLVE\u2122 v1.6 Signed Receipts Verification\n====================================================\n  PASS  C-01  API server imports without error\n  PASS  C-02  _signing_provider initialized\n  PASS  C-03  _SIGNING_STATUS='SIGNED_Ed25519_FILE' (real)\n  PASS  C-04  /start event has signature_hex\n  PASS  C-05  event signature_status='SIGNED_Ed25519_FILE'\n  PASS  C-06  event signature_hex is valid 128-char hex (Ed25519)\n  PASS  C-07  /receipt has signature_hex\n  PASS  C-08  receipt signature_status='SIGNED_Ed25519_FILE'\n  PASS  C-09  event signature verifiable with provider public key\n  PASS  C-10  /health signing_status='SIGNED_Ed25519_FILE' (real)\n\nSIGNED_RECEIPTS_VERIFICATION=PASS (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
     },
     {
       "check_id": "V1_6-E2E-API",
@@ -158,7 +158,7 @@
       "expected_status": "E2E_API_VERIFICATION=PASS",
       "result": "PASS",
       "exit_code": 0,
-      "stdout": "============================================================\nE2E API INTEGRATION TEST \u2014 AEM-EVOLVE\u2122 v1.6.0\n============================================================\n  PASS  C-01  POST /start \u2192 awaiting_human_approval\n  PASS  C-02  GET /status \u2192 human_approval_needed=True\n  PASS  C-03  GET /receipt \u2192 SCOPE_LIMITED + signature_hex present\n  PASS  C-04  Receipt signature_status='SIGNED_EPHEMERAL_Ed25519' (real)\n  PASS  C-05  POST /approve without token \u2192 400\n  PASS  C-06  POST /approve with invalid token \u2192 403\n  PASS  C-07  POST /approve with valid token \u2192 200\n  PASS  C-08  GET /audit \u2192 events + receipts + human_decisions\n  PASS  C-09  GET /chain/verify \u2192 PASS (5 entries)\n  PASS  C-10  GET /health signing_status='SIGNED_EPHEMERAL_Ed25519' (real)\n============================================================\nE2E_API_VERIFICATION=PASS (10/10)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
+      "stdout": "============================================================\nE2E API INTEGRATION TEST \u2014 AEM-EVOLVE\u2122 v1.7.0\n============================================================\n  PASS  C-01  POST /start \u2192 awaiting_human_approval\n  PASS  C-02  GET /status \u2192 human_approval_needed=True\n  PASS  C-03  GET /receipt \u2192 SCOPE_LIMITED + signature_hex present\n  PASS  C-04  Receipt signature_status='SIGNED_Ed25519_FILE' (real)\n  PASS  C-05  POST /approve without token \u2192 400\n  PASS  C-06  POST /approve with invalid token \u2192 403\n  PASS  C-07  POST /approve with valid token \u2192 200\n  PASS  C-08  GET /audit \u2192 events + receipts + human_decisions\n  PASS  C-09  GET /chain/verify \u2192 PASS (3102 entries)\n  PASS  C-10  GET /health signing_status='SIGNED_Ed25519_FILE' (real)\n  PASS  C-11  GET /receipt \u2192 signature_verified=True (read-time)\n  PASS  C-12  GET /audit events \u2192 signature_verified=True\n  PASS  C-13  POST /approve with replayed token \u2192 409\n  PASS  C-14  GET /health \u2192 read_time_signature_verification=True\n============================================================\nE2E_API_VERIFICATION=PASS (14/14)\n/Users/oskrmiranda/.pyenv/versions/3.11.8/lib/python3.11/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.\n  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer\n"
     }
   ]
 }
