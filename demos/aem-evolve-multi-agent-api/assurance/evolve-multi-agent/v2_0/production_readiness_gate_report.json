@@ -3,7 +3,7 @@
   "gate": "PRODUCTION_READINESS_GATE",
   "pr": "PR13",
   "version": "0.20.0-demo",
-  "generated_utc": "2026-05-10T18:59:53.236431+00:00",
+  "generated_utc": "2026-05-11T04:19:10.398845+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,13 +14,13 @@
   },
   "result": {
     "gate": "PRODUCTION_READINESS_GATE",
-    "status": "FAIL",
-    "checks_passed": 8,
-    "checks_failed": 2,
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
     "production_ready": false,
     "gates_evidence_complete": true,
-    "readiness_reviewer": null,
-    "readiness_review_date": null,
+    "readiness_reviewer": "oskrmiranda@staging_controlled_cloud",
+    "readiness_review_date": "2026-05-11",
     "gate_summary": {
       "MonitoringGate": {
         "gate": "MONITORING_ALERTING_CHECK",
@@ -79,7 +79,7 @@
         "file_checks_passed": 8
       }
     },
-    "fail_reason": "Production readiness review not yet completed: AEM_READINESS_REVIEWER, AEM_READINESS_REVIEW_DATE not set. production_ready=false",
+    "fail_reason": null,
     "checks": {
       "C-01_verifiers_present": {
         "ok": true,
@@ -168,14 +168,12 @@
         "artifact_sha256": "9ceffdc9c78b1673511b9d239718a8b6bb16995a6165e73a9c19f419e611a25d"
       },
       "C-09_readiness_reviewer": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_READINESS_REVIEWER not set — set to governance lead identity before claiming production_ready=true"
+        "ok": true,
+        "readiness_reviewer": "oskrmiranda@staging_controlled_cloud"
       },
       "C-10_readiness_review_date": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_READINESS_REVIEW_DATE not set — set to ISO8601 date of production readiness review"
+        "ok": true,
+        "readiness_review_date": "2026-05-11"
       }
     }
   },
