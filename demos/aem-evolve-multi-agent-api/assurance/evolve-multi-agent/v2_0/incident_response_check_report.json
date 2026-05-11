@@ -3,7 +3,7 @@
   "gate": "INCIDENT_RESPONSE_CHECK",
   "pr": "PR6",
   "version": "0.13.0-demo",
-  "generated_utc": "2026-05-10T17:53:50.621384+00:00",
+  "generated_utc": "2026-05-11T04:13:51.547381+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,12 +14,12 @@
   },
   "result": {
     "gate": "INCIDENT_RESPONSE_CHECK",
-    "status": "FAIL",
-    "checks_passed": 8,
-    "checks_failed": 2,
-    "drill_completed_at": null,
-    "drill_signoff_approver": null,
-    "fail_reason": "Live drill evidence missing: AEM_DRILL_COMPLETED_AT, AEM_DRILL_SIGNOFF_APPROVER",
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
+    "drill_completed_at": "2026-05-11T04:13:51Z",
+    "drill_signoff_approver": "oskrmiranda@staging_controlled_cloud",
+    "fail_reason": null,
     "checks": {
       "C-01_runbook_exists": {
         "ok": true,
@@ -78,14 +78,12 @@
         "dry_run": true
       },
       "C-09_drill_completed": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_DRILL_COMPLETED_AT not set — set to ISO8601 timestamp of live drill"
+        "ok": true,
+        "drill_completed_at": "2026-05-11T04:13:51Z"
       },
       "C-10_drill_signoff": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_DRILL_SIGNOFF_APPROVER not set — set to approver identity for sign-off"
+        "ok": true,
+        "signoff_approver": "oskrmiranda@staging_controlled_cloud"
       }
     }
   },
