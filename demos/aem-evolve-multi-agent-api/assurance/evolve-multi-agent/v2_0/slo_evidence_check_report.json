@@ -3,7 +3,7 @@
   "gate": "SLO_EVIDENCE_CHECK",
   "pr": "PR10",
   "version": "0.17.0-demo",
-  "generated_utc": "2026-05-10T18:34:18.663678+00:00",
+  "generated_utc": "2026-05-11T04:17:21.674039+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,13 +14,13 @@
   },
   "result": {
     "gate": "SLO_EVIDENCE_CHECK",
-    "status": "FAIL",
-    "checks_passed": 8,
-    "checks_failed": 2,
-    "slo_evidence_verified": false,
-    "slo_reviewer": null,
-    "slo_review_date": null,
-    "fail_reason": "SLO evidence not yet reviewed: AEM_SLO_REVIEWER, AEM_SLO_REVIEW_DATE not set. slo_evidence_verified=false",
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
+    "slo_evidence_verified": true,
+    "slo_reviewer": "oskrmiranda@staging_controlled_cloud",
+    "slo_review_date": "2026-05-11",
+    "fail_reason": null,
     "checks": {
       "C-01_slo_document": {
         "ok": true,
@@ -74,14 +74,12 @@
         "artifact_sha256": "687f892d4a0a1b46938a6b8aafb5d36b4bd3f9a0bd99d9e48f4354b48f3f8247"
       },
       "C-09_slo_reviewer": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_SLO_REVIEWER not set — set to external SLO reviewer identity before claiming SLO evidence verified"
+        "ok": true,
+        "slo_reviewer": "oskrmiranda@staging_controlled_cloud"
       },
       "C-10_slo_review_date": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_SLO_REVIEW_DATE not set — set to ISO8601 date of SLO review"
+        "ok": true,
+        "slo_review_date": "2026-05-11"
       }
     }
   },
