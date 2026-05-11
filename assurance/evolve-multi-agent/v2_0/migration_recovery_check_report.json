@@ -2,17 +2,17 @@
   "gate": "MIGRATION_RECOVERY_CHECK",
   "gate_version": "v2.0-PR4",
   "result": "FAIL",
-  "timestamp_utc": "2026-05-10T13:37:16.937868+00:00",
+  "timestamp_utc": "2026-05-11T04:02:15.346935+00:00",
   "environment": {
-    "db_url_configured": false,
-    "db_url_prefix": null
+    "db_url_configured": true,
+    "db_url_prefix": "postgresql://aem:aem_staging_p"
   },
   "checks": [
     {
       "id": "C-01",
       "label": "AEM_DB_URL env var configured",
-      "status": "FAIL",
-      "detail": "AEM_DB_URL not set"
+      "status": "PASS",
+      "detail": "postgresql://aem:aem_staging_password@lo"
     },
     {
       "id": "C-02",
@@ -27,58 +27,158 @@
     },
     {
       "id": "C-04",
-      "label": "Forward migration hash before/after N/A",
+      "label": "Forward migration hash before/after recorded",
       "status": "FAIL",
-      "detail": "Skipped \u2014 AEM_DB_URL not set"
+      "detail": "failed: [\"004_indexes.sql: can't execute an empty query\"]"
     },
     {
       "id": "C-05",
-      "label": "Rollback simulation evidence N/A",
-      "status": "FAIL",
-      "detail": "Skipped \u2014 AEM_DB_URL not set"
+      "label": "Rollback simulation evidence produced",
+      "status": "PASS",
+      "detail": "3 rollback file(s) hashed"
     },
     {
       "id": "C-06",
-      "label": "Count reconciliation PASS N/A",
-      "status": "FAIL",
-      "detail": "Skipped \u2014 AEM_DB_URL not set"
+      "label": "Receipt/event count reconciliation PASS",
+      "status": "PASS",
+      "detail": "no rows lost during migration"
     },
     {
       "id": "C-07",
-      "label": "Audit-chain continuity N/A",
-      "status": "FAIL",
-      "detail": "Skipped \u2014 AEM_DB_URL not set"
+      "label": "Audit-chain continuity verified",
+      "status": "PASS",
+      "detail": "empty audit_chain \u2014 continuity trivially satisfied"
     },
     {
       "id": "C-08",
-      "label": "Backup tooling available N/A",
-      "status": "FAIL",
-      "detail": "Skipped \u2014 AEM_DB_URL not set"
+      "label": "Backup tooling available (pg_dump)",
+      "status": "PASS",
+      "detail": "pg_dump at /opt/homebrew/bin/pg_dump"
     },
     {
       "id": "C-09",
-      "label": "Backup file produced N/A",
-      "status": "FAIL",
-      "detail": "Skipped \u2014 AEM_DB_URL not set"
+      "label": "Backup file produced and hashed",
+      "status": "PASS",
+      "detail": "schema dump: 10844 bytes, sha256=48bf803e02ca838b..."
     },
     {
       "id": "C-10",
-      "label": "Restore verification PASS N/A",
-      "status": "FAIL",
-      "detail": "Skipped \u2014 AEM_DB_URL not set"
+      "label": "Restore verification PASS (dump content checked)",
+      "status": "PASS",
+      "detail": "all 4 required tables found in dump"
     }
   ],
   "summary": {
     "total": 10,
-    "passed": 2,
-    "failed": 8
+    "passed": 9,
+    "failed": 1
   },
   "evidence": {
-    "rollback_file_hashes": {
-      "001_rollback_initial_schema.sql": "4749ea5c598e05b9395d17bd3a9d99b91d7c116d218b894a1c6fab7f3aa4c75b",
-      "002_rollback_metrics_table.sql": "631cb430670ccfdd8e57cd755e26eb89f2b275f3875a4ca3442f8f6c21e8f384",
-      "003_rollback_langraph_checkpointer.sql": "b7d6c09ee5155e4cb90c76ddeb8ce83da803652e7d9244881d1c3c3be858c9a4"
-    }
+    "gate": "MIGRATION_RECOVERY_CHECK",
+    "gate_version": "v2.0-PR4",
+    "timestamp_utc": "2026-05-11T04:02:15.154823+00:00",
+    "db_url_prefix": "postgresql://aem:aem_staging_p",
+    "evidence": {
+      "forward_migration": {
+        "ok": false,
+        "before_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
+        "after_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
+        "hash_changed": false,
+        "migrations_applied": [
+          "001_initial_schema.sql",
+          "002_metrics_table.sql",
+          "003_langraph_checkpointer.sql",
+          "005_hitl_used_tokens.sql"
+        ],
+        "migrations_failed": [
+          "004_indexes.sql: can't execute an empty query"
+        ],
+        "before_table_count": 8,
+        "after_table_count": 8,
+        "detail": "failed: [\"004_indexes.sql: can't execute an empty query\"]"
+      },
+      "rollback_migration": {
+        "ok": true,
+        "before_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
+        "rollback_files": [
+          "001_rollback_initial_schema.sql",
+          "002_rollback_metrics_table.sql",
+          "003_rollback_langraph_checkpointer.sql"
+        ],
+        "rollback_file_hashes": {
+          "001_rollback_initial_schema.sql": "4749ea5c598e05b9395d17bd3a9d99b91d7c116d218b894a1c6fab7f3aa4c75b",
+          "002_rollback_metrics_table.sql": "631cb430670ccfdd8e57cd755e26eb89f2b275f3875a4ca3442f8f6c21e8f384",
+          "003_rollback_langraph_checkpointer.sql": "b7d6c09ee5155e4cb90c76ddeb8ce83da803652e7d9244881d1c3c3be858c9a4"
+        },
+        "rollback_procedure": "1. pg_dump $AEM_DB_URL > backup_$(date +%Y%m%d_%H%M%S).sql  2. psql $AEM_DB_URL < migrations/rollback/001_rollback_initial_schema.sql  3. Verify service starts with empty schema  4. Restore from backup if needed: psql $AEM_DB_URL < backup.sql",
+        "non_claim": "Rollback SQL is not applied to live data \u2014 backup restore is the safe rollback path",
+        "detail": "3 rollback file(s) hashed; procedure documented"
+      },
+      "count_reconciliation": {
+        "ok": true,
+        "deltas": {
+          "evolution_events": 0,
+          "evolution_receipts": 0,
+          "human_decisions": 0,
+          "audit_chain": 0,
+          "hitl_used_tokens": 0
+        },
+        "regressions": [],
+        "detail": "no rows lost during migration",
+        "before": {
+          "evolution_events": 0,
+          "evolution_receipts": 0,
+          "human_decisions": 0,
+          "audit_chain": 0,
+          "hitl_used_tokens": 0
+        },
+        "after": {
+          "evolution_events": 0,
+          "evolution_receipts": 0,
+          "human_decisions": 0,
+          "audit_chain": 0,
+          "hitl_used_tokens": 0
+        }
+      },
+      "audit_chain_continuity": {
+        "ok": true,
+        "entries_checked": 0,
+        "broken_links": 0,
+        "detail": "empty audit_chain \u2014 continuity trivially satisfied"
+      },
+      "backup_test": {
+        "ok": true,
+        "dump_path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/aem_pr4_dump_ez2w44us.sql",
+        "dump_size_bytes": 10844,
+        "dump_sha256": "48bf803e02ca838b2977a1552dcf1a2eb8d1194680968b0344b492818fc1445d",
+        "timestamp_utc": "2026-05-11T04:02:15.346572+00:00",
+        "detail": "schema dump: 10844 bytes, sha256=48bf803e02ca838b..."
+      },
+      "restore_verification": {
+        "ok": true,
+        "tables_found_in_dump": [
+          "evolution_events",
+          "evolution_receipts",
+          "audit_chain",
+          "hitl_used_tokens"
+        ],
+        "tables_missing_from_dump": [],
+        "detail": "all 4 required tables found in dump"
+      }
+    },
+    "status": "FAIL",
+    "summary": {
+      "total_checks": 6,
+      "passed": 5,
+      "failed": 1
+    },
+    "non_claims": [
+      "Full restore evidence requires a secondary PostgreSQL instance",
+      "Backup covers schema only \u2014 data backup requires pg_dump without --schema-only",
+      "Not disaster recovery complete by itself",
+      "Not zero data loss unless RPO evidence separately supports it",
+      "Not production-ready by itself \u2014 one gate of 12"
+    ]
   },
   "non_claims": [
     "Full restore evidence requires a secondary PostgreSQL instance",
@@ -87,5 +187,5 @@
     "This gate does not grant regulatory approval",
     "This gate is not production-ready by itself \u2014 one of 12 required gates"
   ],
-  "fail_reason": "AEM_DB_URL not configured \u2014 PostgreSQL instance required"
+  "fail_reason": "One or more checks failed"
 }
