@@ -4,13 +4,13 @@
 CREATE TABLE IF NOT EXISTS hitl_used_tokens (
     token_hash TEXT NOT NULL,
     event_id TEXT NOT NULL,
-    used_at_utc TEXT NOT NULL,
-    approver_identity TEXT,
+    approver_id TEXT,
+    used_at TEXT NOT NULL,
     PRIMARY KEY (token_hash, event_id)
 );
 
 CREATE INDEX IF NOT EXISTS idx_hitl_used_tokens_event_id
     ON hitl_used_tokens (event_id);
 
-CREATE INDEX IF NOT EXISTS idx_hitl_used_tokens_used_at_utc
-    ON hitl_used_tokens (used_at_utc DESC);
+CREATE INDEX IF NOT EXISTS idx_hitl_used_tokens_used_at
+    ON hitl_used_tokens (used_at DESC);

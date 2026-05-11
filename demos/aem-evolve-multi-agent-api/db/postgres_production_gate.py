@@ -194,7 +194,7 @@ class PostgresProductionGate:
             "missing_tables": missing_tables,
             "missing_columns": missing_columns,
             "tables_validated": list(_REQUIRED_SCHEMA.keys()),
-            "detail": "all tables and columns present" if ok else f"missing_tables={missing_tables}",
+            "detail": "all tables and columns present" if ok else f"missing_tables={missing_tables}, missing_columns={missing_columns}",
         }
 
     def check_connection_pool(self) -> dict[str, Any]:

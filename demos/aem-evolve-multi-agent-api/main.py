@@ -381,7 +381,7 @@ def init_audit_tables(adapter: DBAdapter) -> None:
             receipt_json TEXT
         )""",
         """CREATE TABLE IF NOT EXISTS human_decisions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             thread_id TEXT,
             event_id TEXT,
             decision TEXT,
@@ -391,7 +391,7 @@ def init_audit_tables(adapter: DBAdapter) -> None:
         )""",
         # Hash-linked audit chain: chain_hash = SHA256(prev + ":" + entry_sha256)
         """CREATE TABLE IF NOT EXISTS audit_chain (
-            seq INTEGER PRIMARY KEY AUTOINCREMENT,
+            seq SERIAL PRIMARY KEY,
             entry_type TEXT NOT NULL,
             entry_id TEXT NOT NULL,
             entry_sha256 TEXT NOT NULL,
