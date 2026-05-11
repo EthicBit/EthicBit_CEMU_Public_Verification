@@ -1,8 +1,8 @@
 {
   "gate": "MIGRATION_RECOVERY_CHECK",
   "gate_version": "v2.0-PR4",
-  "result": "FAIL",
-  "timestamp_utc": "2026-05-11T04:02:15.346935+00:00",
+  "result": "PASS",
+  "timestamp_utc": "2026-05-11T04:03:58.373191+00:00",
   "environment": {
     "db_url_configured": true,
     "db_url_prefix": "postgresql://aem:aem_staging_p"
@@ -28,8 +28,8 @@
     {
       "id": "C-04",
       "label": "Forward migration hash before/after recorded",
-      "status": "FAIL",
-      "detail": "failed: [\"004_indexes.sql: can't execute an empty query\"]"
+      "status": "PASS",
+      "detail": "before=c3e0a31f0374... after=c3e0a31f0374..."
     },
     {
       "id": "C-05",
@@ -59,7 +59,7 @@
       "id": "C-09",
       "label": "Backup file produced and hashed",
       "status": "PASS",
-      "detail": "schema dump: 10844 bytes, sha256=48bf803e02ca838b..."
+      "detail": "schema dump: 10844 bytes, sha256=3f437ebba131ba1c..."
     },
     {
       "id": "C-10",
@@ -70,17 +70,17 @@
   ],
   "summary": {
     "total": 10,
-    "passed": 9,
-    "failed": 1
+    "passed": 10,
+    "failed": 0
   },
   "evidence": {
     "gate": "MIGRATION_RECOVERY_CHECK",
     "gate_version": "v2.0-PR4",
-    "timestamp_utc": "2026-05-11T04:02:15.154823+00:00",
+    "timestamp_utc": "2026-05-11T04:03:58.153879+00:00",
     "db_url_prefix": "postgresql://aem:aem_staging_p",
     "evidence": {
       "forward_migration": {
-        "ok": false,
+        "ok": true,
         "before_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
         "after_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
         "hash_changed": false,
@@ -88,14 +88,13 @@
           "001_initial_schema.sql",
           "002_metrics_table.sql",
           "003_langraph_checkpointer.sql",
+          "004_indexes.sql",
           "005_hitl_used_tokens.sql"
         ],
-        "migrations_failed": [
-          "004_indexes.sql: can't execute an empty query"
-        ],
+        "migrations_failed": [],
         "before_table_count": 8,
         "after_table_count": 8,
-        "detail": "failed: [\"004_indexes.sql: can't execute an empty query\"]"
+        "detail": "5 migration(s) applied; hash stable or evolved"
       },
       "rollback_migration": {
         "ok": true,
@@ -148,11 +147,11 @@
       },
       "backup_test": {
         "ok": true,
-        "dump_path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/aem_pr4_dump_ez2w44us.sql",
+        "dump_path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/aem_pr4_dump_oqokj2u0.sql",
         "dump_size_bytes": 10844,
-        "dump_sha256": "48bf803e02ca838b2977a1552dcf1a2eb8d1194680968b0344b492818fc1445d",
-        "timestamp_utc": "2026-05-11T04:02:15.346572+00:00",
-        "detail": "schema dump: 10844 bytes, sha256=48bf803e02ca838b..."
+        "dump_sha256": "3f437ebba131ba1c9d8a792c5ac11fbadb4098fdc7c558003716adcc378fc6b9",
+        "timestamp_utc": "2026-05-11T04:03:58.372781+00:00",
+        "detail": "schema dump: 10844 bytes, sha256=3f437ebba131ba1c..."
       },
       "restore_verification": {
         "ok": true,
@@ -166,11 +165,11 @@
         "detail": "all 4 required tables found in dump"
       }
     },
-    "status": "FAIL",
+    "status": "PASS",
     "summary": {
       "total_checks": 6,
-      "passed": 5,
-      "failed": 1
+      "passed": 6,
+      "failed": 0
     },
     "non_claims": [
       "Full restore evidence requires a secondary PostgreSQL instance",
@@ -186,6 +185,5 @@
     "Not zero data loss unless RPO evidence separately supports it",
     "This gate does not grant regulatory approval",
     "This gate is not production-ready by itself \u2014 one of 12 required gates"
-  ],
-  "fail_reason": "One or more checks failed"
+  ]
 }
