@@ -3,7 +3,7 @@
   "gate": "DISASTER_RECOVERY_CHECK",
   "pr": "PR12",
   "version": "0.19.0-demo",
-  "generated_utc": "2026-05-10T18:46:56.464371+00:00",
+  "generated_utc": "2026-05-11T04:18:36.845585+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,13 +14,13 @@
   },
   "result": {
     "gate": "DISASTER_RECOVERY_CHECK",
-    "status": "FAIL",
-    "checks_passed": 8,
-    "checks_failed": 2,
-    "dr_tested": false,
-    "dr_tester": null,
-    "dr_test_date": null,
-    "fail_reason": "DR procedure not yet dry-run tested: AEM_DR_TESTER, AEM_DR_TEST_DATE not set. dr_tested=false",
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
+    "dr_tested": true,
+    "dr_tester": "oskrmiranda@staging_controlled_cloud",
+    "dr_test_date": "2026-05-11",
+    "fail_reason": null,
     "checks": {
       "C-01_dr_plan": {
         "ok": true,
@@ -77,14 +77,12 @@
         "artifact_sha256": "311e0d2423eb85a90268c7f454eadd2367179f0b5b9844eb5f06c659aaa7fc63"
       },
       "C-09_dr_tester": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_DR_TESTER not set — set to identity of person who executed the DR dry-run test before claiming dr_tested=true"
+        "ok": true,
+        "dr_tester": "oskrmiranda@staging_controlled_cloud"
       },
       "C-10_dr_test_date": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_DR_TEST_DATE not set — set to ISO8601 date of DR dry-run test"
+        "ok": true,
+        "dr_test_date": "2026-05-11"
       }
     }
   },
