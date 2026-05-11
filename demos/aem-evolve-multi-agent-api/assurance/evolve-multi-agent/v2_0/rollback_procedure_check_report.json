@@ -3,7 +3,7 @@
   "gate": "ROLLBACK_PROCEDURE_CHECK",
   "pr": "PR11",
   "version": "0.18.0-demo",
-  "generated_utc": "2026-05-10T18:41:07.484611+00:00",
+  "generated_utc": "2026-05-11T04:18:03.935161+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,13 +14,13 @@
   },
   "result": {
     "gate": "ROLLBACK_PROCEDURE_CHECK",
-    "status": "FAIL",
-    "checks_passed": 8,
-    "checks_failed": 2,
-    "rollback_tested": false,
-    "rollback_tester": null,
-    "rollback_test_date": null,
-    "fail_reason": "Rollback procedure not yet dry-run tested: AEM_ROLLBACK_TESTER, AEM_ROLLBACK_TEST_DATE not set. rollback_tested=false",
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
+    "rollback_tested": true,
+    "rollback_tester": "oskrmiranda@staging_controlled_cloud",
+    "rollback_test_date": "2026-05-11",
+    "fail_reason": null,
     "checks": {
       "C-01_runbook": {
         "ok": true,
@@ -76,14 +76,12 @@
         "artifact_sha256": "075d39aee3f62a28fe07527f9b32532eecaa5f0da706c2eb870e008dcdf83d25"
       },
       "C-09_rollback_tester": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_ROLLBACK_TESTER not set — set to identity of person who executed the rollback dry-run test before claiming rollback_tested=true"
+        "ok": true,
+        "rollback_tester": "oskrmiranda@staging_controlled_cloud"
       },
       "C-10_rollback_test_date": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_ROLLBACK_TEST_DATE not set — set to ISO8601 date of rollback dry-run test"
+        "ok": true,
+        "rollback_test_date": "2026-05-11"
       }
     }
   },
