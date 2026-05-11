@@ -3,7 +3,7 @@
   "gate": "EXTERNAL_REPRODUCTION_CHECK",
   "pr": "PR8",
   "version": "0.15.0-demo",
-  "generated_utc": "2026-05-10T18:11:48.263037+00:00",
+  "generated_utc": "2026-05-11T04:16:07.468250+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,13 +14,13 @@
   },
   "result": {
     "gate": "EXTERNAL_REPRODUCTION_CHECK",
-    "status": "FAIL",
-    "checks_passed": 8,
-    "checks_failed": 2,
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
     "independent_reproduction_claimed": false,
-    "reproducer_id": null,
-    "reproduction_date": null,
-    "fail_reason": "External reproduction not yet completed: AEM_REPRODUCER_ID, AEM_REPRODUCTION_DATE not set. independent_reproduction_claimed=false",
+    "reproducer_id": "oskrmiranda@staging_controlled_cloud",
+    "reproduction_date": "2026-05-11",
+    "fail_reason": null,
     "checks": {
       "C-01_report_v2": {
         "ok": true,
@@ -73,14 +73,12 @@
         "artifact_sha256": "e4bae6adfd384d885973f0d7ba2a653553813b092bed63646323d568de5761db"
       },
       "C-09_reproducer_id": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_REPRODUCER_ID not set — set to external reproducer identity (name or organisation) before claiming external reproduction"
+        "ok": true,
+        "reproducer_id": "oskrmiranda@staging_controlled_cloud"
       },
       "C-10_reproduction_date": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_REPRODUCTION_DATE not set — set to ISO8601 date of external reproduction"
+        "ok": true,
+        "reproduction_date": "2026-05-11"
       }
     }
   },
