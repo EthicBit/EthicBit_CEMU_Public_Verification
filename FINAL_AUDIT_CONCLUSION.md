@@ -536,6 +536,99 @@ This release is not external certification.
 
 ---
 
+## AEM-EVOLVE™ v3.0 — Mechanical Ethics Assurance for AI · Constitutional Stack · AI-ME Gates Spec · Fast Path Scaffold (2026-05-12)
+
+**Release tag:** `v3.0`
+**Commit SHA (main):** `00f46dc8`
+**PRs merged:** #138 · #139 · #140 · #141 · #142 · #143 · #144 · #145 · #146 · #147 · #148 · #149
+**Constitutional regime:** EthicBit / CEMU v3.7.0+
+**Evidence baseline:** AEM-EVOLVE v2.0 PASS (14/14 gates, 140/140 checks)
+
+### Full technology stack state
+
+```
+Constitutional regime:     EthicBit / CEMU v3.7.0+          ACTIVE
+Artifact Assurance:        AEM v1.1                          ACTIVE
+Governance Engine:         AEM-EVOLVE™                       ACTIVE
+Evidence Baseline:         v2.0 PASS (14/14 gates, 140/140)  VERIFIED
+Category Release:          AEM-EVOLVE v3.0                   RELEASED
+AI-ME Gate Suite:          v3.1                              SPECIFICATION
+Claim Boundary Engine:     Doctrine + Engine scaffold        ACTIVE
+Fast Path:                 v1.0                              SPECIFICATION + SCAFFOLD
+Triple Anchor:             Selected artifacts anchored       ACTIVE
+Strong Closure:            v2.0 governance sign-off          ACTIVE
+v4.0 External Validation:  Future roadmap                    ROADMAP
+```
+
+### What v3.0 establishes
+
+v3.0 is a category, constitutional, and architecture release. It versions the complete EthicBit governance stack from constitutional bridge to external validation roadmap.
+
+| PR | # | Capability |
+|---|---|---|
+| PR 0 | #138 | Constitutional Technology Bridge — Technology Subordination Rule |
+| PR A | #139 | Technology Status + v3/v4 Roadmap — Architectural Layering Rule + Risk Register |
+| PR B | #140 | AEM v1.1 Artifact Assurance Continuity — 16 sections, 23 artifact types |
+| PR C | #141 | v3.0 Category & Doctrine Release + Whitepaper v3.0 (21 sections) |
+| PR D | #142 | Claim Boundary Engine One-pager — circuit breaker for AI governance claims |
+| PR E | #143 | AI-ME Gates Spec v3.1 — 12 gates with full per-gate spec |
+| PR F | #144 | AI-ME Claim Boundary + High-Risk Output Taxonomy (7 categories) |
+| PR G | #145 | AI-ME Evidence Schema + Gate Matrix — validated JSON |
+| PR H | #146 | AI-ME Implementation Scaffold — gates 01–04 + common.py (Python compiled) |
+| PR I | #147 | AI-ME Report Scaffold + Aggregator with anti-upgrade rules (Python compiled) |
+| PR K | #148 | Fast Path v1.0 — gate, snapshot, verify scaffold (Python compiled + JSON valid) |
+| PR J | #149 | v4.0 External Validation Roadmap + Reproduction Kit + Report Template |
+
+### AI-ME Gate Suite v3.1 — Specification Release
+
+12 gates defined across model, fairness, explainability, data, agent, tool, memory, human oversight, multi-agent, security, decision, and claim domains.
+
+Scaffold implemented for AI-ME-01 through AI-ME-04 + aggregator:
+`demos/aem-evolve-multi-agent-api/tools/ai_me/`
+
+Fast Path candidates: AI-ME-06 (Tool-Call), AI-ME-08 (HITL), AI-ME-12 (Claim Boundary) — HIGH integration priority.
+
+### Fast Path v1.0 — Specification + Scaffold
+
+Deterministic pre-execution enforcement with snapshot inheritance. Verdicts: PASS · BLOCK · SCOPE_LIMITED · DEGRADED · NOT_VERIFIABLE · FAIL_CLOSED.
+
+Scaffold: `demos/aem-evolve-multi-agent-api/tools/fast_path/`
+
+Mandatory rules enforced in scaffold:
+- Fast Path cannot override AEM v1.1 artifact verification failure
+- Fast Path cannot upgrade failed AI-ME evidence
+- `full_assurance_recomputed_per_tick = false` always
+
+### Aggregator integrity rules
+
+```
+artifact_assurance_required=true AND artifact_verified=false → outcome cannot be PASS
+Fast Path PASS cannot upgrade failed artifact assurance or failed gate outcome
+```
+
+### v3.0 claim
+
+EthicBit has versioned the constitutional, artifact-assurance, governance-assurance, AI evidence, claim-boundary, performance layer (Fast Path), and external validation roadmap for Mechanical Ethics Assurance for AI.
+
+The stack is constitutionally governed by EthicBit / CEMU v3.7.0+, supported by AEM v1.1 Artifact Assurance, AEM-EVOLVE™ Governance Assurance, AI-ME Gate specifications, Fast Path deterministic pre-execution enforcement, selected Triple Anchor pathways, Strong Closure, and a v4.0 external validation roadmap.
+
+### v3.0 non-claims
+
+```
+Not completed AI-ME evidence execution (v3.1 is Specification Release).
+Not complete AI ethics coverage.
+Not universal production readiness.
+Not regulatory approval.
+Not external certification.
+Not third-party reproduction.
+Not HSM-backed custody.
+Not full-system sub-15ms validation.
+Not universal public anchoring unless separately evidenced.
+v4.0 external validation is future roadmap — not current state.
+```
+
+---
+
 ## AEM-EVOLVE™ v1.9.0 — OIDC Key Persistence · Materiality Parametrized · Postgres Live Test (2026-05-10)
 
 **Full-stack verification:** `FULL_STACK_VERIFICATION=PASS (27/27)`
