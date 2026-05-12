@@ -1,0 +1,29 @@
+{
+  "artifact_id": "v4_0_fast_path_benchmark",
+  "criterion_number": 7,
+  "criterion": "fast_path_benchmark",
+  "controlled_status": "CONTROLLED_PASS",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "Controlled environment benchmark of Fast Path v1.0 enforcement evaluation — not managed cloud — not independent measurement",
+  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "fast_path_version": "v1.0",
+  "benchmark_source": "assurance/fast-path/v1/verdicts/",
+  "scenarios_measured": 9,
+  "elapsed_ms_min": 0.001,
+  "elapsed_ms_max": 0.091,
+  "elapsed_ms_avg": 0.013,
+  "elapsed_ms_per_scenario": [
+    {"verdict": "PASS",           "operation": "emit_governance_output", "elapsed_ms": 0.091},
+    {"verdict": "PASS",           "operation": "emit_output",            "elapsed_ms": 0.007},
+    {"verdict": "BLOCK",          "operation": "bypass_hitl",            "elapsed_ms": 0.003},
+    {"verdict": "BLOCK",          "operation": "delete_all_records",     "elapsed_ms": 0.003},
+    {"verdict": "SCOPE_LIMITED",  "operation": "emit_output",            "elapsed_ms": 0.004},
+    {"verdict": "FAIL_CLOSED",    "operation": "emit_output",            "elapsed_ms": 0.003},
+    {"verdict": "FAIL_CLOSED",    "operation": "emit_output",            "elapsed_ms": 0.003},
+    {"verdict": "DEGRADED",       "operation": "emit_output",            "elapsed_ms": 0.002},
+    {"verdict": "NOT_VERIFIABLE", "operation": "emit_output",            "elapsed_ms": 0.001}
+  ],
+  "full_assurance_recomputed_this_tick": false,
+  "benchmark_scope_note": "elapsed_ms covers Fast Path enforcement evaluation only — not full-system governance, not Triple Anchor, not AI-ME evidence recomputation",
+  "non_claim": "Benchmark conducted in controlled local environment, not managed cloud. Not an independent measurement. No sub-15ms production latency claim is made. Independent benchmark in managed cloud environment is required for v4.0 External Validation Release."
+}

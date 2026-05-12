@@ -1,0 +1,30 @@
+{
+  "artifact_id": "v4_0_security_review",
+  "criterion_number": 2,
+  "criterion": "external_security_review",
+  "controlled_status": "PENDING_EXTERNAL",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
+  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "internal_controls_documented": true,
+  "security_coverage": {
+    "security_review_document": "demos/aem-evolve-multi-agent-api/docs/SECURITY_REVIEW.md",
+    "dependency_scan_artifact": "demos/aem-evolve-multi-agent-api/tools/production_readiness/dependency_scan_2026_05.json",
+    "static_analysis_artifact": "demos/aem-evolve-multi-agent-api/tools/production_readiness/static_analysis_2026_05.json",
+    "threat_model_present": true,
+    "owasp_api_coverage_documented": true,
+    "governance_security_controls_documented": true,
+    "fast_path_enforcement_security_documented": true,
+    "aem_v1_1_verification_mechanism_documented": true
+  },
+  "review_scope_for_external_reviewer": [
+    "AEM v1.1 artifact verification mechanisms",
+    "Fast Path enforcement logic and snapshot security",
+    "Signing key management and key lifecycle",
+    "AI-ME gate implementation security",
+    "Claim boundary enforcement security",
+    "API and endpoint security",
+    "Threat model validation"
+  ],
+  "non_claim": "Internal security documentation exists. External security review by an independent party with no affiliation to EthicBit has not been conducted. No penetration testing has been performed."
+}

@@ -1,0 +1,27 @@
+{
+  "artifact_id": "v4_0_cloud_deployment",
+  "criterion_number": 3,
+  "criterion": "managed_cloud_deployment",
+  "controlled_status": "PENDING_EXTERNAL",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
+  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "infrastructure_documentation": {
+    "deployment_manifest_exists": true,
+    "deployment_manifest_path": "demos/aem-evolve-multi-agent-api/docs/DEPLOYMENT_MANIFEST.md",
+    "infrastructure_as_code_documented": true,
+    "env_vars_documented": true,
+    "health_endpoints_documented": true,
+    "rollback_plan_documented": true,
+    "monitoring_config_documented": true,
+    "postgres_deployment_documented": true
+  },
+  "managed_cloud_requirements": {
+    "managed_compute": "NOT_DEPLOYED",
+    "managed_networking": "NOT_DEPLOYED",
+    "deployment_audit_trail": "NOT_DEPLOYED",
+    "managed_postgres": "NOT_DEPLOYED",
+    "managed_prometheus_grafana": "NOT_DEPLOYED"
+  },
+  "non_claim": "Managed cloud deployment has not been executed. All infrastructure documentation exists as specification. Cloud deployment requires external managed compute environment."
+}

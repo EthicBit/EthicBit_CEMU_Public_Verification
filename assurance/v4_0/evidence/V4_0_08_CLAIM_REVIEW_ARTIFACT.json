@@ -1,0 +1,25 @@
+{
+  "artifact_id": "v4_0_claim_review",
+  "criterion_number": 8,
+  "criterion": "external_claim_review",
+  "controlled_status": "PENDING_EXTERNAL",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
+  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "internal_claim_state": {
+    "claim_boundary_engine_status": "ACTIVE",
+    "fast_path_claim_ceiling": "PASS",
+    "ai_me_v3_1_claim": "PASS (12/12 gates, artifact_verified=true all gates)",
+    "fast_path_v1_0_claim": "EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules)",
+    "aem_evolve_v2_0_claim": "PASS (14/14 gates, 140/140 checks)",
+    "v4_0_claim": "NOT_CLAIMED — external validation not completed",
+    "claim_boundary_enforcement_log": "assurance/ai-me/v3_1/evidence/AI_ME_12_claim_boundary_enforcement_artifact.json"
+  },
+  "external_reviewer_requirements": [
+    "Independent reviewer evaluates whether declared claims are supported by reproduced evidence",
+    "Overclaims identified and documented",
+    "Claim boundary adjustments made before v4.0 release",
+    "Final claim set reviewed and published with evidence references"
+  ],
+  "non_claim": "External claim review by an independent party has not been conducted. Internal claim boundaries are documented and enforced through the Claim Boundary Engine. External review is required for v4.0 External Validation Release."
+}

@@ -1,8 +1,8 @@
 # Third-Party Reproduction Kit v4.0
 
 **Document type:** Reproduction Kit  
-**Version:** 4.0 (Scaffold)  
-**Status:** `SCAFFOLD — awaiting v3.1 evidence execution`  
+**Version:** 4.0 (Ready)  
+**Status:** `READY — v3.1 evidence execution complete — awaiting external engagement`  
 **Constitutional dependency:** EthicBit / CEMU v3.7.0+  
 **Date:** 2026-05-12
 
@@ -12,7 +12,7 @@
 
 This kit enables independent third parties to reproduce EthicBit AEM-EVOLVE v4.0 evidence in an independent environment.
 
-**Current state:** Scaffold. v3.1 evidence execution has not been completed. This kit defines the reproduction procedure for when it is.
+**Current state:** Ready. v3.1 AI-ME evidence execution is complete (PASS 12/12 gates, artifact_verified=true all gates). Fast Path v1.0 evidence execution is complete (EVIDENCE_PASS 9/9 scenarios). This kit is ready for use by independent third parties.
 
 ---
 
@@ -45,24 +45,28 @@ cp .env.template .env.local
 docker-compose up -d  # or equivalent managed cloud setup
 ```
 
-### Run AI-ME gate scaffold
+### Run AI-ME v3.1 evidence (full 12-gate execution)
 
 ```bash
-# Verify scaffold compiles
-python3 -m py_compile demos/aem-evolve-multi-agent-api/tools/ai_me/common.py
-python3 -m py_compile demos/aem-evolve-multi-agent-api/tools/ai_me/verify_ai_me_01_model_evaluation.py
+# Run all 12 AI-ME gates and produce aggregate report
+python3 demos/aem-evolve-multi-agent-api/tools/ai_me/run_ai_me_evidence_v3_1.py
+# Expected: PASS 12/12 gates, artifact_verified=true all gates
+# Output: assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json
 
-# Run scaffold aggregator (no evidence yet — will produce MISSING outcomes)
-python3 -c "
-from demos.aem_evolve_multi_agent_api.tools.ai_me.aggregate_ai_me_v3_1 import aggregate
-result = aggregate()
-import json; print(json.dumps(result, indent=2))
-"
+# Run Fast Path v1.0 evidence (9 scenarios)
+python3 demos/aem-evolve-multi-agent-api/tools/fast_path/run_fast_path_evidence_v1_0.py
+# Expected: EVIDENCE_PASS 9/9 scenarios, 7/7 mandatory rules verified
+# Output: assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json
+
+# Run v4.0 controlled evidence
+python3 demos/aem-evolve-multi-agent-api/tools/v4_0/run_v4_0_evidence.py
+# Expected: CONTROLLED_EVIDENCE_PARTIAL — 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
+# Output: assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json
 ```
 
 ---
 
-## Expected Evidence Outputs (when v3.1 evidence is executed)
+## Expected Evidence Outputs
 
 Each AI-ME gate produces a JSON report at:
 ```
@@ -74,23 +78,37 @@ Expected acceptance criteria per gate are defined in:
 docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json
 ```
 
+Expected outcomes by artifact type:
+
+| Artifact | Expected outcome | Path |
+|---|---|---|
+| AI-ME v3.1 aggregate | `PASS 12/12` | `assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json` |
+| Fast Path verification | `EVIDENCE_PASS 9/9` | `assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json` |
+| v4.0 controlled evidence | `CONTROLLED_EVIDENCE_PARTIAL 3/8` | `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json` |
+
 ---
 
 ## Hash Verification Instructions (AEM v1.1)
 
-For each evidence artifact:
+For each AI-ME v3.1 evidence artifact:
 
 ```bash
 # Compute SHA-256 hash
-sha256sum <artifact_path>
+sha256sum assurance/ai-me/v3_1/evidence/AI_ME_0X_*.json
 
-# Compare against declared hash in manifest
-cat assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_MANIFEST.json | python3 -c "
-import json, sys
-manifest = json.load(sys.stdin)
-# Find artifact and compare declared hash
+# Compare against declared hash in AEM v1.1 receipt
+python3 -c "
+import json, hashlib
+with open('assurance/ai-me/v3_1/receipt_AI-ME-01_model_evaluation_artifact.json') as f:
+    receipt = json.load(f)
+declared = receipt['artifact_hash']
+with open(receipt['artifact_path'], 'rb') as f:
+    computed = hashlib.sha256(f.read()).hexdigest()
+print(f'PASS' if declared == computed else f'FAIL: declared={declared} computed={computed}')
 "
 ```
+
+Repeat for all 12 AI-ME v3.1 receipts in `assurance/ai-me/v3_1/receipt_AI-ME-*.json`.
 
 ---
 
@@ -114,11 +132,12 @@ manifest = json.load(sys.stdin)
 
 ## Fast Path Benchmark Checklist
 
-- [ ] Deploy Fast Path scaffold (`demos/aem-evolve-multi-agent-api/tools/fast_path/`)
-- [ ] Create test canonical snapshot using `fast_path_snapshot.create_scaffold_snapshot()`
-- [ ] Run `verify_fast_path.verify_scaffold()` and measure elapsed time
-- [ ] Record elapsed_ms from verdict output
+- [ ] Run Fast Path v1.0 evidence runner: `python3 demos/aem-evolve-multi-agent-api/tools/fast_path/run_fast_path_evidence_v1_0.py`
+- [ ] Verify all 9 verdict files in `assurance/fast-path/v1/verdicts/`
+- [ ] Record `evaluation_elapsed_ms` from each verdict file
+- [ ] Confirm `full_assurance_recomputed_this_tick=false` in all verdicts
 - [ ] Note scope: elapsed_ms covers Fast Path enforcement evaluation only, not full-system governance
+- [ ] For independent benchmark: run in managed cloud environment and record elapsed_ms independently
 
 ---
 
@@ -139,11 +158,12 @@ Use `docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md` to document 
 
 ## Known Limitations
 
-1. v3.1 is Specification Release only — evidence execution is not yet complete
-2. Fast Path benchmark results require managed cloud environment for valid measurement
-3. Triple Anchor covers selected artifacts only — not universal
-4. HSM-backed signing requires CloudHSM setup not yet documented for v4.0
-5. External security review is not part of reproduction kit scope — it requires a separate engagement
+1. v3.1 evidence execution is complete (PASS 12/12, EVIDENCE_PASS 9/9). External reproduction by an independent party has not been executed.
+2. Fast Path benchmark results in `assurance/v4_0/evidence/V4_0_07_FAST_PATH_BENCHMARK_ARTIFACT.json` are from controlled local environment — not managed cloud. Independent benchmark required for v4.0.
+3. Triple Anchor covers selected artifacts only — not universal. Existing anchor receipt covers pre-v3.1 state.
+4. HSM-backed signing requires CloudHSM setup with `AEM_KMS_PROVIDER` env var. Not configured in controlled environment.
+5. External security review is not part of reproduction kit scope — requires separate independent engagement.
+6. 5/8 v4.0 acceptance criteria are PENDING_EXTERNAL — see `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json`.
 
 ---
 

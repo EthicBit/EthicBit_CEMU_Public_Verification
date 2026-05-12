@@ -18,7 +18,8 @@ Claim Boundary Engine:     Doctrine + Engine scaffold            ACTIVE
 Fast Path:                 v1.0 EVIDENCE_PASS (9/9 scenarios)    EVIDENCE PASS
 Triple Anchor:             Selected artifacts anchored           ACTIVE
 Strong Closure:            v2.0 governance sign-off              ACTIVE
-v4.0 External Validation:  Future roadmap                        ROADMAP
+Reproduction Kit:          v4.0 READY                            READY
+v4.0 External Validation:  CONTROLLED_EVIDENCE_PARTIAL (3/8)     CONTROLLED
 ```
 
 > The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it.
@@ -34,7 +35,7 @@ EthicBit / CEMU v3.7.0+  (Constitutional Regime)
                       └─ Fast Path v1.0     (Pre-Execution Enforcement — EVIDENCE PASS 9/9)
                            └─ Triple Anchor  (External Anchoring — selected receipts)
                                 └─ Strong Closure  (Convergence Evaluation)
-                                     └─ v4.0 External Validation  (Roadmap)
+                                     └─ v4.0 External Validation  (CONTROLLED_EVIDENCE_PARTIAL 3/8)
 ```
 
 ### Key documents (PR 0–J + K)
@@ -126,34 +127,40 @@ from fast_path.run_fast_path_evidence_v1_0 import main; main()
 
 ### Claim
 
-EthicBit has versioned and evidenced the constitutional, artifact-assurance, governance-assurance, AI evidence (AI-ME Gates v3.1 PASS 12/12), claim-boundary, performance layer (Fast Path v1.0 EVIDENCE_PASS 9/9), and external validation roadmap for Mechanical Ethics Assurance for AI. AI-ME Gates v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
+EthicBit has versioned and evidenced the constitutional, artifact-assurance, governance-assurance, AI evidence (AI-ME Gates v3.1 PASS 12/12), claim-boundary, performance layer (Fast Path v1.0 EVIDENCE_PASS 9/9), and v4.0 controlled evidence (CONTROLLED_EVIDENCE_PARTIAL 3/8 criteria CONTROLLED_PASS) for Mechanical Ethics Assurance for AI. AI-ME Gates v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules) + v4.0 Controlled Evidence (AEM reverification 12/12, Triple Anchor receipt verified, Fast Path benchmark 9 scenarios) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
 
 ### Non-claim
 
-Evidence scope: controlled environment only — not production deployment. Not external validation, not third-party reproduction, not regulatory approval, not external certification, not HSM-backed custody, not complete AI ethics coverage, not universal production readiness, not full-system sub-15 ms validation, not universal public anchoring unless separately evidenced. Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence. `full_assurance_recomputed_per_tick = false` always.
+Evidence scope: controlled environment only — not production deployment. v4.0 External Validation Release NOT claimed (5/8 criteria PENDING_EXTERNAL). Not third-party reproduction, not external security review, not managed cloud deployment, not HSM-backed signing, not external claim review. AEM v1.1 reverification is controlled environment only — not external party. Triple Anchor verification is structural only — no on-chain RPC. Fast Path benchmark is controlled local environment — not managed cloud. Not regulatory approval, not external certification, not complete AI ethics coverage, not universal production readiness, not full-system sub-15 ms validation, not universal public anchoring unless separately evidenced. Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence. `full_assurance_recomputed_per_tick = false` always.
 
 ---
 
-## Latest release: AEM-EVOLVE™ v3.1 — AI-ME Gates Evidence Execution PASS (12/12)
+## Latest release: AEM-EVOLVE™ v3.1 — v4.0 Controlled Evidence CONTROLLED_EVIDENCE_PARTIAL (3/8)
 
 **Tag:** `v3.1` — 2026-05-12  
-**Commit:** `5a67bc10`  
-**Type:** Evidence Execution Release — AI-ME Gate Suite v3.1  
-**Result:** `AI_ME_V3_1_AGGREGATE_REPORT — PASS (12/12 gates, artifact_verified=true all gates, 0 violations)`
+**Type:** Controlled Evidence Execution — v4.0 Acceptance Criteria  
+**Result:** `V4_0_CONTROLLED_EVIDENCE_REPORT — CONTROLLED_EVIDENCE_PARTIAL (3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL)`
 
-> AI-ME Gates v3.1 completes the first evidence pass for all 12 AI-Specific Mechanical Ethics Gates. Scope: AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+. Both constitutional integrity rules verified: fail-closed rule and Fast Path anti-upgrade rule.
+> v4.0 controlled environment evidence execution covers all 8 v4.0 acceptance criteria. 3 criteria have controlled-environment evidence (AEM reverification 12/12, Triple Anchor receipt verified, Fast Path benchmark 9 scenarios). 5 criteria are PENDING_EXTERNAL — require external parties or external infrastructure. v4.0 External Validation Release is NOT claimed.
 
-- [Status Bulletin v3.1 Evidence](docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md)
-- [Aggregate Report](assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json)
+- [Status Bulletin v4.0 Controlled Evidence](docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md)
+- [v4.0 Controlled Evidence Report](assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json)
+- [Reproduction Kit v4.0](docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md)
 - [GitHub Release v3.1](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v3.1)
 
 ```bash
-python3 -c "
-import sys; sys.path.insert(0, 'demos/aem-evolve-multi-agent-api/tools')
-from ai_me.run_ai_me_evidence_v3_1 import main; main()
-"
-# AGGREGATE OUTCOME: PASS — 12/12
+python3 demos/aem-evolve-multi-agent-api/tools/v4_0/run_v4_0_evidence.py
+# STATUS: CONTROLLED_EVIDENCE_PARTIAL — 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
 ```
+
+### Previous: AEM-EVOLVE™ v3.1 — AI-ME Gates + Fast Path Evidence Execution
+
+**Result:** AI-ME v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios)
+
+- [Status Bulletin v3.1 Evidence](docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md)
+- [Status Bulletin Fast Path v1.0](docs/STATUS_BULLETIN_PUBLIC_2026-05-12_FAST_PATH_V1_0_EVIDENCE.md)
+- [AI-ME Aggregate Report](assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json)
+- [Fast Path Verification Report](assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json)
 
 ---
 

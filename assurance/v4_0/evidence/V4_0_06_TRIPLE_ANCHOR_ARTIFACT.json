@@ -1,0 +1,35 @@
+{
+  "artifact_id": "v4_0_triple_anchor",
+  "criterion_number": 6,
+  "criterion": "triple_anchor_verification",
+  "controlled_status": "CONTROLLED_PASS",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "Controlled structural verification of existing AEM v1.1 mainnet anchor receipt — not on-chain RPC verification",
+  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "receipt_path": "docs/anchors/AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json",
+  "receipt_schema_id": "ETHICBIT_AEM_V1_1_MAINNET_ANCHOR_RECEIPT_V1",
+  "receipt_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+  "network": "ethereum-mainnet",
+  "block_number": 24996672,
+  "tx_hash": "0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+  "timestamp_utc": "2026-05-01T01:01:23+00:00",
+  "receipt_schema_verified": true,
+  "required_fields_present": true,
+  "payload_fields_verified": [
+    "canonical_sha256",
+    "freeze_pdf_sha256",
+    "repo_commit_sha",
+    "signer_address",
+    "signer_identity",
+    "system_state_sha256",
+    "thesis_sha256",
+    "ts_unix"
+  ],
+  "anchored_hashes": {
+    "canonical_sha256": "0a51d3cb41495308c2987d00f3212aba4623896113d7ecc30f467ec4645ed2fb",
+    "system_state_sha256": "6f539a93cf05caeca3ba7d1a202bcac07e0946a918fd0cd061ac1028077eb88d",
+    "repo_commit_sha": "4bc4a85c8f4a4c96ab0d4f1df01526c4e33ba140"
+  },
+  "v4_0_anchor_scope": "Existing receipt covers pre-v3.1 state. New anchor receipts for v3.1 and Fast Path v1.0 evidence artifacts require external v4.0 engagement.",
+  "non_claim": "On-chain RPC verification not performed in this execution. No new v4.0 anchor receipts created. External independent verification of anchor content and new anchors for v3.1 evidence are required for v4.0 External Validation Release."
+}

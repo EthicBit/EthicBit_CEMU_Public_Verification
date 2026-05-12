@@ -536,6 +536,67 @@ This release is not external certification.
 
 ---
 
+## v4.0 — Controlled Environment Evidence Execution CONTROLLED_EVIDENCE_PARTIAL (3/8 criteria) (2026-05-12)
+
+**Release tag:** `v3.1` (updated)
+**Constitutional regime:** EthicBit / CEMU v3.7.0+
+**Prerequisites:** AI-ME v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9)
+
+v4.0 controlled environment evidence execution completes the first evidence pass for all 8 v4.0 acceptance criteria. Scope: AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+.
+
+### v4.0 controlled evidence result
+
+```
+V4_0_CONTROLLED_EVIDENCE_REPORT
+status:                         CONTROLLED_EVIDENCE_PARTIAL
+criteria_evaluated:             8
+criteria_controlled_pass:       3
+criteria_pending_external:      5
+v4_0_external_validation_release_claimed: false
+```
+
+### Criterion summary
+
+| # | Criterion | Controlled Status |
+|---|---|---|
+| 1 | Third-party reproduction | PENDING_EXTERNAL |
+| 2 | External security review | PENDING_EXTERNAL |
+| 3 | Managed cloud deployment | PENDING_EXTERNAL |
+| 4 | HSM signing | PENDING_EXTERNAL |
+| 5 | AEM v1.1 reverification | **CONTROLLED_PASS** |
+| 6 | Triple Anchor verification | **CONTROLLED_PASS** |
+| 7 | Fast Path benchmark | **CONTROLLED_PASS** |
+| 8 | External claim review | PENDING_EXTERNAL |
+
+### CONTROLLED_PASS evidence
+
+- AEM v1.1 reverification: 12/12 AI-ME v3.1 artifacts hash-match (SHA256 recomputed vs receipt declared hash)
+- Triple Anchor: anchor receipt structure verified — schema=ETHICBIT_AEM_V1_1_MAINNET_ANCHOR_RECEIPT_V1, network=ethereum-mainnet, block=24996672
+- Fast Path benchmark: 9 scenarios measured — min=0.001ms, max=0.091ms, avg=0.013ms, full_assurance_recomputed_this_tick=false all scenarios
+
+### Non-claims
+
+```
+v4.0 External Validation Release NOT claimed.
+Third-party reproduction NOT completed.
+External security review NOT completed.
+Managed cloud deployment NOT completed.
+HSM-backed signing NOT configured.
+External claim review NOT completed.
+AEM v1.1 reverification: controlled environment — not external party.
+Triple Anchor: structural verification — no on-chain RPC — no new v4.0 receipts.
+Fast Path benchmark: controlled local environment — not managed cloud — not independent.
+```
+
+### Key artifacts
+
+- `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json`
+- `assurance/v4_0/evidence/` (8 criterion artifacts)
+- `demos/aem-evolve-multi-agent-api/tools/v4_0/run_v4_0_evidence.py`
+- `docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md` (updated SCAFFOLD → READY)
+
+---
+
 ## Fast Path v1.0 — Evidence Execution EVIDENCE_PASS (9/9 scenarios) (2026-05-12)
 
 **Release tag:** `v3.1` (updated)

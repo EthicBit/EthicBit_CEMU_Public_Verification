@@ -1,0 +1,123 @@
+{
+  "report_type": "V4_0_CONTROLLED_EVIDENCE_REPORT",
+  "version": "4.0",
+  "status": "CONTROLLED_EVIDENCE_PARTIAL",
+  "evaluation_timestamp": "2026-05-12T16:35:31.686365+00:00",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "criteria_evaluated": 8,
+  "criteria_controlled_pass": 3,
+  "criteria_pending_external": 5,
+  "all_statuses_matched_expected": true,
+  "v4_0_external_validation_release_claimed": false,
+  "controlled_pass_criteria": [
+    "aem_v1_1_reverification",
+    "triple_anchor_verification",
+    "fast_path_benchmark"
+  ],
+  "pending_external_criteria": [
+    "third_party_reproduction",
+    "external_security_review",
+    "managed_cloud_deployment",
+    "hsm_signing",
+    "external_claim_review"
+  ],
+  "ai_me_v3_1_baseline": {
+    "aggregate_outcome": "PASS",
+    "gates_pass": 12,
+    "artifact_verified_all": true,
+    "source": "assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json"
+  },
+  "fast_path_v1_0_baseline": {
+    "status": "EVIDENCE_PASS",
+    "scenarios_pass": 9,
+    "mandatory_rules_verified": 7,
+    "source": "assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json"
+  },
+  "mandatory_non_claims_verified": [
+    "v4.0 External Validation Release NOT claimed \u2014 VERIFIED",
+    "Third-party reproduction NOT claimed \u2014 PENDING_EXTERNAL",
+    "External security review NOT claimed \u2014 PENDING_EXTERNAL",
+    "Managed cloud deployment NOT claimed \u2014 PENDING_EXTERNAL",
+    "HSM-backed signing NOT claimed \u2014 PENDING_EXTERNAL",
+    "External claim review NOT claimed \u2014 PENDING_EXTERNAL",
+    "AEM v1.1 reverification CONTROLLED only \u2014 not external \u2014 VERIFIED",
+    "Triple Anchor verification CONTROLLED only \u2014 not on-chain RPC \u2014 VERIFIED",
+    "Fast Path benchmark CONTROLLED only \u2014 not managed cloud \u2014 VERIFIED"
+  ],
+  "criteria": [
+    {
+      "criterion_number": 1,
+      "criterion": "third_party_reproduction",
+      "artifact_file": "V4_0_01_REPRODUCTION_KIT_ARTIFACT.json",
+      "controlled_status": "PENDING_EXTERNAL",
+      "expected_status": "PENDING_EXTERNAL",
+      "status_matched": true,
+      "artifact_sha256": "0df5358eea69be08e3fb3df8da9003a9bf62c47468c75f7d2cc841e2d7a5d9c7"
+    },
+    {
+      "criterion_number": 2,
+      "criterion": "external_security_review",
+      "artifact_file": "V4_0_02_SECURITY_REVIEW_ARTIFACT.json",
+      "controlled_status": "PENDING_EXTERNAL",
+      "expected_status": "PENDING_EXTERNAL",
+      "status_matched": true,
+      "artifact_sha256": "0f2488d7cf98210f9883e99b286486485d9a77b14a527e49619dcd2d76728a56"
+    },
+    {
+      "criterion_number": 3,
+      "criterion": "managed_cloud_deployment",
+      "artifact_file": "V4_0_03_CLOUD_DEPLOYMENT_ARTIFACT.json",
+      "controlled_status": "PENDING_EXTERNAL",
+      "expected_status": "PENDING_EXTERNAL",
+      "status_matched": true,
+      "artifact_sha256": "5ff6ce2b7faaaf00140cfa0fa5073ee9dfcb255b92ceb702b8ecea648639d3be"
+    },
+    {
+      "criterion_number": 4,
+      "criterion": "hsm_signing",
+      "artifact_file": "V4_0_04_HSM_SIGNING_ARTIFACT.json",
+      "controlled_status": "PENDING_EXTERNAL",
+      "expected_status": "PENDING_EXTERNAL",
+      "status_matched": true,
+      "artifact_sha256": "996cff33a103d8ef604723e715b0f09959b2ab7a7084e5ad5f928a741877ce6d"
+    },
+    {
+      "criterion_number": 5,
+      "criterion": "aem_v1_1_reverification",
+      "artifact_file": "V4_0_05_AEM_REVERIFICATION_ARTIFACT.json",
+      "controlled_status": "CONTROLLED_PASS",
+      "expected_status": "CONTROLLED_PASS",
+      "status_matched": true,
+      "artifact_sha256": "3da2af2db4a74dc13421343a3a6ce6d12b5341bacf4ca10e435fc4245e29f54a"
+    },
+    {
+      "criterion_number": 6,
+      "criterion": "triple_anchor_verification",
+      "artifact_file": "V4_0_06_TRIPLE_ANCHOR_ARTIFACT.json",
+      "controlled_status": "CONTROLLED_PASS",
+      "expected_status": "CONTROLLED_PASS",
+      "status_matched": true,
+      "artifact_sha256": "764e039c364fb8ea9be75bc9d4df7e611c9f475c2de3be14c112edfc68dede81"
+    },
+    {
+      "criterion_number": 7,
+      "criterion": "fast_path_benchmark",
+      "artifact_file": "V4_0_07_FAST_PATH_BENCHMARK_ARTIFACT.json",
+      "controlled_status": "CONTROLLED_PASS",
+      "expected_status": "CONTROLLED_PASS",
+      "status_matched": true,
+      "artifact_sha256": "5b4f3bdb8003416b5c6faa5a03a5b02d8a2a30887540ae35184bb222e3a1a588"
+    },
+    {
+      "criterion_number": 8,
+      "criterion": "external_claim_review",
+      "artifact_file": "V4_0_08_CLAIM_REVIEW_ARTIFACT.json",
+      "controlled_status": "PENDING_EXTERNAL",
+      "expected_status": "PENDING_EXTERNAL",
+      "status_matched": true,
+      "artifact_sha256": "1c693c8ff71d50d3b576c5b850eff2a551a418c55fab0faf7b977879bfd1f6bb"
+    }
+  ],
+  "non_claim": "v4.0 External Validation Release is NOT claimed. This report covers controlled-environment evidence only. 3/8 criteria have controlled-environment evidence (CONTROLLED_PASS). 5/8 criteria require external parties or external infrastructure (PENDING_EXTERNAL). Not production deployment. Not HSM-backed signing. Not external certification. Not third-party reproduction. Not regulatory approval."
+}

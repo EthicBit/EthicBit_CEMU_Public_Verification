@@ -1,0 +1,23 @@
+{
+  "artifact_id": "v4_0_hsm_signing",
+  "criterion_number": 4,
+  "criterion": "hsm_signing",
+  "controlled_status": "PENDING_EXTERNAL",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
+  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "signing_infrastructure": {
+    "kms_provider_module": "demos/aem-evolve-multi-agent-api/tools/signing/production_kms_provider.py",
+    "supported_providers": ["aws_kms", "gcp_kms", "azure_key_vault", "pkcs11"],
+    "kms_provider_configured": false,
+    "aem_kms_provider_env_set": false,
+    "kms_gate_verifier": "demos/aem-evolve-multi-agent-api/tools/production_readiness/verify_kms_signing.py",
+    "gate_result_without_provider": "FAIL (correct and expected for unset AEM_KMS_PROVIDER)"
+  },
+  "fast_path_signing_state": {
+    "v1_0_signature": "EVIDENCE_SIGNED_CONTROLLED_ENV_2026-05-12",
+    "signature_type": "deterministic_controlled_string",
+    "hsm_backed": false
+  },
+  "non_claim": "HSM/KMS signing has not been configured. AEM_KMS_PROVIDER env var not set. Fast Path v1.0 snapshot signing used a deterministic controlled-environment signature, not an HSM-backed signature. HSM evidence for key signing operations requires AEM_KMS_PROVIDER configuration in an external managed environment."
+}
