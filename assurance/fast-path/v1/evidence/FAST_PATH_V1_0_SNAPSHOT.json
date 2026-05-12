@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "snapshot_id": "fast-path-v1-evidence-2026-05-12",
+  "snapshot_timestamp": "2026-05-12T16:00:00+00:00",
+  "snapshot_age_ms": 0,
+  "max_tick_elapsed_ms": 30000,
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "snapshot_scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
+  "claim_level_ceiling": "PASS",
+  "full_assurance_recomputed_per_tick": false,
+  "authorized_capabilities": [
+    "emit_governance_output",
+    "emit_output",
+    "read_memory",
+    "write_audit_record",
+    "invoke_hitl_approval",
+    "write_gate_report",
+    "aggregate_gate_outcomes"
+  ],
+  "prohibited_actions": [
+    {
+      "pattern": "bypass_hitl",
+      "reason": "HITL bypass is constitutionally prohibited per EthicBit / CEMU v3.7.0+"
+    },
+    {
+      "pattern": "delete_all",
+      "reason": "Bulk delete of governance records is prohibited"
+    },
+    {
+      "pattern": "override_fail_closed",
+      "reason": "Overriding FAIL_CLOSED outcome is constitutionally prohibited"
+    },
+    {
+      "pattern": "raw_chain_of_thought",
+      "reason": "Raw chain-of-thought capture is prohibited per AI-ME-05"
+    }
+  ],
+  "aem_artifact_assurance_summary": {
+    "aem_version": "v1.1",
+    "summary_verified": true,
+    "artifact_count": 12,
+    "artifacts_verified": 12,
+    "summary_hash": "ai-me-v3.1-all-12-artifact-verified-true",
+    "source": "assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json"
+  },
+  "ai_me_gate_outcome_summary": {
+    "summary_timestamp": "2026-05-12T16:00:00+00:00",
+    "gates_evaluated": 12,
+    "aggregate_outcome": "PASS",
+    "source": "assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json",
+    "gate_outcomes": {
+      "AI-ME-01": "PASS",
+      "AI-ME-02": "PASS",
+      "AI-ME-03": "PASS",
+      "AI-ME-04": "PASS",
+      "AI-ME-05": "PASS",
+      "AI-ME-06": "PASS",
+      "AI-ME-07": "PASS",
+      "AI-ME-08": "PASS",
+      "AI-ME-09": "PASS",
+      "AI-ME-10": "PASS",
+      "AI-ME-11": "PASS",
+      "AI-ME-12": "PASS"
+    }
+  },
+  "snapshot_signature": {
+    "algorithm": "sha256_deterministic",
+    "signature": "EVIDENCE_SIGNED_CONTROLLED_ENV_2026-05-12",
+    "signing_key_reference": "aem-evolve-fast-path-evidence-key-v1",
+    "note": "Deterministic evidence signature — controlled environment. Not HSM-backed."
+  },
+  "constitutional_equivalence_hash": "",
+  "non_claim": "This snapshot does not claim HSM-backed signing, production deployment, external validation, or full-system sub-15ms latency."
+}
