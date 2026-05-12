@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ethicbit.io/schemas/fast-path/v1.0",
+  "title": "Fast Path Canonical Snapshot Schema v1.0",
+  "description": "Schema for signed canonical snapshots consumed by Fast Path enforcement. Subordinate to EthicBit / CEMU v3.7.0+.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "snapshot_timestamp",
+    "constitutional_dependency",
+    "claim_level_ceiling",
+    "authorized_capabilities",
+    "prohibited_actions",
+    "constitutional_equivalence_hash",
+    "aem_artifact_assurance_summary",
+    "ai_me_gate_outcome_summary",
+    "snapshot_signature",
+    "full_assurance_recomputed_per_tick"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "description": "Unique identifier for this canonical snapshot"
+    },
+    "snapshot_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "snapshot_age_ms": {
+      "type": ["integer", "null"],
+      "description": "Age of snapshot in milliseconds at time of Fast Path evaluation"
+    },
+    "max_tick_elapsed_ms": {
+      "type": ["integer", "null"],
+      "description": "Maximum allowed snapshot age for PASS verdict"
+    },
+    "constitutional_dependency": {
+      "type": "string",
+      "const": "EthicBit/CEMU/v3.7.0+"
+    },
+    "claim_level_ceiling": {
+      "type": "string",
+      "enum": ["PASS", "SCOPE_LIMITED", "FAIL_CLOSED", "PENDING_EXTERNAL_REVIEW", "NOT_APPLICABLE"],
+      "description": "Maximum claim level inherited from Claim Boundary Engine"
+    },
+    "authorized_capabilities": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of authorized capability identifiers"
+    },
+    "prohibited_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pattern", "reason"],
+        "properties": {
+          "pattern": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      },
+      "description": "Prohibited action patterns that must be blocked"
+    },
+    "constitutional_equivalence_hash": {
+      "type": "string",
+      "description": "SHA-256 hash of the canonical constitutional-operational state"
+    },
+    "aem_artifact_assurance_summary": {
+      "type": "object",
+      "required": ["aem_version", "summary_verified", "artifact_count", "artifacts_verified"],
+      "properties": {
+        "aem_version": {"type": "string", "const": "v1.1"},
+        "summary_verified": {"type": "boolean"},
+        "artifact_count": {"type": "integer"},
+        "artifacts_verified": {"type": "integer"},
+        "summary_hash": {"type": "string"}
+      }
+    },
+    "ai_me_gate_outcome_summary": {
+      "type": "object",
+      "required": ["summary_timestamp", "gates_evaluated", "aggregate_outcome"],
+      "properties": {
+        "summary_timestamp": {"type": "string", "format": "date-time"},
+        "gates_evaluated": {"type": "integer"},
+        "aggregate_outcome": {
+          "type": "string",
+          "enum": ["PASS", "SCOPE_LIMITED", "FAIL_CLOSED", "MISSING", "PENDING_EXTERNAL_REVIEW"]
+        },
+        "gate_outcomes": {
+          "type": "object",
+          "description": "Map of gate_id to outcome"
+        }
+      }
+    },
+    "snapshot_signature": {
+      "type": "object",
+      "required": ["algorithm", "signature", "signing_key_reference"],
+      "properties": {
+        "algorithm": {"type": "string"},
+        "signature": {"type": "string"},
+        "signing_key_reference": {"type": "string"}
+      }
+    },
+    "full_assurance_recomputed_per_tick": {
+      "type": "boolean",
+      "const": false,
+      "description": "Always false. Fast Path does not recompute full Triple Anchor, Strong Closure, or AI-ME evidence per tick."
+    }
+  }
+}

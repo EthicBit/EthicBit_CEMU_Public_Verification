@@ -1,0 +1,12 @@
+{
+  "report_type": "FAST_PATH_VERIFICATION_REPORT",
+  "version": "1.0",
+  "status": "SCAFFOLD",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "description": "Scaffold verification report for Fast Path v1.0. No real evidence has been collected.",
+  "gates_verified": 0,
+  "benchmark_evidence": null,
+  "latency_claim": null,
+  "latency_note": "Latency claims for Fast Path require separate measurement and evidence. This scaffold does not claim sub-15ms or any specific latency.",
+  "non_claim": "This report does not claim production readiness, completed Fast Path verification, full-system validation latency, external certification, or that Fast Path subsumes the complete governance stack."
+}
