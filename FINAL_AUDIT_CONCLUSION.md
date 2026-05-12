@@ -536,6 +536,81 @@ This release is not external certification.
 
 ---
 
+## Fast Path v1.0 — Evidence Execution EVIDENCE_PASS (9/9 scenarios) (2026-05-12)
+
+**Release tag:** `v3.1` (updated)
+**Commit SHA (main):** `c44092aa`
+**Evidence execution commit:** `654142fb`
+
+Fast Path v1.0 evidence execution completes the first evidence pass for all 9 deterministic pre-execution gating scenarios. Scope: AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+.
+
+### Fast Path v1.0 result
+
+```
+FAST_PATH_VERIFICATION_REPORT
+status:                    EVIDENCE_PASS
+scenarios_executed:        9
+scenarios_matched_expected: true
+mandatory_rules_verified:  7/7
+full_assurance_recomputed_per_tick: false (enforced)
+```
+
+### Scenario summary
+
+| # | Scenario | Verdict |
+|---|---|---|
+| 1 | Authorized op, claim=PASS, ceiling=PASS | PASS |
+| 2 | emit_output, claim=PASS, ceiling=PASS | PASS |
+| 3 | Prohibited action — bypass_hitl | BLOCK |
+| 4 | Prohibited action — delete_all | BLOCK |
+| 5 | Claim PASS exceeds ceiling SCOPE_LIMITED | SCOPE_LIMITED |
+| 6 | AEM v1.1 summary_verified=False | FAIL_CLOSED |
+| 7 | AI-ME aggregate FAIL_CLOSED | FAIL_CLOSED |
+| 8 | Snapshot age > max_tick_elapsed_ms | DEGRADED |
+| 9 | Unsigned snapshot | NOT_VERIFIABLE |
+
+### Mandatory rules verified (7/7)
+
+```
+Cannot override AEM v1.1 artifact verification failure    — VERIFIED (scenario 6)
+Cannot upgrade failed AI-ME evidence                      — VERIFIED (scenario 7)
+Must block prohibited action                              — VERIFIED (scenarios 3, 4)
+Must scope-limit if claim exceeds ceiling                 — VERIFIED (scenario 5)
+Must emit DEGRADED if snapshot stale                      — VERIFIED (scenario 8)
+Must emit NOT_VERIFIABLE if snapshot unsigned             — VERIFIED (scenario 9)
+full_assurance_recomputed_per_tick = false always         — ENFORCED
+```
+
+### Fast Path v1.0 capabilities
+
+| Component | Detail |
+|---|---|
+| Canonical snapshot | `assurance/fast-path/v1/evidence/FAST_PATH_V1_0_SNAPSHOT.json` |
+| Verdict records | 9 JSON records in `assurance/fast-path/v1/verdicts/` |
+| Verification report | `assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json` (SCAFFOLD → EVIDENCE_PASS) |
+| Evidence runner | `tools/fast_path/run_fast_path_evidence_v1_0.py` |
+| AI-ME baseline | PASS 12/12 from `assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json` |
+
+### Fast Path v1.0 claim
+
+> Fast Path v1.0 evidence execution EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules verified) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
+
+### Fast Path v1.0 non-claims
+
+```
+Evidence scope: controlled environment only — not production deployment.
+Not a production latency benchmark — no sub-15ms claim.
+Not HSM-backed snapshot signing.
+Not external validation (v4.0 roadmap — not current state).
+Not third-party reproduction.
+Not regulatory approval.
+Not external certification.
+Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence.
+full_assurance_recomputed_per_tick = false always.
+```
+
+---
+
 ## AI-ME Gates v3.1 — Evidence Execution PASS (12/12) (2026-05-12)
 
 **Release tag:** `v3.1`
