@@ -1,0 +1,339 @@
+============================================================
+ ETHICBIT / AEM-EVOLVE — CURRENT TECHNOLOGY STATUS
+============================================================
+timestamp_utc=20260512T172316Z
+repo=EthicBit_CEMU
+branch=main
+head=8b8bfab8ac4ba372d192658f4373e49c150f7c80
+head_short=8b8bfab8
+latest_commit=8b8bfab8 assurance: add AI-ME v3.1 final gate summary
+
+=== 1. WORKING TREE ===
+?? results/current_technology_status_20260512T171739Z/
+?? results/current_technology_status_20260512T172316Z/
+
+=== 2. TAGS / RELEASE POINTERS ===
+v3.1
+v3.0
+v2.0-staging-controlled-evidence
+v1.9.0
+v1.8.0
+v1.7.0
+v1.6.0
+v1.5.0
+v1.4.0
+v1.3.0
+v1.2.0
+v1.1.0
+v1.0.0
+ethicbit-mechanical-ethics-assurance-unified-v0.1-2026-05-06
+aem-evolve-technical-demonstration-v0.3-2026-05
+aem-v1.1-independent-reproduction-challenge-external-ready-2026-05-02
+aem-v1.1-independent-reproduction-challenge-2026-05-02
+aem-v1.1-global-registry-final-2026-05-01
+internal-l5-effective-2026-04-25
+v2.2b-hermetic-probe-20260423-4-node24
+
+=== 3. KEY FILE PRESENCE ===
+FOUND: docs/architecture/ETHICBIT_CONSTITUTIONAL_TECHNOLOGY_BRIDGE.md
+FOUND: docs/architecture/AEM_V1_1_ARTIFACT_ASSURANCE_CONTINUITY.md
+FOUND: docs/strategy/ETHICBIT_AEM_EVOLVE_TECHNOLOGY_STATUS_AND_V3_V4_ROADMAP.md
+FOUND: docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md
+FOUND: docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md
+FOUND: docs/strategy/CLAIM_BOUNDARY_ENGINE_ONE_PAGER.md
+FOUND: docs/ai-me/AI_ME_GATES_SPEC_V3_1.md
+FOUND: docs/ai-me/AI_ME_CLAIM_BOUNDARY_V3_1.md
+FOUND: docs/ai-me/HIGH_RISK_OUTPUT_TAXONOMY_V3_1.md
+FOUND: docs/ai-me/AI_ME_EVIDENCE_SCHEMA_V3_1.json
+FOUND: docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json
+FOUND: docs/performance/FAST_PATH_DETERMINISTIC_PRE_EXECUTION_GATING.md
+FOUND: docs/strategy/AEM_EVOLVE_V4_0_EXTERNALIZED_MECHANICAL_ETHICS_ASSURANCE_ROADMAP.md
+FOUND: assurance/evolve-multi-agent/v2_0/FINAL_STAGING_CONTROLLED_GATE_SUMMARY.json
+FOUND: assurance/ai-me/v3_1/FINAL_AI_ME_GATE_SUMMARY.json
+FOUND: assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json
+
+=== 4. JSON VALIDATION ===
+JSON_OK: docs/ai-me/AI_ME_EVIDENCE_SCHEMA_V3_1.json
+JSON_OK: docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json
+JSON_OK: assurance/evolve-multi-agent/v2_0/FINAL_STAGING_CONTROLLED_GATE_SUMMARY.json
+JSON_OK: assurance/ai-me/v3_1/FINAL_AI_ME_GATE_SUMMARY.json
+JSON_OK: assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json
+
+=== 5. v2.0 BASELINE SUMMARY ===
+target_environment=staging_controlled_cloud
+overall_status=PASS
+checks_passed=140
+checks_total=140
+gates_passed=14
+gates_total=14
+
+=== 6. AI-ME v3.1 SUMMARY ===
+schema_id=ETHICBIT_AI_ME_FINAL_GATE_SUMMARY_V3_1
+version=v3.1
+status=EVIDENCE_PASS
+summary_status=PASS
+evidence_status=PASS
+gates_passed=12
+gates_total=12
+claim_boundary_status=PRESERVED
+repository_head_short=d3d5d23b
+source_bulletin=docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md
+
+=== 7. FAST PATH SUMMARY ===
+version=1.0
+status=EVIDENCE_PASS
+
+=== 8. v4.0 EXTERNAL VALIDATION CRITERIA SEARCH ===
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_8.md:40:File-based signing key is not HSM-backed.
+docs/residual_risk_closure_ethicbit_cemu.md:5:Scope: Technical, probative, constitutional, operational, security, and third-party representation risks
+docs/residual_risk_closure_ethicbit_cemu.md:43:Includes third-party acceptance, audit reception, oracle availability, chain availability, and independent certification.
+docs/residual_risk_closure_ethicbit_cemu.md:63:    third-party representation boundary
+docs/residual_risk_closure_ethicbit_cemu.md:78:| Third-party representation | RHS/REI | Medium-High | Mitigated by mandatory delimited formula |
+docs/residual_risk_closure_ethicbit_cemu.md:97:## 7. Third-Party Delimitation
+docs/crypto/MLKEM768_RUNTIME_SECRET_PROTECTION.md:34:This posture is an implementation-level assurance statement. It is not a statement of FIPS module validation or third-party cryptographic certification.
+docs/crypto/MLKEM768_RUNTIME_SECRET_PROTECTION.md:97:- third-party cryptographic certification;
+docs/crypto/MLKEM768_RUNTIME_SECRET_PROTECTION.md:107:EthicBit/CEMU includes ML-KEM768 + X25519 hybrid runtime secret protection for Mechanical Ethics, with HKDF-derived hybrid secrets, fail-closed behavior, and non-sensitive canonical metadata recording. The security posture relies on NIST FIPS 203 ML-KEM assumptions and does not claim FIPS module validation, cryptographic module certification, absolute quantum security, or third-party cryptographic certification.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:197:- Third-party reproduction
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:198:- HSM-backed custody
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:225:- Third-party reproduction of evidence
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:226:- External security review
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:227:- Managed cloud deployment target
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:228:- HSM / CloudHSM evidence
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:42:**12. v4.0 External Validation Roadmap (PR J)** — Roadmap for future externalized validation with 8 explicit acceptance criteria: third-party reproduction, external security review, managed cloud, HSM evidence, AEM v1.1 reverification, Triple Anchor verification, Fast Path independent benchmark, external claim review. Includes Reproduction Kit v4.0 with checklists and Third-Party Reproduction Report Template.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:101:Not third-party reproduction.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:102:Not HSM-backed custody.
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:12:AEM-EVOLVE™ v1.5 closes all six gaps identified in the v1.4.0 production audit. It introduces HSM driver stubs for PKCS#11 and AWS KMS, an OIDC RS256 JWT HITL identity verifier, a runtime dependency validator, an async concurrency test with pgbouncer integration guide, and a v1.4 independent reproduction challenge.
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:20:v1.5 = v1.4 + HSM-driver-stubs + OIDC-JWT-HITL-identity
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:31:| SigningProvider HSM | ABC only, no driver | `Pkcs11SigningProvider` + `KmsSigningProvider` stubs |
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:44:**Files:** `tools/signing/pkcs11_signing_provider.py`, `kms_signing_provider.py`, `verify_hsm_signing_providers.py`
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:106:The v1.4 challenge provides reproduction instructions for the 14-check verifier and a Docker path. The 16-check verifier adds `V1_5-HSM-SIGNING` and `V1_5-OIDC-HITL` to the existing 14.
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:138:  V1_5-HSM-SIGNING             HSM_SIGNING_VERIFICATION=PASS (10/10)
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:152:PKCS#11 provider is not a real HSM integration.
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:175:AEM-EVOLVE™ v1.5 closes enterprise hardening gaps: HSM driver stubs,
+docs/whitepapers/WHITEPAPER_V1_6_AEM_EVOLVE_CRITICAL_GAPS_CLOSURE.md:95:PKCS#11 provider is not a real HSM integration.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:158:Identity boundary: demo-grade. Not HSM-backed, not enterprise IAM, not production identity provider.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:198:Forbidden (without separate evidence): `regulator-approved`, `legal compliance`, `conformity assessed`, `externally certified`, `HSM-backed`, `tamper-proof`, `cybersecurity certified`.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:276:Not HSM-backed unless separately implemented.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:287:| External independent reproduction | Requires third-party engagement outside declared scope |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:288:| HSM-backed key custody | Requires hardware infrastructure outside current deployment targets |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:301:- HSM-backed signing for HITL decisions
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:273:- v4.0 external validation is future roadmap. No third-party reproduction has been completed.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:292:- Third-party reproduction
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:293:- HSM-backed custody
+docs/whitepapers/WHITEPAPER_V1_7_AEM_EVOLVE_READ_VERIFY_PERSIST_ANTIREPLAY.md:96:File-based signing key is not HSM-backed key custody.
+docs/whitepapers/WHITEPAPER_V1_7_AEM_EVOLVE_READ_VERIFY_PERSIST_ANTIREPLAY.md:99:PKCS#11 provider is not a real HSM integration.
+docs/whitepapers/WHITEPAPER_V1_7_AEM_EVOLVE_READ_VERIFY_PERSIST_ANTIREPLAY.md:115:| File key unencrypted on disk | Known non-claim | Set `ETHICBIT_ED25519_PRIVATE_KEY_PEM` or use HSM |
+docs/whitepapers/WHITEPAPER_V1_8_AEM_EVOLVE_PRODUCTION_HARDENING.md:151:File-based signing key is not HSM-backed key custody.
+docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md:45:`SigningProvider` is an abstract base class with three abstract methods: `sign(message) → bytes`, `verify(message, signature) → bool`, `public_key_pem() → bytes`. Any HSM-backed implementation can satisfy this ABC.
+docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md:53:**Non-claim:** Not HSM-backed. HSM integration requires an external `SigningProvider` implementation.
+docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md:167:SigningProvider is not HSM-backed.
+docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md:168:HSM integration requires an external implementation of the SigningProvider ABC.
+docs/whitepapers/WHITEPAPER_V1_3_AEM_EVOLVE_GAPS_CLOSURE.md:87:Approver identity remains demo-grade. Real production requires HSM-backed key custody or enterprise IAM — this is documented as a non-claim, not over-claimed.
+docs/whitepapers/WHITEPAPER_V1_3_AEM_EVOLVE_GAPS_CLOSURE.md:158:HITL quorum model is not HSM-backed.
+docs/technology/ETHICBIT_FULL_TECHNOLOGY_STATE_V3_0.md:102:- No HSM-backed custody unless separately evidenced.
+docs/technology/ETHICBIT_FULL_TECHNOLOGY_STATE_V3_0.md:103:- No independent third-party reproduction unless separately evidenced.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:255:- Not HSM-backed unless separately implemented.
+docs/roadmap/AEM_EVOLVE_V1_3_PR_ROADMAP.md:149:HITL quorum model is not HSM-backed.
+docs/roadmap/AEM_EVOLVE_V1_4_PR_ROADMAP.md:46:**Non-claims:** Not HSM-backed. HSM integration requires hardware implementation of `SigningProvider` ABC.
+docs/roadmap/AEM_EVOLVE_V1_4_PR_ROADMAP.md:61:**Non-claims:** Not enterprise IAM. Shared secret is demo-grade. HSM-backed identity requires external IdP.
+docs/roadmap/AEM_EVOLVE_V1_4_PR_ROADMAP.md:116:SigningProvider is not HSM-backed.
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:13:| SigningProvider HSM-backed — ABC only, no HSM driver | High | PR 2 |
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:27:| PR 2 | `feat/aem-evolve-v1-5-hsm-signing-provider` | feat: add PKCS#11 and KMS signing provider stubs | HSM signing |
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:38:**Branch:** `feat/aem-evolve-v1-5-hsm-signing-provider`
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:42:- `tools/signing/verify_hsm_signing_providers.py` — ABC compliance + graceful-fallback verifier
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:43:- `assurance/evolve-multi-agent/v1_5/hsm_signing_report.json`
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:46:**Non-claims:** Not a real HSM integration. Requires actual PKCS#11 token or AWS KMS credentials for production use.
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:47:**Expected output:** `HSM_SIGNING_VERIFICATION=PASS`
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:115:PKCS#11 provider is not a real HSM integration.
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:34:Not HSM-backed unless separately implemented.
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:165:**Non-claims:** Not HSM-backed. Not enterprise IAM. Not production identity provider. Not cybersecurity certified. Not tamper-proof.
+docs/verification_reproducible_guide.md:57:## 6. Third-Party Boundary
+docs/checks/FINAL_RELEASE_APPROVAL_CHECKLIST.md:86:- third-party execution log
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_6.md:45:PKCS#11 provider is not a real HSM integration.
+docs/AGENTE_ETICO_MECANICO_V1_1.md:239:This posture relies on NIST FIPS 203 ML-KEM assumptions and does not claim FIPS module validation, cryptographic module certification, absolute quantum security, production cryptographic certification, third-party cryptographic certification, regulatory approval, SLSA L4 cryptographic closure, clinical validation, or diagnostic authorization.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:48:This document does **not** claim regulatory approval, clinical validation, production readiness, independent reproduction, full SLSA L4, FIPS module validation, absolute quantum security, or automatic third-party binding.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:116:PENDING_EXTERNAL_REVIEW
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:227:GitHub publication does not constitute certification, regulatory approval, independent reproduction, production readiness, or third-party validation.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:317:No third-party cryptographic certification.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:328:EthicBit does not currently claim AGI, fully autonomous self-improving AI, uncontrolled self-modification, guaranteed safe evolution, regulatory approval, clinical validation, diagnostic authorization, FDA/EMA approval, GxP certification, production readiness, lab readiness, independent reproduction, full SLSA L4, FIPS validation, absolute quantum security, or automatic third-party binding.
+docs/unified/ETHICBIT_UNIFIED_STACK_v0_1.md:48:This document does **not** claim regulatory approval, clinical validation, production readiness, independent reproduction, full SLSA L4, FIPS module validation, absolute quantum security, or automatic third-party binding.
+docs/unified/ETHICBIT_UNIFIED_STACK_v0_1.md:116:PENDING_EXTERNAL_REVIEW
+docs/unified/ETHICBIT_UNIFIED_STACK_v0_1.md:227:GitHub publication does not constitute certification, regulatory approval, independent reproduction, production readiness, or third-party validation.
+docs/unified/ETHICBIT_UNIFIED_STACK_v0_1.md:317:No third-party cryptographic certification.
+docs/unified/ETHICBIT_UNIFIED_STACK_v0_1.md:328:EthicBit does not currently claim AGI, fully autonomous self-improving AI, uncontrolled self-modification, guaranteed safe evolution, regulatory approval, clinical validation, diagnostic authorization, FDA/EMA approval, GxP certification, production readiness, lab readiness, independent reproduction, full SLSA L4, FIPS validation, absolute quantum security, or automatic third-party binding.
+docs/reproducibility/AEM_V1_1_REPRODUCIBILITY_EXTENSION.md:25:- third-party reproduction completed;
+docs/reproducibility/AEM_V1_1_REPRODUCIBILITY_EXTENSION.md:102:7. Optionally complete independent reproduction report and third-party attestation.
+docs/reproducibility/AEM_V1_1_REPRODUCIBILITY_EXTENSION.md:115:## 10. Third-Party Attestation Template
+docs/reproducibility/AEM_V1_1_REPRODUCIBILITY_EXTENSION.md:120:This template does not constitute third-party verification until independently completed and signed.
+docs/reproducibility/AEM_V1_1_REPRODUCIBILITY_EXTENSION.md:151:- independent reproduction by a third-party verifier;
+docs/reproducibility/REPRODUCIBLE_BUILD_GUIDE.md:74:A successful local comparison does not automatically mean independent reproduction has been achieved. Independent reproduction requires execution in a separate environment or by a third-party verifier.
+docs/runbooks/ANTI_RE_HARDENING_SPEC_V1.md:54:| RE-008 | `scripts/security/verify_key_posture.sh` | Canonical key posture artifact for release decisions | Status computed as NON_COMPLIANT / TRANSITIONAL / SOVEREIGN / PRODUCTION_HSM_READY | Strict claim + posture below threshold => fail-closed in closure path |
+docs/ETHICBIT_AUDIT_GRADE_STATUS.md:190:This document does not, by itself, assert universal finality for every possible assurance, regulatory, or third-party certification question.
+docs/AEM_STRATEGIC_THESIS_FOR_AGENTIC_AI_V1_1.md:36:7. Explicit third-party scope delimitation.
+docs/AEM_STRATEGIC_THESIS_FOR_AGENTIC_AI_V1_1.md:108:- non-automatic third-party binding
+docs/AEM_STRATEGIC_THESIS_FOR_AGENTIC_AI_V1_1.md:131:for third-party scope.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md:115:Not third-party reproduction.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md:118:Not HSM-backed artifact custody.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_3.md:112:HITL quorum model is not HSM-backed.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md:123:Not HSM-backed unless separately implemented.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-10_V1_7.md:46:File-based signing key is not HSM-backed key custody.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_FAST_PATH_V1_0_EVIDENCE.md:93:Not HSM-backed snapshot signing.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_FAST_PATH_V1_0_EVIDENCE.md:95:Not third-party reproduction.
+docs/evolve/AEM_EVOLVE_RELEASE_SCOPE_BOUNDARY.md:30:- third-party binding;
+docs/evolve/AEM_EVOLVE_CONCEPT_PAPER_v0_3.md:56:- **Canonical Outcomes**: PASS, SCOPE_LIMITED, FAIL_CLOSED, REJECTED_OVERCLAIM, PENDING_EXTERNAL_REVIEW.
+docs/whitepaper/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_WHITEPAPER_v0_1.md:24:This does not claim regulatory approval, clinical validation, diagnostic authorization, production readiness, lab readiness, full SLSA L4 certification, FIPS module validation, absolute quantum security, completed independent reproduction, or automatic third-party binding.
+docs/whitepaper/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_WHITEPAPER_v0_1.md:93:Primary evidence includes legal and third-party representation boundaries, AEM-EVOLVE scope boundaries, runtime secret protection non-claims, and public claim limitations.
+docs/whitepaper/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_WHITEPAPER_v0_1.md:107:| Scope boundary | Legal, technical, crypto, regulatory, and third-party non-claims | Overclaiming boundaries are explicit |
+docs/whitepaper/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_WHITEPAPER_v0_1.md:190:- third-party cryptographic certification;
+docs/whitepaper/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_WHITEPAPER_v0_1.md:192:- automatic third-party binding;
+docs/whitepaper/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_WHITEPAPER_v0_1.md:218:The Ethereum mainnet anchor does not create regulatory, clinical, cryptographic, or third-party certification. It provides a public timestamped integrity reference for the declared manifest hash and its scope-delimited assurance posture.
+docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_3.md:111:| Not HSM-backed | Demo key is a local PEM file |
+docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_3.md:116:| Not externally certified | No third-party review engagement active |
+docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V0_4.md:61:| Not independently security-audited | Adversarial tests were run by EthicBit, not a third-party security assessor |
+docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V1_0.md:118:| **Security** | Not tamper-proof; not HSM-backed; not production auth |
+docs/whitepaper/AEM_EVOLVE_WHITEPAPER_V1_0.md:147:- Not HSM-backed (unless separately implemented).
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_4.md:99:  - SigningProvider ABC enables HSM plug-in for production key custody; HITL token identity replaces demo-grade approver verification
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_4.md:118:SigningProvider is not HSM-backed.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_4.md:119:HSM integration requires an external implementation of the SigningProvider ABC.
+docs/architecture/AEM_V1_1_ARTIFACT_ASSURANCE_CONTINUITY.md:232:**v4.0 (Externalized Validation):** v4.0 includes AEM v1.1 artifact reverification as a required component of third-party reproduction. External reviewers must verify artifact hashes and manifests through AEM v1.1 procedures before confirming evidence status.
+docs/architecture/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_STACK_v0_1.md:112:- automatic third-party binding;
+docs/architecture/AEM_AEM_EVOLVE_ALIGNMENT_WITH_ETHICBIT_CEERV_CEMU_V10_1.md:71:- **Non-claims** — explicit list of what v1.1 does not assert (regulatory approval, certification, legal compliance, conformity assessment, tamper-proof, HSM-backed, etc.)
+docs/architecture/AEM_AEM_EVOLVE_ALIGNMENT_WITH_ETHICBIT_CEERV_CEMU_V10_1.md:168:- HSM-backed key custody (unless separately implemented)
+docs/architecture/ETHICBIT_CONSTITUTIONAL_TECHNOLOGY_BRIDGE.md:216:- Third-party reproduction
+docs/architecture/ETHICBIT_CONSTITUTIONAL_TECHNOLOGY_BRIDGE.md:217:- HSM-backed custody
+docs/reproduction/REPRODUCTION_GUIDE.md:90:This is a demo key — locally verifiable, not HSM-backed.
+docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md:1:# Third-Party Reproduction Report Template
+docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md:66:## 5. Fast Path Benchmark
+
+=== 9. ANCHOR SEARCH ===
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:77:El Triple Anchor debe alcanzar verificación material suficiente.
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:88:- `EXTERNAL_TRIPLE_ANCHOR_MATERIAL_VERIFIED`
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:136:- Triple Anchor parcial o pendiente
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:163:- anchor externo,
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:42:- AEM v1.1 anchor receipts and hash records remain active and authoritative.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:105:This doctrine applies across all layers: AEM v1.1, AEM-EVOLVE™, AI-ME Gates, Claim Boundary Engine™, Fast Path, Triple Anchor, Strong Closure.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:141:> v3.0 does not claim that all governance, anchoring, closure, AI-ME evidence execution or external validation processes operate within Fast Path latency. Fast Path is a specialized runtime/pre-emission enforcement layer.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:143:Fast Path evaluates claim-level ceiling, snapshot freshness, authorized capabilities, prohibited actions, and constitutional equivalence. It does not recalculate full Triple Anchor, Strong Closure, or AI-ME evidence per enforcement tick.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:166:## 12. Triple Anchor as External Material Anchor Layer
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:168:Triple Anchor is a subordinate external anchoring layer for selected evidence artifacts.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:170:**Safe claim:** Triple Anchor is a subordinate external anchoring layer for selected evidence artifacts.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:172:**Non-claim:** Triple Anchor does not mean every artifact is anchored across Ethereum mainnet, L2, Arweave and AO unless specific anchor receipts exist.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:199:- Public anchoring of every artifact
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:201:- That all governance, anchoring, closure, AI-ME evidence execution or external validation processes operate within Fast Path latency
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:230:- Triple Anchor external verification
+docs/EXECUTIVE_PACK_v10_BILINGUAL.md:8:**EN:** The current v10.0 repo state turns algorithmic decision handling into offline-verifiable evidence structure with cryptographic custody references, executable baseline checks, initial assurance layers (in-toto + SLSA + Sigstore), RuntimeGuard L4 baseline references, and distributed-readiness baseline controls. “Powerful closure” must only be claimed when a verifiable anchor exists plus a reproducible verification pack.
+docs/EXECUTIVE_PACK_v10_BILINGUAL.md:10:**ES:** El estado actual del repo v10.0 convierte el manejo de decisiones algorítmicas en una estructura de evidencia verificable offline con referencias de custodia criptográfica, checks baseline ejecutables, capas iniciales de assurance (in-toto + SLSA + Sigstore), referencias baseline de RuntimeGuard L4 y controles baseline de readiness distribuido. El “cierre potente” solo puede declararse cuando existe un anchor verificable más un pack reproducible.
+docs/STATUS_BULLETIN_PUBLIC_2026-04-18.md:11:- External anchor state: `ANCHOR_HARDENING_ENABLED`
+docs/STATUS_BULLETIN_PUBLIC_2026-04-18.md:33:  - externalAnchorState: `ANCHOR_HARDENING_ENABLED`
+docs/STATUS_BULLETIN_PUBLIC_2026-04-18.md:50:  - deterministic integrity checks, hybrid signature verification, and anchor-hardening evidence
+docs/analysis/EthicBit_CEMU_v3_7_0_plus_Comparativa_Frameworks.md:57:- Anchor Receipt;
+docs/analysis/EthicBit_CEMU_v3_7_0_plus_Comparativa_Frameworks.md:139:- Anchor Receipt;
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:22:**3. AEM v1.1 Artifact Assurance Continuity (PR B)** — Formalizes that AEM v1.1 remains the active Artifact Assurance layer. AEM v1.1 is not replaced by AEM-EVOLVE™, AI-ME Gates, Fast Path, or Triple Anchor. Covers 23 artifact types and defines the fail-closed rule: if `artifact_assurance_required=true` and `artifact_verified=false`, no claim may reach PASS.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:42:**12. v4.0 External Validation Roadmap (PR J)** — Roadmap for future externalized validation with 8 explicit acceptance criteria: third-party reproduction, external security review, managed cloud, HSM evidence, AEM v1.1 reverification, Triple Anchor verification, Fast Path independent benchmark, external claim review. Includes Reproduction Kit v4.0 with checklists and Third-Party Reproduction Report Template.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:57:Triple Anchor:             Selected artifacts anchored       ACTIVE
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:104:Not universal public anchoring unless separately evidenced.
+docs/canonical/Authority_Matrix.case_003.md:48:| Anchor Prepare | Anchor Preparation Bridge | HUMAN_SUPERVISED | Sí | Preparación de anchor bajo control supervisado |
+docs/canonical/Authority_Matrix.case_003.md:49:| Anchor Receipt | Anchor Receipt Framework | AUTONOMOUS_WITH_AUDIT | No | Receipt automático tras confirmación verificable |
+docs/canonical/Authority_Matrix.case_003.md:50:| Anchor Verification | External Anchor Verification Logic | AUTONOMOUS_WITH_AUDIT | No | Verificación reproducible del evento onchain |
+docs/canonical/Authority_Matrix.case_003.md:65:La captura, fijación o aislamiento de un output no equivale por sí sola a elevación, anchor o clausura formal.
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Canonical_Text.md:25:- cómo se articulan freeze interno, bundle soberano, Anchor Receipt, verification pack y clausura formal;
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:98:6. bundle → Anchor Receipt  
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:99:7. Anchor Receipt → verification pack  
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:116:- consistencia del anchor receipt
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:120:- verificación externa del triple anchor
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:118:  V1_1-MULTI-ANCHOR            MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:19:AEM-EVOLVE™ v1.1 established the governed change assurance lifecycle: multi-anchor verification, HITL signature enforcement, receipt forgery resistance, and regulatory mapping. v1.1 left one gap: the process of evaluating evidence and producing a governance outcome recommendation remained informal — dependent on human analysts reading reports.
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:31:EthicBit audits, hashes, anchors, and preserves the claim boundary.
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:51:│  multi-anchor · receipt sealing · HITL signatures   │
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:54:│  claim boundary · audit · hash · anchor             │
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:120:| Anchor integrity | 0.20 |
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:218:| Multi-anchor verifier | Anchor integrity score input |
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:221:| Official status signer | Status anchoring post-recommendation |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:17:- Unified multi-anchor verification across Ethereum mainnet and triple public anchor
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:25:> AEM-EVOLVE™ v1.1 extends the v1.0 public controlled-environment release with regulatory mapping evidence, governance-effectiveness metrics, multi-anchor verification, HITL signature verification, receipt-forgery testing, signed official status evidence, and canonical claim-language controls.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:37:| Multi-anchor verification report | partial | ✓ |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:87:4. AEM-EVOLVE™ v1.1 provides multi-anchor verification evidence for selected public integrity anchors.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:130:## 7. Multi-Anchor Verification
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:133:- Ethereum mainnet execution anchor (`ethereum-mainnet`, tx confirmed)
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:134:- EthicBit triple public anchor
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:138:python3 demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:139:# MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:142:**Report:** `assurance/evolve-multi-agent/v1_1/multi_anchor_verification_report.json`
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:144:Anchor verification proves timestamped integrity references — not certification, regulatory approval, or production readiness.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:215:| Multi-anchor verifier | `demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py` |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:216:| Multi-anchor report | `assurance/evolve-multi-agent/v1_1/multi_anchor_verification_report.json` |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:235:python3 demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:245:MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:257:> AEM-EVOLVE™ v1.1 is regulator-mappable, governance-measurable, multi-anchor-verifiable, HITL-hardened, receipt-forgery-tested, and official-status-signed.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:313:It provides documented, verifiable evidence that the governed change assurance architecture is regulator-mappable, governance-measurable, multi-anchor-verifiable, HITL-hardened, receipt-forgery-tested, and official-status-signed — within declared scope.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:76:- Anchor receipt reference storage
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:79:Current evidence: `docs/anchors/` contains hash records and mainnet anchor receipt. Verification receipts exist for v2.0 evidence artifacts.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:136:  ├─ Triple Anchor (External Anchoring)
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:137:  │    └─ Anchors selected evidence states externally
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:173:              → Anchor (Triple Anchor where receipts exist)
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:217:**Important:** Fast Path does not recalculate full Triple Anchor, Strong Closure, or complete AI-ME evidence per enforcement tick. It operates on inherited state.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:223:## 14. Triple Anchor as External Material Anchor Layer
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:225:Triple Anchor anchors selected evidence states through external persistence targets. Where anchor receipts exist, they provide external material reference for the anchored artifacts.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:227:Current anchor evidence:
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:228:- `docs/anchors/AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json`
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:229:- `assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_ANCHOR_RECEIPT.json`
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:231:Not every artifact is anchored. Anchoring is selective and receipt-based.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:260:Triple Anchor:            Selected artifacts anchored    ACTIVE
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:271:- v3.0 does not claim that all governance, anchoring, closure, AI-ME evidence execution or external validation processes operate within Fast Path latency.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:272:- Triple Anchor is selective. Not every artifact is anchored.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:294:- Public anchoring of every artifact
+docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md:137:  V1_1-MULTI-ANCHOR            MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_3_AEM_EVOLVE_GAPS_CLOSURE.md:115:| v1.1 | 6 (regulatory mapping, governance metrics, multi-anchor, HITL signature, receipt forgery, official status) |
+docs/technology/ETHICBIT_FULL_TECHNOLOGY_STATE_V3_0.md:36:- AEM-EVOLVE v3.0: category and market anchor release.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:3:**From Anchored Controlled Demonstration to Reproducible, Measured, Adversarially Tested Multi-Agent Governance**
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:17:AEM-EVOLVE™ v1.0 will mark the transition from anchored controlled demonstration to reproducible, measured, adversarially tested multi-agent governance for controlled environments.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:24:## Phase 0 — Anchored Controlled Sectorial Execution Demonstration
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:35:- Ethereum mainnet anchor, general and sectorial.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:36:- Full evidence chain: Evolution Event → Receipt → Human-in-the-Loop → Audit Export → Hash → Anchor.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:41:AEM-EVOLVE™ Multi-Agent Governance API v0.3.1-demo includes an anchored Financial Risk & Cybersecurity Response controlled execution demonstration, with the execution manifest anchored on Ethereum mainnet as a public timestamped integrity reference.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:267:Anchored Controlled Demonstration
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:299:Properly executed, this roadmap transforms AEM-EVOLVE™ from an anchored technical demonstration into a serious, verifiable multi-agent governance system that can be reproduced, measured, and evaluated by third parties in controlled environments.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:306:From Anchored Controlled Demonstration  
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:13:v1.1 = regulator-mappable, governance-measurable, multi-anchor-verifiable,
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:19:> AEM-EVOLVE™ v1.1 extends the v1.0 public controlled-environment release with regulatory mapping evidence, governance-effectiveness metrics, multi-anchor verification, HITL signature verification, receipt-forgery testing, signed official status evidence, and canonical claim-language controls.
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:47:| PR 5 | `feat: add multi-anchor verification report` | pendiente | ✅ Listo | `tools/anchors/multi_anchor_verifier.py`, report |
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:134:## PR 5 — multi-anchor verifier
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:137:- `demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py`
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:138:- `assurance/evolve-multi-agent/v1_1/multi_anchor_verification_report.json`
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:139:- `demos/aem-evolve-multi-agent-api/docs/MULTI_ANCHOR_VERIFICATION.md`
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:141:**Anchors verificados:** Ethereum mainnet + EthicBit triple public anchor.
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:143:**Claim:** AEM-EVOLVE™ v1.1 provides multi-anchor verification evidence for selected public integrity anchors.
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:147:python3 demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:148:# MULTI_ANCHOR_VERIFICATION=PASS
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:201:**Claim:** AEM-EVOLVE™ v1.1 extends the v1.0 public controlled-environment release with regulatory mapping evidence, governance-effectiveness metrics, multi-anchor verification, HITL signature verification, receipt-forgery testing, signed official status evidence, and canonical claim-language controls.
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:220:python3 demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:230:MULTI_ANCHOR_VERIFICATION=PASS
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:247:+ multi-anchor verification (Ethereum mainnet + triple public anchor)
+docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md:256:> AEM-EVOLVE™ v1.1 is regulator-mappable, governance-measurable, multi-anchor-verifiable, HITL-hardened, receipt-forgery-tested, and official-status-signed.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-09_V1_2.md:96:EthicBit audits, hashes, anchors, and preserves the claim boundary.
+docs/AGENTE_ETICO_MECANICO_V1_1.md:62:- recovered_address == claimed_signer == anchor.from_address
+docs/AGENTE_ETICO_MECANICO_V1_1.md:176:Este documento define la categoria. El anchor material se registra en
+docs/AGENTE_ETICO_MECANICO_V1_1.md:182:- `docs/anchors/AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json`
+docs/AGENTE_ETICO_MECANICO_V1_1.md:213:Anchor tecnico historico (V1.0):
+docs/AGENTE_ETICO_MECANICO_V1_1.md:215:- network=Sepolia testnet
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:14:**Unified Anchor Status:** `ONCHAIN_UNIFIED_MECHANICAL_ETHICS_ASSURANCE_ANCHOR_VERIFIED`  
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:25:Ethereum mainnet anchors the integrity.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:34:EthicBit turns AI governance into verifiable assurance: declared artifacts can be verified, material changes can be governed, evidence can be inspected, and selected integrity hashes can be anchored on Ethereum mainnet.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:38:- **AEM V1.1** verifies declared artifacts through public-verifiable evidence, receipts, hashes, audit outputs, fail-closed controls, and Ethereum mainnet anchors.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:39:- **AEM-EVOLVE™ v0.3** governs material changes through Evolution Events, Evolution Gates, signed receipts, scope-limited outcomes, and manifest anchoring.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:46:This document defines the current EthicBit Unified Stack v0.1 as GitHub-inspectable, public-verifiable, Ethereum-mainnet anchored, and scope-delimited.
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:56:| AEM V1.1 | Public-verifiable / registry anchored | Verifies the artifact |
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:57:| AEM-EVOLVE™ v0.3 | E2E PASS / manifest anchored | Governs the change |
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:59:| Ethereum mainnet | Unified manifest anchored | Anchors the integrity |
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:69:Ethereum-mainnet anchored: yes
+
+=== 10. CLAIM POSTURE ===
+Current safe posture:
+EthicBit / AEM-EVOLVE supports a controlled-evidence Mechanical Ethics Assurance stack where evidenced.
+AI-ME v3.1 now has a canonical final gate summary present.
+Do not claim external certification, third-party reproduction, production readiness, regulatory approval, HSM-backed custody, clinical readiness, financial advice, cybersecurity certification, or universal public anchoring unless separately evidenced.
+
+============================================================
+ STATUS REPORT COMPLETE
+ output_dir=results/current_technology_status_20260512T172316Z
+============================================================
