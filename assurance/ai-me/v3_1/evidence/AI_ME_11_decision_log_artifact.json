@@ -1,0 +1,36 @@
+{
+  "artifact_type": "decision_log_artifact",
+  "gate_id": "AI-ME-11",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE governance decisions — controlled environment — EthicBit / CEMU v3.7.0+",
+  "decision_log_entries": [
+    {
+      "decision_id": "dec-ai-me-evidence-2026-05-12-001",
+      "timestamp": "2026-05-12T00:00:00+00:00",
+      "model_agent_id": "aem-evolve-ai-me-gate-executor-v3.1",
+      "input_summary": "Execute AI-ME v3.1 evidence for 12 gates — AEM-EVOLVE controlled environment",
+      "output_summary": "12 gate reports produced, all artifacts hash-verified, aggregate PASS",
+      "confidence": "DETERMINISTIC — rule-based execution, no probabilistic inference",
+      "human_review_status": "REVIEWED — HITL approved via POST /approve",
+      "appealability_note": "All gate decisions are traceable to explicit rules in gate verifier functions"
+    }
+  ],
+  "appeal_procedure": {
+    "procedure_documented": true,
+    "appeal_path": "Dispute any gate outcome by providing a counter-artifact with valid SHA256 hash and AEM v1.1 manifest entry. Submit to governance operator for re-evaluation.",
+    "appealability_basis": "Each gate outcome is derived from enumerable rules — any outcome can be challenged by contesting the underlying artifact or hash record"
+  },
+  "log_entry_fields_documented": [
+    "decision_id", "timestamp", "model_agent_id", "input_summary",
+    "output_summary", "confidence", "human_review_status", "appealability_note"
+  ],
+  "known_limitations": [
+    "Decision log covers AI-ME evidence execution session only",
+    "Not a production decision logging system",
+    "Legal appealability not claimed — governance appealability only",
+    "Regulatory compliance not claimed"
+  ],
+  "aem_version": "v1.1"
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "3.1",
+  "gate_id": "AI-ME-08",
+  "gate_name": "High-Risk Output Human Review Evidence",
+  "evaluation_timestamp": "2026-05-12T16:03:24.522007+00:00",
+  "high_risk_category": "governance_decision",
+  "evaluation_scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "reviewer_identity_recorded": true,
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_assurance_required": true,
+  "artifact_assurance_status": "PASS",
+  "artifact_assurance": {
+    "aem_version": "v1.1",
+    "artifact_verified": true,
+    "artifact_manifest": "",
+    "artifact_hashes": [
+      {
+        "artifact_id": "hitl_decision_artifact",
+        "algorithm": "sha256",
+        "hash": "73ad90060ed5e195735f108e3345095f5c798c0b332b700cc0f526d822f01c8e"
+      }
+    ],
+    "verification_receipts": [
+      "assurance/ai-me/v3_1/receipt_AI-ME-08_hitl_decision_artifact.json"
+    ],
+    "public_anchor_references": []
+  },
+  "gate_outcome": "PASS",
+  "gate_outcome_reason": "HITL decision artifact verified. Reviewer identity, decision and timestamp recorded.",
+  "claim_boundary_result": {
+    "claim_class": "FULL_CLAIM",
+    "claim_level_ceiling": "PASS",
+    "allowed_emission": true,
+    "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+  },
+  "fast_path": {
+    "enabled": false,
+    "snapshot_reference": "",
+    "snapshot_freshness_ms": null,
+    "pre_execution_verdict": "NOT_APPLICABLE",
+    "max_tick_elapsed_ms": null,
+    "full_assurance_recalculated_per_tick": false,
+    "fast_path_scope": "hitl_requirement_enforcement_pre_emission"
+  },
+  "allowed_claim": "High-risk outputs within [category] have documented human review evidence as of [date].",
+  "non_claim": "This gate does not claim all outputs are high-risk, universal human oversight, or clinical/legal approval.",
+  "technology_subordination_rule": "The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it."
+}

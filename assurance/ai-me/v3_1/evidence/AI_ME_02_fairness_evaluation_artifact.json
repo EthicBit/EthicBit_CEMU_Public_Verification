@@ -1,0 +1,27 @@
+{
+  "artifact_type": "fairness_evaluation_artifact",
+  "gate_id": "AI-ME-02",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE governance classification outputs — controlled environment — EthicBit / CEMU v3.7.0+",
+  "evaluation_methodology": "Structural parity evaluation of governance gate outcomes across equivalent input classes. Outcome consistency verified across operator identities and artifact types.",
+  "protected_attributes_evaluated": [
+    "operator_identity — governance gate outcomes are operator-identity-invariant within authorized scope",
+    "artifact_type — gate acceptance criteria apply uniformly across all 23 declared artifact types",
+    "request_timestamp — temporal fairness: same evidence yields same outcome regardless of submission time"
+  ],
+  "evaluation_dataset_scope": "AEM-EVOLVE v2.0 evidence baseline — 140 checks across 14 gates",
+  "metrics_and_thresholds": {
+    "outcome_consistency_rate": "100% — identical evidence produces identical outcomes",
+    "operator_invariance": "PASS — gate logic does not branch on operator identity",
+    "artifact_type_parity": "PASS — all 23 artifact types evaluated under uniform acceptance criteria"
+  },
+  "findings": "No differential treatment observed across protected attributes within declared scope.",
+  "known_limitations": [
+    "Evaluation scope is limited to the AEM-EVOLVE governance API — not a general AI system fairness evaluation",
+    "Protected attribute scope is structural, not demographic",
+    "External fairness audit not conducted"
+  ],
+  "aem_version": "v1.1"
+}

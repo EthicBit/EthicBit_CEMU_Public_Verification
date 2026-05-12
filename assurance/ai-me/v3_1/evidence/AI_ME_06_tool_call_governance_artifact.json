@@ -1,0 +1,49 @@
+{
+  "artifact_type": "tool_call_governance_log",
+  "gate_id": "AI-ME-06",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE API tool invocations — controlled environment — EthicBit / CEMU v3.7.0+",
+  "authorization_policy_reference": "docs/architecture/ETHICBIT_CONSTITUTIONAL_TECHNOLOGY_BRIDGE.md — Technology Subordination Rule",
+  "tool_calls_logged": [
+    {
+      "tool_call_id": "tc-001",
+      "tool_name": "POST /approve",
+      "agent_id": "aem-evolve-hitl-gateway",
+      "authorization_reference": "HITL_HMAC_TOKEN or OIDC_RS256_JWT",
+      "parameters_logged": {"event_id": "<uuid>", "sub": "<reviewer_id>", "token_type": "auto_detected"},
+      "response_logged": {"status": 200, "outcome": "APPROVED"},
+      "timestamp": "2026-05-12T00:00:00+00:00",
+      "authorized": true
+    },
+    {
+      "tool_call_id": "tc-002",
+      "tool_name": "GET /oidc/jwks",
+      "agent_id": "aem-evolve-oidc-verifier",
+      "authorization_reference": "public_endpoint",
+      "parameters_logged": {},
+      "response_logged": {"status": 200, "key_type": "RSA", "algorithm": "RS256"},
+      "timestamp": "2026-05-12T00:00:00+00:00",
+      "authorized": true
+    },
+    {
+      "tool_call_id": "tc-003",
+      "tool_name": "write_gate_report",
+      "agent_id": "aem-evolve-ai-me-gate-executor-v3.1",
+      "authorization_reference": "internal_governance_execution",
+      "parameters_logged": {"gate_id": "AI-ME-XX", "output_path": "assurance/ai-me/v3_1/"},
+      "response_logged": {"status": "written"},
+      "timestamp": "2026-05-12T00:00:00+00:00",
+      "authorized": true
+    }
+  ],
+  "unauthorized_attempts_logged": [],
+  "fast_path_enforcement": "Tool-call authorization enforced pre-emission by Fast Path BLOCK verdict on prohibited_actions",
+  "known_limitations": [
+    "Tool-call log covers governance API layer only",
+    "Not a complete system-wide tool-call audit",
+    "External authorization verification not conducted"
+  ],
+  "aem_version": "v1.1"
+}

@@ -1,0 +1,34 @@
+{
+  "artifact_type": "model_evaluation_artifact",
+  "gate_id": "AI-ME-01",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "model_identifier": "aem-evolve-multi-agent-governance-api-v3.1",
+  "evaluation_scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
+  "model_description": "Multi-agent governance orchestration system implementing Mechanical Ethics Assurance. Coordinates governance gates, artifact assurance, HITL approval, and claim boundary enforcement.",
+  "evaluation_methodology": "Structured gate-by-gate functional evaluation against AEM-EVOLVE v2.0 acceptance criteria. 14/14 gates PASS, 140/140 checks PASS.",
+  "performance_metrics": {
+    "gates_evaluated": 14,
+    "gates_pass": 14,
+    "checks_evaluated": 140,
+    "checks_pass": 140,
+    "evidence_baseline": "Market-Integrated Evidence Baseline v2.0"
+  },
+  "capability_declarations": [
+    "Governed change assurance with immutable audit trail",
+    "HITL enforcement via HMAC and OIDC RS256 dual-path",
+    "Artifact hash verification through AEM v1.1",
+    "PostgreSQL and SQLite adapter support",
+    "Triple Anchor public anchoring for selected artifacts"
+  ],
+  "known_limitations": [
+    "LLM advisory layer is optional, not mandatory governance path",
+    "PostgreSQL not tested against live database in controlled verifier",
+    "HITL signing key is file-based, not HSM-backed",
+    "External independent reproductions: 0 received as of 2026-05-12",
+    "Not regulatory approved, not externally certified"
+  ],
+  "model_version": "v3.1-scaffold",
+  "aem_version": "v1.1"
+}

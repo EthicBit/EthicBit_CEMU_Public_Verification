@@ -1,0 +1,51 @@
+{
+  "artifact_type": "memory_mutation_governance_log",
+  "gate_id": "AI-ME-07",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE audit store and LangGraph checkpoint mutations — controlled environment — EthicBit / CEMU v3.7.0+",
+  "authorization_policy_reference": "docs/architecture/AEM_V1_1_ARTIFACT_ASSURANCE_CONTINUITY.md — Artifact types: audit_event_records, key_records",
+  "memory_mutations_logged": [
+    {
+      "mutation_id": "mm-001",
+      "operation": "WRITE",
+      "target": "SQLiteAdapter — audit_events table",
+      "agent_id": "aem-evolve-governance-engine",
+      "authorization_reference": "internal_governance_write",
+      "pre_state_reference": "empty or prior audit record",
+      "post_state_reference": "new audit event with hash and signature",
+      "timestamp": "2026-05-12T00:00:00+00:00",
+      "authorized": true
+    },
+    {
+      "mutation_id": "mm-002",
+      "operation": "WRITE",
+      "target": "LangGraph SQLite checkpoint store",
+      "agent_id": "aem-evolve-langgraph-orchestrator",
+      "authorization_reference": "langgraph_internal_checkpoint",
+      "pre_state_reference": "prior checkpoint or null",
+      "post_state_reference": "updated agent state checkpoint",
+      "timestamp": "2026-05-12T00:00:00+00:00",
+      "authorized": true
+    },
+    {
+      "mutation_id": "mm-003",
+      "operation": "WRITE",
+      "target": "assurance/ai-me/v3_1/ — gate reports",
+      "agent_id": "aem-evolve-ai-me-gate-executor-v3.1",
+      "authorization_reference": "evidence_execution_write",
+      "pre_state_reference": "directory empty or prior run",
+      "post_state_reference": "12 gate reports + aggregate report",
+      "timestamp": "2026-05-12T00:00:00+00:00",
+      "authorized": true
+    }
+  ],
+  "unauthorized_mutations_logged": [],
+  "known_limitations": [
+    "Memory mutation log covers governance layer stores only",
+    "LangGraph checkpoint contents are not audited at record level — only write events logged",
+    "Immutable storage not implemented — SQLite is mutable"
+  ],
+  "aem_version": "v1.1"
+}

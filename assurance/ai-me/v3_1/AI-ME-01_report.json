@@ -1,0 +1,47 @@
+{
+  "schema_version": "3.1",
+  "gate_id": "AI-ME-01",
+  "gate_name": "Model Evaluation Evidence",
+  "evaluation_timestamp": "2026-05-12T16:03:24.519329+00:00",
+  "model_identifier": "aem-evolve-multi-agent-governance-api-v3.1",
+  "evaluation_scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_assurance_required": true,
+  "artifact_assurance_status": "PASS",
+  "artifact_assurance": {
+    "aem_version": "v1.1",
+    "artifact_verified": true,
+    "artifact_manifest": "",
+    "artifact_hashes": [
+      {
+        "artifact_id": "model_evaluation_artifact",
+        "algorithm": "sha256",
+        "hash": "ad1135422dc0d02c9eb0fbcd08cd00e253f8b8156e744e984011ed183244a4b4"
+      }
+    ],
+    "verification_receipts": [
+      "assurance/ai-me/v3_1/receipt_AI-ME-01_model_evaluation_artifact.json"
+    ],
+    "public_anchor_references": []
+  },
+  "gate_outcome": "PASS",
+  "gate_outcome_reason": "Model evaluation artifact verified. Scope declared.",
+  "claim_boundary_result": {
+    "claim_class": "FULL_CLAIM",
+    "claim_level_ceiling": "PASS",
+    "allowed_emission": true,
+    "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+  },
+  "fast_path": {
+    "enabled": false,
+    "snapshot_reference": "",
+    "snapshot_freshness_ms": null,
+    "pre_execution_verdict": "NOT_APPLICABLE",
+    "max_tick_elapsed_ms": null,
+    "full_assurance_recalculated_per_tick": false,
+    "fast_path_scope": ""
+  },
+  "allowed_claim": "Model evaluation evidence exists for [model] within [scope] as of [date].",
+  "non_claim": "This gate does not claim model superiority, external benchmarking, regulatory certification, or clinical/financial suitability.",
+  "technology_subordination_rule": "The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it."
+}

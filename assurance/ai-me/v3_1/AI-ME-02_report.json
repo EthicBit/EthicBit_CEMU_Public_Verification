@@ -1,0 +1,52 @@
+{
+  "schema_version": "3.1",
+  "gate_id": "AI-ME-02",
+  "gate_name": "Bias / Fairness Evidence",
+  "evaluation_timestamp": "2026-05-12T16:03:24.519749+00:00",
+  "protected_attributes": [
+    "operator_identity",
+    "artifact_type",
+    "request_timestamp"
+  ],
+  "methodology": "Structural parity evaluation of governance gate outcomes across equivalent input classes",
+  "evaluation_scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_assurance_required": true,
+  "artifact_assurance_status": "PASS",
+  "artifact_assurance": {
+    "aem_version": "v1.1",
+    "artifact_verified": true,
+    "artifact_manifest": "",
+    "artifact_hashes": [
+      {
+        "artifact_id": "fairness_report",
+        "algorithm": "sha256",
+        "hash": "941d99fc29cc16b2550976f2ae2ee35871fe026b247542c0aa50532c153385a6"
+      }
+    ],
+    "verification_receipts": [
+      "assurance/ai-me/v3_1/receipt_AI-ME-02_fairness_report.json"
+    ],
+    "public_anchor_references": []
+  },
+  "gate_outcome": "PASS",
+  "gate_outcome_reason": "Fairness artifact verified. Attributes and methodology declared.",
+  "claim_boundary_result": {
+    "claim_class": "FULL_CLAIM",
+    "claim_level_ceiling": "PASS",
+    "allowed_emission": true,
+    "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+  },
+  "fast_path": {
+    "enabled": false,
+    "snapshot_reference": "",
+    "snapshot_freshness_ms": null,
+    "pre_execution_verdict": "NOT_APPLICABLE",
+    "max_tick_elapsed_ms": null,
+    "full_assurance_recalculated_per_tick": false,
+    "fast_path_scope": ""
+  },
+  "allowed_claim": "Fairness evaluation evidence exists for [attributes] using [methodology] within [scope] as of [date].",
+  "non_claim": "This gate does not claim universal fairness, legal non-discrimination compliance, or complete bias elimination.",
+  "technology_subordination_rule": "The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it."
+}

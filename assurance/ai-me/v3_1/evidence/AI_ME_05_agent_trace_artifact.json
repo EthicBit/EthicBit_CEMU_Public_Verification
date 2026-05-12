@@ -1,0 +1,57 @@
+{
+  "artifact_type": "agent_trace_artifact",
+  "gate_id": "AI-ME-05",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "operation_scope": "AEM-EVOLVE multi-agent governance orchestration — controlled environment — EthicBit / CEMU v3.7.0+",
+  "raw_chain_of_thought_captured": false,
+  "raw_cot_prohibition_note": "Raw chain-of-thought capture is prohibited per AI-ME-05 specification. Rationale summary and planning metadata are used instead.",
+  "rationale_summary": {
+    "goal": "Execute Mechanical Ethics Assurance governance pass for AEM-EVOLVE v3.1 AI-ME gate suite",
+    "sub_goals": [
+      "Verify each of 12 AI-ME gates against declared acceptance criteria",
+      "Produce hash-verifiable evidence artifacts for each gate",
+      "Aggregate gate outcomes under constitutional governance rules",
+      "Enforce fail-closed rule: artifact_assurance_required + not verified => FAIL_CLOSED",
+      "Enforce anti-upgrade rule: Fast Path PASS cannot upgrade failed gate"
+    ],
+    "plan_selected": "Sequential gate verification with AEM v1.1 artifact assurance per gate, followed by deterministic aggregation",
+    "decision_rationale": "Constitutional compliance requires evidence-before-claims; aggregation rules are non-negotiable"
+  },
+  "planning_metadata": {
+    "agent_id": "aem-evolve-ai-me-gate-executor-v3.1",
+    "session_id": "ai-me-evidence-execution-2026-05-12",
+    "execution_mode": "controlled_environment",
+    "constitutional_regime": "EthicBit/CEMU/v3.7.0+"
+  },
+  "decision_trace": [
+    {"step": 1, "decision": "Create evidence artifacts for all 12 gates", "outcome": "artifacts_created"},
+    {"step": 2, "decision": "Compute SHA256 hashes for AEM v1.1 verification", "outcome": "hashes_computed"},
+    {"step": 3, "decision": "Run gate verifiers — apply fail_closed rule per gate", "outcome": "gate_reports_generated"},
+    {"step": 4, "decision": "Run aggregator — apply integrity rules", "outcome": "aggregate_report_generated"}
+  ],
+  "tool_call_sequence": [
+    "write_evidence_artifacts(gates=1..12)",
+    "sha256_file(artifact_path) x12",
+    "write_verification_receipt(gate_id, artifact_id, ...) x12",
+    "write_gate_report(report, path) x12",
+    "aggregate(report_dir='assurance/ai-me/v3_1')"
+  ],
+  "memory_mutation_records": [
+    {"operation": "write", "target": "assurance/ai-me/v3_1/evidence/", "description": "12 evidence artifact files created"},
+    {"operation": "write", "target": "assurance/ai-me/v3_1/receipts/", "description": "12 AEM v1.1 verification receipts created"},
+    {"operation": "write", "target": "assurance/ai-me/v3_1/", "description": "12 gate reports + 1 aggregate report created"}
+  ],
+  "execution_metadata": {
+    "timestamp": "2026-05-12T00:00:00+00:00",
+    "agent_id": "aem-evolve-ai-me-gate-executor-v3.1",
+    "session_id": "ai-me-evidence-execution-2026-05-12"
+  },
+  "known_limitations": [
+    "Trace covers governance execution only — not underlying LLM inference traces",
+    "No real-time agent tracing infrastructure — trace is constructed from deterministic execution record",
+    "External trace verification not conducted"
+  ],
+  "aem_version": "v1.1"
+}

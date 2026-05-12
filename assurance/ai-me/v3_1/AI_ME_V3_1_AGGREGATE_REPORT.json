@@ -1,0 +1,297 @@
+{
+  "schema_version": "3.1",
+  "report_type": "AI_ME_V3_1_AGGREGATE",
+  "aggregation_timestamp": "2026-05-12T16:03:24.523890+00:00",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "aggregate_outcome": "PASS",
+  "gates_evaluated": 12,
+  "gates_pass": 12,
+  "gates_scope_limited": 0,
+  "gates_fail_closed": 0,
+  "gates_missing": 0,
+  "gates_pending": 0,
+  "fast_path_illegal_upgrade_violations": [],
+  "aggregation_rules_applied": [
+    "artifact_assurance_required=true AND artifact_verified=false => outcome cannot be PASS",
+    "Fast Path PASS cannot upgrade failed artifact assurance or failed gate outcome"
+  ],
+  "gate_summaries": [
+    {
+      "gate_id": "AI-ME-01",
+      "gate_name": "Model Evaluation Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-01_model_evaluation_artifact.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-02",
+      "gate_name": "Bias / Fairness Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-02_fairness_report.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-03",
+      "gate_name": "Explainability Artifact Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-03_explainability_artifact.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-04",
+      "gate_name": "Data Provenance & Lineage Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-04_data_lineage_graph.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-05",
+      "gate_name": "Agent Trace Capture Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-05_agent_trace_artifact.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-06",
+      "gate_name": "Tool-Call Governance Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-06_tool_call_governance_log.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-07",
+      "gate_name": "Memory Mutation Governance Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-07_memory_mutation_governance_log.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-08",
+      "gate_name": "High-Risk Output Human Review Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-08_hitl_decision_artifact.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-09",
+      "gate_name": "Multi-Agent Coordination Governance Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-09_multi_agent_coordination_log.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-10",
+      "gate_name": "AI Red-Team / Adversarial Robustness Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-10_red_team_artifact.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-11",
+      "gate_name": "Decision Logging & Appealability Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-11_decision_log_artifact.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    },
+    {
+      "gate_id": "AI-ME-12",
+      "gate_name": "AI Claim Boundary Enforcement Evidence",
+      "gate_outcome": "PASS",
+      "artifact_assurance_required": true,
+      "artifact_assurance_status": "PASS",
+      "artifact_verified": true,
+      "verification_receipts": [
+        "assurance/ai-me/v3_1/receipt_AI-ME-12_claim_boundary_enforcement_log.json"
+      ],
+      "public_anchor_references": [],
+      "claim_boundary_result": {
+        "claim_class": "FULL_CLAIM",
+        "claim_level_ceiling": "PASS",
+        "allowed_emission": true,
+        "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+      },
+      "fast_path_enabled": false,
+      "fast_path_pre_execution_verdict": "NOT_APPLICABLE",
+      "fast_path_full_assurance_recalculated_per_tick": false,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "report_found": true
+    }
+  ],
+  "non_claim": "This aggregator does not claim AI-ME evidence completion, AI-ME PASS status, external validation, certification or production readiness."
+}

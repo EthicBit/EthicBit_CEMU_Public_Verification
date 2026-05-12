@@ -1,0 +1,47 @@
+{
+  "schema_version": "3.1",
+  "gate_id": "AI-ME-12",
+  "gate_name": "AI Claim Boundary Enforcement Evidence",
+  "evaluation_timestamp": "2026-05-12T16:03:24.523344+00:00",
+  "evaluation_scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "claim_level_ceilings_recorded": true,
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_assurance_required": true,
+  "artifact_assurance_status": "PASS",
+  "artifact_assurance": {
+    "aem_version": "v1.1",
+    "artifact_verified": true,
+    "artifact_manifest": "",
+    "artifact_hashes": [
+      {
+        "artifact_id": "claim_boundary_enforcement_log",
+        "algorithm": "sha256",
+        "hash": "73b4c9fe18e3aaa42a71ef25084a8ef33b62c3f0caf95579437c067565d821a2"
+      }
+    ],
+    "verification_receipts": [
+      "assurance/ai-me/v3_1/receipt_AI-ME-12_claim_boundary_enforcement_log.json"
+    ],
+    "public_anchor_references": []
+  },
+  "gate_outcome": "PASS",
+  "gate_outcome_reason": "Claim boundary enforcement log verified. Claim-level ceilings recorded per evaluation.",
+  "claim_boundary_result": {
+    "claim_class": "FULL_CLAIM",
+    "claim_level_ceiling": "PASS",
+    "allowed_emission": true,
+    "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+  },
+  "fast_path": {
+    "enabled": false,
+    "snapshot_reference": "",
+    "snapshot_freshness_ms": null,
+    "pre_execution_verdict": "NOT_APPLICABLE",
+    "max_tick_elapsed_ms": null,
+    "full_assurance_recalculated_per_tick": false,
+    "fast_path_scope": "claim_boundary_enforcement_log"
+  },
+  "allowed_claim": "Claim boundary enforcement evidence exists for [claims evaluated] within [scope].",
+  "non_claim": "This gate does not claim universal claim coverage, regulatory compliance, or legal certification.",
+  "technology_subordination_rule": "The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it."
+}

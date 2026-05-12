@@ -1,0 +1,11 @@
+{
+  "receipt_type": "aem_v1_1_verification_receipt",
+  "aem_version": "v1.1",
+  "gate_id": "AI-ME-03",
+  "artifact_id": "explainability_artifact",
+  "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_03_explainability_artifact.json",
+  "artifact_hash": "e8681fa86b7f4d679725858c4cd2c159ed9ebc1e40e5299c9f49747adddde989",
+  "artifact_verified": true,
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "timestamp": "2026-05-12T16:03:24.520021+00:00"
+}
