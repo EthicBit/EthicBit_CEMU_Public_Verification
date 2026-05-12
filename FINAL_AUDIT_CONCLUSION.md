@@ -536,6 +536,83 @@ This release is not external certification.
 
 ---
 
+## AI-ME Gates v3.1 — Evidence Execution PASS (12/12) (2026-05-12)
+
+**Release tag:** `v3.1`
+**Commit SHA (main):** `456ac670`
+**Evidence execution commit:** `ba139616`
+
+AI-ME Gates v3.1 completes the first evidence pass for all 12 AI-Specific Mechanical Ethics Gates defined in the v3.0 Specification Release. Scope: AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+.
+
+### AI-ME v3.1 aggregate result
+
+```
+AI_ME_V3_1_AGGREGATE_REPORT
+aggregate_outcome:    PASS
+gates_evaluated:      12
+gates_pass:           12
+gates_scope_limited:   0
+gates_fail_closed:     0
+gates_missing:         0
+fast_path_violations:  0
+artifact_verified:    true (all 12 gates)
+```
+
+### Constitutional integrity rules verified
+
+- `artifact_assurance_required=true` + `artifact_verified=false` → outcome cannot be PASS ✓
+- Fast Path PASS cannot upgrade failed artifact assurance or failed gate outcome ✓
+
+### Gate-by-gate summary
+
+| Gate | Name | Outcome | artifact_verified |
+|---|---|---|---|
+| AI-ME-01 | Model Evaluation Evidence | PASS | true |
+| AI-ME-02 | Bias / Fairness Evidence | PASS | true |
+| AI-ME-03 | Explainability Artifact Evidence | PASS | true |
+| AI-ME-04 | Data Provenance & Lineage Evidence | PASS | true |
+| AI-ME-05 | Agent Trace Capture Evidence | PASS | true |
+| AI-ME-06 | Tool-Call Governance Evidence | PASS | true |
+| AI-ME-07 | Memory Mutation Governance Evidence | PASS | true |
+| AI-ME-08 | High-Risk Output Human Review Evidence | PASS | true |
+| AI-ME-09 | Multi-Agent Coordination Governance Evidence | PASS | true |
+| AI-ME-10 | AI Red-Team / Adversarial Robustness Evidence | PASS | true |
+| AI-ME-11 | Decision Logging & Appealability Evidence | PASS | true |
+| AI-ME-12 | AI Claim Boundary Enforcement Evidence | PASS | true |
+
+### v3.1 capabilities
+
+| Component | Detail |
+|---|---|
+| Evidence artifacts | 12 JSON artifacts (`assurance/ai-me/v3_1/evidence/`) |
+| AEM v1.1 receipts | 12 verification receipts (`artifact_verified=true` per gate) |
+| Gate reports | 12 gate reports (`assurance/ai-me/v3_1/AI-ME-*.json`) |
+| Aggregate report | `assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json` |
+| Verifier scripts | gates 01–12 (`tools/ai_me/verify_ai_me_01–12.py`) |
+| Execution runner | `tools/ai_me/run_ai_me_evidence_v3_1.py` |
+| AI-ME-05 constraint | Raw chain-of-thought capture prohibited — rationale summary only |
+
+### v3.1 claim
+
+> AI-ME Gates v3.1 evidence execution PASS (12/12 gates) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
+
+### v3.1 non-claims
+
+```
+Evidence scope: controlled environment only — not production deployment.
+Not external validation (v4.0 roadmap — not current state).
+Not third-party reproduction.
+Not regulatory approval.
+Not external certification.
+Not HSM-backed artifact custody.
+Not complete AI ethics coverage.
+Not universal production readiness.
+Not full-system sub-15ms validation.
+Not universal public anchoring unless separately evidenced.
+```
+
+---
+
 ## AEM-EVOLVE™ v3.0 — Mechanical Ethics Assurance for AI · Constitutional Stack · AI-ME Gates Spec · Fast Path Scaffold (2026-05-12)
 
 **Release tag:** `v3.0`
