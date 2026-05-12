@@ -1,5 +1,5 @@
 {
-  "freezeDate": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "freezeDate": "2026-04-08T09:29:37Z",
   "status": "FROZEN_FOR_CONTROLLED_PRODUCTION",
   "preFreezeTestExecuted": "YES",
   "preFreezeTestLog": "./pre-freeze-full-test.log",
