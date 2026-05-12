@@ -8,17 +8,17 @@
 ## Full Technology Stack State — 2026-05-12
 
 ```
-Constitutional regime:     EthicBit / CEMU v3.7.0+          ACTIVE
-Artifact Assurance:        AEM v1.1                          ACTIVE
-Governance Engine:         AEM-EVOLVE™                       ACTIVE
-Evidence Baseline:         v2.0 PASS (14/14 gates, 140/140)  VERIFIED
-Category Release:          AEM-EVOLVE v3.0                   RELEASED
-AI-ME Gate Suite:          v3.1                              SPECIFICATION
-Claim Boundary Engine:     Doctrine + Engine scaffold        ACTIVE
-Fast Path:                 v1.0                              SPECIFICATION + SCAFFOLD
-Triple Anchor:             Selected artifacts anchored       ACTIVE
-Strong Closure:            v2.0 governance sign-off          ACTIVE
-v4.0 External Validation:  Future roadmap                    ROADMAP
+Constitutional regime:     EthicBit / CEMU v3.7.0+              ACTIVE
+Artifact Assurance:        AEM v1.1                              ACTIVE
+Governance Engine:         AEM-EVOLVE™                           ACTIVE
+Evidence Baseline:         v2.0 PASS (14/14 gates, 140/140)      VERIFIED
+Category Release:          AEM-EVOLVE v3.0                       RELEASED
+AI-ME Gate Suite:          v3.1 PASS (12/12 gates)               EVIDENCE PASS
+Claim Boundary Engine:     Doctrine + Engine scaffold            ACTIVE
+Fast Path:                 v1.0                                  SPECIFICATION + SCAFFOLD
+Triple Anchor:             Selected artifacts anchored           ACTIVE
+Strong Closure:            v2.0 governance sign-off              ACTIVE
+v4.0 External Validation:  Future roadmap                        ROADMAP
 ```
 
 > The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it.
@@ -29,7 +29,7 @@ v4.0 External Validation:  Future roadmap                    ROADMAP
 EthicBit / CEMU v3.7.0+  (Constitutional Regime)
   └─ AEM v1.1             (Artifact Assurance)
        └─ AEM-EVOLVE™     (Governance Assurance)
-            └─ AI-ME Gates v3.1  (AI Evidence — Specification)
+            └─ AI-ME Gates v3.1  (AI Evidence — PASS 12/12)
                  └─ Claim Boundary Engine™  (Claim Enforcement)
                       └─ Fast Path v1.0     (Pre-Execution Enforcement — Scaffold)
                            └─ Triple Anchor  (External Anchoring — selected receipts)
@@ -57,24 +57,39 @@ EthicBit / CEMU v3.7.0+  (Constitutional Regime)
 | Reproduction Kit v4.0 | [docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md](docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md) |
 | Master Roadmap | [docs/strategy/ETHICBIT_ROADMAP_PR_0_J_PLUS_PR_K_FINAL.md](docs/strategy/ETHICBIT_ROADMAP_PR_0_J_PLUS_PR_K_FINAL.md) |
 
-### AI-ME Gate Suite v3.1 — Specification Release
+### AI-ME Gate Suite v3.1 — Evidence Execution PASS (12/12)
 
-| Gate | Name | Domain | Fast Path |
-|---|---|---|---|
-| AI-ME-01 | Model Evaluation Evidence | Model | — |
-| AI-ME-02 | Bias / Fairness Evidence | Fairness | — |
-| AI-ME-03 | Explainability Artifact Evidence | Explainability | — |
-| AI-ME-04 | Data Provenance & Lineage Evidence | Data | candidate |
-| AI-ME-05 | Agent Trace Capture Evidence | Agent | candidate |
-| AI-ME-06 | Tool-Call Governance Evidence | Tool | **HIGH** |
-| AI-ME-07 | Memory Mutation Governance Evidence | Memory | candidate |
-| AI-ME-08 | High-Risk Output Human Review Evidence | Human Oversight | **HIGH** |
-| AI-ME-09 | Multi-Agent Coordination Governance Evidence | Multi-Agent | — |
-| AI-ME-10 | AI Red-Team / Adversarial Robustness Evidence | Security | — |
-| AI-ME-11 | Decision Logging & Appealability Evidence | Decision | — |
-| AI-ME-12 | AI Claim Boundary Enforcement Evidence | Claim | **HIGH** |
+| Gate | Name | Domain | Outcome | Fast Path |
+|---|---|---|---|---|
+| AI-ME-01 | Model Evaluation Evidence | Model | PASS | — |
+| AI-ME-02 | Bias / Fairness Evidence | Fairness | PASS | — |
+| AI-ME-03 | Explainability Artifact Evidence | Explainability | PASS | — |
+| AI-ME-04 | Data Provenance & Lineage Evidence | Data | PASS | candidate |
+| AI-ME-05 | Agent Trace Capture Evidence | Agent | PASS | candidate |
+| AI-ME-06 | Tool-Call Governance Evidence | Tool | PASS | **HIGH** |
+| AI-ME-07 | Memory Mutation Governance Evidence | Memory | PASS | candidate |
+| AI-ME-08 | High-Risk Output Human Review Evidence | Human Oversight | PASS | **HIGH** |
+| AI-ME-09 | Multi-Agent Coordination Governance Evidence | Multi-Agent | PASS | — |
+| AI-ME-10 | AI Red-Team / Adversarial Robustness Evidence | Security | PASS | — |
+| AI-ME-11 | Decision Logging & Appealability Evidence | Decision | PASS | — |
+| AI-ME-12 | AI Claim Boundary Enforcement Evidence | Claim | PASS | **HIGH** |
 
-Scaffold: `demos/aem-evolve-multi-agent-api/tools/ai_me/` (gates 01–04 + aggregator)
+```
+aggregate_outcome: PASS  |  gates_pass: 12  |  artifact_verified: true (all 12)
+fast_path_illegal_upgrade_violations: 0
+```
+
+Evidence: `assurance/ai-me/v3_1/` — artifacts, receipts, gate reports, aggregate report  
+Verifiers: `demos/aem-evolve-multi-agent-api/tools/ai_me/` (gates 01–12 + aggregator + runner)
+
+```bash
+# Reproducir evidence execution
+python3 -c "
+import sys; sys.path.insert(0, 'demos/aem-evolve-multi-agent-api/tools')
+from ai_me.run_ai_me_evidence_v3_1 import main; main()
+"
+# AGGREGATE OUTCOME: PASS — 12/12
+```
 
 ### Fast Path scaffold
 
@@ -89,17 +104,52 @@ import json; print(json.dumps(verify_scaffold(), indent=2))
 
 Scaffold: `demos/aem-evolve-multi-agent-api/tools/fast_path/`
 
-### Final claim
+### Claim
 
-EthicBit has versioned the constitutional, artifact-assurance, governance-assurance, AI evidence, claim-boundary, performance layer (Fast Path), and external validation roadmap for Mechanical Ethics Assurance for AI.
+EthicBit has versioned the constitutional, artifact-assurance, governance-assurance, AI evidence (AI-ME Gates v3.1 PASS 12/12), claim-boundary, performance layer (Fast Path), and external validation roadmap for Mechanical Ethics Assurance for AI. AI-ME Gates v3.1 evidence execution PASS (12/12 gates) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
 
-### Final non-claim
+### Non-claim
 
-This does not claim completed AI-ME evidence execution, complete AI ethics coverage, universal production readiness, regulatory approval, external certification, third-party reproduction, HSM-backed custody, full-system sub-15 ms validation, or universal public anchoring unless separately evidenced.
+Evidence scope: controlled environment only — not production deployment. Not external validation, not third-party reproduction, not regulatory approval, not external certification, not HSM-backed custody, not complete AI ethics coverage, not universal production readiness, not full-system sub-15 ms validation, not universal public anchoring unless separately evidenced.
 
 ---
 
-## Latest release: AEM-EVOLVE™ v1.9.0 — OIDC Key Persistence · Materiality Parametrized · Postgres Live Test
+## Latest release: AEM-EVOLVE™ v3.1 — AI-ME Gates Evidence Execution PASS (12/12)
+
+**Tag:** `v3.1` — 2026-05-12  
+**Commit:** `5a67bc10`  
+**Type:** Evidence Execution Release — AI-ME Gate Suite v3.1  
+**Result:** `AI_ME_V3_1_AGGREGATE_REPORT — PASS (12/12 gates, artifact_verified=true all gates, 0 violations)`
+
+> AI-ME Gates v3.1 completes the first evidence pass for all 12 AI-Specific Mechanical Ethics Gates. Scope: AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+. Both constitutional integrity rules verified: fail-closed rule and Fast Path anti-upgrade rule.
+
+- [Status Bulletin v3.1 Evidence](docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md)
+- [Aggregate Report](assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json)
+- [GitHub Release v3.1](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v3.1)
+
+```bash
+python3 -c "
+import sys; sys.path.insert(0, 'demos/aem-evolve-multi-agent-api/tools')
+from ai_me.run_ai_me_evidence_v3_1 import main; main()
+"
+# AGGREGATE OUTCOME: PASS — 12/12
+```
+
+---
+
+## Previous release: AEM-EVOLVE™ v3.0 — Constitutional Stack · AI-ME Gates Spec · Fast Path Scaffold
+
+**Tag:** `v3.0` — 2026-05-12  
+**Type:** Category Release + Constitutional Stack + AI-ME Specification + Fast Path Scaffold
+
+> AEM-EVOLVE™ v3.0 formalizes Mechanical Ethics Assurance for AI™ as a proprietary category and versions the complete constitutional stack from constitutional bridge to external validation roadmap.
+
+- [Status Bulletin v3.0](docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md)
+- [GitHub Release v3.0](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v3.0)
+
+---
+
+## Previous release: AEM-EVOLVE™ v1.9.0 — OIDC Key Persistence · Materiality Parametrized · Postgres Live Test
 
 **Tag:** `v1.9.0` — 2026-05-10
 **Type:** Production hardening — OIDC key persistence (`oidc_key.pem`) · materiality parametrized (3 paths) · Postgres live verifier
