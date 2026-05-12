@@ -15,7 +15,7 @@ Evidence Baseline:         v2.0 PASS (14/14 gates, 140/140)      VERIFIED
 Category Release:          AEM-EVOLVE v3.0                       RELEASED
 AI-ME Gate Suite:          v3.1 PASS (12/12 gates)               EVIDENCE PASS
 Claim Boundary Engine:     Doctrine + Engine scaffold            ACTIVE
-Fast Path:                 v1.0                                  SPECIFICATION + SCAFFOLD
+Fast Path:                 v1.0 EVIDENCE_PASS (9/9 scenarios)    EVIDENCE PASS
 Triple Anchor:             Selected artifacts anchored           ACTIVE
 Strong Closure:            v2.0 governance sign-off              ACTIVE
 v4.0 External Validation:  Future roadmap                        ROADMAP
@@ -31,7 +31,7 @@ EthicBit / CEMU v3.7.0+  (Constitutional Regime)
        └─ AEM-EVOLVE™     (Governance Assurance)
             └─ AI-ME Gates v3.1  (AI Evidence — PASS 12/12)
                  └─ Claim Boundary Engine™  (Claim Enforcement)
-                      └─ Fast Path v1.0     (Pre-Execution Enforcement — Scaffold)
+                      └─ Fast Path v1.0     (Pre-Execution Enforcement — EVIDENCE PASS 9/9)
                            └─ Triple Anchor  (External Anchoring — selected receipts)
                                 └─ Strong Closure  (Convergence Evaluation)
                                      └─ v4.0 External Validation  (Roadmap)
@@ -91,26 +91,46 @@ from ai_me.run_ai_me_evidence_v3_1 import main; main()
 # AGGREGATE OUTCOME: PASS — 12/12
 ```
 
-### Fast Path scaffold
+### Fast Path v1.0 — Evidence Execution EVIDENCE_PASS (9/9)
 
-```bash
-# Verificar scaffold (sin evidencia real aún)
-python3 -c "
-import sys; sys.path.insert(0, '.')
-from demos.aem_evolve_multi_agent_api.tools.fast_path.verify_fast_path import verify_scaffold
-import json; print(json.dumps(verify_scaffold(), indent=2))
-"
+| # | Scenario | Verdict |
+|---|---|---|
+| 1–2 | Authorized operation within ceiling | PASS |
+| 3–4 | Prohibited actions (bypass_hitl, delete_all) | BLOCK |
+| 5 | Claim exceeds snapshot ceiling | SCOPE_LIMITED |
+| 6 | AEM v1.1 summary_verified=False | FAIL_CLOSED |
+| 7 | AI-ME aggregate FAIL_CLOSED | FAIL_CLOSED |
+| 8 | Snapshot age > max_tick_elapsed_ms | DEGRADED |
+| 9 | Unsigned snapshot | NOT_VERIFIABLE |
+
+```
+FAST_PATH_VERIFICATION_REPORT
+status:                     EVIDENCE_PASS
+scenarios_executed:         9
+scenarios_matched_expected: true
+mandatory_rules_verified:   7/7
+full_assurance_recomputed_per_tick: false (enforced)
 ```
 
-Scaffold: `demos/aem-evolve-multi-agent-api/tools/fast_path/`
+Evidence: `assurance/fast-path/v1/` — snapshot, 9 verdict records, verification report
+Runner: `demos/aem-evolve-multi-agent-api/tools/fast_path/run_fast_path_evidence_v1_0.py`
+
+```bash
+# Reproducir Fast Path evidence execution
+python3 -c "
+import sys; sys.path.insert(0, 'demos/aem-evolve-multi-agent-api/tools')
+from fast_path.run_fast_path_evidence_v1_0 import main; main()
+"
+# STATUS: EVIDENCE_PASS — 9/9 scenarios
+```
 
 ### Claim
 
-EthicBit has versioned the constitutional, artifact-assurance, governance-assurance, AI evidence (AI-ME Gates v3.1 PASS 12/12), claim-boundary, performance layer (Fast Path), and external validation roadmap for Mechanical Ethics Assurance for AI. AI-ME Gates v3.1 evidence execution PASS (12/12 gates) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
+EthicBit has versioned and evidenced the constitutional, artifact-assurance, governance-assurance, AI evidence (AI-ME Gates v3.1 PASS 12/12), claim-boundary, performance layer (Fast Path v1.0 EVIDENCE_PASS 9/9), and external validation roadmap for Mechanical Ethics Assurance for AI. AI-ME Gates v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
 
 ### Non-claim
 
-Evidence scope: controlled environment only — not production deployment. Not external validation, not third-party reproduction, not regulatory approval, not external certification, not HSM-backed custody, not complete AI ethics coverage, not universal production readiness, not full-system sub-15 ms validation, not universal public anchoring unless separately evidenced.
+Evidence scope: controlled environment only — not production deployment. Not external validation, not third-party reproduction, not regulatory approval, not external certification, not HSM-backed custody, not complete AI ethics coverage, not universal production readiness, not full-system sub-15 ms validation, not universal public anchoring unless separately evidenced. Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence. `full_assurance_recomputed_per_tick = false` always.
 
 ---
 
