@@ -6,6 +6,7 @@
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "scope": "Controlled re-verification of AI-ME v3.1 evidence artifacts against AEM v1.1 receipt declared hashes \u2014 not external party",
   "evaluation_timestamp": "2026-05-12T16:33:11.245219+00:00",
+  "reverification_timestamp": "2026-05-14T18:47:22.119339+00:00",
   "aem_version": "v1.1",
   "artifacts_reverified": 12,
   "artifacts_hash_match": 12,
@@ -133,5 +134,12 @@
       "receipt_timestamp": "2026-05-12T16:03:24.523270+00:00"
     }
   ],
+  "reverification_v4_0_execution": {
+    "execution_date": "2026-05-14",
+    "result": "REVERIFICATION_PASS",
+    "artifacts_checked": 12,
+    "all_match": true,
+    "note": "Fresh re-run confirms all 12 AI-ME v3.1 artifact hashes unchanged since original 2026-05-12 evidence execution. Hashes match on-chain Sepolia anchor payload (block 10840044)."
+  },
   "non_claim": "Reverification was performed in the same controlled environment as original verification, not by an independent external party. External third-party reverification is required for v4.0 External Validation Release."
 }
