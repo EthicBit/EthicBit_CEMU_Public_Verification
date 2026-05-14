@@ -1,0 +1,244 @@
+============================================================
+ ETHICBIT / CEMU — FULL STACK LOCAL VERIFICATION
+============================================================
+timestamp_utc=20260512T183137Z
+head=372684200bb0d0aaa5e3e2273a45b2fe95ed7c57
+head_short=37268420
+branch=main
+latest_commit=37268420 docs: add clean full stack technology status
+
+=== 1. WORKING TREE ===
+?? results/full_stack_verification_20260512T183137Z/
+
+=== 2. JSON VALIDATION ===
+json_total=3885
+json_fail=0
+
+=== 3. PYTHON COMPILE CHECK ===
+python_total=306
+python_fail=0
+
+=== 4. SHELL SYNTAX CHECK ===
+shell_total=301
+shell_fail=0
+
+=== 5. CORE SUMMARY FILES ===
+FOUND: assurance/evolve-multi-agent/v2_0/FINAL_STAGING_CONTROLLED_GATE_SUMMARY.json
+FOUND: assurance/ai-me/v3_1/FINAL_AI_ME_GATE_SUMMARY.json
+FOUND: assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json
+FOUND: docs/architecture/ETHICBIT_CONSTITUTIONAL_TECHNOLOGY_BRIDGE.md
+FOUND: docs/architecture/AEM_V1_1_ARTIFACT_ASSURANCE_CONTINUITY.md
+FOUND: docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md
+FOUND: docs/ai-me/AI_ME_GATES_SPEC_V3_1.md
+FOUND: docs/performance/FAST_PATH_DETERMINISTIC_PRE_EXECUTION_GATING.md
+FOUND: docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md
+FOUND: docs/external-validation/outreach/V4_0_EXTERNAL_REVIEWER_OUTREACH_PACK.md
+
+=== 6. v2.0 BASELINE ===
+v2_status=PASS
+v2_gates=14/14
+v2_checks=140/140
+
+=== 7. AI-ME v3.1 ===
+ai_me_status=EVIDENCE_PASS
+ai_me_gates=12/12
+claim_boundary_status=PRESERVED
+
+=== 8. FAST PATH v1.0 ===
+fast_path_status=EVIDENCE_PASS
+
+=== 9. ANCHOR EVIDENCE SEARCH ===
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:77:El Triple Anchor debe alcanzar verificación material suficiente.
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:88:- `EXTERNAL_TRIPLE_ANCHOR_MATERIAL_VERIFIED`
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:136:- Triple Anchor parcial o pendiente
+docs/explanations/EthicBit_CEMU_v3_7_0_plus_Strong_Closure_Explanation.md:163:- anchor externo,
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:42:- AEM v1.1 anchor receipts and hash records remain active and authoritative.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:105:This doctrine applies across all layers: AEM v1.1, AEM-EVOLVE™, AI-ME Gates, Claim Boundary Engine™, Fast Path, Triple Anchor, Strong Closure.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:141:> v3.0 does not claim that all governance, anchoring, closure, AI-ME evidence execution or external validation processes operate within Fast Path latency. Fast Path is a specialized runtime/pre-emission enforcement layer.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:143:Fast Path evaluates claim-level ceiling, snapshot freshness, authorized capabilities, prohibited actions, and constitutional equivalence. It does not recalculate full Triple Anchor, Strong Closure, or AI-ME evidence per enforcement tick.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:166:## 12. Triple Anchor as External Material Anchor Layer
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:168:Triple Anchor is a subordinate external anchoring layer for selected evidence artifacts.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:170:**Safe claim:** Triple Anchor is a subordinate external anchoring layer for selected evidence artifacts.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:172:**Non-claim:** Triple Anchor does not mean every artifact is anchored across Ethereum mainnet, L2, Arweave and AO unless specific anchor receipts exist.
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:199:- Public anchoring of every artifact
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:201:- That all governance, anchoring, closure, AI-ME evidence execution or external validation processes operate within Fast Path latency
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:230:- Triple Anchor external verification
+docs/EXECUTIVE_PACK_v10_BILINGUAL.md:8:**EN:** The current v10.0 repo state turns algorithmic decision handling into offline-verifiable evidence structure with cryptographic custody references, executable baseline checks, initial assurance layers (in-toto + SLSA + Sigstore), RuntimeGuard L4 baseline references, and distributed-readiness baseline controls. “Powerful closure” must only be claimed when a verifiable anchor exists plus a reproducible verification pack.
+docs/EXECUTIVE_PACK_v10_BILINGUAL.md:10:**ES:** El estado actual del repo v10.0 convierte el manejo de decisiones algorítmicas en una estructura de evidencia verificable offline con referencias de custodia criptográfica, checks baseline ejecutables, capas iniciales de assurance (in-toto + SLSA + Sigstore), referencias baseline de RuntimeGuard L4 y controles baseline de readiness distribuido. El “cierre potente” solo puede declararse cuando existe un anchor verificable más un pack reproducible.
+docs/STATUS_BULLETIN_PUBLIC_2026-04-18.md:11:- External anchor state: `ANCHOR_HARDENING_ENABLED`
+docs/STATUS_BULLETIN_PUBLIC_2026-04-18.md:33:  - externalAnchorState: `ANCHOR_HARDENING_ENABLED`
+docs/STATUS_BULLETIN_PUBLIC_2026-04-18.md:50:  - deterministic integrity checks, hybrid signature verification, and anchor-hardening evidence
+docs/analysis/EthicBit_CEMU_v3_7_0_plus_Comparativa_Frameworks.md:57:- Anchor Receipt;
+docs/analysis/EthicBit_CEMU_v3_7_0_plus_Comparativa_Frameworks.md:139:- Anchor Receipt;
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:22:**3. AEM v1.1 Artifact Assurance Continuity (PR B)** — Formalizes that AEM v1.1 remains the active Artifact Assurance layer. AEM v1.1 is not replaced by AEM-EVOLVE™, AI-ME Gates, Fast Path, or Triple Anchor. Covers 23 artifact types and defines the fail-closed rule: if `artifact_assurance_required=true` and `artifact_verified=false`, no claim may reach PASS.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:42:**12. v4.0 External Validation Roadmap (PR J)** — Roadmap for future externalized validation with 8 explicit acceptance criteria: third-party reproduction, external security review, managed cloud, HSM evidence, AEM v1.1 reverification, Triple Anchor verification, Fast Path independent benchmark, external claim review. Includes Reproduction Kit v4.0 with checklists and Third-Party Reproduction Report Template.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:57:Triple Anchor:             Selected artifacts anchored       ACTIVE
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:104:Not universal public anchoring unless separately evidenced.
+docs/canonical/Authority_Matrix.case_003.md:48:| Anchor Prepare | Anchor Preparation Bridge | HUMAN_SUPERVISED | Sí | Preparación de anchor bajo control supervisado |
+docs/canonical/Authority_Matrix.case_003.md:49:| Anchor Receipt | Anchor Receipt Framework | AUTONOMOUS_WITH_AUDIT | No | Receipt automático tras confirmación verificable |
+docs/canonical/Authority_Matrix.case_003.md:50:| Anchor Verification | External Anchor Verification Logic | AUTONOMOUS_WITH_AUDIT | No | Verificación reproducible del evento onchain |
+docs/canonical/Authority_Matrix.case_003.md:65:La captura, fijación o aislamiento de un output no equivale por sí sola a elevación, anchor o clausura formal.
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Canonical_Text.md:25:- cómo se articulan freeze interno, bundle soberano, Anchor Receipt, verification pack y clausura formal;
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:98:6. bundle → Anchor Receipt  
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:99:7. Anchor Receipt → verification pack  
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:116:- consistencia del anchor receipt
+docs/canonical/EthicBit_CEMU_v3_7_0_plus_Compliance_Cross_Reference_Matrix.md:120:- verificación externa del triple anchor
+docs/whitepapers/WHITEPAPER_V1_5_AEM_EVOLVE_ENTERPRISE_HARDENING.md:118:  V1_1-MULTI-ANCHOR            MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:19:AEM-EVOLVE™ v1.1 established the governed change assurance lifecycle: multi-anchor verification, HITL signature enforcement, receipt forgery resistance, and regulatory mapping. v1.1 left one gap: the process of evaluating evidence and producing a governance outcome recommendation remained informal — dependent on human analysts reading reports.
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:31:EthicBit audits, hashes, anchors, and preserves the claim boundary.
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:51:│  multi-anchor · receipt sealing · HITL signatures   │
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:54:│  claim boundary · audit · hash · anchor             │
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:120:| Anchor integrity | 0.20 |
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:218:| Multi-anchor verifier | Anchor integrity score input |
+docs/whitepapers/WHITEPAPER_V1_2_AEM_EVOLVE_MECHANICAL_REASONING_LAYER.md:221:| Official status signer | Status anchoring post-recommendation |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:17:- Unified multi-anchor verification across Ethereum mainnet and triple public anchor
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:25:> AEM-EVOLVE™ v1.1 extends the v1.0 public controlled-environment release with regulatory mapping evidence, governance-effectiveness metrics, multi-anchor verification, HITL signature verification, receipt-forgery testing, signed official status evidence, and canonical claim-language controls.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:37:| Multi-anchor verification report | partial | ✓ |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:87:4. AEM-EVOLVE™ v1.1 provides multi-anchor verification evidence for selected public integrity anchors.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:130:## 7. Multi-Anchor Verification
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:133:- Ethereum mainnet execution anchor (`ethereum-mainnet`, tx confirmed)
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:134:- EthicBit triple public anchor
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:138:python3 demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:139:# MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:142:**Report:** `assurance/evolve-multi-agent/v1_1/multi_anchor_verification_report.json`
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:144:Anchor verification proves timestamped integrity references — not certification, regulatory approval, or production readiness.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:215:| Multi-anchor verifier | `demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py` |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:216:| Multi-anchor report | `assurance/evolve-multi-agent/v1_1/multi_anchor_verification_report.json` |
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:235:python3 demos/aem-evolve-multi-agent-api/tools/anchors/multi_anchor_verifier.py
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:245:MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:257:> AEM-EVOLVE™ v1.1 is regulator-mappable, governance-measurable, multi-anchor-verifiable, HITL-hardened, receipt-forgery-tested, and official-status-signed.
+docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md:313:It provides documented, verifiable evidence that the governed change assurance architecture is regulator-mappable, governance-measurable, multi-anchor-verifiable, HITL-hardened, receipt-forgery-tested, and official-status-signed — within declared scope.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:76:- Anchor receipt reference storage
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:79:Current evidence: `docs/anchors/` contains hash records and mainnet anchor receipt. Verification receipts exist for v2.0 evidence artifacts.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:136:  ├─ Triple Anchor (External Anchoring)
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:137:  │    └─ Anchors selected evidence states externally
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:173:              → Anchor (Triple Anchor where receipts exist)
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:217:**Important:** Fast Path does not recalculate full Triple Anchor, Strong Closure, or complete AI-ME evidence per enforcement tick. It operates on inherited state.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:223:## 14. Triple Anchor as External Material Anchor Layer
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:225:Triple Anchor anchors selected evidence states through external persistence targets. Where anchor receipts exist, they provide external material reference for the anchored artifacts.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:227:Current anchor evidence:
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:228:- `docs/anchors/AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json`
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:229:- `assurance/evolve-multi-agent/AEM_EVOLVE_MULTI_AGENT_API_ANCHOR_RECEIPT.json`
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:231:Not every artifact is anchored. Anchoring is selective and receipt-based.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:260:Triple Anchor:            Selected artifacts anchored    ACTIVE
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:271:- v3.0 does not claim that all governance, anchoring, closure, AI-ME evidence execution or external validation processes operate within Fast Path latency.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:272:- Triple Anchor is selective. Not every artifact is anchored.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:294:- Public anchoring of every artifact
+docs/whitepapers/WHITEPAPER_V1_4_AEM_EVOLVE_PRODUCTION_HARDENING.md:137:  V1_1-MULTI-ANCHOR            MULTI_ANCHOR_VERIFICATION=PASS
+docs/whitepapers/WHITEPAPER_V1_3_AEM_EVOLVE_GAPS_CLOSURE.md:115:| v1.1 | 6 (regulatory mapping, governance metrics, multi-anchor, HITL signature, receipt forgery, official status) |
+docs/technology/ETHICBIT_FULL_TECHNOLOGY_STATE_V3_0.md:36:- AEM-EVOLVE v3.0: category and market anchor release.
+docs/roadmap/AEM_EVOLVE_V1_0_ROADMAP.md:3:**From Anchored Controlled Demonstration to Reproducible, Measured, Adversarially Tested Multi-Agent Governance**
+
+=== 10. EXTERNAL VALIDATION STATUS SEARCH ===
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:197:- Third-party reproduction
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:225:- Third-party reproduction of evidence
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:226:- External security review
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:227:- Managed cloud deployment target
+docs/releases/AEM_EVOLVE_V3_0_CATEGORY_AND_DOCTRINE_RELEASE.md:232:- External claim review and public auditability
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:42:**12. v4.0 External Validation Roadmap (PR J)** — Roadmap for future externalized validation with 8 explicit acceptance criteria: third-party reproduction, external security review, managed cloud, HSM evidence, AEM v1.1 reverification, Triple Anchor verification, Fast Path independent benchmark, external claim review. Includes Reproduction Kit v4.0 with checklists and Third-Party Reproduction Report Template.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_0.md:101:Not third-party reproduction.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:273:- v4.0 external validation is future roadmap. No third-party reproduction has been completed.
+docs/whitepapers/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_FOR_AI_V3_0.md:292:- Third-party reproduction
+docs/technology/ETHICBIT_FULL_TECHNOLOGY_STATE_V3_0.md:103:- No independent third-party reproduction unless separately evidenced.
+docs/roadmap/AEM_EVOLVE_V1_5_PR_ROADMAP.md:27:| PR 2 | `feat/aem-evolve-v1-5-hsm-signing-provider` | feat: add PKCS#11 and KMS signing provider stubs | HSM signing |
+docs/unified/MECHANICAL_ETHICS_ASSURANCE_FOR_AI_UNIFIED_STACK_v0_1.md:116:PENDING_EXTERNAL_REVIEW
+docs/unified/ETHICBIT_UNIFIED_STACK_v0_1.md:116:PENDING_EXTERNAL_REVIEW
+docs/reproducibility/AEM_V1_1_REPRODUCIBILITY_EXTENSION.md:25:- third-party reproduction completed;
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md:115:Not third-party reproduction.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_FAST_PATH_V1_0_EVIDENCE.md:95:Not third-party reproduction.
+docs/evolve/AEM_EVOLVE_CONCEPT_PAPER_v0_3.md:56:- **Canonical Outcomes**: PASS, SCOPE_LIMITED, FAIL_CLOSED, REJECTED_OVERCLAIM, PENDING_EXTERNAL_REVIEW.
+docs/architecture/AEM_V1_1_ARTIFACT_ASSURANCE_CONTINUITY.md:232:**v4.0 (Externalized Validation):** v4.0 includes AEM v1.1 artifact reverification as a required component of third-party reproduction. External reviewers must verify artifact hashes and manifests through AEM v1.1 procedures before confirming evidence status.
+docs/architecture/ETHICBIT_CONSTITUTIONAL_TECHNOLOGY_BRIDGE.md:216:- Third-party reproduction
+docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md:1:# Third-Party Reproduction Report Template
+docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md:107:*Third-Party Reproduction Report Template v4.0 — EthicBit / CEMU v3.7.0+*
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:1:# Third-Party Reproduction Kit v4.0
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:23:- Docker or Colima (local) OR managed cloud environment
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:45:docker-compose up -d  # or equivalent managed cloud setup
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:63:# Expected: CONTROLLED_EVIDENCE_PARTIAL — 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:87:| v4.0 controlled evidence | `CONTROLLED_EVIDENCE_PARTIAL 3/8` | `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json` |
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:140:- [ ] For independent benchmark: run in managed cloud environment and record elapsed_ms independently
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:162:2. Fast Path benchmark results in `assurance/v4_0/evidence/V4_0_07_FAST_PATH_BENCHMARK_ARTIFACT.json` are from controlled local environment — not managed cloud. Independent benchmark required for v4.0.
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:165:5. External security review is not part of reproduction kit scope — requires separate independent engagement.
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:166:6. 5/8 v4.0 acceptance criteria are PENDING_EXTERNAL — see `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json`.
+docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md:187:*Third-Party Reproduction Kit v4.0 — EthicBit / CEMU v3.7.0+ — 2026-05-12*
+docs/deployment/AEM_EVOLVE_V2_0_STAGING_CONTROLLED_CLOUD_TARGET.md:93:### 5.2 KMS/HSM Signing Provider
+docs/deployment/AEM_EVOLVE_V2_0_STAGING_CONTROLLED_CLOUD_TARGET.md:244:2. Configure KMS/HSM signing provider
+docs/ai-me/AI_ME_GATES_SPEC_V3_1.md:82:**Outcomes:** PASS | SCOPE_LIMITED | FAIL_CLOSED | PENDING_EXTERNAL_REVIEW
+docs/ai-me/AI_ME_GATES_SPEC_V3_1.md:133:**Outcomes:** PASS | SCOPE_LIMITED | FAIL_CLOSED | PENDING_EXTERNAL_REVIEW
+docs/ai-me/AI_ME_GATES_SPEC_V3_1.md:181:**Outcomes:** PASS | SCOPE_LIMITED | FAIL_CLOSED | PENDING_EXTERNAL_REVIEW
+docs/ai-me/AI_ME_GATES_SPEC_V3_1.md:228:**Outcomes:** PASS | SCOPE_LIMITED | FAIL_CLOSED | PENDING_EXTERNAL_REVIEW
+docs/ai-me/AI_ME_GATES_SPEC_V3_1.md:473:**Outcomes:** PASS | SCOPE_LIMITED | FAIL_CLOSED | PENDING_EXTERNAL_REVIEW
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:14:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:38:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:62:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:86:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:110:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:160:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:234:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json:258:      "default_outcome": "PENDING_EXTERNAL_REVIEW",
+docs/ai-me/AI_ME_CLAIM_BOUNDARY_V3_1.md:56:| **PENDING_CLAIM** | Evidence exists but is pending external review; receives PENDING_EXTERNAL_REVIEW |
+docs/ai-me/AI_ME_EVIDENCE_SCHEMA_V3_1.json:161:        "PENDING_EXTERNAL_REVIEW"
+docs/ai-me/AI_ME_EVIDENCE_SCHEMA_V3_1.json:179:          "enum": ["PASS", "SCOPE_LIMITED", "FAIL_CLOSED", "PENDING_EXTERNAL_REVIEW", "NOT_APPLICABLE"]
+docs/ai-me/AI_ME_IMPLEMENTATION_ROADMAP_V3_1.md:66:Third-party reproduction of evidence. External security review. Independent Fast Path benchmark. v4.0 External Validation Release.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:6:**Status:** CONTROLLED_EVIDENCE_PARTIAL
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:10:**v4.0 controlled evidence result:** CONTROLLED_EVIDENCE_PARTIAL — 3/8 criteria CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:18:**1. Evidence artifacts (8)** — `assurance/v4_0/evidence/`. One JSON artifact per v4.0 criterion, each declaring `controlled_status` (CONTROLLED_PASS or PENDING_EXTERNAL) with scope qualifiers and explicit non-claims.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:22:**3. Controlled evidence report** — `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json`. Status: CONTROLLED_EVIDENCE_PARTIAL. Records: 8 criteria, 3 CONTROLLED_PASS, 5 PENDING_EXTERNAL. `v4_0_external_validation_release_claimed: false`.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:32:| 1 | Third-party reproduction | **PENDING_EXTERNAL** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:33:| 2 | External security review | **PENDING_EXTERNAL** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:34:| 3 | Managed cloud deployment | **PENDING_EXTERNAL** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:35:| 4 | HSM signing | **PENDING_EXTERNAL** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:36:| 5 | AEM v1.1 reverification | **CONTROLLED_PASS** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:37:| 6 | Triple Anchor verification | **CONTROLLED_PASS** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:38:| 7 | Fast Path benchmark | **CONTROLLED_PASS** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:39:| 8 | External claim review | **PENDING_EXTERNAL** |
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:43:## CONTROLLED_PASS details
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:55:Non-claim: controlled local environment only. Not managed cloud. Not independent measurement.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:59:## PENDING_EXTERNAL criteria (5/8)
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:63:- **Third-party reproduction** — Requires independent party, separate environment
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:64:- **External security review** — Requires independent reviewer with no EthicBit affiliation
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:65:- **Managed cloud deployment** — Requires managed compute, networking, PostgreSQL, Prometheus/Grafana
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:66:- **HSM signing** — Requires `AEM_KMS_PROVIDER` in external managed environment
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:67:- **External claim review** — Requires independent reviewer to evaluate claim boundaries
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:85:v4.0 External Validation:  CONTROLLED_EVIDENCE_PARTIAL (3/8)         CONTROLLED
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:98:v4.0 controlled environment evidence execution CONTROLLED_EVIDENCE_PARTIAL (3/8 criteria CONTROLLED_PASS, 5/8 PENDING_EXTERNAL) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:104:Third-party reproduction NOT completed.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:105:External security review NOT completed.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:106:Managed cloud deployment NOT completed.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:108:External claim review NOT completed.
+docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md:111:Fast Path benchmark: controlled local environment — not managed cloud — not independent.
+docs/production/AEM_EVOLVE_V2_0_PRODUCTION_READINESS_GATE_CHECKLIST.md:176:- [ ] KMS/HSM signing failure
+docs/external-validation/V4_0_THIRD_PARTY_REPRODUCTION_INSTRUCTIONS.md:1:# v4.0 Third-Party Reproduction Instructions
+docs/external-validation/V4_0_THIRD_PARTY_REPRODUCTION_INSTRUCTIONS.md:21:This template does not constitute third-party reproduction until completed by an independent party.
+docs/external-validation/V4_0_EXTERNAL_SECURITY_REVIEW_SCOPE.md:1:# v4.0 External Security Review Scope
+docs/external-validation/V4_0_EXTERNAL_SECURITY_REVIEW_SCOPE.md:4:**Purpose:** Define the scope for an external security review.
+docs/external-validation/V4_0_EXTERNAL_SECURITY_REVIEW_SCOPE.md:19:This document does not claim an external security review has been completed.
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:4:**Current posture:** CONTROLLED_EVIDENCE_PARTIAL  
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:15:- v4.0 status: CONTROLLED_EVIDENCE_PARTIAL, 3/8 criteria
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:21:| 1 | Third-party reproduction | PENDING_EXTERNAL |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:22:| 2 | External security review | PENDING_EXTERNAL |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:23:| 3 | Managed cloud deployment | PENDING_EXTERNAL |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:24:| 4 | HSM signing evidence | PENDING_EXTERNAL |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:25:| 5 | AEM v1.1 reverification | CONTROLLED_PASS |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:26:| 6 | Triple Anchor verification | CONTROLLED_PASS |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:27:| 7 | Fast Path benchmark | CONTROLLED_PASS |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:28:| 8 | External claim review | PENDING_EXTERNAL |
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:34:1. Third-party reproduction
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:35:2. External security review
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:36:3. Managed cloud deployment evidence
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:37:4. HSM signing evidence
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:38:5. External claim review
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:42:This package prepares the external engagement path required to move AEM-EVOLVE™ v4.0 from CONTROLLED_EVIDENCE_PARTIAL to external validation evidence collection.
+docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md:46:This package does not claim third-party reproduction, external security review completion, managed cloud validation, HSM-backed custody, external certification, regulatory approval, production readiness, cybersecurity certification, financial advice, clinical readiness, or universal public anchoring.
+
+=== 11. LOCAL VERIFICATION VERDICT ===
+LOCAL_FULL_STACK_VERIFICATION=PASS
+
+=== 12. CLAIM BOUNDARY ===
+This local verification supports controlled local technical functioning where files, summaries and checks pass.
+It does not claim external certification, third-party reproduction, regulatory approval, universal production readiness, HSM-backed custody, cybersecurity certification, financial advice, clinical readiness or universal public anchoring.
+
+============================================================
+ FULL STACK LOCAL VERIFICATION COMPLETE
+ report=results/full_stack_verification_20260512T183137Z/FULL_STACK_LOCAL_VERIFICATION.txt
+============================================================
