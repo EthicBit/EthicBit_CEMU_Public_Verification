@@ -536,6 +536,48 @@ This release is not external certification.
 
 ---
 
+## v4.0 — External Validation Process Initiated — EXTERNAL_VALIDATION_IN_PROGRESS (2026-05-14)
+
+**Posture:** EXTERNAL_VALIDATION_IN_PROGRESS  
+**Prior posture:** CONTROLLED_EVIDENCE_ADVANCED  
+**Constitutional regime:** EthicBit / CEMU v3.7.0+  
+**Initiation date:** 2026-05-14
+
+The v4.0 external validation process has been formally initiated. All controlled-environment prerequisites are complete: AI-ME v3.1 EVIDENCE_PASS (12/12), Fast Path v1.0 EVIDENCE_PASS (9/9), Sepolia on-chain anchor (block 10840044), Reproduction Kit v4.0 READY.
+
+### Permitted claim
+
+EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated.
+
+### Non-claims
+
+```
+v4.0 validated — NOT claimed
+third-party reproduced — NOT claimed
+externally certified — NOT claimed
+production-ready — NOT claimed
+regulatory-approved — NOT claimed
+```
+
+### External workstreams open
+
+| Order | Criterion | Status |
+|---|---|---|
+| 1 | Third-party reproduction | PENDING_EXTERNAL |
+| 2 | External security review | PENDING_EXTERNAL |
+| 3 | Managed cloud deployment | PENDING_EXTERNAL |
+| 4 | HSM / KMS signing | PENDING_EXTERNAL |
+| 5 | External claim review | PENDING_EXTERNAL |
+
+### Key artifacts
+
+- `assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json`
+- `docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md`
+- `docs/external-validation/outreach/V4_0_EXTERNAL_REVIEWER_OUTREACH_PACK.md`
+- `docs/STATUS_BULLETIN_PUBLIC_2026-05-14_V4_0_EXTERNAL_VALIDATION_INITIATED.md`
+
+---
+
 ## v4.0 — Controlled Environment Evidence Execution CONTROLLED_EVIDENCE_PARTIAL (3/8 criteria) (2026-05-12)
 
 **Release tag:** `v3.1` (updated)

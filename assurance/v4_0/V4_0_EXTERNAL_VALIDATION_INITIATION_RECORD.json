@@ -1,0 +1,78 @@
+{
+  "record_type": "V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD",
+  "version": "1.0",
+  "status": "EXTERNAL_VALIDATION_IN_PROGRESS",
+  "initiation_date": "2026-05-14",
+  "prior_status": "CONTROLLED_EVIDENCE_ADVANCED",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API — v4.0 External Validation — EthicBit / CEMU v3.7.0+",
+  "git_commit_sha": "d3d5d23b",
+  "controlled_evidence_baseline": {
+    "ai_me_v3_1": "EVIDENCE_PASS — 12/12 gates, artifact_verified=true all gates",
+    "fast_path_v1_0": "EVIDENCE_PASS — 9/9 scenarios, 7/7 mandatory rules",
+    "aem_v2_0_baseline": "PASS — 14/14 gates, 140/140 checks",
+    "sepolia_anchor": {
+      "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+      "network": "sepolia-testnet",
+      "block_number": 10840044,
+      "tx_hash": "0xc5908653fa5fc60db913a21ae021d7037f6d35365e8dbaf90c55a6fb86ec4bc0",
+      "covers": "AI-ME v3.1 + Fast Path v1.0 + 12 artifact hashes"
+    },
+    "v4_0_controlled_criteria_pass": 3,
+    "v4_0_controlled_criteria_pending_external": 5
+  },
+  "external_validation_workstreams": [
+    {
+      "order": 1,
+      "criterion": "third_party_reproduction",
+      "status": "PENDING_EXTERNAL",
+      "instructions": "docs/external-validation/V4_0_THIRD_PARTY_REPRODUCTION_INSTRUCTIONS.md",
+      "kit": "docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md",
+      "template": "docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md"
+    },
+    {
+      "order": 2,
+      "criterion": "external_security_review",
+      "status": "PENDING_EXTERNAL",
+      "scope": "docs/external-validation/V4_0_EXTERNAL_SECURITY_REVIEW_SCOPE.md"
+    },
+    {
+      "order": 3,
+      "criterion": "managed_cloud_deployment",
+      "status": "PENDING_EXTERNAL",
+      "plan": "docs/external-validation/V4_0_MANAGED_CLOUD_DEPLOYMENT_EVIDENCE_PLAN.md"
+    },
+    {
+      "order": 4,
+      "criterion": "hsm_signing",
+      "status": "PENDING_EXTERNAL",
+      "plan": "docs/external-validation/V4_0_HSM_SIGNING_EVIDENCE_PLAN.md"
+    },
+    {
+      "order": 5,
+      "criterion": "external_claim_review",
+      "status": "PENDING_EXTERNAL",
+      "template": "docs/external-validation/V4_0_EXTERNAL_CLAIM_REVIEW_TEMPLATE.md"
+    }
+  ],
+  "public_package": {
+    "public_mirror": "https://github.com/EthicBit/EthicBit_CEMU_Public_Verification",
+    "latest_release": "https://github.com/EthicBit/EthicBit_CEMU_Public_Verification/releases/tag/aem-evolve-v3.1-v4-controlled-evidence-2026-05-12",
+    "third_party_kit": "docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md",
+    "report_template": "docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md",
+    "engagement_package": "docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md"
+  },
+  "outreach_message": "We are inviting you to perform an external validation review for EthicBit / AEM-EVOLVE. Current state: AEM-EVOLVE v3.1 evidence PASS, Fast Path v1.0 evidence PASS, v4.0 controlled evidence partial: 3/8 criteria controlled pass, 5/8 pending external. Scope: third-party reproduction, external security review, managed cloud deployment evidence, HSM/KMS signing evidence, and external claim review. Important boundary: This is not a request for regulatory approval, clinical validation, financial advice, cybersecurity certification, or universal production-readiness certification. The review should be limited to the evidence actually inspected and reproduced.",
+  "permitted_claim": "EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated.",
+  "non_claims": [
+    "v4.0 validated — NOT claimed",
+    "third-party reproduced — NOT claimed",
+    "externally certified — NOT claimed",
+    "production-ready — NOT claimed",
+    "regulatory-approved — NOT claimed",
+    "clinical validation — NOT claimed",
+    "financial advice — NOT claimed",
+    "cybersecurity certification — NOT claimed",
+    "universal production-readiness — NOT claimed"
+  ]
+}

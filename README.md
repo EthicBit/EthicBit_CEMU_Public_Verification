@@ -19,7 +19,7 @@ Fast Path:                 v1.0 EVIDENCE_PASS (9/9 scenarios)    EVIDENCE PASS
 Triple Anchor:             Selected artifacts anchored           ACTIVE
 Strong Closure:            v2.0 governance sign-off              ACTIVE
 Reproduction Kit:          v4.0 READY                            READY
-v4.0 External Validation:  CONTROLLED_EVIDENCE_PARTIAL (3/8)     CONTROLLED
+v4.0 External Validation:  EXTERNAL_VALIDATION_IN_PROGRESS       INITIATED
 ```
 
 > The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it.
@@ -35,7 +35,7 @@ EthicBit / CEMU v3.7.0+  (Constitutional Regime)
                       └─ Fast Path v1.0     (Pre-Execution Enforcement — EVIDENCE PASS 9/9)
                            └─ Triple Anchor  (External Anchoring — selected receipts)
                                 └─ Strong Closure  (Convergence Evaluation)
-                                     └─ v4.0 External Validation  (CONTROLLED_EVIDENCE_PARTIAL 3/8)
+                                     └─ v4.0 External Validation  (EXTERNAL_VALIDATION_IN_PROGRESS)
 ```
 
 ### Key documents (PR 0–J + K)
@@ -127,25 +127,39 @@ from fast_path.run_fast_path_evidence_v1_0 import main; main()
 
 ### Claim
 
-EthicBit has versioned and evidenced the constitutional, artifact-assurance, governance-assurance, AI evidence (AI-ME Gates v3.1 PASS 12/12), claim-boundary, performance layer (Fast Path v1.0 EVIDENCE_PASS 9/9), and v4.0 controlled evidence (CONTROLLED_EVIDENCE_PARTIAL 3/8 criteria CONTROLLED_PASS) for Mechanical Ethics Assurance for AI. AI-ME Gates v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules) + v4.0 Controlled Evidence (AEM reverification 12/12, Triple Anchor receipt verified, Fast Path benchmark 9 scenarios) — AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+ — 2026-05-12.
+EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated. AI-ME Gates v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules) + Sepolia on-chain anchor (block 10840044, covers v3.1+FastPath hashes) + v4.0 Controlled Evidence (AEM reverification 12/12, Triple Anchor on-chain confirmed, Fast Path benchmark 9 scenarios) — AEM-EVOLVE multi-agent governance API — EthicBit / CEMU v3.7.0+ — 2026-05-14.
 
 ### Non-claim
 
-Evidence scope: controlled environment only — not production deployment. v4.0 External Validation Release NOT claimed (5/8 criteria PENDING_EXTERNAL). Not third-party reproduction, not external security review, not managed cloud deployment, not HSM-backed signing, not external claim review. AEM v1.1 reverification is controlled environment only — not external party. Triple Anchor verification is structural only — no on-chain RPC. Fast Path benchmark is controlled local environment — not managed cloud. Not regulatory approval, not external certification, not complete AI ethics coverage, not universal production readiness, not full-system sub-15 ms validation, not universal public anchoring unless separately evidenced. Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence. `full_assurance_recomputed_per_tick = false` always.
+```
+v4.0 validated — NOT claimed
+third-party reproduced — NOT claimed
+externally certified — NOT claimed
+production-ready — NOT claimed
+regulatory-approved — NOT claimed
+clinical validation — NOT claimed
+financial advice — NOT claimed
+cybersecurity certification — NOT claimed
+universal production-readiness — NOT claimed
+```
+v4.0 External Validation Release NOT claimed — external validation IN PROGRESS. Sepolia anchor is testnet, not Ethereum mainnet. Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence. `full_assurance_recomputed_per_tick = false` always.
 
 ---
 
-## Latest release: AEM-EVOLVE™ v3.1 — v4.0 Controlled Evidence CONTROLLED_EVIDENCE_PARTIAL (3/8)
+## Latest: AEM-EVOLVE™ v4.0 — EXTERNAL_VALIDATION_IN_PROGRESS (2026-05-14)
 
-**Tag:** `v3.1` — 2026-05-12  
-**Type:** Controlled Evidence Execution — v4.0 Acceptance Criteria  
-**Result:** `V4_0_CONTROLLED_EVIDENCE_REPORT — CONTROLLED_EVIDENCE_PARTIAL (3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL)`
+**Posture:** `EXTERNAL_VALIDATION_IN_PROGRESS`  
+**Type:** External Validation Process Initiated  
+**Claim:** EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated.
 
-> v4.0 controlled environment evidence execution covers all 8 v4.0 acceptance criteria. 3 criteria have controlled-environment evidence (AEM reverification 12/12, Triple Anchor receipt verified, Fast Path benchmark 9 scenarios). 5 criteria are PENDING_EXTERNAL — require external parties or external infrastructure. v4.0 External Validation Release is NOT claimed.
+> External validation workstreams open for all 5 pending criteria. Reproduction Kit v4.0 READY. Public verification mirror available. Formal initiation record at `assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json`.
 
-- [Status Bulletin v4.0 Controlled Evidence](docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V4_0_CONTROLLED_EVIDENCE.md)
-- [v4.0 Controlled Evidence Report](assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json)
+- [Status Bulletin v4.0 Initiated](docs/STATUS_BULLETIN_PUBLIC_2026-05-14_V4_0_EXTERNAL_VALIDATION_INITIATED.md)
+- [Engagement Package](docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md)
+- [Outreach Pack](docs/external-validation/outreach/V4_0_EXTERNAL_REVIEWER_OUTREACH_PACK.md)
+- [Initiation Record](assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json)
 - [Reproduction Kit v4.0](docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md)
+- [Public Mirror](https://github.com/EthicBit/EthicBit_CEMU_Public_Verification)
 - [GitHub Release v3.1](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v3.1)
 
 ```bash
