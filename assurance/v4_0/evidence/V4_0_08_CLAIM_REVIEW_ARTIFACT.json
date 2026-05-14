@@ -3,17 +3,176 @@
   "criterion_number": 8,
   "criterion": "external_claim_review",
   "controlled_status": "PENDING_EXTERNAL",
+  "controlled_claim_audit_status": "CONTROLLED_CLAIM_AUDIT_PASS",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
-  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "assessment_timestamp": "2026-05-14T18:35:11.590907+00:00",
+  "assessment_type": "CONTROLLED_INTERNAL_CLAIM_AUDIT",
+  "claim_boundary_engine_status": "ACTIVE",
+  "assessment_steps_executed": [
+    "AI_ME_CLAIM_BOUNDARY_V3_1.md reviewed",
+    "AI_ME_12_claim_boundary_enforcement_artifact.json reviewed (12/12 evaluations within ceiling)",
+    "All 7 current public claims mapped to evidence artifacts",
+    "All 11 non-claims verified as correctly not claimed",
+    "Overclaim scan executed (README, status bulletin, outreach pack)",
+    "Scope qualifier audit (Sepolia testnet vs mainnet)",
+    "full_assurance_recomputed_per_tick=false enforcement verified",
+    "Evidence artifact SHA256 collected for all 7 claims",
+    "CLAIMS_AND_NON_CLAIMS.md reviewed (cumulative phase claims)"
+  ],
+  "claims_audit": [
+    {
+      "claim_id": "CA-01",
+      "claim": "EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated.",
+      "claim_class": "FULL_CLAIM",
+      "evidence_artifact": "assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json",
+      "evidence_sha256": "85df4c71940dce363748708033e8bec8d3921f3aee3461ce6724e9f27082a9ac",
+      "audit_verdict": "SUPPORTED",
+      "audit_note": "Initiation record documents posture transition to EXTERNAL_VALIDATION_IN_PROGRESS dated 2026-05-14. Permitted claim text matches evidence."
+    },
+    {
+      "claim_id": "CA-02",
+      "claim": "AI-ME Gates v3.1 PASS (12/12 gates, artifact_verified=true all gates)",
+      "claim_class": "FULL_CLAIM",
+      "evidence_artifact": "assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json",
+      "evidence_sha256": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
+      "audit_verdict": "SUPPORTED",
+      "audit_note": "Aggregate report gates_pass=12, aggregate_outcome=PASS. CBE log 12/12 within ceiling. On-chain anchor covers hash. No numeric overclaim."
+    },
+    {
+      "claim_id": "CA-03",
+      "claim": "Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules)",
+      "claim_class": "FULL_CLAIM",
+      "evidence_artifact": "assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json",
+      "evidence_sha256": "9fd864325a47553070c49f51b032e449047add3122c4ff891719822929955064",
+      "audit_verdict": "SUPPORTED",
+      "audit_note": "Verification report status=EVIDENCE_PASS. full_assurance_recomputed_per_tick=false enforced. Claim scope correctly qualified as evidence-pass, not production-pass."
+    },
+    {
+      "claim_id": "CA-04",
+      "claim": "Sepolia on-chain anchor block 10840044 \u2014 covers v3.1+FastPath hashes",
+      "claim_class": "SCOPED_CLAIM",
+      "evidence_artifact": "assurance/v4_0/V4_0_SEPOLIA_ANCHOR_RECEIPT.json",
+      "evidence_sha256": "26ca967cf1f42c9026b53ef11897eb8d485be74f48a1b2bc85de807fd11226c1",
+      "audit_verdict": "SUPPORTED_SCOPED",
+      "scope_qualifier": "testnet (Sepolia) \u2014 not Ethereum mainnet",
+      "audit_note": "Receipt ONCHAIN_BLOB_ANCHOR_VERIFIED, block=10840044. Testnet scope clearly labeled. README non-claims explicitly state Sepolia anchor is testnet. No mainnet permanence claimed."
+    },
+    {
+      "claim_id": "CA-05",
+      "claim": "v4.0 Controlled Evidence \u2014 AEM reverification 12/12",
+      "claim_class": "FULL_CLAIM",
+      "evidence_artifact": "assurance/v4_0/evidence/V4_0_05_AEM_REVERIFICATION_ARTIFACT.json",
+      "evidence_sha256": "3da2af2db4a74dc13421343a3a6ce6d12b5341bacf4ca10e435fc4245e29f54a",
+      "audit_verdict": "SUPPORTED",
+      "audit_note": "CONTROLLED_PASS, 12/12 hash match. Claim correctly qualified as controlled evidence, not external."
+    },
+    {
+      "claim_id": "CA-06",
+      "claim": "v4.0 Controlled Evidence \u2014 Triple Anchor on-chain confirmed",
+      "claim_class": "SCOPED_CLAIM",
+      "evidence_artifact": "assurance/v4_0/evidence/V4_0_06_TRIPLE_ANCHOR_ARTIFACT.json",
+      "evidence_sha256": "0253aeadc379208d937ab44e2af0aec74ee9073f9dd5b3bf528b855d74d73772",
+      "audit_verdict": "SUPPORTED_SCOPED",
+      "scope_qualifier": "new_sepolia_anchor covers v3.1+FastPath; existing mainnet anchor covers_v3_1_evidence=false",
+      "audit_note": "Scope limitation correctly documented in artifact. No overclaim of mainnet permanence for v3.1 evidence."
+    },
+    {
+      "claim_id": "CA-07",
+      "claim": "v4.0 Controlled Evidence \u2014 Fast Path benchmark 9 scenarios",
+      "claim_class": "FULL_CLAIM",
+      "evidence_artifact": "assurance/v4_0/evidence/V4_0_07_FAST_PATH_BENCHMARK_ARTIFACT.json",
+      "evidence_sha256": "5b4f3bdb8003416b5c6faa5a03a5b02d8a2a30887540ae35184bb222e3a1a588",
+      "audit_verdict": "SUPPORTED",
+      "audit_note": "CONTROLLED_PASS. Benchmark scope correctly qualified as controlled environment."
+    }
+  ],
+  "non_claims_audit": [
+    {
+      "non_claim": "v4.0 validated",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "5/8 v4.0 criteria PENDING_EXTERNAL \u2014 external validation not complete"
+    },
+    {
+      "non_claim": "third-party reproduced",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "Criterion 1 = CONTROLLED_SELF_REPRODUCTION only \u2014 no independent third party"
+    },
+    {
+      "non_claim": "externally certified",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "No external certification body engaged"
+    },
+    {
+      "non_claim": "production-ready",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "All 9 PR gates FAIL \u2014 managed cloud infrastructure not provisioned"
+    },
+    {
+      "non_claim": "regulatory-approved",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "No regulatory submission made"
+    },
+    {
+      "non_claim": "clinical validation",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "Out of scope \u2014 not a clinical system"
+    },
+    {
+      "non_claim": "financial advice",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "Out of scope \u2014 governance API, not advisory system"
+    },
+    {
+      "non_claim": "cybersecurity certification",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "No certification body engaged; bandit HIGH=0 but no pentest performed"
+    },
+    {
+      "non_claim": "Sepolia anchor equals mainnet permanence",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "Testnet scope explicitly labeled in receipt and README non-claims"
+    },
+    {
+      "non_claim": "HSM-backed signing for v4.0 evidence",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "AEM_KMS_PROVIDER not set; Ed25519 FILE_BASED used; criterion 4 PENDING_EXTERNAL"
+    },
+    {
+      "non_claim": "full_assurance_recomputed_per_tick=true",
+      "status": "CORRECTLY_NOT_CLAIMED",
+      "basis": "Fast Path snapshot explicitly sets full_assurance_recomputed_per_tick=false throughout all scenarios"
+    }
+  ],
+  "overclaims_found": [],
+  "gaps_found": [],
+  "claim_boundary_enforcement": {
+    "cbe_log_artifact": "assurance/ai-me/v3_1/evidence/AI_ME_12_claim_boundary_enforcement_artifact.json",
+    "cbe_log_sha256": "73b4c9fe18e3aaa42a71ef25084a8ef33b62c3f0caf95579437c067565d821a2",
+    "fail_closed_violations": 0,
+    "fast_path_illegal_upgrade_violations": 0,
+    "aggregate_enforcement_outcome": "PASS \u2014 all 12 claim boundary evaluations within ceiling",
+    "claim_boundary_doc": "docs/ai-me/AI_ME_CLAIM_BOUNDARY_V3_1.md",
+    "claim_boundary_doc_sha256": "6d1424f6de4b34dffd675f5b7ce7f53e8f31f0de51b1f53b6aa1c26a29ff4f52"
+  },
+  "audit_summary": {
+    "claims_reviewed": 7,
+    "claims_supported": 5,
+    "claims_supported_scoped": 2,
+    "claims_unsupported": 0,
+    "non_claims_reviewed": 11,
+    "non_claims_correctly_not_claimed": 11,
+    "overclaims_found": 0,
+    "gaps_found": 0,
+    "internal_audit_conclusion": "PASS \u2014 all 7 current public claims have supporting evidence artifacts. 2 scoped claims correctly qualified. 11 non-claims all correctly not claimed. 0 overclaims detected. Claim Boundary Engine active, 0 violations."
+  },
   "internal_claim_state": {
     "claim_boundary_engine_status": "ACTIVE",
     "fast_path_claim_ceiling": "PASS",
     "ai_me_v3_1_claim": "PASS (12/12 gates, artifact_verified=true all gates)",
     "fast_path_v1_0_claim": "EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules)",
     "aem_evolve_v2_0_claim": "PASS (14/14 gates, 140/140 checks)",
-    "v4_0_claim": "NOT_CLAIMED — external validation not completed",
-    "claim_boundary_enforcement_log": "assurance/ai-me/v3_1/evidence/AI_ME_12_claim_boundary_enforcement_artifact.json"
+    "v4_0_claim": "NOT_CLAIMED \u2014 external validation not completed"
   },
   "external_reviewer_requirements": [
     "Independent reviewer evaluates whether declared claims are supported by reproduced evidence",
@@ -21,5 +180,5 @@
     "Claim boundary adjustments made before v4.0 release",
     "Final claim set reviewed and published with evidence references"
   ],
-  "non_claim": "External claim review by an independent party has not been conducted. Internal claim boundaries are documented and enforced through the Claim Boundary Engine. External review is required for v4.0 External Validation Release."
+  "non_claim": "CONTROLLED_INTERNAL_CLAIM_AUDIT \u2014 NOT external claim review. Internal audit finds 0 overclaims, 0 unsupported claims, 0 CBE violations across 7 public claims and 11 non-claims. External claim review by an independent party with no EthicBit affiliation has not been conducted. This controlled audit does not satisfy the external claim review criterion for v4.0 External Validation Release."
 }

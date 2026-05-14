@@ -2,7 +2,7 @@
   "report_type": "V4_0_CONTROLLED_EVIDENCE_REPORT",
   "version": "4.0",
   "status": "CONTROLLED_EVIDENCE_PARTIAL",
-  "evaluation_timestamp": "2026-05-14T18:31:39.920634+00:00",
+  "evaluation_timestamp": "2026-05-14T18:35:17.002143+00:00",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
   "criteria_evaluated": 8,
@@ -116,7 +116,7 @@
       "controlled_status": "PENDING_EXTERNAL",
       "expected_status": "PENDING_EXTERNAL",
       "status_matched": true,
-      "artifact_sha256": "1c693c8ff71d50d3b576c5b850eff2a551a418c55fab0faf7b977879bfd1f6bb"
+      "artifact_sha256": "de05038cb6849249df5305dd0fcb2e4857e6262a42c36d7d9c2c1406252c5451"
     }
   ],
   "non_claim": "v4.0 External Validation Release is NOT claimed. This report covers controlled-environment evidence only. 3/8 criteria have controlled-environment evidence (CONTROLLED_PASS). 5/8 criteria require external parties or external infrastructure (PENDING_EXTERNAL). Not production deployment. Not HSM-backed signing. Not external certification. Not third-party reproduction. Not regulatory approval."
