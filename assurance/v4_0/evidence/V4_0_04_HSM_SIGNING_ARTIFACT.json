@@ -3,21 +3,115 @@
   "criterion_number": 4,
   "criterion": "hsm_signing",
   "controlled_status": "PENDING_EXTERNAL",
+  "controlled_signing_assessment_status": "CONTROLLED_ASSESSMENT_PASS_SOFTWARE_SIGNING_CODE_TIER",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
-  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "assessment_timestamp": "2026-05-14T18:31:32.858167+00:00",
+  "assessment_type": "CONTROLLED_INTERNAL_SIGNING_ASSESSMENT",
+  "assessment_steps_executed": [
+    "verify_hsm_signing_providers.py \u2014 PKCS11 + KMS class importability and inheritance",
+    "verify_key_persistence.py \u2014 Ed25519 file key load, sign, verify roundtrip",
+    "verify_signing_provider.py \u2014 ABC interface, tamper rejection, public key format",
+    "verify_signed_receipts.py \u2014 /start event and /receipt endpoint signature verification",
+    "verify_read_time_signatures.py \u2014 read-time artifact signature verification",
+    "verify_kms_signing.py (PR2) \u2014 production KMS gate check (AEM_KMS_PROVIDER unset)",
+    "Custom sign/verify roundtrip \u2014 assessment payload signed and verified",
+    "Signing artifact SHA256 collection"
+  ],
+  "signing_verifier_results": {
+    "verify_hsm_signing_providers": {
+      "gate": "HSM_SIGNING_VERIFICATION=PASS",
+      "checks_passed": "10/10",
+      "pkcs11_class_importable": true,
+      "kms_class_importable": true,
+      "software_fallback_drop_in": true
+    },
+    "verify_key_persistence": {
+      "gate": "KEY_PERSISTENCE_VERIFICATION=PASS",
+      "checks_passed": "10/10",
+      "signing_key_exists": true,
+      "pem_valid_ed25519": true,
+      "sign_verify_roundtrip": true,
+      "same_file_same_pubkey": true
+    },
+    "verify_signing_provider": {
+      "gate": "SIGNING_PROVIDER_VERIFICATION=PASS",
+      "checks_passed": "8/8",
+      "abc_abstract_methods": [
+        "public_key_pem",
+        "sign",
+        "verify"
+      ],
+      "tamper_rejected": true,
+      "missing_sig_fields_handled": true
+    },
+    "verify_signed_receipts": {
+      "gate": "SIGNED_RECEIPTS_VERIFICATION=PASS",
+      "checks_passed": "10/10",
+      "event_signature_valid": true,
+      "receipt_signature_valid": true,
+      "signing_status": "SIGNED_Ed25519_FILE"
+    },
+    "verify_read_time_signatures": {
+      "gate": "READ_TIME_SIG_VERIFICATION=PASS",
+      "checks_passed": "10/10",
+      "event_verified_at_read": true,
+      "receipt_verified_at_read": true,
+      "tampered_sig_rejected": true
+    },
+    "verify_kms_signing_pr2": {
+      "gate": "HSM_KMS_SIGNING_CHECK=FAIL",
+      "checks_passed": "9/10",
+      "C01_kms_provider_configured": false,
+      "C02_kms_module_importable": true,
+      "C03_four_providers_supported": true,
+      "C04_load_kms_config_correct": true,
+      "C05_from_env_correct": true,
+      "C06_gate_fail_closed": true,
+      "C07_C10_skipped_no_provider": true,
+      "blocking": "AEM_KMS_PROVIDER not set \u2014 HSM/KMS not provisioned"
+    }
+  },
   "signing_infrastructure": {
     "kms_provider_module": "demos/aem-evolve-multi-agent-api/tools/signing/production_kms_provider.py",
-    "supported_providers": ["aws_kms", "gcp_kms", "azure_key_vault", "pkcs11"],
+    "supported_providers": [
+      "aws_kms",
+      "gcp_kms",
+      "azure_key_vault",
+      "pkcs11"
+    ],
     "kms_provider_configured": false,
     "aem_kms_provider_env_set": false,
-    "kms_gate_verifier": "demos/aem-evolve-multi-agent-api/tools/production_readiness/verify_kms_signing.py",
-    "gate_result_without_provider": "FAIL (correct and expected for unset AEM_KMS_PROVIDER)"
+    "gate_result_without_provider": "HSM_KMS_SIGNING_CHECK=FAIL (correct and expected \u2014 fail-closed)",
+    "software_signing_active": true,
+    "software_signing_algorithm": "Ed25519",
+    "software_signing_type": "FILE_BASED",
+    "sign_verify_roundtrip_confirmed": true,
+    "tamper_rejection_confirmed": true,
+    "public_key_sha256": "258699bd2992fa00936427af1edad606edd40a5b51a68a2981103708bb39e2fa"
   },
   "fast_path_signing_state": {
     "v1_0_signature": "EVIDENCE_SIGNED_CONTROLLED_ENV_2026-05-12",
     "signature_type": "deterministic_controlled_string",
-    "hsm_backed": false
+    "hsm_backed": false,
+    "software_ed25519_backed": true,
+    "signing_status_in_receipts": "SIGNED_Ed25519_FILE"
   },
-  "non_claim": "HSM/KMS signing has not been configured. AEM_KMS_PROVIDER env var not set. Fast Path v1.0 snapshot signing used a deterministic controlled-environment signature, not an HSM-backed signature. HSM evidence for key signing operations requires AEM_KMS_PROVIDER configuration in an external managed environment."
+  "artifact_sha256s": {
+    "signing_key_pem": "5ff2e71d684d605acca13c0486fa95c6ed3ce80603e80f98e00afb41d7882b04",
+    "production_kms_provider_py": "6522ae2855064f519a677d5904f3492ad51d00eba44cf59316f0c711b319d9c7",
+    "kms_signing_provider_py": "ad636492756e886d0307413b81795ef05694f6eb844df8e76d82a4c9febdf089",
+    "pkcs11_signing_provider_py": "345efcff8c4567daf503ea98cb60990752ddb88d07b2c629372ad66ff658de71",
+    "file_signing_provider_py": "3107ad0684cc923382d512806570d5207d35a0e1805e3e3bae90dfb779329262",
+    "signing_provider_py": "871af4e91d9a5bd17ee7cf52c937daa92eba3784cc055cd5a21ea19b7b342600"
+  },
+  "hsm_provisioning_required": [
+    "AEM_KMS_PROVIDER: one of aws_kms | gcp_kms | azure_key_vault | pkcs11",
+    "AEM_KMS_KEY_ID: key ARN or resource name in the managed KMS",
+    "AEM_KMS_REGION: cloud region (AWS/GCP)",
+    "Key creation with non_exportable=True posture",
+    "Sign/verify roundtrip with live KMS endpoint",
+    "Audit log active in KMS provider"
+  ],
+  "non_claim": "CONTROLLED_INTERNAL_SIGNING_ASSESSMENT \u2014 NOT HSM/KMS signing. All software-tier signing verifiers pass (48/48 checks across 5 verifiers). AEM_KMS_PROVIDER env var not set. Fast Path v1.0 snapshot signing used a deterministic controlled-environment signature, not an HSM-backed signature. PR2 gate (HSM_KMS_SIGNING_CHECK) fails correctly with fail-closed behavior. HSM/KMS signing evidence requires AEM_KMS_PROVIDER configuration in an external managed environment with a real KMS key."
 }
