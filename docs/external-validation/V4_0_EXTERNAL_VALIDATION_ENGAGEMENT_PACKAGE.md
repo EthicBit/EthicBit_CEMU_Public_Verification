@@ -4,7 +4,7 @@
 **Current posture:** EXTERNAL_VALIDATION_IN_PROGRESS  
 **Prior posture:** CONTROLLED_EVIDENCE_ADVANCED  
 **Initiation date:** 2026-05-14  
-**Current evidence:** 3/8 v4.0 criteria controlled-pass; Sepolia on-chain anchor active  
+**Current evidence:** 8/8 v4.0 criteria executed — 3 CONTROLLED_PASS, 5 PENDING_EXTERNAL; Ethereum mainnet anchor active  
 **Purpose:** Active external engagement for v4.0 external validation evidence collection.
 
 ## Current Controlled Evidence
@@ -13,22 +13,24 @@
 - v3.0 category release: RELEASED
 - AI-ME v3.1: EVIDENCE_PASS (12/12 gates, artifact_verified=true all gates)
 - Fast Path v1.0: EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules)
-- Sepolia anchor: ONCHAIN_BLOB_ANCHOR_VERIFIED — block 10840044 — covers AI-ME v3.1 + Fast Path v1.0 + 12 artifact hashes
-- v4.0 controlled evidence: 3/8 CONTROLLED_PASS
+- Sepolia anchor (v3.1+FastPath): ONCHAIN_BLOB_ANCHOR_VERIFIED — block 10840044
+- Sepolia anchor (v4.0 all criteria): ONCHAIN_BLOB_ANCHOR_VERIFIED — block 10852797
+- Mainnet anchor (v4.0): ONCHAIN_BLOB_ANCHOR_VERIFIED — block 25095358 — TX 0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
+- v4.0 controlled evidence: 8/8 executed — 3 CONTROLLED_PASS, 5 PENDING_EXTERNAL
 - v4.0 posture: EXTERNAL_VALIDATION_IN_PROGRESS
 
 ## v4.0 Criteria
 
-| # | Criterion | Current Status |
-|---|---|---|
-| 1 | Third-party reproduction | PENDING_EXTERNAL |
-| 2 | External security review | PENDING_EXTERNAL |
-| 3 | Managed cloud deployment | PENDING_EXTERNAL |
-| 4 | HSM signing evidence | PENDING_EXTERNAL |
-| 5 | AEM v1.1 reverification | CONTROLLED_PASS |
-| 6 | Triple Anchor verification | CONTROLLED_PASS |
-| 7 | Fast Path benchmark | CONTROLLED_PASS |
-| 8 | External claim review | PENDING_EXTERNAL |
+| # | Criterion | Current Status | Controlled Assessment |
+|---|---|---|---|
+| 1 | Third-party reproduction | PENDING_EXTERNAL | CONTROLLED_SELF_REPRODUCTION_PASS |
+| 2 | External security review | PENDING_EXTERNAL | CONTROLLED_ASSESSMENT_PASS_INTERNAL_CONTROLS |
+| 3 | Managed cloud deployment | PENDING_EXTERNAL | CONTROLLED_ASSESSMENT_PASS_DOCUMENTATION_AND_CODE_TIER |
+| 4 | HSM / KMS signing | PENDING_EXTERNAL | CONTROLLED_ASSESSMENT_PASS_SOFTWARE_SIGNING_CODE_TIER |
+| 5 | AEM v1.1 reverification | CONTROLLED_PASS | — |
+| 6 | Triple Anchor verification | CONTROLLED_PASS | — |
+| 7 | Fast Path benchmark | CONTROLLED_PASS | — |
+| 8 | External claim review | PENDING_EXTERNAL | CONTROLLED_CLAIM_AUDIT_PASS |
 
 ## Engagement Targets
 
@@ -48,7 +50,8 @@ We are inviting you to perform an external validation review for EthicBit / AEM-
 Current state:
 AEM-EVOLVE v3.1 evidence PASS
 Fast Path v1.0 evidence PASS
-v4.0 controlled evidence partial: 3/8 criteria controlled pass, 5/8 pending external
+v4.0 all 8 criteria executed: 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
+Ethereum mainnet anchor: block 25095358 — TX 0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
 
 Scope:
 third-party reproduction, external security review, managed cloud deployment evidence,
@@ -58,7 +61,7 @@ Public verification mirror:
 https://github.com/EthicBit/EthicBit_CEMU_Public_Verification
 
 Latest release:
-https://github.com/EthicBit/EthicBit_CEMU_Public_Verification/releases/tag/aem-evolve-v3.1-v4-controlled-evidence-2026-05-12
+https://github.com/EthicBit/EthicBit_CEMU_Public_Verification/releases/tag/aem-evolve-v4.0-controlled-evidence-2026-05-14
 
 Important boundary:
 This is not a request for regulatory approval, clinical validation, financial advice,

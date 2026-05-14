@@ -14,7 +14,8 @@ We are inviting you to perform an external validation review for EthicBit / AEM-
 Current state:
 AEM-EVOLVE v3.1 evidence PASS
 Fast Path v1.0 evidence PASS
-v4.0 controlled evidence partial: 3/8 criteria controlled pass, 5/8 pending external
+v4.0 all 8 criteria executed: 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
+Ethereum mainnet anchor: block 25095358 — TX 0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
 
 Scope:
 third-party reproduction, external security review, managed cloud deployment evidence, HSM/KMS signing evidence, and external claim review.
@@ -23,7 +24,7 @@ Public verification mirror:
 https://github.com/EthicBit/EthicBit_CEMU_Public_Verification
 
 Latest release:
-https://github.com/EthicBit/EthicBit_CEMU_Public_Verification/releases/tag/aem-evolve-v3.1-v4-controlled-evidence-2026-05-12
+https://github.com/EthicBit/EthicBit_CEMU_Public_Verification/releases/tag/aem-evolve-v4.0-controlled-evidence-2026-05-14
 
 Important boundary:
 This is not a request for regulatory approval, clinical validation, financial advice, cybersecurity certification, or universal production-readiness certification. The review should be limited to the evidence actually inspected and reproduced.
@@ -38,10 +39,13 @@ This is not a request for regulatory approval, clinical validation, financial ad
 | AEM-EVOLVE v3.0 | RELEASED |
 | AI-ME v3.1 | EVIDENCE_PASS — 12/12 gates, artifact_verified=true all |
 | Fast Path v1.0 | EVIDENCE_PASS — 9/9 scenarios, 7/7 mandatory rules |
-| Sepolia anchor | ONCHAIN — block 10840044 — covers v3.1+FastPath hashes |
-| v4.0 controlled | 3/8 CONTROLLED_PASS |
+| Sepolia anchor (v3.1+FastPath) | ONCHAIN — block 10840044 |
+| Sepolia anchor (v4.0 all criteria) | ONCHAIN — block 10852797 |
+| Mainnet anchor (v4.0) | ONCHAIN — block 25095358 |
+| v4.0 controlled | 8/8 executed — 3 CONTROLLED_PASS, 5 PENDING_EXTERNAL |
 
-Sepolia anchor TX: `0xc5908653fa5fc60db913a21ae021d7037f6d35365e8dbaf90c55a6fb86ec4bc0`
+Mainnet anchor TX: `0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41`
+Explorer: https://etherscan.io/tx/0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
 
 ---
 
@@ -74,7 +78,7 @@ We are seeking external review for one or more of the following:
 ```bash
 git clone https://github.com/EthicBit/EthicBit_CEMU_Public_Verification
 cd EthicBit_CEMU_Public_Verification
-git checkout aem-evolve-v3.1-v4-controlled-evidence-2026-05-12
+git checkout aem-evolve-v4.0-controlled-evidence-2026-05-14
 
 # Run AI-ME v3.1 evidence
 python3 demos/aem-evolve-multi-agent-api/tools/ai_me/run_ai_me_evidence_v3_1.py
@@ -86,7 +90,7 @@ python3 demos/aem-evolve-multi-agent-api/tools/fast_path/run_fast_path_evidence_
 
 # Run v4.0 controlled evidence
 python3 demos/aem-evolve-multi-agent-api/tools/v4_0/run_v4_0_evidence.py
-# Expected: CONTROLLED_EVIDENCE_PARTIAL 3/8
+# Expected: 8 criterion artifacts — 3 CONTROLLED_PASS, 5 PENDING_EXTERNAL
 ```
 
 Full instructions: `docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md`
