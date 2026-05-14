@@ -74,7 +74,10 @@
     "mainnet_anchor_for_v3_1": false,
     "v4_0_controlled_evidence_anchored": true,
     "v4_0_anchor_block": 10852797,
-    "v4_0_anchor_tx": "0xf26be6ccce3fd71b8a561c71073f039e823f2e1122179459d7e66e7bae040b2d"
+    "v4_0_anchor_tx": "0xf26be6ccce3fd71b8a561c71073f039e823f2e1122179459d7e66e7bae040b2d",
+    "v4_0_mainnet_anchor": true,
+    "v4_0_mainnet_block": 25095358,
+    "v4_0_mainnet_tx": "0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41"
   },
   "non_claim": "New anchor is Sepolia testnet \u2014 not Ethereum mainnet. Testnet anchor provides timestamped integrity reference for v3.1+FastPath evidence but does not carry the same permanence guarantees as mainnet. Mainnet anchor for v3.1 evidence is required for v4.0 External Validation Release.",
   "v4_0_controlled_evidence_anchor": {
@@ -103,5 +106,22 @@
       "ai_me_v3_1_aggregate": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
       "fast_path_v1_0": "ab3553d0c47a60247a80876c6f9637e2d39662217c289240cbabeffb776e04a3"
     }
+  },
+  "v4_0_mainnet_anchor": {
+    "receipt_path": "assurance/v4_0/V4_0_MAINNET_ANCHOR_RECEIPT.json",
+    "receipt_sha256": "f0ed4dff2efa368f2fe657a0009f9f85bdea502b2db27e3f903d6246b4c70d8d",
+    "receipt_schema_id": "ETHICBIT_AEM_V4_0_CONTROLLED_EVIDENCE_MAINNET_ANCHOR_V1",
+    "receipt_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+    "network": "ethereum-mainnet",
+    "chain_id": 1,
+    "block_number": 25095358,
+    "tx_hash": "0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41",
+    "block_explorer_url": "https://etherscan.io/tx/0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41",
+    "blob_versioned_hash": "0x016999367d98aa0fa766fd5e0e6e51cb7c33ea0d964a84e0eb8103dabde0af51",
+    "timestamp_utc": "2026-05-14T19:06:40.875242+00:00",
+    "git_commit_sha": "7f3a47d70e0db0de",
+    "covers_all_8_criterion_artifacts": true,
+    "covers_v4_0_controlled_evidence_execution": true,
+    "network_type": "MAINNET_PERMANENT"
   }
 }

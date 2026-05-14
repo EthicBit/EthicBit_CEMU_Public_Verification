@@ -1,0 +1,48 @@
+{
+  "schema_id": "ETHICBIT_AEM_V4_0_CONTROLLED_EVIDENCE_MAINNET_ANCHOR_V1",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+  "network": "ethereum-mainnet",
+  "chain_id": 1,
+  "block_number": 25095358,
+  "tx_hash": "0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41",
+  "block_explorer_url": "https://etherscan.io/tx/0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41",
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "blob_versioned_hashes": [
+    "0x016999367d98aa0fa766fd5e0e6e51cb7c33ea0d964a84e0eb8103dabde0af51"
+  ],
+  "timestamp_utc": "2026-05-14T19:06:25.330196+00:00",
+  "anchored_at_unix": 1778785565,
+  "verification_rpcs": {
+    "tx_lookup": "https://ethereum-rpc.publicnode.com",
+    "receipt_lookup": "https://ethereum-rpc.publicnode.com"
+  },
+  "payload": {
+    "schema": "ETHICBIT_AEM_V4_0_CONTROLLED_EVIDENCE_MAINNET_ANCHOR_V1",
+    "anchor_scope": "v4.0 controlled evidence execution \u2014 all 8 criteria \u2014 2026-05-14",
+    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+    "criterion_artifact_hashes": {
+      "V4_0_01_reproduction_kit": "a41e70626ba5ebdb71a8461a40fa8856bb74f87ed92dd379437389d76bf19541",
+      "V4_0_02_security_review": "ac5731d4bad1e48cdbb5d8d54ed817af851c60efd72d2b96d60843aca1b262e9",
+      "V4_0_03_cloud_deployment": "5fc1fe3dd49d5b6adbd32195c9f36438f0633a5c676605ee576e37b584e6a72a",
+      "V4_0_04_hsm_signing": "d0c5b2d1631c42c0feaa3456d5e039cd6f0c26cb09a6e69cbd4db196985f16b0",
+      "V4_0_05_aem_reverification": "8c67403f35954bfcc635717c3fd00771b47deb638fbb6c919fb08c2203c7b1f6",
+      "V4_0_06_triple_anchor": "ed2f2913a9413a777132d70e805f3358cc48bce2160387148199455f708f8619",
+      "V4_0_07_fast_path_benchmark": "422070c92a78ff92096dfdfec14662d8e4402f61404e9e0a6586404a28379e03",
+      "V4_0_08_claim_review": "de05038cb6849249df5305dd0fcb2e4857e6262a42c36d7d9c2c1406252c5451"
+    },
+    "core_evidence_hashes": {
+      "ai_me_v3_1_aggregate": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
+      "fast_path_v1_0_verification": "ab3553d0c47a60247a80876c6f9637e2d39662217c289240cbabeffb776e04a3",
+      "v4_0_controlled_evidence_rpt": "fd37eef43ccc8ccd27ff72bd40674a43a86e824b65feb8a3e174f7b5825c16b7",
+      "v4_0_initiation_record": "85df4c71940dce363748708033e8bec8d3921f3aee3461ce6724e9f27082a9ac"
+    },
+    "criteria_controlled_pass": 3,
+    "criteria_pending_external": 5,
+    "git_commit_sha": "7f3a47d70e0db0de9f3409e1b80a4ee4a6767253",
+    "ts_unix": 1778785565,
+    "non_claim": "Ethereum mainnet anchor \u2014 timestamped integrity reference for v4.0 controlled evidence execution. Does not claim v4.0 validated, third-party reproduced, or production-ready. 5/8 criteria remain PENDING_EXTERNAL.",
+    "payload_sha256": "abc2251341274c68e575145db9578e8091490f7f393020297253ac9d026d27b4"
+  },
+  "non_claim": "Ethereum mainnet anchor \u2014 timestamped integrity reference for v4.0 controlled evidence execution. Does not claim v4.0 validated, third-party reproduced, or production-ready. 5/8 criteria remain PENDING_EXTERNAL."
+}
