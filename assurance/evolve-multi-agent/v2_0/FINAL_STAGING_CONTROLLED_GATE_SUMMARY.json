@@ -1,0 +1,109 @@
+{
+  "report_type": "AEM_EVOLVE_V2_0_FINAL_STAGING_CONTROLLED_GATE_SUMMARY",
+  "generated_utc": "2026-05-11T04:36:41.666203+00:00",
+  "target_environment": "staging_controlled_cloud",
+  "repository_head": "4cf0fb964777fefc283e0af1caf0f88bcae5c171",
+  "repository_head_short": "4cf0fb964777",
+  "overall_status": "PASS",
+  "gates_total": 14,
+  "gates_passed": 14,
+  "checks_total": 140,
+  "checks_passed": 140,
+  "claim": "AEM-EVOLVE v2.0 has collected complete v2.0 gate evidence for the staging_controlled_cloud target.",
+  "non_claims": [
+    "No universal production readiness.",
+    "No regulatory approval.",
+    "No legal compliance.",
+    "No conformity assessment.",
+    "No external certification.",
+    "No tamper-proof status.",
+    "No HSM-backed custody unless separately evidenced.",
+    "No independent external reproduction unless performed by a true third party."
+  ],
+  "gates": [
+    {
+      "pr": "PR1",
+      "gate": "PRODUCTION_OIDC_PROVIDER_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR2",
+      "gate": "HSM_KMS_SIGNING_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR3",
+      "gate": "POSTGRES_PRODUCTION_PERSISTENCE_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR4",
+      "gate": "MIGRATION_RECOVERY_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR5",
+      "gate": "MONITORING_ALERTING_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR6",
+      "gate": "INCIDENT_RESPONSE_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR7",
+      "gate": "SECURITY_REVIEW_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR8",
+      "gate": "EXTERNAL_REPRODUCTION_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR9",
+      "gate": "PRODUCTION_DEPLOYMENT_AUDIT_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR10",
+      "gate": "SLO_EVIDENCE_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR11",
+      "gate": "ROLLBACK_PROCEDURE_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR12",
+      "gate": "DISASTER_RECOVERY_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR13",
+      "gate": "PRODUCTION_READINESS_GATE",
+      "status": "PASS",
+      "checks": "10/10"
+    },
+    {
+      "pr": "PR14",
+      "gate": "GOVERNANCE_SIGNOFF_CHECK",
+      "status": "PASS",
+      "checks": "10/10"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "artifact_id": "v4_0_reproduction_kit",
+  "criterion_number": 1,
+  "criterion": "third_party_reproduction",
+  "controlled_status": "PENDING_EXTERNAL",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
+  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "kit_version": "v4.0",
+  "kit_readiness_status": "READY",
+  "kit_path": "docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md",
+  "prerequisites_met": true,
+  "prerequisites": {
+    "v3_1_ai_me_evidence": "PASS (12/12 gates, artifact_verified=true all gates)",
+    "fast_path_v1_0_evidence": "EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules)",
+    "aem_v1_1_baseline": "PASS (14/14 gates, 140/140 checks)",
+    "reproduction_kit_finalized": true,
+    "expected_outputs_documented": true,
+    "hash_verification_instructions_present": true
+  },
+  "controlled_evidence_note": "Reproduction kit is ready for third-party use. v3.1 evidence execution is complete. Third-party reproduction in an independent environment has not been executed.",
+  "non_claim": "Controlled kit preparation does not constitute third-party reproduction. External reproduction by an independent party in a separate environment is required for v4.0 External Validation Release."
+}

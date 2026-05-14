@@ -1,0 +1,45 @@
+{
+  "schema_id": "ETHICBIT_AEM_V3_1_FASTPATH_V1_0_SEPOLIA_ANCHOR_V1",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+  "network": "sepolia-testnet",
+  "chain_id": 11155111,
+  "block_number": 10840044,
+  "tx_hash": "0xc5908653fa5fc60db913a21ae021d7037f6d35365e8dbaf90c55a6fb86ec4bc0",
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "blob_versioned_hashes": [
+    "0x01a3d9490565502aa7ead253659190033a158034ad166aa8e94bb894daf9c68c"
+  ],
+  "timestamp_utc": "2026-05-12T16:56:37.375465+00:00",
+  "anchored_at_unix": 1778604978,
+  "verification_rpcs": {
+    "tx_lookup": "https://ethereum-sepolia-rpc.publicnode.com",
+    "receipt_lookup": "https://ethereum-sepolia-rpc.publicnode.com"
+  },
+  "payload": {
+    "schema": "ETHICBIT_AEM_V3_1_FASTPATH_V1_0_ANCHOR_V1",
+    "anchor_scope": "AI-ME v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9) + v4.0 CONTROLLED_EVIDENCE_PARTIAL (3/8)",
+    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+    "ai_me_v3_1_aggregate_sha256": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
+    "fast_path_v1_0_verification_sha256": "9fd864325a47553070c49f51b032e449047add3122c4ff891719822929955064",
+    "v4_0_controlled_evidence_sha256": "c3eb01f40470ef1db1039f1410240f86459ae6f1bf113dfed8863d38314a4c09",
+    "ai_me_v3_1_artifact_hashes": {
+      "AI-ME-01": "ad1135422dc0d02c9eb0fbcd08cd00e253f8b8156e744e984011ed183244a4b4",
+      "AI-ME-02": "941d99fc29cc16b2550976f2ae2ee35871fe026b247542c0aa50532c153385a6",
+      "AI-ME-03": "e8681fa86b7f4d679725858c4cd2c159ed9ebc1e40e5299c9f49747adddde989",
+      "AI-ME-04": "4ca3bd1ee945fb117090f1b29f5a997583cef4f6f612373fa04c772420a4f16a",
+      "AI-ME-05": "6580078bbf7f55a470cfd8409a2802951365cea051dec4c5e694a414aeb0c1ce",
+      "AI-ME-06": "294623a274a7beca5afb14fd16fb800c8d080739be9848c8d5871197490bc6a0",
+      "AI-ME-07": "8aaf4970c312d2b91810244995744016eaec9fb4acca5e0e2ba4e27e0cc5a0f2",
+      "AI-ME-08": "73ad90060ed5e195735f108e3345095f5c798c0b332b700cc0f526d822f01c8e",
+      "AI-ME-09": "0ab5ceea190409371ca7d1f0e7ba26474dabeb503306cdd879dd764287a881a8",
+      "AI-ME-10": "638d0a0766d73f37bb92c292db26d7b02e133256cab470659fcf4ecef6a77d9b",
+      "AI-ME-11": "65a7546ece85ff1093f97fcd119399d91400f5fd1f56badaaaa981e63eace15f",
+      "AI-ME-12": "73b4c9fe18e3aaa42a71ef25084a8ef33b62c3f0caf95579437c067565d821a2"
+    },
+    "git_commit_sha": "f276746dc401100ebe931dee2135c1183e482172",
+    "ts_unix": 1778604978,
+    "payload_sha256": "b776846d5674486e148275fb9c5ed2a01f28f2372955f2f910655a01c525527e"
+  },
+  "non_claim": "Sepolia testnet anchor \u2014 not Ethereum mainnet. Timestamped integrity reference only. Not certification, regulatory approval, production readiness, or mainnet anchor."
+}

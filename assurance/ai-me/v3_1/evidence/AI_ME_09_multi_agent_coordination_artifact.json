@@ -1,0 +1,50 @@
+{
+  "artifact_type": "multi_agent_coordination_log",
+  "gate_id": "AI-ME-09",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE LangGraph multi-agent orchestration — controlled environment — EthicBit / CEMU v3.7.0+",
+  "agent_role_manifest": [
+    {
+      "agent_id": "governance-orchestrator",
+      "role": "Coordinates overall governance pipeline: artifact ingestion, gate evaluation, HITL routing",
+      "authorization_scope": "Full governance pipeline coordination"
+    },
+    {
+      "agent_id": "hitl-gateway",
+      "role": "Manages HITL approval flow: token validation, decision recording, replay mitigation",
+      "authorization_scope": "HITL approval endpoint only"
+    },
+    {
+      "agent_id": "artifact-verifier",
+      "role": "Computes and verifies SHA256 hashes against AEM v1.1 manifests",
+      "authorization_scope": "Read-only artifact access + hash record writes"
+    },
+    {
+      "agent_id": "signing-provider",
+      "role": "Signs governance receipts with configured signing key",
+      "authorization_scope": "Signing operations on completed receipts only"
+    },
+    {
+      "agent_id": "ai-me-gate-executor",
+      "role": "Executes AI-ME gate verifiers and writes gate reports",
+      "authorization_scope": "Gate execution and assurance/ai-me/v3_1/ writes"
+    }
+  ],
+  "handoff_records": [
+    {"from": "governance-orchestrator", "to": "artifact-verifier", "event": "artifact_received", "timestamp": "2026-05-12T00:00:00+00:00"},
+    {"from": "artifact-verifier", "to": "hitl-gateway", "event": "artifact_verified", "timestamp": "2026-05-12T00:00:01+00:00"},
+    {"from": "hitl-gateway", "to": "governance-orchestrator", "event": "hitl_approved", "timestamp": "2026-05-12T00:00:02+00:00"},
+    {"from": "governance-orchestrator", "to": "signing-provider", "event": "sign_receipt", "timestamp": "2026-05-12T00:00:03+00:00"},
+    {"from": "governance-orchestrator", "to": "ai-me-gate-executor", "event": "execute_ai_me_gates", "timestamp": "2026-05-12T00:00:04+00:00"}
+  ],
+  "decision_attribution": "Each governance decision is traceable to the specific agent role that produced it via agent_id field in all records",
+  "checkpoint_mechanism": "LangGraph SQLite checkpoint store — agent state persisted per step",
+  "known_limitations": [
+    "Agent coordination log is reconstructed from deterministic execution — not a live event stream",
+    "Real-time multi-agent monitoring not implemented",
+    "Agent identity verification is role-based, not cryptographic"
+  ],
+  "aem_version": "v1.1"
+}

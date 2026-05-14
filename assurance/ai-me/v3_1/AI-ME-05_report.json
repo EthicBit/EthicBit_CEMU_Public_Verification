@@ -1,0 +1,47 @@
+{
+  "schema_version": "3.1",
+  "gate_id": "AI-ME-05",
+  "gate_name": "Agent Trace Capture Evidence",
+  "evaluation_timestamp": "2026-05-12T16:03:24.520926+00:00",
+  "operation_scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "raw_cot_captured": false,
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_assurance_required": true,
+  "artifact_assurance_status": "PASS",
+  "artifact_assurance": {
+    "aem_version": "v1.1",
+    "artifact_verified": true,
+    "artifact_manifest": "",
+    "artifact_hashes": [
+      {
+        "artifact_id": "agent_trace_artifact",
+        "algorithm": "sha256",
+        "hash": "6580078bbf7f55a470cfd8409a2802951365cea051dec4c5e694a414aeb0c1ce"
+      }
+    ],
+    "verification_receipts": [
+      "assurance/ai-me/v3_1/receipt_AI-ME-05_agent_trace_artifact.json"
+    ],
+    "public_anchor_references": []
+  },
+  "gate_outcome": "PASS",
+  "gate_outcome_reason": "Agent trace artifact verified. Rationale summary and planning metadata present. Scope declared.",
+  "claim_boundary_result": {
+    "claim_class": "FULL_CLAIM",
+    "claim_level_ceiling": "PASS",
+    "allowed_emission": true,
+    "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+  },
+  "fast_path": {
+    "enabled": false,
+    "snapshot_reference": "",
+    "snapshot_freshness_ms": null,
+    "pre_execution_verdict": "NOT_APPLICABLE",
+    "max_tick_elapsed_ms": null,
+    "full_assurance_recalculated_per_tick": false,
+    "fast_path_scope": "trace_metadata_snapshot"
+  },
+  "allowed_claim": "Agent trace evidence exists for [operation] within [scope] as of [date].",
+  "non_claim": "This gate does not claim complete agent interpretability, full chain-of-thought capture, or real-time tracing. Raw chain-of-thought is prohibited evidence.",
+  "technology_subordination_rule": "The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it."
+}

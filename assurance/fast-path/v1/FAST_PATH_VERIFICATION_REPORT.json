@@ -1,0 +1,101 @@
+{
+  "report_type": "FAST_PATH_VERIFICATION_REPORT",
+  "version": "1.0",
+  "status": "EVIDENCE_PASS",
+  "evaluation_timestamp": "2026-05-12T16:18:44.171796+00:00",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "snapshot_reference": "assurance/fast-path/v1/evidence/FAST_PATH_V1_0_SNAPSHOT.json",
+  "scenarios_executed": 9,
+  "scenarios_matched_expected": true,
+  "verdict_counts": {
+    "BLOCK": 2,
+    "DEGRADED": 1,
+    "NOT_VERIFIABLE": 1,
+    "SCOPE_LIMITED": 1,
+    "PASS": 2,
+    "FAIL_CLOSED": 2
+  },
+  "ai_me_baseline": {
+    "aggregate_outcome": "PASS",
+    "gates_pass": 12,
+    "source": "assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json"
+  },
+  "aem_artifact_assurance": {
+    "aem_version": "v1.1",
+    "summary_verified": true,
+    "artifact_count": 12,
+    "artifacts_verified": 12
+  },
+  "mandatory_rules_verified": [
+    "Cannot override AEM v1.1 artifact verification failure \u2014 VERIFIED (scenario 6)",
+    "Cannot upgrade failed AI-ME evidence \u2014 VERIFIED (scenario 7)",
+    "Must block prohibited action \u2014 VERIFIED (scenarios 3, 4)",
+    "Must scope-limit if claim exceeds ceiling \u2014 VERIFIED (scenario 5)",
+    "Must emit DEGRADED if snapshot stale \u2014 VERIFIED (scenario 8)",
+    "Must emit NOT_VERIFIABLE if snapshot unsigned \u2014 VERIFIED (scenario 9)",
+    "full_assurance_recomputed_per_tick = false always \u2014 ENFORCED"
+  ],
+  "scenarios": [
+    {
+      "label": "1. Authorized op, claim=PASS, ceiling=PASS \u2192 PASS",
+      "operation": "emit_governance_output",
+      "claim_level": "PASS",
+      "verdict": "PASS"
+    },
+    {
+      "label": "2. emit_output, claim=PASS, ceiling=PASS \u2192 PASS",
+      "operation": "emit_output",
+      "claim_level": "PASS",
+      "verdict": "PASS"
+    },
+    {
+      "label": "3. Prohibited action bypass_hitl \u2192 BLOCK",
+      "operation": "bypass_hitl",
+      "claim_level": "PASS",
+      "verdict": "BLOCK"
+    },
+    {
+      "label": "4. Prohibited action delete_all \u2192 BLOCK",
+      "operation": "delete_all_records",
+      "claim_level": "PASS",
+      "verdict": "BLOCK"
+    },
+    {
+      "label": "5. Claim PASS exceeds ceiling SCOPE_LIMITED \u2192 SCOPE_LIMITED",
+      "operation": "emit_output",
+      "claim_level": "PASS",
+      "verdict": "SCOPE_LIMITED"
+    },
+    {
+      "label": "6. AEM v1.1 summary_verified=False \u2192 FAIL_CLOSED",
+      "operation": "emit_output",
+      "claim_level": "PASS",
+      "verdict": "FAIL_CLOSED"
+    },
+    {
+      "label": "7. AI-ME aggregate FAIL_CLOSED \u2192 FAIL_CLOSED",
+      "operation": "emit_output",
+      "claim_level": "PASS",
+      "verdict": "FAIL_CLOSED"
+    },
+    {
+      "label": "8. Snapshot age 60000ms > max_tick 30000ms \u2192 DEGRADED",
+      "operation": "emit_output",
+      "claim_level": "PASS",
+      "verdict": "DEGRADED"
+    },
+    {
+      "label": "9. Unsigned snapshot \u2192 NOT_VERIFIABLE",
+      "operation": "emit_output",
+      "claim_level": "PASS",
+      "verdict": "NOT_VERIFIABLE"
+    }
+  ],
+  "benchmark_evidence": {
+    "latency_note": "Fast Path evaluation elapsed_ms recorded per verdict in assurance/fast-path/v1/verdicts/. Controlled environment timing \u2014 not a production latency benchmark.",
+    "latency_claim": null
+  },
+  "full_assurance_recomputed_per_tick": false,
+  "non_claim": "This report does not claim production readiness, full-system validation latency, HSM-backed signing, external certification, or that Fast Path subsumes the complete governance stack. Evidence scope: controlled environment only."
+}

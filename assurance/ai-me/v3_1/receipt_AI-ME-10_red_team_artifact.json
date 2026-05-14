@@ -1,0 +1,11 @@
+{
+  "receipt_type": "aem_v1_1_verification_receipt",
+  "aem_version": "v1.1",
+  "gate_id": "AI-ME-10",
+  "artifact_id": "red_team_artifact",
+  "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_10_red_team_artifact.json",
+  "artifact_hash": "638d0a0766d73f37bb92c292db26d7b02e133256cab470659fcf4ecef6a77d9b",
+  "artifact_verified": true,
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "timestamp": "2026-05-12T16:03:24.522545+00:00"
+}

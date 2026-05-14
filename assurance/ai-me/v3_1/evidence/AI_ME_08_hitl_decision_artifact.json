@@ -1,0 +1,36 @@
+{
+  "artifact_type": "hitl_decision_artifact",
+  "gate_id": "AI-ME-08",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE HITL enforcement — controlled environment — EthicBit / CEMU v3.7.0+",
+  "high_risk_output_category": "governance_decision",
+  "hitl_mechanism": "Dual-path HITL: HMAC hex token or OIDC RS256 JWT. Format auto-detected at POST /approve endpoint.",
+  "hitl_decision_record": {
+    "event_id": "ai-me-evidence-execution-2026-05-12",
+    "reviewer_id": "ethicbit-governance-operator",
+    "reviewer_identity_recorded": true,
+    "decision": "APPROVED",
+    "decision_timestamp": "2026-05-12T00:00:00+00:00",
+    "rationale": "AI-ME v3.1 evidence execution — all 12 gate artifacts produced, hash-verified, and constitutionally compliant",
+    "output_artifact_reference": "assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json",
+    "token_type": "HMAC_hex"
+  },
+  "hitl_enforcement_evidence": {
+    "endpoint": "POST /approve",
+    "wrong_sub_returns_403": true,
+    "wrong_event_id_returns_403": true,
+    "unregistered_sub_returns_403": true,
+    "token_replay_returns_409": true,
+    "verification_source": "STATUS_BULLETIN_PUBLIC_2026-05-09_V1_8.md — OIDC_WIRED_VERIFICATION=PASS (10/10)"
+  },
+  "fast_path_enforcement": "HITL requirement enforced pre-emission — Fast Path BLOCK if HITL not cleared for high-risk output",
+  "known_limitations": [
+    "HITL signing key is file-based, not HSM-backed",
+    "HITL token is a shared HMAC key, not enterprise IAM",
+    "JWKS served in-process, not a real OIDC provider endpoint",
+    "External HITL audit not conducted"
+  ],
+  "aem_version": "v1.1"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_id": "ETHICBIT_AI_ME_FINAL_GATE_SUMMARY_V3_1",
+  "version": "v3.1",
+  "generated_utc": "2026-05-12T17:20:47Z",
+  "repository_head": "d3d5d23b8e721f867c65b0f8afd3729627e9254d",
+  "repository_head_short": "d3d5d23b",
+  "source_bulletin": "docs/STATUS_BULLETIN_PUBLIC_2026-05-12_V3_1_EVIDENCE.md",
+  "source_bulletin_sha256": "5a192c548de3834f89c882445fa3bd94d102fd9f4fc4abbce6e6c167d330e4b7",
+  "status": "EVIDENCE_PASS",
+  "evidence_status": "PASS",
+  "summary_status": "PASS",
+  "gates_total": 12,
+  "gates_passed": 12,
+  "gate_suite": "AI-ME Gates v3.1",
+  "claim_boundary_status": "PRESERVED",
+  "artifact_assurance_dependency": "AEM v1.1 artifact assurance remains required for declared evidence artifacts.",
+  "fast_path_relationship": "Fast Path may enforce inherited claim ceilings before emission but does not replace AI-ME evidence execution.",
+  "claim": "AI-ME v3.1 has documented controlled evidence PASS for 12/12 gates according to the referenced public status bulletin.",
+  "non_claims": [
+    "Not third-party reproduction.",
+    "Not external certification.",
+    "Not regulatory approval.",
+    "Not production readiness.",
+    "Not clinical or diagnostic readiness.",
+    "Not financial advice.",
+    "Not cybersecurity certification.",
+    "Not HSM-backed artifact custody unless separately evidenced.",
+    "Not complete AI ethics coverage beyond the evidenced gate scope."
+  ]
+}

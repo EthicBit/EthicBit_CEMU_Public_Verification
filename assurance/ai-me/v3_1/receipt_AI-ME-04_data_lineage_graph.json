@@ -1,0 +1,11 @@
+{
+  "receipt_type": "aem_v1_1_verification_receipt",
+  "aem_version": "v1.1",
+  "gate_id": "AI-ME-04",
+  "artifact_id": "data_lineage_graph",
+  "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_04_data_provenance_artifact.json",
+  "artifact_hash": "4ca3bd1ee945fb117090f1b29f5a997583cef4f6f612373fa04c772420a4f16a",
+  "artifact_verified": true,
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "timestamp": "2026-05-12T16:03:24.520445+00:00"
+}

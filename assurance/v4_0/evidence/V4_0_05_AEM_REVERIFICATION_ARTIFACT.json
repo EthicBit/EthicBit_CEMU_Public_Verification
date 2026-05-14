@@ -1,0 +1,137 @@
+{
+  "artifact_id": "v4_0_aem_reverification",
+  "criterion_number": 5,
+  "criterion": "aem_v1_1_reverification",
+  "controlled_status": "CONTROLLED_PASS",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "Controlled re-verification of AI-ME v3.1 evidence artifacts against AEM v1.1 receipt declared hashes \u2014 not external party",
+  "evaluation_timestamp": "2026-05-12T16:33:11.245219+00:00",
+  "aem_version": "v1.1",
+  "artifacts_reverified": 12,
+  "artifacts_hash_match": 12,
+  "all_hash_match": true,
+  "reverification_procedure": "SHA256 recomputed from artifact file bytes; compared against artifact_hash field in AEM v1.1 receipt",
+  "reverification_results": [
+    {
+      "gate_id": "AI-ME-01",
+      "artifact_id": "model_evaluation_artifact",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_01_model_evaluation_artifact.json",
+      "declared_hash": "ad1135422dc0d02c9eb0fbcd08cd00e253f8b8156e744e984011ed183244a4b4",
+      "recomputed_hash": "ad1135422dc0d02c9eb0fbcd08cd00e253f8b8156e744e984011ed183244a4b4",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.518694+00:00"
+    },
+    {
+      "gate_id": "AI-ME-02",
+      "artifact_id": "fairness_report",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_02_fairness_evaluation_artifact.json",
+      "declared_hash": "941d99fc29cc16b2550976f2ae2ee35871fe026b247542c0aa50532c153385a6",
+      "recomputed_hash": "941d99fc29cc16b2550976f2ae2ee35871fe026b247542c0aa50532c153385a6",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.519624+00:00"
+    },
+    {
+      "gate_id": "AI-ME-03",
+      "artifact_id": "explainability_artifact",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_03_explainability_artifact.json",
+      "declared_hash": "e8681fa86b7f4d679725858c4cd2c159ed9ebc1e40e5299c9f49747adddde989",
+      "recomputed_hash": "e8681fa86b7f4d679725858c4cd2c159ed9ebc1e40e5299c9f49747adddde989",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.520021+00:00"
+    },
+    {
+      "gate_id": "AI-ME-04",
+      "artifact_id": "data_lineage_graph",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_04_data_provenance_artifact.json",
+      "declared_hash": "4ca3bd1ee945fb117090f1b29f5a997583cef4f6f612373fa04c772420a4f16a",
+      "recomputed_hash": "4ca3bd1ee945fb117090f1b29f5a997583cef4f6f612373fa04c772420a4f16a",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.520445+00:00"
+    },
+    {
+      "gate_id": "AI-ME-05",
+      "artifact_id": "agent_trace_artifact",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_05_agent_trace_artifact.json",
+      "declared_hash": "6580078bbf7f55a470cfd8409a2802951365cea051dec4c5e694a414aeb0c1ce",
+      "recomputed_hash": "6580078bbf7f55a470cfd8409a2802951365cea051dec4c5e694a414aeb0c1ce",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.520832+00:00"
+    },
+    {
+      "gate_id": "AI-ME-06",
+      "artifact_id": "tool_call_governance_log",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_06_tool_call_governance_artifact.json",
+      "declared_hash": "294623a274a7beca5afb14fd16fb800c8d080739be9848c8d5871197490bc6a0",
+      "recomputed_hash": "294623a274a7beca5afb14fd16fb800c8d080739be9848c8d5871197490bc6a0",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.521298+00:00"
+    },
+    {
+      "gate_id": "AI-ME-07",
+      "artifact_id": "memory_mutation_governance_log",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_07_memory_mutation_artifact.json",
+      "declared_hash": "8aaf4970c312d2b91810244995744016eaec9fb4acca5e0e2ba4e27e0cc5a0f2",
+      "recomputed_hash": "8aaf4970c312d2b91810244995744016eaec9fb4acca5e0e2ba4e27e0cc5a0f2",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.521615+00:00"
+    },
+    {
+      "gate_id": "AI-ME-08",
+      "artifact_id": "hitl_decision_artifact",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_08_hitl_decision_artifact.json",
+      "declared_hash": "73ad90060ed5e195735f108e3345095f5c798c0b332b700cc0f526d822f01c8e",
+      "recomputed_hash": "73ad90060ed5e195735f108e3345095f5c798c0b332b700cc0f526d822f01c8e",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.521930+00:00"
+    },
+    {
+      "gate_id": "AI-ME-09",
+      "artifact_id": "multi_agent_coordination_log",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_09_multi_agent_coordination_artifact.json",
+      "declared_hash": "0ab5ceea190409371ca7d1f0e7ba26474dabeb503306cdd879dd764287a881a8",
+      "recomputed_hash": "0ab5ceea190409371ca7d1f0e7ba26474dabeb503306cdd879dd764287a881a8",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.522232+00:00"
+    },
+    {
+      "gate_id": "AI-ME-10",
+      "artifact_id": "red_team_artifact",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_10_red_team_artifact.json",
+      "declared_hash": "638d0a0766d73f37bb92c292db26d7b02e133256cab470659fcf4ecef6a77d9b",
+      "recomputed_hash": "638d0a0766d73f37bb92c292db26d7b02e133256cab470659fcf4ecef6a77d9b",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.522545+00:00"
+    },
+    {
+      "gate_id": "AI-ME-11",
+      "artifact_id": "decision_log_artifact",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_11_decision_log_artifact.json",
+      "declared_hash": "65a7546ece85ff1093f97fcd119399d91400f5fd1f56badaaaa981e63eace15f",
+      "recomputed_hash": "65a7546ece85ff1093f97fcd119399d91400f5fd1f56badaaaa981e63eace15f",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.522957+00:00"
+    },
+    {
+      "gate_id": "AI-ME-12",
+      "artifact_id": "claim_boundary_enforcement_log",
+      "artifact_path": "assurance/ai-me/v3_1/evidence/AI_ME_12_claim_boundary_enforcement_artifact.json",
+      "declared_hash": "73b4c9fe18e3aaa42a71ef25084a8ef33b62c3f0caf95579437c067565d821a2",
+      "recomputed_hash": "73b4c9fe18e3aaa42a71ef25084a8ef33b62c3f0caf95579437c067565d821a2",
+      "hash_match": true,
+      "original_artifact_verified": true,
+      "receipt_timestamp": "2026-05-12T16:03:24.523270+00:00"
+    }
+  ],
+  "non_claim": "Reverification was performed in the same controlled environment as original verification, not by an independent external party. External third-party reverification is required for v4.0 External Validation Release."
+}

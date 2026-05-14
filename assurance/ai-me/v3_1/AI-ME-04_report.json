@@ -1,0 +1,51 @@
+{
+  "schema_version": "3.1",
+  "gate_id": "AI-ME-04",
+  "gate_name": "Data Provenance & Lineage Evidence",
+  "evaluation_timestamp": "2026-05-12T16:03:24.520529+00:00",
+  "data_sources": [
+    "aem_evolve_audit_sqlite",
+    "aem_evolve_artifact_manifests",
+    "aem_evolve_anchor_receipts"
+  ],
+  "lineage_scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_assurance_required": true,
+  "artifact_assurance_status": "PASS",
+  "artifact_assurance": {
+    "aem_version": "v1.1",
+    "artifact_verified": true,
+    "artifact_manifest": "",
+    "artifact_hashes": [
+      {
+        "artifact_id": "data_lineage_graph",
+        "algorithm": "sha256",
+        "hash": "4ca3bd1ee945fb117090f1b29f5a997583cef4f6f612373fa04c772420a4f16a"
+      }
+    ],
+    "verification_receipts": [
+      "assurance/ai-me/v3_1/receipt_AI-ME-04_data_lineage_graph.json"
+    ],
+    "public_anchor_references": []
+  },
+  "gate_outcome": "PASS",
+  "gate_outcome_reason": "Data lineage artifact verified. Sources declared.",
+  "claim_boundary_result": {
+    "claim_class": "FULL_CLAIM",
+    "claim_level_ceiling": "PASS",
+    "allowed_emission": true,
+    "scope_qualifier": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+"
+  },
+  "fast_path": {
+    "enabled": false,
+    "snapshot_reference": "",
+    "snapshot_freshness_ms": null,
+    "pre_execution_verdict": "NOT_APPLICABLE",
+    "max_tick_elapsed_ms": null,
+    "full_assurance_recalculated_per_tick": false,
+    "fast_path_scope": ""
+  },
+  "allowed_claim": "Data provenance evidence exists for [dataset] within [scope] as of [date].",
+  "non_claim": "This gate does not claim legal data compliance, complete lineage coverage, or data quality certification.",
+  "technology_subordination_rule": "The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it."
+}

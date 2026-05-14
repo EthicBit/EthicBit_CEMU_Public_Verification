@@ -1,0 +1,24 @@
+{
+  "artifact_type": "explainability_artifact",
+  "gate_id": "AI-ME-03",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE gate outcome decisions — controlled environment — EthicBit / CEMU v3.7.0+",
+  "methodology": "Deterministic rule-based explainability. Each gate outcome is produced by explicit, enumerable decision rules — not opaque model inference. All decision paths are documented in the gate specification.",
+  "explainability_approach": "rule_based_deterministic",
+  "output_format": "structured_gate_report_json",
+  "explanation_coverage": {
+    "gate_outcome_derivation": "Every PASS/SCOPE_LIMITED/FAIL_CLOSED outcome is traceable to a specific rule in the gate verifier",
+    "artifact_assurance_path": "artifact_verified=true/false is computed from SHA256 hash comparison — fully reproducible",
+    "claim_boundary_derivation": "claim_level_ceiling is deterministically derived from gate_outcome value",
+    "fail_closed_trigger": "fail_closed_if_required_artifact_missing() — single function, single rule"
+  },
+  "scope_of_application": "All 12 AI-ME gates in AEM-EVOLVE v3.1 scaffold",
+  "known_limitations": [
+    "Explainability covers governance layer only — not the underlying LLM advisory adapter",
+    "LLM advisory adapter outputs are excluded from governance path by design",
+    "No SHAP/LIME/attention analysis — not applicable to rule-based system"
+  ],
+  "aem_version": "v1.1"
+}

@@ -1,0 +1,51 @@
+{
+  "artifact_type": "red_team_adversarial_robustness_artifact",
+  "gate_id": "AI-ME-10",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE governance API adversarial robustness — controlled environment — EthicBit / CEMU v3.7.0+",
+  "methodology": "Structured adversarial test suite covering HITL bypass attempts, token replay, invalid artifact injection, unauthorized tool calls, and claim boundary override attempts.",
+  "test_categories": [
+    {
+      "category": "HITL bypass attempts",
+      "tests_run": 4,
+      "findings": "All bypass attempts rejected — wrong_sub→403, wrong_event_id→403, unregistered_sub→403, token_replay→409",
+      "mitigation": "Dual-path token validation with replay mitigation active",
+      "source": "STATUS_BULLETIN_PUBLIC_2026-05-09_V1_8.md — OIDC_WIRED_VERIFICATION=PASS (10/10)"
+    },
+    {
+      "category": "Artifact hash tampering",
+      "tests_run": 3,
+      "findings": "Modified artifacts fail hash verification — artifact_verified=false → gate FAIL_CLOSED",
+      "mitigation": "fail_closed_if_required_artifact_missing() enforced in all gate verifiers"
+    },
+    {
+      "category": "Claim boundary override",
+      "tests_run": 3,
+      "findings": "Fast Path PASS cannot upgrade FAIL_CLOSED — _fast_path_cannot_upgrade() returns True, outcome forced to FAIL_CLOSED",
+      "mitigation": "_fast_path_cannot_upgrade() rule in aggregator"
+    },
+    {
+      "category": "Unauthorized tool invocation",
+      "tests_run": 2,
+      "findings": "Unauthorized tool calls return 403. Fast Path BLOCK on prohibited_actions list.",
+      "mitigation": "Fast Path pre-emission gate + endpoint authorization"
+    },
+    {
+      "category": "Full-stack verification replay",
+      "tests_run": 1,
+      "findings": "FULL_STACK_VERIFICATION=PASS (24/24) — all verifiers consistent on replay",
+      "mitigation": "Deterministic verifier — identical inputs produce identical outcomes"
+    }
+  ],
+  "findings_summary": "No successful bypass of governance controls observed within declared scope and methodology.",
+  "scope_declaration": "Controlled environment — AEM-EVOLVE governance API layer only. External penetration testing not conducted.",
+  "known_limitations": [
+    "Red-team scope is governance API layer only — not full system penetration test",
+    "External security review not conducted",
+    "No cybersecurity certification claimed",
+    "LLM advisory layer adversarial robustness not evaluated"
+  ],
+  "aem_version": "v1.1"
+}

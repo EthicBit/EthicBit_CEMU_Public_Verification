@@ -1,0 +1,49 @@
+{
+  "artifact_id": "v4_0_triple_anchor",
+  "criterion_number": 6,
+  "criterion": "triple_anchor_verification",
+  "controlled_status": "CONTROLLED_PASS",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "Controlled verification: existing mainnet receipt (structural) + new Sepolia on-chain anchor of v3.1+FastPath evidence",
+  "evaluation_timestamp": "2026-05-12T16:56:37+00:00",
+  "existing_mainnet_receipt": {
+    "receipt_path": "docs/anchors/AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json",
+    "receipt_schema_id": "ETHICBIT_AEM_V1_1_MAINNET_ANCHOR_RECEIPT_V1",
+    "receipt_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+    "network": "ethereum-mainnet",
+    "block_number": 24996672,
+    "tx_hash": "0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+    "timestamp_utc": "2026-05-01T01:01:23+00:00",
+    "verification_type": "structural",
+    "covers_v3_1_evidence": false,
+    "note": "Predates AI-ME v3.1 (2026-05-12) and Fast Path v1.0 (2026-05-12). Anchors pre-v3.1 state."
+  },
+  "new_sepolia_anchor": {
+    "receipt_path": "assurance/v4_0/V4_0_SEPOLIA_ANCHOR_RECEIPT.json",
+    "receipt_schema_id": "ETHICBIT_AEM_V3_1_FASTPATH_V1_0_SEPOLIA_ANCHOR_V1",
+    "receipt_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+    "network": "sepolia-testnet",
+    "chain_id": 11155111,
+    "block_number": 10840044,
+    "tx_hash": "0xc5908653fa5fc60db913a21ae021d7037f6d35365e8dbaf90c55a6fb86ec4bc0",
+    "blob_versioned_hash": "0x01a3d9490565502aa7ead253659190033a158034ad166aa8e94bb894daf9c68c",
+    "timestamp_utc": "2026-05-12T16:56:37.375465+00:00",
+    "git_commit_sha": "f276746dc401100ebe931dee2135c1183e482172",
+    "verification_type": "on_chain_confirmed",
+    "covers_v3_1_evidence": true,
+    "covers_fast_path_v1_0": true,
+    "anchored_hashes": {
+      "ai_me_v3_1_aggregate_sha256": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
+      "fast_path_v1_0_verification_sha256": "9fd864325a47553070c49f51b032e449047add3122c4ff891719822929955064",
+      "v4_0_controlled_evidence_sha256": "c3eb01f40470ef1db1039f1410240f86459ae6f1bf113dfed8863d38314a4c09",
+      "ai_me_artifacts_anchored": 12
+    }
+  },
+  "anchor_coverage_summary": {
+    "v3_1_evidence_anchored": true,
+    "fast_path_v1_0_anchored": true,
+    "anchor_network": "sepolia-testnet",
+    "mainnet_anchor_for_v3_1": false
+  },
+  "non_claim": "New anchor is Sepolia testnet — not Ethereum mainnet. Testnet anchor provides timestamped integrity reference for v3.1+FastPath evidence but does not carry the same permanence guarantees as mainnet. On-chain RPC verification of the Sepolia TX not performed in this artifact (receipt is output of the anchor script). Mainnet anchor for v3.1 evidence is required for v4.0 External Validation Release."
+}

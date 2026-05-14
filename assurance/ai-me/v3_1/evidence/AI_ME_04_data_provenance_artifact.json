@@ -1,0 +1,46 @@
+{
+  "artifact_type": "data_provenance_artifact",
+  "gate_id": "AI-ME-04",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "artifact_version": "1.0",
+  "evaluation_date": "2026-05-12",
+  "evaluation_scope": "AEM-EVOLVE governance audit data — controlled environment — EthicBit / CEMU v3.7.0+",
+  "data_sources": [
+    {
+      "source_id": "aem_evolve_audit_sqlite",
+      "source_type": "SQLiteAdapter audit tables",
+      "description": "Local audit event store for governance events, HITL decisions, signing records",
+      "lineage_coverage": "All governance events from API invocation to HITL sign-off"
+    },
+    {
+      "source_id": "aem_evolve_artifact_manifests",
+      "source_type": "AEM v1.1 artifact manifests",
+      "description": "Hash records and verification receipts for all declared evidence artifacts",
+      "lineage_coverage": "23 artifact types as declared in AEM_V1_1_ARTIFACT_ASSURANCE_CONTINUITY.md"
+    },
+    {
+      "source_id": "aem_evolve_anchor_receipts",
+      "source_type": "Triple Anchor public anchor receipts",
+      "description": "Public blockchain anchor receipts for selected artifacts",
+      "lineage_coverage": "Selected artifacts as declared in docs/anchors/"
+    }
+  ],
+  "lineage_graph_scope": "AEM-EVOLVE v2.0 evidence baseline — input events to signed governance receipts",
+  "data_transformation_steps": [
+    "1. Governance event received via API endpoint",
+    "2. Event validated against constitutional governance policy",
+    "3. Artifact hash computed (SHA256) and matched against AEM v1.1 manifest",
+    "4. HITL decision recorded with reviewer identity and timestamp",
+    "5. Governance receipt signed with SigningProvider",
+    "6. Audit record persisted to SQLiteAdapter / PostgresAdapter",
+    "7. Selected artifacts anchored via Triple Anchor"
+  ],
+  "known_limitations": [
+    "PostgreSQL lineage not verified against live database in this execution",
+    "Lineage scope is governance pipeline only — not training data lineage",
+    "External data source audit not conducted"
+  ],
+  "fast_path_snapshot_eligible": true,
+  "snapshot_scope": "data_provenance_snapshot_inheritance",
+  "aem_version": "v1.1"
+}
