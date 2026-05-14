@@ -41,13 +41,13 @@ Expected results are documented. You fill in a short report template and send it
 **Public mirror (all evidence attached):**
 https://github.com/EthicBit/EthicBit_CEMU_Public_Verification/releases/tag/aem-evolve-v4.0-controlled-evidence-2026-05-14
 
-**Full instructions:**
-`docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md`
+**Full instructions (single document — covers reproduction + security + claim review):**
+`docs/external-validation/V4_0_UNIFIED_EXTERNAL_VALIDATOR_BUNDLE.md`
 
 **Scope boundary:**
 This is not a request for certification, regulatory approval, or endorsement. It is a request to reproduce evidence and report what you observed. Deviations, failures, and partial results are valid and valuable.
 
-If you have security background and want to do a broader review (API security, claim boundaries, dependency audit), there is a separate scope document for that too.
+Depending on your background, you can cover one, two, or all three validation criteria in a single session — all instructions are in the bundle above.
 
 Would you be open to this? Happy to answer any questions.
 
@@ -77,11 +77,15 @@ No affiliation with EthicBit required — in fact, independent reviewers with no
 
 ## What to tell reviewers about each criterion
 
-| Criterion | Who to invite | What they do |
+| Perfil del revisor | Criterios que puede cubrir | Documento |
 |---|---|---|
-| 1 — Reproduction | Any developer with Python 3.11+ | Clone, run scripts, report results |
-| 2 — Security review | Security engineer / pentester | Review repo, threat model, dependencies, sign off |
-| 8 — Claim review | Technical reviewer / ethicist / AI auditor | Review 7 public claims + 11 non-claims, confirm or flag overclaims |
+| Desarrollador Python | Criterio 1 (reproducción) | Bundle unificado — Part A |
+| Security engineer | Criterios 1 + 2 (reproducción + seguridad) | Bundle unificado — Parts A + B |
+| AI auditor / técnico | Criterios 1 + 8 (reproducción + claims) | Bundle unificado — Parts A + C |
+| Security + AI auditor | Criterios 1 + 2 + 8 (los tres) | Bundle unificado completo |
+
+**Un solo documento cubre los tres:**
+`docs/external-validation/V4_0_UNIFIED_EXTERNAL_VALIDATOR_BUNDLE.md`
 
 ---
 
