@@ -3,19 +3,155 @@
   "criterion_number": 2,
   "criterion": "external_security_review",
   "controlled_status": "PENDING_EXTERNAL",
+  "controlled_security_assessment_status": "CONTROLLED_ASSESSMENT_PASS_INTERNAL_CONTROLS",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
-  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "assessment_timestamp": "2026-05-14T18:24:38.160927+00:00",
+  "assessment_type": "CONTROLLED_INTERNAL_SECURITY_ASSESSMENT",
   "internal_controls_documented": true,
   "security_coverage": {
     "security_review_document": "demos/aem-evolve-multi-agent-api/docs/SECURITY_REVIEW.md",
-    "dependency_scan_artifact": "demos/aem-evolve-multi-agent-api/tools/production_readiness/dependency_scan_2026_05.json",
-    "static_analysis_artifact": "demos/aem-evolve-multi-agent-api/tools/production_readiness/static_analysis_2026_05.json",
+    "dependency_scan_artifact": "demos/aem-evolve-multi-agent-api/tools/security/dependency_scan_2026_05.json",
+    "static_analysis_artifact": "demos/aem-evolve-multi-agent-api/tools/security/static_analysis_2026_05.json",
     "threat_model_present": true,
     "owasp_api_coverage_documented": true,
     "governance_security_controls_documented": true,
     "fast_path_enforcement_security_documented": true,
     "aem_v1_1_verification_mechanism_documented": true
+  },
+  "assessment_steps_executed": [
+    "SECURITY_REVIEW.md existence and content verification",
+    "THREAT_MODEL.md existence and content verification",
+    "bandit static analysis re-run (full codebase)",
+    "bandit static analysis re-run (API source, tools excluded)",
+    "pip-audit CVE scan (API requirements.txt scope)",
+    "pip-audit CVE scan (global environment)",
+    "governance security controls review (7 controls)",
+    "OWASP API Top 10 coverage review",
+    "artifact SHA256 fingerprint collection"
+  ],
+  "step_results": {
+    "bandit_full_codebase": {
+      "scope": "demos/aem-evolve-multi-agent-api (all)",
+      "high": 0,
+      "medium": 14,
+      "low": 1089,
+      "high_ok": true,
+      "medium_disposition": "reviewed \u2014 B608 hardcoded_sql_expressions (false positive, parameterized); B306/B310 subprocess/urllib (false positive, controlled URLs)",
+      "bandit_api_excl_tools_sha256": "7e560bc86198c50618d85d045be3b02271850e79a8bc8a19f6ba1cdc6c2e325c"
+    },
+    "bandit_api_source_excl_tools": {
+      "scope": "demos/aem-evolve-multi-agent-api (tools excluded)",
+      "high": 0,
+      "medium": 11,
+      "low": 1045,
+      "high_ok": true
+    },
+    "pip_audit_api_requirements": {
+      "scope": "demos/aem-evolve-multi-agent-api/requirements.txt",
+      "dependencies": 47,
+      "cves": 0,
+      "ok": true,
+      "sha256": "558ac70127e789f096ef51640ae99618b3b558ccdb50154bf76df5df17756a60"
+    },
+    "pip_audit_global_environment": {
+      "scope": "global pyenv environment (includes tooling)",
+      "dependencies": 186,
+      "cves": 15,
+      "ok": false,
+      "cve_note": "All 15 CVEs in tooling/environment packages (gitpython 3.1.46, pip 24.0, setuptools 65.5.0, urllib3 2.6.3) \u2014 NOT in AEM-EVOLVE API production dependencies",
+      "affected_packages": [
+        {
+          "package": "gitpython",
+          "version": "3.1.46",
+          "cves": [
+            "CVE-2026-42215",
+            "CVE-2026-42284",
+            "CVE-2026-44244",
+            "GHSA-mv93-w799-cj2w"
+          ],
+          "fix": "3.1.50",
+          "scope": "tooling only \u2014 used in anchor scripts, not API"
+        },
+        {
+          "package": "pip",
+          "version": "24.0",
+          "cves": [
+            "CVE-2025-8869",
+            "CVE-2026-1703",
+            "CVE-2026-3219",
+            "CVE-2026-6357"
+          ],
+          "fix": "26.1",
+          "scope": "system package manager \u2014 not runtime dependency"
+        },
+        {
+          "package": "setuptools",
+          "version": "65.5.0",
+          "cves": [
+            "PYSEC-2022-43012",
+            "PYSEC-2025-49",
+            "CVE-2024-6345"
+          ],
+          "fix": "78.1.1",
+          "scope": "build tooling \u2014 not runtime dependency"
+        },
+        {
+          "package": "urllib3",
+          "version": "2.6.3",
+          "cves": [
+            "CVE-2026-44431",
+            "CVE-2026-44432"
+          ],
+          "fix": "2.7.0",
+          "scope": "transitive \u2014 not direct API dependency"
+        }
+      ],
+      "api_production_deps_cves": 0
+    },
+    "governance_controls": {
+      "controls_documented": 7,
+      "controls_verified_present": 7,
+      "controls": [
+        "HITL Identity Enforcement (HMAC + OIDC)",
+        "KMS/HSM Signing (ProductionKmsProvider)",
+        "Audit Chain Integrity (SHA-256 hash-linked)",
+        "Replay Mitigation (hitl_used_tokens)",
+        "RBAC Access Control (X-API-Key fail-closed)",
+        "Input Validation (Pydantic field validators)",
+        "Monitoring and Alerting (7 Prometheus counters)"
+      ]
+    },
+    "owasp_api_top10": {
+      "items_reviewed": 10,
+      "coverage": "documented",
+      "high_risk_open": 0,
+      "noted_gaps": [
+        "API4 rate limiting not present in demo \u2014 production must add",
+        "API7 SQLite demo only \u2014 production requires PostgreSQL + KMS + OIDC"
+      ]
+    },
+    "artifact_sha256s": {
+      "security_review_md": "8fa1623671f13e532abe5f28e4fc9da2d031dec395cf078d72fc6e6225dfac03",
+      "threat_model_md": "a6e49875a0d72b030b31bd97e05627a32ce3f307ce81eed684157a66ce451cb9",
+      "dependency_scan_json": "028d34b68a8331249dd5d55cf2a8c52a2d5ae6ba15eb45ebcc119b465cc0116e",
+      "static_analysis_json": "90933ab75da1695683df6f888e7a60f22182b38ae76935aa8b64b0ed04aa61ea"
+    }
+  },
+  "internal_gate_checks": {
+    "C01_security_review_doc_exists": true,
+    "C02_threat_model_covers_attack_surfaces": true,
+    "C03_governance_controls_reviewed": true,
+    "C04_dependency_scan_api_cves": 0,
+    "C05_static_analysis_high_findings": 0,
+    "C06_owasp_api_coverage_documented": true,
+    "C07_findings_dispositioned": true,
+    "C08_artifact_sha256_recorded": true,
+    "C09_external_reviewer_identity": "NOT_SET \u2014 PENDING_EXTERNAL",
+    "C10_external_review_date": "NOT_SET \u2014 PENDING_EXTERNAL",
+    "checks_passed_internal": 8,
+    "checks_total": 10,
+    "external_checks_skipped": 2
   },
   "review_scope_for_external_reviewer": [
     "AEM v1.1 artifact verification mechanisms",
@@ -24,7 +160,10 @@
     "AI-ME gate implementation security",
     "Claim boundary enforcement security",
     "API and endpoint security",
-    "Threat model validation"
+    "Threat model validation",
+    "gitpython CVE triage (tooling scope)",
+    "urllib3 CVE triage (transitive scope)",
+    "pip/setuptools upgrade path (environment hygiene)"
   ],
-  "non_claim": "Internal security documentation exists. External security review by an independent party with no affiliation to EthicBit has not been conducted. No penetration testing has been performed."
+  "non_claim": "CONTROLLED_INTERNAL_SECURITY_ASSESSMENT \u2014 NOT external security review. Internal controls documented and verified. 0 HIGH bandit findings. 0 CVEs in API production dependencies. 15 CVEs in ambient tooling/environment packages (all non-API scope). External security review by an independent party with no EthicBit affiliation has not been conducted. No penetration testing performed. AEM_SECURITY_REVIEWER not set."
 }

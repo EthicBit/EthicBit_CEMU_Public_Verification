@@ -2,7 +2,7 @@
   "report_type": "V4_0_CONTROLLED_EVIDENCE_REPORT",
   "version": "4.0",
   "status": "CONTROLLED_EVIDENCE_PARTIAL",
-  "evaluation_timestamp": "2026-05-14T18:20:21.063036+00:00",
+  "evaluation_timestamp": "2026-05-14T18:24:42.667935+00:00",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
   "criteria_evaluated": 8,
@@ -62,7 +62,7 @@
       "controlled_status": "PENDING_EXTERNAL",
       "expected_status": "PENDING_EXTERNAL",
       "status_matched": true,
-      "artifact_sha256": "0f2488d7cf98210f9883e99b286486485d9a77b14a527e49619dcd2d76728a56"
+      "artifact_sha256": "ac5731d4bad1e48cdbb5d8d54ed817af851c60efd72d2b96d60843aca1b262e9"
     },
     {
       "criterion_number": 3,
