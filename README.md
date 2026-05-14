@@ -5,21 +5,23 @@
 
 ---
 
-## Full Technology Stack State — 2026-05-12
+## Full Technology Stack State — 2026-05-14
 
 ```
-Constitutional regime:     EthicBit / CEMU v3.7.0+              ACTIVE
-Artifact Assurance:        AEM v1.1                              ACTIVE
-Governance Engine:         AEM-EVOLVE™                           ACTIVE
-Evidence Baseline:         v2.0 PASS (14/14 gates, 140/140)      VERIFIED
-Category Release:          AEM-EVOLVE v3.0                       RELEASED
-AI-ME Gate Suite:          v3.1 PASS (12/12 gates)               EVIDENCE PASS
-Claim Boundary Engine:     Doctrine + Engine scaffold            ACTIVE
-Fast Path:                 v1.0 EVIDENCE_PASS (9/9 scenarios)    EVIDENCE PASS
-Triple Anchor:             Selected artifacts anchored           ACTIVE
-Strong Closure:            v2.0 governance sign-off              ACTIVE
-Reproduction Kit:          v4.0 READY                            READY
-v4.0 External Validation:  EXTERNAL_VALIDATION_IN_PROGRESS       INITIATED
+Constitutional regime:     EthicBit / CEMU v3.7.0+                    ACTIVE
+Artifact Assurance:        AEM v1.1                                    ACTIVE
+Governance Engine:         AEM-EVOLVE™                                 ACTIVE
+Evidence Baseline:         v2.0 PASS (14/14 gates, 140/140)            VERIFIED
+Category Release:          AEM-EVOLVE v3.0                             RELEASED
+AI-ME Gate Suite:          v3.1 PASS (12/12 gates)                     EVIDENCE PASS
+Claim Boundary Engine:     Doctrine + Engine scaffold                   ACTIVE — 0 violations
+Fast Path:                 v1.0 EVIDENCE_PASS (9/9 scenarios)          EVIDENCE PASS
+Triple Anchor (v3.1):      Sepolia block 10840044                      ON-CHAIN (testnet)
+Triple Anchor (v4.0):      Sepolia block 10852797                      ON-CHAIN (testnet)
+Triple Anchor (v4.0):      Mainnet block 25095358                      ON-CHAIN (mainnet)
+Strong Closure:            v2.0 governance sign-off                    ACTIVE
+Reproduction Kit:          v4.0 READY                                  READY
+v4.0 External Validation:  EXTERNAL_VALIDATION_IN_PROGRESS             INITIATED
 ```
 
 > The technology stack does not replace the EthicBit / CEMU constitutional-operational regime. It operationalizes it.
@@ -127,7 +129,7 @@ from fast_path.run_fast_path_evidence_v1_0 import main; main()
 
 ### Claim
 
-EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated. AI-ME Gates v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules) + Sepolia on-chain anchor (block 10840044, covers v3.1+FastPath hashes) + v4.0 Controlled Evidence (AEM reverification 12/12, Triple Anchor on-chain confirmed, Fast Path benchmark 9 scenarios) — AEM-EVOLVE multi-agent governance API — EthicBit / CEMU v3.7.0+ — 2026-05-14.
+EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated. AI-ME Gates v3.1 PASS (12/12) + Fast Path v1.0 EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules) + on-chain anchors (Sepolia blocks 10840044, 10852797 · Mainnet block 25095358, TX 0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41) + v4.0 Controlled Evidence (todos los 8 criterios ejecutados — 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL) — AEM-EVOLVE multi-agent governance API — EthicBit / CEMU v3.7.0+ — 2026-05-14.
 
 ### Non-claim
 
@@ -142,22 +144,43 @@ financial advice — NOT claimed
 cybersecurity certification — NOT claimed
 universal production-readiness — NOT claimed
 ```
-v4.0 External Validation Release NOT claimed — external validation IN PROGRESS. Sepolia anchor is testnet, not Ethereum mainnet. Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence. `full_assurance_recomputed_per_tick = false` always.
+v4.0 External Validation Release NOT claimed — external validation IN PROGRESS. Mainnet anchor (block 25095358) is timestamped integrity reference — not certification, regulatory approval, or production readiness. Fast Path does not subsume Triple Anchor, Strong Closure, or AI-ME evidence. `full_assurance_recomputed_per_tick = false` always.
 
 ---
 
 ## Latest: AEM-EVOLVE™ v4.0 — EXTERNAL_VALIDATION_IN_PROGRESS (2026-05-14)
 
 **Posture:** `EXTERNAL_VALIDATION_IN_PROGRESS`  
-**Type:** External Validation Process Initiated  
+**Type:** External Validation Process Initiated — All 8 Criteria Executed — Mainnet Anchored  
 **Claim:** EthicBit / AEM-EVOLVE v4.0 external validation process has been initiated.
 
-> External validation workstreams open for all 5 pending criteria. Reproduction Kit v4.0 READY. Public verification mirror available. Formal initiation record at `assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json`.
+> All 8 v4.0 criteria executed 2026-05-14. 3/8 CONTROLLED_PASS · 5/8 PENDING_EXTERNAL with controlled assessments documented. v4.0 controlled evidence anchored on Ethereum mainnet (block 25095358) and Sepolia (block 10852797). Reproduction Kit v4.0 READY.
+
+**Mainnet anchor — v4.0 controlled evidence:**
+```
+tx:      0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
+block:   25095358  (ethereum-mainnet)
+schema:  ETHICBIT_AEM_V4_0_CONTROLLED_EVIDENCE_MAINNET_ANCHOR_V1
+anchors: 8 criterion artifacts + AI-ME v3.1 + Fast Path v1.0 + controlled evidence report
+```
+
+| # | Criterio | Postura | Controlled Assessment |
+|---|---|---|---|
+| 1 | Third-party reproduction | `PENDING_EXTERNAL` | `CONTROLLED_SELF_REPRODUCTION_PASS` |
+| 2 | External security review | `PENDING_EXTERNAL` | `CONTROLLED_ASSESSMENT_PASS` |
+| 3 | Managed cloud deployment | `PENDING_EXTERNAL` | `CONTROLLED_ASSESSMENT_PASS` |
+| 4 | HSM / KMS signing | `PENDING_EXTERNAL` | `CONTROLLED_ASSESSMENT_PASS` |
+| 5 | AEM v1.1 reverification | `CONTROLLED_PASS` | 12/12 hashes |
+| 6 | Triple anchor verification | `CONTROLLED_PASS` | 3 anchors on-chain |
+| 7 | Fast Path benchmark | `CONTROLLED_PASS` | 9/9 escenarios |
+| 8 | External claim review | `PENDING_EXTERNAL` | `CONTROLLED_CLAIM_AUDIT_PASS` |
 
 - [Status Bulletin v4.0 Initiated](docs/STATUS_BULLETIN_PUBLIC_2026-05-14_V4_0_EXTERNAL_VALIDATION_INITIATED.md)
 - [Engagement Package](docs/external-validation/V4_0_EXTERNAL_VALIDATION_ENGAGEMENT_PACKAGE.md)
 - [Outreach Pack](docs/external-validation/outreach/V4_0_EXTERNAL_REVIEWER_OUTREACH_PACK.md)
 - [Initiation Record](assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json)
+- [Mainnet Anchor Receipt](assurance/v4_0/V4_0_MAINNET_ANCHOR_RECEIPT.json)
+- [Sepolia Anchor Receipt v4.0](assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_ANCHOR_RECEIPT.json)
 - [Reproduction Kit v4.0](docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md)
 - [Public Mirror](https://github.com/EthicBit/EthicBit_CEMU_Public_Verification)
 - [GitHub Release v3.1](https://github.com/EthicBit/EthicBit_CEMU/releases/tag/v3.1)
