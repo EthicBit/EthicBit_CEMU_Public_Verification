@@ -6,20 +6,34 @@
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "scope": "Controlled verification: existing mainnet receipt (structural) + new Sepolia on-chain anchor of v3.1+FastPath evidence",
   "evaluation_timestamp": "2026-05-12T16:56:37+00:00",
+  "reverification_timestamp": "2026-05-14T18:51:33.915121+00:00",
   "existing_mainnet_receipt": {
     "receipt_path": "docs/anchors/AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json",
+    "receipt_sha256": "d52ea64a02d7416ec5a3bc75ca051124d0046b79559abc5065cf95bf705ebdda",
     "receipt_schema_id": "ETHICBIT_AEM_V1_1_MAINNET_ANCHOR_RECEIPT_V1",
     "receipt_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
     "network": "ethereum-mainnet",
+    "chain_id": 1,
     "block_number": 24996672,
     "tx_hash": "0xa0a354162c5d2e2eb3a45ecd6bb34f0a57ac093d2674e5fb5eed87e4551165c0",
+    "blob_versioned_hashes": [
+      "0x019a48cf8578338425f30f6149ba4ed4b11ac02e21075813775a594214c0f041"
+    ],
     "timestamp_utc": "2026-05-01T01:01:23+00:00",
     "verification_type": "structural",
+    "structural_checks": {
+      "receipt_exists": true,
+      "schema_id_present": true,
+      "block_number_present": true,
+      "tx_hash_present": true,
+      "blob_versioned_hashes_present": true
+    },
     "covers_v3_1_evidence": false,
     "note": "Predates AI-ME v3.1 (2026-05-12) and Fast Path v1.0 (2026-05-12). Anchors pre-v3.1 state."
   },
   "new_sepolia_anchor": {
     "receipt_path": "assurance/v4_0/V4_0_SEPOLIA_ANCHOR_RECEIPT.json",
+    "receipt_sha256": "26ca967cf1f42c9026b53ef11897eb8d485be74f48a1b2bc85de807fd11226c1",
     "receipt_schema_id": "ETHICBIT_AEM_V3_1_FASTPATH_V1_0_SEPOLIA_ANCHOR_V1",
     "receipt_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
     "network": "sepolia-testnet",
@@ -39,11 +53,25 @@
       "ai_me_artifacts_anchored": 12
     }
   },
+  "reverification_2026_05_14": {
+    "execution_date": "2026-05-14",
+    "result": "REVERIFICATION_PASS",
+    "checks": {
+      "mainnet_receipt_structural": true,
+      "sepolia_rpc_on_chain": true,
+      "sepolia_block_match": true,
+      "sepolia_rpc_endpoint": "https://sepolia.gateway.tenderly.co",
+      "sepolia_block_from_rpc": 10840044,
+      "ai_me_v3_1_aggregate_current_matches_anchored": true,
+      "fast_path_v1_0_current_matches_anchored": true
+    },
+    "note": "Fresh re-execution confirms Sepolia TX on-chain (block 10840044). AI-ME v3.1 aggregate and Fast Path v1.0 hashes unchanged \u2014 match anchored payload."
+  },
   "anchor_coverage_summary": {
     "v3_1_evidence_anchored": true,
     "fast_path_v1_0_anchored": true,
     "anchor_network": "sepolia-testnet",
     "mainnet_anchor_for_v3_1": false
   },
-  "non_claim": "New anchor is Sepolia testnet — not Ethereum mainnet. Testnet anchor provides timestamped integrity reference for v3.1+FastPath evidence but does not carry the same permanence guarantees as mainnet. On-chain RPC verification of the Sepolia TX not performed in this artifact (receipt is output of the anchor script). Mainnet anchor for v3.1 evidence is required for v4.0 External Validation Release."
+  "non_claim": "New anchor is Sepolia testnet \u2014 not Ethereum mainnet. Testnet anchor provides timestamped integrity reference for v3.1+FastPath evidence but does not carry the same permanence guarantees as mainnet. Mainnet anchor for v3.1 evidence is required for v4.0 External Validation Release."
 }
