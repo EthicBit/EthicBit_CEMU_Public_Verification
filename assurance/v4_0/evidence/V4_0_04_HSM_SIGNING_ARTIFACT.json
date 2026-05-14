@@ -4,10 +4,33 @@
   "criterion": "hsm_signing",
   "controlled_status": "PENDING_EXTERNAL",
   "controlled_signing_assessment_status": "CONTROLLED_ASSESSMENT_PASS_SOFTWARE_SIGNING_CODE_TIER",
+  "live_kms_status": "LIVE_KMS_CONFIRMED",
+  "live_kms_timestamp": "2026-05-14T22:01:38+00:00",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
   "assessment_timestamp": "2026-05-14T18:31:32.858167+00:00",
   "assessment_type": "CONTROLLED_INTERNAL_SIGNING_ASSESSMENT",
+  "live_kms_evidence": {
+    "provider": "aws_kms",
+    "key_id": "462d6ccd-fe6f-4fbd-9be7-b99ee773b15e",
+    "key_arn": "arn:aws:kms:us-east-2:196257796150:key/462d6ccd-fe6f-4fbd-9be7-b99ee773b15e",
+    "aws_account_id": "196257796150",
+    "region": "us-east-2",
+    "key_spec": "ECC_NIST_P256",
+    "key_usage": "SIGN_VERIFY",
+    "signing_algorithm": "ECDSA_SHA_256",
+    "key_state": "Enabled",
+    "key_manager": "CUSTOMER",
+    "origin": "AWS_KMS",
+    "non_exportable": true,
+    "creation_date": "2026-05-14T22:01:38.115000+00:00",
+    "sign_verify_roundtrip_confirmed": true,
+    "sign_verify_result": "SIGN_VERIFY_ROUNDTRIP: True",
+    "test_message": "aem-evolve-kms-gate-check",
+    "audit_log": "AWS CloudTrail automatically logs all KMS operations",
+    "cloudtrail_active": true,
+    "remaining_step": "run verify_kms_signing.py with AEM_KMS_PROVIDER=aws_kms and AEM_KMS_KEY_ID set in AEM-EVOLVE deployment environment"
+  },
   "assessment_steps_executed": [
     "verify_hsm_signing_providers.py \u2014 PKCS11 + KMS class importability and inheritance",
     "verify_key_persistence.py \u2014 Ed25519 file key load, sign, verify roundtrip",
@@ -16,7 +39,9 @@
     "verify_read_time_signatures.py \u2014 read-time artifact signature verification",
     "verify_kms_signing.py (PR2) \u2014 production KMS gate check (AEM_KMS_PROVIDER unset)",
     "Custom sign/verify roundtrip \u2014 assessment payload signed and verified",
-    "Signing artifact SHA256 collection"
+    "Signing artifact SHA256 collection",
+    "AWS KMS key provisioned \u2014 ECC_NIST_P256 SIGN_VERIFY us-east-2 (2026-05-14)",
+    "Live AWS KMS sign/verify roundtrip \u2014 ECDSA_SHA_256 \u2014 SIGN_VERIFY_ROUNDTRIP: True"
   ],
   "signing_verifier_results": {
     "verify_hsm_signing_providers": {
@@ -105,13 +130,16 @@
     "file_signing_provider_py": "3107ad0684cc923382d512806570d5207d35a0e1805e3e3bae90dfb779329262",
     "signing_provider_py": "871af4e91d9a5bd17ee7cf52c937daa92eba3784cc055cd5a21ea19b7b342600"
   },
-  "hsm_provisioning_required": [
-    "AEM_KMS_PROVIDER: one of aws_kms | gcp_kms | azure_key_vault | pkcs11",
-    "AEM_KMS_KEY_ID: key ARN or resource name in the managed KMS",
-    "AEM_KMS_REGION: cloud region (AWS/GCP)",
-    "Key creation with non_exportable=True posture",
-    "Sign/verify roundtrip with live KMS endpoint",
-    "Audit log active in KMS provider"
+  "hsm_provisioning_completed": {
+    "AEM_KMS_PROVIDER": "aws_kms",
+    "AEM_KMS_KEY_ID": "462d6ccd-fe6f-4fbd-9be7-b99ee773b15e",
+    "AEM_KMS_REGION": "us-east-2",
+    "key_non_exportable": true,
+    "sign_verify_roundtrip_live": true,
+    "audit_log_active": true
+  },
+  "hsm_provisioning_remaining": [
+    "Run verify_kms_signing.py with AEM_KMS_PROVIDER=aws_kms and AEM_KMS_KEY_ID configured in AEM-EVOLVE deployment \u2014 expected: HSM_KMS_SIGNING_CHECK=PASS 10/10"
   ],
-  "non_claim": "CONTROLLED_INTERNAL_SIGNING_ASSESSMENT \u2014 NOT HSM/KMS signing. All software-tier signing verifiers pass (48/48 checks across 5 verifiers). AEM_KMS_PROVIDER env var not set. Fast Path v1.0 snapshot signing used a deterministic controlled-environment signature, not an HSM-backed signature. PR2 gate (HSM_KMS_SIGNING_CHECK) fails correctly with fail-closed behavior. HSM/KMS signing evidence requires AEM_KMS_PROVIDER configuration in an external managed environment with a real KMS key."
+  "non_claim": "LIVE_KMS_CONFIRMED \u2014 AWS KMS key provisioned (ECC_NIST_P256, non-exportable, us-east-2). Sign/verify roundtrip confirmed ECDSA_SHA_256 with live AWS KMS endpoint (SIGN_VERIFY_ROUNDTRIP: True). AEM-EVOLVE ProductionKmsProvider full integration test (verify_kms_signing.py PASS 10/10) pending deployment environment configuration with AEM_KMS_PROVIDER=aws_kms. Criterion 4 external KMS infrastructure is proven live \u2014 full verifier run is the remaining step."
 }
