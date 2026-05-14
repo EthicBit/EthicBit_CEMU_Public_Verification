@@ -71,7 +71,37 @@
     "v3_1_evidence_anchored": true,
     "fast_path_v1_0_anchored": true,
     "anchor_network": "sepolia-testnet",
-    "mainnet_anchor_for_v3_1": false
+    "mainnet_anchor_for_v3_1": false,
+    "v4_0_controlled_evidence_anchored": true,
+    "v4_0_anchor_block": 10852797,
+    "v4_0_anchor_tx": "0xf26be6ccce3fd71b8a561c71073f039e823f2e1122179459d7e66e7bae040b2d"
   },
-  "non_claim": "New anchor is Sepolia testnet \u2014 not Ethereum mainnet. Testnet anchor provides timestamped integrity reference for v3.1+FastPath evidence but does not carry the same permanence guarantees as mainnet. Mainnet anchor for v3.1 evidence is required for v4.0 External Validation Release."
+  "non_claim": "New anchor is Sepolia testnet \u2014 not Ethereum mainnet. Testnet anchor provides timestamped integrity reference for v3.1+FastPath evidence but does not carry the same permanence guarantees as mainnet. Mainnet anchor for v3.1 evidence is required for v4.0 External Validation Release.",
+  "v4_0_controlled_evidence_anchor": {
+    "receipt_path": "assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_ANCHOR_RECEIPT.json",
+    "receipt_sha256": "76703ad733873ccf9c2120fa7c8e0b52018ca5be42a242b689d06f6a25d9e558",
+    "receipt_schema_id": "ETHICBIT_AEM_V4_0_CONTROLLED_EVIDENCE_SEPOLIA_ANCHOR_V1",
+    "receipt_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+    "network": "sepolia-testnet",
+    "chain_id": 11155111,
+    "block_number": 10852797,
+    "tx_hash": "0xf26be6ccce3fd71b8a561c71073f039e823f2e1122179459d7e66e7bae040b2d",
+    "blob_versioned_hash": "0x0105b3c5a9e06063f619e564a002bb4e6aa5e0c8b75b68afdb77f830fa090905",
+    "timestamp_utc": "2026-05-14T19:01:38.700033+00:00",
+    "git_commit_sha": "c68a598f95c78f49a68ac249bf5e49e646120407",
+    "covers_all_8_criterion_artifacts": true,
+    "covers_v4_0_controlled_evidence_execution": true,
+    "anchored_hashes": {
+      "V4_0_01": "a41e70626ba5ebdb71a8461a40fa8856bb74f87ed92dd379437389d76bf19541",
+      "V4_0_02": "ac5731d4bad1e48cdbb5d8d54ed817af851c60efd72d2b96d60843aca1b262e9",
+      "V4_0_03": "5fc1fe3dd49d5b6adbd32195c9f36438f0633a5c676605ee576e37b584e6a72a",
+      "V4_0_04": "d0c5b2d1631c42c0feaa3456d5e039cd6f0c26cb09a6e69cbd4db196985f16b0",
+      "V4_0_05": "8c67403f35954bfcc635717c3fd00771b47deb638fbb6c919fb08c2203c7b1f6",
+      "V4_0_06": "d6d923dddeddeae6989f5680ccf2df7de568deb8bbbdf7eb56608f5c3674b02a",
+      "V4_0_07": "422070c92a78ff92096dfdfec14662d8e4402f61404e9e0a6586404a28379e03",
+      "V4_0_08": "de05038cb6849249df5305dd0fcb2e4857e6262a42c36d7d9c2c1406252c5451",
+      "ai_me_v3_1_aggregate": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
+      "fast_path_v1_0": "ab3553d0c47a60247a80876c6f9637e2d39662217c289240cbabeffb776e04a3"
+    }
+  }
 }

@@ -1,0 +1,47 @@
+{
+  "schema_id": "ETHICBIT_AEM_V4_0_CONTROLLED_EVIDENCE_SEPOLIA_ANCHOR_V1",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
+  "network": "sepolia-testnet",
+  "chain_id": 11155111,
+  "block_number": 10852797,
+  "tx_hash": "0xf26be6ccce3fd71b8a561c71073f039e823f2e1122179459d7e66e7bae040b2d",
+  "from_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "to_address": "0x9221456decc27547aa76ec5d53537dfe430c69b7",
+  "blob_versioned_hashes": [
+    "0x0105b3c5a9e06063f619e564a002bb4e6aa5e0c8b75b68afdb77f830fa090905"
+  ],
+  "timestamp_utc": "2026-05-14T19:01:07.598247+00:00",
+  "anchored_at_unix": 1778785240,
+  "verification_rpcs": {
+    "tx_lookup": "https://ethereum-sepolia-rpc.publicnode.com",
+    "receipt_lookup": "https://ethereum-sepolia-rpc.publicnode.com"
+  },
+  "payload": {
+    "schema": "ETHICBIT_AEM_V4_0_CONTROLLED_EVIDENCE_SEPOLIA_ANCHOR_V1",
+    "anchor_scope": "v4.0 controlled evidence execution \u2014 all 8 criteria \u2014 2026-05-14",
+    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+    "criterion_artifact_hashes": {
+      "V4_0_01_reproduction_kit": "a41e70626ba5ebdb71a8461a40fa8856bb74f87ed92dd379437389d76bf19541",
+      "V4_0_02_security_review": "ac5731d4bad1e48cdbb5d8d54ed817af851c60efd72d2b96d60843aca1b262e9",
+      "V4_0_03_cloud_deployment": "5fc1fe3dd49d5b6adbd32195c9f36438f0633a5c676605ee576e37b584e6a72a",
+      "V4_0_04_hsm_signing": "d0c5b2d1631c42c0feaa3456d5e039cd6f0c26cb09a6e69cbd4db196985f16b0",
+      "V4_0_05_aem_reverification": "8c67403f35954bfcc635717c3fd00771b47deb638fbb6c919fb08c2203c7b1f6",
+      "V4_0_06_triple_anchor": "d6d923dddeddeae6989f5680ccf2df7de568deb8bbbdf7eb56608f5c3674b02a",
+      "V4_0_07_fast_path_benchmark": "422070c92a78ff92096dfdfec14662d8e4402f61404e9e0a6586404a28379e03",
+      "V4_0_08_claim_review": "de05038cb6849249df5305dd0fcb2e4857e6262a42c36d7d9c2c1406252c5451"
+    },
+    "core_evidence_hashes": {
+      "ai_me_v3_1_aggregate": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
+      "fast_path_v1_0_verification": "ab3553d0c47a60247a80876c6f9637e2d39662217c289240cbabeffb776e04a3",
+      "v4_0_controlled_evidence_rpt": "fd37eef43ccc8ccd27ff72bd40674a43a86e824b65feb8a3e174f7b5825c16b7",
+      "v4_0_initiation_record": "85df4c71940dce363748708033e8bec8d3921f3aee3461ce6724e9f27082a9ac"
+    },
+    "criteria_controlled_pass": 3,
+    "criteria_pending_external": 5,
+    "git_commit_sha": "c68a598f95c78f49a68ac249bf5e49e646120407",
+    "ts_unix": 1778785240,
+    "non_claim": "Sepolia testnet anchor \u2014 not Ethereum mainnet. Timestamped integrity reference for v4.0 controlled evidence execution. Does not claim v4.0 validated, third-party reproduced, or production-ready. 5/8 criteria remain PENDING_EXTERNAL.",
+    "payload_sha256": "d578e0de9a0a1f2b2328d8ea0ff7fcbe533911e3858a943d16894854771b057b"
+  },
+  "non_claim": "Sepolia testnet anchor \u2014 not Ethereum mainnet. Timestamped integrity reference for v4.0 controlled evidence execution. Does not claim v4.0 validated, third-party reproduced, or production-ready. 5/8 criteria remain PENDING_EXTERNAL."
+}
