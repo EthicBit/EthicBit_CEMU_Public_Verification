@@ -2,9 +2,10 @@
 
 **Document type:** Reproduction Kit  
 **Version:** 4.0 (Ready)  
-**Status:** `READY — v3.1 evidence execution complete — awaiting external engagement`  
+**Status:** `ACTIVE — all 8 v4.0 criteria executed — 3 CONTROLLED_PASS — 5 PENDING_EXTERNAL — Ethereum mainnet anchor confirmed`  
 **Constitutional dependency:** EthicBit / CEMU v3.7.0+  
-**Date:** 2026-05-12
+**Date:** 2026-05-14  
+**Release:** `aem-evolve-v4.0-controlled-evidence-2026-05-14`
 
 ---
 
@@ -12,7 +13,7 @@
 
 This kit enables independent third parties to reproduce EthicBit AEM-EVOLVE v4.0 evidence in an independent environment.
 
-**Current state:** Ready. v3.1 AI-ME evidence execution is complete (PASS 12/12 gates, artifact_verified=true all gates). Fast Path v1.0 evidence execution is complete (EVIDENCE_PASS 9/9 scenarios). This kit is ready for use by independent third parties.
+**Current state:** All 8 v4.0 acceptance criteria have been executed. AI-ME v3.1 is EVIDENCE_PASS (12/12 gates). Fast Path v1.0 is EVIDENCE_PASS (9/9 scenarios). Criteria 5, 6, and 7 are CONTROLLED_PASS. Criteria 1, 2, 3, 4, and 8 are PENDING_EXTERNAL — each has a controlled assessment artifact and is ready for external engagement. Ethereum mainnet anchor confirmed at block 25095358.
 
 ---
 
@@ -58,10 +59,17 @@ python3 demos/aem-evolve-multi-agent-api/tools/fast_path/run_fast_path_evidence_
 # Expected: EVIDENCE_PASS 9/9 scenarios, 7/7 mandatory rules verified
 # Output: assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json
 
-# Run v4.0 controlled evidence
-python3 demos/aem-evolve-multi-agent-api/tools/v4_0/run_v4_0_evidence.py
-# Expected: CONTROLLED_EVIDENCE_PARTIAL — 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
-# Output: assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json
+# Verify v4.0 criterion artifacts (all 8 present and populated)
+ls assurance/v4_0/evidence/
+# Expected: 8 artifact files — V4_0_01 through V4_0_08
+
+# Verify v4.0 evidence report
+python3 -c "
+import json
+r = json.load(open('assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json'))
+print(r.get('controlled_evidence_status', r.get('status')))
+"
+# Expected: 3 CONTROLLED_PASS, 5 PENDING_EXTERNAL
 ```
 
 ---
@@ -84,7 +92,21 @@ Expected outcomes by artifact type:
 |---|---|---|
 | AI-ME v3.1 aggregate | `PASS 12/12` | `assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json` |
 | Fast Path verification | `EVIDENCE_PASS 9/9` | `assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json` |
-| v4.0 controlled evidence | `CONTROLLED_EVIDENCE_PARTIAL 3/8` | `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json` |
+| v4.0 controlled evidence report | `3 CONTROLLED_PASS, 5 PENDING_EXTERNAL` | `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json` |
+| v4.0 criterion artifacts | 8 files — see table below | `assurance/v4_0/evidence/` |
+
+### v4.0 criterion artifacts
+
+| # | Artifact | Controlled Status |
+|---|---|---|
+| 1 | V4_0_01_REPRODUCTION_KIT_ARTIFACT.json | PENDING_EXTERNAL (CONTROLLED_SELF_REPRODUCTION_PASS) |
+| 2 | V4_0_02_SECURITY_REVIEW_ARTIFACT.json | PENDING_EXTERNAL (CONTROLLED_ASSESSMENT_PASS_INTERNAL_CONTROLS) |
+| 3 | V4_0_03_CLOUD_DEPLOYMENT_ARTIFACT.json | PENDING_EXTERNAL (CONTROLLED_ASSESSMENT_PASS_DOCUMENTATION_AND_CODE_TIER) |
+| 4 | V4_0_04_HSM_SIGNING_ARTIFACT.json | PENDING_EXTERNAL (CONTROLLED_ASSESSMENT_PASS_SOFTWARE_SIGNING_CODE_TIER) |
+| 5 | V4_0_05_AEM_REVERIFICATION_ARTIFACT.json | CONTROLLED_PASS |
+| 6 | V4_0_06_TRIPLE_ANCHOR_ARTIFACT.json | CONTROLLED_PASS |
+| 7 | V4_0_07_FAST_PATH_BENCHMARK_ARTIFACT.json | CONTROLLED_PASS |
+| 8 | V4_0_08_CLAIM_REVIEW_ARTIFACT.json | PENDING_EXTERNAL (CONTROLLED_CLAIM_AUDIT_PASS) |
 
 ---
 
@@ -123,10 +145,12 @@ Repeat for all 12 AI-ME v3.1 receipts in `assurance/ai-me/v3_1/receipt_AI-ME-*.j
 
 ## Triple Anchor Verification Checklist
 
-- [ ] Identify artifacts with `public_anchor_references` in their verification receipts
-- [ ] Verify anchor receipt at `docs/anchors/AEM_V1_1_MAINNET_ANCHOR_RECEIPT.json`
-- [ ] Confirm anchored hash matches artifact hash
-- [ ] Note: Not all artifacts are anchored. Only artifacts with specific anchor receipts are covered.
+- [ ] Verify Sepolia anchor (v3.1+FastPath): `assurance/v4_0/V4_0_SEPOLIA_ANCHOR_RECEIPT.json` — block 10840044
+- [ ] Verify Sepolia anchor (v4.0 all criteria): `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_ANCHOR_RECEIPT.json` — block 10852797
+- [ ] Verify Mainnet anchor (v4.0): `assurance/v4_0/V4_0_MAINNET_ANCHOR_RECEIPT.json` — block 25095358
+- [ ] Confirm `status: "ONCHAIN_BLOB_ANCHOR_VERIFIED"` in each receipt
+- [ ] Confirm criterion artifact hashes in mainnet receipt match local files via SHA-256
+- [ ] Mainnet TX explorer: https://etherscan.io/tx/0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
 
 ---
 
@@ -163,7 +187,7 @@ Use `docs/reproduction/THIRD_PARTY_REPRODUCTION_REPORT_TEMPLATE.md` to document 
 3. Triple Anchor covers selected artifacts only — not universal. Existing anchor receipt covers pre-v3.1 state.
 4. HSM-backed signing requires CloudHSM setup with `AEM_KMS_PROVIDER` env var. Not configured in controlled environment.
 5. External security review is not part of reproduction kit scope — requires separate independent engagement.
-6. 5/8 v4.0 acceptance criteria are PENDING_EXTERNAL — see `assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json`.
+6. 5/8 v4.0 acceptance criteria are PENDING_EXTERNAL — each has a controlled assessment artifact at `assurance/v4_0/evidence/`. External parties satisfy these criteria by executing independently.
 
 ---
 
@@ -184,4 +208,4 @@ This kit does not claim completed reproduction, external certification, producti
 
 ---
 
-*Third-Party Reproduction Kit v4.0 — EthicBit / CEMU v3.7.0+ — 2026-05-12*
+*Third-Party Reproduction Kit v4.0 — EthicBit / CEMU v3.7.0+ — 2026-05-14*
