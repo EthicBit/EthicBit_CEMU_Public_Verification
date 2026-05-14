@@ -1,23 +1,153 @@
 {
-  "artifact_id": "v4_0_reproduction_kit",
+  "artifact_id": "v4_0_controlled_self_reproduction",
   "criterion_number": 1,
   "criterion": "third_party_reproduction",
   "controlled_status": "PENDING_EXTERNAL",
+  "controlled_self_reproduction_status": "CONTROLLED_SELF_REPRODUCTION_PASS",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
-  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
-  "kit_version": "v4.0",
-  "kit_readiness_status": "READY",
-  "kit_path": "docs/reproduction/THIRD_PARTY_REPRODUCTION_KIT_V4_0.md",
-  "prerequisites_met": true,
-  "prerequisites": {
-    "v3_1_ai_me_evidence": "PASS (12/12 gates, artifact_verified=true all gates)",
-    "fast_path_v1_0_evidence": "EVIDENCE_PASS (9/9 scenarios, 7/7 mandatory rules)",
-    "aem_v1_1_baseline": "PASS (14/14 gates, 140/140 checks)",
-    "reproduction_kit_finalized": true,
-    "expected_outputs_documented": true,
-    "hash_verification_instructions_present": true
+  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "reproduction_timestamp": "2026-05-14T18:17:38.621989+00:00",
+  "reproduction_type": "CONTROLLED_SELF_REPRODUCTION",
+  "environment": {
+    "python": "3.11.8",
+    "os": "Darwin 25.5.0",
+    "platform": "arm64"
   },
-  "controlled_evidence_note": "Reproduction kit is ready for third-party use. v3.1 evidence execution is complete. Third-party reproduction in an independent environment has not been executed.",
-  "non_claim": "Controlled kit preparation does not constitute third-party reproduction. External reproduction by an independent party in a separate environment is required for v4.0 External Validation Release."
+  "git_state": {
+    "sha": "58f32edee1d3e1215b941cc2c47dca0d20352581",
+    "tag": "v3.1",
+    "dirty": false
+  },
+  "reproduction_steps_executed": [
+    "git state verification",
+    "AI-ME v3.1 aggregate report read and verified",
+    "Fast Path v1.0 verification report read and verified",
+    "AEM v1.1 SHA256 hash re-verification (12 artifacts)",
+    "Sepolia anchor TX on-chain RPC verification",
+    "v4.0 controlled evidence report read and verified"
+  ],
+  "step_results": {
+    "ai_me_v3_1": {
+      "aggregate_outcome": "PASS",
+      "gates_pass": 12,
+      "sha256": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc"
+    },
+    "fast_path_v1_0": {
+      "status": "EVIDENCE_PASS",
+      "scenarios_executed": 9,
+      "scenarios_matched_expected": true,
+      "sha256": "9fd864325a47553070c49f51b032e449047add3122c4ff891719822929955064"
+    },
+    "aem_v1_1_hash_verification": {
+      "artifacts_verified": 12,
+      "all_match": true,
+      "per_artifact": [
+        {
+          "gate_id": "AI-ME-01",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-02",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-03",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-04",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-05",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-06",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-07",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-08",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-09",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-10",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-11",
+          "hash_match": true
+        },
+        {
+          "gate_id": "AI-ME-12",
+          "hash_match": true
+        }
+      ]
+    },
+    "sepolia_anchor_rpc_verification": {
+      "tx_hash": "0xc5908653fa5fc60db913a21ae021d7037f6d35365e8dbaf90c55a6fb86ec4bc0",
+      "on_chain": true,
+      "block_number": 10840044,
+      "receipt_block_claimed": 10840044,
+      "block_match": true
+    },
+    "v4_0_controlled_evidence": {
+      "status": "CONTROLLED_EVIDENCE_PARTIAL",
+      "criteria_controlled_pass": 3,
+      "criteria_pending_external": 5,
+      "sha256": "2aa159ca589626575f00e58499021fffa73fa6a1bafdd3248f706d442887a2f8"
+    }
+  },
+  "all_expected_outputs_verified": true,
+  "expected_vs_actual": {
+    "ai_me_v3_1_outcome": {
+      "expected": "PASS",
+      "actual": "PASS",
+      "match": true
+    },
+    "ai_me_v3_1_gates": {
+      "expected": 12,
+      "actual": 12,
+      "match": true
+    },
+    "fast_path_status": {
+      "expected": "EVIDENCE_PASS",
+      "actual": "EVIDENCE_PASS",
+      "match": true
+    },
+    "fast_path_scenarios": {
+      "expected": 9,
+      "actual": 9,
+      "match": true
+    },
+    "fast_path_matched": {
+      "expected": true,
+      "actual": true,
+      "match": true
+    },
+    "aem_hash_all_match": {
+      "expected": true,
+      "actual": true,
+      "match": true
+    },
+    "sepolia_on_chain": {
+      "expected": true,
+      "actual": true,
+      "match": true
+    },
+    "sepolia_block_match": {
+      "expected": true,
+      "actual": true,
+      "match": true
+    }
+  },
+  "non_claim": "CONTROLLED_SELF_REPRODUCTION \u2014 NOT third-party reproduction. Executed in the same controlled environment as original evidence. Not an independent party. Not a separate environment. Third-party reproduction by an independent party in a genuinely separate environment is required for v4.0 External Validation Release criterion 1."
 }
