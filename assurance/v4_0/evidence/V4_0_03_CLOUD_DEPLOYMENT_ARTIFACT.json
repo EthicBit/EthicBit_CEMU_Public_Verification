@@ -3,9 +3,11 @@
   "criterion_number": 3,
   "criterion": "managed_cloud_deployment",
   "controlled_status": "PENDING_EXTERNAL",
+  "controlled_deployment_assessment_status": "CONTROLLED_ASSESSMENT_PASS_DOCUMENTATION_AND_CODE_TIER",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-  "scope": "AEM-EVOLVE multi-agent governance API — controlled environment — EthicBit / CEMU v3.7.0+",
-  "evaluation_timestamp": "2026-05-12T00:00:00+00:00",
+  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "assessment_timestamp": "2026-05-14T18:28:43.597095+00:00",
+  "assessment_type": "CONTROLLED_INTERNAL_DEPLOYMENT_ASSESSMENT",
   "infrastructure_documentation": {
     "deployment_manifest_exists": true,
     "deployment_manifest_path": "demos/aem-evolve-multi-agent-api/docs/DEPLOYMENT_MANIFEST.md",
@@ -16,12 +18,112 @@
     "monitoring_config_documented": true,
     "postgres_deployment_documented": true
   },
-  "managed_cloud_requirements": {
-    "managed_compute": "NOT_DEPLOYED",
-    "managed_networking": "NOT_DEPLOYED",
-    "deployment_audit_trail": "NOT_DEPLOYED",
-    "managed_postgres": "NOT_DEPLOYED",
-    "managed_prometheus_grafana": "NOT_DEPLOYED"
+  "assessment_steps_executed": [
+    "All 12 production readiness verifiers executed",
+    "Deployment documentation presence and SHA256 verified",
+    "Monitoring configuration artifact SHA256 verified",
+    "API importability and demo-mode startup verified",
+    "Docker build readiness assessed",
+    "Production readiness gate states documented"
+  ],
+  "production_readiness_gates": {
+    "verify_deployment_audit": {
+      "checks_passed": "8/10",
+      "gate": "FAIL",
+      "blocking": "AEM_DEPLOYMENT_TARGET, AEM_DEPLOYMENT_TIMESTAMP not set \u2014 production deployment not executed"
+    },
+    "verify_disaster_recovery": {
+      "checks_passed": "8/10",
+      "gate": "FAIL",
+      "blocking": "AEM_DR_TESTER, AEM_DR_TEST_DATE not set \u2014 DR dry-run not completed"
+    },
+    "verify_governance_signoff": {
+      "checks_passed": "8/10",
+      "gate": "FAIL",
+      "blocking": "AEM_GOVERNANCE_APPROVER, AEM_GOVERNANCE_SIGNOFF_DATE not set"
+    },
+    "verify_incident_response": {
+      "checks_passed": "8/10",
+      "gate": "FAIL",
+      "blocking": "AEM_DRILL_COMPLETED_AT, AEM_DRILL_SIGNOFF_APPROVER not set \u2014 live drill not conducted"
+    },
+    "verify_kms_signing": {
+      "checks_passed": "9/10",
+      "gate": "FAIL",
+      "blocking": "AEM_KMS_PROVIDER not set \u2014 HSM/KMS not provisioned (criterion 4)"
+    },
+    "verify_migration_recovery": {
+      "checks_passed": "code-tier",
+      "gate": "FAIL",
+      "blocking": "AEM_DB_URL not set \u2014 managed PostgreSQL not provisioned"
+    },
+    "verify_monitoring_alerting": {
+      "checks_passed": "7/10",
+      "gate": "FAIL",
+      "blocking": "AEM_PROMETHEUS_URL not set \u2014 live Prometheus not provisioned"
+    },
+    "verify_oidc_provider": {
+      "checks_passed": "code-tier",
+      "gate": "FAIL",
+      "blocking": "OIDC_ISSUER not set \u2014 external OIDC provider not configured"
+    },
+    "verify_postgres_persistence": {
+      "checks_passed": "code-tier",
+      "gate": "FAIL",
+      "blocking": "AEM_DB_URL not set \u2014 managed PostgreSQL not provisioned"
+    },
+    "verify_rollback_procedure": {
+      "checks_passed": "8/10",
+      "gate": "FAIL",
+      "blocking": "AEM_ROLLBACK_TESTER, AEM_ROLLBACK_TEST_DATE not set \u2014 rollback dry-run not completed"
+    },
+    "verify_security_review": {
+      "checks_passed": "8/10",
+      "gate": "FAIL",
+      "blocking": "AEM_SECURITY_REVIEWER not set (criterion 2)"
+    },
+    "verify_slo_evidence": {
+      "checks_passed": "8/10",
+      "gate": "FAIL",
+      "blocking": "AEM_SLO_REVIEWER, AEM_SLO_REVIEW_DATE not set \u2014 SLO evidence not externally reviewed"
+    }
   },
-  "non_claim": "Managed cloud deployment has not been executed. All infrastructure documentation exists as specification. Cloud deployment requires external managed compute environment."
+  "documentation_tier_results": {
+    "deployment_manifest_sha256": "889f7f1c4c871043408c2c6f8e14f932ee38b706b900e9f4e8d97a0f6a79e535",
+    "disaster_recovery_sha256": "c2159d47020266931294c028a773aaa27c3c6ced2de4edc55def91800b2b22cc",
+    "rollback_runbook_sha256": "be0717f287ad44e1f9331b2676ff934ea8ca57d83cc3e3a2a71f0b0cf5e30b91",
+    "incident_response_sha256": "7671e6de3bb0459f16a86860638bd9ce58d4a1c77ef62185a90933dbcd59e64d",
+    "slo_sha256": "ba6a7c63cb13813771b4d0345b0c7289e930690a932210eb1f0362c8ebd5192e",
+    "alert_rules_yaml_sha256": "5c808ee1a866cc57a0e3c69f174001ec9bc5a3a1c6b2eabd5aff0fe05d5dfa6a",
+    "alertmanager_config_sha256": "82722787bfa79683399decd7ed6e0cff38272df7b1cfad2cb1b2c7327b4b8511",
+    "grafana_dashboard_sha256": "dee64a8c1149836ec3af0aa037b658ac6b3e5051dfd3342802f185f151511e7f"
+  },
+  "api_readiness": {
+    "main_py_importable": true,
+    "demo_mode_startup": true,
+    "signing_provider_loaded": "FileSigningProvider (demo)",
+    "oidc_demo_provider_loaded": true,
+    "prometheus_url_configured": false,
+    "dockerfile_present": false,
+    "docker_compose_present": false,
+    "container_deployment_note": "Deployment spec in DEPLOYMENT_MANIFEST.md \u2014 container image build is defined in manifest but Dockerfile not present in repo; container build is a deployment-time step"
+  },
+  "managed_cloud_requirements": {
+    "managed_compute": "NOT_DEPLOYED \u2014 requires external cloud provider (AWS/GCP/Azure)",
+    "managed_networking": "NOT_DEPLOYED",
+    "deployment_audit_trail": "NOT_DEPLOYED \u2014 AEM_DEPLOYMENT_TARGET, AEM_DEPLOYMENT_TIMESTAMP not set",
+    "managed_postgres": "NOT_DEPLOYED \u2014 AEM_DB_URL not set",
+    "managed_prometheus_grafana": "NOT_DEPLOYED \u2014 AEM_PROMETHEUS_URL not set",
+    "managed_oidc_provider": "NOT_DEPLOYED \u2014 OIDC_ISSUER not set",
+    "managed_kms": "NOT_DEPLOYED \u2014 AEM_KMS_PROVIDER not set (criterion 4)"
+  },
+  "infrastructure_provisioning_required": [
+    "Managed compute (AWS ECS/GCP Cloud Run/Azure Container Apps)",
+    "Managed PostgreSQL (AWS RDS/GCP Cloud SQL/Azure Database)",
+    "External OIDC provider (Okta/Auth0/Azure AD/Keycloak)",
+    "Managed KMS/HSM (AWS KMS/GCP Cloud KMS/Azure Key Vault/PKCS11) \u2014 criterion 4",
+    "Prometheus/Grafana instance or managed equivalent",
+    "Set all 14 documented required env vars in DEPLOYMENT_MANIFEST.md"
+  ],
+  "non_claim": "CONTROLLED_INTERNAL_DEPLOYMENT_ASSESSMENT \u2014 NOT managed cloud deployment. Documentation tier fully verified. All 12 production readiness verifiers executed \u2014 code-tier checks pass, infrastructure-tier checks fail due to absence of managed compute, managed PostgreSQL, OIDC provider, and KMS. No actual cloud deployment has been executed. AEM_DEPLOYMENT_TARGET and AEM_DEPLOYMENT_TIMESTAMP not set. Managed cloud deployment requires external cloud provider provisioning."
 }
