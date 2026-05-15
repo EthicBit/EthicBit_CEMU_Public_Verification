@@ -2,15 +2,17 @@
   "report_type": "V4_0_CONTROLLED_EVIDENCE_REPORT",
   "version": "4.0",
   "status": "CONTROLLED_EVIDENCE_PARTIAL",
-  "evaluation_timestamp": "2026-05-14T18:35:17.002143+00:00",
+  "evaluation_timestamp": "2026-05-15T12:35:06.051211+00:00",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-  "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API - controlled environment - EthicBit / CEMU v3.7.0+",
   "criteria_evaluated": 8,
-  "criteria_controlled_pass": 3,
-  "criteria_pending_external": 5,
+  "criteria_controlled_pass": 5,
+  "criteria_pending_external": 3,
   "all_statuses_matched_expected": true,
   "v4_0_external_validation_release_claimed": false,
   "controlled_pass_criteria": [
+    "managed_cloud_deployment",
+    "hsm_signing",
     "aem_v1_1_reverification",
     "triple_anchor_verification",
     "fast_path_benchmark"
@@ -18,8 +20,6 @@
   "pending_external_criteria": [
     "third_party_reproduction",
     "external_security_review",
-    "managed_cloud_deployment",
-    "hsm_signing",
     "external_claim_review"
   ],
   "ai_me_v3_1_baseline": {
@@ -35,15 +35,15 @@
     "source": "assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json"
   },
   "mandatory_non_claims_verified": [
-    "v4.0 External Validation Release NOT claimed \u2014 VERIFIED",
-    "Third-party reproduction NOT claimed \u2014 PENDING_EXTERNAL",
-    "External security review NOT claimed \u2014 PENDING_EXTERNAL",
-    "Managed cloud deployment NOT claimed \u2014 PENDING_EXTERNAL",
-    "HSM-backed signing NOT claimed \u2014 PENDING_EXTERNAL",
-    "External claim review NOT claimed \u2014 PENDING_EXTERNAL",
-    "AEM v1.1 reverification CONTROLLED only \u2014 not external \u2014 VERIFIED",
-    "Triple Anchor verification CONTROLLED only \u2014 not on-chain RPC \u2014 VERIFIED",
-    "Fast Path benchmark CONTROLLED only \u2014 not managed cloud \u2014 VERIFIED"
+    "v4.0 External Validation Release NOT claimed - VERIFIED",
+    "Third-party reproduction NOT claimed - PENDING_EXTERNAL",
+    "External security review NOT claimed - PENDING_EXTERNAL",
+    "External claim review NOT claimed - PENDING_EXTERNAL",
+    "Managed cloud deployment is CONTROLLED_PASS only - not external validation and not universal production readiness - VERIFIED",
+    "HSM/KMS signing is CONTROLLED_PASS only - not FIPS certification and not external certification - VERIFIED",
+    "AEM v1.1 reverification CONTROLLED only - not external reproduction - VERIFIED",
+    "Triple Anchor verification CONTROLLED only - not universal public anchoring - VERIFIED",
+    "Fast Path benchmark CONTROLLED only - not full-system sub-15ms validation - VERIFIED"
   ],
   "criteria": [
     {
@@ -68,19 +68,19 @@
       "criterion_number": 3,
       "criterion": "managed_cloud_deployment",
       "artifact_file": "V4_0_03_CLOUD_DEPLOYMENT_ARTIFACT.json",
-      "controlled_status": "PENDING_EXTERNAL",
-      "expected_status": "PENDING_EXTERNAL",
+      "controlled_status": "CONTROLLED_PASS",
+      "expected_status": "CONTROLLED_PASS",
       "status_matched": true,
-      "artifact_sha256": "5fc1fe3dd49d5b6adbd32195c9f36438f0633a5c676605ee576e37b584e6a72a"
+      "artifact_sha256": "255de2a83ab080225f8a668b8352f546a3d7452a5850a42ddeeda1059196fa22"
     },
     {
       "criterion_number": 4,
       "criterion": "hsm_signing",
       "artifact_file": "V4_0_04_HSM_SIGNING_ARTIFACT.json",
-      "controlled_status": "PENDING_EXTERNAL",
-      "expected_status": "PENDING_EXTERNAL",
+      "controlled_status": "CONTROLLED_PASS",
+      "expected_status": "CONTROLLED_PASS",
       "status_matched": true,
-      "artifact_sha256": "d0c5b2d1631c42c0feaa3456d5e039cd6f0c26cb09a6e69cbd4db196985f16b0"
+      "artifact_sha256": "3705aa1974cac6fdac8731333012afd5eaf2a77c44751b48f9ad9055d4476d87"
     },
     {
       "criterion_number": 5,
@@ -89,7 +89,7 @@
       "controlled_status": "CONTROLLED_PASS",
       "expected_status": "CONTROLLED_PASS",
       "status_matched": true,
-      "artifact_sha256": "3da2af2db4a74dc13421343a3a6ce6d12b5341bacf4ca10e435fc4245e29f54a"
+      "artifact_sha256": "8c67403f35954bfcc635717c3fd00771b47deb638fbb6c919fb08c2203c7b1f6"
     },
     {
       "criterion_number": 6,
@@ -98,7 +98,7 @@
       "controlled_status": "CONTROLLED_PASS",
       "expected_status": "CONTROLLED_PASS",
       "status_matched": true,
-      "artifact_sha256": "0253aeadc379208d937ab44e2af0aec74ee9073f9dd5b3bf528b855d74d73772"
+      "artifact_sha256": "68b7c46cf4772f7a7637936e02032498a3a8fa99147c1dbd5bc7a8b1d513e8f8"
     },
     {
       "criterion_number": 7,
@@ -107,7 +107,7 @@
       "controlled_status": "CONTROLLED_PASS",
       "expected_status": "CONTROLLED_PASS",
       "status_matched": true,
-      "artifact_sha256": "5b4f3bdb8003416b5c6faa5a03a5b02d8a2a30887540ae35184bb222e3a1a588"
+      "artifact_sha256": "422070c92a78ff92096dfdfec14662d8e4402f61404e9e0a6586404a28379e03"
     },
     {
       "criterion_number": 8,
@@ -116,8 +116,8 @@
       "controlled_status": "PENDING_EXTERNAL",
       "expected_status": "PENDING_EXTERNAL",
       "status_matched": true,
-      "artifact_sha256": "de05038cb6849249df5305dd0fcb2e4857e6262a42c36d7d9c2c1406252c5451"
+      "artifact_sha256": "94722df75f0f13ff97031f8052f364664f00af533070311c66d898a370e2ebbf"
     }
   ],
-  "non_claim": "v4.0 External Validation Release is NOT claimed. This report covers controlled-environment evidence only. 3/8 criteria have controlled-environment evidence (CONTROLLED_PASS). 5/8 criteria require external parties or external infrastructure (PENDING_EXTERNAL). Not production deployment. Not HSM-backed signing. Not external certification. Not third-party reproduction. Not regulatory approval."
+  "non_claim": "v4.0 External Validation Release is NOT claimed. This report covers controlled-environment evidence only. 5/8 criteria have controlled-environment evidence (CONTROLLED_PASS): managed cloud deployment, HSM/KMS signing, AEM v1.1 reverification, Triple Anchor verification, and Fast Path benchmark. 3/8 criteria require independent external parties (PENDING_EXTERNAL): third-party reproduction, external security review, and external claim review. Not external validation pass. Not external certification. Not third-party reproduction. Not regulatory approval. Not cybersecurity certification. Not financial advice. Not clinical or diagnostic readiness. Not universal production readiness. Not universal public anchoring."
 }

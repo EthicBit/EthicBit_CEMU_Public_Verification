@@ -1,0 +1,62 @@
+============================================================
+ ETHICBIT / CEMU - PRE-REPORT FULL STACK VERIFICATION
+============================================================
+timestamp_utc=20260515T015619Z
+repo=EthicBit_CEMU
+branch=main
+head_at_run=a5fff5ed05c74e07f2920ade35b7713bb0eeb18f
+head_short_at_run=a5fff5ed
+latest_commit_at_run=a5fff5ed criterion 3: monitoring PASS 10/10 - Prometheus EC2 t3.micro live, 7/7 alerts
+
+=== 1. PURPOSE ===
+This report records the pre-report verification context used to reconcile the v4.0 controlled evidence rollup from 3/8 CONTROLLED_PASS to 5/8 CONTROLLED_PASS.
+
+=== 2. VALIDATION COUNTS OBSERVED AT RUN ===
+json_total=3933
+json_fail=0
+python_total=309
+python_fail=0
+shell_total=301
+shell_fail=0
+
+=== 3. CORE BASELINES ===
+v2_status=PASS
+v2_gates=14/14
+v2_checks=140/140
+ai_me_status=EVIDENCE_PASS
+ai_me_gates=12/12
+claim_boundary_status=PRESERVED
+fast_path_status=EVIDENCE_PASS
+
+=== 4. v4.0 RECONCILED CONTROLLED EVIDENCE ===
+status=CONTROLLED_EVIDENCE_PARTIAL
+criteria_evaluated=8
+criteria_controlled_pass=5
+criteria_pending_external=3
+
+CONTROLLED_PASS:
+- managed_cloud_deployment
+- hsm_signing
+- aem_v1_1_reverification
+- triple_anchor_verification
+- fast_path_benchmark
+
+PENDING_EXTERNAL:
+- third_party_reproduction
+- external_security_review
+- external_claim_review
+
+=== 5. CANONICAL FILES UPDATED ===
+assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json
+docs/STATUS_BULLETIN_PUBLIC_2026-05-15_V4_0_5_OF_8_CONTROLLED_EVIDENCE.md
+results/pre_report_full_stack_verification_20260515T015619Z/PRE_REPORT_FULL_STACK_VERIFICATION.txt
+
+=== 6. CLAIM BOUNDARY ===
+This reconciliation supports the claim that EthicBit / AEM-EVOLVE v4.0 has reached 5/8 controlled evidence criteria.
+
+It does not claim completed v4.0 external validation, completed third-party reproduction, completed external security review, completed external claim review, external certification, regulatory approval, cybersecurity certification, financial advice, clinical readiness, universal production readiness, FIPS validation, absence of all vulnerabilities, or universal public anchoring.
+
+=== 7. PUBLIC MIRROR NOTE ===
+Private infrastructure evidence may include live resource identifiers. Public mirror publication should use sanitized summaries for managed infrastructure and signing evidence.
+
+PRE_REPORT_FULL_STACK_VERIFICATION=PASS
