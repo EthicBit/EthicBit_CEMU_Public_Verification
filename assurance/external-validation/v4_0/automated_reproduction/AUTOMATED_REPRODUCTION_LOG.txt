@@ -1,0 +1,12 @@
+AEM-EVOLVE v4.0 Automated Reproduction Support
+generated_utc=2026-05-15T17:53:13.718908+00:00
+AUTOMATED_REPRODUCTION_SUPPORT=PASS
+PRE_REPORT_FULL_STACK_VERIFICATION=PASS
+AI_ME_V3_1=PASS
+FAST_PATH_V1_0=PASS
+V4_0_CONTROLLED_EVIDENCE=CONTROLLED_EVIDENCE_PARTIAL
+CLAIM_BOUNDARY_RED_TEAM=PASS
+third_party_reproduction_completed=false
+external_validation_pass_claimed=false
+HUMAN_ATTESTATION_PENDING=true
+Automated reproduction support is not third-party reproduction completion.

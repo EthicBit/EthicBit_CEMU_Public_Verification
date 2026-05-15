@@ -1,0 +1,47 @@
+name: v4.0 Automated Reproduction Support
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/v4_automated_reproduction_support.yml"
+      - "tools/external_validation/automated_reproduction/**"
+      - "assurance/external-validation/v4_0/automated_reproduction/**"
+      - "assurance/external-validation/v4_0/claim_red_team/**"
+      - "assurance/external-validation/v4_0/notary_dossier/**"
+      - "assurance/v4_0/**"
+      - "assurance/ai-me/v3_1/**"
+      - "assurance/fast-path/v1/**"
+
+permissions:
+  contents: read
+
+jobs:
+  automated-reproduction-support:
+    name: Automated reproduction support evidence
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate automated reproduction support artifacts
+        run: python3 tools/external_validation/automated_reproduction/run_automated_reproduction_support.py
+
+      - name: Verify automated reproduction support artifacts
+        run: python3 tools/external_validation/automated_reproduction/verify_automated_reproduction_report.py
+
+      - name: Upload automated reproduction support artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-automated-reproduction-support
+          path: |
+            assurance/external-validation/v4_0/automated_reproduction/AUTOMATED_REPRODUCTION_REPORT.json
+            assurance/external-validation/v4_0/automated_reproduction/AUTOMATED_REPRODUCTION_LOG.txt
+            assurance/external-validation/v4_0/automated_reproduction/AUTOMATED_REPRODUCTION_HASH_RECORD.txt
