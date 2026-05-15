@@ -1,0 +1,69 @@
+{
+  "schema_id": "AEM_EVOLVE_V4_0_NOTARY_DOSSIER_MANIFEST_V1",
+  "dossier_name": "AEM-EVOLVE v4.0 Notary Dossier",
+  "version": "4.0",
+  "status": "DOSSIER_STRUCTURE_DEFINED",
+  "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
+  "external_validation_pass_claimed": false,
+  "third_party_reproduction_completed": false,
+  "external_security_review_completed": false,
+  "external_claim_review_completed": false,
+  "repository": "EthicBit/EthicBit_CEMU",
+  "scope": "AEM-EVOLVE v4.0 hybrid validation support dossier scaffold",
+  "current_evidence_posture": {
+    "controlled_evidence_status": "CONTROLLED_EVIDENCE_PARTIAL",
+    "criteria_evaluated": 8,
+    "criteria_controlled_pass": 5,
+    "criteria_pending_external": 3,
+    "controlled_pass_criteria": [
+      "managed_cloud_deployment",
+      "hsm_signing",
+      "aem_v1_1_reverification",
+      "triple_anchor_verification",
+      "fast_path_benchmark"
+    ],
+    "pending_external_criteria": [
+      "third_party_reproduction",
+      "external_security_review",
+      "external_claim_review"
+    ]
+  },
+  "dossier_files_defined": [
+    "README.md",
+    "DOSSIER_MANIFEST.json",
+    "HUMAN_ATTESTATION_TEMPLATE.md",
+    "NON_CLAIMS.md"
+  ],
+  "future_generated_files": [
+    "DOSSIER_HASH_RECORD.txt",
+    "AUTOMATED_REPRODUCTION_REPORT.json",
+    "AUTOMATED_SECURITY_REVIEW_SUMMARY.json",
+    "CLAIM_BOUNDARY_RED_TEAM_REPORT.json",
+    "CLOUD_KMS_EVIDENCE_SUMMARY.json",
+    "ANCHOR_REFERENCE_SUMMARY.json",
+    "METHODOLOGY_REVIEW.md"
+  ],
+  "hash_algorithm": "SHA-256",
+  "canonicalization": "json_sort_keys_no_whitespace_utf8",
+  "claim_boundary": {
+    "automated_pipeline_may_claim_external_validation_pass": false,
+    "human_attestation_required_for_external_validation_elevation": true,
+    "non_claims_required": true,
+    "sensitive_infrastructure_identifiers_must_be_sanitized_for_public_mirror": true
+  },
+  "non_claims": {
+    "completed_notary_dossier": false,
+    "completed_human_attestation": false,
+    "completed_third_party_reproduction": false,
+    "completed_external_security_review": false,
+    "completed_external_claim_review": false,
+    "external_certification": false,
+    "regulatory_approval": false,
+    "cybersecurity_certification": false,
+    "financial_advice": false,
+    "clinical_or_diagnostic_readiness": false,
+    "universal_production_readiness": false,
+    "legal_compliance": false,
+    "external_validation_pass": false
+  }
+}
