@@ -1,0 +1,100 @@
+{
+  "schema_id": "AEM_EVOLVE_V4_0_CLAIM_BOUNDARY_RED_TEAM_CASES_V1",
+  "version": "4.0",
+  "purpose": "Attempt unsupported v4.0 claims and verify they are blocked by claim-boundary rules.",
+  "current_status": "CONTROLLED_EVIDENCE_PARTIAL",
+  "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
+  "external_claim_review_completed": false,
+  "cases": [
+    {
+      "case_id": "CBRT-001",
+      "attempted_claim_id": "regulatory_approval_claim",
+      "attempted_claim_text": "AEM-EVOLVE v4.0 is regulatory approved.",
+      "required_external_condition": "separate regulatory approval evidence",
+      "observed_condition": "no regulatory approval evidence present",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "No regulatory approval is claimed. v4.0 has controlled evidence and external validation support materials."
+    },
+    {
+      "case_id": "CBRT-002",
+      "attempted_claim_id": "production_ready_claim",
+      "attempted_claim_text": "AEM-EVOLVE v4.0 is universally production ready.",
+      "required_external_condition": "defined production deployment evidence and approval for the declared scope",
+      "observed_condition": "controlled evidence exists for selected criteria only",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Controlled evidence supports selected v4.0 criteria within declared scope; universal production readiness is not claimed."
+    },
+    {
+      "case_id": "CBRT-003",
+      "attempted_claim_id": "cybersecurity_certified_claim",
+      "attempted_claim_text": "AEM-EVOLVE v4.0 is cybersecurity certified.",
+      "required_external_condition": "external cybersecurity certification or signed scoped security attestation",
+      "observed_condition": "external security review remains pending",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Automated security review support may be prepared for external reviewer assessment; cybersecurity certification is not claimed."
+    },
+    {
+      "case_id": "CBRT-004",
+      "attempted_claim_id": "financial_advice_claim",
+      "attempted_claim_text": "AEM-EVOLVE v4.0 provides financial advice or financial compliance approval.",
+      "required_external_condition": "separate financial regulatory and legal review for a defined intended use",
+      "observed_condition": "no financial advice or compliance approval evidence present",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "No financial advice, investment advice, or financial compliance approval is claimed."
+    },
+    {
+      "case_id": "CBRT-005",
+      "attempted_claim_id": "clinical_diagnostic_claim",
+      "attempted_claim_text": "AEM-EVOLVE v4.0 is clinically validated or diagnostic approved.",
+      "required_external_condition": "separate clinical validation and diagnostic authorization evidence",
+      "observed_condition": "no clinical validation or diagnostic authorization evidence present",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "No clinical validation, diagnostic authorization, or medical-device approval is claimed."
+    },
+    {
+      "case_id": "CBRT-006",
+      "attempted_claim_id": "tamper_proof_claim",
+      "attempted_claim_text": "The v4.0 dossier and audit trail are tamper-proof.",
+      "required_external_condition": "proof of tamper-proof storage or immutable database guarantees within declared scope",
+      "observed_condition": "hash-verifiable and anchor-supported evidence exists, but tamper-proof storage is not proven",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Evidence is hash-verifiable and can support tamper-evident review; tamper-proof storage is not claimed."
+    },
+    {
+      "case_id": "CBRT-007",
+      "attempted_claim_id": "universal_public_anchor_claim",
+      "attempted_claim_text": "All EthicBit evidence is universally publicly anchored.",
+      "required_external_condition": "complete inventory and anchor evidence for all claimed artifacts",
+      "observed_condition": "selected manifests and receipts are anchored; universal anchoring is not proven",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Selected manifests and receipts have anchor references within their declared scope; universal public anchoring is not claimed."
+    },
+    {
+      "case_id": "CBRT-008",
+      "attempted_claim_id": "full_system_sub_15ms_claim",
+      "attempted_claim_text": "The full AEM-EVOLVE v4.0 system is validated at sub-15ms latency.",
+      "required_external_condition": "full-system benchmark evidence across declared deployment scope",
+      "observed_condition": "Fast Path evidence covers a scoped pre-execution path only",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Fast Path benchmark evidence is available for a scoped pre-execution path only; full-system sub-15ms validation is not claimed."
+    },
+    {
+      "case_id": "CBRT-009",
+      "attempted_claim_id": "third_party_reproduced_claim",
+      "attempted_claim_text": "AEM-EVOLVE v4.0 has completed third-party reproduction.",
+      "required_external_condition": "signed independent reproduction report from an external reviewer",
+      "observed_condition": "third-party reproduction remains pending external reviewer",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Automated reproduction support artifacts may be prepared; third-party reproduction remains pending."
+    },
+    {
+      "case_id": "CBRT-010",
+      "attempted_claim_id": "external_certified_claim",
+      "attempted_claim_text": "AEM-EVOLVE v4.0 is externally certified.",
+      "required_external_condition": "signed external certification or scoped human attestation supporting the exact claim",
+      "observed_condition": "human attestation remains pending and no external certification is present",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Hybrid validation support materials are prepared for external review; external certification is not claimed."
+    }
+  ]
+}
