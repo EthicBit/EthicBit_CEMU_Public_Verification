@@ -3,7 +3,7 @@
   "gate": "MONITORING_ALERTING_CHECK",
   "pr": "PR5",
   "version": "0.12.0-demo",
-  "generated_utc": "2026-05-15T00:58:30.794299+00:00",
+  "generated_utc": "2026-05-15T01:37:40.856426+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,11 +14,11 @@
   },
   "result": {
     "gate": "MONITORING_ALERTING_CHECK",
-    "status": "FAIL",
-    "checks_passed": 7,
-    "checks_failed": 3,
-    "prometheus_url_configured": false,
-    "fail_reason": "AEM_PROMETHEUS_URL not configured — C-08/C-09/C-10 require live Prometheus",
+    "status": "PASS",
+    "checks_passed": 10,
+    "checks_failed": 0,
+    "prometheus_url_configured": true,
+    "fail_reason": null,
     "checks": {
       "C-01_alert_rules_yaml": {
         "ok": true,
@@ -86,19 +86,20 @@
         "note": "Placeholder credentials — replace before production deploy"
       },
       "C-08_prometheus_reachable": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_PROMETHEUS_URL not set"
+        "ok": true,
+        "prometheus_url": "http://52.15.229.123:9090"
       },
       "C-09_alert_rules_loaded": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_PROMETHEUS_URL not set"
+        "ok": true,
+        "prometheus_url": "http://52.15.229.123:9090",
+        "loaded_alert_count": 7,
+        "missing_alerts": []
       },
       "C-10_alert_can_fire": {
-        "ok": false,
-        "skipped": true,
-        "reason": "AEM_PROMETHEUS_URL not set"
+        "ok": true,
+        "prometheus_url": "http://52.15.229.123:9090",
+        "query_status": "success",
+        "note": "Counter queryable — alert fires when value > 0"
       }
     }
   },

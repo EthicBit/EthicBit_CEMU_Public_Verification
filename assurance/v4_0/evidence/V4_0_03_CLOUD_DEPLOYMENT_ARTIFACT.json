@@ -57,8 +57,15 @@
       "sign_verify_roundtrip_confirmed": true
     },
     "managed_prometheus_grafana": {
-      "status": "PENDING_PROVISIONING",
-      "note": "AEM_PROMETHEUS_URL not set — live Prometheus not provisioned. C-08/C-09/C-10 of verify_monitoring_alerting skipped. C-01 through C-07 (documentation tier) PASS."
+      "status": "LIVE_PASS",
+      "provider": "aws_ec2",
+      "instance_id": "i-0800e0d8e3cf1e645",
+      "public_ip": "52.15.229.123",
+      "instance_type": "t3.micro",
+      "region": "us-east-2",
+      "AEM_PROMETHEUS_URL": "http://52.15.229.123:9090",
+      "alert_rules_loaded": 7,
+      "alert_names": ["AEM_HITLApprovalFailed","AEM_SignatureVerificationFailed","AEM_ReplayAttemptDetected","AEM_AuditChainMismatch","AEM_DatabaseUnavailable","AEM_KMSSigningFailed","AEM_OIDCProviderOutage"]
     }
   },
   "assessment_steps_executed": [
@@ -161,10 +168,11 @@
       "files_hashed": 20
     },
     "verify_monitoring_alerting": {
-      "checks_passed": "7/10",
-      "gate": "FAIL",
-      "blocking": "AEM_PROMETHEUS_URL not set — C-08/C-09/C-10 skipped (live Prometheus not provisioned)",
-      "documentation_tier": "PASS (C-01 through C-07 all pass)"
+      "checks_passed": "10/10",
+      "gate": "PASS",
+      "prometheus_url": "http://52.15.229.123:9090",
+      "alert_rules_loaded": 7,
+      "instance_id": "i-0800e0d8e3cf1e645"
     },
     "verify_security_review": {
       "checks_passed": "8/10",
@@ -178,11 +186,10 @@
   "verifier_run_summary": {
     "run_timestamp": "2026-05-15T01:00:00+00:00",
     "verifiers_run": 12,
-    "passed": 10,
-    "failed": 2,
-    "failed_verifiers": ["verify_monitoring_alerting", "verify_security_review"],
+    "passed": 11,
+    "failed": 1,
+    "failed_verifiers": ["verify_security_review"],
     "fail_reasons": [
-      "verify_monitoring_alerting: AEM_PROMETHEUS_URL not provisioned — pending managed Prometheus",
       "verify_security_review: external reviewer not yet engaged — pending criterion 2"
     ]
   },
@@ -212,14 +219,13 @@
     "managed_networking": "NOT_DEPLOYED",
     "deployment_audit_trail": "LIVE_PASS — AEM_DEPLOYMENT_TARGET=aws-us-east-2-rds-cognito-kms",
     "managed_postgres": "LIVE_PASS — AWS RDS PostgreSQL 18.3 db.t3.micro us-east-2",
-    "managed_prometheus_grafana": "PENDING — AEM_PROMETHEUS_URL not provisioned",
+    "managed_prometheus_grafana": "LIVE_PASS — Prometheus t3.micro i-0800e0d8e3cf1e645 us-east-2 7/7 alerts loaded",
     "managed_oidc_provider": "LIVE_PASS — AWS Cognito us-east-2_eEOb7JdbK",
     "managed_kms": "LIVE_PASS — AWS KMS ECC_NIST_P256 us-east-2 (criterion 4)"
   },
   "infrastructure_provisioning_remaining": [
     "Managed compute (AWS ECS/GCP Cloud Run/Azure Container Apps) — for full production deployment",
-    "Managed Prometheus/Grafana — for verify_monitoring_alerting C-08/C-09/C-10",
     "External security reviewer — for verify_security_review C-09/C-10 (criterion 2)"
   ],
-  "non_claim": "CONTROLLED_PASS — AWS RDS PostgreSQL 18.3 db.t3.micro provisioned in us-east-2 (aem-evolve-db). AWS Cognito User Pool us-east-2_eEOb7JdbK provisioned as OIDC provider. AWS KMS ECC_NIST_P256 key active (criterion 4). 10/12 production readiness verifiers PASS at 10/10 checks each. verify_monitoring_alerting FAIL (7/10 — live Prometheus not provisioned). verify_security_review FAIL (8/10 — external reviewer pending criterion 2). This criterion does not claim full production deployment, managed compute, container orchestration, live Prometheus, or external security review."
+  "non_claim": "CONTROLLED_PASS — AWS RDS PostgreSQL 18.3 db.t3.micro provisioned in us-east-2 (aem-evolve-db). AWS Cognito User Pool us-east-2_eEOb7JdbK provisioned as OIDC provider. AWS KMS ECC_NIST_P256 key active (criterion 4). Prometheus EC2 t3.micro (i-0800e0d8e3cf1e645) provisioned with 7/7 governance alert rules. 11/12 production readiness verifiers PASS at 10/10 checks each. verify_security_review FAIL (8/10 — external reviewer pending criterion 2). This criterion does not claim full production deployment, managed compute, or container orchestration."
 }
