@@ -1,0 +1,105 @@
+{
+  "schema_id": "AEM_EVOLVE_V4_0_AUTOMATED_REPRODUCTION_SUPPORT_REPORT_V1",
+  "report_type": "AUTOMATED_REPRODUCTION_SUPPORT_REPORT",
+  "version": "4.0",
+  "generated_utc": "2026-05-15T17:53:13.718908+00:00",
+  "status": "AUTOMATED_REPRODUCTION_SUPPORT_PASS",
+  "automated_reproduction_support": "PASS",
+  "pre_report_full_stack_verification": "PASS",
+  "ai_me_v3_1": "PASS",
+  "fast_path_v1_0": "PASS",
+  "v4_0_controlled_evidence": "CONTROLLED_EVIDENCE_PARTIAL",
+  "claim_boundary_red_team": "PASS",
+  "notary_dossier_human_attestation": "HUMAN_ATTESTATION_PENDING",
+  "evidence_inputs": [
+    {
+      "name": "ai_me_v3_1_aggregate",
+      "path": "assurance/ai-me/v3_1/AI_ME_V3_1_AGGREGATE_REPORT.json",
+      "source": "git_HEAD",
+      "sha256": "43f0fd6c7ccfcb343ffaee75d7c9b72d5cdf67b899e2f33fbee95b613bc9e9fc",
+      "canonical_sha256": "b30fded1710c5aac6df6dba26f55892ecfc6f554b035c4aa4ef79c7d50aa701d"
+    },
+    {
+      "name": "fast_path_v1_0",
+      "path": "assurance/fast-path/v1/FAST_PATH_VERIFICATION_REPORT.json",
+      "source": "git_HEAD",
+      "sha256": "9fd864325a47553070c49f51b032e449047add3122c4ff891719822929955064",
+      "canonical_sha256": "3b9a1c84bbf347b841ba48f669168e5bcd2b92e7cc16b95ba6692cf8bc26fe26"
+    },
+    {
+      "name": "v4_0_controlled_evidence",
+      "path": "assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json",
+      "source": "git_HEAD",
+      "sha256": "1d3a8ca0876de7bef175bec4ebf333da525f275165e6464c5e64256c38a16326",
+      "canonical_sha256": "15b3c24ecc5036ccaaf146c43bd4cb52c7ad9c7614caea97e0305d5acbba4426"
+    },
+    {
+      "name": "claim_boundary_red_team",
+      "path": "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json",
+      "source": "git_HEAD",
+      "sha256": "b7b1d8ae938942530faacabe7baa38b8ac8b91796a60798e865bf43b0b18a6fe",
+      "canonical_sha256": "ca0decb04b305591a91bfc5e427c9acf8cc6cf933f557618a1cbc3f664c7580c"
+    },
+    {
+      "name": "notary_dossier_manifest",
+      "path": "assurance/external-validation/v4_0/notary_dossier/DOSSIER_MANIFEST.json",
+      "source": "git_HEAD",
+      "sha256": "2fe0cef408e8ce6b01b0da4ff8cbac79eeb16984d272679489271a6e66b67b48",
+      "canonical_sha256": "c6dd053bc3607467aed30d2741c80ba606fb74e305e7f4cfe260e0c6b194fe8e"
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "AI_ME_V3_1",
+      "status": "PASS",
+      "passed": true,
+      "detail": "AI-ME v3.1 aggregate must be PASS with 12 passing gates."
+    },
+    {
+      "check_id": "FAST_PATH_V1_0",
+      "status": "PASS",
+      "passed": true,
+      "detail": "Fast Path v1.0 must be EVIDENCE_PASS with 9 matched scenarios."
+    },
+    {
+      "check_id": "V4_0_CONTROLLED_EVIDENCE",
+      "status": "CONTROLLED_EVIDENCE_PARTIAL_CONFIRMED",
+      "passed": true,
+      "detail": "v4.0 must remain 5/8 controlled evidence with 3 external criteria pending."
+    },
+    {
+      "check_id": "CLAIM_BOUNDARY_RED_TEAM",
+      "status": "PASS",
+      "passed": true,
+      "detail": "Claim red-team must block all attempted overclaims without claiming external review completion."
+    },
+    {
+      "check_id": "NOTARY_DOSSIER_BOUNDARY",
+      "status": "HUMAN_ATTESTATION_PENDING_CONFIRMED",
+      "passed": true,
+      "detail": "Notary dossier must preserve human attestation pending and no external validation pass claim."
+    }
+  ],
+  "claim_boundary": {
+    "automated_reproduction_support_only": true,
+    "automated_pipeline_may_claim_third_party_reproduction": false,
+    "automated_pipeline_may_claim_external_validation_pass": false,
+    "human_attestation_required_for_external_validation_elevation": true,
+    "human_attestation_status": "HUMAN_ATTESTATION_PENDING"
+  },
+  "non_claims": {
+    "third_party_reproduction_completed": false,
+    "completed_external_validation": false,
+    "completed_external_security_review": false,
+    "completed_external_claim_review": false,
+    "external_certification": false,
+    "cybersecurity_certification": false,
+    "regulatory_approval": false,
+    "financial_advice": false,
+    "clinical_or_diagnostic_readiness": false,
+    "universal_production_readiness": false,
+    "full_system_sub_15ms_validation": false,
+    "universal_public_anchoring": false
+  },
+  "notes": "Automated reproduction support is not third-party reproduction completion unless independently reviewed and attested by an external reviewer."
+}
