@@ -2,19 +2,19 @@
   "gate": "PRODUCTION_OIDC_PROVIDER_CHECK",
   "gate_version": "v2.0-PR1",
   "result": "PASS",
-  "timestamp_utc": "2026-05-11T03:01:34.855776+00:00",
+  "timestamp_utc": "2026-05-15T00:57:58.205672+00:00",
   "environment": {
     "oidc_issuer_configured": true,
-    "oidc_issuer": "http://localhost:8080/realms/aem-evolve",
-    "oidc_jwks_uri": "http://localhost:8080/realms/aem-evolve/protocol/openid-connect/certs",
-    "oidc_audience": "aem-evolve"
+    "oidc_issuer": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_eEOb7JdbK",
+    "oidc_jwks_uri": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_eEOb7JdbK/.well-known/jwks.json",
+    "oidc_audience": "3l7u8b96cppg54hdghlq1q4not"
   },
   "checks": [
     {
       "id": "C-01",
       "label": "OIDC_ISSUER env var configured",
       "status": "PASS",
-      "detail": "http://localhost:8080/realms/aem-evolve"
+      "detail": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_eEOb7JdbK"
     },
     {
       "id": "C-02",
@@ -30,7 +30,7 @@
       "id": "C-04",
       "label": "load_oidc_config returns config (OIDC_ISSUER set)",
       "status": "PASS",
-      "detail": "issuer=http://localhost:8080/realms/aem-evolve"
+      "detail": "issuer=https://cognito-idp.us-east-2.amazonaws.com/us-east-2_eEOb7JdbK"
     },
     {
       "id": "C-05",
@@ -42,7 +42,7 @@
       "id": "C-06",
       "label": "Provider issuer matches OIDC_ISSUER",
       "status": "PASS",
-      "detail": "http://localhost:8080/realms/aem-evolve"
+      "detail": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_eEOb7JdbK"
     },
     {
       "id": "C-07",
@@ -60,7 +60,7 @@
       "id": "C-09",
       "label": "Audience configured",
       "status": "PASS",
-      "detail": "aem-evolve"
+      "detail": "3l7u8b96cppg54hdghlq1q4not"
     },
     {
       "id": "C-10",

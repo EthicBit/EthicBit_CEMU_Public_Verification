@@ -2,17 +2,17 @@
   "gate": "MIGRATION_RECOVERY_CHECK",
   "gate_version": "v2.0-PR4",
   "result": "PASS",
-  "timestamp_utc": "2026-05-11T04:03:58.373191+00:00",
+  "timestamp_utc": "2026-05-15T00:58:29.284370+00:00",
   "environment": {
     "db_url_configured": true,
-    "db_url_prefix": "postgresql://aem:aem_staging_p"
+    "db_url_prefix": "postgresql://aemadmin:AemEvolv"
   },
   "checks": [
     {
       "id": "C-01",
       "label": "AEM_DB_URL env var configured",
       "status": "PASS",
-      "detail": "postgresql://aem:aem_staging_password@lo"
+      "detail": "postgresql://aemadmin:AemEvolve2026!@aem"
     },
     {
       "id": "C-02",
@@ -29,7 +29,7 @@
       "id": "C-04",
       "label": "Forward migration hash before/after recorded",
       "status": "PASS",
-      "detail": "before=c3e0a31f0374... after=c3e0a31f0374..."
+      "detail": "before=db964357bff3... after=db964357bff3..."
     },
     {
       "id": "C-05",
@@ -47,7 +47,7 @@
       "id": "C-07",
       "label": "Audit-chain continuity verified",
       "status": "PASS",
-      "detail": "empty audit_chain \u2014 continuity trivially satisfied"
+      "detail": "all 8 entries valid"
     },
     {
       "id": "C-08",
@@ -59,7 +59,7 @@
       "id": "C-09",
       "label": "Backup file produced and hashed",
       "status": "PASS",
-      "detail": "schema dump: 10844 bytes, sha256=3f437ebba131ba1c..."
+      "detail": "schema dump: 11055 bytes, sha256=533b9adfadb9518b..."
     },
     {
       "id": "C-10",
@@ -76,13 +76,13 @@
   "evidence": {
     "gate": "MIGRATION_RECOVERY_CHECK",
     "gate_version": "v2.0-PR4",
-    "timestamp_utc": "2026-05-11T04:03:58.153879+00:00",
-    "db_url_prefix": "postgresql://aem:aem_staging_p",
+    "timestamp_utc": "2026-05-15T00:58:12.000089+00:00",
+    "db_url_prefix": "postgresql://aemadmin:AemEvolv",
     "evidence": {
       "forward_migration": {
         "ok": true,
-        "before_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
-        "after_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
+        "before_hash": "db964357bff3b600e3da9ebf2f02f295c2a917dbbb9d980aeed3aef779f457fe",
+        "after_hash": "db964357bff3b600e3da9ebf2f02f295c2a917dbbb9d980aeed3aef779f457fe",
         "hash_changed": false,
         "migrations_applied": [
           "001_initial_schema.sql",
@@ -98,7 +98,7 @@
       },
       "rollback_migration": {
         "ok": true,
-        "before_hash": "c3e0a31f03742794280d06177bba171f0854d86e9663ebb9bc2f126ed5670d54",
+        "before_hash": "db964357bff3b600e3da9ebf2f02f295c2a917dbbb9d980aeed3aef779f457fe",
         "rollback_files": [
           "001_rollback_initial_schema.sql",
           "002_rollback_metrics_table.sql",
@@ -128,30 +128,31 @@
           "evolution_events": 0,
           "evolution_receipts": 0,
           "human_decisions": 0,
-          "audit_chain": 0,
+          "audit_chain": 8,
           "hitl_used_tokens": 0
         },
         "after": {
           "evolution_events": 0,
           "evolution_receipts": 0,
           "human_decisions": 0,
-          "audit_chain": 0,
+          "audit_chain": 8,
           "hitl_used_tokens": 0
         }
       },
       "audit_chain_continuity": {
         "ok": true,
-        "entries_checked": 0,
+        "entries_checked": 8,
         "broken_links": 0,
-        "detail": "empty audit_chain \u2014 continuity trivially satisfied"
+        "broken_seqs": [],
+        "detail": "all 8 entries valid"
       },
       "backup_test": {
         "ok": true,
-        "dump_path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/aem_pr4_dump_oqokj2u0.sql",
-        "dump_size_bytes": 10844,
-        "dump_sha256": "3f437ebba131ba1c9d8a792c5ac11fbadb4098fdc7c558003716adcc378fc6b9",
-        "timestamp_utc": "2026-05-11T04:03:58.372781+00:00",
-        "detail": "schema dump: 10844 bytes, sha256=3f437ebba131ba1c..."
+        "dump_path": "/var/folders/43/nd1ybp1s7tsgrls9w42b7qfc0000gn/T/aem_pr4_dump__t91dho7.sql",
+        "dump_size_bytes": 11055,
+        "dump_sha256": "533b9adfadb9518bd6a60bd4828fa2105684b242ab2510715404a0ef9149b591",
+        "timestamp_utc": "2026-05-15T00:58:29.282679+00:00",
+        "detail": "schema dump: 11055 bytes, sha256=533b9adfadb9518b..."
       },
       "restore_verification": {
         "ok": true,

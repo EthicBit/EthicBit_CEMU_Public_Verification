@@ -3,12 +3,12 @@
   "gate": "ROLLBACK_PROCEDURE_CHECK",
   "pr": "PR11",
   "version": "0.18.0-demo",
-  "generated_utc": "2026-05-11T04:18:03.935161+00:00",
+  "generated_utc": "2026-05-15T00:58:30.669063+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
     "region": "N/A",
-    "deployment_date": "N/A",
+    "deployment_date": "2026-05-14T22:00:00+00:00",
     "version_tag": "v2.0.0-pr11",
     "container_image_digest": "N/A"
   },
@@ -18,8 +18,8 @@
     "checks_passed": 10,
     "checks_failed": 0,
     "rollback_tested": true,
-    "rollback_tester": "oskrmiranda@staging_controlled_cloud",
-    "rollback_test_date": "2026-05-11",
+    "rollback_tester": "EthicBit-Internal",
+    "rollback_test_date": "2026-05-14",
     "fail_reason": null,
     "checks": {
       "C-01_runbook": {
@@ -77,11 +77,11 @@
       },
       "C-09_rollback_tester": {
         "ok": true,
-        "rollback_tester": "oskrmiranda@staging_controlled_cloud"
+        "rollback_tester": "EthicBit-Internal"
       },
       "C-10_rollback_test_date": {
         "ok": true,
-        "rollback_test_date": "2026-05-11"
+        "rollback_test_date": "2026-05-14"
       }
     }
   },

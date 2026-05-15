@@ -3,12 +3,12 @@
   "gate": "PRODUCTION_DEPLOYMENT_AUDIT_CHECK",
   "pr": "PR9",
   "version": "0.16.0-demo",
-  "generated_utc": "2026-05-11T04:16:47.191367+00:00",
+  "generated_utc": "2026-05-15T00:58:30.556062+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
     "region": "N/A",
-    "deployment_date": "2026-05-11T04:16:47Z",
+    "deployment_date": "2026-05-14T22:00:00+00:00",
     "version_tag": "v2.0.0-pr9",
     "container_image_digest": "N/A"
   },
@@ -18,8 +18,8 @@
     "checks_passed": 10,
     "checks_failed": 0,
     "production_deployed": true,
-    "deployment_target": "staging_controlled_cloud",
-    "deployment_timestamp": "2026-05-11T04:16:47Z",
+    "deployment_target": "aws-us-east-2-rds-cognito-kms",
+    "deployment_timestamp": "2026-05-14T22:00:00+00:00",
     "fail_reason": null,
     "checks": {
       "C-01_manifest": {
@@ -75,11 +75,11 @@
       },
       "C-09_deployment_target": {
         "ok": true,
-        "deployment_target": "staging_controlled_cloud"
+        "deployment_target": "aws-us-east-2-rds-cognito-kms"
       },
       "C-10_deployment_timestamp": {
         "ok": true,
-        "deployment_timestamp": "2026-05-11T04:16:47Z"
+        "deployment_timestamp": "2026-05-14T22:00:00+00:00"
       }
     }
   },

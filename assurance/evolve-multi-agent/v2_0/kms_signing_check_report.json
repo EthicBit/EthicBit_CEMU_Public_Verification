@@ -2,11 +2,11 @@
   "gate": "HSM_KMS_SIGNING_CHECK",
   "gate_version": "v2.0-PR2",
   "result": "PASS",
-  "timestamp_utc": "2026-05-11T03:51:21.022963+00:00",
+  "timestamp_utc": "2026-05-15T00:58:30.421933+00:00",
   "environment": {
     "kms_provider_configured": true,
     "kms_provider": "aws_kms",
-    "kms_key_id": "alias/aem-evolve-staging-signing",
+    "kms_key_id": "462d6ccd-fe6f-4fbd-9be7-b99ee773b15e",
     "kms_algorithm": "ECDSA_SHA_256"
   },
   "checks": [
@@ -43,7 +43,7 @@
       "id": "C-06",
       "label": "AEM_KMS_KEY_ID configured",
       "status": "PASS",
-      "detail": "alias/aem-evolve-staging-signing"
+      "detail": "462d6ccd-fe6f-4fbd-9be7-b99ee773b15e"
     },
     {
       "id": "C-07",

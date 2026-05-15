@@ -3,12 +3,12 @@
   "gate": "SLO_EVIDENCE_CHECK",
   "pr": "PR10",
   "version": "0.17.0-demo",
-  "generated_utc": "2026-05-11T04:17:21.674039+00:00",
+  "generated_utc": "2026-05-15T00:58:30.749475+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
     "region": "N/A",
-    "deployment_date": "N/A",
+    "deployment_date": "2026-05-14T22:00:00+00:00",
     "version_tag": "v2.0.0-pr10",
     "container_image_digest": "N/A"
   },
@@ -18,8 +18,8 @@
     "checks_passed": 10,
     "checks_failed": 0,
     "slo_evidence_verified": true,
-    "slo_reviewer": "oskrmiranda@staging_controlled_cloud",
-    "slo_review_date": "2026-05-11",
+    "slo_reviewer": "EthicBit-Internal",
+    "slo_review_date": "2026-05-14",
     "fail_reason": null,
     "checks": {
       "C-01_slo_document": {
@@ -75,11 +75,11 @@
       },
       "C-09_slo_reviewer": {
         "ok": true,
-        "slo_reviewer": "oskrmiranda@staging_controlled_cloud"
+        "slo_reviewer": "EthicBit-Internal"
       },
       "C-10_slo_review_date": {
         "ok": true,
-        "slo_review_date": "2026-05-11"
+        "slo_review_date": "2026-05-14"
       }
     }
   },

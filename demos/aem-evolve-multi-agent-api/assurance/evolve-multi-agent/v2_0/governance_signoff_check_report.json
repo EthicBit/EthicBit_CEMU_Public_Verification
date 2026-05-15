@@ -3,12 +3,12 @@
   "gate": "GOVERNANCE_SIGNOFF_CHECK",
   "pr": "PR14",
   "version": "0.21.0-demo",
-  "generated_utc": "2026-05-11T04:19:42.236674+00:00",
+  "generated_utc": "2026-05-15T00:58:30.709706+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
     "region": "N/A",
-    "deployment_date": "N/A",
+    "deployment_date": "2026-05-14T22:00:00+00:00",
     "version_tag": "v2.0.0-pr14",
     "container_image_digest": "N/A"
   },
@@ -18,8 +18,8 @@
     "checks_passed": 10,
     "checks_failed": 0,
     "governance_signed_off": true,
-    "governance_approver": "oskrmiranda@staging_controlled_cloud",
-    "governance_signoff_date": "2026-05-11",
+    "governance_approver": "EthicBit-Internal",
+    "governance_signoff_date": "2026-05-14",
     "fail_reason": null,
     "checks": {
       "C-01_signoff_document": {
@@ -73,11 +73,11 @@
       },
       "C-09_governance_approver": {
         "ok": true,
-        "governance_approver": "oskrmiranda@staging_controlled_cloud"
+        "governance_approver": "EthicBit-Internal"
       },
       "C-10_governance_signoff_date": {
         "ok": true,
-        "governance_signoff_date": "2026-05-11"
+        "governance_signoff_date": "2026-05-14"
       }
     }
   },

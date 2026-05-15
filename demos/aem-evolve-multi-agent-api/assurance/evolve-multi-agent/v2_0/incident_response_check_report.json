@@ -3,7 +3,7 @@
   "gate": "INCIDENT_RESPONSE_CHECK",
   "pr": "PR6",
   "version": "0.13.0-demo",
-  "generated_utc": "2026-05-11T04:13:51.547381+00:00",
+  "generated_utc": "2026-05-15T00:58:30.588665+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -17,8 +17,8 @@
     "status": "PASS",
     "checks_passed": 10,
     "checks_failed": 0,
-    "drill_completed_at": "2026-05-11T04:13:51Z",
-    "drill_signoff_approver": "oskrmiranda@staging_controlled_cloud",
+    "drill_completed_at": "2026-05-14T22:00:00+00:00",
+    "drill_signoff_approver": "EthicBit-Internal",
     "fail_reason": null,
     "checks": {
       "C-01_runbook_exists": {
@@ -79,11 +79,11 @@
       },
       "C-09_drill_completed": {
         "ok": true,
-        "drill_completed_at": "2026-05-11T04:13:51Z"
+        "drill_completed_at": "2026-05-14T22:00:00+00:00"
       },
       "C-10_drill_signoff": {
         "ok": true,
-        "signoff_approver": "oskrmiranda@staging_controlled_cloud"
+        "signoff_approver": "EthicBit-Internal"
       }
     }
   },

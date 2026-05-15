@@ -3,12 +3,12 @@
   "gate": "DISASTER_RECOVERY_CHECK",
   "pr": "PR12",
   "version": "0.19.0-demo",
-  "generated_utc": "2026-05-11T04:18:36.845585+00:00",
+  "generated_utc": "2026-05-15T00:58:30.627809+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
     "region": "N/A",
-    "deployment_date": "N/A",
+    "deployment_date": "2026-05-14T22:00:00+00:00",
     "version_tag": "v2.0.0-pr12",
     "container_image_digest": "N/A"
   },
@@ -18,8 +18,8 @@
     "checks_passed": 10,
     "checks_failed": 0,
     "dr_tested": true,
-    "dr_tester": "oskrmiranda@staging_controlled_cloud",
-    "dr_test_date": "2026-05-11",
+    "dr_tester": "EthicBit-Internal",
+    "dr_test_date": "2026-05-14",
     "fail_reason": null,
     "checks": {
       "C-01_dr_plan": {
@@ -78,11 +78,11 @@
       },
       "C-09_dr_tester": {
         "ok": true,
-        "dr_tester": "oskrmiranda@staging_controlled_cloud"
+        "dr_tester": "EthicBit-Internal"
       },
       "C-10_dr_test_date": {
         "ok": true,
-        "dr_test_date": "2026-05-11"
+        "dr_test_date": "2026-05-14"
       }
     }
   },

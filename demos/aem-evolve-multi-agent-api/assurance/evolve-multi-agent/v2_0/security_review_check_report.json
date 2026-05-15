@@ -3,7 +3,7 @@
   "gate": "SECURITY_REVIEW_CHECK",
   "pr": "PR7",
   "version": "0.14.0-demo",
-  "generated_utc": "2026-05-11T04:15:19.821257+00:00",
+  "generated_utc": "2026-05-15T00:58:30.827477+00:00",
   "environment": {
     "environment_name": "local-demo",
     "cloud_provider": "N/A",
@@ -14,12 +14,12 @@
   },
   "result": {
     "gate": "SECURITY_REVIEW_CHECK",
-    "status": "PASS",
-    "checks_passed": 10,
-    "checks_failed": 0,
-    "security_reviewer": "oskrmiranda@staging_controlled_cloud",
-    "security_review_date": "2026-05-11",
-    "fail_reason": null,
+    "status": "FAIL",
+    "checks_passed": 8,
+    "checks_failed": 2,
+    "security_reviewer": null,
+    "security_review_date": null,
+    "fail_reason": "External review evidence missing: AEM_SECURITY_REVIEWER, AEM_SECURITY_REVIEW_DATE",
     "checks": {
       "C-01_review_document": {
         "ok": true,
@@ -88,12 +88,14 @@
         }
       },
       "C-09_external_reviewer": {
-        "ok": true,
-        "security_reviewer": "oskrmiranda@staging_controlled_cloud"
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_SECURITY_REVIEWER not set — set to external reviewer identity before production deploy"
       },
       "C-10_review_date": {
-        "ok": true,
-        "security_review_date": "2026-05-11"
+        "ok": false,
+        "skipped": true,
+        "reason": "AEM_SECURITY_REVIEW_DATE not set — set to ISO8601 date of external review"
       }
     }
   },
