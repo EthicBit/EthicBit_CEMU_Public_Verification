@@ -31,6 +31,19 @@ ANCHOR_REFERENCE_SUMMARY.json
 METHODOLOGY_REVIEW.md
 ```
 
+## Builder / Verifier Scaffold
+
+HV-4 adds local scaffold tools for dossier construction and verification:
+
+```bash
+python3 tools/external_validation/build_v4_notary_dossier.py --dry-run
+python3 tools/external_validation/verify_v4_notary_dossier.py --structure-only
+```
+
+The builder can generate `DOSSIER_HASH_RECORD.txt` when run without `--dry-run`. The verifier can validate the scaffold in `--structure-only` mode or validate a generated hash record when present.
+
+These tools may emit `DOSSIER_BUILT`, `DOSSIER_VERIFIED`, `DOSSIER_INCOMPLETE`, `DOSSIER_FAIL_CLOSED`, or `HUMAN_ATTESTATION_PENDING`. They must not emit or claim `EXTERNAL_VALIDATION_PASS`.
+
 ## Boundary
 
 This scaffold does not claim completed external validation, completed human attestation, completed third-party reproduction, completed external security review, completed external claim review, external certification, regulatory approval, cybersecurity certification, clinical readiness, financial advice, legal compliance, or universal production readiness.
