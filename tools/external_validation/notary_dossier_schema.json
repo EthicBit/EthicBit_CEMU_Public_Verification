@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_id": "AEM_EVOLVE_V4_0_NOTARY_DOSSIER_SCHEMA_V1",
+  "title": "AEM-EVOLVE v4.0 Notary Dossier Manifest Schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_id",
+    "dossier_name",
+    "version",
+    "status",
+    "human_attestation_status",
+    "external_validation_pass_claimed",
+    "third_party_reproduction_completed",
+    "external_security_review_completed",
+    "external_claim_review_completed",
+    "repository",
+    "scope",
+    "current_evidence_posture",
+    "claim_boundary",
+    "non_claims"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string"
+    },
+    "dossier_name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DOSSIER_STRUCTURE_DEFINED",
+        "DOSSIER_BUILT",
+        "DOSSIER_VERIFIED",
+        "DOSSIER_INCOMPLETE",
+        "DOSSIER_FAIL_CLOSED",
+        "HUMAN_ATTESTATION_PENDING"
+      ]
+    },
+    "human_attestation_status": {
+      "type": "string",
+      "enum": [
+        "HUMAN_ATTESTATION_PENDING",
+        "HUMAN_ATTESTATION_PARTIAL",
+        "HUMAN_ATTESTATION_PASS"
+      ]
+    },
+    "external_validation_pass_claimed": {
+      "const": false
+    },
+    "third_party_reproduction_completed": {
+      "const": false
+    },
+    "external_security_review_completed": {
+      "const": false
+    },
+    "external_claim_review_completed": {
+      "const": false
+    },
+    "claim_boundary": {
+      "type": "object",
+      "required": [
+        "automated_pipeline_may_claim_external_validation_pass",
+        "human_attestation_required_for_external_validation_elevation",
+        "non_claims_required"
+      ],
+      "properties": {
+        "automated_pipeline_may_claim_external_validation_pass": {
+          "const": false
+        },
+        "human_attestation_required_for_external_validation_elevation": {
+          "const": true
+        },
+        "non_claims_required": {
+          "const": true
+        }
+      }
+    },
+    "non_claims": {
+      "type": "object",
+      "properties": {
+        "external_validation_pass": {
+          "const": false
+        },
+        "completed_human_attestation": {
+          "const": false
+        },
+        "completed_third_party_reproduction": {
+          "const": false
+        },
+        "completed_external_security_review": {
+          "const": false
+        },
+        "completed_external_claim_review": {
+          "const": false
+        },
+        "external_certification": {
+          "const": false
+        },
+        "regulatory_approval": {
+          "const": false
+        },
+        "cybersecurity_certification": {
+          "const": false
+        },
+        "clinical_or_diagnostic_readiness": {
+          "const": false
+        },
+        "universal_production_readiness": {
+          "const": false
+        }
+      }
+    }
+  }
+}
