@@ -11,7 +11,7 @@ DEMO_ROOT = Path(__file__).resolve().parent
 TOOLS = DEMO_ROOT / "tools" / "production_readiness"
 
 ENV = {
-    "AEM_DB_URL": "postgresql://aemadmin:AemEvolve2026!@aem-evolve-db.cpk8qwq6yqv6.us-east-2.rds.amazonaws.com:5432/postgres",
+    # AEM_DB_URL must be set in environment — not stored in source control
     "AEM_DB_ADAPTER": "postgres",
     "OIDC_ISSUER":   "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_eEOb7JdbK",
     "OIDC_JWKS_URI": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_eEOb7JdbK/.well-known/jwks.json",
