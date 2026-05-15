@@ -13,7 +13,7 @@
       "id": "C-01",
       "label": "AEM_DB_URL env var configured",
       "status": "PASS",
-      "detail": "postgresql://aemadmin:AemEvolve2026!@aem"
+      "detail": "postgresql://aemadmin:***@aem"
     },
     {
       "id": "C-02",
