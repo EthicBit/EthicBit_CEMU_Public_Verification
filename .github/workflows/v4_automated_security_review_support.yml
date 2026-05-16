@@ -1,0 +1,52 @@
+name: v4.0 Automated Security Review Support
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/v4_automated_security_review_support.yml"
+      - "tools/external_validation/security_review/**"
+      - "assurance/external-validation/v4_0/security_review/**"
+      - "assurance/external-validation/v4_0/automated_reproduction/**"
+      - "assurance/external-validation/v4_0/claim_red_team/**"
+      - "assurance/external-validation/v4_0/notary_dossier/**"
+      - "assurance/v4_0/**"
+      - "requirements*.txt"
+      - "pyproject.toml"
+      - "package.json"
+      - "package-lock.json"
+      - "go.mod"
+      - "go.sum"
+
+permissions:
+  contents: read
+
+jobs:
+  automated-security-review-support:
+    name: Automated security review support evidence
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate automated security review support artifacts
+        run: python3 tools/external_validation/security_review/run_automated_security_review_support.py
+
+      - name: Verify automated security review support artifacts
+        run: python3 tools/external_validation/security_review/verify_automated_security_review_summary.py
+
+      - name: Upload automated security review support artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-automated-security-review-support
+          path: |
+            assurance/external-validation/v4_0/security_review/AUTOMATED_SECURITY_REVIEW_SUMMARY.json
+            assurance/external-validation/v4_0/security_review/AUTOMATED_SECURITY_REVIEW_LOG.txt
+            assurance/external-validation/v4_0/security_review/SECURITY_SCAN_HASH_RECORD.txt

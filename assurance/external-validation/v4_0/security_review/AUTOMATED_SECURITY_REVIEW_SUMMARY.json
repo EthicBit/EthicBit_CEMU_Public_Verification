@@ -1,0 +1,187 @@
+{
+  "schema_id": "AEM_EVOLVE_V4_0_AUTOMATED_SECURITY_REVIEW_SUPPORT_SUMMARY_V1",
+  "report_type": "AUTOMATED_SECURITY_REVIEW_SUPPORT_SUMMARY",
+  "version": "4.0",
+  "generated_utc": "2026-05-16T18:39:47.640479+00:00",
+  "status": "AUTOMATED_SECURITY_REVIEW_SUPPORT_PASS",
+  "automated_security_review_support": "PASS",
+  "critical_findings": 0,
+  "secret_findings": 0,
+  "scan_scope": "committed_git_HEAD_tracked_text_files",
+  "scanned_files": 1412,
+  "skipped_binary_files": 16,
+  "skipped_large_files": 3,
+  "dependency_inventory_status": "GENERATED",
+  "dependency_manifest_count": 7,
+  "dependency_manifests": [
+    {
+      "path": "demos/aem-evolve-multi-agent-api/requirements.txt",
+      "source": "git_HEAD",
+      "sha256": "a0c29b6f17fce2684c9c9a571bdcd2b0020bba48ef13863783cdad5b486d193d",
+      "size_bytes": 132
+    },
+    {
+      "path": "go.mod",
+      "source": "git_HEAD",
+      "sha256": "f4cea97c85ad3ffddeb1c315d62d26c510481057ccc1336164b23c95450e4609",
+      "size_bytes": 41
+    },
+    {
+      "path": "package-lock.json",
+      "source": "git_HEAD",
+      "sha256": "55ab31c15ae509d17606f23fc36b9369a8313bbea570a52cee5ae191082070ea",
+      "size_bytes": 449720
+    },
+    {
+      "path": "package.json",
+      "source": "git_HEAD",
+      "sha256": "44e6def8003027ec891915d3532bb0ddfabb8d7f4f8218a6e3e804a96d588054",
+      "size_bytes": 345
+    },
+    {
+      "path": "pyproject.toml",
+      "source": "git_HEAD",
+      "sha256": "2321225cd0de04ed1d7c29fa9c2ca9d4a77df730348199672324e9df7c87dc7d",
+      "size_bytes": 513
+    },
+    {
+      "path": "requirements-dev.txt",
+      "source": "git_HEAD",
+      "sha256": "8548e96c7a81a67afbf2188a0d85a0833d869273d98c64b969bcedf232d4db07",
+      "size_bytes": 60
+    },
+    {
+      "path": "requirements.txt",
+      "source": "git_HEAD",
+      "sha256": "822676f466cca0bdf4a6ca1865ebc6209cb8581cd98833094b8d2ccae4dee76a",
+      "size_bytes": 766
+    }
+  ],
+  "optional_security_tools": [
+    {
+      "tool": "gitleaks",
+      "available_in_runner": false,
+      "path": null,
+      "required_for_pass": false
+    },
+    {
+      "tool": "trufflehog",
+      "available_in_runner": false,
+      "path": null,
+      "required_for_pass": false
+    },
+    {
+      "tool": "pip-audit",
+      "available_in_runner": true,
+      "path": "/Users/oskrmiranda/.pyenv/versions/3.11.8/bin/pip-audit",
+      "required_for_pass": false
+    },
+    {
+      "tool": "safety",
+      "available_in_runner": false,
+      "path": null,
+      "required_for_pass": false
+    },
+    {
+      "tool": "bandit",
+      "available_in_runner": true,
+      "path": "/Users/oskrmiranda/.pyenv/versions/3.11.8/bin/bandit",
+      "required_for_pass": false
+    },
+    {
+      "tool": "trivy",
+      "available_in_runner": true,
+      "path": "/opt/homebrew/bin/trivy",
+      "required_for_pass": false
+    },
+    {
+      "tool": "semgrep",
+      "available_in_runner": false,
+      "path": null,
+      "required_for_pass": false
+    }
+  ],
+  "evidence_inputs": [
+    {
+      "name": "v4_0_controlled_evidence",
+      "path": "assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json",
+      "source": "git_HEAD",
+      "sha256": "1d3a8ca0876de7bef175bec4ebf333da525f275165e6464c5e64256c38a16326",
+      "canonical_sha256": "15b3c24ecc5036ccaaf146c43bd4cb52c7ad9c7614caea97e0305d5acbba4426"
+    },
+    {
+      "name": "claim_boundary_red_team",
+      "path": "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json",
+      "source": "git_HEAD",
+      "sha256": "b7b1d8ae938942530faacabe7baa38b8ac8b91796a60798e865bf43b0b18a6fe",
+      "canonical_sha256": "ca0decb04b305591a91bfc5e427c9acf8cc6cf933f557618a1cbc3f664c7580c"
+    },
+    {
+      "name": "notary_dossier_manifest",
+      "path": "assurance/external-validation/v4_0/notary_dossier/DOSSIER_MANIFEST.json",
+      "source": "git_HEAD",
+      "sha256": "2fe0cef408e8ce6b01b0da4ff8cbac79eeb16984d272679489271a6e66b67b48",
+      "canonical_sha256": "c6dd053bc3607467aed30d2741c80ba606fb74e305e7f4cfe260e0c6b194fe8e"
+    },
+    {
+      "name": "automated_reproduction_support",
+      "path": "assurance/external-validation/v4_0/automated_reproduction/AUTOMATED_REPRODUCTION_REPORT.json",
+      "source": "git_HEAD",
+      "sha256": "32758683586ea22f999119d15ce3840737e57a10c7a97a819c334c7afe34cb1a",
+      "canonical_sha256": "15b87fa0e5061cda8ad0028f2f4b2b47f6414dba19a0d59efcce33abc5936b28"
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "HIGH_CONFIDENCE_SECRET_SCAN",
+      "status": "PASS",
+      "passed": true,
+      "detail": "No high-confidence committed secret patterns may be present in scanned HEAD text files."
+    },
+    {
+      "check_id": "V4_0_SECURITY_REVIEW_BOUNDARY",
+      "status": "PENDING_EXTERNAL_CONFIRMED",
+      "passed": true,
+      "detail": "External security review must remain pending until external reviewer attestation exists."
+    },
+    {
+      "check_id": "CLAIM_BOUNDARY_RED_TEAM_SUPPORT",
+      "status": "PASS",
+      "passed": true,
+      "detail": "Claim red-team support must pass without claiming external claim review completion."
+    },
+    {
+      "check_id": "NOTARY_DOSSIER_SECURITY_BOUNDARY",
+      "status": "HUMAN_ATTESTATION_PENDING_CONFIRMED",
+      "passed": true,
+      "detail": "Dossier must not claim completed external security review or external validation pass."
+    },
+    {
+      "check_id": "AUTOMATED_REPRODUCTION_SUPPORT_REFERENCE",
+      "status": "PASS",
+      "passed": true,
+      "detail": "HV-5 automated reproduction support should be present while preserving non-claims."
+    }
+  ],
+  "claim_boundary": {
+    "automated_security_review_support_only": true,
+    "automated_pipeline_may_claim_external_security_review_completed": false,
+    "automated_pipeline_may_claim_cybersecurity_certification": false,
+    "automated_pipeline_may_claim_absence_of_all_vulnerabilities": false,
+    "human_attestation_required_for_external_security_review_completion": true,
+    "human_attestation_status": "HUMAN_ATTESTATION_PENDING"
+  },
+  "non_claims": {
+    "completed_external_security_review": false,
+    "cybersecurity_certification": false,
+    "absence_of_all_vulnerabilities": false,
+    "completed_external_validation": false,
+    "external_certification": false,
+    "regulatory_approval": false,
+    "financial_advice": false,
+    "clinical_or_diagnostic_readiness": false,
+    "universal_production_readiness": false,
+    "legal_compliance": false
+  },
+  "notes": "Automated security review support does not constitute cybersecurity certification, external security audit completion, legal compliance, or absence of all vulnerabilities."
+}

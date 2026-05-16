@@ -1,0 +1,11 @@
+AEM-EVOLVE v4.0 Automated Security Review Support
+generated_utc=2026-05-16T18:39:47.640479+00:00
+AUTOMATED_SECURITY_REVIEW_SUPPORT=PASS
+critical_findings=0
+secret_findings=0
+dependency_manifest_count=7
+external_security_review_completed=false
+cybersecurity_certification=false
+absence_of_all_vulnerabilities=false
+HUMAN_ATTESTATION_PENDING=true
+Automated security review support is not cybersecurity certification or completed external security review.
