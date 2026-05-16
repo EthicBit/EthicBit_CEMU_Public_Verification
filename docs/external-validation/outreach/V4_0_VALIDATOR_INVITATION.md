@@ -2,7 +2,9 @@
 
 **Ready to send — copy, personalize [name], and send**
 **Date:** 2026-05-16
+**Current state machine:** `HYBRID_VALIDATION_READY → HUMAN_ATTESTATION_PENDING`
 **Purpose:** Hybrid validation review for Criterion 1 (reproduction), Criterion 2 (security review), and Criterion 8 (claim review)
+**Criteria status:** 5/8 CONTROLLED_PASS — 3/8 PENDING_EXTERNAL (criteria 1, 2, 8)
 
 ---
 
@@ -20,20 +22,15 @@ Your role is not to manually rebuild the entire stack from scratch unless you ch
 
 Your role is to review the Notary Dossier, recompute selected hashes, inspect the automated evidence methodology, evaluate claim boundaries, and issue a scoped `PASS / PARTIAL / FAIL` attestation.
 
-This review supports the transition from:
+The project is currently at:
 
 ```text
-CONTROLLED_EVIDENCE_PARTIAL
+HYBRID_VALIDATION_READY → HUMAN_ATTESTATION_PENDING
 ```
 
-toward:
+5/8 criteria are CONTROLLED_PASS. Criteria 1, 2, and 8 are PENDING_EXTERNAL — awaiting your attestation.
 
-```text
-HYBRID_VALIDATION_READY
-HUMAN_ATTESTATION_PENDING
-```
-
-It does not itself claim `EXTERNAL_VALIDATION_PASS` until an external reviewer completes and signs a scoped attestation.
+This review supports the transition toward `EXTERNAL_VALIDATION_PASS`. It does not itself claim `EXTERNAL_VALIDATION_PASS` until an external reviewer completes and signs a scoped attestation.
 
 ---
 

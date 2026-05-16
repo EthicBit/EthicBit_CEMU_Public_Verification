@@ -1,0 +1,15 @@
+{
+  "fast_path_version": "1.0",
+  "evaluation_timestamp": "2026-05-14T18:52:32.848500+00:00",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "snapshot_id": "fast-path-v1-evidence-2026-05-12",
+  "snapshot_timestamp": "2026-05-12T16:00:00+00:00",
+  "requested_operation": "emit_output",
+  "requested_claim_level": "PASS",
+  "claim_level_ceiling": "PASS",
+  "verdict": "PASS",
+  "reason": "Operation within authorized scope and claim ceiling.",
+  "evaluation_elapsed_ms": 0.007,
+  "full_assurance_recomputed_this_tick": false,
+  "non_claim": "Fast Path enforcement does not claim full-system validation latency. Full Triple Anchor, Strong Closure, and AI-ME evidence are not recomputed per tick."
+}

@@ -2,19 +2,19 @@
   "report_type": "FAST_PATH_VERIFICATION_REPORT",
   "version": "1.0",
   "status": "EVIDENCE_PASS",
-  "evaluation_timestamp": "2026-05-12T16:18:44.171796+00:00",
+  "evaluation_timestamp": "2026-05-15T01:10:18.643283+00:00",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
   "snapshot_reference": "assurance/fast-path/v1/evidence/FAST_PATH_V1_0_SNAPSHOT.json",
   "scenarios_executed": 9,
   "scenarios_matched_expected": true,
   "verdict_counts": {
-    "BLOCK": 2,
-    "DEGRADED": 1,
-    "NOT_VERIFIABLE": 1,
-    "SCOPE_LIMITED": 1,
     "PASS": 2,
-    "FAIL_CLOSED": 2
+    "NOT_VERIFIABLE": 1,
+    "FAIL_CLOSED": 2,
+    "BLOCK": 2,
+    "SCOPE_LIMITED": 1,
+    "DEGRADED": 1
   },
   "ai_me_baseline": {
     "aggregate_outcome": "PASS",

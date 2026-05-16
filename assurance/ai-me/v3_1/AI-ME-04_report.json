@@ -2,7 +2,7 @@
   "schema_version": "3.1",
   "gate_id": "AI-ME-04",
   "gate_name": "Data Provenance & Lineage Evidence",
-  "evaluation_timestamp": "2026-05-12T16:03:24.520529+00:00",
+  "evaluation_timestamp": "2026-05-15T01:10:13.156689+00:00",
   "data_sources": [
     "aem_evolve_audit_sqlite",
     "aem_evolve_artifact_manifests",

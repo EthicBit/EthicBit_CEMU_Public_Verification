@@ -2,7 +2,7 @@
   "schema_version": "3.1",
   "gate_id": "AI-ME-03",
   "gate_name": "Explainability Artifact Evidence",
-  "evaluation_timestamp": "2026-05-12T16:03:24.520111+00:00",
+  "evaluation_timestamp": "2026-05-15T01:10:13.156237+00:00",
   "methodology": "rule_based_deterministic",
   "application_scope": "AEM-EVOLVE multi-agent governance API \u2014 controlled environment \u2014 EthicBit / CEMU v3.7.0+",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",

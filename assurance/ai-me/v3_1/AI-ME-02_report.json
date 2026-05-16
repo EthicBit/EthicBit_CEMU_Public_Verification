@@ -2,7 +2,7 @@
   "schema_version": "3.1",
   "gate_id": "AI-ME-02",
   "gate_name": "Bias / Fairness Evidence",
-  "evaluation_timestamp": "2026-05-12T16:03:24.519749+00:00",
+  "evaluation_timestamp": "2026-05-15T01:10:13.155801+00:00",
   "protected_attributes": [
     "operator_identity",
     "artifact_type",

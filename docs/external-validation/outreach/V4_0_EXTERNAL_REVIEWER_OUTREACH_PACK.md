@@ -2,7 +2,8 @@
 
 **Status:** ACTIVE — external validation process initiated  
 **Initiation date:** 2026-05-14  
-**Posture:** EXTERNAL_VALIDATION_IN_PROGRESS  
+**Last updated:** 2026-05-16  
+**Posture:** HUMAN_ATTESTATION_PENDING  
 **Constitutional dependency:** EthicBit / CEMU v3.7.0+
 
 ---
@@ -14,11 +15,13 @@ We are inviting you to perform an external validation review for EthicBit / AEM-
 Current state:
 AEM-EVOLVE v3.1 evidence PASS
 Fast Path v1.0 evidence PASS
-v4.0 all 8 criteria executed: 3/8 CONTROLLED_PASS, 5/8 PENDING_EXTERNAL
+v4.0 all 8 criteria executed: 5/8 CONTROLLED_PASS, 3/8 PENDING_EXTERNAL (criteria 1, 2, 8)
+AWS infrastructure live: RDS PostgreSQL 18.3 + Cognito OIDC + KMS ECC_NIST_P256 + Prometheus (us-east-2)
+Hybrid Validation Suite HV-0..HV-10: COMPLETE
 Ethereum mainnet anchor: block 25095358 — TX 0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
 
 Scope:
-third-party reproduction, external security review, managed cloud deployment evidence, HSM/KMS signing evidence, and external claim review.
+third-party reproduction (criterion 1), external security review (criterion 2), and external claim review (criterion 8).
 
 Public verification mirror:
 https://github.com/EthicBit/EthicBit_CEMU_Public_Verification
@@ -42,22 +45,22 @@ This is not a request for regulatory approval, clinical validation, financial ad
 | Sepolia anchor (v3.1+FastPath) | ONCHAIN — block 10840044 |
 | Sepolia anchor (v4.0 all criteria) | ONCHAIN — block 10852797 |
 | Mainnet anchor (v4.0) | ONCHAIN — block 25095358 |
-| v4.0 controlled | 8/8 executed — 3 CONTROLLED_PASS, 5 PENDING_EXTERNAL |
+| v4.0 controlled | 8/8 executed — 5 CONTROLLED_PASS, 3 PENDING_EXTERNAL (1, 2, 8) |
 
 Mainnet anchor TX: `0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41`
 Explorer: https://etherscan.io/tx/0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41
 
 ---
 
-## Pending External Criteria (5/8)
+## Pending External Criteria (3/8)
 
 | # | Criterion | What reviewer provides |
 |---|---|---|
 | 1 | Third-party reproduction | Independent reproduction in a separate environment |
 | 2 | External security review | Independent security review with no EthicBit affiliation |
-| 3 | Managed cloud deployment | Deployment evidence in a managed cloud environment |
-| 4 | HSM / KMS signing | Signing evidence using a managed HSM or cloud KMS |
-| 5 | External claim review | Independent review of claim boundaries |
+| 8 | External claim review | Independent review of claim boundaries and non-claims |
+
+Criteria 3 (managed cloud deployment), 4 (HSM/KMS signing), 5 (AEM reverification), 6 (triple anchor), and 7 (Fast Path benchmark) are CONTROLLED_PASS — AWS infrastructure live.
 
 ---
 
@@ -65,11 +68,9 @@ Explorer: https://etherscan.io/tx/0xd5fe44459f15e1cb3230f841f039d35d73da84564963
 
 We are seeking external review for one or more of the following:
 
-1. Reproduce selected evidence from a fresh clone in an independent environment.
-2. Review repository security posture and claim boundaries.
-3. Review managed cloud deployment evidence.
-4. Review HSM / managed-key signing evidence when available.
-5. Review public claims and non-claims for accuracy.
+1. Reproduce selected evidence from a fresh clone in an independent environment (criterion 1).
+2. Review repository security posture and claim boundaries (criterion 2).
+3. Review public claims and non-claims for accuracy (criterion 8).
 
 ---
 
@@ -145,4 +146,4 @@ universal production-readiness — NOT claimed
 
 ---
 
-*AEM-EVOLVE™ v4.0 External Reviewer Outreach Pack — EthicBit / CEMU v3.7.0+ — 2026-05-14*
+*AEM-EVOLVE™ v4.0 External Reviewer Outreach Pack — EthicBit / CEMU v3.7.0+ — 2026-05-16 (updated: criteria 3–7 CONTROLLED_PASS; pending: 1, 2, 8)*
