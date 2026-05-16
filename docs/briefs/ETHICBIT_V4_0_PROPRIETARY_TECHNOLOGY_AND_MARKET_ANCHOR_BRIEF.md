@@ -4,7 +4,8 @@
 **Hybrid Validation Status:** `HYBRID_VALIDATION_READY`  
 **External Validation Status:** `HUMAN_ATTESTATION_PENDING`  
 **Date:** `2026-05-16`  
-**Reference Commit:** `8e8ead0d`  
+**Evidence Reference Commit:** `8e8ead0d`  
+**Brief Publication Commit:** `791c4686`  
 **Private Repository:** `EthicBit/EthicBit_CEMU`  
 **Public Mirror:** `EthicBit_CEMU_Public_Verification`  
 **Repository Sync:** `origin/main = mirror/main`  
@@ -24,7 +25,8 @@ This brief summarizes the currently published, mirrored and verifiable controlle
 | Anchor Field | Current State |
 |---|---|
 | Technology posture | `CONTROLLED_EVIDENCE_ADVANCED` |
-| Reference commit | `8e8ead0d` |
+| Evidence reference commit | `8e8ead0d` |
+| Brief publication commit | `791c4686` |
 | Private GitHub repo | `EthicBit/EthicBit_CEMU` |
 | Public GitHub mirror | `EthicBit_CEMU_Public_Verification` |
 | Mirror sync | `origin/main = mirror/main` |
@@ -432,7 +434,7 @@ within the declared scope.
 
 ## 21. Safe Claim
 
-EthicBit / CEMU has reached `CONTROLLED_EVIDENCE_ADVANCED` status with a synchronized private repository and public GitHub mirror at commit `8e8ead0d`, active CEMU Core modules, AEM-EVOLVE v2.0 `PASS`, AI-ME v3.1 `PASS`, Fast Path v1.0 `EVIDENCE_PASS`, live AWS infrastructure evidence, selected on-chain and external persistence anchors, Claim Boundary integrity preserved, and HV-0..HV-10 complete. External validation remains `HUMAN_ATTESTATION_PENDING` for criteria 1, 2 and 8.
+EthicBit / CEMU has reached `CONTROLLED_EVIDENCE_ADVANCED` status with a synchronized private repository and public GitHub mirror at evidence reference commit `8e8ead0d`, with this brief published at commit `791c4686`, active CEMU Core modules, AEM-EVOLVE v2.0 `PASS`, AI-ME v3.1 `PASS`, Fast Path v1.0 `EVIDENCE_PASS`, live AWS infrastructure evidence, selected on-chain and external persistence anchors, Claim Boundary integrity preserved, and HV-0..HV-10 complete. External validation remains `HUMAN_ATTESTATION_PENDING` for criteria 1, 2 and 8.
 
 ---
 
