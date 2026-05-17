@@ -3,16 +3,18 @@
 **Technology Status:** `CONTROLLED_EVIDENCE_ADVANCED`<br>
 **Hybrid Validation Status:** `HYBRID_VALIDATION_READY`<br>
 **External Validation Status:** `HUMAN_ATTESTATION_PENDING`<br>
-**Date:** `2026-05-16`<br>
-**Evidence Reference Commit:** `8e8ead0d`<br>
-**Brief Publication Commit:** `791c4686`<br>
+**Date:** `2026-05-17`<br>
+**Evidence Reference Commit:** `9b86885e`<br>
+**Brief Publication Commit:** `9b86885e`<br>
 **Private Repository:** `EthicBit/EthicBit_CEMU`<br>
 **Public Mirror:** `EthicBit_CEMU_Public_Verification`<br>
-**Repository Sync Scope:** public mirror synchronized to evidence reference commit `8e8ead0d`; private `origin/main` may contain later publication-only commits<br>
+**Repository Sync Scope:** public mirror synchronized to evidence reference commit `9b86885e` after sanitized sync<br>
 **GitHub Publication Status:** public mirror synchronized to sanitized controlled-evidence reference<br>
 **AEM-EVOLVE v2.0:** `PASS` — 14/14 gates, 140/140 checks<br>
 **AI-ME v3.1:** `PASS` — 12/12 gates, `artifact_verified=true`<br>
 **Fast Path v1.0:** `EVIDENCE_PASS` — 9/9 scenarios, 7/7 mandatory rules<br>
+**Release-Grade Deep Audit v1.0:** `PASS_WITH_SCOPE_LIMITATIONS` — score 92/100<br>
+**Aggressive Validation & Abuse Testing v1.0:** `PASS_WITH_SCOPE_LIMITATIONS` — score 100/100<br>
 **v4.0 External Validation:** 5/8 `CONTROLLED_PASS`, 3/8 `PENDING_EXTERNAL`<br>
 **Only Active Gap:** external human attestation for criteria 1, 2 and 8
 
@@ -25,14 +27,16 @@ This brief summarizes the currently published, mirrored and verifiable controlle
 | Anchor Field | Current State |
 |---|---|
 | Technology posture | `CONTROLLED_EVIDENCE_ADVANCED` |
-| Evidence reference commit | `8e8ead0d` |
-| Brief publication commit | `791c4686` |
+| Evidence reference commit | `9b86885e` |
+| Brief publication commit | `9b86885e` |
 | Private GitHub repo | `EthicBit/EthicBit_CEMU` |
 | Public GitHub mirror | `EthicBit_CEMU_Public_Verification` |
-| Evidence sync | Public mirror synchronized to evidence reference commit `8e8ead0d`; private `origin/main` may advance independently |
+| Evidence sync | Public mirror synchronized to evidence reference commit `9b86885e` after sanitized sync |
 | AEM-EVOLVE v2.0 | `PASS` — 14/14 gates, 140/140 checks |
 | AI-ME v3.1 | `PASS` — 12/12 gates, `artifact_verified=true` |
 | Fast Path v1.0 | `EVIDENCE_PASS` — 9/9 scenarios, 7/7 mandatory rules |
+| Release-Grade Deep Audit v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` — score 92/100 |
+| Aggressive Validation & Abuse Testing v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` — score 100/100 |
 | Claim Boundary Engine | 0 overclaims, 0 CBE violations |
 | v4.0 controlled evidence | 5/8 `CONTROLLED_PASS`, 3/8 `PENDING_EXTERNAL` |
 | Hybrid Validation Suite | HV-0..HV-10 complete |
@@ -69,6 +73,8 @@ GitHub publication and public mirroring make selected evidence inspectable. They
 | AI-ME v3.1 | `PASS` — 12/12 gates |
 | Claim Boundary Engine | Active — 0 overclaims, 0 CBE violations |
 | Fast Path v1.0 | `EVIDENCE_PASS` — 9/9 scenarios |
+| Release-Grade Deep Audit v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` — score 92/100 |
+| Aggressive Validation & Abuse Testing v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` — score 100/100 |
 | Triple Anchor | Selected evidence states anchored |
 | AWS infrastructure | Live controlled evidence |
 | CEERV | `FORMALLY_FROZEN — PASS_REFERENCE_ONLY · case_003` |
@@ -140,6 +146,8 @@ These contracts and anchors provide selected integrity references for declared e
 | Fast Path v1.0 | `EVIDENCE_PASS` | 9/9 deterministic pre-emission scenarios |
 | Claim Boundary Engine | `SUPPORTED / SUPPORTED_SCOPED` | 10/10 public claims supported or scoped |
 | Non-claims | Preserved | 11/11 correctly not claimed |
+| Release-Grade Deep Audit v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` | score 92/100 — 6 gates, `claim_boundary` and `reproducibility` SCOPE_LIMITED |
+| Aggressive Validation & Abuse Testing v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` | score 100/100 — 8/8 tests PASS, 10/10 overclaims blocked, 8/8 forgeries detected |
 | v4.0 controlled criteria | 5/8 `CONTROLLED_PASS` | External attestation still pending |
 
 ---
@@ -316,8 +324,8 @@ No automated pipeline may transition directly to EXTERNAL_VALIDATION_PASS.
 
 | Repo | Commit | Status |
 |---|---:|---|
-| origin `EthicBit/EthicBit_CEMU` | private HEAD may advance beyond `8e8ead0d` | Private engineering source |
-| mirror `EthicBit_CEMU_Public_Verification` | `8e8ead0d` | Public sanitized evidence reference |
+| origin `EthicBit/EthicBit_CEMU` | `9b86885e` | Private engineering source |
+| mirror `EthicBit_CEMU_Public_Verification` | `9b86885e` | Public sanitized evidence reference — synchronized |
 
 This synchronization makes selected controlled evidence publicly inspectable. It does not convert controlled evidence into external validation by itself.
 
@@ -339,6 +347,8 @@ EthicBit currently demonstrates:
 10. CEERV and SLSA L4 controlled-evidence posture.
 11. HV-0..HV-10 hybrid validation readiness.
 12. A formal block against self-certification into `EXTERNAL_VALIDATION_PASS`.
+13. Release-grade deep audit (`PASS_WITH_SCOPE_LIMITATIONS`, score 92/100).
+14. Internal aggressive validation and abuse testing (`PASS_WITH_SCOPE_LIMITATIONS`, score 100/100).
 
 All non-external criteria currently required for the controlled-evidence posture are documented, internally verified or controlled-pass within their declared scope, with selected evidence states anchored where receipts exist.
 
@@ -434,7 +444,7 @@ within the declared scope.
 
 ## 21. Safe Claim
 
-EthicBit / CEMU has reached `CONTROLLED_EVIDENCE_ADVANCED` status with a public GitHub mirror synchronized to sanitized evidence reference commit `8e8ead0d`, with this brief published in the private engineering repository, active CEMU Core modules, AEM-EVOLVE v2.0 `PASS`, AI-ME v3.1 `PASS`, Fast Path v1.0 `EVIDENCE_PASS`, sanitized live-infrastructure evidence, selected on-chain and external persistence anchors, Claim Boundary integrity preserved, and HV-0..HV-10 complete. External validation remains `HUMAN_ATTESTATION_PENDING` for criteria 1, 2 and 8.
+EthicBit / CEMU has reached `CONTROLLED_EVIDENCE_ADVANCED` status with a public GitHub mirror synchronized to sanitized evidence reference commit `9b86885e`, active CEMU Core modules, AEM-EVOLVE v2.0 `PASS`, AI-ME v3.1 `PASS`, Fast Path v1.0 `EVIDENCE_PASS`, Release-Grade Deep Audit `PASS_WITH_SCOPE_LIMITATIONS` (score 92/100), Aggressive Validation & Abuse Testing `PASS_WITH_SCOPE_LIMITATIONS` (score 100/100), sanitized live-infrastructure evidence, selected on-chain and external persistence anchors, Claim Boundary integrity preserved (0 overclaims), and HV-0..HV-10 complete. External validation remains `HUMAN_ATTESTATION_PENDING` for criteria 1, 2 and 8.
 
 ---
 
