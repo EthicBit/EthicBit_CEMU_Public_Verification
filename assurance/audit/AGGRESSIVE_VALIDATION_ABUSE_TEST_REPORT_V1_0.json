@@ -1,0 +1,287 @@
+{
+  "generated_at_utc": "2026-05-17T20:12:37.622195+00:00",
+  "git": {
+    "branch": "codex/aggressive-validation-abuse-testing-v1",
+    "commit": "81ffecfe"
+  },
+  "non_claims": {
+    "absence_of_all_vulnerabilities_claimed": false,
+    "clinical_or_diagnostic_readiness_claimed": false,
+    "cybersecurity_certification_claimed": false,
+    "external_security_audit_completed": false,
+    "external_validation_completed": false,
+    "legal_compliance_claimed": false,
+    "regulatory_approval_claimed": false,
+    "third_party_reproduction_completed": false,
+    "universal_production_readiness_claimed": false
+  },
+  "overall_score": 100,
+  "overall_status": "PASS_WITH_SCOPE_LIMITATIONS",
+  "publication_decision": "PUBLICATION_ALLOWED_SCOPE_LIMITED_AFTER_AGGRESSIVE_TESTING_WITH_EXTERNAL_ATTESTATION_PENDING",
+  "schema_id": "ETHICBIT_AGGRESSIVE_VALIDATION_ABUSE_TEST_REPORT_V1_0",
+  "tests": [
+    {
+      "details": {
+        "block_rate_percent": 100.0,
+        "external_claim_review_completed": false,
+        "external_validation_pass_claimed": false,
+        "overclaims_attempted": 10,
+        "overclaims_blocked": 10,
+        "report": "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json"
+      },
+      "name": "claim_red_team_overclaim_blocking",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Blocked 10/10 attempted overclaims; external claim review remains false."
+    },
+    {
+      "details": {
+        "automated_elevation_documentation": [
+          {
+            "automated_output": "AUTOMATED_REPRODUCTION_SUPPORT=PASS",
+            "documented": true,
+            "prohibited_claim": "third_party_reproduction_completed"
+          },
+          {
+            "automated_output": "AUTOMATED_SECURITY_REVIEW_SUPPORT=PASS",
+            "documented": true,
+            "prohibited_claim": "cybersecurity_certified"
+          },
+          {
+            "automated_output": "AUTOMATED_SECURITY_REVIEW_SUPPORT=PASS",
+            "documented": true,
+            "prohibited_claim": "absence_of_all_vulnerabilities"
+          },
+          {
+            "automated_output": "CLAIM_BOUNDARY_RED_TEAM=PASS",
+            "documented": true,
+            "prohibited_claim": "external_claim_review_completed"
+          },
+          {
+            "automated_output": "FAST_PATH_EVIDENCE_PASS",
+            "documented": true,
+            "prohibited_claim": "full_system_sub_15ms_validation"
+          },
+          {
+            "automated_output": "TRIPLE_ANCHOR_PRESENT",
+            "documented": true,
+            "prohibited_claim": "universal_public_anchoring"
+          },
+          {
+            "automated_output": "DOSSIER_VERIFIED",
+            "documented": true,
+            "prohibited_claim": "externally_certified"
+          },
+          {
+            "automated_output": "DOSSIER_VERIFIED",
+            "documented": true,
+            "prohibited_claim": "regulatory_approved"
+          }
+        ],
+        "complete_external_pass_decision_with_required_conditions": "ALLOW",
+        "incomplete_external_pass_decision": "FAIL_CLOSED",
+        "prohibited_transition_results": [
+          {
+            "decision": "FAIL_CLOSED",
+            "from": "CONTROLLED_EVIDENCE_ADVANCED",
+            "to": "EXTERNAL_VALIDATION_PASS"
+          },
+          {
+            "decision": "FAIL_CLOSED",
+            "from": "HYBRID_VALIDATION_READY",
+            "to": "EXTERNAL_VALIDATION_PASS"
+          },
+          {
+            "decision": "FAIL_CLOSED",
+            "from": "DOSSIER_BUILT",
+            "to": "EXTERNAL_VALIDATION_PASS"
+          },
+          {
+            "decision": "FAIL_CLOSED",
+            "from": "DOSSIER_VERIFIED",
+            "to": "EXTERNAL_VALIDATION_PASS"
+          },
+          {
+            "decision": "FAIL_CLOSED",
+            "from": "HUMAN_ATTESTATION_PENDING",
+            "to": "EXTERNAL_VALIDATION_PASS"
+          }
+        ],
+        "state_machine_doc": "docs/external-validation/hybrid/V4_0_HYBRID_VALIDATION_CLAIM_STATE_MACHINE.md"
+      },
+      "name": "hybrid_validation_state_machine_abuse",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Prohibited automated transitions fail closed; external pass requires complete human-attestation conditions."
+    },
+    {
+      "details": {
+        "expected_hashes": "assurance/reproducibility/expected_hashes.json",
+        "subjects": [
+          {
+            "id": "global_public_verification_registry",
+            "original_match": true,
+            "path": "registry/ETHICBIT_CEMU_AEM_V1_1_GLOBAL_PUBLIC_VERIFICATION_REGISTRY.json",
+            "tampered_expected_detected": true
+          },
+          {
+            "id": "supply_chain_manifest",
+            "original_match": true,
+            "path": "assurance/release/AEM_V1_1_SUPPLY_CHAIN_VERIFICATION_MANIFEST.json",
+            "tampered_expected_detected": true
+          },
+          {
+            "id": "slsa_provenance",
+            "original_match": true,
+            "path": "assurance/provenance/SLSA_PROVENANCE.json",
+            "tampered_expected_detected": true
+          },
+          {
+            "id": "toolchain_fingerprint",
+            "original_match": true,
+            "path": "assurance/toolchain/toolchain_fingerprint.json",
+            "tampered_expected_detected": true
+          }
+        ]
+      },
+      "name": "reproducibility_hash_tamper_detection",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Simulated expected-hash tamper detected for 4/4 declared subjects."
+    },
+    {
+      "details": {
+        "automated_reproduction_report": "assurance/external-validation/v4_0/automated_reproduction/AUTOMATED_REPRODUCTION_REPORT.json",
+        "checks": {
+          "automated_reproduction_not_third_party_completion": true,
+          "automated_security_not_certification": true,
+          "declared_subjects_do_not_claim_full_reproducible_build": true,
+          "declared_subjects_do_not_claim_independent_reproduction": true,
+          "security_critical_findings_zero": true,
+          "security_secret_findings_zero": true
+        },
+        "declared_subjects": "assurance/reproducibility/declared_subjects.json",
+        "security_review_summary": "assurance/external-validation/v4_0/security_review/AUTOMATED_SECURITY_REVIEW_SUMMARY.json"
+      },
+      "name": "automated_evidence_non_claim_boundary",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Automated reproduction/security evidence remains support evidence, not external completion or certification."
+    },
+    {
+      "details": {
+        "ignored_local_sensitive_entries_present": [
+          ".env",
+          ".env.local",
+          "assurance/keys/ed25519_private.pem",
+          "assurance/keys/mldsa_private.pem"
+        ],
+        "release_zip_sensitive_entries": [],
+        "tracked_sensitive_entries": [],
+        "zip_files_scanned": 9
+      },
+      "name": "release_packaging_secret_leak_abuse_scan",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Scanned 1490 tracked files and 9 release ZIPs for sensitive entries."
+    },
+    {
+      "details": {
+        "hash_record": "assurance/audit/RELEASE_GRADE_DEEP_AUDIT_HASH_RECORD_V1_0.txt",
+        "verified_entries": [
+          {
+            "path": "tools/audit/release_grade_deep_audit.py",
+            "record_match": true,
+            "tamper_changes_hash": true
+          },
+          {
+            "path": "assurance/audit/RELEASE_GRADE_DEEP_AUDIT_REPORT_V1_0.json",
+            "record_match": true,
+            "tamper_changes_hash": true
+          },
+          {
+            "path": "docs/audit/ETHICBIT_RELEASE_GRADE_DEEP_AUDIT_V1_0.md",
+            "record_match": true,
+            "tamper_changes_hash": true
+          }
+        ]
+      },
+      "name": "audit_hash_record_tamper_detection",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Verified 3 hash-record entries and in-memory tamper mismatch behavior."
+    },
+    {
+      "details": {
+        "mutations": [
+          {
+            "mutation": "modify_outcome",
+            "tamper_detected": true
+          },
+          {
+            "mutation": "modify_materiality_score",
+            "tamper_detected": true
+          },
+          {
+            "mutation": "remove_non_claims",
+            "tamper_detected": true
+          },
+          {
+            "mutation": "change_scope_boundary",
+            "tamper_detected": true
+          },
+          {
+            "mutation": "change_hitl_requirement",
+            "tamper_detected": true
+          },
+          {
+            "mutation": "replay_old_receipt_hash",
+            "tamper_detected": true
+          },
+          {
+            "mutation": "inject_production_ready_claim",
+            "tamper_detected": true
+          },
+          {
+            "mutation": "replace_receipt_hash",
+            "tamper_detected": true
+          }
+        ]
+      },
+      "name": "receipt_forgery_mutation_detection",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Detected 8/8 receipt forgery mutations."
+    },
+    {
+      "details": {
+        "baseline_status": "PASS",
+        "source_db": "demos/aem-evolve-multi-agent-api/ethicbit_demo.db",
+        "tamper_cases": [
+          {
+            "case": "mutate_entry_sha256_seq_1",
+            "observed": "TAMPER_DETECTED",
+            "tamper_detected": true
+          },
+          {
+            "case": "mutate_middle_chain_hash",
+            "observed": "TAMPER_DETECTED",
+            "tamper_detected": true
+          },
+          {
+            "case": "delete_chain_entry",
+            "observed": "TAMPER_DETECTED",
+            "tamper_detected": true
+          }
+        ]
+      },
+      "name": "audit_chain_sqlite_tamper_detection",
+      "score": 100,
+      "status": "PASS",
+      "summary": "Clean DB baseline=PASS; detected 3/3 SQLite audit-chain tamper cases."
+    }
+  ],
+  "tests_failed": 0,
+  "tests_passed": 8,
+  "tests_total": 8
+}

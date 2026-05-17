@@ -1,0 +1,8 @@
+generated_at_utc=2026-05-17T20:12:37.622195+00:00
+git_commit=81ffecfe
+overall_status=PASS_WITH_SCOPE_LIMITATIONS
+overall_score=100
+
+3dbba88b29ceaa1bbe81572727beba2d75e6bebc06793936633e7ec008d9c28f  tools/audit/aggressive_validation_abuse_testing.py
+27b03dd8c9b3c1ac1a60ca06005a2da36082619c0b2bd42d1019dcffccb94323  assurance/audit/AGGRESSIVE_VALIDATION_ABUSE_TEST_REPORT_V1_0.json
+7c2f0317c0c3bb8fa96dcfa4fc3c1ed2ee52e12234d0b8b7887497dee1a31c6a  docs/audit/ETHICBIT_AGGRESSIVE_VALIDATION_ABUSE_TESTING_V1_0.md
