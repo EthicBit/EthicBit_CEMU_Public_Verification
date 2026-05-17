@@ -1,20 +1,20 @@
 # EthicBit v4.0 — Proprietary Technology and Market Anchor Brief
 
-**Technology Status:** `CONTROLLED_EVIDENCE_ADVANCED`  
-**Hybrid Validation Status:** `HYBRID_VALIDATION_READY`  
-**External Validation Status:** `HUMAN_ATTESTATION_PENDING`  
-**Date:** `2026-05-16`  
-**Evidence Reference Commit:** `8e8ead0d`  
-**Brief Publication Commit:** `791c4686`  
-**Private Repository:** `EthicBit/EthicBit_CEMU`  
-**Public Mirror:** `EthicBit_CEMU_Public_Verification`  
-**Repository Sync:** `origin/main = mirror/main`  
-**GitHub Publication Status:** public mirror synchronized  
-**AEM-EVOLVE v2.0:** `PASS` — 14/14 gates, 140/140 checks  
-**AI-ME v3.1:** `PASS` — 12/12 gates, `artifact_verified=true`  
-**Fast Path v1.0:** `EVIDENCE_PASS` — 9/9 scenarios, 7/7 mandatory rules  
-**v4.0 External Validation:** 5/8 `CONTROLLED_PASS`, 3/8 `PENDING_EXTERNAL`  
-**Only Active Gap:** external human attestation for criteria 1, 2 and 8  
+**Technology Status:** `CONTROLLED_EVIDENCE_ADVANCED`<br>
+**Hybrid Validation Status:** `HYBRID_VALIDATION_READY`<br>
+**External Validation Status:** `HUMAN_ATTESTATION_PENDING`<br>
+**Date:** `2026-05-16`<br>
+**Evidence Reference Commit:** `8e8ead0d`<br>
+**Brief Publication Commit:** `791c4686`<br>
+**Private Repository:** `EthicBit/EthicBit_CEMU`<br>
+**Public Mirror:** `EthicBit_CEMU_Public_Verification`<br>
+**Repository Sync Scope:** public mirror synchronized to evidence reference commit `8e8ead0d`; private `origin/main` may contain later publication-only commits<br>
+**GitHub Publication Status:** public mirror synchronized to sanitized controlled-evidence reference<br>
+**AEM-EVOLVE v2.0:** `PASS` — 14/14 gates, 140/140 checks<br>
+**AI-ME v3.1:** `PASS` — 12/12 gates, `artifact_verified=true`<br>
+**Fast Path v1.0:** `EVIDENCE_PASS` — 9/9 scenarios, 7/7 mandatory rules<br>
+**v4.0 External Validation:** 5/8 `CONTROLLED_PASS`, 3/8 `PENDING_EXTERNAL`<br>
+**Only Active Gap:** external human attestation for criteria 1, 2 and 8
 
 ---
 
@@ -29,7 +29,7 @@ This brief summarizes the currently published, mirrored and verifiable controlle
 | Brief publication commit | `791c4686` |
 | Private GitHub repo | `EthicBit/EthicBit_CEMU` |
 | Public GitHub mirror | `EthicBit_CEMU_Public_Verification` |
-| Mirror sync | `origin/main = mirror/main` |
+| Evidence sync | Public mirror synchronized to evidence reference commit `8e8ead0d`; private `origin/main` may advance independently |
 | AEM-EVOLVE v2.0 | `PASS` — 14/14 gates, 140/140 checks |
 | AI-ME v3.1 | `PASS` — 12/12 gates, `artifact_verified=true` |
 | Fast Path v1.0 | `EVIDENCE_PASS` — 9/9 scenarios, 7/7 mandatory rules |
@@ -212,10 +212,10 @@ The only active gap is independent human attestation for criteria 1, 2 and 8.
 
 | Market Component | Provider / Layer | Current Evidence Status |
 |---|---|---|
-| Managed database | AWS RDS PostgreSQL 18.3 — `aem-evolve-db` | Live / controlled evidence |
-| Identity / OIDC | AWS Cognito — `us-east-2_eEOb7JdbK` | Live / controlled evidence |
-| Signing | AWS KMS ECC_NIST_P256 | Enabled / SIGN_VERIFY |
-| Monitoring | EC2 Prometheus — `i-0800e0d8e3cf1e645` | Running |
+| Managed database | AWS RDS PostgreSQL 18.3 — sanitized identifier | Live / controlled evidence |
+| Identity / OIDC | AWS Cognito — sanitized pool identifier | Live / controlled evidence |
+| Signing | AWS KMS ECC_NIST_P256 — sanitized key identifier | Enabled / SIGN_VERIFY |
+| Monitoring | EC2 Prometheus — sanitized instance and endpoint | Running |
 | Governance alerting | Prometheus rules | 7/7 rules loaded |
 
 Active governance alert rules:
@@ -316,8 +316,8 @@ No automated pipeline may transition directly to EXTERNAL_VALIDATION_PASS.
 
 | Repo | Commit | Status |
 |---|---:|---|
-| origin `EthicBit/EthicBit_CEMU` | `8e8ead0d` | Synchronized |
-| mirror `EthicBit_CEMU_Public_Verification` | `8e8ead0d` | Synchronized |
+| origin `EthicBit/EthicBit_CEMU` | private HEAD may advance beyond `8e8ead0d` | Private engineering source |
+| mirror `EthicBit_CEMU_Public_Verification` | `8e8ead0d` | Public sanitized evidence reference |
 
 This synchronization makes selected controlled evidence publicly inspectable. It does not convert controlled evidence into external validation by itself.
 
@@ -434,7 +434,7 @@ within the declared scope.
 
 ## 21. Safe Claim
 
-EthicBit / CEMU has reached `CONTROLLED_EVIDENCE_ADVANCED` status with a synchronized private repository and public GitHub mirror at evidence reference commit `8e8ead0d`, with this brief published at commit `791c4686`, active CEMU Core modules, AEM-EVOLVE v2.0 `PASS`, AI-ME v3.1 `PASS`, Fast Path v1.0 `EVIDENCE_PASS`, live AWS infrastructure evidence, selected on-chain and external persistence anchors, Claim Boundary integrity preserved, and HV-0..HV-10 complete. External validation remains `HUMAN_ATTESTATION_PENDING` for criteria 1, 2 and 8.
+EthicBit / CEMU has reached `CONTROLLED_EVIDENCE_ADVANCED` status with a public GitHub mirror synchronized to sanitized evidence reference commit `8e8ead0d`, with this brief published in the private engineering repository, active CEMU Core modules, AEM-EVOLVE v2.0 `PASS`, AI-ME v3.1 `PASS`, Fast Path v1.0 `EVIDENCE_PASS`, sanitized live-infrastructure evidence, selected on-chain and external persistence anchors, Claim Boundary integrity preserved, and HV-0..HV-10 complete. External validation remains `HUMAN_ATTESTATION_PENDING` for criteria 1, 2 and 8.
 
 ---
 
