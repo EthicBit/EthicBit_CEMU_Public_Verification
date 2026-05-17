@@ -1,0 +1,300 @@
+{
+  "details": {
+    "claim_boundary": {
+      "claim_red_team_status": "CLAIM_BOUNDARY_RED_TEAM_PASS",
+      "potential_forbidden_claim_assertion_count": 24,
+      "potential_forbidden_claim_assertions": [
+        {
+          "path": "FINAL_AUDIT_CONCLUSION.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "assurance/evolve-multi-agent/v1_1/OFFICIAL_STATUS_SIGNED.json",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "assurance/evolve-multi-agent/v1_1/hitl_signature_verification_report.json",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "assurance/evolve-multi-agent/v1_1/receipt_forgery_test_report.json",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json",
+          "pattern": "regulatory_approval_asserted"
+        },
+        {
+          "path": "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "demos/aem-evolve-multi-agent-api/RELEASE_NOTES_V1_1.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "demos/aem-evolve-multi-agent-api/docs/ASSURANCE_LADDER.md",
+          "pattern": "production_ready_universal_asserted"
+        },
+        {
+          "path": "demos/aem-evolve-multi-agent-api/docs/HITL_SIGNATURE_VERIFICATION.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/LINGO_AND_CLAIM_DICTIONARY.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/STATUS_BULLETIN_PUBLIC_2026-05-09.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/ai-me/AI_ME_GATE_MATRIX_V3_1.json",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/external-validation/hybrid/V4_0_AUTOMATED_EVIDENCE_PIPELINE.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/external-validation/hybrid/V4_0_AUTOMATED_EVIDENCE_PIPELINE.md",
+          "pattern": "production_ready_universal_asserted"
+        },
+        {
+          "path": "docs/external-validation/hybrid/V4_0_AUTOMATED_SECURITY_REVIEW_PIPELINE.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/external-validation/hybrid/V4_0_CLAIM_BOUNDARY_RED_TEAM_PIPELINE.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/external-validation/hybrid/V4_0_HYBRID_VALIDATION_SUPPORT_MODEL.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/external-validation/hybrid/V4_0_HYBRID_VALIDATION_SUPPORT_MODEL.md",
+          "pattern": "production_ready_universal_asserted"
+        },
+        {
+          "path": "docs/production/AEM_EVOLVE_V2_0_PRODUCTION_READINESS_GATE_CHECKLIST.md",
+          "pattern": "production_ready_universal_asserted"
+        },
+        {
+          "path": "docs/roadmap/AEM_EVOLVE_V1_1_PR_ROADMAP.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "docs/whitepapers/WHITEPAPER_V1_1_AEM_EVOLVE_GOVERNED_CHANGE_ASSURANCE.md",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "results/current_technology_status_20260512T172316Z/ETHICBIT_CURRENT_TECHNOLOGY_STATUS.txt",
+          "pattern": "cybersecurity_certified_asserted"
+        },
+        {
+          "path": "tools/external_validation/claim_red_team/claim_red_team_cases.json",
+          "pattern": "regulatory_approval_asserted"
+        },
+        {
+          "path": "tools/external_validation/claim_red_team/claim_red_team_cases.json",
+          "pattern": "cybersecurity_certified_asserted"
+        }
+      ]
+    },
+    "code_quality": {
+      "cemu_component_tests": [
+        "tests/test_cemu_swarm_containment.py"
+      ],
+      "dev_tool_markers": {
+        "bandit": false,
+        "mypy": true,
+        "pytest": true,
+        "ruff": true
+      },
+      "python_files": 319,
+      "syntax_failures": [],
+      "test_files": 29
+    },
+    "component_inventory": {
+      "ai_me_report_count": 12,
+      "cemu_missing": [],
+      "cemu_present": [
+        "cemu/core/intake.py",
+        "cemu/core/fixation.py",
+        "cemu/core/sealing.py",
+        "cemu/core/provenance.py",
+        "cemu/core/closure.py",
+        "cemu/core/governance.py",
+        "cemu/builders/runtime_guard.py",
+        "cemu/builders/swarm_containment.py"
+      ],
+      "fast_path_artifact_count": 56,
+      "hv_missing": [],
+      "hv_present_count": 11,
+      "workflow_count": 24
+    },
+    "ecosystem_publication_surface": {
+      "required_missing": [],
+      "required_present": [
+        "README.md",
+        "README_PUBLIC.md",
+        "docs/briefs/ETHICBIT_V4_0_PROPRIETARY_TECHNOLOGY_AND_MARKET_ANCHOR_BRIEF.md",
+        "docs/external-validation/outreach/V4_0_VALIDATOR_INVITATION.md",
+        "assurance/external-validation/v4_0/security_review/AUTOMATED_SECURITY_REVIEW_SUMMARY.json",
+        "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json",
+        "assurance/unified/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_UNIFIED_MANIFEST_v0_1.json",
+        "assurance/unified/ETHICBIT_MECHANICAL_ETHICS_ASSURANCE_UNIFIED_ANCHOR_RECEIPT_v0_1.json",
+        "receipts/AEM_EVOLVE_TECHNICAL_DEMONSTRATION_MAINNET_ANCHOR_RECEIPT.json",
+        "assurance/external-validation/v4_0/automated_reproduction/AUTOMATED_REPRODUCTION_REPORT.json"
+      ]
+    },
+    "reproducibility_and_external_validation": {
+      "external_pending_markers": [
+        "docs/STATUS_BULLETIN_PUBLIC_2026-05-16_V4_0_HYBRID_VALIDATION.md",
+        "docs/external-validation/hybrid/V4_0_HYBRID_VALIDATION_CLAIM_STATE_MACHINE.md"
+      ],
+      "required_missing": [],
+      "required_present": [
+        "scripts/reproducibility/run_reproducibility_extension_e2e.sh",
+        "docs/reproducibility/REPRODUCIBLE_BUILD_GUIDE.md",
+        "assurance/reproducibility/declared_subjects.json",
+        "assurance/reproducibility/expected_hashes.json",
+        "challenge/independent-reproduction/AEM_V1_1_INDEPENDENT_REPRODUCTION_CHALLENGE.md",
+        "docs/external-validation/outreach/V4_0_VALIDATOR_INVITATION.md"
+      ]
+    },
+    "security_posture": {
+      "local_sensitive_paths_present": [
+        {
+          "ignored": true,
+          "path": ".env",
+          "tracked": false
+        },
+        {
+          "ignored": true,
+          "path": ".env.local",
+          "tracked": false
+        },
+        {
+          "ignored": true,
+          "path": ".env.template",
+          "tracked": false
+        },
+        {
+          "ignored": true,
+          "path": "assurance/keys/ed25519_private.pem",
+          "tracked": false
+        },
+        {
+          "ignored": true,
+          "path": "assurance/keys/mldsa_private.pem",
+          "tracked": false
+        }
+      ],
+      "tracked_secret_content_marker_count": 0,
+      "tracked_secret_content_markers": [],
+      "tracked_sensitive_paths": []
+    }
+  },
+  "gates": [
+    {
+      "name": "code_quality",
+      "notes": [
+        "Python AST syntax scan completed without failures.",
+        "Python test inventory present: 29 files.",
+        "CEMU component-specific tests present: 1 files.",
+        "Bandit is not configured as a committed dev dependency."
+      ],
+      "score": 92,
+      "status": "PASS"
+    },
+    {
+      "name": "component_inventory",
+      "notes": [
+        "CEMU components present: 8/8.",
+        "HV suite artifacts present: 11/11.",
+        "AI-ME report artifacts found: 12.",
+        "Fast Path evidence artifacts found: 56."
+      ],
+      "score": 100,
+      "status": "PASS"
+    },
+    {
+      "name": "security_posture",
+      "notes": [
+        "No tracked sensitive path names detected by path-pattern scan.",
+        "No tracked secret-like content markers detected by conservative pattern scan.",
+        "Ignored local sensitive files are present; publication packaging must exclude them."
+      ],
+      "score": 90,
+      "status": "PASS"
+    },
+    {
+      "name": "ecosystem_publication_surface",
+      "notes": [
+        "Required publication/evidence artifacts present: 10/10.",
+        "Ethereum/mainnet and external-validation evidence are treated as references, not external certification."
+      ],
+      "score": 100,
+      "status": "PASS"
+    },
+    {
+      "name": "claim_boundary",
+      "notes": [
+        "Potential forbidden claim assertion patterns require review: 24.",
+        "Claim red-team artifact present with status marker: CLAIM_BOUNDARY_RED_TEAM_PASS."
+      ],
+      "score": 75,
+      "status": "SCOPE_LIMITED"
+    },
+    {
+      "name": "reproducibility_and_external_validation",
+      "notes": [
+        "Reproducibility/challenge inputs present: 6/6.",
+        "External human attestation remains pending by design."
+      ],
+      "score": 95,
+      "status": "SCOPE_LIMITED"
+    }
+  ],
+  "generated_at_utc": "2026-05-17T19:59:14.573480+00:00",
+  "git": {
+    "branch": "codex/release-grade-deep-audit-v1",
+    "commit": "7054c0ef"
+  },
+  "key_findings": [
+    {
+      "severity": "HIGH",
+      "summary": "External validation remains HUMAN_ATTESTATION_PENDING; do not claim EXTERNAL_VALIDATION_PASS."
+    },
+    {
+      "severity": "MEDIUM",
+      "summary": "Ignored local sensitive files are present; release and mirror packaging must continue to exclude secrets and private key material."
+    },
+    {
+      "severity": "MEDIUM",
+      "summary": "Code-quality posture is improved but still scope-limited until broader CEMU component tests and committed SAST tooling are expanded."
+    }
+  ],
+  "non_claims": {
+    "clinical_or_diagnostic_readiness_claimed": false,
+    "cybersecurity_certification_claimed": false,
+    "external_validation_completed": false,
+    "legal_compliance_claimed": false,
+    "regulatory_approval_claimed": false,
+    "third_party_reproduction_completed": false,
+    "universal_production_readiness_claimed": false
+  },
+  "overall_score": 92,
+  "overall_status": "PASS_WITH_SCOPE_LIMITATIONS",
+  "publication_decision": "PUBLICATION_ALLOWED_SCOPE_LIMITED_WITH_EXTERNAL_ATTESTATION_PENDING",
+  "required_next_actions": [
+    "Run this audit before each major public release or mirror refresh.",
+    "Keep private engineering repository and public verification mirror separated unless a sanitized mirror package is explicitly prepared.",
+    "Do not elevate to EXTERNAL_VALIDATION_PASS until signed human attestation covers criteria 1, 2 and 8.",
+    "Expand CEMU component tests and add committed Bandit/SAST posture if the next target is higher code-quality score.",
+    "Continue excluding `.env*`, private keys and local runtime secrets from all release and mirror packaging."
+  ],
+  "schema_id": "ETHICBIT_RELEASE_GRADE_DEEP_AUDIT_REPORT_V1_0"
+}
