@@ -40,6 +40,6 @@
     "attestations_mandatory": true,
     "in_toto_signing_status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS",
     "builder_workflow_status": "ACTIVE",
-    "note": "in-toto chain KMS-signed (Block B2). slsa-build.yml active (Block B3). Full L4 claim requires external witness on in-toto statements and human review for escalated release claims."
+    "note": "in-toto chain KMS-signed (B2). slsa-build.yml active (B3). SBOM KMS-signed (B4). Anchor policy documented at assurance/anchor/anchor-policy.json (B5). Full L4 claim requires external witness on in-toto statements and human review for escalated release claims."
   }
 }

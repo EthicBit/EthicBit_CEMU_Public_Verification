@@ -1,0 +1,168 @@
+{
+  "schema_id": "ETHICBIT_ANCHOR_POLICY_V1",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "description": "Programmatic anchor policy governing which artifacts are anchored, on which networks, under what prerequisites, and with what verification gates — per release class.",
+
+  "anchor_networks": {
+    "triple_public": {
+      "role": "PUBLIC_TAMPER_EVIDENCE",
+      "networks": ["sepolia", "arweave", "ao"],
+      "canonical": true,
+      "note": "Canonical set. Bitcoin is excluded (legacy planning reference only)."
+    },
+    "mainnet_kzg_blob": {
+      "role": "PRODUCTION_PROVENANCE",
+      "networks": ["ethereum_mainnet"],
+      "tx_type": "EIP-4844 type-3 KZG blob",
+      "canonical": true
+    }
+  },
+
+  "signing_keys": {
+    "intoto_and_artifact_signing": {
+      "alias": "alias/ethicbit-intoto-signing",
+      "algorithm": "ECDSA_SHA_256",
+      "spec": "ECC_NIST_P256",
+      "region": "us-east-2",
+      "purpose": "in-toto statements, SBOM, build manifests"
+    },
+    "runtime_api": {
+      "alias": "alias/ethicbit-kms-signing",
+      "algorithm": "ECDSA_SHA_256",
+      "spec": "ECC_NIST_P256",
+      "region": "us-east-2",
+      "purpose": "API runtime signing only — not used for artifact anchoring"
+    }
+  },
+
+  "release_classes": {
+    "DEVELOPMENT": {
+      "anchor_required": false,
+      "description": "Local and CI development runs. No anchor required."
+    },
+    "CONTROLLED_EVIDENCE": {
+      "anchor_required": true,
+      "anchor_networks": ["triple_public"],
+      "prerequisites": {
+        "sbom_kms_signed": true,
+        "claim_boundary_red_team_pass": true,
+        "in_toto_kms_signed": false,
+        "human_review_required": false
+      },
+      "artifacts_to_anchor": [
+        "assurance/v4_0/V4_0_CONTROLLED_EVIDENCE_REPORT.json",
+        "assurance/v4_0/evidence/V4_0_01_REPRODUCTION_KIT_ARTIFACT.json",
+        "assurance/v4_0/evidence/V4_0_02_SECURITY_REVIEW_ARTIFACT.json",
+        "assurance/v4_0/evidence/V4_0_03_CLOUD_DEPLOYMENT_ARTIFACT.json",
+        "assurance/v4_0/evidence/V4_0_04_HSM_SIGNING_ARTIFACT.json",
+        "assurance/v4_0/evidence/V4_0_05_AEM_REVERIFICATION_ARTIFACT.json",
+        "assurance/v4_0/evidence/V4_0_06_TRIPLE_ANCHOR_ARTIFACT.json",
+        "assurance/v4_0/evidence/V4_0_07_FAST_PATH_BENCHMARK_ARTIFACT.json",
+        "assurance/v4_0/evidence/V4_0_08_CLAIM_REVIEW_ARTIFACT.json"
+      ],
+      "verification_gate_script": "deployment/anchor_pre_deploy_gate.sh",
+      "anchor_script": "scripts/core/anchor_v4_0_controlled_evidence_mainnet.py"
+    },
+    "EXTERNAL_VALIDATION": {
+      "anchor_required": true,
+      "anchor_networks": ["triple_public", "mainnet_kzg_blob"],
+      "prerequisites": {
+        "sbom_kms_signed": true,
+        "claim_boundary_red_team_pass": true,
+        "in_toto_kms_signed": true,
+        "slsa_build_workflow_active": true,
+        "human_review_required": false,
+        "note": "in-toto chain must be KMS_SIGNED (not necessarily externally witnessed)"
+      },
+      "artifacts_to_anchor": [
+        "assurance/slsa/subject-index.json",
+        "assurance/sbom/aem_v1_1_sbom.cyclonedx.json",
+        "assurance/in-toto/attestation-index.json",
+        "assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json"
+      ],
+      "verification_gate_script": "deployment/anchor_pre_deploy_gate.sh",
+      "anchor_script": "scripts/core/anchor_v4_0_controlled_evidence_mainnet.py"
+    },
+    "PRODUCTION_RELEASE": {
+      "anchor_required": true,
+      "anchor_networks": ["triple_public", "mainnet_kzg_blob"],
+      "prerequisites": {
+        "sbom_kms_signed": true,
+        "claim_boundary_red_team_pass": true,
+        "in_toto_kms_signed": true,
+        "in_toto_externally_witnessed": true,
+        "slsa_build_workflow_active": true,
+        "human_review_required": true,
+        "human_attestation_status_required": "HUMAN_ATTESTED",
+        "external_validation_criteria_required": "5/8_minimum_controlled_pass"
+      },
+      "artifacts_to_anchor": [
+        "assurance/slsa/subject-index.json",
+        "assurance/sbom/aem_v1_1_sbom.cyclonedx.json",
+        "assurance/in-toto/attestation-index.json",
+        "ceerv/artifacts/evidence_bundle_full.json",
+        "ceerv/artifacts/certificate.json",
+        "ceerv/outputs/ACTA_MINIMA.json",
+        "artifacts/history/swarm/official_operational_status.json"
+      ],
+      "verification_gate_script": "deployment/anchor_pre_deploy_gate.sh",
+      "note": "Human review and external witness on in-toto chain required before PRODUCTION_RELEASE anchor."
+    }
+  },
+
+  "current_release_class": "EXTERNAL_VALIDATION",
+  "current_state": {
+    "sbom_kms_signed": true,
+    "sbom_signed_at": "2026-05-18T02:52:13.301282+00:00",
+    "in_toto_kms_signed": true,
+    "in_toto_signed_at": "2026-05-18T02:39:56.333340+00:00",
+    "in_toto_externally_witnessed": false,
+    "slsa_build_workflow_active": true,
+    "claim_boundary_red_team_pass": true,
+    "claim_boundary_cases": 14,
+    "claim_boundary_blocked": 14,
+    "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
+    "triple_public_anchor_last": "2026-05-14 (v4.0 controlled evidence)",
+    "mainnet_kzg_blob_anchor_last": "2026-05-14 (v4.0 controlled evidence)"
+  },
+
+  "gates": [
+    {
+      "id": "GATE_TRIPLE_ANCHOR_VERIFY",
+      "script": "deployment/anchor_pre_deploy_gate.sh",
+      "blocks_release_class": ["CONTROLLED_EVIDENCE", "EXTERNAL_VALIDATION", "PRODUCTION_RELEASE"],
+      "description": "Verifies canonical Triple Public Anchor (Sepolia + Arweave + AO) is reconciled before any production deploy."
+    },
+    {
+      "id": "GATE_CLAIM_BOUNDARY",
+      "script": "tools/external_validation/claim_red_team/run_claim_red_team.py",
+      "ci_workflow": ".github/workflows/claim-boundary-property-tests.yml",
+      "blocks_release_class": ["CONTROLLED_EVIDENCE", "EXTERNAL_VALIDATION", "PRODUCTION_RELEASE"],
+      "description": "All 14 red-team cases must be BLOCKED. block_rate must be 100%."
+    },
+    {
+      "id": "GATE_KMS_SIGNATURES",
+      "description": "SBOM and in-toto chain must carry valid KMS signatures before EXTERNAL_VALIDATION or PRODUCTION_RELEASE anchor.",
+      "blocks_release_class": ["EXTERNAL_VALIDATION", "PRODUCTION_RELEASE"],
+      "check_files": [
+        "assurance/sbom/aem_v1_1_sbom.cyclonedx.sig.json",
+        "assurance/in-toto/attestation-index.json"
+      ]
+    },
+    {
+      "id": "GATE_HUMAN_REVIEW",
+      "description": "Human reviewer must sign off before PRODUCTION_RELEASE anchor. human_attestation_status must be HUMAN_ATTESTED.",
+      "blocks_release_class": ["PRODUCTION_RELEASE"],
+      "automated": false
+    }
+  ],
+
+  "non_claims": {
+    "anchor_proves_correctness": false,
+    "anchor_proves_external_certification": false,
+    "triple_public_anchor_is_tamper_proof_storage": false,
+    "mainnet_anchor_is_regulatory_approval": false,
+    "note": "Anchoring provides tamper-evident timestamping and public verifiability within declared scope. It does not constitute certification, regulatory approval, or proof of correctness."
+  }
+}
