@@ -78,11 +78,15 @@
       "artifacts_to_anchor": [
         "assurance/slsa/subject-index.json",
         "assurance/sbom/aem_v1_1_sbom.cyclonedx.json",
+        "assurance/sbom/aem_v1_1_sbom.cyclonedx.sig.json",
         "assurance/in-toto/attestation-index.json",
-        "assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD.json"
+        "assurance/threat-model/threat-model.json",
+        "assurance/anchor/anchor-policy.json",
+        "assurance/v4_0/V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD_V2.json",
+        "docs/assurance/SIGNING_KEY_MIGRATION_RECORD.md"
       ],
       "verification_gate_script": "deployment/anchor_pre_deploy_gate.sh",
-      "anchor_script": "scripts/core/anchor_v4_0_controlled_evidence_mainnet.py"
+      "anchor_script": "scripts/core/anchor_v4_0_external_validation_posture.py"
     },
     "PRODUCTION_RELEASE": {
       "anchor_required": true,
@@ -123,8 +127,15 @@
     "claim_boundary_cases": 14,
     "claim_boundary_blocked": 14,
     "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
+    "remediation_blocks_completed": ["A", "B1", "B2", "B3", "B4", "B5", "C", "D", "E"],
+    "signing_posture": "PRODUCTION_HSM_READY",
+    "ev_posture_anchor_prepared_at": "2026-05-18T03:27:32Z",
+    "ev_posture_payload_sha256": "aee31fb3fabf56dec5add617378ae1d569902b4d1d1b2a31923b0b7331a611b6",
+    "ev_posture_mainnet_versioned_hash_pending": "0x017bbd7e860da0534fbce0ca370ff119232f9408549f82ea0ac7aaf0c3b6dc55",
+    "ev_posture_sepolia_versioned_hash_pending": "0x01119f1e2e70ae45b6bf6b3dfcfd480700a2e0601316d59e6195316cc5b6c526",
     "triple_public_anchor_last": "2026-05-14 (v4.0 controlled evidence)",
-    "mainnet_kzg_blob_anchor_last": "2026-05-14 (v4.0 controlled evidence)"
+    "mainnet_kzg_blob_anchor_last": "2026-05-14 (v4.0 controlled evidence)",
+    "ev_posture_anchor_status": "PENDING_BROADCAST"
   },
 
   "gates": [
