@@ -1,44 +1,51 @@
 {
   "schema_id": "ETHICBIT_IN_TOTO_ATTESTATION_INDEX_V1",
   "version": "1.1.0",
-  "status": "SCHEMA_DEFINED_NOT_SIGNED",
+  "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS",
   "verification": {
     "mode": "FAIL_CLOSED",
     "allStepsMustBeAttested": true,
     "noPendingAllowed": true,
     "requiredStatementStatus": "VERIFIED",
-    "current_state": "Statements schema present; signedBy=[] on all steps. Full in-toto verification requires signed statements from a KMS-backed signer. Pending Block B implementation."
+    "current_state": "All 6 steps signed with KMS key alias/ethicbit-intoto-signing (ECC_NIST_P256, ECDSA_SHA_256) at 2026-05-18T02:39:56Z. Full in-toto verification requires external witness or TSA timestamp. Pending external validation."
+  },
+  "kms_signing": {
+    "key_alias": "alias/ethicbit-intoto-signing",
+    "algorithm": "ECDSA_SHA_256",
+    "signed_at": "2026-05-18T02:39:56.333340+00:00",
+    "steps_signed": 6,
+    "steps_total": 6
   },
   "attestations": [
     {
       "step": "intake",
       "statement_ref": "assurance/in-toto/attestations/intake.statement.json",
-      "status": "REQUIRED_NOT_VERIFIED"
+      "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS"
     },
     {
       "step": "provenance",
       "statement_ref": "assurance/in-toto/attestations/provenance.statement.json",
-      "status": "REQUIRED_NOT_VERIFIED"
+      "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS"
     },
     {
       "step": "governance",
       "statement_ref": "assurance/in-toto/attestations/governance.statement.json",
-      "status": "REQUIRED_NOT_VERIFIED"
+      "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS"
     },
     {
       "step": "fixation",
       "statement_ref": "assurance/in-toto/attestations/fixation.statement.json",
-      "status": "REQUIRED_NOT_VERIFIED"
+      "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS"
     },
     {
       "step": "sealing",
       "statement_ref": "assurance/in-toto/attestations/sealing.statement.json",
-      "status": "REQUIRED_NOT_VERIFIED"
+      "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS"
     },
     {
       "step": "closure",
       "statement_ref": "assurance/in-toto/attestations/closure.statement.json",
-      "status": "REQUIRED_NOT_VERIFIED"
+      "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS"
     }
   ]
 }

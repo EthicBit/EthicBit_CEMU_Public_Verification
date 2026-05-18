@@ -1,6 +1,7 @@
 {
   "schema_id": "AEM_EVOLVE_V4_0_CLAIM_BOUNDARY_RED_TEAM_CASES_V1",
   "version": "4.0",
+  "file_role": "claim_boundary_regression_cases",
   "purpose": "Attempt unsupported v4.0 claims and verify they are blocked by claim-boundary rules.",
   "current_status": "CONTROLLED_EVIDENCE_PARTIAL",
   "human_attestation_status": "HUMAN_ATTESTATION_PENDING",

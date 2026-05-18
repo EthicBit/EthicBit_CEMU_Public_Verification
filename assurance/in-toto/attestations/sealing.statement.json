@@ -2,9 +2,14 @@
   "schema_id": "ETHICBIT_IN_TOTO_STATEMENT_V1",
   "version": "1.0.0",
   "step": "sealing",
-  "status": "REQUIRED_NOT_VERIFIED",
-  "verificationStatus": "UNVERIFIED",
+  "status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS",
+  "verificationStatus": "KMS_SIGNED",
   "reason": "Signed in-toto attestation is required before READY",
-  "signedBy": [],
-  "signedAt": ""
+  "signedBy": [
+    "arn:aws:kms:us-east-2:196257796150:key/977feb8e-fd71-494f-bd8d-216c570c69db"
+  ],
+  "signedAt": "2026-05-18T02:39:56.333340+00:00",
+  "signature": "MEUCIEpazk9hosS+PujVjo5tqkQWI3IqjJIrOoPu4PPFaarCAiEAoZr1Ig6QdFq2POR/5Kdi+DJMAydWNhUj6QdYcOeaNOE=",
+  "signingAlgorithm": "ECDSA_SHA_256",
+  "payloadSHA256": "f848d896610eb8c93df9193d8708e255cbfbb468438ce9778c21ba69e1865207"
 }

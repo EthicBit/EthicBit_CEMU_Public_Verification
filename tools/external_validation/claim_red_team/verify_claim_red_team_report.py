@@ -11,7 +11,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_REPORT = ROOT / "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json"
-DEFAULT_CASES = ROOT / "tools/external_validation/claim_red_team/claim_red_team_cases.json"
+DEFAULT_CASES = ROOT / "tools/external_validation/claim_red_team/claim_boundary_regression_cases.json"
 
 REQUIRED_CASE_IDS = {
     "regulatory_approval_claim",
