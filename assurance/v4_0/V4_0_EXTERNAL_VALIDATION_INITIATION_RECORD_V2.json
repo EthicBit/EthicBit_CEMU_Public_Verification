@@ -1,0 +1,114 @@
+{
+  "record_type": "V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD",
+  "version": "2.0",
+  "supersedes": "V4_0_EXTERNAL_VALIDATION_INITIATION_RECORD_V1 (2026-05-14, commit d3d5d23b)",
+  "status": "EXTERNAL_VALIDATION_IN_PROGRESS",
+  "initiation_date": "2026-05-14",
+  "record_date": "2026-05-18",
+  "git_commit_sha": "66fbce1d",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "scope": "AEM-EVOLVE multi-agent governance API — v4.0 External Validation — EthicBit / CEMU v3.7.0+",
+  "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
+  "external_claim_review_completed": false,
+
+  "remediation_blocks_completed": ["A", "B2", "B3", "B4", "B5", "C", "D", "E"],
+  "remediation_blocks_pending": ["B1"],
+
+  "criteria_status": [
+    {"criterion": 1, "name": "third_party_reproduction",    "status": "PENDING_EXTERNAL", "package": "assurance/external-validation/v4_0/CRITERION_01_REPRODUCTION_PACKAGE.md"},
+    {"criterion": 2, "name": "external_security_review",    "status": "PENDING_EXTERNAL", "package": "assurance/external-validation/v4_0/CRITERION_02_SECURITY_REVIEW_PACKAGE.md"},
+    {"criterion": 3, "name": "managed_cloud_deployment",    "status": "CONTROLLED_PASS"},
+    {"criterion": 4, "name": "hsm_kms_signing",             "status": "CONTROLLED_PASS"},
+    {"criterion": 5, "name": "aem_reverification",          "status": "CONTROLLED_PASS"},
+    {"criterion": 6, "name": "triple_anchor",               "status": "CONTROLLED_PASS"},
+    {"criterion": 7, "name": "fast_path_benchmark",         "status": "CONTROLLED_PASS"},
+    {"criterion": 8, "name": "external_claim_review",       "status": "PENDING_EXTERNAL", "package": "assurance/external-validation/v4_0/CRITERION_08_CLAIM_REVIEW_PACKAGE.md"}
+  ],
+
+  "assurance_posture_at_record_date": {
+    "in_toto_chain": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS",
+    "in_toto_steps_signed": 6,
+    "sbom_signed": true,
+    "sbom_components": 654,
+    "sbom_format": "CycloneDX 1.5",
+    "slsa_status": "BASELINE_DOCUMENTED",
+    "slsa_builder_workflow": "ACTIVE",
+    "subject_index_bound": true,
+    "subject_index_subjects": 4,
+    "threat_model": "STRIDE_LINDDUN_MITRE_ATLAS",
+    "threat_model_threats": 21,
+    "nist_ai_rmf_mapped": true,
+    "iso_42001_mapped": true,
+    "claim_boundary_cases": 14,
+    "claim_boundary_block_rate": 100.0,
+    "hypothesis_tests": 8,
+    "hypothesis_max_examples": 500,
+    "test_suite_total": 15,
+    "test_suite_passed": 15,
+    "pre_commit_hooks": true,
+    "ci_pr_gate_jobs": 5,
+    "release_checklist": true,
+    "claims_policy": true,
+    "incident_runbook": true,
+    "internal_bug_bounty_simulation": true,
+    "semantic_versioning_policy": true
+  },
+
+  "anchor_record": {
+    "mainnet_kzg_blob": {
+      "block": 25095358,
+      "tx": "0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41"
+    },
+    "sepolia": {
+      "block": 10852797
+    },
+    "anchor_class_eligible": "EXTERNAL_VALIDATION"
+  },
+
+  "external_validation_workstreams": [
+    {
+      "criterion": 1,
+      "status": "PENDING_EXTERNAL",
+      "package": "assurance/external-validation/v4_0/CRITERION_01_REPRODUCTION_PACKAGE.md",
+      "support_artifacts": [
+        "assurance/external-validation/v4_0/automated_reproduction/AUTOMATED_REPRODUCTION_REPORT.json",
+        "assurance/slsa/subject-index.json",
+        "tests/test_claim_boundary_properties.py"
+      ]
+    },
+    {
+      "criterion": 2,
+      "status": "PENDING_EXTERNAL",
+      "package": "assurance/external-validation/v4_0/CRITERION_02_SECURITY_REVIEW_PACKAGE.md",
+      "support_artifacts": [
+        "assurance/threat-model/threat-model.json",
+        "assurance/sbom/aem_v1_1_sbom.cyclonedx.sig.json",
+        "assurance/external-validation/v4_0/security_review/AUTOMATED_SECURITY_REVIEW_SUMMARY.json",
+        "assurance/security/INTERNAL_BUG_BOUNTY_SIMULATION.md",
+        "docs/assurance/NIST_AI_RMF_MAPPING.md",
+        "docs/assurance/ISO_42001_MAPPING.md",
+        "docs/assurance/INCIDENT_RUNBOOK.md"
+      ]
+    },
+    {
+      "criterion": 8,
+      "status": "PENDING_EXTERNAL",
+      "package": "assurance/external-validation/v4_0/CRITERION_08_CLAIM_REVIEW_PACKAGE.md",
+      "support_artifacts": [
+        "tools/external_validation/claim_red_team/claim_boundary_regression_cases.json",
+        "docs/policies/CLAIMS_POLICY.md",
+        "docs/LINGO_AND_CLAIM_DICTIONARY.md",
+        "assurance/external-validation/v4_0/notary_dossier/",
+        "docs/assurance/FRAMEWORK_COMPARATIVE_ANALYSIS.md"
+      ]
+    }
+  ],
+
+  "non_claims": {
+    "external_validation_pass_claimed": false,
+    "human_attestation_complete": false,
+    "regulatory_approval": false,
+    "cybersecurity_certification": false,
+    "production_release_authorized": false
+  }
+}
