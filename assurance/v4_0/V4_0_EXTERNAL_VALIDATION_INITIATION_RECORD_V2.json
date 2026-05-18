@@ -5,14 +5,14 @@
   "status": "EXTERNAL_VALIDATION_IN_PROGRESS",
   "initiation_date": "2026-05-14",
   "record_date": "2026-05-18",
-  "git_commit_sha": "66fbce1d",
+  "git_commit_sha": "8f7e141b",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "scope": "AEM-EVOLVE multi-agent governance API — v4.0 External Validation — EthicBit / CEMU v3.7.0+",
   "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
   "external_claim_review_completed": false,
 
-  "remediation_blocks_completed": ["A", "B2", "B3", "B4", "B5", "C", "D", "E"],
-  "remediation_blocks_pending": ["B1"],
+  "remediation_blocks_completed": ["A", "B1", "B2", "B3", "B4", "B5", "C", "D", "E"],
+  "remediation_blocks_pending": [],
 
   "criteria_status": [
     {"criterion": 1, "name": "third_party_reproduction",    "status": "PENDING_EXTERNAL", "package": "assurance/external-validation/v4_0/CRITERION_01_REPRODUCTION_PACKAGE.md"},
@@ -51,7 +51,9 @@
     "claims_policy": true,
     "incident_runbook": true,
     "internal_bug_bounty_simulation": true,
-    "semantic_versioning_policy": true
+    "semantic_versioning_policy": true,
+    "signing_key_migration_record": true,
+    "signing_posture": "PRODUCTION_HSM_READY"
   },
 
   "anchor_record": {
