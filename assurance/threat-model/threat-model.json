@@ -1,0 +1,289 @@
+{
+  "schema_id": "ETHICBIT_THREAT_MODEL_V1",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "date": "2026-05-18",
+  "scope": "EthicBit/CEMU v4.0 — evidence chain, KMS layer, CI/CD pipeline, Triple Public Anchor, Claim Boundary Engine, external validation interface, multi-agent runtime (AEM-EVOLVE)",
+  "methodologies": ["STRIDE", "LINDDUN", "MITRE_ATLAS"],
+  "risk_rating_scale": "HIGH / MEDIUM / LOW",
+  "mitigations_note": "All mitigations reference current implemented controls. Gaps marked RESIDUAL_RISK.",
+
+  "components": [
+    "EVIDENCE_CHAIN",
+    "KMS_LAYER",
+    "CI_CD_PIPELINE",
+    "TRIPLE_PUBLIC_ANCHOR",
+    "CLAIM_BOUNDARY_ENGINE",
+    "EXTERNAL_VALIDATION_INTERFACE",
+    "MULTI_AGENT_RUNTIME"
+  ],
+
+  "stride_threats": [
+    {
+      "id": "STR-001",
+      "category": "SPOOFING",
+      "component": "KMS_LAYER",
+      "threat": "Attacker impersonates the KMS signer to produce fraudulent in-toto or SBOM signatures.",
+      "risk": "HIGH",
+      "mitigation": "KMS key alias/ethicbit-intoto-signing is IAM-controlled; signing requires explicit AWS credentials. Signer ARN embedded in every statement — verifiable against KMS DescribeKey.",
+      "residual_risk": "Compromised AWS credentials would allow impersonation. Mitigated by IAM least-privilege; not fully eliminated."
+    },
+    {
+      "id": "STR-002",
+      "category": "SPOOFING",
+      "component": "EXTERNAL_VALIDATION_INTERFACE",
+      "threat": "Attacker produces a fake external validator attestation to elevate claim status without genuine review.",
+      "risk": "HIGH",
+      "mitigation": "PROHIBITED_AUTOMATED_ELEVATIONS list blocks automated status elevation. human_attestation_status transitions require out-of-band human sign-off. CBE enforces external_claim_review_completed=false until explicitly overridden.",
+      "residual_risk": "LOW — automated path is structurally blocked."
+    },
+    {
+      "id": "STR-003",
+      "category": "SPOOFING",
+      "component": "CI_CD_PIPELINE",
+      "threat": "Attacker injects a malicious GitHub Actions workflow that mimics slsa-build.yml or slsa_hybrid_attest.yml to produce fraudulent attestations.",
+      "risk": "MEDIUM",
+      "mitigation": "Workflows pinned to specific action versions. Builder ID in provenance.json references the canonical workflow URI. id-token: write permission scoped.",
+      "residual_risk": "MEDIUM — supply chain compromise of GitHub Actions marketplace actions remains a residual risk."
+    },
+    {
+      "id": "STR-004",
+      "category": "TAMPERING",
+      "component": "EVIDENCE_CHAIN",
+      "threat": "Attacker modifies a signed in-toto statement file after KMS signing to alter evidence content.",
+      "risk": "HIGH",
+      "mitigation": "Each statement contains payloadSHA256 of the canonical payload. Signature covers the SHA256 digest via ECDSA_SHA_256. Modification invalidates signature on verification.",
+      "residual_risk": "LOW — cryptographic binding makes undetected tampering computationally infeasible."
+    },
+    {
+      "id": "STR-005",
+      "category": "TAMPERING",
+      "component": "CLAIM_BOUNDARY_ENGINE",
+      "threat": "Attacker modifies claim_boundary_regression_cases.json to remove a blocking case, allowing an overclaim to pass.",
+      "risk": "HIGH",
+      "mitigation": "cases_sha256 and cases_canonical_sha256 recorded in every report. Hypothesis property test I-M verifies that any injected non-BLOCKED case flips report to FAIL_CLOSED. CI runs on every push.",
+      "residual_risk": "MEDIUM — depends on CI not being bypassed."
+    },
+    {
+      "id": "STR-006",
+      "category": "TAMPERING",
+      "component": "TRIPLE_PUBLIC_ANCHOR",
+      "threat": "Attacker replaces anchor receipt files with fabricated TXIDs pointing to attacker-controlled transactions.",
+      "risk": "MEDIUM",
+      "mitigation": "Anchor TXIDs are publicly verifiable on Sepolia, Arweave, and AO. anchor_pre_deploy_gate.sh re-verifies live against public networks before any deploy. Anchor receipts also in git history.",
+      "residual_risk": "LOW — public network verification makes fabrication detectable."
+    },
+    {
+      "id": "STR-007",
+      "category": "TAMPERING",
+      "component": "CI_CD_PIPELINE",
+      "threat": "Compromised dependency in npm or pip supply chain introduces malicious code into the hermetic build.",
+      "risk": "HIGH",
+      "mitigation": "npm ci uses package-lock.json (integrity hashes). SBOM covers 654 components with digests. slsa-build.yml uses --ignore-scripts on npm install.",
+      "residual_risk": "MEDIUM — SBOM is signed but not continuously re-verified against registries."
+    },
+    {
+      "id": "STR-008",
+      "category": "REPUDIATION",
+      "component": "EVIDENCE_CHAIN",
+      "threat": "Signer denies having signed an in-toto statement or SBOM.",
+      "risk": "MEDIUM",
+      "mitigation": "KMS CloudTrail logs every Sign API call with timestamp, caller identity, and key ID. signedAt field embedded in each artifact. Triple Public Anchor timestamps the full evidence bundle.",
+      "residual_risk": "LOW — KMS CloudTrail provides non-repudiable audit log."
+    },
+    {
+      "id": "STR-009",
+      "category": "REPUDIATION",
+      "component": "MULTI_AGENT_RUNTIME",
+      "threat": "Agent output disputed; no traceable record links the output to the agent run parameters.",
+      "risk": "HIGH",
+      "mitigation": "CEERV formally freezes case_003 output as PASS_REFERENCE_ONLY. official_operational_status.json is canonical truth source. AEM-EVOLVE produces structured evidence bundles per execution.",
+      "residual_risk": "MEDIUM — runtime evidence chain completeness depends on execution context."
+    },
+    {
+      "id": "STR-010",
+      "category": "INFORMATION_DISCLOSURE",
+      "component": "KMS_LAYER",
+      "threat": "Live AWS infrastructure identifiers (KMS key IDs, RDS endpoints, EC2 instance IDs) published in public-facing state blocks, enabling targeted attacks.",
+      "risk": "HIGH",
+      "mitigation": "Sanitization policy enforced: all public state blocks use 'sanitized identifier' language. .gitignore excludes .env and credential files. KMS key IDs referenced only by alias in public artifacts.",
+      "residual_risk": "LOW — policy documented in memory/feedback_mirror_sync_and_infra_ids.md."
+    },
+    {
+      "id": "STR-011",
+      "category": "INFORMATION_DISCLOSURE",
+      "component": "EVIDENCE_CHAIN",
+      "threat": "Evidence bundles contain sensitive operational data (execution parameters, internal system state) exposed via public mirror.",
+      "risk": "MEDIUM",
+      "mitigation": "Public mirror (EthicBit_CEMU_Public_Verification) receives same commits as origin. Sensitive data should be excluded from committed artifacts; .gitignore covers keys/, .env*.",
+      "residual_risk": "MEDIUM — evidence artifacts may contain operational context that was not designed as public."
+    },
+    {
+      "id": "STR-012",
+      "category": "DENIAL_OF_SERVICE",
+      "component": "KMS_LAYER",
+      "threat": "AWS KMS becomes unavailable, blocking all signing operations and preventing release.",
+      "risk": "MEDIUM",
+      "mitigation": "KMS has SLA 99.99%. Signing is not on the critical execution path (done offline before anchor). Signed artifacts persist locally and in git.",
+      "residual_risk": "LOW — signing is a pre-release step, not runtime dependency."
+    },
+    {
+      "id": "STR-013",
+      "category": "DENIAL_OF_SERVICE",
+      "component": "TRIPLE_PUBLIC_ANCHOR",
+      "threat": "Sepolia, Arweave, or AO networks become unavailable, blocking anchor verification and pre-deploy gate.",
+      "risk": "MEDIUM",
+      "mitigation": "anchor_pre_deploy_gate.sh blocks on verification failure. Receipts cached locally. Multiple RPC endpoints configured for Ethereum.",
+      "residual_risk": "MEDIUM — gate failure blocks deployment; recovers when network resumes."
+    },
+    {
+      "id": "STR-014",
+      "category": "ELEVATION_OF_PRIVILEGE",
+      "component": "CLAIM_BOUNDARY_ENGINE",
+      "threat": "Automated process attempts to elevate human_attestation_status or external_claim_review_completed without out-of-band human authorization.",
+      "risk": "HIGH",
+      "mitigation": "PROHIBITED_AUTOMATED_ELEVATIONS structural list. CBE enforces external_claim_review_completed=false. Hypothesis I-M meta-test blocks any automated path that returns PASS after injection.",
+      "residual_risk": "LOW — structurally enforced by CBE."
+    },
+    {
+      "id": "STR-015",
+      "category": "ELEVATION_OF_PRIVILEGE",
+      "component": "CI_CD_PIPELINE",
+      "threat": "CI workflow escalates permissions beyond contents: read / id-token: write to push force or modify protected branches.",
+      "risk": "MEDIUM",
+      "mitigation": "GitHub Actions permissions declared minimally per workflow. No push permissions granted to CI workflows. Branch protection on main.",
+      "residual_risk": "MEDIUM — depends on GitHub branch protection configuration being correctly enforced."
+    }
+  ],
+
+  "linddun_threats": [
+    {
+      "id": "LIN-001",
+      "category": "LINKABILITY",
+      "component": "EVIDENCE_CHAIN",
+      "threat": "Evidence artifacts linking multiple agent executions to the same individual or organization enable profiling.",
+      "risk": "MEDIUM",
+      "mitigation": "Evidence artifacts describe system behavior, not user behavior. Case IDs are abstract (case_003). No PII in committed artifacts.",
+      "residual_risk": "LOW within current scope."
+    },
+    {
+      "id": "LIN-002",
+      "category": "DETECTABILITY",
+      "component": "TRIPLE_PUBLIC_ANCHOR",
+      "threat": "Public anchor transactions on Sepolia/Arweave reveal deployment timing and operational cadence to adversaries.",
+      "risk": "LOW",
+      "mitigation": "Anchor receipts are intentionally public for tamper-evidence. Timing disclosure is an accepted trade-off.",
+      "residual_risk": "LOW — accepted by design."
+    },
+    {
+      "id": "LIN-003",
+      "category": "UNAWARENESS",
+      "component": "MULTI_AGENT_RUNTIME",
+      "threat": "Downstream users of AEM-EVOLVE outputs are unaware that the system is operating under HUMAN_ATTESTATION_PENDING status.",
+      "risk": "HIGH",
+      "mitigation": "All public-facing materials declare current state machine position. Outreach pack explicitly states PENDING_EXTERNAL for criteria 1, 2, 8. CBE blocks external certification claims.",
+      "residual_risk": "MEDIUM — depends on reviewers reading the state disclosures."
+    },
+    {
+      "id": "LIN-004",
+      "category": "NON_COMPLIANCE",
+      "component": "MULTI_AGENT_RUNTIME",
+      "threat": "AI system outputs used in regulated domains (finance, clinical, legal) without declared scope limitation.",
+      "risk": "HIGH",
+      "mitigation": "CBE blocks financial_advice_claim, clinical_diagnostic_claim, regulatory_approval_claim. Non-claims section in all public documents. LINGO_AND_CLAIM_DICTIONARY defines scope.",
+      "residual_risk": "LOW — structurally blocked by CBE."
+    },
+    {
+      "id": "LIN-005",
+      "category": "DISCLOSURE_OF_INFORMATION",
+      "component": "EXTERNAL_VALIDATION_INTERFACE",
+      "threat": "Outreach pack or validator invitation reveals internal system details (architecture, key IDs, endpoint URLs) beyond what is necessary for validation.",
+      "risk": "MEDIUM",
+      "mitigation": "Outreach materials reviewed for sanitization. Infrastructure IDs replaced with 'sanitized identifier'. Validator invitation scoped to validation criteria only.",
+      "residual_risk": "LOW — sanitization policy in place."
+    }
+  ],
+
+  "mitre_atlas_threats": [
+    {
+      "id": "ATL-001",
+      "tactic": "ML Attack Staging",
+      "technique": "T0043",
+      "component": "MULTI_AGENT_RUNTIME",
+      "threat": "Adversary stages an attack by probing AEM-EVOLVE agent behavior through repeated queries to map decision boundaries.",
+      "risk": "MEDIUM",
+      "mitigation": "FAIL_CLOSED posture on all constitutional gates. Fast Path benchmark covers only scoped pre-execution path. No public API endpoint for direct agent probing in current scope.",
+      "residual_risk": "MEDIUM — active deployment would require rate limiting and input validation."
+    },
+    {
+      "id": "ATL-002",
+      "tactic": "ML Supply Chain Compromise",
+      "technique": "T0010",
+      "component": "CI_CD_PIPELINE",
+      "threat": "Adversary compromises a model checkpoint, Python package, or npm dependency in the supply chain to backdoor the agent runtime.",
+      "risk": "HIGH",
+      "mitigation": "SBOM (654 components, CycloneDX 1.5, KMS-signed) provides full component inventory. npm ci with lock file integrity. slsa-build.yml uses --ignore-scripts.",
+      "residual_risk": "MEDIUM — SBOM is a detection tool, not a prevention guarantee. No automated SBOM diff on update."
+    },
+    {
+      "id": "ATL-003",
+      "tactic": "Craft Adversarial Data",
+      "technique": "T0020",
+      "component": "MULTI_AGENT_RUNTIME",
+      "threat": "Adversary crafts inputs to AEM-EVOLVE designed to produce outputs that bypass the Mechanical Ethics constitutional gates.",
+      "risk": "HIGH",
+      "mitigation": "Constitutional controls operate on output structure, not input. FAIL_CLOSED means ambiguous output triggers block. RuntimeGuard L4 negative tests cover bypass attempts.",
+      "residual_risk": "MEDIUM — full adversarial red-teaming of ME gates pending external security review (criterion 2)."
+    },
+    {
+      "id": "ATL-004",
+      "tactic": "Discover ML Model Ontology",
+      "technique": "T0013",
+      "component": "EVIDENCE_CHAIN",
+      "threat": "Adversary uses publicly anchored evidence artifacts to reverse-engineer the internal decision ontology of AEM-EVOLVE.",
+      "risk": "LOW",
+      "mitigation": "Public artifacts describe output classifications and gate decisions, not model weights or internal reasoning traces. CBE limits disclosure of operational detail.",
+      "residual_risk": "LOW — intentional transparency is a design property, not a vulnerability."
+    },
+    {
+      "id": "ATL-005",
+      "tactic": "Evade ML Model",
+      "technique": "T0015",
+      "component": "CLAIM_BOUNDARY_ENGINE",
+      "threat": "Adversary constructs a claim that is technically not in the blocked list but semantically equivalent to a prohibited overclaim.",
+      "risk": "MEDIUM",
+      "mitigation": "CBE covers 14 semantic categories, not just exact string matches. LINGO_AND_CLAIM_DICTIONARY defines scope boundaries. Hypothesis I-M tests adversarial injection patterns.",
+      "residual_risk": "MEDIUM — semantic boundary enforcement relies on case coverage; new edge cases require human review to add."
+    },
+    {
+      "id": "ATL-006",
+      "tactic": "Exfiltration via ML Inference API",
+      "technique": "T0040",
+      "component": "MULTI_AGENT_RUNTIME",
+      "threat": "Adversary uses AEM-EVOLVE as a covert channel to exfiltrate training data or system context through crafted outputs.",
+      "risk": "LOW",
+      "mitigation": "AEM-EVOLVE outputs are structured JSON with defined schema, not free-form text capable of embedding exfiltrated data at scale. No active public inference API in current scope.",
+      "residual_risk": "LOW within current scope."
+    }
+  ],
+
+  "summary": {
+    "total_threats": 21,
+    "high_risk": 9,
+    "medium_risk": 10,
+    "low_risk": 2,
+    "fully_mitigated": 8,
+    "residual_medium_or_higher": 9,
+    "primary_residual_gaps": [
+      "Supply chain compromise of CI Actions marketplace (STR-003, ATL-002)",
+      "SBOM not continuously re-verified against registries (STR-007)",
+      "Full adversarial ME gate red-team pending external security review criterion 2 (ATL-003)",
+      "Semantic CBE boundary enforcement depends on human-maintained case coverage (ATL-005)"
+    ],
+    "non_claims": {
+      "threat_model_is_complete": false,
+      "all_risks_eliminated": false,
+      "note": "This threat model covers the declared scope of EthicBit/CEMU v4.0. Full penetration testing and independent security review remain pending (external validation criterion 2)."
+    }
+  }
+}
