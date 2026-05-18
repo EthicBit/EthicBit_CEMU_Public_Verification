@@ -1,0 +1,39 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-json
+        exclude: ^node_modules/
+      - id: check-yaml
+      - id: end-of-file-fixer
+        exclude: ^node_modules/
+      - id: trailing-whitespace
+        exclude: ^node_modules/
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: [--maxkb=2048]
+
+  - repo: local
+    hooks:
+      - id: no-aws-ids-in-public-state
+        name: Block live AWS IDs in public-facing files
+        language: python
+        entry: python3 scripts/hooks/check_no_aws_ids.py
+        pass_filenames: true
+        files: \.(json|md|txt|yaml|yml)$
+        exclude: ^(node_modules|\.git)/
+
+      - id: claim-consistency
+        name: Claim boundary consistency check
+        language: python
+        entry: python3 scripts/hooks/check_claim_consistency.py
+        pass_filenames: false
+        always_run: false
+        files: ^(assurance/|tools/external_validation/)

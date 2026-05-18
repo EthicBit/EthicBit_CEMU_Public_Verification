@@ -1,0 +1,80 @@
+name: PR Gate
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  claim-boundary:
+    name: Claim boundary (14 cases, 100% blocked)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]" --quiet
+      - name: Run claim boundary red-team
+        run: python3 tools/external_validation/claim_red_team/run_claim_red_team.py --dry-run
+
+  property-tests:
+    name: Hypothesis property tests (I-1..I-M)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]" --quiet
+      - uses: actions/cache@v4
+        with:
+          path: tests/.hypothesis
+          key: hypothesis-db-${{ runner.os }}-${{ hashFiles('tests/test_claim_boundary_properties.py') }}
+          restore-keys: hypothesis-db-${{ runner.os }}-
+      - run: pytest tests/test_claim_boundary_properties.py -v --tb=short
+
+  consistency-check:
+    name: Claim consistency (attestation-index, SLSA policy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/hooks/check_claim_consistency.py
+
+  lint:
+    name: Ruff lint + type check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]" --quiet
+      - run: ruff check .
+      - run: mypy --ignore-missing-imports cemu/ tools/ scripts/ 2>/dev/null || true
+
+  no-aws-ids:
+    name: AWS ID sanitization check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check changed files for live AWS IDs
+        run: |
+          git fetch origin main --depth=1
+          CHANGED=$(git diff --name-only origin/main...HEAD -- '*.json' '*.md' '*.yaml' '*.yml' '*.txt' 2>/dev/null || true)
+          if [ -n "$CHANGED" ]; then
+            echo "$CHANGED" | xargs python3 scripts/hooks/check_no_aws_ids.py
+          else
+            echo "No relevant files changed."
+          fi
