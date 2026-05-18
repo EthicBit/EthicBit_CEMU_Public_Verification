@@ -14947,5 +14947,13 @@
         }
       ]
     }
-  ]
+  ],
+  "signature": {
+    "algorithm": "ECDSA_SHA_256",
+    "keyId": "alias/ethicbit-intoto-signing",
+    "signerArn": "arn:aws:kms:us-east-2:196257796150:key/977feb8e-fd71-494f-bd8d-216c570c69db",
+    "value": "MEUCIQCEOja/K4t+Br4lxgCY3CDTkEnfMJk0dRPnlXAWEe046wIgcMHAPcsZmrnU7brDEUWedvc79uywXmNSTFAj3X8MZcw=",
+    "payloadSHA256": "556c66597f49e3c273e2b7d7d2b36cf1d1ec4a27bd02301fe01f53712cbacebf",
+    "signedAt": "2026-05-18T02:52:13.301282+00:00"
+  }
 }
