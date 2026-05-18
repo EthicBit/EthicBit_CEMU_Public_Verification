@@ -264,8 +264,14 @@ def main() -> None:
     max_priority = 2 * 10**9
     max_fee = base * 2 + max_priority
 
+    try:
+        bbf, _ = rpc_call("eth_blobBaseFee", [])
+        max_blob_fee = max(int(bbf, 16) * 2, 10**9)
+    except Exception:
+        max_blob_fee = 10**9
+
     tx = {
-        "type": "0x03",
+        "type": 3,
         "chainId": chain_id,
         "nonce": nonce,
         "to": wallet,
@@ -274,18 +280,21 @@ def main() -> None:
         "gas": 21000,
         "maxFeePerGas": max_fee,
         "maxPriorityFeePerGas": max_priority,
-        "maxFeePerBlobGas": max(base, 10**9),
-        "blobVersionedHashes": [f"0x{vh.hex()}"],
-        "blobs": [blob_b],
-        "kzgCommitments": [commit],
-        "kzgProofs": [proof],
+        "maxFeePerBlobGas": max_blob_fee,
+        "blobVersionedHashes": [vh],
     }
 
-    signed = Account.sign_transaction(tx, priv)
+    signed = Account.sign_transaction(tx, private_key=priv, blobs=[blob_b])
     ts_start = int(time.time())
-    raw_hex, _ = rpc_call("eth_sendRawTransaction", [f"0x{signed.raw_transaction.hex()}"])
+    raw = getattr(signed, "raw_transaction", None) or signed.rawTransaction
+    raw_hex = raw.hex() if isinstance(raw, bytes) else raw
+    if not raw_hex.startswith("0x"):
+        raw_hex = "0x" + raw_hex
+    tx_hash_result, _ = rpc_call("eth_sendRawTransaction", [raw_hex])
+    tx_hash = tx_hash_result
     tx_hash = raw_hex
     print(f"TX submitted: {tx_hash}")
+    print(f"Versioned hash: 0x{vh.hex()}")
 
     print("Waiting for receipt", end="", flush=True)
     receipt = None

@@ -1,61 +1,59 @@
 {
   "schema_id": "ETHICBIT_AEM_V4_0_EV_POSTURE_ANCHOR_V1",
-  "status": "PENDING_BROADCAST",
+  "status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
   "network": "ethereum-mainnet",
-  "prepared_at": "2026-05-18T03:27:32.476041+00:00",
-  "payload_sha256": "aee31fb3fabf56dec5add617378ae1d569902b4d1d1b2a31923b0b7331a611b6",
-  "blob_versioned_hash_dry": "0x017bbd7e860da0534fbce0ca370ff119232f9408549f82ea0ac7aaf0c3b6dc55",
-  "payload": {
-    "schema": "ETHICBIT_AEM_V4_0_EV_POSTURE_ANCHOR_V1",
-    "anchor_scope": "v4.0 External Validation posture re-anchor \u2014 all remediation blocks complete (A, B1-B5, C, D, E) \u2014 2026-05-18",
-    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-    "release_class": "EXTERNAL_VALIDATION",
-    "remediation_blocks_completed": [
-      "A",
-      "B1",
-      "B2",
-      "B3",
-      "B4",
-      "B5",
-      "C",
-      "D",
-      "E"
-    ],
-    "criteria_controlled_pass": 5,
-    "criteria_pending_external": 3,
-    "criteria_pending_external_list": [
-      1,
-      2,
-      8
-    ],
-    "signing_posture": "PRODUCTION_HSM_READY",
-    "intoto_chain_status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS",
-    "intoto_steps_signed": 6,
-    "sbom_components": 654,
-    "sbom_kms_signed": true,
-    "slsa_builder_workflow": "ACTIVE",
-    "claim_boundary_block_rate": 100.0,
-    "hypothesis_tests_passed": 8,
-    "test_suite_passed": 15,
-    "previous_mainnet_anchor": {
-      "block": 25095358,
-      "tx": "0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41",
-      "scope": "v4.0 controlled evidence \u2014 2026-05-14"
-    },
-    "artifact_hashes": {
-      "subject_index": "3bfc69cfb4366dbecb102c8f7b7a2b0099b5c06b602423cacc049135e4b7e345",
-      "sbom_cyclonedx": "b975f15f916919ea53e5be8324bce8e060e6413d5347119dc2df14d6d8468875",
-      "sbom_sig": "efb38f7bfc35cab8aaa2661f1081eae5626d49a78926d28c9b6bef0c208797f6",
-      "intoto_index": "77bb4a4021cd4ecfa5d3990148b0d10b652b6be6da5760eb6deb353353087ca4",
-      "threat_model": "354ca84ac4d50b4113e0e12c74c6fa6b7e5ee09eb5d07c755f96c0be226b7522",
-      "anchor_policy": "94efdf44868f701f1e5b8850c2f159f64fb05db25e62217b23999fdbd88f29c1",
-      "initiation_record_v2": "31c86afde0f8fb250972d0449d1c56b19f842026121086f1915364d91943e705",
-      "signing_migration_b1": "b101b72573fa2a8a2e933c0c83330249759107e2cf0c59fbf8893661629dde02"
-    },
-    "git_commit_sha": "eb6cfaa837f0e4ec1d53a0d1489e399dcd9158fc",
-    "ts_unix": 1779074850,
-    "non_claim": "Anchor \u2014 timestamped integrity reference for v4.0 External Validation posture after all remediation blocks complete. Does not claim external validation pass, third-party reproduced, production-ready, or human attestation complete. Criteria 1, 2, 8 remain PENDING_EXTERNAL.",
-    "payload_sha256": "aee31fb3fabf56dec5add617378ae1d569902b4d1d1b2a31923b0b7331a611b6"
+  "chain_id": 1,
+  "block_number": 25119456,
+  "tx_hash": "0x6c9b5fbf032782868e1cc46ba11208a862f891b652d7630dfd3ebaecde5cb692",
+  "block_explorer_url": "https://etherscan.io/tx/0x6c9b5fbf032782868e1cc46ba11208a862f891b652d7630dfd3ebaecde5cb692",
+  "from_address": "0x9221456deCC27547aA76EC5d53537dfe430C69B7",
+  "to_address": "0x9221456deCC27547aA76EC5d53537dfe430C69B7",
+  "blob_versioned_hashes": [
+    "0x01abb661f362d12ddd6da5aff5313f7e92a97e1807c518172e02aabf849301a1"
+  ],
+  "timestamp_utc": "2026-05-18T03:39:59+00:00",
+  "anchored_at_unix": 1779075599,
+  "anchor_scope": "v4.0 External Validation posture re-anchor \u2014 all remediation blocks complete (A, B1-B5, C, D, E) \u2014 2026-05-18",
+  "release_class": "EXTERNAL_VALIDATION",
+  "remediation_blocks_completed": [
+    "A",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "C",
+    "D",
+    "E"
+  ],
+  "criteria_controlled_pass": 5,
+  "criteria_pending_external": 3,
+  "criteria_pending_external_list": [
+    1,
+    2,
+    8
+  ],
+  "signing_posture": "PRODUCTION_HSM_READY",
+  "intoto_chain_status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS",
+  "sbom_components": 654,
+  "claim_boundary_block_rate": 100.0,
+  "hypothesis_tests_passed": 8,
+  "test_suite_passed": 15,
+  "payload_sha256": "56a28a2b12b1f315f82bb16d47762c665c6a67d7df6faa2ea01ba1b01b7a6219",
+  "artifact_hashes": {
+    "subject_index": "3bfc69cfb4366dbecb102c8f7b7a2b0099b5c06b602423cacc049135e4b7e345",
+    "sbom_cyclonedx": "b975f15f916919ea53e5be8324bce8e060e6413d5347119dc2df14d6d8468875",
+    "sbom_sig": "efb38f7bfc35cab8aaa2661f1081eae5626d49a78926d28c9b6bef0c208797f6",
+    "intoto_index": "77bb4a4021cd4ecfa5d3990148b0d10b652b6be6da5760eb6deb353353087ca4",
+    "threat_model": "354ca84ac4d50b4113e0e12c74c6fa6b7e5ee09eb5d07c755f96c0be226b7522",
+    "anchor_policy": "33833eb08d0753c51a3eb4069ffc0af34d2bc498020e84788f1fd8e9c3965ba",
+    "initiation_record_v2": "31c86afde0f8fb250972d0449d1c56b19f842026121086f1915364d91943e705",
+    "signing_migration_b1": "b101b72573fa2a8a2e933c0c83330249759107e2cf0c59fbf8893661629dde02"
+  },
+  "previous_mainnet_anchor": {
+    "block": 25095358,
+    "tx": "0xd5fe44459f15e1cb3230f841f039d35d73da84564963fb4b32dcb9000da2cb41",
+    "scope": "v4.0 controlled evidence \u2014 2026-05-14"
   },
   "non_claim": "Anchor \u2014 timestamped integrity reference for v4.0 External Validation posture after all remediation blocks complete. Does not claim external validation pass, third-party reproduced, production-ready, or human attestation complete. Criteria 1, 2, 8 remain PENDING_EXTERNAL."
 }
