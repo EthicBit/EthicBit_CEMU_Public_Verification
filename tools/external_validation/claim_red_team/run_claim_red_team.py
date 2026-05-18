@@ -118,6 +118,10 @@ def build_report(cases_path: Path) -> dict[str, Any]:
             "clinical_or_diagnostic_readiness": False,
             "universal_production_readiness": False,
             "third_party_reproduction_completed": False,
+            "slsa_l4_fully_achieved": False,
+            "slsa_l4_certification": False,
+            "production_supply_chain_certification": False,
+            "externally_verified_in_toto_chain": False,
         },
     }
     return report

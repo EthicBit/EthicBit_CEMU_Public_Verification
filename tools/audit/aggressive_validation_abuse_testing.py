@@ -59,6 +59,10 @@ PROHIBITED_AUTOMATED_ELEVATIONS = [
     ("TRIPLE_ANCHOR_PRESENT", "universal_public_anchoring"),
     ("DOSSIER_VERIFIED", "externally_certified"),
     ("DOSSIER_VERIFIED", "regulatory_approved"),
+    ("SLSA_STYLE_BASELINE_EXECUTABLE_PASS", "slsa_l4_fully_achieved"),
+    ("SLSA_STYLE_BASELINE_EXECUTABLE_PASS", "slsa_l4_certified"),
+    ("SUPPLY_CHAIN_EVIDENCE_PRESENT", "production_supply_chain_certified"),
+    ("IN_TOTO_REQUIRED_NOT_VERIFIED", "externally_verified_in_toto_chain"),
 ]
 
 
@@ -149,6 +153,9 @@ def state_transition_decision(source: str, target: str, conditions: dict[str, bo
         required = [
             "signed_human_attestation",
             "reviewer_scope_declared",
+            "independent_reproduction_reviewed",
+            "threat_model_review_completed",
+            "external_red_team_or_security_review_completed",
             "dossier_hashes_verified",
             "methodology_review_completed",
             "claim_boundary_review_completed",
@@ -177,6 +184,9 @@ def test_state_machine_abuse() -> AbuseTest:
     full_conditions = {
         "signed_human_attestation": True,
         "reviewer_scope_declared": True,
+        "independent_reproduction_reviewed": True,
+        "threat_model_review_completed": True,
+        "external_red_team_or_security_review_completed": True,
         "dossier_hashes_verified": True,
         "methodology_review_completed": True,
         "claim_boundary_review_completed": True,
@@ -511,11 +521,13 @@ def render_markdown(report: dict[str, Any]) -> str:
             "- Do not claim `EXTERNAL_VALIDATION_PASS` until signed independent human attestation is present.",
             "- Do not claim cybersecurity certification or absence of all vulnerabilities from automated security support.",
             "- Do not claim third-party reproduction from automated reproduction support.",
+            "- Do not claim SLSA L4 fully achieved, SLSA L4 certified, production supply-chain certified, or externally verified in-toto chain while the in-toto chain remains REQUIRED_NOT_VERIFIED.",
+            "- Preserve validation order: independent technical reproduction first, threat model and external red-team second, scoped human attestation third.",
             "- Keep `.env*`, private keys and runtime secrets excluded from releases and public mirrors.",
             "",
             "## Non-Claims",
             "",
-            "This report does not claim completed external validation, third-party reproduction, external security audit completion, cybersecurity certification, regulatory approval, legal compliance, universal production readiness, absence of all vulnerabilities, or clinical/diagnostic readiness.",
+            "This report does not claim completed external validation, third-party reproduction, external security audit completion, cybersecurity certification, regulatory approval, legal compliance, universal production readiness, absence of all vulnerabilities, clinical/diagnostic readiness, SLSA L4 full achievement, SLSA L4 certification, production supply-chain certification, or externally verified in-toto chain.",
             "",
         ]
     )

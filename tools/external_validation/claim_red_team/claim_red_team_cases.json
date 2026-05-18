@@ -95,6 +95,42 @@
       "observed_condition": "human attestation remains pending and no external certification is present",
       "expected_decision": "BLOCKED",
       "permitted_alternative": "Hybrid validation support materials are prepared for external review; external certification is not claimed."
+    },
+    {
+      "case_id": "CBRT-011",
+      "attempted_claim_id": "slsa_l4_fully_achieved_claim",
+      "attempted_claim_text": "EthicBit/CEMU has fully achieved SLSA L4.",
+      "required_external_condition": "complete SLSA L4 evidence with verified in-toto attestation chain and no pending supply-chain verification gaps",
+      "observed_condition": "SLSA-style enforcement posture exists, but the in-toto chain remains REQUIRED_NOT_VERIFIED",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "SLSA-style controls and release-boundary enforcement are documented; full SLSA L4 achievement is not claimed."
+    },
+    {
+      "case_id": "CBRT-012",
+      "attempted_claim_id": "slsa_l4_certified_claim",
+      "attempted_claim_text": "EthicBit/CEMU is SLSA L4 certified.",
+      "required_external_condition": "named external certification or formal assessment evidence explicitly covering SLSA L4 certification scope",
+      "observed_condition": "no named SLSA L4 certification body, certificate, or external certification evidence is present",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "EthicBit/CEMU documents a SLSA-style controlled-evidence posture; SLSA L4 certification is not claimed."
+    },
+    {
+      "case_id": "CBRT-013",
+      "attempted_claim_id": "production_supply_chain_certified_claim",
+      "attempted_claim_text": "EthicBit/CEMU is production supply-chain certified.",
+      "required_external_condition": "named production supply-chain certification, declared scope, certificate evidence, and external assessor identity",
+      "observed_condition": "controlled supply-chain evidence exists, but no production supply-chain certification is present",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "Supply-chain evidence and controls are available for review within declared scope; production supply-chain certification is not claimed."
+    },
+    {
+      "case_id": "CBRT-014",
+      "attempted_claim_id": "externally_verified_in_toto_chain_claim",
+      "attempted_claim_text": "EthicBit/CEMU has an externally verified in-toto chain.",
+      "required_external_condition": "signed external verification of the in-toto layout, link metadata, functionary identities, and attestation chain",
+      "observed_condition": "in-toto materials are present, but the chain remains REQUIRED_NOT_VERIFIED pending external verification signatures",
+      "expected_decision": "BLOCKED",
+      "permitted_alternative": "in-toto materials are present with fail-closed status; externally verified in-toto completion is not claimed."
     }
   ]
 }

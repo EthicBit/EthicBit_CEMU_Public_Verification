@@ -80,15 +80,31 @@ The system generates evidence, preserves integrity, records scope, and prevents 
 
 ---
 
-## 4. Core Components
+## 4. Validation Ordering Policy
 
-### 4.1 Machine-Verifiable Evidence
+The hybrid model follows this order:
+
+```text
+independent technical reproduction
+  -> threat model and external red-team / security review
+  -> scoped human attestation
+```
+
+This order is mandatory for any attempted elevation to `EXTERNAL_VALIDATION_PASS`.
+
+Human attestation is valuable only after the reviewer has either independently reproduced the declared technical checks or explicitly scoped reproduction out of the attestation. A signature collected before reproduction and threat-model/security review may support `PARTIAL`, `OUT_OF_SCOPE`, or `EXTERNAL_VALIDATION_SCOPE_LIMITED` conclusions, but it must not be treated as full external validation.
+
+---
+
+## 5. Core Components
+
+### 5.1 Machine-Verifiable Evidence
 
 Machine-verifiable evidence includes JSON reports, manifests, hash records, receipts, logs, verification outputs, benchmark reports, anchor receipts, and reproducibility evidence.
 
 This evidence may support external review, but it does not by itself constitute external validation.
 
-### 4.2 Automated Evidence Pipelines
+### 5.2 Automated Evidence Pipelines
 
 Automated pipelines may generate support artifacts for:
 
@@ -101,7 +117,7 @@ Automated pipelines may generate support artifacts for:
 
 Pipeline outputs are treated as support evidence only.
 
-### 4.3 Notary Dossier
+### 5.3 Notary Dossier
 
 The Notary Dossier packages evidence into a scoped, hash-verifiable review bundle.
 
@@ -120,13 +136,13 @@ A dossier may include:
 
 A dossier can be built and verified without claiming external validation.
 
-### 4.4 Human Attestation
+### 5.4 Human Attestation
 
 Human attestation is the review layer that evaluates integrity, methodology, scope, limitations, and claim-boundary sufficiency.
 
 The reviewer does not need to certify the entire EthicBit system. The reviewer attests only the declared scope.
 
-### 4.5 Claim-State Governance
+### 5.5 Claim-State Governance
 
 Claim-state governance prevents unsupported status escalation.
 
@@ -140,7 +156,7 @@ External-validation claims require scoped human attestation and declared reviewe
 
 ---
 
-## 5. Evidence-to-Claim Boundary
+## 6. Evidence-to-Claim Boundary
 
 Automated evidence may support these claims:
 
@@ -164,14 +180,20 @@ regulatory approved
 clinical or diagnostic ready
 universal production ready
 external validation pass achieved
+SLSA L4 fully achieved
+SLSA L4 certified
+production supply-chain certified
+externally verified in-toto chain
 ```
 
 ---
 
-## 6. Required Human Review Domains
+## 7. Required Human Review Domains
 
 The human reviewer should evaluate:
 
+- independent reproduction status;
+- threat model and external red-team/security review status;
 - evidence integrity;
 - evidence methodology;
 - hash reproducibility;
@@ -192,10 +214,12 @@ OUT_OF_SCOPE
 
 ---
 
-## 7. Fail-Closed Conditions
+## 8. Fail-Closed Conditions
 
 The hybrid validation process must fail closed if:
 
+- independent reproduction is claimed without independent execution or review;
+- threat-model or external red-team/security review is claimed without review evidence;
 - dossier hashes do not match;
 - required evidence is missing;
 - reviewer scope is undeclared;
@@ -204,10 +228,11 @@ The hybrid validation process must fail closed if:
 - limitations are not declared;
 - forbidden claims are present;
 - automated evidence attempts to claim external validation directly.
+- SLSA L4 full achievement, SLSA L4 certification, production supply-chain certification, or externally verified in-toto chain is claimed without the required evidence.
 
 ---
 
-## 8. Public Mirror Sanitization
+## 9. Public Mirror Sanitization
 
 The public verification mirror may publish sanitized evidence summaries.
 
@@ -226,13 +251,13 @@ The public mirror may publish provider class, region, service type, evidence sta
 
 ---
 
-## 9. Permitted Claim
+## 10. Permitted Claim
 
 This document defines the AEM-EVOLVE v4.0 Hybrid Validation Support Model: automated evidence generation combined with scoped human attestation and claim-state governance.
 
 ---
 
-## 10. Non-Claims
+## 11. Non-Claims
 
 This document does not claim:
 
@@ -249,10 +274,14 @@ This document does not claim:
 - legal compliance;
 - absence of all vulnerabilities;
 - universal public anchoring.
+- SLSA L4 full achievement;
+- SLSA L4 certification;
+- production supply-chain certification;
+- externally verified in-toto chain.
 
 ---
 
-## 11. Strategic Position
+## 12. Strategic Position
 
 The hybrid validation model is designed to move AEM-EVOLVE v4.0 from:
 

@@ -28,6 +28,10 @@ production ready
 externally certified
 regulatory approved
 clinical or diagnostic ready
+SLSA L4 fully achieved
+SLSA L4 certified
+production supply-chain certified
+externally verified in-toto chain
 ```
 
 ---
@@ -47,6 +51,10 @@ universal_public_anchor_claim
 full_system_sub_15ms_claim
 third_party_reproduced_claim
 external_certified_claim
+slsa_l4_fully_achieved_claim
+slsa_l4_certified_claim
+production_supply_chain_certified_claim
+externally_verified_in_toto_chain_claim
 ```
 
 Additional domain-specific red-team cases may be added as AEM-EVOLVE enters new sectors.
@@ -112,6 +120,10 @@ Examples:
 | `production ready` | `controlled evidence supports defined deployment criteria within declared scope` |
 | `regulatory approved` | `no regulatory approval claimed` |
 | `full-system sub-15ms validation` | `Fast Path benchmark evidence available for scoped pre-execution path only` |
+| `SLSA L4 fully achieved` | `SLSA-style controls and release-boundary enforcement documented; full SLSA L4 achievement not claimed` |
+| `SLSA L4 certified` | `SLSA-style controlled-evidence posture documented; SLSA certification not claimed` |
+| `production supply-chain certified` | `supply-chain evidence available for scoped review; production certification not claimed` |
+| `externally verified in-toto chain` | `in-toto materials present with fail-closed status; external verification pending` |
 
 ---
 
@@ -132,6 +144,7 @@ The pipeline must fail closed if:
 - external review is claimed without attestation;
 - regulated claims appear without supporting regulatory evidence;
 - clinical, diagnostic, financial, cybersecurity, or certification claims appear without separate evidence.
+- SLSA L4 full achievement, SLSA L4 certification, production supply-chain certification, or externally verified in-toto chain is claimed while the in-toto chain remains `REQUIRED_NOT_VERIFIED`.
 
 ---
 
@@ -143,4 +156,4 @@ This document defines automated claim-boundary red-team evidence for external cl
 
 ## 11. Non-Claims
 
-This document does not claim completed external claim review, external certification, regulatory approval, legal advice, cybersecurity certification, financial advice, clinical validation, or production readiness.
+This document does not claim completed external claim review, external certification, regulatory approval, legal advice, cybersecurity certification, financial advice, clinical validation, production readiness, SLSA L4 full achievement, SLSA L4 certification, production supply-chain certification, or externally verified in-toto chain.

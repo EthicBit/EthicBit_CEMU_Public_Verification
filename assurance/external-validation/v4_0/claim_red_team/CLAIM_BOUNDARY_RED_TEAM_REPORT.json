@@ -2,19 +2,19 @@
   "schema_id": "AEM_EVOLVE_V4_0_CLAIM_BOUNDARY_RED_TEAM_REPORT_V1",
   "report_type": "CLAIM_BOUNDARY_RED_TEAM_REPORT",
   "version": "4.0",
-  "generated_utc": "2026-05-15T17:44:47.040081+00:00",
+  "generated_utc": "2026-05-18T01:48:08.331977+00:00",
   "status": "CLAIM_BOUNDARY_RED_TEAM_PASS",
   "claim_boundary_red_team": "PASS",
-  "overclaims_attempted": 10,
-  "overclaims_blocked": 10,
+  "overclaims_attempted": 14,
+  "overclaims_blocked": 14,
   "overclaims_failed_to_block": 0,
   "block_rate_percent": 100.0,
   "external_claim_review_completed": false,
   "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
   "external_validation_pass_claimed": false,
   "current_evidence_posture": "CONTROLLED_EVIDENCE_PARTIAL",
-  "cases_sha256": "c1f0c5ac1d7bc948dfae07d8218d55f99fc4824cedd0fded708a5f4c726f0cd5",
-  "cases_canonical_sha256": "12a70b53d34b869ab95a732ce36f85e0bf413ad6aa07d4fcb5d1dac5602e4f98",
+  "cases_sha256": "50e5394d71b0e078f4c3cbbe11486464b313da595f2d28726516980524546d4a",
+  "cases_canonical_sha256": "7210633fc5ecf2b5e272d309c593444e47330706c4ff32effd7712c97161252d",
   "cases": [
     {
       "case_id": "CBRT-001",
@@ -115,6 +115,46 @@
       "decision": "BLOCKED",
       "permitted_alternative": "Hybrid validation support materials are prepared for external review; external certification is not claimed.",
       "reason": "unsupported claim blocked; permitted alternative preserved"
+    },
+    {
+      "case_id": "CBRT-011",
+      "attempted_claim_id": "slsa_l4_fully_achieved_claim",
+      "attempted_claim_text": "EthicBit/CEMU has fully achieved SLSA L4.",
+      "required_external_condition": "complete SLSA L4 evidence with verified in-toto attestation chain and no pending supply-chain verification gaps",
+      "observed_condition": "SLSA-style enforcement posture exists, but the in-toto chain remains REQUIRED_NOT_VERIFIED",
+      "decision": "BLOCKED",
+      "permitted_alternative": "SLSA-style controls and release-boundary enforcement are documented; full SLSA L4 achievement is not claimed.",
+      "reason": "unsupported claim blocked; permitted alternative preserved"
+    },
+    {
+      "case_id": "CBRT-012",
+      "attempted_claim_id": "slsa_l4_certified_claim",
+      "attempted_claim_text": "EthicBit/CEMU is SLSA L4 certified.",
+      "required_external_condition": "named external certification or formal assessment evidence explicitly covering SLSA L4 certification scope",
+      "observed_condition": "no named SLSA L4 certification body, certificate, or external certification evidence is present",
+      "decision": "BLOCKED",
+      "permitted_alternative": "EthicBit/CEMU documents a SLSA-style controlled-evidence posture; SLSA L4 certification is not claimed.",
+      "reason": "unsupported claim blocked; permitted alternative preserved"
+    },
+    {
+      "case_id": "CBRT-013",
+      "attempted_claim_id": "production_supply_chain_certified_claim",
+      "attempted_claim_text": "EthicBit/CEMU is production supply-chain certified.",
+      "required_external_condition": "named production supply-chain certification, declared scope, certificate evidence, and external assessor identity",
+      "observed_condition": "controlled supply-chain evidence exists, but no production supply-chain certification is present",
+      "decision": "BLOCKED",
+      "permitted_alternative": "Supply-chain evidence and controls are available for review within declared scope; production supply-chain certification is not claimed.",
+      "reason": "unsupported claim blocked; permitted alternative preserved"
+    },
+    {
+      "case_id": "CBRT-014",
+      "attempted_claim_id": "externally_verified_in_toto_chain_claim",
+      "attempted_claim_text": "EthicBit/CEMU has an externally verified in-toto chain.",
+      "required_external_condition": "signed external verification of the in-toto layout, link metadata, functionary identities, and attestation chain",
+      "observed_condition": "in-toto materials are present, but the chain remains REQUIRED_NOT_VERIFIED pending external verification signatures",
+      "decision": "BLOCKED",
+      "permitted_alternative": "in-toto materials are present with fail-closed status; externally verified in-toto completion is not claimed.",
+      "reason": "unsupported claim blocked; permitted alternative preserved"
     }
   ],
   "claim_boundary": {
@@ -132,6 +172,10 @@
     "financial_advice": false,
     "clinical_or_diagnostic_readiness": false,
     "universal_production_readiness": false,
-    "third_party_reproduction_completed": false
+    "third_party_reproduction_completed": false,
+    "slsa_l4_fully_achieved": false,
+    "slsa_l4_certification": false,
+    "production_supply_chain_certification": false,
+    "externally_verified_in_toto_chain": false
   }
 }

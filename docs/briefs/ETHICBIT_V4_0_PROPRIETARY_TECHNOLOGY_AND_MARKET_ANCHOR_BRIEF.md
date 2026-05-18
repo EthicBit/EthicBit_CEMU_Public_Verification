@@ -78,7 +78,7 @@ GitHub publication and public mirroring make selected evidence inspectable. They
 | Triple Anchor | Selected evidence states anchored |
 | AWS infrastructure | Live controlled evidence |
 | CEERV | `FORMALLY_FROZEN — PASS_REFERENCE_ONLY · case_003` |
-| SLSA L4 | `ENFORCED` within declared release boundaries |
+| SLSA L4 | `BASELINE_DOCUMENTED` — full L4 pending signed in-toto chain |
 | in-toto Attestation Chain | `REQUIRED_NOT_VERIFIED` pending external verification signatures |
 | HV-0..HV-10 | Complete |
 | v4.0 external validation | `HUMAN_ATTESTATION_PENDING` |
@@ -118,7 +118,7 @@ The technology stack does not replace the Constitution. It operationalizes it.
 | `provenance.py` | Active |
 | `governance.py` | Active |
 | `intake.py` | Active |
-| Runtime Guard L4 | `SLSA L4 ENFORCED` |
+| Runtime Guard L4 | `SLSA-style baseline documented` |
 | Swarm Containment | Active |
 
 The CEMU Core provides the constitutional-operational runtime substrate for closure, fixation, sealing, provenance, governance, intake, release-boundary enforcement and containment.
@@ -147,7 +147,7 @@ These contracts and anchors provide selected integrity references for declared e
 | Claim Boundary Engine | `SUPPORTED / SUPPORTED_SCOPED` | 10/10 public claims supported or scoped |
 | Non-claims | Preserved | 11/11 correctly not claimed |
 | Release-Grade Deep Audit v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` | score 92/100 — 6 gates, `claim_boundary` and `reproducibility` SCOPE_LIMITED |
-| Aggressive Validation & Abuse Testing v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` | score 100/100 — 8/8 tests PASS, 10/10 overclaims blocked, 8/8 forgeries detected |
+| Aggressive Validation & Abuse Testing v1.0 | `PASS_WITH_SCOPE_LIMITATIONS` | score 100/100 — 8/8 tests PASS, 14/14 overclaims blocked, 8/8 forgeries detected |
 | v4.0 controlled criteria | 5/8 `CONTROLLED_PASS` | External attestation still pending |
 
 ---
@@ -262,7 +262,7 @@ Anchors provide timestamped integrity references for selected evidence states. T
 | Layer | Current State | Interpretation |
 |---|---|---|
 | CEERV | `FORMALLY_FROZEN — PASS_REFERENCE_ONLY · case_003` | Offline-verifiable compliance and ethical evidence reference |
-| SLSA L4 Supply Chain | `ENFORCED` | Release-boundary enforcement posture |
+| SLSA L4 Supply Chain | `BASELINE_DOCUMENTED` | Policy and subject index present; full L4 requires signed in-toto statements |
 | in-toto Attestation Chain | `REQUIRED_NOT_VERIFIED` | Statements present; external verification signatures pending |
 
 SLSA L4 policy enforcement is active for declared release boundaries; however, the in-toto attestation chain remains `REQUIRED_NOT_VERIFIED` until external verification signatures are completed.
@@ -373,12 +373,15 @@ EthicBit does not yet demonstrate:
 13. Externally verified in-toto attestation completion.
 14. Absence of all vulnerabilities.
 15. Legal compliance.
+16. SLSA L4 fully achieved.
+17. SLSA L4 certified.
+18. Production supply-chain certified.
 
 ---
 
 ## 18. Critical Non-Claim
 
-This brief does **not** claim `EXTERNAL_VALIDATION_PASS`, completed third-party reproduction, completed external security review, completed external claim review, external certification, regulatory approval, legal compliance, cybersecurity certification, financial advice, clinical or diagnostic readiness, universal production readiness, full-system sub-15 ms validation, tamper-proof status, absence of all vulnerabilities, verified in-toto external attestation completion, or universal public anchoring.
+This brief does **not** claim `EXTERNAL_VALIDATION_PASS`, completed third-party reproduction, completed external security review, completed external claim review, external certification, regulatory approval, legal compliance, cybersecurity certification, financial advice, clinical or diagnostic readiness, universal production readiness, full-system sub-15 ms validation, tamper-proof status, absence of all vulnerabilities, verified in-toto external attestation completion, universal public anchoring, SLSA L4 full achievement, SLSA L4 certification, or production supply-chain certification.
 
 GitHub publication, public mirroring, successful controlled evidence, live infrastructure evidence, smart contracts, CEERV references, SLSA L4 enforcement posture, and selected on-chain anchors make selected evidence inspectable and integrity-referenced. They do **not** by themselves constitute external certification, regulatory approval, third-party validation, cybersecurity certification, universal production readiness, legal compliance, or semantic truth of every claim.
 

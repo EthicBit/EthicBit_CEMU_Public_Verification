@@ -37,7 +37,23 @@ No claim elevation may occur without scoped human attestation.
 
 ---
 
-## 3. Reviewer Role
+## 3. Required Validation Order
+
+The attestation protocol follows a substance-first order:
+
+```text
+independent technical reproduction
+  -> threat model and external red-team / security review
+  -> scoped human attestation
+```
+
+This order prevents human attestation from becoming a cosmetic seal over internally generated evidence.
+
+An attestation may be accepted as `PARTIAL` or `OUT_OF_SCOPE` if it reviews only a subset of the dossier. It must not elevate the system to `EXTERNAL_VALIDATION_PASS` unless independent reproduction, threat-model/security review, claim-boundary review, scope declaration, limitations, and signature requirements are all satisfied within the declared scope.
+
+---
+
+## 4. Reviewer Role
 
 The reviewer evaluates:
 
@@ -56,7 +72,7 @@ The reviewer does not provide automatic regulatory approval, cybersecurity certi
 
 ---
 
-## 4. Required Reviewer Declarations
+## 5. Required Reviewer Declarations
 
 A valid attestation must include:
 
@@ -69,13 +85,15 @@ A valid attestation must include:
 - declared scope;
 - domains reviewed;
 - methodology notes;
+- independent reproduction review status;
+- threat-model or external red-team/security review status;
 - limitations;
 - final scoped outcome;
 - signature or equivalent approval evidence.
 
 ---
 
-## 5. Attestation Outcomes
+## 6. Attestation Outcomes
 
 Allowed human attestation outcomes:
 
@@ -99,7 +117,7 @@ A `PASS` does not imply certification outside the declared scope.
 
 ---
 
-## 6. Scope Requirements
+## 7. Scope Requirements
 
 Every attestation must state what was reviewed and what was not reviewed.
 
@@ -121,12 +139,15 @@ If scope is missing, the attestation must be treated as invalid for external-val
 
 ---
 
-## 7. Claim-State Interaction
+## 8. Claim-State Interaction
 
 A human attestation may support state transition only if:
 
 ```text
 reviewer_scope_declared=true
+independent_reproduction_reviewed=true
+threat_model_review_completed=true
+external_red_team_or_security_review_completed=true
 methodology_review_completed=true
 dossier_hashes_verified=true
 claim_boundary_review_completed=true
@@ -151,7 +172,7 @@ as appropriate.
 
 ---
 
-## 8. Required Attestation Statement
+## 9. Required Attestation Statement
 
 The reviewer may use this safe statement:
 
@@ -161,7 +182,7 @@ I reviewed the provided AEM-EVOLVE v4.0 Notary Dossier for the scoped criteria l
 
 ---
 
-## 9. Forbidden Attestation Claims
+## 10. Forbidden Attestation Claims
 
 The attestation must not claim, unless separately evidenced and explicitly in scope:
 
@@ -179,10 +200,14 @@ The attestation must not claim, unless separately evidenced and explicitly in sc
 - tamper-proof storage;
 - third-party reproduction if reproduction was not independently executed;
 - external security review if security methodology was not reviewed.
+- SLSA L4 fully achieved while in-toto remains unverified;
+- SLSA L4 certified without named certification evidence;
+- production supply-chain certified without named production certification evidence;
+- externally verified in-toto chain without signed external verification.
 
 ---
 
-## 10. Evidence Review Checklist
+## 11. Evidence Review Checklist
 
 The reviewer should inspect:
 
@@ -201,7 +226,7 @@ If a listed artifact is absent, the reviewer should record it as missing, out of
 
 ---
 
-## 11. Public Mirror Handling
+## 12. Public Mirror Handling
 
 A signed attestation may be published to the public verification mirror only after sanitization review.
 
@@ -218,12 +243,14 @@ Public attestation should not disclose:
 
 ---
 
-## 12. Fail-Closed Conditions
+## 13. Fail-Closed Conditions
 
 The human attestation protocol must fail closed if:
 
 - reviewer scope is missing;
 - reviewed dossier hash is missing;
+- independent reproduction is claimed without independent execution or review;
+- threat-model or external red-team/security review is claimed without review evidence;
 - methodology review is missing;
 - limitations are missing;
 - claim-boundary review is missing;
@@ -231,16 +258,17 @@ The human attestation protocol must fail closed if:
 - reviewer attests domains not reviewed;
 - automated evidence is treated as human attestation;
 - external validation pass is claimed before signed human attestation.
+- SLSA L4 full achievement, SLSA L4 certification, production supply-chain certification, or externally verified in-toto chain is claimed without required evidence.
 
 ---
 
-## 13. Permitted Claim
+## 14. Permitted Claim
 
 This document defines the human attestation protocol for scoped review of the AEM-EVOLVE v4.0 Notary Dossier.
 
 ---
 
-## 14. Non-Claims
+## 15. Non-Claims
 
 This document does not claim:
 
@@ -257,3 +285,7 @@ This document does not claim:
 - clinical or diagnostic readiness;
 - universal production readiness;
 - absence of all vulnerabilities.
+- SLSA L4 full achievement;
+- SLSA L4 certification;
+- production supply-chain certification;
+- externally verified in-toto chain.

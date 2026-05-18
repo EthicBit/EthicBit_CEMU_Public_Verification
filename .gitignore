@@ -52,20 +52,10 @@ temp/
 # Backups y temporales
 *.backup*
 *.backup_*
-
-# Backups y temporales
-*.backup*
-*.backup_*
-
-# Backups y temporales
-*.backup*
-*.backup_*
-
-# Backups automáticos (nunca commitear)
-artifacts_backup_*
-*_backup_*
 *.backup
 *.bak
+artifacts_backup_*
+*_backup_*
 
 # Hardhat isolated build output
 .hardhat/

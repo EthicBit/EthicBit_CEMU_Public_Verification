@@ -1,8 +1,8 @@
 {
   "schema_id": "ETHICBIT_SLSA_L4_POLICY_V1",
   "version": "1.1.0",
-  "status": "ENFORCED",
-  "level_target": "L4_ENFORCED",
+  "status": "BASELINE_DOCUMENTED",
+  "level_target": "L4_ASPIRATIONAL",
   "requirements": [
     "source_integrity_required",
     "subject_index_required",
@@ -35,8 +35,11 @@
     }
   },
   "enforcement": {
-    "current_level": "ENFORCED",
-    "full_l4_claim_allowed": true,
-    "attestations_mandatory": true
+    "current_level": "BASELINE_DOCUMENTED",
+    "full_l4_claim_allowed": false,
+    "attestations_mandatory": true,
+    "in_toto_signing_status": "SCHEMA_DEFINED_NOT_SIGNED",
+    "builder_workflow_status": "DEFINED_NOT_ACTIVE",
+    "note": "Full L4 requires signed in-toto statements and active hermetic build workflow. Currently BASELINE_DOCUMENTED pending B1/B2 implementation."
   }
 }

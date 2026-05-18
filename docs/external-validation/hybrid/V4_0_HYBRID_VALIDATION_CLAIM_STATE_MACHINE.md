@@ -83,6 +83,9 @@ All of the following must be true before the status may be elevated to `EXTERNAL
 |---|---|
 | `signed_human_attestation` | `true` |
 | `reviewer_scope_declared` | `true` |
+| `independent_reproduction_reviewed` | `true` |
+| `threat_model_review_completed` | `true` |
+| `external_red_team_or_security_review_completed` | `true` |
 | `dossier_hashes_verified` | `true` |
 | `methodology_review_completed` | `true` |
 | `claim_boundary_review_completed` | `true` |
@@ -122,6 +125,25 @@ No automated pipeline output may be used to claim the following without independ
 | `DOSSIER_VERIFIED` | `externally_certified` |
 | `DOSSIER_VERIFIED` | `regulatory_approved` |
 | Any controlled evidence | `production_ready` (without managed compute + external security review) |
+| `SLSA_STYLE_BASELINE_EXECUTABLE_PASS` | `slsa_l4_fully_achieved` |
+| `SLSA_STYLE_BASELINE_EXECUTABLE_PASS` | `slsa_l4_certified` |
+| `SUPPLY_CHAIN_EVIDENCE_PRESENT` | `production_supply_chain_certified` |
+| `IN_TOTO_REQUIRED_NOT_VERIFIED` | `externally_verified_in_toto_chain` |
+
+---
+
+## Validation Ordering Policy
+
+External validation status must follow this order:
+
+```text
+independent technical reproduction
+  -> threat model and external red-team / security review
+  -> scoped human attestation
+  -> claim-state elevation, if all required conditions are met
+```
+
+Human attestation must not be used as a cosmetic substitute for technical reproduction or external threat-model review. If attestation is collected before independent reproduction and threat-model/security review are completed or explicitly scoped, the state machine must remain at `HUMAN_ATTESTATION_PENDING` or move to `EXTERNAL_VALIDATION_SCOPE_LIMITED`, not `EXTERNAL_VALIDATION_PASS`.
 
 ---
 
@@ -129,7 +151,7 @@ No automated pipeline output may be used to claim the following without independ
 
 > **No automated pipeline may transition directly to `EXTERNAL_VALIDATION_PASS`.**
 >
-> The only valid path to `EXTERNAL_VALIDATION_PASS` is through a signed human attestation from an independent reviewer with no EthicBit affiliation, covering the declared scope, with methodology review, claim boundary review, and limitations declared.
+> The only valid path to `EXTERNAL_VALIDATION_PASS` is through independent technical reproduction, threat-model and external red-team/security review, and then a signed human attestation from an independent reviewer with no EthicBit affiliation, covering the declared scope, with methodology review, claim boundary review, and limitations declared.
 
 ---
 
@@ -155,7 +177,7 @@ This document defines the hybrid validation claim state machine that governs sta
 
 ## Non-Claim
 
-This document does not claim that `EXTERNAL_VALIDATION_PASS` has been reached. It does not claim completed third-party reproduction, completed external security review, completed external claim review, external certification, regulatory approval, cybersecurity certification, legal compliance, financial advice, clinical readiness, universal production readiness, absence of all vulnerabilities, full-system sub-15ms validation, or universal public anchoring.
+This document does not claim that `EXTERNAL_VALIDATION_PASS` has been reached. It does not claim completed third-party reproduction, completed external security review, completed external claim review, external certification, regulatory approval, cybersecurity certification, legal compliance, financial advice, clinical readiness, universal production readiness, absence of all vulnerabilities, full-system sub-15ms validation, universal public anchoring, SLSA L4 full achievement, SLSA L4 certification, production supply-chain certification, or externally verified in-toto completion.
 
 ---
 

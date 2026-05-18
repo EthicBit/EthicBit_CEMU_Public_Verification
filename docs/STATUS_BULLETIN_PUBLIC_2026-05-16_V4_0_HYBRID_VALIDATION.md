@@ -120,8 +120,8 @@ assurance/external-validation/v4_0/security_review/SECURITY_SCAN_HASH_RECORD.txt
 
 ```text
 CLAIM_BOUNDARY_RED_TEAM=PASS
-overclaims_attempted=10
-overclaims_blocked=10
+overclaims_attempted=14
+overclaims_blocked=14
 block_rate=100%
 external_claim_review_completed=false
 HUMAN_ATTESTATION_PENDING=true
@@ -166,13 +166,27 @@ The following transitions remain prohibited:
 AUTOMATED_REPRODUCTION_SUPPORT=PASS -> third_party_reproduction_completed
 AUTOMATED_SECURITY_REVIEW_SUPPORT=PASS -> cybersecurity_certification
 CLAIM_BOUNDARY_RED_TEAM=PASS -> external_claim_review_completed
+SLSA_STYLE_BASELINE_EXECUTABLE_PASS -> slsa_l4_fully_achieved
+SLSA_STYLE_BASELINE_EXECUTABLE_PASS -> slsa_l4_certified
+SUPPLY_CHAIN_EVIDENCE_PRESENT -> production_supply_chain_certified
+IN_TOTO_REQUIRED_NOT_VERIFIED -> externally_verified_in_toto_chain
 HYBRID_VALIDATION_READY -> EXTERNAL_VALIDATION_PASS
 HUMAN_ATTESTATION_PENDING -> EXTERNAL_VALIDATION_PASS
+```
+
+A future claim elevation must follow this order:
+
+```text
+independent technical reproduction
+  -> threat model and external red-team / security review
+  -> scoped human attestation
 ```
 
 A future claim elevation requires a scoped external reviewer attestation covering:
 
 ```text
+independent reproduction status
+threat model / external red-team status
 integrity
 methodology
 scope
@@ -205,10 +219,14 @@ This bulletin does not claim:
 - absence of all vulnerabilities;
 - full-system sub-15ms validation;
 - universal public anchoring;
-- third-party binding.
+- third-party binding;
+- SLSA L4 full achievement;
+- SLSA L4 certification;
+- production supply-chain certification;
+- externally verified in-toto chain.
 
 ---
 
 ## Next Step
 
-Proceed to the Hybrid Validation Claim State Machine (`HV-10`) to define allowed states, forbidden transitions, and the exact conditions required before any future elevation to `EXTERNAL_VALIDATION_SCOPE_LIMITED` or `EXTERNAL_VALIDATION_PASS`.
+Proceed to independent technical reproduction first, then threat-model and external red-team/security review, and only then scoped human attestation. The state machine must not elevate to `EXTERNAL_VALIDATION_PASS` before that sequence is complete within declared scope.

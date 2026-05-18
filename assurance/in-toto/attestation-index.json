@@ -1,12 +1,13 @@
 {
   "schema_id": "ETHICBIT_IN_TOTO_ATTESTATION_INDEX_V1",
   "version": "1.1.0",
-  "status": "ENFORCED",
+  "status": "SCHEMA_DEFINED_NOT_SIGNED",
   "verification": {
     "mode": "FAIL_CLOSED",
     "allStepsMustBeAttested": true,
     "noPendingAllowed": true,
-    "requiredStatementStatus": "VERIFIED"
+    "requiredStatementStatus": "VERIFIED",
+    "current_state": "Statements schema present; signedBy=[] on all steps. Full in-toto verification requires signed statements from a KMS-backed signer. Pending Block B implementation."
   },
   "attestations": [
     {

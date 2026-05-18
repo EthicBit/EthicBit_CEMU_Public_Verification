@@ -24,6 +24,10 @@ REQUIRED_CASE_IDS = {
     "full_system_sub_15ms_claim",
     "third_party_reproduced_claim",
     "external_certified_claim",
+    "slsa_l4_fully_achieved_claim",
+    "slsa_l4_certified_claim",
+    "production_supply_chain_certified_claim",
+    "externally_verified_in_toto_chain_claim",
 }
 
 
@@ -85,6 +89,10 @@ def verify(report: dict[str, Any], cases: dict[str, Any]) -> list[str]:
         "clinical_or_diagnostic_readiness",
         "universal_production_readiness",
         "third_party_reproduction_completed",
+        "slsa_l4_fully_achieved",
+        "slsa_l4_certification",
+        "production_supply_chain_certification",
+        "externally_verified_in_toto_chain",
     ):
         if non_claims.get(field) is not False:
             errors.append(f"non_claims.{field} must be false")

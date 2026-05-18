@@ -22,6 +22,16 @@ Your role is not to manually rebuild the entire stack from scratch unless you ch
 
 Your role is to review the Notary Dossier, recompute selected hashes, inspect the automated evidence methodology, evaluate claim boundaries, and issue a scoped `PASS / PARTIAL / FAIL` attestation.
 
+The recommended validation order is:
+
+```text
+independent technical reproduction
+  -> threat model and external red-team / security review
+  -> scoped human attestation
+```
+
+A signature without reproduction and threat-model/security review should be treated as `PARTIAL`, `OUT_OF_SCOPE`, or `EXTERNAL_VALIDATION_SCOPE_LIMITED`, not as full external validation.
+
 The project is currently at:
 
 ```text
@@ -30,7 +40,7 @@ HYBRID_VALIDATION_READY → HUMAN_ATTESTATION_PENDING
 
 5/8 criteria are CONTROLLED_PASS. Criteria 1, 2, and 8 are PENDING_EXTERNAL — awaiting your attestation.
 
-This review supports the transition toward `EXTERNAL_VALIDATION_PASS`. It does not itself claim `EXTERNAL_VALIDATION_PASS` until an external reviewer completes and signs a scoped attestation.
+This review supports the transition toward external validation. It does not itself claim `EXTERNAL_VALIDATION_PASS` until independent technical reproduction, threat-model/security review, claim-boundary review, and scoped signed attestation are all complete within the declared scope.
 
 ---
 
@@ -49,15 +59,16 @@ EthicBit / AEM-EVOLVE provides a formal evidence stack for AI governance: mechan
 The project has controlled evidence for selected v4.0 criteria, and now uses a hybrid validation support model. Automated pipelines generate machine-verifiable evidence, while an external reviewer evaluates the Notary Dossier and attests integrity, methodology, scope, and claim-boundary sufficiency.
 
 **What I'm asking:**
-Please review the v4.0 Notary Dossier and supporting automated evidence. You may recompute selected hashes, inspect the methodology, review the automated reproduction and security-support reports, evaluate the claim-boundary red-team evidence, and complete a scoped human attestation.
+Please review the v4.0 Notary Dossier and supporting automated evidence. The preferred sequence is to independently reproduce the declared technical checks first, inspect the threat model and security/red-team methodology second, and only then complete a scoped human attestation.
 
-This typically takes 30–60 minutes for a scoped review.
+Timing depends on scope. A narrow dossier and hash review may take 30–60 minutes; independent reproduction plus threat-model/security review should be treated as a deeper technical review.
 
 **Your review may cover:**
 - Criterion 1: reproduction support methodology and selected hash verification;
 - Criterion 2: automated security-review support and limitations;
 - Criterion 8: claim-boundary review and overclaim prevention;
 - the Notary Dossier as a scoped review bundle.
+- the explicit non-claims for SLSA L4 full achievement, SLSA L4 certification, production supply-chain certification, and externally verified in-toto completion.
 
 **Suggested local commands:**
 
@@ -92,7 +103,7 @@ https://github.com/EthicBit/EthicBit_CEMU_Public_Verification
 https://github.com/EthicBit/EthicBit_CEMU_Public_Verification/releases/tag/aem-evolve-v4.0-controlled-evidence-2026-05-14
 
 **Scope boundary:**
-This is not a request for certification, regulatory approval, cybersecurity certification, legal opinion, clinical validation, financial advice, or endorsement. It is a scoped technical review of evidence integrity, methodology, limitations, and claim boundaries.
+This is not a request for certification, regulatory approval, cybersecurity certification, legal opinion, clinical validation, financial advice, SLSA certification, production supply-chain certification, externally verified in-toto completion, or endorsement. It is a scoped technical review of evidence integrity, methodology, limitations, and claim boundaries.
 
 A valid outcome may be `PASS`, `PARTIAL`, or `FAIL`. Deviations, failures, and limitations are useful evidence and should be recorded.
 

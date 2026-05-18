@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-05-17T20:12:37.622195+00:00",
+  "generated_at_utc": "2026-05-18T01:49:12.052974+00:00",
   "git": {
-    "branch": "codex/aggressive-validation-abuse-testing-v1",
-    "commit": "81ffecfe"
+    "branch": "main",
+    "commit": "4f608332"
   },
   "non_claims": {
     "absence_of_all_vulnerabilities_claimed": false,
@@ -25,14 +25,14 @@
         "block_rate_percent": 100.0,
         "external_claim_review_completed": false,
         "external_validation_pass_claimed": false,
-        "overclaims_attempted": 10,
-        "overclaims_blocked": 10,
+        "overclaims_attempted": 14,
+        "overclaims_blocked": 14,
         "report": "assurance/external-validation/v4_0/claim_red_team/CLAIM_BOUNDARY_RED_TEAM_REPORT.json"
       },
       "name": "claim_red_team_overclaim_blocking",
       "score": 100,
       "status": "PASS",
-      "summary": "Blocked 10/10 attempted overclaims; external claim review remains false."
+      "summary": "Blocked 14/14 attempted overclaims; external claim review remains false."
     },
     {
       "details": {
@@ -76,6 +76,26 @@
             "automated_output": "DOSSIER_VERIFIED",
             "documented": true,
             "prohibited_claim": "regulatory_approved"
+          },
+          {
+            "automated_output": "SLSA_STYLE_BASELINE_EXECUTABLE_PASS",
+            "documented": true,
+            "prohibited_claim": "slsa_l4_fully_achieved"
+          },
+          {
+            "automated_output": "SLSA_STYLE_BASELINE_EXECUTABLE_PASS",
+            "documented": true,
+            "prohibited_claim": "slsa_l4_certified"
+          },
+          {
+            "automated_output": "SUPPLY_CHAIN_EVIDENCE_PRESENT",
+            "documented": true,
+            "prohibited_claim": "production_supply_chain_certified"
+          },
+          {
+            "automated_output": "IN_TOTO_REQUIRED_NOT_VERIFIED",
+            "documented": true,
+            "prohibited_claim": "externally_verified_in_toto_chain"
           }
         ],
         "complete_external_pass_decision_with_required_conditions": "ALLOW",
@@ -183,7 +203,7 @@
       "name": "release_packaging_secret_leak_abuse_scan",
       "score": 100,
       "status": "PASS",
-      "summary": "Scanned 1490 tracked files and 9 release ZIPs for sensitive entries."
+      "summary": "Scanned 1494 tracked files and 9 release ZIPs for sensitive entries."
     },
     {
       "details": {
