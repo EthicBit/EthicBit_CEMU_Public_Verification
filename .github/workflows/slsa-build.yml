@@ -1,0 +1,97 @@
+name: SLSA Build (Hermetic)
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - "v*"
+      - "audit-freeze-*"
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      build_sha:
+        description: "SHA-256 of the build manifest"
+        value: ${{ jobs.build.outputs.build_sha }}
+      commit:
+        description: "Git commit SHA that was built"
+        value: ${{ jobs.build.outputs.commit }}
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    name: Hermetic build + provenance capture
+    runs-on: ubuntu-latest
+
+    outputs:
+      build_sha: ${{ steps.manifest.outputs.build_sha }}
+      commit: ${{ github.sha }}
+
+    steps:
+      - name: Checkout (no credentials retained)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Python dev dependencies
+        run: pip install -e ".[dev]" --no-build-isolation
+
+      - name: Install Node dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Hermetic build — contracts + runtime guard
+        run: |
+          set -euo pipefail
+          # Compile Solidity contracts if any exist; graceful skip if none.
+          if ls contracts/*.sol 2>/dev/null | head -1 > /dev/null 2>&1; then
+            npx hardhat compile --force
+          else
+            echo "No Solidity contracts found — skipping hardhat compile."
+          fi
+          python3 -m cemu.builders.runtime_guard
+
+      - name: Run test suite
+        run: pytest tests/ -q --tb=short
+
+      - name: Compute artifact digests
+        id: digests
+        run: |
+          python3 scripts/slsa/compute_subject_digests.py \
+            --subjects assurance/slsa/subject-index.json \
+            --output assurance/slsa/subject-index-bound.json
+
+      - name: Generate build manifest
+        id: manifest
+        run: |
+          set -euo pipefail
+          python3 scripts/slsa/generate_build_manifest.py \
+            --commit "$GITHUB_SHA" \
+            --ref "$GITHUB_REF" \
+            --workflow "$GITHUB_WORKFLOW" \
+            --run-id "$GITHUB_RUN_ID"
+          SHA=$(sha256sum assurance/slsa/build-manifest.json | awk '{print $1}')
+          echo "build_sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Build manifest SHA-256: $SHA"
+
+      - name: Upload build manifest + bound subject index
+        uses: actions/upload-artifact@v4
+        with:
+          name: slsa-build-${{ github.sha }}
+          path: |
+            assurance/slsa/build-manifest.json
+            assurance/slsa/subject-index-bound.json
+          retention-days: 90

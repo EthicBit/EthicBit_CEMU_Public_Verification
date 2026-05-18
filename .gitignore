@@ -60,6 +60,10 @@ artifacts_backup_*
 # Hardhat isolated build output
 .hardhat/
 
+# SLSA CI-generated outputs (uploaded as Actions artifacts, not tracked in git)
+assurance/slsa/build-manifest.json
+assurance/slsa/subject-index-bound.json
+
 # Constitutional controls runtime report (generated)
 results/constitutional_controls_report.json
 

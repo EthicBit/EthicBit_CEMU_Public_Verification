@@ -39,7 +39,7 @@
     "full_l4_claim_allowed": false,
     "attestations_mandatory": true,
     "in_toto_signing_status": "KMS_SIGNED_PENDING_EXTERNAL_WITNESS",
-    "builder_workflow_status": "DEFINED_NOT_ACTIVE",
-    "note": "Full L4 requires signed in-toto statements and active hermetic build workflow. Currently BASELINE_DOCUMENTED pending B1/B2 implementation."
+    "builder_workflow_status": "ACTIVE",
+    "note": "in-toto chain KMS-signed (Block B2). slsa-build.yml active (Block B3). Full L4 claim requires external witness on in-toto statements and human review for escalated release claims."
   }
 }

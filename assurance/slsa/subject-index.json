@@ -1,19 +1,27 @@
 {
   "schema_id": "ETHICBIT_SLSA_SUBJECT_INDEX_V1",
-  "version": "1.0.0",
-  "status": "INITIAL_MATERIALIZATION",
+  "version": "1.1.0",
+  "status": "DIGESTS_BOUND",
   "subjects": [
     {
       "name": "ceerv/artifacts/evidence_bundle_full.json",
-      "digest_status": "TO_BE_BOUND"
+      "digest_status": "BOUND",
+      "sha256": "69c3d8d156b8079772222e5c76a0823ba7a1cda52f7b878d36b8b9a04a03096e"
     },
     {
       "name": "ceerv/artifacts/certificate.json",
-      "digest_status": "TO_BE_BOUND"
+      "digest_status": "BOUND",
+      "sha256": "def17b7d92865f3fbdee2cee53d61c81395910b47f3f98da8fff604accaec087"
     },
     {
       "name": "ceerv/outputs/ACTA_MINIMA.json",
-      "digest_status": "TO_BE_BOUND"
+      "digest_status": "BOUND",
+      "sha256": "35849d003b2897e731e3c172a9fef69c4ceb255875d6f87d880aac07d9483cee"
+    },
+    {
+      "name": "artifacts/history/swarm/official_operational_status.json",
+      "digest_status": "BOUND",
+      "sha256": "b2906666249be152fc569b4f26d43119706c4c0614dda892da45c9958166194f"
     }
   ]
 }
