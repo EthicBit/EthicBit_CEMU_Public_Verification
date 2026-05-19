@@ -1,0 +1,49 @@
+[
+  {
+    "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
+    "receipt_id": "b0ee5dff-0904-4211-ab0d-d86b2da56ba7",
+    "call_id": "call_001",
+    "run_id": "f24c87f2",
+    "tool_name": "search_knowledge_base",
+    "risk_level": "LOW",
+    "governance_decision": "AUTO_PASS",
+    "approved": true,
+    "reason": "risk_level=LOW auto-approved",
+    "args_sha256": "00b1c8ceb9b5ef917c7d5a88fa3ceadfb5c5b24a1c14ca79036753fb5927b4f2",
+    "claim_boundary_enforced": true,
+    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+    "timestamp": "2026-05-19T13:44:52.956746+00:00"
+  },
+  {
+    "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
+    "receipt_id": "09ebc826-915b-4420-8247-659d6c6efaad",
+    "call_id": "call_002",
+    "run_id": "f24c87f2",
+    "tool_name": "draft_document",
+    "risk_level": "MEDIUM",
+    "governance_decision": "AUTO_PASS",
+    "approved": true,
+    "reason": "risk_level=MEDIUM auto-approved",
+    "args_sha256": "700e558279ee8b39b4783df0a9d2482d449e958f7106a9dc22b64ca8e8df4cbd",
+    "claim_boundary_enforced": true,
+    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+    "timestamp": "2026-05-19T13:44:52.957355+00:00"
+  },
+  {
+    "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
+    "receipt_id": "d0f20023-f363-4221-b821-b9e11f7fcd63",
+    "call_id": "call_003",
+    "run_id": "f24c87f2",
+    "tool_name": "publish_external",
+    "risk_level": "HIGH",
+    "governance_decision": "HITL_APPROVED",
+    "approved": true,
+    "reason": "risk_level=HIGH requires HITL",
+    "args_sha256": "785d670641c28d3759414499bed735829b87a4dcc4f0ebd94dadafa9812323bd",
+    "claim_boundary_enforced": true,
+    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+    "timestamp": "2026-05-19T13:44:52.957909+00:00",
+    "hitl_simulated": true,
+    "hitl_note": "DEMO_HITL_APPROVE=true \u2014 simulated approval"
+  }
+]

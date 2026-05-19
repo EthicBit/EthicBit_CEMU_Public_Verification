@@ -1,0 +1,112 @@
+{
+  "schema_id": "ETHICBIT_LANGGRAPH_INTEGRATION_REPORT_V1",
+  "version": "1.0.0",
+  "report_date": "2026-05-19T13:44:52.958364+00:00",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "integration": "LangGraph/LangChain",
+  "status": "PASS",
+  "results": {
+    "ETHICBIT_LANGGRAPH_INTEGRATION_STATUS": "PASS",
+    "TOOL_CALL_GOVERNANCE": "PASS",
+    "CLAIM_BOUNDARY_ENFORCEMENT": "PASS",
+    "HITL_REQUIRED_FOR_HIGH_RISK_ACTION": "PASS",
+    "HITL_RESOLVED": "PASS",
+    "AUDIT_RECEIPT_GENERATED": "PASS"
+  },
+  "run_summary": {
+    "run_id": "f24c87f2",
+    "total_tool_calls": 3,
+    "approved": 3,
+    "blocked": 0,
+    "hitl_approved": 1,
+    "hitl_rejected": 0,
+    "claim_boundary_enforced": true,
+    "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+    "non_claims": [
+      "Not a customer production deployment.",
+      "Not externally validated.",
+      "Not security certified.",
+      "Not regulatory approved.",
+      "HITL in demo mode is simulated \u2014 not a substitute for real human-in-the-loop in production."
+    ]
+  },
+  "governance_receipts": [
+    {
+      "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
+      "receipt_id": "b0ee5dff-0904-4211-ab0d-d86b2da56ba7",
+      "call_id": "call_001",
+      "run_id": "f24c87f2",
+      "tool_name": "search_knowledge_base",
+      "risk_level": "LOW",
+      "governance_decision": "AUTO_PASS",
+      "approved": true,
+      "reason": "risk_level=LOW auto-approved",
+      "args_sha256": "00b1c8ceb9b5ef917c7d5a88fa3ceadfb5c5b24a1c14ca79036753fb5927b4f2",
+      "claim_boundary_enforced": true,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "timestamp": "2026-05-19T13:44:52.956746+00:00"
+    },
+    {
+      "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
+      "receipt_id": "09ebc826-915b-4420-8247-659d6c6efaad",
+      "call_id": "call_002",
+      "run_id": "f24c87f2",
+      "tool_name": "draft_document",
+      "risk_level": "MEDIUM",
+      "governance_decision": "AUTO_PASS",
+      "approved": true,
+      "reason": "risk_level=MEDIUM auto-approved",
+      "args_sha256": "700e558279ee8b39b4783df0a9d2482d449e958f7106a9dc22b64ca8e8df4cbd",
+      "claim_boundary_enforced": true,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "timestamp": "2026-05-19T13:44:52.957355+00:00"
+    },
+    {
+      "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
+      "receipt_id": "d0f20023-f363-4221-b821-b9e11f7fcd63",
+      "call_id": "call_003",
+      "run_id": "f24c87f2",
+      "tool_name": "publish_external",
+      "risk_level": "HIGH",
+      "governance_decision": "HITL_APPROVED",
+      "approved": true,
+      "reason": "risk_level=HIGH requires HITL",
+      "args_sha256": "785d670641c28d3759414499bed735829b87a4dcc4f0ebd94dadafa9812323bd",
+      "claim_boundary_enforced": true,
+      "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+      "timestamp": "2026-05-19T13:44:52.957909+00:00",
+      "hitl_simulated": true,
+      "hitl_note": "DEMO_HITL_APPROVE=true \u2014 simulated approval"
+    }
+  ],
+  "tool_call_trace": [
+    {
+      "step": 1,
+      "tool": "search_knowledge_base",
+      "risk_level": "LOW",
+      "decision": "AUTO_PASS",
+      "approved": true
+    },
+    {
+      "step": 2,
+      "tool": "draft_document",
+      "risk_level": "MEDIUM",
+      "decision": "AUTO_PASS",
+      "approved": true
+    },
+    {
+      "step": 3,
+      "tool": "publish_external",
+      "risk_level": "HIGH",
+      "decision": "HITL_APPROVED",
+      "approved": true
+    }
+  ],
+  "non_claims": {
+    "integration_is_production_deployment": false,
+    "integration_is_externally_validated": false,
+    "integration_is_security_certified": false,
+    "integration_is_regulatory_approved": false,
+    "hitl_simulation_equals_real_hitl": false
+  }
+}

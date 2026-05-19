@@ -1,0 +1,59 @@
+{
+  "schema_id": "ETHICBIT_LANGGRAPH_CLAIM_POLICY_V1",
+  "version": "1.0.0",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "description": "Governance policy for LangGraph tool-call risk classification and claim boundaries.",
+
+  "risk_levels": {
+    "LOW": {
+      "description": "Read-only, no external side effects, no PII access.",
+      "governance_decision": "AUTO_PASS",
+      "hitl_required": false,
+      "audit_required": true
+    },
+    "MEDIUM": {
+      "description": "State mutation within bounded scope, no external publish.",
+      "governance_decision": "AUTO_PASS",
+      "hitl_required": false,
+      "audit_required": true
+    },
+    "HIGH": {
+      "description": "External side effects, irreversible actions, publish, send, delete.",
+      "governance_decision": "HITL_REQUIRED",
+      "hitl_required": true,
+      "audit_required": true
+    }
+  },
+
+  "tool_risk_registry": {
+    "search_knowledge_base": "LOW",
+    "draft_document":        "MEDIUM",
+    "publish_external":      "HIGH"
+  },
+
+  "blocked_patterns": [
+    "rm -rf",
+    "DROP TABLE",
+    "DELETE FROM",
+    "TRUNCATE",
+    "format_disk",
+    "send_all_users"
+  ],
+
+  "claim_boundary": {
+    "integration_is_production_deployment": false,
+    "integration_is_externally_validated":  false,
+    "integration_is_security_certified":    false,
+    "integration_is_regulatory_approved":   false,
+    "integration_is_universal_adapter":     false,
+    "hitl_simulation_equals_real_hitl":     false
+  },
+
+  "non_claims": [
+    "Not a customer production deployment.",
+    "Not externally validated.",
+    "Not security certified.",
+    "Not regulatory approved.",
+    "HITL in demo mode is simulated — not a substitute for real human-in-the-loop in production."
+  ]
+}
