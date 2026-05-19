@@ -2,23 +2,27 @@
   "schema_id": "ETHICBIT_ANCHOR_POLICY_V1",
   "version": "1.0.0",
   "status": "ACTIVE",
-  "description": "Programmatic anchor policy governing which artifacts are anchored, on which networks, under what prerequisites, and with what verification gates — per release class.",
-
+  "description": "Programmatic anchor policy governing which artifacts are anchored, on which networks, under what prerequisites, and with what verification gates \u2014 per release class.",
   "anchor_networks": {
     "triple_public": {
       "role": "PUBLIC_TAMPER_EVIDENCE",
-      "networks": ["sepolia", "arweave", "ao"],
+      "networks": [
+        "sepolia",
+        "arweave",
+        "ao"
+      ],
       "canonical": true,
       "note": "Canonical set. Bitcoin is excluded (legacy planning reference only)."
     },
     "mainnet_kzg_blob": {
       "role": "PRODUCTION_PROVENANCE",
-      "networks": ["ethereum_mainnet"],
+      "networks": [
+        "ethereum_mainnet"
+      ],
       "tx_type": "EIP-4844 type-3 KZG blob",
       "canonical": true
     }
   },
-
   "signing_keys": {
     "intoto_and_artifact_signing": {
       "alias": "alias/ethicbit-intoto-signing",
@@ -32,10 +36,9 @@
       "algorithm": "ECDSA_SHA_256",
       "spec": "ECC_NIST_P256",
       "region": "us-east-2",
-      "purpose": "API runtime signing only — not used for artifact anchoring"
+      "purpose": "API runtime signing only \u2014 not used for artifact anchoring"
     }
   },
-
   "release_classes": {
     "DEVELOPMENT": {
       "anchor_required": false,
@@ -43,7 +46,9 @@
     },
     "CONTROLLED_EVIDENCE": {
       "anchor_required": true,
-      "anchor_networks": ["triple_public"],
+      "anchor_networks": [
+        "triple_public"
+      ],
       "prerequisites": {
         "sbom_kms_signed": true,
         "claim_boundary_red_team_pass": true,
@@ -66,7 +71,10 @@
     },
     "EXTERNAL_VALIDATION": {
       "anchor_required": true,
-      "anchor_networks": ["triple_public", "mainnet_kzg_blob"],
+      "anchor_networks": [
+        "triple_public",
+        "mainnet_kzg_blob"
+      ],
       "prerequisites": {
         "sbom_kms_signed": true,
         "claim_boundary_red_team_pass": true,
@@ -86,11 +94,23 @@
         "docs/assurance/SIGNING_KEY_MIGRATION_RECORD.md"
       ],
       "verification_gate_script": "deployment/anchor_pre_deploy_gate.sh",
-      "anchor_script": "scripts/core/anchor_v4_0_external_validation_posture.py"
+      "anchor_script": "scripts/core/anchor_v4_0_external_validation_posture.py",
+      "current_state": {
+        "triple_anchor_status": "COMPLETE",
+        "arweave_tx_id": "H1g--kWWE9huA7CXEkkmpEfpV6DjjRN-Yx4lumC-Qo0",
+        "arweave_url": "https://arweave.net/H1g--kWWE9huA7CXEkkmpEfpV6DjjRN-Yx4lumC-Qo0",
+        "ao_message_id": "fQe1icPQmDl3hA000csM_DX9bub3aglw9D1M6qWqh6c",
+        "ao_url": "https://www.ao.link/#/message/fQe1icPQmDl3hA000csM_DX9bub3aglw9D1M6qWqh6c",
+        "ao_process_id": "Ypj63UI-c3H6EthuVERwzxfPv4fkEwo9CGBdAnH63C4",
+        "triple_anchor_date": "2026-05-19"
+      }
     },
     "PRODUCTION_RELEASE": {
       "anchor_required": true,
-      "anchor_networks": ["triple_public", "mainnet_kzg_blob"],
+      "anchor_networks": [
+        "triple_public",
+        "mainnet_kzg_blob"
+      ],
       "prerequisites": {
         "sbom_kms_signed": true,
         "claim_boundary_red_team_pass": true,
@@ -114,7 +134,6 @@
       "note": "Human review and external witness on in-toto chain required before PRODUCTION_RELEASE anchor."
     }
   },
-
   "current_release_class": "EXTERNAL_VALIDATION",
   "current_state": {
     "sbom_kms_signed": true,
@@ -127,7 +146,17 @@
     "claim_boundary_cases": 14,
     "claim_boundary_blocked": 14,
     "human_attestation_status": "HUMAN_ATTESTATION_PENDING",
-    "remediation_blocks_completed": ["A", "B1", "B2", "B3", "B4", "B5", "C", "D", "E"],
+    "remediation_blocks_completed": [
+      "A",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5",
+      "C",
+      "D",
+      "E"
+    ],
     "signing_posture": "PRODUCTION_HSM_READY",
     "ev_posture_anchor_prepared_at": "2026-05-18T03:27:32Z",
     "ev_posture_payload_sha256": "aee31fb3fabf56dec5add617378ae1d569902b4d1d1b2a31923b0b7331a611b6",
@@ -136,33 +165,42 @@
     "ev_posture_sepolia_block": 10872023,
     "ev_posture_sepolia_tx": "0x8dad6d08b9a581c50482d2224ef9fd2975b9e0986b98541904a2efbba47da2e1",
     "ev_posture_sepolia_versioned_hash": "0x01f999b7d2f59a6832c972c60166d664db9e053cead83d6cd1f8f694737f9bc4",
-    "triple_public_anchor_last": "2026-05-14 (v4.0 controlled evidence — triple public pending re-anchor)",
-    "mainnet_kzg_blob_anchor_last": "2026-05-14 (v4.0 controlled evidence)",
+    "triple_public_anchor_last": "2026-05-14 (v4.0 controlled evidence \u2014 triple public pending re-anchor)",
+    "mainnet_kzg_blob_anchor_last": "2026-05-18 (v4.0 EV posture \u2014 all blocks complete)",
     "ev_posture_anchor_status": "ONCHAIN_BLOB_ANCHOR_VERIFIED",
     "ev_posture_mainnet_block": 25119456,
     "ev_posture_mainnet_tx": "0x6c9b5fbf032782868e1cc46ba11208a862f891b652d7630dfd3ebaecde5cb692",
-    "ev_posture_mainnet_versioned_hash": "0x01abb661f362d12ddd6da5aff5313f7e92a97e1807c518172e02aabf849301a1",
-    "mainnet_kzg_blob_anchor_last": "2026-05-18 (v4.0 EV posture — all blocks complete)"
+    "ev_posture_mainnet_versioned_hash": "0x01abb661f362d12ddd6da5aff5313f7e92a97e1807c518172e02aabf849301a1"
   },
-
   "gates": [
     {
       "id": "GATE_TRIPLE_ANCHOR_VERIFY",
       "script": "deployment/anchor_pre_deploy_gate.sh",
-      "blocks_release_class": ["CONTROLLED_EVIDENCE", "EXTERNAL_VALIDATION", "PRODUCTION_RELEASE"],
+      "blocks_release_class": [
+        "CONTROLLED_EVIDENCE",
+        "EXTERNAL_VALIDATION",
+        "PRODUCTION_RELEASE"
+      ],
       "description": "Verifies canonical Triple Public Anchor (Sepolia + Arweave + AO) is reconciled before any production deploy."
     },
     {
       "id": "GATE_CLAIM_BOUNDARY",
       "script": "tools/external_validation/claim_red_team/run_claim_red_team.py",
       "ci_workflow": ".github/workflows/claim-boundary-property-tests.yml",
-      "blocks_release_class": ["CONTROLLED_EVIDENCE", "EXTERNAL_VALIDATION", "PRODUCTION_RELEASE"],
+      "blocks_release_class": [
+        "CONTROLLED_EVIDENCE",
+        "EXTERNAL_VALIDATION",
+        "PRODUCTION_RELEASE"
+      ],
       "description": "All 14 red-team cases must be BLOCKED. block_rate must be 100%."
     },
     {
       "id": "GATE_KMS_SIGNATURES",
       "description": "SBOM and in-toto chain must carry valid KMS signatures before EXTERNAL_VALIDATION or PRODUCTION_RELEASE anchor.",
-      "blocks_release_class": ["EXTERNAL_VALIDATION", "PRODUCTION_RELEASE"],
+      "blocks_release_class": [
+        "EXTERNAL_VALIDATION",
+        "PRODUCTION_RELEASE"
+      ],
       "check_files": [
         "assurance/sbom/aem_v1_1_sbom.cyclonedx.sig.json",
         "assurance/in-toto/attestation-index.json"
@@ -171,11 +209,12 @@
     {
       "id": "GATE_HUMAN_REVIEW",
       "description": "Human reviewer must sign off before PRODUCTION_RELEASE anchor. human_attestation_status must be HUMAN_ATTESTED.",
-      "blocks_release_class": ["PRODUCTION_RELEASE"],
+      "blocks_release_class": [
+        "PRODUCTION_RELEASE"
+      ],
       "automated": false
     }
   ],
-
   "non_claims": {
     "anchor_proves_correctness": false,
     "anchor_proves_external_certification": false,

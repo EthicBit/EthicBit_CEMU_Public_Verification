@@ -1,0 +1,12 @@
+{
+  "schema_id": "ETHICBIT_AEM_V4_0_EV_POSTURE_ARWEAVE_RECEIPT_V1",
+  "status": "ARWEAVE_ANCHOR_UPLOADED",
+  "tx_id": "H1g--kWWE9huA7CXEkkmpEfpV6DjjRN-Yx4lumC-Qo0",
+  "locator": "https://arweave.net/H1g--kWWE9huA7CXEkkmpEfpV6DjjRN-Yx4lumC-Qo0",
+  "gateway_url": "https://arweave.net/H1g--kWWE9huA7CXEkkmpEfpV6DjjRN-Yx4lumC-Qo0",
+  "anchor_scope": "v4.0 External Validation posture — triple public anchor (Arweave + AO) — 2026-05-19",
+  "payload_sha256": "75affbadd89dafd73e39b6d63e030b11b9c5471664cfa296faaf08f271433d5f",
+  "generated_at": "2026-05-19T15:58:01Z",
+  "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
+  "non_claim": "Arweave+AO tamper-evidence anchor for v4.0 External Validation posture. Does not claim external validation pass, third-party reproduced, production-ready, or human attestation complete. Criteria 1, 2, 8 remain PENDING_EXTERNAL."
+}
