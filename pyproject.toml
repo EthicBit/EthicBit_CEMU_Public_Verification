@@ -13,6 +13,14 @@ authors = [
 ]
 dependencies = []
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "agentic*",
+  "cemu*",
+]
+namespaces = true
+
 [project.optional-dependencies]
 agentic = [
   "numpy>=1.26.0",
@@ -25,4 +33,3 @@ dev = [
   "pytest>=8.0.0",
   "ruff>=0.5.0",
 ]
-

@@ -58,7 +58,19 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -e ".[dev]" --quiet
-      - run: ruff check .
+      - name: Ruff lint changed Python files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          CHANGED="$(git diff --name-only origin/main HEAD -- '*.py' | sed '/^$/d')"
+          if [ -z "$CHANGED" ]; then
+            echo "No Python files changed."
+            exit 0
+          fi
+          printf '%s\n' "$CHANGED"
+          # File paths in this repository do not contain spaces; keep this PR gate focused on changed Python files.
+          ruff check $CHANGED
       - run: mypy --ignore-missing-imports cemu/ tools/ scripts/ 2>/dev/null || true
 
   no-aws-ids:

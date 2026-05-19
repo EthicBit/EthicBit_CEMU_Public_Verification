@@ -109,6 +109,13 @@ bash scripts/run_langgraph_demo_e2e.sh
 
 Installs deps, runs the demo, verifies the report JSON, checks non-claims.
 
+If dependencies are already installed, or if the local Python environment blocks
+package-manager post-install hooks, skip the install step:
+
+```bash
+SKIP_INSTALL=1 bash scripts/run_langgraph_demo_e2e.sh
+```
+
 ---
 
 ## Non-claims

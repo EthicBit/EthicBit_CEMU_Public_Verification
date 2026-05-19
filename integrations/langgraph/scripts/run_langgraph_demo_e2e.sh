@@ -12,8 +12,12 @@ echo "========================================"
 
 cd "$INTEGRATION_DIR"
 
-echo "→ Installing dependencies..."
-pip install -r requirements.txt -q
+if [[ "${SKIP_INSTALL:-0}" == "1" ]]; then
+  echo "→ Skipping dependency install (SKIP_INSTALL=1)..."
+else
+  echo "→ Installing dependencies..."
+  python3 -m pip install -r requirements.txt -q
+fi
 
 echo "→ Running demo agent (DEMO_HITL_APPROVE=true)..."
 DEMO_HITL_APPROVE=true python3 demo_agent.py

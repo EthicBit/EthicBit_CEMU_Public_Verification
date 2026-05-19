@@ -1,7 +1,7 @@
 {
   "schema_id": "ETHICBIT_LANGGRAPH_INTEGRATION_REPORT_V1",
   "version": "1.0.0",
-  "report_date": "2026-05-19T13:44:52.958364+00:00",
+  "report_date": "2026-05-19T16:10:53.960522+00:00",
   "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
   "integration": "LangGraph/LangChain",
   "status": "PASS",
@@ -14,7 +14,7 @@
     "AUDIT_RECEIPT_GENERATED": "PASS"
   },
   "run_summary": {
-    "run_id": "f24c87f2",
+    "run_id": "a3ab728b",
     "total_tool_calls": 3,
     "approved": 3,
     "blocked": 0,
@@ -33,9 +33,9 @@
   "governance_receipts": [
     {
       "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
-      "receipt_id": "b0ee5dff-0904-4211-ab0d-d86b2da56ba7",
+      "receipt_id": "fedd3294-d44e-4952-ab63-52f2170476d6",
       "call_id": "call_001",
-      "run_id": "f24c87f2",
+      "run_id": "a3ab728b",
       "tool_name": "search_knowledge_base",
       "risk_level": "LOW",
       "governance_decision": "AUTO_PASS",
@@ -44,13 +44,13 @@
       "args_sha256": "00b1c8ceb9b5ef917c7d5a88fa3ceadfb5c5b24a1c14ca79036753fb5927b4f2",
       "claim_boundary_enforced": true,
       "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-      "timestamp": "2026-05-19T13:44:52.956746+00:00"
+      "timestamp": "2026-05-19T16:10:53.958413+00:00"
     },
     {
       "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
-      "receipt_id": "09ebc826-915b-4420-8247-659d6c6efaad",
+      "receipt_id": "30617b68-b3c3-4071-8c75-b5e27452e913",
       "call_id": "call_002",
-      "run_id": "f24c87f2",
+      "run_id": "a3ab728b",
       "tool_name": "draft_document",
       "risk_level": "MEDIUM",
       "governance_decision": "AUTO_PASS",
@@ -59,13 +59,13 @@
       "args_sha256": "700e558279ee8b39b4783df0a9d2482d449e958f7106a9dc22b64ca8e8df4cbd",
       "claim_boundary_enforced": true,
       "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-      "timestamp": "2026-05-19T13:44:52.957355+00:00"
+      "timestamp": "2026-05-19T16:10:53.959199+00:00"
     },
     {
       "schema_id": "ETHICBIT_LANGGRAPH_GOVERNANCE_RECEIPT_V1",
-      "receipt_id": "d0f20023-f363-4221-b821-b9e11f7fcd63",
+      "receipt_id": "1f735e7d-b941-4b5c-84f2-508eaac2f9d0",
       "call_id": "call_003",
-      "run_id": "f24c87f2",
+      "run_id": "a3ab728b",
       "tool_name": "publish_external",
       "risk_level": "HIGH",
       "governance_decision": "HITL_APPROVED",
@@ -74,7 +74,7 @@
       "args_sha256": "785d670641c28d3759414499bed735829b87a4dcc4f0ebd94dadafa9812323bd",
       "claim_boundary_enforced": true,
       "constitutional_dependency": "EthicBit/CEMU/v3.7.0+",
-      "timestamp": "2026-05-19T13:44:52.957909+00:00",
+      "timestamp": "2026-05-19T16:10:53.960120+00:00",
       "hitl_simulated": true,
       "hitl_note": "DEMO_HITL_APPROVE=true \u2014 simulated approval"
     }

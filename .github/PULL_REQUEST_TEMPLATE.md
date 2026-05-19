@@ -16,6 +16,7 @@ Describe the change and the intended impact.
 - [ ] `full_l4_claim_allowed` not changed to `true` without external witness
 - [ ] `human_attestation_status` not elevated without out-of-band authorization
 - [ ] `external_claim_review_completed` remains `false` unless human-attested
+- [ ] Constitutional check `production-distributed-ready-final` passed
 - [ ] Release discipline check `release-grade-discipline-gate` passed
 - [ ] If claim semantics changed → `docs/policies/CLAIMS_POLICY.md` updated
 
